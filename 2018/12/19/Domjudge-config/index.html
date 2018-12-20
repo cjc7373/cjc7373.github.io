@@ -84,13 +84,13 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="DOMjudge 配置（踩坑）指南">
 <meta property="og:url" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/index.html">
-<meta property="og:site_name" content="Hello,World">
+<meta property="og:site_name" content="Coherence">
 <meta property="og:description" content="我校新生赛也能用上 World Final 同款评测系统啦~ DOMjudge 提供了详尽的官方文档，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545218741334.png">
 <meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545219324330.png">
 <meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545220336183.png">
-<meta property="og:updated_time" content="2018-12-19T12:13:14.358Z">
+<meta property="og:updated_time" content="2018-12-19T12:27:21.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOMjudge 配置（踩坑）指南">
 <meta name="twitter:description" content="我校新生赛也能用上 World Final 同款评测系统啦~ DOMjudge 提供了详尽的官方文档，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。">
@@ -130,7 +130,7 @@
 
 
 
-  <title>DOMjudge 配置（踩坑）指南 | Hello,World</title>
+  <title>DOMjudge 配置（踩坑）指南 | Coherence</title>
   
 
 
@@ -169,7 +169,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hello,World</span>
+        <span class="site-title">Coherence</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -259,13 +259,13 @@
     <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2018/12/19/Domjudge-config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Who Cares">
+      <meta itemprop="name" content="Coherence">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hello,World">
+      <meta itemprop="name" content="Coherence">
     </span>
 
     
@@ -346,7 +346,7 @@
 <li>模块化的系统，方面添加不同的语言/编译器</li>
 </ul>
 <p>整个 DOMjudge 主要分为两个部分，domserver 和 judgehost，据其名字即可得出它们的功能。需要注意的是，DOMjudge 使用数据库来存放几乎一切数据，所以我们还需配置 MySQL 或者 MariaDB。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>DOMjudge 只能运行在 Linux 环境下。博主的运行环境是 Ubuntu Server 18.04 LTS。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>DOMjudge 只能运行在 Linux 环境下。博主的运行环境是 Ubuntu Server 18.04 LTS。配置为虚拟化平台下的 8 核，8G 内存（猜猜比赛会不会崩。</p>
 <p>除了传统的安装方式外，DOMjudge 还提供了 Docker 镜像以供安装，这样就大大简化了安装的困难程度。</p>
 <p>关于 Docker 的使用这里不作详细描述。（其实是博主也一知半解）</p>
 <p>然而<a href="https://hub.docker.com/r/domjudge/domserver" target="_blank" rel="noopener">官方的 Docker 文档中</a>仅使用了命令来启动容器，为了进一步简化安装，也为了方便修改配置，我决定采用 Docker Compose 。以下是 <code>docker-compose.yml</code>文件：</p>
@@ -361,7 +361,7 @@
 <li>数据卷没有创建在当前目录下。</li>
 <li>尚未实现多核判题</li>
 </ul>
-<p>除了 MariaDB , DOMserver , Judgehost 这三个必要的容器外，我还使用了 phpMyAdmin 来进行图形化的数据库管理。</p>
+<p>除了 MariaDB , DOMserver , Judgehost 这三个必要的容器外，我还使用了 phpMyAdmin 来进行图形化的数据库管理（备份)。</p>
 <p>其中，Domserver 映射到了主机的 80 端口， phpMyAdmin 映射到了 8080 端口。由于是内网环境，故不准备采用 HTTPS 加密。</p>
 <p>需要注意的是，DOMjudge 提供的 Judgehost 镜像中仅包含 C, C++, Java 三种语言的运行环境。</p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>Domserver 部署成功后，即可通过 Web 端来访问了。默认的管理员账号用户名 <code>admin</code> 密码 <code>admin</code> 。</p>
@@ -381,9 +381,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">teams    1</span><br><span class="line">team_id    external_ID    group_id    team_name    institution_name	institution_short_name    country_code</span><br></pre></td></tr></table></figure>
 <p>accounts 格式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">accounts	1</span><br><span class="line">account_type	fullname	username	password</span><br></pre></td></tr></table></figure>
-<p>一种（可能）简单的方式是先导入队伍再导入用户，并且用户 username 的后缀数字与 team_id 相同。</p>
-<p>不需要的字段可以直接留空。（不能缺少分隔符）</p>
+<p>一种（可能）简单的方式是先导入队伍再导入用户，并且用户 username 的后缀数字与 team_id 相同。不需要的字段可以直接留空。（不能缺少分隔符）</p>
 <p>tsv 文件可以采用 Excel 生成。在 Excel 中输入完数据后选择另存为文本文件（制表符分隔）即可。</p>
+<p>country_code 尝试使用 CHN 然而并不能显示出国旗（？）</p>
 <h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><p>参考官方的 API 说明，DOMjudge 包含<a href="https://clics.ecs.baylor.edu/index.php/Contest_API" target="_blank" rel="noopener"> ICPC 定义的 API </a>和<a href="https://www.domjudge.org/demoweb/api/doc" target="_blank" rel="noopener">自有的 API</a>。</p>
 <p><img src="/2018/12/19/Domjudge-config/1545220336183.png" alt="1545220336183"></p>
 <h3 id="滚榜"><a href="#滚榜" class="headerlink" title="滚榜"></a>滚榜</h3><p>尝试使用官方的 <a href="https://icpc.baylor.edu/icpctools/" target="_blank" rel="noopener">ICPC tools</a>，发现总是提示比赛未结束，查阅日志认为是 DOMjudge 的 event feed 格式与 ICPC tools 提供的 resolver 工具的格式不兼容。</p>
@@ -502,7 +502,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">Who Cares</p>
+              <p class="site-author-name" itemprop="name">Coherence</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -602,7 +602,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Who Cares</span>
+  <span class="author" itemprop="copyrightHolder">Coherence</span>
 
   
 </div>
