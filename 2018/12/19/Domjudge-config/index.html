@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545218741334.png">
 <meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545219324330.png">
 <meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545220336183.png">
-<meta property="og:updated_time" content="2018-12-19T12:27:21.008Z">
+<meta property="og:updated_time" content="2018-12-22T16:38:56.111Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOMjudge 配置（踩坑）指南">
 <meta name="twitter:description" content="我校新生赛也能用上 World Final 同款评测系统啦~ DOMjudge 提供了详尽的官方文档，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。">
@@ -345,8 +345,8 @@
 <li>Web 用户界面</li>
 <li>模块化的系统，方面添加不同的语言/编译器</li>
 </ul>
-<p>整个 DOMjudge 主要分为两个部分，domserver 和 judgehost，据其名字即可得出它们的功能。需要注意的是，DOMjudge 使用数据库来存放几乎一切数据，所以我们还需配置 MySQL 或者 MariaDB。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>DOMjudge 只能运行在 Linux 环境下。博主的运行环境是 Ubuntu Server 18.04 LTS。配置为虚拟化平台下的 8 核，8G 内存（猜猜比赛会不会崩。</p>
+<p>整个 DOMjudge 主要分为两个部分，Domserver 和 Judgehost，据其名字即可得出它们的功能。需要注意的是，DOMjudge 使用数据库来存放几乎一切数据，所以我们还需配置 MySQL 或者 MariaDB。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>DOMjudge 只能运行在 Linux 环境下。博主的运行环境是 Ubuntu Server 18.04 LTS，以及 DOMjudge 6.0.3。</p>
 <p>除了传统的安装方式外，DOMjudge 还提供了 Docker 镜像以供安装，这样就大大简化了安装的困难程度。</p>
 <p>关于 Docker 的使用这里不作详细描述。（其实是博主也一知半解）</p>
 <p>然而<a href="https://hub.docker.com/r/domjudge/domserver" target="_blank" rel="noopener">官方的 Docker 文档中</a>仅使用了命令来启动容器，为了进一步简化安装，也为了方便修改配置，我决定采用 Docker Compose 。以下是 <code>docker-compose.yml</code>文件：</p>
@@ -355,11 +355,11 @@
 <p>Judgehost 利用了 Linux 内核的 Cgroup 特性，所以需进行一步额外设置。编辑 <code>/etc/default/grub</code> 文件，将默认的命令改为：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=<span class="string">"quiet cgroup_enable=memory swapaccount=1"</span></span><br><span class="line">GRUB_CMDLINE_LINUX=<span class="string">"quiet cgroup_enable=memory swapaccount=1"</span></span><br></pre></td></tr></table></figure>
 <p>然后运行 <code>update-grub</code> 并重启。</p>
+<p>需要多核判题的话创建多个 Judgehost 容器并修改 DAEMON_ID 为不同的值即可。</p>
 <p>目前存在的问题：</p>
 <ul>
 <li>judgehost 用户的初始密码不定，需要手动去 web 端更改并添加 <code>JUDGEDAEMON_PASSWORD</code> 的环境变量。（默认环境变量的密码是 <code>password</code>）</li>
 <li>数据卷没有创建在当前目录下。</li>
-<li>尚未实现多核判题</li>
 </ul>
 <p>除了 MariaDB , DOMserver , Judgehost 这三个必要的容器外，我还使用了 phpMyAdmin 来进行图形化的数据库管理（备份)。</p>
 <p>其中，Domserver 映射到了主机的 80 端口， phpMyAdmin 映射到了 8080 端口。由于是内网环境，故不准备采用 HTTPS 加密。</p>
@@ -374,7 +374,7 @@
 <p><img src="/2018/12/19/Domjudge-config/1545219324330.png" alt="1545219324330"></p>
 <p>（懒得翻译了，有时间再补）</p>
 <p>在 secret 文件夹中存放测试数据，在 sample 文件夹中存放样例数据， 在 problem_statement 存放题面。</p>
-<p>（不知道为什么博主上传题面没有成功过，而比赛也不用题面索性不管了）</p>
+<p>（不知道为什么博主在压缩包内上传题面没有成功过，只能通过 Web 端来上传）</p>
 <p>测试数据的扩展名为 <code>.in</code> 和 <code>.ans</code>。</p>
 <h3 id="队伍导入"><a href="#队伍导入" class="headerlink" title="队伍导入"></a>队伍导入</h3><p>队伍及用户导入采用 tsv(<em>tab-separated values</em>) 格式，即信息之间采用制表符（TAB）分隔。格式由<a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System_Requirements#Appendix:_File_formats" target="_blank" rel="noopener"> ICPC 官方定义</a>。</p>
 <p>teams 格式：</p>
@@ -383,11 +383,18 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">accounts	1</span><br><span class="line">account_type	fullname	username	password</span><br></pre></td></tr></table></figure>
 <p>一种（可能）简单的方式是先导入队伍再导入用户，并且用户 username 的后缀数字与 team_id 相同。不需要的字段可以直接留空。（不能缺少分隔符）</p>
 <p>tsv 文件可以采用 Excel 生成。在 Excel 中输入完数据后选择另存为文本文件（制表符分隔）即可。</p>
-<p>country_code 尝试使用 CHN 然而并不能显示出国旗（？）</p>
+<p>如需使用<code>institution_name institution_short_name country_code</code> 三项需在 Team Affiliations 中提前创建相应的条目。</p>
 <h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><p>参考官方的 API 说明，DOMjudge 包含<a href="https://clics.ecs.baylor.edu/index.php/Contest_API" target="_blank" rel="noopener"> ICPC 定义的 API </a>和<a href="https://www.domjudge.org/demoweb/api/doc" target="_blank" rel="noopener">自有的 API</a>。</p>
 <p><img src="/2018/12/19/Domjudge-config/1545220336183.png" alt="1545220336183"></p>
 <h3 id="滚榜"><a href="#滚榜" class="headerlink" title="滚榜"></a>滚榜</h3><p>尝试使用官方的 <a href="https://icpc.baylor.edu/icpctools/" target="_blank" rel="noopener">ICPC tools</a>，发现总是提示比赛未结束，查阅日志认为是 DOMjudge 的 event feed 格式与 ICPC tools 提供的 resolver 工具的格式不兼容。</p>
-<p>待续。</p>
+<p>尝试 DOMjura 发现同样不能正确读取 event-feed 。</p>
+<h2 id="新生赛概况"><a href="#新生赛概况" class="headerlink" title="新生赛概况"></a>新生赛概况</h2><p>闲扯几句。</p>
+<p>热身赛一切良好。出题人数据出锅，被批判了一个多小时2333。</p>
+<p>正式赛赛前比赛账号导入的时候，有个人是后来添加的，和之前的版本没有对应上，导致部分队伍登录到了后一个队伍的账号，重新导入 team 后发现无法登录，还需导入 accounts。这导致比赛推迟了 5 分钟。</p>
+<p>由于 Submission 的输出数据是保留的，而赛前我的服务器硬盘空间本来就不多了，比赛时当服务器的硬盘占用达到 90% 时，所有 judgehost 就都被关了。我只能胡乱删几个软件包腾出空间。还好没有造成大的影响。</p>
+<p>然后直到最后还是没有搞出滚榜。</p>
+<p>GG。总体来说还是挺顺利的，服务器没有崩，甚至平均 CPU load 只有 1.0 左右，就是感觉比较吃 I/O，还好我用的是固态（<del>先见之明</del>）。</p>
+<p>总结一下，DOMjudge 体验极佳，可以在校赛再推广一波。</p>
 
       
     </div>
@@ -578,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目导入"><span class="nav-number">3.1.</span> <span class="nav-text">题目导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队伍导入"><span class="nav-number">3.2.</span> <span class="nav-text">队伍导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">3.3.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滚榜"><span class="nav-number">3.4.</span> <span class="nav-text">滚榜</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目导入"><span class="nav-number">3.1.</span> <span class="nav-text">题目导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队伍导入"><span class="nav-number">3.2.</span> <span class="nav-text">队伍导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">3.3.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滚榜"><span class="nav-number">3.4.</span> <span class="nav-text">滚榜</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新生赛概况"><span class="nav-number">4.</span> <span class="nav-text">新生赛概况</span></a></li></ol></div>
             
 
           </div>
