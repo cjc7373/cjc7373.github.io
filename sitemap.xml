@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://cjc7373.github.io/2018/10/13/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</loc>
-    
-    <lastmod>2019-03-11T13:28:27.188Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://cjc7373.github.io/about/index.html</loc>
     
     <lastmod>2019-02-27T14:59:07.834Z</lastmod>
@@ -74,7 +67,14 @@
   <url>
     <loc>https://cjc7373.github.io/2018/09/24/Hello-World-0/</loc>
     
-    <lastmod>2018-10-13T12:38:00.000Z</lastmod>
+    <lastmod>2018-10-14T12:38:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://cjc7373.github.io/2018/10/13/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</loc>
+    
+    <lastmod>2018-10-13T12:13:11.000Z</lastmod>
     
   </url>
   
