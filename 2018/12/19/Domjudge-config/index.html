@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545218741334.png">
 <meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545219324330.png">
 <meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545220336183.png">
-<meta property="og:updated_time" content="2019-03-19T15:31:20.845Z">
+<meta property="og:updated_time" content="2019-03-19T15:41:36.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOMjudge 配置&#x2F;踩坑指南">
 <meta name="twitter:description" content="我校新生赛也能用上 World Final 同款评测系统啦~ DOMjudge 提供了详尽的官方文档，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。">
@@ -301,7 +301,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-19T23:31:20+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-19T23:41:36+08:00">
                 2019-03-19
               </time>
             
@@ -372,7 +372,7 @@
 <li>judgehost 用户的初始密码不定，需要手动去 web 端更改并添加 <code>JUDGEDAEMON_PASSWORD</code> 的环境变量。（默认环境变量的密码是 <code>password</code>）</li>
 <li>整个系统对我来说是个黑盒…</li>
 </ul>
-<p>除了 MariaDB , DOMserver , Judgehost 这三个必要的容器外，我还使用了 phpMyAdmin 来进行图形化的数据库管理（备份)。数据库（即 <code>mariadb</code> 容器的数据卷）创建在了当前目录的<code>data</code>文件夹下，方便备份</p>
+<p>除了 MariaDB , DOMserver , Judgehost 这三个必要的容器外，我还使用了 phpMyAdmin 来进行图形化的数据库管理（备份)。数据库（即 <code>mariadb</code> 容器的数据卷）创建在了当前目录的<code>data</code>文件夹下，方便备份。</p>
 <p>其中，Domserver 映射到了主机的 80 端口， phpMyAdmin 映射到了 8080 端口。由于是内网环境，故不准备采用 HTTPS 加密。</p>
 <p>需要注意的是，DOMjudge 提供的 Judgehost 镜像中仅包含 C, C++, Java 三种语言的运行环境。</p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>Domserver 部署成功后，即可通过 Web 端来访问了。默认的管理员账号用户名 <code>admin</code> 密码 <code>admin</code> 。</p>
@@ -559,7 +559,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -581,7 +581,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
