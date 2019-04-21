@@ -39,10 +39,22 @@ tags:
 git init
 git remote add origin git@github.com:cjc7373/cjc7373.github.io.git
 git checkout -b source
-
+git add .
+git commit -m "To use CI to automated deploy"
+git push origin source:source
 ```
 
+本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带`.gitignore`文件，所以实际大小并没有多少。
 
+![1555835090941](use-ci-auto-deploy-blog/1555835090941.png)
+
+然后在 Github 上将主分支切换为`source`分支。
+
+## 配置 Travis CI
+
+CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key，后者似乎有些麻烦，我选择了前者。当前需求应该只需要 repo 和 user:email 权限，然后再 Travis CI 的 Environment Variables 中加入这个 Token，注意不要勾选 Display value in build log。
+
+然后就是编写`.travis.yml`了。 正当我准备抄大佬们的配置的时候，忽然看到 Travis CI 官方提供了[轮子](https://docs.travis-ci.com/user/deployment/pages/)，那就用吧QAQ（其实也没简单多少）
 
 ## 参考资料
 
