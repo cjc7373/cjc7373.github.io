@@ -13,4 +13,4 @@ git checkout master
 git add .
 git commit -m "Site updated: `date +"%Y-%m-%d %H:%M:%S"`"
 
-git push origin master:master --quiet
+git push "https://${token}@github.com/cjc7373/cjc7373.github.io.git" master:master --quiet
