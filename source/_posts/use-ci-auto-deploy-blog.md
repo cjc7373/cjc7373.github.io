@@ -60,13 +60,79 @@ CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key�
 
 同时我也没搞懂每个字段的意思。所以还是自己来吧。
 
-一开始忘了给`deploy.sh`可执行权限，CI 啥都没报错就退出了。。
+一开始忘了给`deploy.sh`可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。
 
 为了在 commit 记录中显示更新日期，我把 push 部分单独写成了 sh脚本。
+
+`.travis.yml`:
+
+```
+language: node_js
+node_js: stable
+
+# 只监听 source 分支的改动
+branches:
+  only:
+    - source
+
+# 缓存依赖，节省持续集成时间
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install
+
+script:
+  - hexo clean
+  - hexo g
+
+after_script:
+  - chmod +x ./deploy.sh # 添加可执行权限
+  - ./deploy.sh
+```
+
+`deploy.sh`:
+
+```
+#!/bin/bash
+set -ev
+export TZ='Asia/Shanghai'
+
+git config --global user.name "cjc7373"
+git config --global user.email "niuchangcun@163.com"
+
+# 获取以前的 commit 记录
+git clone -b master https://github.com/cjc7373/cjc7373.github.io.git .deploy
+# 这么移动是为了确保不受之前文件的影响
+mv .deploy/.git/ public/
+cd public
+git checkout master
+
+git add .
+git commit -m "Site updated: `date +"%Y-%m-%d %H:%M:%S"`"
+
+# 我也不知道 token 怎么用。。抄大佬的代码
+git push "https://${token}@github.com/cjc7373/cjc7373.github.io.git" master:master --quiet
+```
+
+![1555840082905](use-ci-auto-deploy-blog/1555840082905.png)
+
+（看着都是成功其实都是失败。。）
+
+## 后记
+
+历经两个多小时，终于把 CI 弄好了。虽然对 CI 还是一知半解，不过总算开了个头，也基本实现了需求。
+
+Travis CI 官方的文档很全，但是以我的英文水平看得很吃力（懒得看），中文资料的质量又参差不齐。所以还是要锻炼自己的英语水平啊。
 
 ## 参考资料
 
 https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html
+
+https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/
+
+https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/
 
 
 

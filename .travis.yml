@@ -19,5 +19,5 @@ script:
   - hexo g
 
 after_script:
-  - chmod +x ./deploy.sh
+  - chmod +x ./deploy.sh # 添加可执行权限
   - ./deploy.sh
