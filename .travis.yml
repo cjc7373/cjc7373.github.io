@@ -19,4 +19,5 @@ script:
   - hexo g
 
 after_script:
+  - chmod +x ./deploy.sh
   - ./deploy.sh
