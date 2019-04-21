@@ -249,6 +249,308 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coherence">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coherence">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/21/use-ci-auto-deploy-blog/" itemprop="url">使用 Travis CI 自动部署 Hexo 博客</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-21T20:16:56+00:00">
+                2019-04-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-21T09:45:09+00:00">
+                2019-04-21
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/21/use-ci-auto-deploy-blog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/21/use-ci-auto-deploy-blog/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h2><p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。</p>
+<p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的<code>ln -s</code>大法行不通了。</p>
+<p>于是我想到了 CI。仔细一想其实也不复杂，无非是<code>git push</code>， <code>git pull</code>两下罢了。那么，Let’s do it!</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/21/use-ci-auto-deploy-blog/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+            
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2019/04/19/ssh-pubkey-authentication/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coherence">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coherence">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/19/ssh-pubkey-authentication/" itemprop="url">SSH 公钥登陆配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-19T20:16:56+00:00">
+                2019-04-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-21T09:45:09+00:00">
+                2019-04-21
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/19/ssh-pubkey-authentication/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/19/ssh-pubkey-authentication/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h2><p>使用公钥最大的好处应该在于避免了弱密码吧。目前很多 VPS 也已强制使用公钥登录了。</p>
+<p>在易用性上似乎没什么区别，可能免去了记多个密码的麻烦，在多端使用的时候免去了试密码的麻烦（特别是有多个服务器的时候）。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>首先，我使用 Xshell 生成了 2048 位的 RSA 密钥。</p>
+<p>导入至 GCP 时，一切正常。（GCP 强制使用公钥进行连接，在网页端导入公钥，且对公钥有格式要求）</p>
+<p>然后在阿里云上导入公钥后，无法连接。</p>
+<p><img src="/2019/04/19/ssh-pubkey-authentication/1555674231944.png" alt="1555674231944"></p>
+<p>在 DigitalOcean 上尝试，同样出现上述错误。</p>
+<h2 id="尝试"><a href="#尝试" class="headerlink" title="尝试"></a>尝试</h2><p><del>我是不是应该先搞清楚 <code>sshd</code> 配置文件各项的意义和<code>ssh</code>各项参数的意义？</del></p>
+<p>首先，标准的做法是复制公钥至 home 目录下的 <code>.ssh/authorized_keys</code>文件中，重启<code>sshd</code>服务，即完成配置。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+            
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -280,7 +582,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-24T20:12:51+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-24T20:12:51+00:00">
                 2019-03-24
               </time>
             
@@ -296,8 +598,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-30T21:23:31+08:00">
-                2019-03-30
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-21T09:45:09+00:00">
+                2019-04-21
               </time>
             
           </span>
@@ -429,7 +731,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T16:32:47+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T16:32:47+00:00">
                 2019-02-16
               </time>
             
@@ -445,8 +747,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-19T12:33:48+08:00">
-                2019-02-19
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-21T09:45:09+00:00">
+                2019-04-21
               </time>
             
           </span>
@@ -578,7 +880,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-11T19:00:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-11T19:00:00+00:00">
                 2019-02-11
               </time>
             
@@ -594,8 +896,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-14T16:53:02+08:00">
-                2019-02-14
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-21T09:45:09+00:00">
+                2019-04-21
               </time>
             
           </span>
@@ -726,7 +1028,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T20:12:51+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T20:12:51+00:00">
                 2018-12-19
               </time>
             
@@ -742,8 +1044,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-03-19T23:41:36+08:00">
-                2019-03-19
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-21T09:45:09+00:00">
+                2019-04-21
               </time>
             
           </span>
@@ -875,7 +1177,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-01T23:11:38+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-01T23:11:38+00:00">
                 2018-12-01
               </time>
             
@@ -891,8 +1193,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-01T23:18:43+08:00">
-                2018-12-01
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-21T09:45:09+00:00">
+                2019-04-21
               </time>
             
           </span>
@@ -1023,7 +1325,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-08T20:16:56+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-08T20:16:56+00:00">
                 2018-11-08
               </time>
             
@@ -1039,8 +1341,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-22T14:15:50+08:00">
-                2019-01-22
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-21T09:45:09+00:00">
+                2019-04-21
               </time>
             
           </span>
@@ -1172,7 +1474,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T18:23:47+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T18:23:47+00:00">
                 2018-11-02
               </time>
             
@@ -1188,8 +1490,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-13T12:40:37+08:00">
-                2019-02-13
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-21T09:45:09+00:00">
+                2019-04-21
               </time>
             
           </span>
@@ -1345,7 +1647,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-13T20:13:11+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-13T20:13:11+00:00">
                 2018-10-13
               </time>
             
@@ -1361,7 +1663,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-13T20:13:11+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-13T20:13:11+00:00">
                 2018-10-13
               </time>
             
@@ -1452,303 +1754,13 @@
 
       
     
-      
-            
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2018/10/13/Hexo搭建小记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coherence">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coherence">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/13/Hexo搭建小记/" itemprop="url">Hexo搭建小记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-13T20:10:18+08:00">
-                2018-10-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-13T12:15:41+08:00">
-                2019-02-13
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/13/Hexo搭建小记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/13/Hexo搭建小记/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>身为一个懒人，又不会写网页，也只能用用博客生成器了。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/13/Hexo搭建小记/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
-      
-            
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2018/09/24/Hello-World-0/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coherence">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coherence">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/24/Hello-World-0/" itemprop="url">Hello,World!</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-24T11:28:47+08:00">
-                2018-09-24
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-14T20:38:00+08:00">
-                2018-10-14
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/24/Hello-World-0/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/24/Hello-World-0/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello,World!"></a>Hello,World!</h3><p><img src="/2018/09/24/Hello-World-0/hello.jpeg" alt="Hello,World"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1792,7 +1804,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1814,7 +1826,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
