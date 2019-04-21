@@ -5,7 +5,7 @@ export TZ='Asia/Shanghai'
 git config --global user.name "cjc7373"
 git config --global user.email "niuchangcun@163.com"
 
-git clone -b master git@github.com:cjc7373/cjc7373.github.io.git .deploy
+git clone -b master https://github.com/cjc7373/cjc7373.github.io.git .deploy
 mv .deploy/.git/ public/
 cd public
 git checkout master
