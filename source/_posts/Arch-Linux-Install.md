@@ -11,7 +11,7 @@ tags:
 
 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。
 
-![1554536417517](/home/cjc/.config/Typora/typora-user-images/1554536417517.png)
+![1554536417517](/home/cjc/blog/source/_posts/Arch-Linux-Install/1554536417517.png)
 
 <!-- more -->
 
@@ -58,7 +58,7 @@ tags:
 
 对比发现 5.x 内核启动时并没有报错，于是删除 `bbswtich`，再升级 5.0 内核，成功启动`sddm`，问题解决（终于可以愉快地滚系统啦）。
 
-![1554535852814](/home/cjc/.config/Typora/typora-user-images/1554535852814.png)
+![1554535852814](/home/cjc/blog/source/_posts/Arch-Linux-Install/1554535852814.png)
 
 原因可能是 `bbswitch` 配置不当，具体原因不明。此时开始仍然会报`Failed to load Linux Kernel Modules`，需要手动将`/etc/modprobe.d/bbswitch.conf`及`/etc/modprobe.d/bbswitch.conf`中的`bbswitch`删除。
 
@@ -113,7 +113,7 @@ Linux Mode Setting 可以提前启动？虽然不知道有什么用。
 
 * pacman 能够在升级前对比版本信息，对于我这种强迫症非常有用。
 
-  ![1555419677545](/home/cjc/.config/Typora/typora-user-images/1555419677545.png)
+  ![1555419677545](/home/cjc/blog/source/_posts/Arch-Linux-Install/1555419677545.png)
 
 ## Trouble Shooting
 
@@ -121,11 +121,11 @@ Linux Mode Setting 可以提前启动？虽然不知道有什么用。
 
   于是 Google，StackOverflow 上有一个帖子建议我先找找有没有这个库。
 
-  ![1555419245819](/home/cjc/.config/Typora/typora-user-images/1555419245819.png)
+  ![1555419245819](/home/cjc/blog/source/_posts/Arch-Linux-Install/1555419245819.png)
 
   发现是有的，ls 看下。
 
-  ![1555419316125](/home/cjc/.config/Typora/typora-user-images/1555419316125.png)
+  ![1555419316125](/home/cjc/blog/source/_posts/Arch-Linux-Install/1555419316125.png)
 
   然而链接到了另一个文件，一看，果然那个文件没了。。（推测和包更新了有关？）但是 Typora 有这个库呀，于是尝试链接到 Typora 带的那个库，然后问题解决了。。。我被我这波操作惊呆了。
 
@@ -140,7 +140,7 @@ Linux Mode Setting 可以提前启动？虽然不知道有什么用。
 
 * 尝试安装 Tim。
 
-  ![1555420630345](/home/cjc/.config/Typora/typora-user-images/1555420630345.png)
+  ![1555420630345](/home/cjc/blog/source/_posts/Arch-Linux-Install/1555420630345.png)
 
   ？？？说好的自动解决依赖关系呢？
 
