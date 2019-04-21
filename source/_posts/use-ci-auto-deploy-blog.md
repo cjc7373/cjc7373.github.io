@@ -7,6 +7,7 @@ tags:
 ---
 
 ## 缘由
+![bg2017121901](use-ci-auto-deploy-blog/bg2017121901.png)
 
 其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。
 
@@ -58,9 +59,7 @@ CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key�
 
 ![1555837683039](use-ci-auto-deploy-blog/1555837683039.png)
 
-同时我也没搞懂每个字段的意思。所以还是自己来吧。
-
-一开始忘了给`deploy.sh`可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。
+看了下文档，我也没搞懂每个字段的意思。所以还是自己来吧。
 
 为了在 commit 记录中显示更新日期，我把 push 部分单独写成了 sh脚本。
 
@@ -116,9 +115,23 @@ git commit -m "Site updated: `date +"%Y-%m-%d %H:%M:%S"`"
 git push "https://${token}@github.com/cjc7373/cjc7373.github.io.git" master:master --quiet
 ```
 
+一开始忘了给`deploy.sh`可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。
+
 ![1555840082905](use-ci-auto-deploy-blog/1555840082905.png)
 
 （看着都是成功其实都是失败。。）
+
+同时本地配合一下批处理，真正一键发布（滑稽
+
+```
+cd C:\Users\niuch\Documents\GitHub\blog\
+git add .
+git commit
+git push
+pause
+```
+
+
 
 ## 后记
 
@@ -127,6 +140,8 @@ git push "https://${token}@github.com/cjc7373/cjc7373.github.io.git" master:mast
 Travis CI 官方的文档很全，但是以我的英文水平看得很吃力（懒得看），中文资料的质量又参差不齐。所以还是要锻炼自己的英语水平啊。
 
 ## 参考资料
+
+https://docs.travis-ci.com
 
 https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html
 
