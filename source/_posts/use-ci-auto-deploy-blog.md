@@ -1,0 +1,52 @@
+---
+title: 使用 Travis CI 自动部署 Hexo 博客
+date: 2019-04-21 20:16:56
+tags:
+- CI
+- Hexo
+---
+
+## 缘由
+
+其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。
+
+前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的`ln -s`大法行不通了。
+
+于是我想到了 CI。仔细一想其实也不复杂，无非是`git push`， `git pull`两下罢了。那么，Let's do it!
+
+<!-- more -->
+
+## 需求
+
+我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。
+
+* 我更新博客之后，commit 然后 push 至 Github repo
+* CI 自动构建博客
+* CI 将构建完成的静态文件 push 至 Github repo
+
+我原先使用的是`hexo-deployer-git`插件，通过`hexo g -d`部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。
+
+## 配置 Github Repo
+
+在这个 Repo 中需要两个分支：
+
+- master 用于存放构建完成的静态文件
+- source 用于存放 Hexo 生成的博客源文件
+
+对 Hexo 文件夹的操作如下：
+
+```
+git init
+git remote add origin git@github.com:cjc7373/cjc7373.github.io.git
+git checkout -b source
+
+```
+
+
+
+## 参考资料
+
+https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html
+
+
+
