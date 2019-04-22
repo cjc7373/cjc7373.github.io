@@ -1,6 +1,7 @@
 ---
 title: Hexo搭建小记
 date: 2018-10-13 20:10:18
+updated: 2019-04-21
 tags:
 - Hexo
 ---
@@ -55,10 +56,10 @@ npm install https://github.com/CodeFalling/hexo-asset-image --save
 * 搜索引擎收录，Google Search Console
 * 首页文章不显示全部
 * git配置，`hexo g -d`一条命令部署
+* [使用Travis CI自动生成及部署](use-ci-auto-deploy-blog.md) 
 
 ##### 待实现功能
 
-* 使用Travis CI自动生成及部署
 * 更多的自定义操作
 * 文章访问量统计
 * 在自己的服务器也部署博客，然后用 CI 实现自动部署

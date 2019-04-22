@@ -1,13 +1,14 @@
 ---
 title: 使用 Travis CI 自动部署 Hexo 博客
 date: 2019-04-21 20:16:56
+updated: 2019-04-21
 tags:
 - CI
 - Hexo
 ---
+![bg2017121901](use-ci-auto-deploy-blog/bg2017121901.png)
 
 ## 缘由
-![bg2017121901](use-ci-auto-deploy-blog/bg2017121901.png)
 
 其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。
 

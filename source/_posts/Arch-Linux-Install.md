@@ -1,6 +1,7 @@
 ---
 title: Arch Linux 安装&配置全过程
 date: 2019-3-24 20:12:51
+updated: 2019-04-21
 tags:
 - Linux
 ---

@@ -1,6 +1,7 @@
 ---
 title: DOMjudge 配置/踩坑指南
 date: 2018-12-19 20:12:51
+updated: 2019-03-19
 tags:
 - ACM
 ---
