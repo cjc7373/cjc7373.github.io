@@ -28,6 +28,12 @@ tags:
 
 
 
+## 为什么选择 Arch
+
+滚动更新天下第一！（误
+
+听说社区非常友好（然而我还没感受到
+
 ## 基本安装
 
 安装参考了 [以官方Wiki的方式安装ArchLinux](https://www.viseator.com/2017/05/17/arch_install/) 和 官方Wiki的 [Installation Guide](https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))。在未安装图形界面前，基本一切顺利。
@@ -48,26 +54,26 @@ tags:
 
 搜索发现问题可能与N卡的开源驱动 `Nouveau`有关，（我寻思我也没装nouveau啊），于是创建 `/etc/modprobe.d/blacklist.conf`，并在文件中写入`blacklist nouveau`，执行 `update-initramfs -u`（大概是更新内核配置？）。顺便安装`bbswitch`把N卡给禁了，具体配置按照[这篇文章](https://coolrc.me/2016/11/28/28115748/)。
 
-重启问题解决，于是又把内核升到 5.0.2，重启卡在命令行界面（甚至没有见到 sddm）。于是进 live cd，回滚 4.20，重启问题解决。至今不明原因。
-
-发现开机时有一行报错，`Failed to load Linux Kernel Modules`，用`systemctl status systemd-modules-load.service`查看发现是`bbswitch`加载失败了。所有东西似乎有着千丝万缕的联系...
+重启问题解决，于是又把内核升到 5.0.2，重启卡在命令行界面（甚至没有见到 sddm）。于是进 live cd，回滚 4.20，重启问题解决。
 
 话说以后可以试试 Wayland？
 
 ### 问题解决
 
+发现开机时有一行报错，`Failed to load Linux Kernel Modules`，用`systemctl status systemd-modules-load.service`查看发现是`bbswitch`加载失败了。所有东西似乎有着千丝万缕的联系...
+
 对比发现 5.x 内核启动时并没有报错，于是删除 `bbswtich`，再升级 5.0 内核，成功启动`sddm`，问题解决（终于可以愉快地滚系统啦）。
 
 ![1554535852814](Arch-Linux-Install/1554535852814.png)
 
-原因可能是 `bbswitch` 配置不当，具体原因不明。此时开始仍然会报`Failed to load Linux Kernel Modules`，需要手动将`/etc/modprobe.d/bbswitch.conf`及`/etc/modprobe.d/bbswitch.conf`中的`bbswitch`删除。
+原因可能是 `bbswitch` 配置不当，具体原因不明。此时开始仍然会报`Failed to load Linux Kernel Modules`，需要手动将`/etc/modprobe.d/bbswitch.conf`及`/etc/modprobe.d/`中某个文件中（我忘了）的`bbswitch`删除。
 
 
 ## 必要软件
 
 * Arch Linux CN 源，包含了许多 AUR 中的软件。第一次加入源的时候不知道要安装 keyring，导致安装包时卡在了  GPG 签名校验那一步。我还寻思为什么 Arch 的签名老出锅。。（BTW：为什么需要 keyring？）
 * Shadowsocks，装完命令行版的 Shadowsocks，根据 Wiki 描述，应用 `ss-local`启动，然而`commend not found`，未能解决，于是又装了 Shadowsocks-qt5。
-* Chrome，ArchCN 源中有（话说什么时候试试 Chromium）。
+* ~~Chrome，ArchCN 源中有（话说什么时候试试 Chromium）。~~ Chrome 不支持硬件加速，现已更换 Chromium。同步等功能一切正常。
 * 字体，不安装中文字体许多中文字是框框（然而为什么不是所有呢），我选择了`wqy-microhei`，然而系统自带的英文字体也很丑。按照[官方Wiki](https://wiki.archlinux.org/index.php/Microsoft_fonts_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))把Windows中的字体复制了过来，然而发现英文字体的间距变得非常小。中文字体看着挺舒服（应该是雅黑？）。
 * 中文输入法，装了谷歌拼音发现打出来的字是繁体，还找不到相关选项（Update：把简繁转换关了就好了）。现在在用 Rime。
 * 印象笔记，在 Linux 有开源的客户端 Tusk。然而 Tusk 不支持 Markdown....
@@ -92,10 +98,10 @@ Linux Mode Setting 可以提前启动？虽然不知道有什么用。
 ### 目前遇到的问题
 
 * 为什么任务栏有两个音量图标？（一个是 Audio Volume，一个是 KMix，然而这不都是 KDE 自带的么..）
-* Windows 分区在 Windows 启用了快速启动或者处于休眠状态时只能以只读方式挂载。什么傻吊设计。（因为我想把博客文件夹 `ln` 到 Arch 下，使得双系统能够同步写作）
 * 触摸板无法使用手势
 * 还是想禁用独显，参考资料<https://xuchen.wang/archives/archbbswitch.html>
-* 输入法在终端和 Telegram，Kate 下（以及更多）不能使用。
+* Tim 字体发虚，[官方仓库](<https://github.com/countstarlight/deepin-wine-tim-arch>)似乎给出了解决方案。
+* 风扇调度误我，只要CPU占用率高个那么几秒，风扇就像起飞了一样
 
 ## 实用技巧
 
@@ -143,12 +149,42 @@ Linux Mode Setting 可以提前启动？虽然不知道有什么用。
   ![1555420630345](Arch-Linux-Install/1555420630345.png)
 
   ？？？说好的自动解决依赖关系呢？
+  
+  直接构建发现会报一堆依赖的错，查看 Github 项目发现：
+  
+  > `deepin-wine-tim`依赖`Multilib`仓库中的`wine`，`wine_gecko`和`wine-mono`，Archlinux默认没有开启`Multilib`仓库，需要编辑`/etc/pacman.conf`，取消对应行前面的注释([Archlinux wiki](https://wiki.archlinux.org/index.php/Official_repositories#multilib))
+  
+  懂了，我以后一定先 RTFM（
+  
+* Windows 分区在 Windows 启用了快速启动或者处于休眠状态时只能以只读方式挂载。什么傻吊设计。（因为我想把博客文件夹 `ln` 到 Arch 下，使得双系统能够同步写作）
+  
+  解决方案：使用 Travis CI 自动部署 Hexo。
+  
+* 输入法在终端和 Telegram，Kate 下（以及更多）不能使用。
+
+  根据[某大佬的博客](<http://www.towdium.me/2017/04/11/manjaro-config-diary/>)：
+
+> 安装完输入法，你需要把输入法添加到环境变量里才能让他生效。我目前的配置是在 `~/.xprofile`这个文件里加上下面几行：
+>
+> ```
+> export GTK_IM_MODULE=fcitx
+> export QT_IM_MODULE=fcitx
+> export XMODIFIERS=@im=fcitx
+> ```
+
+​		成功解决。
 
 ## TO DO
 
 * zsh
-* 
+* ssh相关帐号导入arch
 
 ## 吐槽
 
 * 在 Linux 下，什么东西装好不用折腾就能用我反而觉得不正常...
+
+* 附一段不太恰当的比喻：
+
+  > Windows 是人妻，啥都有，啥都会，啥都包玩的舒服，就是经常还往家里带一些你不想要的
+  > MacOS 是女朋友，带出去在人前倍有feel，但是只能按照她的规则玩不然一脚踹下床
+  > Linux 是小萝莉，懵懂无知，你怎么调教就怎么跟你玩，但是调教过猛经常会把腰闪了，萝莉也玩坏了。。。
