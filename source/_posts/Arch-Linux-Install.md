@@ -1,7 +1,7 @@
 ---
 title: Arch Linux 安装&配置全过程
 date: 2019-3-24 20:12:51
-updated: 2019-04-21
+updated: 2019-04-24
 tags:
 - Linux
 ---
@@ -103,6 +103,7 @@ Linux Mode Setting 可以提前启动？虽然不知道有什么用。
 * 还是想禁用独显，参考资料<https://xuchen.wang/archives/archbbswitch.html>
 * Tim 字体发虚，[官方仓库](<https://github.com/countstarlight/deepin-wine-tim-arch>)似乎给出了解决方案。
 * 风扇调度误我，只要CPU占用率高个那么几秒，风扇就像起飞了一样
+* Typora 打开时不能恢复上次打开的文件夹
 
 ## 实用技巧
 
@@ -121,6 +122,23 @@ Linux Mode Setting 可以提前启动？虽然不知道有什么用。
 * pacman 能够在升级前对比版本信息，对于我这种强迫症非常有用。
 
   ![1555419677545](Arch-Linux-Install/1555419677545.png)
+
+* 修改 `/etc/fstab`，加入以下内容，使得开机时能够自动以只读模式挂载 Windows 分区。
+
+  ![1556519535880](Arch-Linux-Install/1556519535880.png)
+  
+* 日志相关。由于`systemd`这个神奇的存在，似乎所有日志都可以通过`systemd`带的`journalctl`查看。
+
+
+    * 查看启动时`tty1`的滚过去的那一大堆日志：`journalctl /usr/lib/systemd/systemd -b`
+    
+    * 查看加载失败的 unit：`systemctl --failed`
+    
+    * 查看某个 unit 的日志：`journalctl -u nginx.service --since today`
+    
+      （另外`systemctl status`也能显示最新的大概十行日志）
+
+* 增强 Bash 的自动补全：`pacman -S bash-completion`，重启终端即可。
 
 ## Trouble Shooting
 
@@ -175,10 +193,24 @@ Linux Mode Setting 可以提前启动？虽然不知道有什么用。
 
 ​		成功解决。
 
+* 改完`fstab`之后，开机发现闪过一行[FAILED]，查看日志发现`sys-fs-fuse-connections.mount`这个服务（mount）失败了。日志为：
+
+  > May 02 14:19:10 Coherence systemd[1]: Condition check resulted in FUSE Control File System being skipped.
+  > May 02 14:19:11 Coherence systemd[1]: sys-fs-fuse-connections.mount: Start request repeated too quickly.
+  > May 02 14:19:11 Coherence systemd[1]: sys-fs-fuse-connections.mount: Failed with result 'start-limit-hit'.
+  > May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.
+
+  Google 了下，没找到原因，尝试 restart，成功了。
+
+  > **active (mounted)**
+
+  有待进一步观察。。（未复现
+
 ## TO DO
 
 * zsh
 * ssh相关帐号导入arch
+* 可以尝试一下用命令行版替代 ss-qt5 
 
 ## 吐槽
 
