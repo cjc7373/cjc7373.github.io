@@ -90,10 +90,11 @@
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1554536417517.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1554535852814.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419677545.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1556519535880.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419245819.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419316125.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555420630345.png">
-<meta property="og:updated_time" content="2019-04-21T00:00:00.000Z">
+<meta property="og:updated_time" content="2019-04-24T00:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Arch Linux 安装&amp;配置全过程">
 <meta name="twitter:description" content="前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。">
@@ -304,8 +305,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-21T00:00:00+00:00">
-                2019-04-21
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-24T00:00:00+00:00">
+                2019-04-24
               </time>
             
           </span>
@@ -423,6 +424,7 @@
 <li>还是想禁用独显，参考资料<a href="https://xuchen.wang/archives/archbbswitch.html" target="_blank" rel="noopener">https://xuchen.wang/archives/archbbswitch.html</a></li>
 <li>Tim 字体发虚，<a href="https://github.com/countstarlight/deepin-wine-tim-arch" target="_blank" rel="noopener">官方仓库</a>似乎给出了解决方案。</li>
 <li>风扇调度误我，只要CPU占用率高个那么几秒，风扇就像起飞了一样</li>
+<li>Typora 打开时不能恢复上次打开的文件夹</li>
 </ul>
 <h2 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h2><ul>
 <li><p>显示桌面：在 Panel Option 中添加 Show Desktop 小工具，然后设置快捷键为 Win+D。</p>
@@ -435,6 +437,21 @@
 <li><p>pacman 能够在升级前对比版本信息，对于我这种强迫症非常有用。</p>
 <p><img src="/2019/03/24/Arch-Linux-Install/1555419677545.png" alt="1555419677545"></p>
 </li>
+<li><p>修改 <code>/etc/fstab</code>，加入以下内容，使得开机时能够自动以只读模式挂载 Windows 分区。</p>
+<p><img src="/2019/03/24/Arch-Linux-Install/1556519535880.png" alt="1556519535880"></p>
+</li>
+<li><p>日志相关。由于<code>systemd</code>这个神奇的存在，似乎所有日志都可以通过<code>systemd</code>带的<code>journalctl</code>查看。</p>
+</li>
+</ul>
+<pre><code>* 查看启动时`tty1`的滚过去的那一大堆日志：`journalctl /usr/lib/systemd/systemd -b`
+
+* 查看加载失败的 unit：`systemctl --failed`
+
+* 查看某个 unit 的日志：`journalctl -u nginx.service --since today`
+
+  （另外`systemctl status`也能显示最新的大概十行日志）
+</code></pre><ul>
+<li>增强 Bash 的自动补全：<code>pacman -S bash-completion</code>，重启终端即可。</li>
 </ul>
 <h2 id="Trouble-Shooting"><a href="#Trouble-Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><ul>
 <li><p>今天打开tusk发现闪退。。用终端运行报<code>tusk: error while loading shared libraries: libnode.so: cannot open shared object file: No such file or directory</code>，我干什么了我？我啥都没干啊。。重新安装未解决问题。重启同样未解决。</p>
@@ -474,9 +491,22 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; export GTK_IM_MODULE=fcitx</span><br><span class="line">&gt; export QT_IM_MODULE=fcitx</span><br><span class="line">&gt; export XMODIFIERS=@im=fcitx</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>​        成功解决。</p>
+<ul>
+<li><p>改完<code>fstab</code>之后，开机发现闪过一行[FAILED]，查看日志发现<code>sys-fs-fuse-connections.mount</code>这个服务（mount）失败了。日志为：</p>
+<blockquote>
+<p>May 02 14:19:10 Coherence systemd[1]: Condition check resulted in FUSE Control File System being skipped.<br>May 02 14:19:11 Coherence systemd[1]: sys-fs-fuse-connections.mount: Start request repeated too quickly.<br>May 02 14:19:11 Coherence systemd[1]: sys-fs-fuse-connections.mount: Failed with result ‘start-limit-hit’.<br>May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.</p>
+</blockquote>
+<p>Google 了下，没找到原因，尝试 restart，成功了。</p>
+<blockquote>
+<p><strong>active (mounted)</strong></p>
+</blockquote>
+<p>有待进一步观察。。（未复现</p>
+</li>
+</ul>
 <h2 id="TO-DO"><a href="#TO-DO" class="headerlink" title="TO DO"></a>TO DO</h2><ul>
 <li>zsh</li>
 <li>ssh相关帐号导入arch</li>
+<li>可以尝试一下用命令行版替代 ss-qt5 </li>
 </ul>
 <h2 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h2><ul>
 <li><p>在 Linux 下，什么东西装好不用折腾就能用我反而觉得不正常…</p>
