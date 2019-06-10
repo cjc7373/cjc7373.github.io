@@ -87,14 +87,14 @@
 <meta property="og:site_name" content="Coherence">
 <meta property="og:description" content="我校新生赛也能用上 World Final 同款评测系统啦~ DOMjudge 提供了详尽的官方文档，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545218741334.png">
-<meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545219324330.png">
-<meta property="og:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545220336183.png">
+<meta property="og:image" content="https://cjc7373.github.io/.io//1545218741334.png">
+<meta property="og:image" content="https://cjc7373.github.io/.io//1545219324330.png">
+<meta property="og:image" content="https://cjc7373.github.io/.io//1545220336183.png">
 <meta property="og:updated_time" content="2019-03-19T00:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOMjudge 配置&#x2F;踩坑指南">
 <meta name="twitter:description" content="我校新生赛也能用上 World Final 同款评测系统啦~ DOMjudge 提供了详尽的官方文档，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。">
-<meta name="twitter:image" content="https://cjc7373.github.io/2018/12/19/Domjudge-config/1545218741334.png">
+<meta name="twitter:image" content="https://cjc7373.github.io/.io//1545218741334.png">
 
 
 
@@ -349,7 +349,7 @@
 <p>DOMjudge 提供了详尽的<a href="https://www.domjudge.org/documentation" target="_blank" rel="noopener">官方文档</a>，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。</p>
 <a id="more"></a>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>DOMjudge，作为一款开源的 CCS(<a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System" target="_blank" rel="noopener">Contest Control System</a>)，现已被ICPC钦定为官方的比赛评测系统。比 pc^2 这种闭源而含有诸多 Bug 的 CCS 高到不知道哪里去了啊。</p>
-<p><img src="/2018/12/19/Domjudge-config/1545218741334.png" alt="1545218741334"></p>
+<p><img src="/.io//1545218741334.png" alt="1545218741334"></p>
 <p>根据官方文档的描述，DOMjudge 的主要特性有：</p>
 <ul>
 <li>分布式且自动评测的 judge host</li>
@@ -382,7 +382,7 @@
 <p>具体的文件结构是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">│  domjudge-problem.ini</span><br><span class="line">│</span><br><span class="line">├─data</span><br><span class="line">│  ├─sample</span><br><span class="line">│  └─secret</span><br><span class="line">│</span><br><span class="line">└─problem_statement</span><br><span class="line">        problem.&#123;pdf,html,txt&#125;</span><br></pre></td></tr></table></figure>
 <p>在 <code>domjudge-problem.ini</code> 中定义了如下信息：</p>
-<p><img src="/2018/12/19/Domjudge-config/1545219324330.png" alt="1545219324330"></p>
+<p><img src="/.io//1545219324330.png" alt="1545219324330"></p>
 <p>（懒得翻译了，有时间再补）</p>
 <p>在 secret 文件夹中存放测试数据，在 sample 文件夹中存放样例数据， 在 problem_statement 存放题面。</p>
 <p>（不知道为什么博主在压缩包内上传题面没有成功过，只能通过 Web 端来上传）</p>
@@ -401,7 +401,7 @@
 <p>tsv 文件可以采用 Excel 生成。在 Excel 中输入完数据后选择另存为文本文件（制表符分隔）即可。</p>
 <p>如需使用<code>institution_name institution_short_name country_code</code> 三项需在 Team Affiliations 中提前创建相应的条目。</p>
 <h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><p>参考官方的 API 说明，DOMjudge 包含<a href="https://clics.ecs.baylor.edu/index.php/Contest_API" target="_blank" rel="noopener"> ICPC 定义的 API </a>和<a href="https://www.domjudge.org/demoweb/api/doc" target="_blank" rel="noopener">自有的 API</a>。</p>
-<p><img src="/2018/12/19/Domjudge-config/1545220336183.png" alt="1545220336183"></p>
+<p><img src="/.io//1545220336183.png" alt="1545220336183"></p>
 <h3 id="滚榜"><a href="#滚榜" class="headerlink" title="滚榜"></a>滚榜</h3><p>尝试使用官方的 <a href="https://icpc.baylor.edu/icpctools/" target="_blank" rel="noopener">ICPC tools</a>，发现总是提示比赛未结束，查阅日志认为是 DOMjudge 的 event feed 格式与 ICPC tools 提供的 resolver 工具的格式不兼容。</p>
 <p>尝试 DOMjura 发现同样不能正确读取 event-feed 。</p>
 <h2 id="新生赛概况"><a href="#新生赛概况" class="headerlink" title="新生赛概况"></a>新生赛概况</h2><p>闲扯几句。</p>

@@ -87,18 +87,18 @@
 <meta property="og:site_name" content="Coherence">
 <meta property="og:description" content="前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1554536417517.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1554535852814.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419677545.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1556519535880.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419245819.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419316125.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555420630345.png">
+<meta property="og:image" content="https://cjc7373.github.io/.io//1554536417517.png">
+<meta property="og:image" content="https://cjc7373.github.io/.io//1554535852814.png">
+<meta property="og:image" content="https://cjc7373.github.io/.io//1555419677545.png">
+<meta property="og:image" content="https://cjc7373.github.io/.io//1556519535880.png">
+<meta property="og:image" content="https://cjc7373.github.io/.io//1555419245819.png">
+<meta property="og:image" content="https://cjc7373.github.io/.io//1555419316125.png">
+<meta property="og:image" content="https://cjc7373.github.io/.io//1555420630345.png">
 <meta property="og:updated_time" content="2019-04-24T00:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Arch Linux 安装&amp;配置全过程">
 <meta name="twitter:description" content="前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。">
-<meta name="twitter:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1554536417517.png">
+<meta name="twitter:image" content="https://cjc7373.github.io/.io//1554536417517.png">
 
 
 
@@ -351,7 +351,7 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。</p>
 <p>这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。</p>
-<p><img src="/2019/03/24/Arch-Linux-Install/1554536417517.png" alt="1554536417517"></p>
+<p><img src="/.io//1554536417517.png" alt="1554536417517"></p>
 <a id="more"></a>
 <p>下面列出笔记本的配置，以供参考。</p>
 <table>
@@ -402,7 +402,7 @@
 <p>话说以后可以试试 Wayland？</p>
 <h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>发现开机时有一行报错，<code>Failed to load Linux Kernel Modules</code>，用<code>systemctl status systemd-modules-load.service</code>查看发现是<code>bbswitch</code>加载失败了。所有东西似乎有着千丝万缕的联系…</p>
 <p>对比发现 5.x 内核启动时并没有报错，于是删除 <code>bbswtich</code>，再升级 5.0 内核，成功启动<code>sddm</code>，问题解决（终于可以愉快地滚系统啦）。</p>
-<p><img src="/2019/03/24/Arch-Linux-Install/1554535852814.png" alt="1554535852814"></p>
+<p><img src="/.io//1554535852814.png" alt="1554535852814"></p>
 <p>原因可能是 <code>bbswitch</code> 配置不当，具体原因不明。此时开始仍然会报<code>Failed to load Linux Kernel Modules</code>，需要手动将<code>/etc/modprobe.d/bbswitch.conf</code>及<code>/etc/modprobe.d/</code>中某个文件中（我忘了）的<code>bbswitch</code>删除。</p>
 <h2 id="必要软件"><a href="#必要软件" class="headerlink" title="必要软件"></a>必要软件</h2><ul>
 <li>Arch Linux CN 源，包含了许多 AUR 中的软件。第一次加入源的时候不知道要安装 keyring，导致安装包时卡在了  GPG 签名校验那一步。我还寻思为什么 Arch 的签名老出锅。。（BTW：为什么需要 keyring？）</li>
@@ -435,10 +435,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[General]</span><br><span class="line">Numlock=on</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>pacman 能够在升级前对比版本信息，对于我这种强迫症非常有用。</p>
-<p><img src="/2019/03/24/Arch-Linux-Install/1555419677545.png" alt="1555419677545"></p>
+<p><img src="/.io//1555419677545.png" alt="1555419677545"></p>
 </li>
 <li><p>修改 <code>/etc/fstab</code>，加入以下内容，使得开机时能够自动以只读模式挂载 Windows 分区。</p>
-<p><img src="/2019/03/24/Arch-Linux-Install/1556519535880.png" alt="1556519535880"></p>
+<p><img src="/.io//1556519535880.png" alt="1556519535880"></p>
 </li>
 <li><p>日志相关。由于<code>systemd</code>这个神奇的存在，似乎所有日志都可以通过<code>systemd</code>带的<code>journalctl</code>查看。</p>
 </li>
@@ -456,9 +456,9 @@
 <h2 id="Trouble-Shooting"><a href="#Trouble-Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><ul>
 <li><p>今天打开tusk发现闪退。。用终端运行报<code>tusk: error while loading shared libraries: libnode.so: cannot open shared object file: No such file or directory</code>，我干什么了我？我啥都没干啊。。重新安装未解决问题。重启同样未解决。</p>
 <p>于是 Google，StackOverflow 上有一个帖子建议我先找找有没有这个库。</p>
-<p><img src="/2019/03/24/Arch-Linux-Install/1555419245819.png" alt="1555419245819"></p>
+<p><img src="/.io//1555419245819.png" alt="1555419245819"></p>
 <p>发现是有的，ls 看下。</p>
-<p><img src="/2019/03/24/Arch-Linux-Install/1555419316125.png" alt="1555419316125"></p>
+<p><img src="/.io//1555419316125.png" alt="1555419316125"></p>
 <p>然而链接到了另一个文件，一看，果然那个文件没了。。（推测和包更新了有关？）但是 Typora 有这个库呀，于是尝试链接到 Typora 带的那个库，然后问题解决了。。。我被我这波操作惊呆了。</p>
 </li>
 <li><p>觉得字体不好看，然后似乎改崩了…目前把 Windows 的字体扔了，重新安装的字体列表有：</p>
@@ -471,7 +471,7 @@
 <p>然后把终端的字体改成了 Consolas（AUR），感觉还是这个字体好看，不过中文字体好像变丑了。。</p>
 </li>
 <li><p>尝试安装 Tim。</p>
-<p><img src="/2019/03/24/Arch-Linux-Install/1555420630345.png" alt="1555420630345"></p>
+<p><img src="/.io//1555420630345.png" alt="1555420630345"></p>
 <p>？？？说好的自动解决依赖关系呢？</p>
 <p>直接构建发现会报一堆依赖的错，查看 Github 项目发现：</p>
 <blockquote>
