@@ -86,14 +86,14 @@
 <meta property="og:site_name" content="Coherence">
 <meta property="og:description" content="寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。 Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://cjc7373.github.io/.io//IMG_20190219_113847.jpg">
-<meta property="og:image" content="https://cjc7373.github.io/.io//1550548463370.png">
-<meta property="og:image" content="https://cjc7373.github.io/.io//1550306022384.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/02/16/fiber-modem-crack/IMG_20190219_113847.jpg">
+<meta property="og:image" content="https://cjc7373.github.io/2019/02/16/fiber-modem-crack/1550548463370.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/02/16/fiber-modem-crack/1550306022384.png">
 <meta property="og:updated_time" content="2019-02-19T00:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="中国电信 HG2543C1 光猫获取超级管理员密码">
 <meta name="twitter:description" content="寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。 Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板">
-<meta name="twitter:image" content="https://cjc7373.github.io/.io//IMG_20190219_113847.jpg">
+<meta name="twitter:image" content="https://cjc7373.github.io/2019/02/16/fiber-modem-crack/IMG_20190219_113847.jpg">
 
 
 
@@ -348,13 +348,13 @@
 <p>Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板，准备拆机 TTL 破解光猫。</p>
 <a id="more"></a>
 <h2 id="0x01-拆机"><a href="#0x01-拆机" class="headerlink" title="0x01 拆机"></a>0x01 拆机</h2><p>拆机后发现 PCB 板上有 TTL 插针，用万用表测得倒数第二根为 GND（接地pin），然后剩余四根随机组合，测得 RX（接收数据pin）和 TX（发送数据pin）。用杜邦线连接 USB转TTL板和 TTL 插针。</p>
-<p><img src="/.io//IMG_20190219_113847.jpg" alt="IMG_20190219_113847"></p>
+<p><img src="/2019/02/16/fiber-modem-crack/IMG_20190219_113847.jpg" alt="IMG_20190219_113847"></p>
 <h2 id="0x02-串口调试"><a href="#0x02-串口调试" class="headerlink" title="0x02 串口调试"></a>0x02 串口调试</h2><p>电脑安装好 USB转TTL板的驱动，USB端连接上电脑。网上的教程一般使用 SecureCRT， 然而我后来发现 Xshell 也能连接串口，遂用 Xshell 进行调试。</p>
-<p><img src="/.io//1550548463370.png" alt="1550548463370"></p>
+<p><img src="/2019/02/16/fiber-modem-crack/1550548463370.png" alt="1550548463370"></p>
 <p>如图设置参数，port 按照自己的情况设置。</p>
 <p>然后连接。接通电源后等待。大概等待两分钟后，按回车，出现 <code>Login:</code> 字样，用 <code>root/hg2x0</code> 登陆。</p>
 <p>用 <code>cat /proc/cpuinfo</code> 看一下 CPU 信息，居然是 MIPS…</p>
-<p><img src="/.io//1550306022384.png" alt="1550306022384"></p>
+<p><img src="/2019/02/16/fiber-modem-crack/1550306022384.png" alt="1550306022384"></p>
 <p>超级密码在<code>/flash/cfg/agentconf/factory.conf</code>文件中。文件前两行即为管理员账户和密码。至此，光猫破解完成。</p>
 <h2 id="0x03-参考资料"><a href="#0x03-参考资料" class="headerlink" title="0x03 参考资料"></a>0x03 参考资料</h2><p><a href="https://paper.seebug.org/506/#0x03" target="_blank" rel="noopener">如何通过TTL调试光猫</a><br><a href="https://m2.zhugh.com:26800/po-jie-dian-xin-guang-mao/" target="_blank" rel="noopener">破解电信光猫</a></p>
 
