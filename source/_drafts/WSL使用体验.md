@@ -5,4 +5,5 @@ tags:
 
 ## 参考资料
 
-$$ SEI=BIR \cdot Iss \cdot 100% ​$$
+$$ SEI=BIR \cdot Iss \cdot 100% $$
+
