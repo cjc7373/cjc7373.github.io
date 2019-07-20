@@ -1,9 +1,10 @@
 ---
 title: 软通实习
 date: 2019-07-17 15:12:51
-updated: 2019-07-17
+updated: 2019-07-20
 tags:
 - Python
+- Nginx
 ---
 
 ## 序
@@ -12,6 +13,8 @@ tags:
 ![“isoftstone”的图片搜索结果](isoftstone-practice/isoftstone.png)
 
 然而网上这家公司的风评很差，不过其他两家似乎更差，于是我们班大概四分之三的人都来了软通。
+
+<!-- more -->
 
 ## 经历
 
