@@ -249,6 +249,223 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2019/07/17/isoftstone-practice/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coherence">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coherence">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/17/isoftstone-practice/" itemprop="url">软通实习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-17T15:12:51+00:00">
+                2019-07-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-17T00:00:00+00:00">
+                2019-07-17
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/17/isoftstone-practice/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/17/isoftstone-practice/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>二年级下学期期末，有一个两周的实习，学校给了我们三个选项，其中软通算是知名度最高的一家公司了。<br><img src="/2019/07/17/isoftstone-practice/isoftstone.png" alt="“isoftstone”的图片搜索结果"></p>
+<p>然而网上这家公司的风评很差，不过其他两家似乎更差，于是我们班大概四分之三的人都来了软通。</p>
+<h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><p>实习第一天，上午讲的开发流程，团队角色，每日例行项目好似我们已经接手了一个实际项目，然而到了下午瞬间变成培训班，开始教我们配置环境。看下发的文档是用 Java Spring Boot 框架来开发。第二天又开始复习 Java。然后到了第三天，负责我们的老师（就叫他项目经理好了）突然说，你们想用什么技术就用什么技术吧。终于不用写 Java 了（逃</p>
+<p>我们大概使用的是 Scrum 敏捷开发方法，最有特色的一点大概就是每日站会了。还有 Story 列表其实也挺不错的，只是没有贴在公告板上感觉失去了灵魂。</p>
+<p>可能是时间短的原因，从一开始需求包括 Story 列表就已经确定了，我认为如果只是说做一个什么系统而不说具体需求会让大家的产品更有差异化，亮点也会更多。</p>
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>由于我很倾向 Python，加上青岛大学的开源 OJ 采用的就是 Django+Vue 前后端分离的开发模式，于是我便也想采用这个模式。</p>
+<p>最终我们决定采用前后端完全分离，前后端之间使用 HTTP 协议通信。前端采用：HTML+CSS+JavaScript（JQuery+AJAX），后端采用：Django，数据库采用：PostgreSQL</p>
+<h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><p>我有一些 Git 的知识，然而软通提供的版本管理工具是 SVN。用了一段时间后发现，两个工具没有本质的区别，最大的大概是 SVN 需要中心服务器，权限控制似乎也比较强大，所以像在公司内部比较好用，而 Git 分布式，分支创建极为方便，在开源社区中被广泛使用。</p>
+<p><img src="/2019/07/17/isoftstone-practice/1563352303687.png" alt="1563352303687"></p>
+<p>然而我们甚至没有用到分支这个功能，总体上还是没有利用好版本管理。</p>
+<h2 id="前端：三剑客"><a href="#前端：三剑客" class="headerlink" title="前端：三剑客"></a>前端：三剑客</h2><p>zpc 第一天就不知道在哪找了个模板网站，然后冲了十块钱下了个模板。接下来就开始改改改。</p>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p>一个问题是，后端的代码如何给前端调试。我们选择：</p>
+<ol>
+<li>后端首先使用 Django 的本地服务器，用 Postman 进行测试，测试通过后上传代码。</li>
+<li>不定期部署至服务器上</li>
+<li>前端从服务器调用接口调试</li>
+</ol>
+<p>然而，在其他组答辩的时候，我们才知道有个东西叫 <a href="http://mockjs.com/" target="_blank" rel="noopener">mock</a>，能够简化调试难度。</p>
+<h2 id="后端：Django"><a href="#后端：Django" class="headerlink" title="后端：Django"></a>后端：Django</h2><p>很早就听说了 Python Web 一些有名的框架，后来又知道了青岛大学的开源 OJ 后端使用的就是 Django，所以很想尝试一下。曾经看过几节慕课，也看了一些官方文档（一开始是真的看不懂）。在做微信小程序的时候，我就想用 Django，奈何技术不够，放弃了。</p>
+<p>实习前，我去找 zjb 两小时速成了一下 Django，发现 Django 虽然是 MTV（Model——Template——View）三级结构，但是前后端分离的话就没有模板了，同时我们用了 REST Framework，在函数名中直接声明要调用的方法，大大简化了开发。REST Framework 也提供了<a href="https://q1mi.github.io/Django-REST-framework-documentation/" target="_blank" rel="noopener">官方中文文档</a>，不过感觉写得不是很好。</p>
+<p>后端代码非常简单，我们先用<code>token = request.COOKIES.get(&quot;token&quot;)</code>获取token，查询<code>user = User.objects.get(userToken=token)</code>，若 token 无效则会抛出<code>User.DoesNotExist</code>错误，查询操作之后调用一个序列化方法<code>users = serializers.serialize(&quot;json&quot;, allMessage, fields=(&quot;userID&quot;))</code>，但是如果直接这样返回会有问题，所以需要把它转化成字典类型<code>rtn[&#39;data&#39;]=json.loads(users)</code>，然后调用<code>JsonResponse</code>返回。</p>
+<p>Django 查询数据库返回的是一个 <a href="https://docs.djangoproject.com/zh-hans/2.2/ref/models/querysets/" target="_blank" rel="noopener">QuerySet</a> 对象，我们能对它进行很多操作，但是其实我们都没用到..</p>
+<h3 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h3><p>我一开始以为 Cookies 是前端负责维护的，后来发现这只是浏览器的工作。所以实际上 Cookies 是后端维护的。在登陆时设置 Cookie，调用 API 时获取 Cookie，退出时删除 Cookie 即可。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>我们用了 Postman 模拟 HTTP 请求进行测试，很可惜的是没有用到 Django 的自动化测试。</p>
+<h3 id="几个坑"><a href="#几个坑" class="headerlink" title="几个坑"></a>几个坑</h3><p>Django 的文档宣称：</p>
+<blockquote>
+<p><strong>会自动重新加载的服务器 <a href="https://docs.djangoproject.com/zh-hans/2.2/ref/django-admin/#django-admin-runserver" target="_blank" rel="noopener"><code>runserver</code></a></strong></p>
+<p>用于开发的服务器在需要的情况下会对每一次的访问请求重新载入一遍 Python 代码。所以你不需要为了让修改的代码生效而频繁的重新启动服务器。然而，一些动作，比如添加新文件，将不会触发自动重新加载，这时你得自己手动重启服务器。</p>
+</blockquote>
+<p>然而有时候重新载入并不会生效（可能是 PyCharm 的问题？），这种时候就很烦..</p>
+<p>数据库中的<code>DateTimeField</code>字段存储的时间总是 UTC 时间，在<code>settings.py</code>中设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TIME_ZONE = &apos;Asia/Shanghai&apos;</span><br><span class="line">USE_TZ = False</span><br></pre></td></tr></table></figure>
+<p>这样返回的时间是正常的，虽然数据库里的时间还是 UTC 时间，不过不影响了。</p>
+<h2 id="数据库：PostgreSQL"><a href="#数据库：PostgreSQL" class="headerlink" title="数据库：PostgreSQL"></a>数据库：<strong>PostgreSQL</strong></h2><p>据说 PostgreSQL 和 MySQL 的区别是..</p>
+<p><img src="/2019/07/17/isoftstone-practice/1563367521827.png" alt="1563367521827"></p>
+<p><img src="/2019/07/17/isoftstone-practice/1563367537890.png" alt="1563367537890"></p>
+<p>虽说 Django 官方支持 PostgreSQL，而且我们的数据库部署在服务器上，但是本地还是要一个中间件<code>psycopg2</code>，在 Windows 下安装无问题，在 Linux 下需要一个额外的包 <code>libpq-dev</code>，而在 Mac 下需要先安装 PostgreSQL。这也是一个坑点。</p>
+<p>图形化管理界面方面，我使用了 pgadmin，一开始我以为这是个客户端，还奇怪为什么它提供 Docker 镜像，下完才发现它是网页端。果断卸载然后 docker pull..</p>
+<p>数据库由于我们的设计问题，改了一万次。</p>
+<p><img src="/2019/07/17/isoftstone-practice/1563368286617.png" alt="1563368286617"></p>
+<p>七次其实还是我们重置过一次数据库的结果，真实改动可能有十一二次吧。虽然 Django 提供了方便的 migrate 功能，但是这功能锅很多，能不改还是尽量不改。</p>
+<ul>
+<li>在自己设置主键然后又取消使用自动主键时，Django 会报没有默认值的错。？？？AutoField 你要什么默认值。网上也有同样的情况，应该是 Django 的 Bug。</li>
+<li>在改某张表的时候一直碰到报错一个不存在的列不存在，这张表就似乎坏了。我们的解决方案是重建一张新的表2333</li>
+</ul>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>我们的接口文档直接写在 Story 列表后面。主要写明了接口地址，方法（GET，POST，PUT，DELETE，我是想 RESTful 的，可是其他人基本随缘了），请求字段，相应字段，以及相应的解释和示例。</p>
+<h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>前端调试接口的时候产生了跨域的问题。Cookie，Ajax 请求都会遭到浏览器<a href="https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html" target="_blank" rel="noopener">同源策略</a>的限制。临时的解决方案是，在 Django 上装一个插件 <a href="https://github.com/ottoyiu/django-cors-headers" target="_blank" rel="noopener"><code>django-cors-headers</code></a>，并且修改<code>settings.py</code>，在<code>INSTALLED_APPS</code>中加入<code>corsheaders</code>，在<code>MIDDLEWARE</code>中加入<code>corsheaders.middleware.CorsMiddleware</code>（位置尽量靠前），并设置字段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CORS_ORIGIN_ALLOW_ALL = True</span><br><span class="line">CORS_ALLOW_CREDENTIALS = True</span><br></pre></td></tr></table></figure>
+<p>而在前端每个 Ajax 请求中加上：</p>
+<p><img src="/2019/07/17/isoftstone-practice/1563353270812.png" alt="1563353270812"></p>
+<p>而在生产环境中由于同源，所以不存在跨域的问题。</p>
+<p>然而，一个新的问题是，本地浏览器并不能够成功地存储 Cookie，当时的解决办法是，每改动一个页面就部署至服务器上进行调试，然而这个方法效率极低。后来我发现其实这只是 Chrome 浏览器的问题，其他浏览器则没有这个问题。</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>在开发中，采取的方案是前端静态网页由 Nginx 部署，而后端 Django 代码则使用 Django 自带的服务器部署，而显然，这绝不能用于生产环境。</p>
+<blockquote>
+<p>DO NOT USE THIS SERVER IN A PRODUCTION SETTING. It has not gone through security audits or performance tests. </p>
+</blockquote>
+<p>（不过我还是用了，甚至都没关 DEBUG 选项）</p>
+<p>因为 Django 服务器使用 <code>python3 manage.py runserver</code>运行的， SSH 断开后进程就被中断了，所以需要让它能够后台运行，尝试了 nohup，子 shell 等方法后（都不好用），最终选择了 screen。主要命令有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">screen -S [NAME] 创建一个新 shell</span><br><span class="line">screen -ls 查看后台 shell</span><br><span class="line">screen -r [ID] 进入某个 shell</span><br><span class="line">Ctrl+A,D 把当前 shell 切换至后台</span><br></pre></td></tr></table></figure>
+<p>Nginx 配置我就直接改默认配置了，路径在<code>/etc/nginx/sites-enabled/default</code>下。除了静态页面外，还需配置后端请求转发：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location /api &#123;</span><br><span class="line">            proxy_pass http://127.0.0.1:8000;</span><br><span class="line">            proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">            proxy_set_header Host $http_host;</span><br><span class="line">            client_max_body_size 200M;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>（这个配置我是抄青岛大学 OJ 的）</p>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>尝试把域名解析至阿里云的服务器，发现不管是 HTTP 还是 HTTPS 请求都会被拦截，并被劫持到一个备案页面。</p>
+<p><img src="/2019/07/17/isoftstone-practice/1563512996274.png" alt="1563512996274"></p>
+<p>于是换用 GCP，一切顺利。使用 Let’s Encrypt 的证书以及官方推荐的 <a href="https://certbot.eff.org/" target="_blank" rel="noopener">certbot</a> 工具。简单几步即可签发证书并自动配置 Nginx。</p>
+<p> <img src="/2019/07/17/isoftstone-practice/1563513130043.png" alt="1563513130043"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://blog.csdn.net/summer2day/article/details/81358815" target="_blank" rel="noopener">前后端分离的django项目服务器跨域</a></p>
+<p><a href="https://harttle.land/2016/12/28/cors-with-cookie.html" target="_blank" rel="noopener">CORS 跨域发送 Cookie</a></p>
+<p><a href="https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/tutorials/Django_and_nginx.html" target="_blank" rel="noopener">使用uWSGI和nginx来设置Django和你的web服务器</a></p>
+<p><a href="https://www.cnblogs.com/lhj588/archive/2011/10/27/2226976.html" target="_blank" rel="noopener">django web Cookie 和 Sessions 应用</a></p>
+<p><a href="https://www.jianshu.com/p/15af33d2c2c4" target="_blank" rel="noopener">从零开始建立单元测试-以Django项目为例</a></p>
+<p><a href="http://www.liujiangblog.com/course/django/129" target="_blank" rel="noopener">查询操作</a></p>
+<p><a href="https://www.runoob.com/django/django-model.html" target="_blank" rel="noopener">Django 模型</a></p>
+<p><a href="https://blog.csdn.net/zhu_free/article/details/48176779" target="_blank" rel="noopener">django DateTimeField 时区问题解决</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+            
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1604,156 +1821,6 @@
 
       
     
-      
-            
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2018/10/13/Hexo搭建小记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coherence">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coherence">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/13/Hexo搭建小记/" itemprop="url">Hexo搭建小记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-13T20:10:18+00:00">
-                2018-10-13
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-04-21T00:00:00+00:00">
-                2019-04-21
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/10/13/Hexo搭建小记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/13/Hexo搭建小记/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>身为一个懒人，又不会写网页，也只能用用博客生成器了。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/13/Hexo搭建小记/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1804,7 +1871,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1826,7 +1893,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
