@@ -396,7 +396,7 @@
 <li>在自己设置主键然后又取消使用自动主键时，Django 会报没有默认值的错。？？？AutoField 你要什么默认值。网上也有同样的情况，应该是 Django 的 Bug。</li>
 <li>在改某张表的时候一直碰到报错一个不存在的列不存在，这张表就似乎坏了。我们的解决方案是重建一张新的表2333</li>
 </ul>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>我们的接口文档直接写在 Story 列表后面。主要写明了接口地址，方法（GET，POST，PUT，DELETE，我是想 RESTful 的，可是其他人基本随缘了），请求字段，相应字段，以及相应的解释和示例。</p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>我们的接口文档直接写在 Story 列表后面。主要写明了接口地址，方法（GET，POST，PUT，DELETE，我是想 RESTful 的，可是其他人基本随缘了），请求字段，响应字段，以及相应的解释和示例。</p>
 <h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>前端调试接口的时候产生了跨域的问题。Cookie，Ajax 请求都会遭到浏览器<a href="https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html" target="_blank" rel="noopener">同源策略</a>的限制。临时的解决方案是，在 Django 上装一个插件 <a href="https://github.com/ottoyiu/django-cors-headers" target="_blank" rel="noopener"><code>django-cors-headers</code></a>，并且修改<code>settings.py</code>，在<code>INSTALLED_APPS</code>中加入<code>corsheaders</code>，在<code>MIDDLEWARE</code>中加入<code>corsheaders.middleware.CorsMiddleware</code>（位置尽量靠前），并设置字段：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CORS_ORIGIN_ALLOW_ALL = True</span><br><span class="line">CORS_ALLOW_CREDENTIALS = True</span><br></pre></td></tr></table></figure>
 <p>而在前端每个 Ajax 请求中加上：</p>
