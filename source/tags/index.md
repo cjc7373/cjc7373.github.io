@@ -1,4 +1,4 @@
 ---
-layout: categories
+layout: tags
 comments: false
 ---
