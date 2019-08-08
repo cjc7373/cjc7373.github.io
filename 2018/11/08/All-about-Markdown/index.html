@@ -1,219 +1,354 @@
 <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    
-<!-- Google Analytics -->
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-126196845-1', 'auto');
-ga('send', 'pageview');
-</script>
-<script async src="https://www.google-analytics.com/analytics.js"></script>
-<!-- End Google Analytics -->
-
-
-    
-
-    
 
 
 
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>Markdown简介 | Coherence</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="Markdown">
-    <meta name="description" content="什么是 Markdown?Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。                                                                                              哈哈哈">
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Markdown,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是 Markdown?Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。">
 <meta name="keywords" content="Markdown">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Markdown简介">
 <meta property="og:url" content="https://cjc7373.github.io/2018/11/08/All-about-Markdown/index.html">
 <meta property="og:site_name" content="Coherence">
-<meta property="og:description" content="什么是 Markdown?Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。                                                                                              哈哈哈">
+<meta property="og:description" content="什么是 Markdown?Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://cjc7373.github.io/2018/11/08/All-about-Markdown/All-about-Markdown/Markdown-mark.svg.png">
+<meta property="og:image" content="https://cjc7373.github.io/2018/11/08/All-about-Markdown/Markdown-mark.svg.png">
 <meta property="og:updated_time" content="2019-01-22T00:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Markdown简介">
-<meta name="twitter:description" content="什么是 Markdown?Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。                                                                                              哈哈哈">
-<meta name="twitter:image" content="https://cjc7373.github.io/2018/11/08/All-about-Markdown/All-about-Markdown/Markdown-mark.svg.png">
-    
-        <link rel="alternate" type="application/atom+xml" title="Coherence" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+<meta name="twitter:description" content="什么是 Markdown?Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。">
+<meta name="twitter:image" content="https://cjc7373.github.io/2018/11/08/All-about-Markdown/Markdown-mark.svg.png">
 
-    <!-- custom head -->
-    
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cjc7373.github.io/2018/11/08/All-about-Markdown/">
+
+
+
+
+
+  <title>Markdown简介 | Coherence</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-126196845-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
 
 </head>
 
-<body>
-    <div id="loading" class="active"></div>
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-    <aside id="menu"  >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Coherence</h5>
-          <a href="mailto:niuchangcun@gmail.com" title="niuchangcun@gmail.com" class="mail">niuchangcun@gmail.com</a>
-        </hgroup>
-      </div>
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coherence</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/cjc7373" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                关于
-              </a>
-            </li>
-        
-      </ul>
-    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-</aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">Markdown简介</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-    <div class="container fade-scale">
-        <h1 class="title">Markdown简介</h1>
-        <h5 class="subtitle">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-                <time datetime="2018-11-08T20:16:56.000Z" itemprop="datePublished" class="page-time">
-  2018-11-08
-</time>
-
-
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-        </h5>
-    </div>
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
 
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
 
+  
 
-</header>
+  
+  
+  
 
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2018/11/08/All-about-Markdown/">
 
-<div class="container body-wrap">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coherence">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coherence">
+    </span>
+
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是-Markdown"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是 Markdown?</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Markdown-VS-富文本"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Markdown VS 富文本</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#「富文本」写作"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">*「富文本」写作 *</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#「Markdown」写作"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">「Markdown」写作</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编辑器推荐"><span class="post-toc-number">2.</span> <span class="post-toc-text">编辑器推荐</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本语法"><span class="post-toc-number">3.</span> <span class="post-toc-text">基本语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-标题"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">1. 标题</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一级标题"><span class="post-toc-number"></span> <span class="post-toc-text">一级标题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二级标题"><span class="post-toc-number">1.</span> <span class="post-toc-text">二级标题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三级标题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">三级标题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#四级标题"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">四级标题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#五级标题"><span class="post-toc-number">1.1.1.1.</span> <span class="post-toc-text">五级标题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#六级标题"><span class="post-toc-number">1.1.1.1.1.</span> <span class="post-toc-text">六级标题</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-段落"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">2. 段落</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-区块引用"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">3. 区块引用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-代码区块"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">4. 代码区块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-强调"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">5. 强调</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-列表"><span class="post-toc-number">1.1.6.</span> <span class="post-toc-text">6. 列表</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-分割线"><span class="post-toc-number">1.1.7.</span> <span class="post-toc-text">7. 分割线</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-链接"><span class="post-toc-number">1.1.8.</span> <span class="post-toc-text">8. 链接</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#9-图片"><span class="post-toc-number">1.1.9.</span> <span class="post-toc-text">9. 图片</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#10-反斜杠"><span class="post-toc-number">1.1.10.</span> <span class="post-toc-text">10. 反斜杠\</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#11-行内引用"><span class="post-toc-number">1.1.11.</span> <span class="post-toc-text">11. 行内引用</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#拓展语法"><span class="post-toc-number">2.</span> <span class="post-toc-text">拓展语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-表格"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">1.表格</span></a></li></ol></li></ol></li></ol>
-        </nav>
-    </aside>
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">Markdown简介</h1>
+        
 
-<article id="post-All-about-Markdown"
-  class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">Markdown简介</h1>
         <div class="post-meta">
-            <time class="post-time" title="2018-11-08 20:16:56" datetime="2018-11-08T20:16:56.000Z"  itemprop="datePublished">2018-11-08</time>
-
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-08T20:16:56+00:00">
+                2018-11-08
+              </time>
             
 
+            
+              <span class="post-meta-divider">|</span>
+            
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-22T00:00:00+00:00">
+                2019-01-22
+              </time>
+            
+          </span>
 
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/08/All-about-Markdown/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/08/All-about-Markdown/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
 
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="什么是-Markdown"><a href="#什么是-Markdown" class="headerlink" title="什么是 Markdown?"></a><strong>什么是 Markdown?</strong></h2><p>Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="All-about-Markdown/Markdown-mark.svg.png" alt="哈哈哈" title>
-                </div>
-                <div class="image-caption">哈哈哈</div>
-            </figure>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是-Markdown"><a href="#什么是-Markdown" class="headerlink" title="什么是 Markdown?"></a><strong>什么是 Markdown?</strong></h2><p>Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。</p>
+<p><img src="/2018/11/08/All-about-Markdown/Markdown-mark.svg.png" alt="哈哈哈"></p>
 <a id="more"></a>
-
 <hr>
 <h3 id="Markdown-VS-富文本"><a href="#Markdown-VS-富文本" class="headerlink" title="Markdown VS 富文本"></a>Markdown VS 富文本</h3><p>基于 Markdown 写作，是属于<strong>纯文本</strong>写作。「纯文本」写作和「富文本」写作是对立的，我们来区分一下：</p>
-<h4 id="「富文本」写作"><a href="#「富文本」写作" class="headerlink" title="*「富文本」写作 *"></a>*<em>「富文本」写作 *</em></h4><p>你平时在<strong>Word</strong>上写作，就属于富文本写作。修改文字的大小、修改文字颜色、调整各种格式只需要点一下鼠标就行。富文本写作最大的特点是：<strong>所见即所得</strong>，你把格式调整成什么样子，就会直接显示出什么样的效果。</p>
+<h4 id="「富文本」写作"><a href="#「富文本」写作" class="headerlink" title="「富文本」写作 "></a><strong>「富文本」写作 </strong></h4><p>你平时在<strong>Word</strong>上写作，就属于富文本写作。修改文字的大小、修改文字颜色、调整各种格式只需要点一下鼠标就行。富文本写作最大的特点是：<strong>所见即所得</strong>，你把格式调整成什么样子，就会直接显示出什么样的效果。</p>
 <p>然而，富文本的格式排版过于繁杂，以致于你不得不花费大量时间在这上面，而忽略了写作本身。</p>
 <p>同时，富文本存在着<strong>多平台转换不方便</strong>的问题，假如你在 Word 上写好了文档，格式也调好了，复制粘贴到其他写作平台的时候发现：<strong>格式全乱啦</strong>；即使是转发给其他人也可能因为 Word 版本的不同而导致显示的差别很大。（如果你有过去打印店打印文档的经历的话，相信体会很深吧）富文本一般需要使用专用软件打开（如Word）。</p>
 <h4 id="「Markdown」写作"><a href="#「Markdown」写作" class="headerlink" title="「Markdown」写作"></a><strong>「Markdown」写作</strong></h4><p>基于 <strong>Markdown</strong> 写作，就是纯文本写作。它允许人们使用纯文本格式来编写文档。如果你想设置某段文字的格式，只需要使用一些简单的符号来代表即可。所以<strong>文字和格式都是纯文本</strong>。能够用普通的文本编辑器打开。</p>
@@ -251,7 +386,7 @@ ga('send', 'pageview');
 <h4 id="2-段落"><a href="#2-段落" class="headerlink" title="2. 段落"></a>2. 段落</h4><p>段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用<strong>两个以上</strong>空格加上回车（引用中换行省略回车）。</p>
 <h4 id="3-区块引用"><a href="#3-区块引用" class="headerlink" title="3. 区块引用"></a>3. 区块引用</h4><p>在段落的每行或者只在第一行使用符号<code>&gt;</code>,还可使用多个嵌套引用，如：</p>
 <blockquote>
-<p>&gt; 区块引用<br>&gt;&gt; 嵌套引用</p>
+<p>> 区块引用<br>>&gt; 嵌套引用</p>
 </blockquote>
 <p>效果：</p>
 <blockquote>
@@ -266,27 +401,27 @@ ga('send', 'pageview');
 <pre><code>int main()
 {
     printf(&quot;Hello, Markdown.&quot;);
-}</code></pre><p><strong>注意</strong>:需要和普通段落之间存在空行。 </p>
+}
+</code></pre><p><strong>注意</strong>:需要和普通段落之间存在空行。 </p>
 <p>2）在代码区块的前后加上  ```</p>
 <blockquote>
 <p>```<br>hello,world<br>```</p>
 </blockquote>
 <p>效果为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello，world</span><br></pre></td></tr></table></figure>
-
 <h4 id="5-强调"><a href="#5-强调" class="headerlink" title="5. 强调"></a>5. 强调</h4><p>在强调内容两侧分别加上<code>*</code>或者<code>_</code>，如：</p>
 <blockquote>
-<p>*斜体*，_斜体_<br>*<em>粗体*</em>，_<em>粗体_</em></p>
+<p>*斜体*，_斜体_<br>**粗体**，__粗体__</p>
 </blockquote>
 <p>效果：</p>
 <blockquote>
-<p><em>斜体<em>，</em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong></p>
+<p><em>斜体</em>，<em>斜体</em><br><strong>粗体</strong>，<strong>粗体</strong></p>
 </blockquote>
 <h4 id="6-列表"><a href="#6-列表" class="headerlink" title="6. 列表"></a>6. 列表</h4><p>使用<code>·</code>、<code>+</code>、或<code>-</code>标记无序列表，如：</p>
 <blockquote>
 <p>-（+<em>） 第一项 -（+</em>） 第二项 - （+*）第三项</p>
 </blockquote>
-<p><strong>注意</strong>：标记后面最少有一个_空格<em>或</em>制表符_。若不在引用区块中，必须和前方段落之间存在空行。</p>
+<p><strong>注意</strong>：标记后面最少有一个_空格_或<em>制表符</em>。若不在引用区块中，必须和前方段落之间存在空行。</p>
 <p>效果：</p>
 <blockquote>
 <ul>
@@ -334,311 +469,475 @@ ga('send', 'pageview');
 <p><code>Too young</code></p>
 </blockquote>
 <h2 id="拓展语法"><a href="#拓展语法" class="headerlink" title="拓展语法"></a>拓展语法</h2><h4 id="1-表格"><a href="#1-表格" class="headerlink" title="1.表格"></a>1.表格</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| 一个普通标题 | 一个普通标题 | 一个普通标题 |</span><br><span class="line">| ------ | :------: | ------: |</span><br><span class="line">| 短文本 | 中等文本 | 稍微长一点的文本 |</span><br><span class="line">| 稍微长一点的文本 | 短文本 | 中等文本 |</span><br></pre></td></tr></table></figure>
-
 <p><code>------</code>用作标题和内容的分隔符，<code>:</code>用来控制对齐方式，上述表格的效果如下：</p>
 <table>
 <thead>
 <tr>
 <th>一个普通标题</th>
-<th align="center">一个普通标题</th>
-<th align="right">一个普通标题</th>
+<th style="text-align:center">一个普通标题</th>
+<th style="text-align:right">一个普通标题</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>短文本</td>
-<td align="center">中等文本</td>
-<td align="right">稍微长一点的文本</td>
+<td style="text-align:center">中等文本</td>
+<td style="text-align:right">稍微长一点的文本</td>
 </tr>
 <tr>
 <td>稍微长一点的文本</td>
-<td align="center">短文本</td>
-<td align="right">中等文本</td>
+<td style="text-align:center">短文本</td>
+<td style="text-align:right">中等文本</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2019-01-22T00:00:00.000Z" itemprop="dateUpdated">2019-01-22 00:00:00</time>
-</span><br>
-
-
-        
-        <a href="/2018/11/08/All-about-Markdown/" target="_blank" rel="external">https://cjc7373.github.io/2018/11/08/All-about-Markdown/</a>
-        
+      
     </div>
     
-    <footer>
-        <a href="https://cjc7373.github.io">
-            <img src="/img/avatar.jpg" alt="Coherence">
-            Coherence
-        </a>
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Coherence
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://cjc7373.github.io/2018/11/08/All-about-Markdown/" title="Markdown简介">https://cjc7373.github.io/2018/11/08/All-about-Markdown/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/02/Windows10字体崩溃修复/" rel="next" title="Windows10字体崩溃修复">
+                <i class="fa fa-chevron-left"></i> Windows10字体崩溃修复
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/01/Visio-KMS-Activate/" rel="prev" title="使用KMS激活Visio">
+                使用KMS激活Visio <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
-</blockquote>
-
-        
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/">Markdown</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cjc7373.github.io/2018/11/08/All-about-Markdown/&title=《Markdown简介》 — Coherence&pic=https://cjc7373.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cjc7373.github.io/2018/11/08/All-about-Markdown/&title=《Markdown简介》 — Coherence&source=什么是 Markdown?Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cjc7373.github.io/2018/11/08/All-about-Markdown/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Markdown简介》 — Coherence&url=https://cjc7373.github.io/2018/11/08/All-about-Markdown/&via=https://cjc7373.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cjc7373.github.io/2018/11/08/All-about-Markdown/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
+  </div>
+  
+  
+  
+  </article>
 
 
 
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
         </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2018/12/01/Visio-KMS-Activate/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">使用KMS激活Visio</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2018/11/02/Windows10字体崩溃修复/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Windows10字体崩溃修复</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-<section class="comments" id="comments">
-    <div id="disqus_thread"></div>
-    <script>
-    var disqus_shortname = 'cjc7373';
-    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</article>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
         
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
-        </p>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
-    <div class="bottom">
-        <p><span>Coherence &copy; 2018 - 2019</span>
-            <span>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Coherence</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+          </nav>
 
+          
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cjc7373.github.io/2018/11/08/All-about-Markdown/&title=《Markdown简介》 — Coherence&pic=https://cjc7373.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cjc7373.github.io/2018/11/08/All-about-Markdown/&title=《Markdown简介》 — Coherence&source=什么是 Markdown?Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cjc7373.github.io/2018/11/08/All-about-Markdown/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Markdown简介》 — Coherence&url=https://cjc7373.github.io/2018/11/08/All-about-Markdown/&via=https://cjc7373.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cjc7373.github.io/2018/11/08/All-about-Markdown/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACPUlEQVR42u3aS27DMAxF0ex/0ynQaSvlPlItYOp6FCSOoaMBzY9eL3y9v6/V96vr539Xv67uP3zJkCHjsYzaUsgTVhuxx+y/Xz1fhgwZNzD2QZZ/3iNJKCfBV4YMGTL4EnnYJUieJsqQIUNGLR2shWySGsqQIUMGL2LP3lMrbg/U4jJkyHggIx0M/OfnP5xvyJAh4yGMd+MiLbO0AVdciQwZMkYzeCuttmjSnkvHnCjsypAhYxBj38ziDbXakJKH3Q9bL0OGjNGM/kGKdLn8CenWyJAh4x5G7RgESeNqQwVS9MqQIeMeBl8KiXJnD1KgkC1DhoyhDBLIags9FcT3wf2X+YYMGTLGMfiQoDbCTMcAZBNlyJBxJ6M2kiSlZtzc3/764TUgQ4aMoQx+bIsnZ2mzLD2cEWe4MmTIGMEgo8TOYbL0nuBdwft2MmTIeCwjqG7DgJimgLURggwZMu5h7BOv2iI6sPSVIEOGjBsYZNG1QFzDF9NWGTJkXMDg5WXrGAQujMnIU4YMGTcz+gVt2larjQqCSawMGTJGMPatLl527peYFrHBRsuQIWM0o5O08aNdp7bmwGxWhgwZj2K8w4sneWnylw4yl6fbZMiQMY5RKz7TBdWovOiVIUPGDQwSZNOj9ml5zMcDMmTIuJmRNvFJT54Ut2nQjw9byJAh40pGpxDtJ4XFTqEMGTKuYdSGnZ2GWqvOliFDxjhG/8hFmgjychfBZMiQMZqRBuXOUJM37EgbrvVukSFDxjMYXwoQS6lGyjU/AAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cjc7373" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:niuchangcun@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
             </div>
-            <time class="flex-col time">{date}</time>
+          
+
+          
+          
+
+          
+          
+
+          
+
         </div>
-    </a>
-</li>
-</template>
+      </section>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-Markdown"><span class="nav-number">1.</span> <span class="nav-text">什么是 Markdown?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Markdown-VS-富文本"><span class="nav-number">1.1.</span> <span class="nav-text">Markdown VS 富文本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#「富文本」写作"><span class="nav-number">1.1.1.</span> <span class="nav-text">「富文本」写作 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#「Markdown」写作"><span class="nav-number">1.1.2.</span> <span class="nav-text">「Markdown」写作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑器推荐"><span class="nav-number">2.</span> <span class="nav-text">编辑器推荐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本语法"><span class="nav-number">3.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-标题"><span class="nav-number">3.0.1.</span> <span class="nav-text">1. 标题</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#一级标题"><span class="nav-number"></span> <span class="nav-text">一级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二级标题"><span class="nav-number">1.</span> <span class="nav-text">二级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三级标题"><span class="nav-number">1.1.</span> <span class="nav-text">三级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#四级标题"><span class="nav-number">1.1.1.</span> <span class="nav-text">四级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#五级标题"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">五级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#六级标题"><span class="nav-number">1.1.1.1.1.</span> <span class="nav-text">六级标题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-段落"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 段落</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-区块引用"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 区块引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-代码区块"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. 代码区块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-强调"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. 强调</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-列表"><span class="nav-number">1.1.6.</span> <span class="nav-text">6. 列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-分割线"><span class="nav-number">1.1.7.</span> <span class="nav-text">7. 分割线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-链接"><span class="nav-number">1.1.8.</span> <span class="nav-text">8. 链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-图片"><span class="nav-number">1.1.9.</span> <span class="nav-text">9. 图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-反斜杠"><span class="nav-number">1.1.10.</span> <span class="nav-text">10. 反斜杠\</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-行内引用"><span class="nav-number">1.1.11.</span> <span class="nav-text">11. 行内引用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展语法"><span class="nav-number">2.</span> <span class="nav-text">拓展语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-表格"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.表格</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coherence</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-<!-- mathjax config similar to math.stackexchange -->
+  <span class="post-meta-divider">|</span>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+  <div class="footer-custom">Hosted by <a target="_blank" href="https://pages.github.com">GitHub Pages</a></div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://cjc7373.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://cjc7373.github.io/2018/11/08/All-about-Markdown/';
+          this.page.identifier = '2018/11/08/All-about-Markdown/';
+          this.page.title = 'Markdown简介';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://cjc7373.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

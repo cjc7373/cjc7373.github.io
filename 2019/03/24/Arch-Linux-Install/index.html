@@ -1,36 +1,85 @@
 <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-    
-<!-- Google Analytics -->
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-126196845-1', 'auto');
-ga('send', 'pageview');
-</script>
-<script async src="https://www.google-analytics.com/analytics.js"></script>
-<!-- End Google Analytics -->
-
-
-    
-
-    
 
 
 
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>Arch Linux 安装&amp;配置全过程 | Coherence</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="Linux">
-    <meta name="description" content="前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。">
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Arch Linux 安装&amp;配置全过程">
@@ -38,186 +87,272 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="Coherence">
 <meta property="og:description" content="前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/Arch-Linux-Install/1554536417517.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/Arch-Linux-Install/1554535852814.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/Arch-Linux-Install/1555419677545.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/Arch-Linux-Install/1556519535880.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/Arch-Linux-Install/1555419245819.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/Arch-Linux-Install/1555419316125.png">
-<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/Arch-Linux-Install/1555420630345.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1554536417517.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1554535852814.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419677545.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1556519535880.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419245819.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419316125.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555420630345.png">
 <meta property="og:updated_time" content="2019-04-24T00:00:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Arch Linux 安装&amp;配置全过程">
 <meta name="twitter:description" content="前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。">
-<meta name="twitter:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/Arch-Linux-Install/1554536417517.png">
-    
-        <link rel="alternate" type="application/atom+xml" title="Coherence" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+<meta name="twitter:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1554536417517.png">
 
-    <!-- custom head -->
-    
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/">
+
+
+
+
+
+  <title>Arch Linux 安装&配置全过程 | Coherence</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-126196845-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
 
 </head>
 
-<body>
-    <div id="loading" class="active"></div>
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-    <aside id="menu"  >
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Coherence</h5>
-          <a href="mailto:niuchangcun@gmail.com" title="niuchangcun@gmail.com" class="mail">niuchangcun@gmail.com</a>
-        </hgroup>
-      </div>
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coherence</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/"  >
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories"  >
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/cjc7373" target="_blank" >
-                <i class="icon icon-lg icon-github"></i>
-                Github
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/about"  >
-                <i class="icon icon-lg icon-user"></i>
-                关于
-              </a>
-            </li>
-        
-      </ul>
-    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-</aside>
 
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">Arch Linux 安装&amp;配置全过程</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
-    </div>
-</header>
-<header class="content-header post-header">
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-    <div class="container fade-scale">
-        <h1 class="title">Arch Linux 安装&amp;配置全过程</h1>
-        <h5 class="subtitle">
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-                <time datetime="2019-03-24T20:12:51.000Z" itemprop="datePublished" class="page-time">
-  2019-03-24
-</time>
-
-
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-        </h5>
-    </div>
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
 
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
 
+  
 
-</header>
+  
+  
+  
 
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/">
 
-<div class="container body-wrap">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coherence">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coherence">
+    </span>
+
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么选择-Arch"><span class="post-toc-number">2.</span> <span class="post-toc-text">为什么选择 Arch</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本安装"><span class="post-toc-number">3.</span> <span class="post-toc-text">基本安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#图形界面"><span class="post-toc-number">4.</span> <span class="post-toc-text">图形界面</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题解决"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">问题解决</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#必要软件"><span class="post-toc-number">5.</span> <span class="post-toc-text">必要软件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#省电"><span class="post-toc-number">6.</span> <span class="post-toc-text">省电</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#折腾"><span class="post-toc-number">7.</span> <span class="post-toc-text">折腾</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#瞎改配置"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">瞎改配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目前遇到的问题"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">目前遇到的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实用技巧"><span class="post-toc-number">8.</span> <span class="post-toc-text">实用技巧</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Trouble-Shooting"><span class="post-toc-number">9.</span> <span class="post-toc-text">Trouble Shooting</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TO-DO"><span class="post-toc-number">10.</span> <span class="post-toc-text">TO DO</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#吐槽"><span class="post-toc-number">11.</span> <span class="post-toc-text">吐槽</span></a></li></ol>
-        </nav>
-    </aside>
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">Arch Linux 安装&配置全过程</h1>
+        
 
-<article id="post-Arch-Linux-Install"
-  class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">Arch Linux 安装&配置全过程</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-03-24 20:12:51" datetime="2019-03-24T20:12:51.000Z"  itemprop="datePublished">2019-03-24</time>
-
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-24T20:12:51+00:00">
+                2019-03-24
+              </time>
             
 
+            
+              <span class="post-meta-divider">|</span>
+            
 
             
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-04-24T00:00:00+00:00">
+                2019-04-24
+              </time>
+            
+          </span>
 
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/24/Arch-Linux-Install/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/24/Arch-Linux-Install/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
 
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。</p>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。</p>
 <p>这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="Arch-Linux-Install/1554536417517.png" alt="1554536417517" title>
-                </div>
-                <div class="image-caption">1554536417517</div>
-            </figure>
-
+<p><img src="/2019/03/24/Arch-Linux-Install/1554536417517.png" alt="1554536417517"></p>
 <a id="more"></a>
-
 <p>下面列出笔记本的配置，以供参考。</p>
 <table>
 <thead>
@@ -226,7 +361,8 @@ ga('send', 'pageview');
 <th>型号</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>CPU</td>
 <td>Intel i5-7300HQ</td>
 </tr>
@@ -250,10 +386,11 @@ ga('send', 'pageview');
 <td>触摸板</td>
 <td>Synaptics</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <h2 id="为什么选择-Arch"><a href="#为什么选择-Arch" class="headerlink" title="为什么选择 Arch"></a>为什么选择 Arch</h2><p>滚动更新天下第一！（误</p>
 <p>听说社区非常友好（然而我还没感受到</p>
-<h2 id="基本安装"><a href="#基本安装" class="headerlink" title="基本安装"></a>基本安装</h2><p>安装参考了 <a href="https://www.viseator.com/2017/05/17/arch_install/" target="_blank" rel="noopener">以官方Wiki的方式安装ArchLinux</a> 和 官方Wiki的 <a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noopener">Installation Guide</a>。在未安装图形界面前，基本一切顺利。</p>
+<h2 id="基本安装"><a href="#基本安装" class="headerlink" title="基本安装"></a>基本安装</h2><p>安装参考了 <a href="https://www.viseator.com/2017/05/17/arch_install/" target="_blank" rel="noopener">以官方Wiki的方式安装ArchLinux</a> 和 官方Wiki的 <a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">Installation Guide</a>)。在未安装图形界面前，基本一切顺利。</p>
 <p>题外话：说起无线网卡，之前装 Ubuntu 的时候，没有驱动，需要手动安装。不过内核从 4.x 某个版本之后，加入了对我这个网卡的驱动，现在无需配置即可使用了。</p>
 <p>由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。</p>
 <p>在配置<code>sudo</code>时，使用<code>visudo</code>命令编辑配置文件，然而这个 vi编辑器有毒，许多操作都无法执行，感觉是个 bug。（Update：原来 vi 和 vim 是有挺大的区别的…）</p>
@@ -265,20 +402,13 @@ ga('send', 'pageview');
 <p>话说以后可以试试 Wayland？</p>
 <h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>发现开机时有一行报错，<code>Failed to load Linux Kernel Modules</code>，用<code>systemctl status systemd-modules-load.service</code>查看发现是<code>bbswitch</code>加载失败了。所有东西似乎有着千丝万缕的联系…</p>
 <p>对比发现 5.x 内核启动时并没有报错，于是删除 <code>bbswtich</code>，再升级 5.0 内核，成功启动<code>sddm</code>，问题解决（终于可以愉快地滚系统啦）。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="Arch-Linux-Install/1554535852814.png" alt="1554535852814" title>
-                </div>
-                <div class="image-caption">1554535852814</div>
-            </figure>
-
+<p><img src="/2019/03/24/Arch-Linux-Install/1554535852814.png" alt="1554535852814"></p>
 <p>原因可能是 <code>bbswitch</code> 配置不当，具体原因不明。此时开始仍然会报<code>Failed to load Linux Kernel Modules</code>，需要手动将<code>/etc/modprobe.d/bbswitch.conf</code>及<code>/etc/modprobe.d/</code>中某个文件中（我忘了）的<code>bbswitch</code>删除。</p>
 <h2 id="必要软件"><a href="#必要软件" class="headerlink" title="必要软件"></a>必要软件</h2><ul>
 <li>Arch Linux CN 源，包含了许多 AUR 中的软件。第一次加入源的时候不知道要安装 keyring，导致安装包时卡在了  GPG 签名校验那一步。我还寻思为什么 Arch 的签名老出锅。。（BTW：为什么需要 keyring？）</li>
 <li>Shadowsocks，装完命令行版的 Shadowsocks，根据 Wiki 描述，应用 <code>ss-local</code>启动，然而<code>commend not found</code>，未能解决，于是又装了 Shadowsocks-qt5。</li>
 <li><del>Chrome，ArchCN 源中有（话说什么时候试试 Chromium）。</del> Chrome 不支持硬件加速，现已更换 Chromium。同步等功能一切正常。</li>
-<li>字体，不安装中文字体许多中文字是框框（然而为什么不是所有呢），我选择了<code>wqy-microhei</code>，然而系统自带的英文字体也很丑。按照<a href="https://wiki.archlinux.org/index.php/Microsoft_fonts_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noopener">官方Wiki</a>把Windows中的字体复制了过来，然而发现英文字体的间距变得非常小。中文字体看着挺舒服（应该是雅黑？）。</li>
+<li>字体，不安装中文字体许多中文字是框框（然而为什么不是所有呢），我选择了<code>wqy-microhei</code>，然而系统自带的英文字体也很丑。按照<a href="https://wiki.archlinux.org/index.php/Microsoft_fonts_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87" target="_blank" rel="noopener">官方Wiki</a>)把Windows中的字体复制了过来，然而发现英文字体的间距变得非常小。中文字体看着挺舒服（应该是雅黑？）。</li>
 <li>中文输入法，装了谷歌拼音发现打出来的字是繁体，还找不到相关选项（Update：把简繁转换关了就好了）。现在在用 Rime。</li>
 <li>印象笔记，在 Linux 有开源的客户端 Tusk。然而 Tusk 不支持 Markdown….</li>
 <li>Tim/QQ，ArchCN 源包含。本质上是魔改过配置的 Wine 容器。</li>
@@ -305,10 +435,10 @@ ga('send', 'pageview');
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[General]</span><br><span class="line">Numlock=on</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>pacman 能够在升级前对比版本信息，对于我这种强迫症非常有用。</p>
-<p><img src="Arch-Linux-Install/1555419677545.png" alt="1555419677545"></p>
+<p><img src="/2019/03/24/Arch-Linux-Install/1555419677545.png" alt="1555419677545"></p>
 </li>
 <li><p>修改 <code>/etc/fstab</code>，加入以下内容，使得开机时能够自动以只读模式挂载 Windows 分区。</p>
-<p><img src="Arch-Linux-Install/1556519535880.png" alt="1556519535880"></p>
+<p><img src="/2019/03/24/Arch-Linux-Install/1556519535880.png" alt="1556519535880"></p>
 </li>
 <li><p>日志相关。由于<code>systemd</code>这个神奇的存在，似乎所有日志都可以通过<code>systemd</code>带的<code>journalctl</code>查看。</p>
 </li>
@@ -319,15 +449,16 @@ ga('send', 'pageview');
 
 * 查看某个 unit 的日志：`journalctl -u nginx.service --since today`
 
-  （另外`systemctl status`也能显示最新的大概十行日志）</code></pre><ul>
+  （另外`systemctl status`也能显示最新的大概十行日志）
+</code></pre><ul>
 <li>增强 Bash 的自动补全：<code>pacman -S bash-completion</code>，重启终端即可。</li>
 </ul>
 <h2 id="Trouble-Shooting"><a href="#Trouble-Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h2><ul>
 <li><p>今天打开tusk发现闪退。。用终端运行报<code>tusk: error while loading shared libraries: libnode.so: cannot open shared object file: No such file or directory</code>，我干什么了我？我啥都没干啊。。重新安装未解决问题。重启同样未解决。</p>
 <p>于是 Google，StackOverflow 上有一个帖子建议我先找找有没有这个库。</p>
-<p><img src="Arch-Linux-Install/1555419245819.png" alt="1555419245819"></p>
+<p><img src="/2019/03/24/Arch-Linux-Install/1555419245819.png" alt="1555419245819"></p>
 <p>发现是有的，ls 看下。</p>
-<p><img src="Arch-Linux-Install/1555419316125.png" alt="1555419316125"></p>
+<p><img src="/2019/03/24/Arch-Linux-Install/1555419316125.png" alt="1555419316125"></p>
 <p>然而链接到了另一个文件，一看，果然那个文件没了。。（推测和包更新了有关？）但是 Typora 有这个库呀，于是尝试链接到 Typora 带的那个库，然后问题解决了。。。我被我这波操作惊呆了。</p>
 </li>
 <li><p>觉得字体不好看，然后似乎改崩了…目前把 Windows 的字体扔了，重新安装的字体列表有：</p>
@@ -340,7 +471,7 @@ ga('send', 'pageview');
 <p>然后把终端的字体改成了 Consolas（AUR），感觉还是这个字体好看，不过中文字体好像变丑了。。</p>
 </li>
 <li><p>尝试安装 Tim。</p>
-<p><img src="Arch-Linux-Install/1555420630345.png" alt="1555420630345"></p>
+<p><img src="/2019/03/24/Arch-Linux-Install/1555420630345.png" alt="1555420630345"></p>
 <p>？？？说好的自动解决依赖关系呢？</p>
 <p>直接构建发现会报一堆依赖的错，查看 Github 项目发现：</p>
 <blockquote>
@@ -387,289 +518,452 @@ ga('send', 'pageview');
 </li>
 </ul>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2019-04-24T00:00:00.000Z" itemprop="dateUpdated">2019-04-24 00:00:00</time>
-</span><br>
-
-
-        
-        <a href="/2019/03/24/Arch-Linux-Install/" target="_blank" rel="external">https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/</a>
-        
+      
     </div>
     
-    <footer>
-        <a href="https://cjc7373.github.io">
-            <img src="/img/avatar.jpg" alt="Coherence">
-            Coherence
-        </a>
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Coherence
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/" title="Arch Linux 安装&配置全过程">https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/16/fiber-modem-crack/" rel="next" title="中国电信 HG2543C1 光猫获取超级管理员密码">
+                <i class="fa fa-chevron-left"></i> 中国电信 HG2543C1 光猫获取超级管理员密码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/21/use-ci-auto-deploy-blog/" rel="prev" title="使用 Travis CI 自动部署 Hexo 博客">
+                使用 Travis CI 自动部署 Hexo 博客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
-</blockquote>
-
-        
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/&title=《Arch Linux 安装&配置全过程》 — Coherence&pic=https://cjc7373.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/&title=《Arch Linux 安装&配置全过程》 — Coherence&source=前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Arch Linux 安装&配置全过程》 — Coherence&url=https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/&via=https://cjc7373.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
+  </div>
+  
+  
+  
+  </article>
 
 
 
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
         </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2019/04/21/use-ci-auto-deploy-blog/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">使用 Travis CI 自动部署 Hexo 博客</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2019/02/16/fiber-modem-crack/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">中国电信 HG2543C1 光猫获取超级管理员密码</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-<section class="comments" id="comments">
-    <div id="disqus_thread"></div>
-    <script>
-    var disqus_shortname = 'cjc7373';
-    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</article>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
         
-<p>
-    <span id="busuanzi_container_site_uv" style='display:none'>
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style='display:none'>
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
-        </p>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
-    <div class="bottom">
-        <p><span>Coherence &copy; 2018 - 2019</span>
-            <span>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Coherence</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+          </nav>
 
+          
 
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/&title=《Arch Linux 安装&配置全过程》 — Coherence&pic=https://cjc7373.github.io/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/&title=《Arch Linux 安装&配置全过程》 — Coherence&source=前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行..." data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Arch Linux 安装&配置全过程》 — Coherence&url=https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/&via=https://cjc7373.github.io" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aO47DMAwFwNz/0t56CwuPlBLA9LgKAsfWqGD40ecTX9fNld9/d0/+/YELAwPjsYxrea2XlZOSz8l7b9+IgYHxAkbv9dXFrX+bvOv2ewwMDIzlPb1kMQ/EGBgYGL8JuNU6FAMDA6NXxK5fttOG+2ktjoGB8UBGHgp///kr8w0MDIxHMa7ilbfJdlK98qowMDBGM/IA12uW5cutFr0YGBjvZCQPXQffU6VmL7hjYGDMZuShcIedJJo7LT8MDIypjOrjqntTTf7yojeK0BgYGEMZeQjOk8vqEY1qGoqBgTGbkRyVqLb19weleZIa7SUGBsYIRl649tLKvMTdXxUGBsZsxk4gzhPEaiK4P+zEwMB4OiNvnyUp4zda/+XTIhgYGOMYvR/sHMvIn18ukjEwMIYymiPD1kKT4rba+PuXGmJgYAxl7I8t82Rx6z+huokYGBiDGHlJmQw18xC8Mzq9PTOCgYExlJGPHvNl5cG0lzhGM1gMDIyhjGY7/mjK2DuugYGB8R5GnorlY4Dqwa9egoiBgfE2RnL0odqG+1G/EAMDYyjjKl55uOwNOMuFKwYGxgsY+9H67OGMJNBXn4aBgTGDkZep+a4kZXA1EBf2CQMDYyijOp5ct+ryJlovcGNgYGDkQbaZaR4qgzEwMDCSI1/VgxH51uRhHQMD4z2Ms8cpesniVvGMgYExmlHNu84OPpMlHhtqYmBgPI/xB4ky+gixhx6oAAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cjc7373" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:niuchangcun@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
             </div>
-            <time class="flex-col time">{date}</time>
+          
+
+          
+          
+
+          
+          
+
+          
+
         </div>
-    </a>
-</li>
-</template>
+      </section>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么选择-Arch"><span class="nav-number">2.</span> <span class="nav-text">为什么选择 Arch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本安装"><span class="nav-number">3.</span> <span class="nav-text">基本安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图形界面"><span class="nav-number">4.</span> <span class="nav-text">图形界面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题解决"><span class="nav-number">4.1.</span> <span class="nav-text">问题解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必要软件"><span class="nav-number">5.</span> <span class="nav-text">必要软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#省电"><span class="nav-number">6.</span> <span class="nav-text">省电</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#折腾"><span class="nav-number">7.</span> <span class="nav-text">折腾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#瞎改配置"><span class="nav-number">7.1.</span> <span class="nav-text">瞎改配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目前遇到的问题"><span class="nav-number">7.2.</span> <span class="nav-text">目前遇到的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实用技巧"><span class="nav-number">8.</span> <span class="nav-text">实用技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trouble-Shooting"><span class="nav-number">9.</span> <span class="nav-text">Trouble Shooting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TO-DO"><span class="nav-number">10.</span> <span class="nav-text">TO DO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#吐槽"><span class="nav-number">11.</span> <span class="nav-text">吐槽</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coherence</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-<!-- mathjax config similar to math.stackexchange -->
+  <span class="post-meta-divider">|</span>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+  <div class="footer-custom">Hosted by <a target="_blank" href="https://pages.github.com">GitHub Pages</a></div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
 
 
 
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://cjc7373.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/';
+          this.page.identifier = '2019/03/24/Arch-Linux-Install/';
+          this.page.title = 'Arch Linux 安装&配置全过程';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://cjc7373.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
