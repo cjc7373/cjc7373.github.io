@@ -16,7 +16,7 @@ menu:
   tags:
     url: /tags
   th-list:
-    text: Categories
+    text: 分类
     url: /categories
   github:
     url: https://github.com/cjc7373
