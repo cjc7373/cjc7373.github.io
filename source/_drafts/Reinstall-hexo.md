@@ -36,7 +36,7 @@ npm install
 
 （我发现现在 `hexo init` 会同时自动执行 `npm install`命令了）
 
-![1565185528852](Reinstall-hexo\1565185528852.png)
+![1565185528852](Reinstall-hexo/1565185528852.png)
 
 然而还是有一个漏洞，不管了。
 
