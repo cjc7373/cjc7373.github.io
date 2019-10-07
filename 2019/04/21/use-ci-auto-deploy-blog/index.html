@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="缘由其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。 前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的ln -s大法行不通了。 于是我想到了 CI。仔细一想其实也不">
+<meta name="keywords" content="Hexo,CI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Travis CI 自动部署 Hexo 博客">
+<meta property="og:url" content="https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/index.html">
+<meta property="og:site_name" content="Coherence">
+<meta property="og:description" content="缘由其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。 前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的ln -s大法行不通了。 于是我想到了 CI。仔细一想其实也不">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/bg2017121901.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/1555835090941.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/1555837683039.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/1555840082905.png">
+<meta property="og:updated_time" content="2019-04-21T00:00:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Travis CI 自动部署 Hexo 博客">
+<meta name="twitter:description" content="缘由其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。 前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的ln -s大法行不通了。 于是我想到了 CI。仔细一想其实也不">
+<meta name="twitter:image" content="https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/bg2017121901.png">
+  <link rel="canonical" href="https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>使用 Travis CI 自动部署 Hexo 博客 | Coherence</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126196845-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-126196845-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coherence</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coherence">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coherence">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">使用 Travis CI 自动部署 Hexo 博客
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-21 20:16:56 / 修改时间：00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-21T20:16:56+00:00">2019-04-21</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/04/21/use-ci-auto-deploy-blog/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/21/use-ci-auto-deploy-blog/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/2019/04/21/use-ci-auto-deploy-blog/bg2017121901.png" alt="bg2017121901"></p>
+<h2 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h2><p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。</p>
+<p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的<code>ln -s</code>大法行不通了。</p>
+<p>于是我想到了 CI。仔细一想其实也不复杂，无非是<code>git push</code>， <code>git pull</code>两下罢了。那么，Let’s do it!</p>
+<a id="more"></a>
+
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力<del>（懒）</del>后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。</p>
+<ul>
+<li>我更新博客之后，commit 然后 push 至 Github repo</li>
+<li>CI 自动构建博客</li>
+<li>CI 将构建完成的静态文件 push 至 Github repo</li>
+</ul>
+<p>我原先使用的是<code>hexo-deployer-git</code>插件，通过<code>hexo g -d</code>部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。</p>
+<h2 id="配置-Github-Repo"><a href="#配置-Github-Repo" class="headerlink" title="配置 Github Repo"></a>配置 Github Repo</h2><p>在这个 Repo 中需要两个分支：</p>
+<ul>
+<li>master 用于存放构建完成的静态文件</li>
+<li>source 用于存放 Hexo 生成的博客源文件</li>
+</ul>
+<p>对 Hexo 文件夹的操作如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git remote add origin git@github.com:cjc7373/cjc7373.github.io.git</span><br><span class="line">git checkout -b source</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;To use CI to automated deploy&quot;</span><br><span class="line">git push origin source:source</span><br></pre></td></tr></table></figure>
+
+<p>本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带<code>.gitignore</code>文件，所以实际大小并没有多少。</p>
+<p><img src="/2019/04/21/use-ci-auto-deploy-blog/1555835090941.png" alt="1555835090941"></p>
+<p>然后在 Github 上将主分支切换为<code>source</code>分支。</p>
+<h2 id="配置-Travis-CI"><a href="#配置-Travis-CI" class="headerlink" title="配置 Travis CI"></a>配置 Travis CI</h2><p>CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key，后者似乎有些麻烦，我选择了前者。当前需求应该只需要 repo 权限，然后在 Travis CI 的 Environment Variables 中加入这个 Token，注意不要勾选 Display value in build log。</p>
+<p>然后就是编写<code>.travis.yml</code>了。 <del>正当我准备抄大佬们的配置的时候，忽然看到 Travis CI 官方提供了<a href="https://docs.travis-ci.com/user/deployment/pages/" target="_blank" rel="noopener">轮子</a>，那就用吧QAQ（其实也没简单多少）</del>，然后翻车了。</p>
+<p><img src="/2019/04/21/use-ci-auto-deploy-blog/1555837683039.png" alt="1555837683039"></p>
+<p>看了下文档，我也没搞懂每个字段的意思。所以还是自己来吧。</p>
+<p>为了在 commit 记录中显示更新日期，我把 push 部分单独写成了 sh脚本。</p>
+<p><code>.travis.yml</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">language: node_js</span><br><span class="line">node_js: stable</span><br><span class="line"></span><br><span class="line"># 只监听 source 分支的改动</span><br><span class="line">branches:</span><br><span class="line">  only:</span><br><span class="line">    - source</span><br><span class="line"></span><br><span class="line"># 缓存依赖，节省持续集成时间</span><br><span class="line">cache:</span><br><span class="line">  directories:</span><br><span class="line">    - node_modules</span><br><span class="line"></span><br><span class="line">install:</span><br><span class="line">  - npm install</span><br><span class="line"></span><br><span class="line">script:</span><br><span class="line">  - hexo clean</span><br><span class="line">  - hexo g</span><br><span class="line"></span><br><span class="line">after_script:</span><br><span class="line">  - chmod +x ./deploy.sh # 添加可执行权限</span><br><span class="line">  - ./deploy.sh</span><br></pre></td></tr></table></figure>
+
+<p><code>deploy.sh</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">set -ev</span><br><span class="line">export TZ=&apos;Asia/Shanghai&apos;</span><br><span class="line"></span><br><span class="line">git config --global user.name &quot;cjc7373&quot;</span><br><span class="line">git config --global user.email &quot;niuchangcun@163.com&quot;</span><br><span class="line"></span><br><span class="line"># 获取以前的 commit 记录</span><br><span class="line">git clone -b master https://github.com/cjc7373/cjc7373.github.io.git .deploy</span><br><span class="line"># 这么移动是为了确保不受之前文件的影响</span><br><span class="line">mv .deploy/.git/ public/</span><br><span class="line">cd public</span><br><span class="line">git checkout master</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;Site updated: `date +&quot;%Y-%m-%d %H:%M:%S&quot;`&quot;</span><br><span class="line"></span><br><span class="line"># 我也不知道 token 怎么用。。抄大佬的代码</span><br><span class="line">git push &quot;https://$&#123;token&#125;@github.com/cjc7373/cjc7373.github.io.git&quot; master:master --quiet</span><br></pre></td></tr></table></figure>
+
+<p>一开始忘了给<code>deploy.sh</code>可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。</p>
+<p><img src="/2019/04/21/use-ci-auto-deploy-blog/1555840082905.png" alt="1555840082905"></p>
+<p>（看着都是成功其实都是失败。。）</p>
+<p>同时本地配合一下批处理，真正一键发布（滑稽</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd C:\Users\niuch\Documents\GitHub\blog\</span><br><span class="line">git add .</span><br><span class="line">git commit</span><br><span class="line">git push</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>历经两个多小时，终于把 CI 弄好了。虽然对 CI 还是一知半解，不过总算开了个头，也基本实现了需求。</p>
+<p>Travis CI 官方的文档很全，但是以我的英文水平看得很吃力（懒得看），中文资料的质量又参差不齐。所以还是要锻炼自己的英语水平啊。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://docs.travis-ci.com" target="_blank" rel="noopener">https://docs.travis-ci.com</a></p>
+<p><a href="https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html" target="_blank" rel="noopener">https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html</a></p>
+<p><a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/" target="_blank" rel="noopener">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/</a></p>
+<p><a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/" target="_blank" rel="noopener">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Coherence</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/" title="使用 Travis CI 自动部署 Hexo 博客">https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+            
+              <a href="/tags/CI/" rel="tag"># CI</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/03/24/Arch-Linux-Install/" rel="next" title="Arch Linux 安装&配置全过程">
+                  <i class="fa fa-chevron-left"></i> Arch Linux 安装&配置全过程
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/07/17/isoftstone-practice/" rel="prev" title="软通实习">
+                  软通实习 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#缘由"><span class="nav-number">1.</span> <span class="nav-text">缘由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">2.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-Github-Repo"><span class="nav-number">3.</span> <span class="nav-text">配置 Github Repo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-Travis-CI"><span class="nav-number">4.</span> <span class="nav-text">配置 Travis CI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">5.</span> <span class="nav-text">后记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Coherence</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/cjc7373" title="GitHub &rarr; https://github.com/cjc7373" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:niuchangcun@gmail.com" title="E-Mail &rarr; mailto:niuchangcun@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coherence</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://cjc7373.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "https://cjc7373.github.io/2019/04/21/use-ci-auto-deploy-blog/";
+    this.page.identifier = "2019/04/21/use-ci-auto-deploy-blog/";
+    this.page.title = '使用 Travis CI 自动部署 Hexo 博客';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://cjc7373.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>

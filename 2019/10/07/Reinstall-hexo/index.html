@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="缘由直接原因是 Github 的一个假装很贴心的功能：  由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。 过程环境node.js 6.4.1 hexo 3.9.0 hexo-cli 2.0.0  官方文档上写需要 node.js 6.9+，然而我是 6.4，不知道会不会锅。 H">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重新安装 Hexo">
+<meta property="og:url" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/index.html">
+<meta property="og:site_name" content="Coherence">
+<meta property="og:description" content="缘由直接原因是 Github 的一个假装很贴心的功能：  由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。 过程环境node.js 6.4.1 hexo 3.9.0 hexo-cli 2.0.0  官方文档上写需要 node.js 6.9+，然而我是 6.4，不知道会不会锅。 H">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/Reinstall-hexo/1565183420437.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/Reinstall-hexo/1565186395227.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/1565185528852.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/Reinstall-hexo/1565184499949.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/Reinstall-hexo/1565227855897.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/Reinstall-hexo/1565232540544.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/Reinstall-hexo/1570428603861.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/Reinstall-hexo/1570429427612.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/Reinstall-hexo/1570429889982.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/Reinstall-hexo/1570430098775.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/1570431870938.png">
+<meta property="og:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/1570432899620.png">
+<meta property="og:updated_time" content="2019-10-07T08:04:50.711Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重新安装 Hexo">
+<meta name="twitter:description" content="缘由直接原因是 Github 的一个假装很贴心的功能：  由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。 过程环境node.js 6.4.1 hexo 3.9.0 hexo-cli 2.0.0  官方文档上写需要 node.js 6.9+，然而我是 6.4，不知道会不会锅。 H">
+<meta name="twitter:image" content="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/Reinstall-hexo/1565183420437.png">
+  <link rel="canonical" href="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>重新安装 Hexo | Coherence</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126196845-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-126196845-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coherence</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coherence">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coherence">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">重新安装 Hexo
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-07 16:03:29 / 修改时间：08:04:50" itemprop="dateCreated datePublished" datetime="2019-10-07T16:03:29+00:00">2019-10-07</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/10/07/Reinstall-hexo/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/07/Reinstall-hexo/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h2><p>直接原因是 Github 的一个假装很贴心的功能：</p>
+<p><img src="/2019/10/07/Reinstall-hexo/Reinstall-hexo\1565183420437.png" alt="1565183420437"></p>
+<p>由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>node.js 6.4.1</p>
+<p>hexo 3.9.0</p>
+<p>hexo-cli 2.0.0</p>
+<p><img src="/2019/10/07/Reinstall-hexo/Reinstall-hexo\1565186395227.png" alt="1565186395227"></p>
+<p>官方文档上写需要 node.js 6.9+，然而我是 6.4，不知道会不会锅。</p>
+<h3 id="Hexo-安装"><a href="#Hexo-安装" class="headerlink" title="Hexo 安装"></a>Hexo 安装</h3><p>首先，把仓库 clone 下来后，备份一份源文件。然后找一个空文件夹，按照官方文档的指引，执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>（我发现现在 <code>hexo init</code> 会同时自动执行 <code>npm install</code>命令了）</p>
+<p><img src="/2019/10/07/Reinstall-hexo/1565185528852.png" alt="1565185528852"></p>
+<p>然而还是有一个漏洞，不管了。</p>
+<p>然后删除原文件夹中文件（保留.git），把新的文件复制过去。同时把备份文件夹中的<code>source</code>文件夹覆盖过去。（自动创建 .gitignore 好评）</p>
+<p>这时候基本的安装就完成了，接下来打开 Github Desktop 开始对比差异。</p>
+<p>在全局配置<code>_config.yml</code>中，</p>
+<p><img src="/2019/10/07/Reinstall-hexo/Reinstall-hexo\1565184499949.png" alt="1565184499949"></p>
+<p>这个配置是为每篇博文创建一个单独的资源文件夹。</p>
+<p>基本不用变，直接 discard changes 即可。</p>
+<p><code>.travis.yml</code> 和 <code>deploy.sh</code> 也直接还原。</p>
+<p><a href="https://cjc7373.github.io/2018/10/13/Hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/#Hexo%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%8C%87%E5%BC%95">图片的问题</a>先不管，有问题再说。</p>
+<h3 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h3><p>剩下的差异全是主题文件。既然都重新搞了，那就换一个主题吧。在自己的 stars 里找了个主题 <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="noopener">hexo-theme-indigo</a>，看了下也支持 Analysis、Disqus，就决定用它了。</p>
+<p>接下来就开始按照<a href="https://github.com/yscoder/hexo-theme-indigo/wiki" target="_blank" rel="noopener">主题文档</a>来安装。首先 clone 仓库，我选择 card 分支，感觉比较好看（其实也没有对比）。</p>
+<p>在 hexo 根目录执行<code>git clone -b card https://github.com/yscoder/hexo-theme-indigo.git themes/indigo</code>，下载主题文件。安装插件<code>hexo-renderer-less hexo-generator-feed hexo-generator-json-content hexo-helper-qrcode</code>。</p>
+<blockquote>
+<h2 id="开启标签页"><a href="#开启标签页" class="headerlink" title="开启标签页"></a>开启标签页</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo new page tags</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>修改 <code>hexo/source/tags/index.md</code> 的元数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; layout: tags</span><br><span class="line">&gt; comments: false</span><br><span class="line">&gt; ---</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<h2 id="开启分类页"><a href="#开启分类页" class="headerlink" title="开启分类页"></a>开启分类页</h2><p>仅 card theme 支持。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; hexo new page categories</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>修改 <code>hexo/source/categories/index.md</code> 的元数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; layout: categories</span><br><span class="line">&gt; comments: false</span><br><span class="line">&gt; ---</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>话说用 Github Desktop commit 的时候因为主题文件夹也是一个 git 仓库，所以报错了，在命令行中 add，提示</p>
+<p><img src="/2019/10/07/Reinstall-hexo/Reinstall-hexo\1565227855897.png" alt="1565227855897"></p>
+<p>于是我去 Google 了下<a href="/2019/10/07/Reinstall-hexo//git-scm.com/book/zh/v2/Git-工具-子模块](https://git-scm.com/book/zh/v2/Git-工具-子模块)">子模块</a>，感觉这会让问题变复杂，同时这个主题已经很久没更新过了，干脆把主题的版本库删了吧。删除 <code>.git</code>文件夹后，提交成功。</p>
+<h3 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h3><p>编辑站点配置文件。启用主题<code>theme: indigo</code>。feed 是用来 rss 的，不管。jsonContent 用来搜索，如下：</p>
+<blockquote>
+<h3 id="jsonContent配置"><a href="#jsonContent配置" class="headerlink" title="jsonContent配置"></a>jsonContent配置</h3><p>为了节约资源，可以对 jsonContent 插件生成的数据字段进行配置，减少数据文件大小。参考 <a href="https://github.com/alexbruno/hexo-generator-json-content" target="_blank" rel="noopener">hexo-generator-json-content</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt; jsonContent:</span><br><span class="line">&gt;   meta: false</span><br><span class="line">&gt;   pages: false</span><br><span class="line">&gt;   posts:</span><br><span class="line">&gt;     title: true</span><br><span class="line">&gt;     date: true</span><br><span class="line">&gt;     path: true</span><br><span class="line">&gt;     text: true</span><br><span class="line">&gt;     raw: false</span><br><span class="line">&gt;     content: false</span><br><span class="line">&gt;     slug: false</span><br><span class="line">&gt;     updated: false</span><br><span class="line">&gt;     comments: false</span><br><span class="line">&gt;     link: false</span><br><span class="line">&gt;     permalink: false</span><br><span class="line">&gt;     excerpt: false</span><br><span class="line">&gt;     categories: false</span><br><span class="line">&gt;     tags: true</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>编辑主题配置文件，<code>themes/indigo/_config.yml</code>。</p>
+<p>左侧菜单： </p>
+<blockquote>
+<p>添加新菜单项时，在 menu 下增加子属性即可。属性说明如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; menu:</span><br><span class="line">&gt;  link:               # fontawesome图标，省略前缀，本主题前缀为 icon-，必须</span><br><span class="line">&gt;    text: About       # 菜单显示的文字，如果省略即默认与图标一致，首字母会转大写</span><br><span class="line">&gt;    url: /about       # 链接，绝对或相对路径，必须</span><br><span class="line">&gt;    target: _blank    # 是否跳出，省略则在当前页面打开</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>fontawesome 图标已集成到主题中，你可以到 <a href="http://fontawesome.io/icons/" target="_blank" rel="noopener">这个页面</a> 挑选合适的图标。</p>
+</blockquote>
+<p>我修改为如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home:</span><br><span class="line">    text: 主页</span><br><span class="line">    url: /</span><br><span class="line">  archives:</span><br><span class="line">    url: /archives</span><br><span class="line">  tags:</span><br><span class="line">    url: /tags</span><br><span class="line">  th-list:</span><br><span class="line">    text: Categories</span><br><span class="line">    url: /categories</span><br><span class="line">  github:</span><br><span class="line">    url: https://github.com/cjc7373</span><br><span class="line">    target: _blank</span><br><span class="line">  user:</span><br><span class="line">    text: 关于</span><br><span class="line">    url: /about</span><br></pre></td></tr></table></figure>
+
+<p>其余改动略。</p>
+<p>由于这个主题为国人制作，配置文件都带有中文注释，还是很友好的。</p>
+<h2 id="修锅"><a href="#修锅" class="headerlink" title="修锅"></a>修锅</h2><p>图片不出意外地崩了。。而且不止首页图片，是所有。。装插件试试。<code>npm install hexo-asset-image --save</code>。装完又多了两个漏洞，这插件是有多久没更新了。。自动修复试试。</p>
+<p><img src="/2019/10/07/Reinstall-hexo/Reinstall-hexo\1565232540544.png" alt="1565232540544"></p>
+<p>GG。</p>
+<p>语言是错的。hexo 配置文件改成 zh-cn 试试。</p>
+<p>头像好丑。改成猫头鹰了。</p>
+<hr>
+<p>坑爹啊，img不说清楚在哪里。。我在根目录下创建了img，结果找了一下发现是在<code>themes\indigo\source\img</code>下，图片还是炸。待修。暂时回滚至以前的版本。</p>
+<h2 id="回滚"><a href="#回滚" class="headerlink" title="回滚"></a>回滚</h2><p>Updated in 2019/10/7</p>
+<p><img src="/2019/10/07/Reinstall-hexo/Reinstall-hexo\1570428603861.png" alt="1570428603861"></p>
+<p>时隔两个月,重新拾回了我的博客..</p>
+<p>这个主题的锅不想修了..</p>
+<p>又看了几个主题之后,看看似乎原主题也挺好的..</p>
+<p>所以我又用回了 Next..</p>
+<p>看了一下 Next 换维护者了..</p>
+<p><img src="/2019/10/07/Reinstall-hexo/Reinstall-hexo\1570429427612.png" alt="1570429427612"></p>
+<p>仓库地址从<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">这个</a>变为<a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">这个</a>(话说居然不是 fork 过去的)</p>
+<p>大致过程是<del>重来一遍上述过程</del>回退到某一个提交即可.</p>
+<p>不过我把 node.js 的版本更新到了 v12.11.1</p>
+<p>首先这四个 commit 记录不需要了,我建了个新的分支 theme-indigo 扔着..</p>
+<p>然后,先fetch一下,因为我在远程仓库上回滚了之前的更改..然后发现记错了,回滚的是 master 分支..</p>
+<p>然后看一下 log, 回退到 2939aa 这个 commit.</p>
+<p><img src="/2019/10/07/Reinstall-hexo/Reinstall-hexo\1570429889982.png" alt="1570429889982"></p>
+<p><code>git reset --hard 2939aa</code></p>
+<p>此时本地分支已经落后于远程分支了,需要强制推送一遍.<code>git push --force</code></p>
+<p><img src="/2019/10/07/Reinstall-hexo/Reinstall-hexo\1570430098775.png" alt="1570430098775"></p>
+<p>看了一下这个提交是 [Hexo 安装](#Hexo 安装) 完成之后.</p>
+<p>接下来安装主题, 先从 Github 下载一个 release. 目前是 v7.4.1</p>
+<p>看了一眼<a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/UPDATE-FROM-5.1.X.md" target="_blank" rel="noopener">从5.x升级</a>文档, 全局配置中 language 要从 zh-Hans 变为 zh-CN</p>
+<p><del>然后并没有发现其他配置文档</del> 是有的, 只不过是英文, 在<a href="https://theme-next.org/docs/getting-started/" target="_blank" rel="noopener">这里</a>, 只能一行一行看 <code>_config.yml</code> 了.</p>
+<p>用 sublimerge 对比一下新旧配置文件的差异..</p>
+<p><img src="/2019/10/07/Reinstall-hexo/1570431870938.png" alt="1570431870938"></p>
+<p>瞎改了一点.</p>
+<p>ok. 测试一下, 果然图片又崩了. 原因引用的图片地址多了一级. 把多余的地址删掉是能够正常显示的.</p>
+<p><img src="/2019/10/07/Reinstall-hexo/1570432899620.png" alt="1570432899620"></p>
+<p>然而原来那个插件 <code>hexo-asset-image</code> 没用了. 无奈继续 Google, 找到了一篇<a href="https://liolok.github.io/en/How-to-Add-Image-to-Hexo-Blog-Post/" target="_blank" rel="noopener">英文博文</a>, 指出了另一个插件<a href="https://github.com/liolok/hexo-asset-link" target="_blank" rel="noopener">hexo-asset-link</a>, 尝试之, 发现能完美在首页及内容页显示图片.</p>
+<p>至此, 我的博客算是修好了. (这篇博客写得不成样子,大雾,希望没人看到吧</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>两次修锅的过程, 让我看到了 Hexo 的插入图片的巨坑. 用图床能够避免这个问题, 然而图床也有缺点, 我还是更喜欢直接插入图片. 感觉上这部分是由 Hexo 来处理的, 与主题无关, 所以还是可以换个主题玩玩的, 目前来说, 还是先专注于内容吧.</p>
+<p>有时间也可以试试 Typecho, Jekyll, Pelican, Hugo 等其他博客生成器.</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Coherence</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://cjc7373.github.io/2019/10/07/Reinstall-hexo/" title="重新安装 Hexo">https://cjc7373.github.io/2019/10/07/Reinstall-hexo/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/07/17/isoftstone-practice/" rel="next" title="软通实习">
+                  <i class="fa fa-chevron-left"></i> 软通实习
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#缘由"><span class="nav-number">1.</span> <span class="nav-text">缘由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">2.</span> <span class="nav-text">过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境"><span class="nav-number">2.1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo-安装"><span class="nav-number">2.2.</span> <span class="nav-text">Hexo 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题安装"><span class="nav-number">2.3.</span> <span class="nav-text">主题安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启标签页"><span class="nav-number">3.</span> <span class="nav-text">开启标签页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启分类页"><span class="nav-number">4.</span> <span class="nav-text">开启分类页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主题配置"><span class="nav-number">4.1.</span> <span class="nav-text">主题配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsonContent配置"><span class="nav-number">4.2.</span> <span class="nav-text">jsonContent配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修锅"><span class="nav-number">5.</span> <span class="nav-text">修锅</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回滚"><span class="nav-number">6.</span> <span class="nav-text">回滚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">7.</span> <span class="nav-text">结语</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Coherence</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/cjc7373" title="GitHub &rarr; https://github.com/cjc7373" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:niuchangcun@gmail.com" title="E-Mail &rarr; mailto:niuchangcun@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coherence</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://cjc7373.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "https://cjc7373.github.io/2019/10/07/Reinstall-hexo/";
+    this.page.identifier = "2019/10/07/Reinstall-hexo/";
+    this.page.title = '重新安装 Hexo';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://cjc7373.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>
