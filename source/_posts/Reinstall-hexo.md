@@ -1,14 +1,16 @@
 ---
 title: 重新安装 Hexo
-date: 2019-10-07 16:03:29
+date: 2019-08-07 16:03:29
 tags:
 ---
 
+<!-- more -->
 
 ## 缘由
+
 直接原因是 Github 的一个假装很贴心的功能：
 
-![1565183420437](Reinstall-hexo\1565183420437.png)
+![1565183420437](Reinstall-hexo/1565183420437.png)
 
 由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。
 
@@ -23,7 +25,7 @@ hexo 3.9.0
 
 hexo-cli 2.0.0
 
-![1565186395227](Reinstall-hexo\1565186395227.png)
+![1565186395227](Reinstall-hexo/1565186395227.png)
 
 官方文档上写需要 node.js 6.9+，然而我是 6.4，不知道会不会锅。
 
@@ -48,7 +50,7 @@ npm install
 
 在全局配置`_config.yml`中，
 
-![1565184499949](Reinstall-hexo\1565184499949.png)
+![1565184499949](Reinstall-hexo/1565184499949.png)
 
 这个配置是为每篇博文创建一个单独的资源文件夹。
 
@@ -98,7 +100,7 @@ npm install
 
 话说用 Github Desktop commit 的时候因为主题文件夹也是一个 git 仓库，所以报错了，在命令行中 add，提示
 
-![1565227855897](Reinstall-hexo\1565227855897.png)
+![1565227855897](Reinstall-hexo/1565227855897.png)
 
 于是我去 Google 了下[子模块]([https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97](https://git-scm.com/book/zh/v2/Git-工具-子模块))，感觉这会让问题变复杂，同时这个主题已经很久没更新过了，干脆把主题的版本库删了吧。删除 `.git`文件夹后，提交成功。
 
@@ -177,7 +179,7 @@ menu:
 
 图片不出意外地崩了。。而且不止首页图片，是所有。。装插件试试。`npm install hexo-asset-image --save`。装完又多了两个漏洞，这插件是有多久没更新了。。自动修复试试。
 
-![1565232540544](Reinstall-hexo\1565232540544.png)
+![1565232540544](Reinstall-hexo/1565232540544.png)
 
 GG。
 
@@ -193,7 +195,7 @@ GG。
 
 Updated in 2019/10/7
 
-![1570428603861](Reinstall-hexo\1570428603861.png)
+![1570428603861](Reinstall-hexo/1570428603861.png)
 
 时隔两个月,重新拾回了我的博客..
 
@@ -205,7 +207,7 @@ Updated in 2019/10/7
 
 看了一下 Next 换维护者了..
 
-![1570429427612](Reinstall-hexo\1570429427612.png)
+![1570429427612](Reinstall-hexo/1570429427612.png)
 
 仓库地址从[这个](https://github.com/iissnan/hexo-theme-next)变为[这个](https://github.com/theme-next/hexo-theme-next)(话说居然不是 fork 过去的)
 
@@ -219,13 +221,13 @@ Updated in 2019/10/7
 
 然后看一下 log, 回退到 2939aa 这个 commit.
 
-![1570429889982](Reinstall-hexo\1570429889982.png)
+![1570429889982](Reinstall-hexo/1570429889982.png)
 
 `git reset --hard 2939aa`
 
 此时本地分支已经落后于远程分支了,需要强制推送一遍.`git push --force`
 
-![1570430098775](Reinstall-hexo\1570430098775.png)
+![1570430098775](Reinstall-hexo/1570430098775.png)
 
 看了一下这个提交是 [Hexo 安装](#Hexo 安装) 完成之后.
 
