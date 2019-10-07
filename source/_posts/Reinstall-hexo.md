@@ -1,7 +1,9 @@
 ---
 title: 重新安装 Hexo
+date: 2019-10-07 16:03:29
 tags:
 ---
+
 
 ## 缘由
 直接原因是 Github 的一个假装很贴心的功能：
@@ -242,3 +244,13 @@ Updated in 2019/10/7
 ok. 测试一下, 果然图片又崩了. 原因引用的图片地址多了一级. 把多余的地址删掉是能够正常显示的.
 
 ![1570432899620](Reinstall-hexo/1570432899620.png)
+
+然而原来那个插件 `hexo-asset-image` 没用了. 无奈继续 Google, 找到了一篇[英文博文](https://liolok.github.io/en/How-to-Add-Image-to-Hexo-Blog-Post/), 指出了另一个插件[hexo-asset-link](https://github.com/liolok/hexo-asset-link), 尝试之, 发现能完美在首页及内容页显示图片.
+
+至此, 我的博客算是修好了. (这篇博客写得不成样子,大雾,希望没人看到吧
+
+## 结语
+
+两次修锅的过程, 让我看到了 Hexo 的插入图片的巨坑. 用图床能够避免这个问题, 然而图床也有缺点, 我还是更喜欢直接插入图片. 感觉上这部分是由 Hexo 来处理的, 与主题无关, 所以还是可以换个主题玩玩的, 目前来说, 还是先专注于内容吧.
+
+有时间也可以试试 Typecho, Jekyll, Pelican, Hugo 等其他博客生成器.
