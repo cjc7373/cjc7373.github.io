@@ -209,8 +209,6 @@ Linux Mode Setting 可以提前启动？虽然不知道有什么用。
 ## TO DO
 
 * zsh
-* ssh相关帐号导入arch
-* 可以尝试一下用命令行版替代 ss-qt5 
 
 ## 吐槽
 
