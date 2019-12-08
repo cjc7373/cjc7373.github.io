@@ -211,6 +211,155 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2019/12/08/WSL使用体验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coherence">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coherence">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/12/08/WSL使用体验/" class="post-title-link" itemprop="url">WSL使用体验</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-08 11:46:52" itemprop="dateCreated datePublished" datetime="2019-12-08T11:46:52+00:00">2019-12-08</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/12/08/WSL使用体验/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/08/WSL使用体验/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>首先，WSL真香！</p>
+<h2 id="开启WSL"><a href="#开启WSL" class="headerlink" title="开启WSL"></a>开启WSL</h2><p>最简单的方式是使用管理员权限运行Powershell，然后输入：</p>
+<p><code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</code></p>
+<p>重启电脑，然后在应用商店中安装WSL发行版。</p>
+<h2 id="Arch"><a href="#Arch" class="headerlink" title="Arch"></a>Arch</h2><p>注意到WSL是没有Arch Linux发行版的（以前有一个非官方的，很快被下架了），但是我们有办法添加Arch发行版。去<a href="https://github.com/yuk7/ArchWSL" target="_blank" rel="noopener">这个仓库</a>下载打包好的appx文件和证书，首先将证书导入至受信任的根证书颁发机构，然后安装appx即可。</p>
+<h2 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h2><h3 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h3><ul>
+<li><p>默认WSL不会读取<code>~/.bashrc</code>而会读取<code>~/.bash_profile</code>，所以需要在<code>~/.bash_profile</code>中写入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [[ -f ~/.bashrc ]] ; <span class="keyword">then</span></span><br><span class="line">	. ~/.bashrc</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>才能够正常读取bash配置。</p>
+</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>WSL下无法使用Docker等涉及内核的操作，该缺陷在WSL2中被解决。</li>
+<li>默认无图形界面，使用GUI需自己安装X Server，较为麻烦。</li>
+</ul>
+<h2 id="Windows-Terminal"><a href="#Windows-Terminal" class="headerlink" title="Windows Terminal"></a>Windows Terminal</h2><p>注意，截至目前，Windows Terminal仍处于预览阶段，正式发布预计要到2020年4月。</p>
+<p><img src="/2019/12/08/WSL使用体验/image-20191115231943950.png" alt="image-20191115231943950"></p>
+<p>安装WSL后，Windows Terminal能够自动识别WSL并添加至可用Terminal列表中。</p>
+<h3 id="Bug"><a href="#Bug" class="headerlink" title="Bug"></a>Bug</h3><ul>
+<li>启动Shell后的工作目录为Windows当前用户的Home目录，而非Linux的用户Home目录。</li>
+</ul>
+<p><img src="/2019/12/08/WSL使用体验/image-20191115232130240.png" alt="image-20191115232130240"></p>
+<p>​    可以通过在配置文件中加入<code>&quot;commandline&quot; : &quot;wsl ~&quot;</code>来解决，不过这个方案只适用于默认WSL发行版，对于其他发行版无效，可以通过在<code>.bashrc</code>中添加一条判断语句来解决。</p>
+<ul>
+<li><p>Windows Terminal目前暂无法自动添加至右键菜单上下文，需手动添加注册表。</p>
+</li>
+<li><p>往Terminal中粘贴内容是会自动在行间加空格。（更新：这个bug是由于\r\n与\n的处理问题，在0.7中被解决）</p>
+<p><img src="/2019/12/08/WSL使用体验/image-20191115233340872.png" alt="image-20191115233340872"></p>
+</li>
+</ul>
+<h2 id="WSL2"><a href="#WSL2" class="headerlink" title="WSL2"></a>WSL2</h2><h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><p>可喜可贺，WSL终于能用Docker了。</p>
+<p>配置镜像源（无systemd）：</p>
+<blockquote>
+<p>在配置文件 <code>/etc/default/docker</code> 中的 <code>DOCKER_OPTS</code> 中配置Hub地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; DOCKER_OPTS=&quot;--registry-mirror=https://docker.mirrors.ustc.edu.cn/&quot;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>重新启动服务:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo service docker restart</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="坑-1"><a href="#坑-1" class="headerlink" title="坑"></a>坑</h3><ul>
+<li><p>官方宣称在18945之后的版本中Windows访问WSL提供的网络服务只需使用localhost即可（服务需绑定之0.0.0.0而不是127.0.0.1，因为实际上这些连接被认为是局域网中的连接）。</p>
+<p>尝试在Docker中使用。</p>
+<p><img src="/2019/12/08/WSL使用体验/image-20191116233838273.png" alt="image-20191116233838273"></p>
+<p>使用<code>netstat -ano</code>如下：</p>
+<p><img src="/2019/12/08/WSL使用体验/image-20191116233912110.png" alt="image-20191116233912110"></p>
+<p>然而在Windows下只能使用IPv6地址访问：</p>
+<p><img src="/2019/12/08/WSL使用体验/image-20191116233953189.png" alt="image-20191116233953189">b</p>
+<p>而不能使用IPv4：</p>
+<p><img src="/2019/12/08/WSL使用体验/image-20191116234023402.png" alt="image-20191116234023402"></p>
+</li>
+<li><p>无法使用systemd。</p>
+</li>
+</ul>
+<h2 id="Pycharm"><a href="#Pycharm" class="headerlink" title="Pycharm"></a>Pycharm</h2><p>Pycharm能够将Python解释器设置为WSL中的Python。</p>
+<p><img src="/2019/12/08/WSL使用体验/image-20191119150317595.png" alt="image-20191119150317595"></p>
+<p>同时能够将terminal设置为WSL：</p>
+<p><img src="/2019/12/08/WSL使用体验/image-20191119150135830.png" alt="image-20191119150135830"></p>
+<p>只需要将Shell path设置成<code>bash.exe</code>即可。注意设置为<code>arch.exe</code>等自定义的发行版名称时，无法将当前工作目录传递给Shell。</p>
+<p>注意到由于WSL没有图形界面，无法在Python中运行GUI程序。</p>
+<h3 id="Bug-1"><a href="#Bug-1" class="headerlink" title="Bug"></a>Bug</h3><p><del>在WSL中安装的包无法被识别：</del></p>
+<p><img src="/2019/12/08/WSL使用体验/image-20191119150405724.png" alt="image-20191119150405724"></p>
+<p><del>因此也无法使用这个包的自动补全、查看定义等一系列功能。</del></p>
+<p><a href="https://www.jetbrains.com/help/pycharm/using-wsl-as-a-remote-interpreter.html" target="_blank" rel="noopener">文档里</a>写得清清楚楚：</p>
+<p><img src="/2019/12/08/WSL使用体验/image-20191208194351006.png" alt="image-20191208194351006"></p>
+<p>我错了，我应该看文档的。安装rsync之后问题解决。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2019/08/07/Reinstall-hexo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -251,7 +400,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-07 08:12:42" itemprop="dateModified" datetime="2019-10-07T08:12:42+00:00">2019-10-07</time>
+                <time title="修改时间：2019-12-08 11:46:52" itemprop="dateModified" datetime="2019-12-08T11:46:52+00:00">2019-12-08</time>
               </span>
             
           
@@ -870,7 +1019,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-03-19 00:00:00" itemprop="dateModified" datetime="2019-03-19T00:00:00+00:00">2019-03-19</time>
+                <time title="修改时间：2019-12-08 00:00:00" itemprop="dateModified" datetime="2019-12-08T00:00:00+00:00">2019-12-08</time>
               </span>
             
           
@@ -1128,125 +1277,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2018/11/02/Windows10字体崩溃修复/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Coherence">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coherence">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2018/11/02/Windows10字体崩溃修复/" class="post-title-link" itemprop="url">Windows10字体崩溃修复</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-02 18:23:47" itemprop="dateCreated datePublished" datetime="2018-11-02T18:23:47+00:00">2018-11-02</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-02-13 00:00:00" itemprop="dateModified" datetime="2019-02-13T00:00:00+00:00">2019-02-13</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Windows/" itemprop="url" rel="index"><span itemprop="name">Windows</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2018/11/02/Windows10字体崩溃修复/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/02/Windows10字体崩溃修复/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>这就是乱改字体的后果..</p>
-</blockquote>
-<p>字体修复，不只是字体修复。</p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2018/11/02/Windows10字体崩溃修复/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1297,7 +1327,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
