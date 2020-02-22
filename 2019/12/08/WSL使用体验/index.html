@@ -73,7 +73,7 @@
 <meta property="og:image" content="https://cjc7373.github.io/2019/12/08/WSL使用体验/image-20191119150135830.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/12/08/WSL使用体验/image-20191119150405724.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/12/08/WSL使用体验/image-20191208194351006.png">
-<meta property="og:updated_time" content="2019-12-08T11:54:43.578Z">
+<meta property="og:updated_time" content="2020-02-22T03:10:28.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WSL使用体验">
 <meta name="twitter:description" content="首先，WSL真香！">
@@ -256,11 +256,19 @@
                 
               
 
-              <time title="创建时间：2019-12-08 19:12:51 / 修改时间：11:54:43" itemprop="dateCreated datePublished" datetime="2019-12-08T19:12:51+00:00">2019-12-08</time>
+              <time title="创建时间：2019-12-08 19:12:51" itemprop="dateCreated datePublished" datetime="2019-12-08T19:12:51+00:00">2019-12-08</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-22 03:10:28" itemprop="dateModified" datetime="2020-02-22T03:10:28+00:00">2020-02-22</time>
+              </span>
             
           
 
@@ -303,6 +311,7 @@
 <p>才能够正常读取bash配置。</p>
 </li>
 </ul>
+<h3 id="Netcat"><a href="#Netcat" class="headerlink" title="Netcat"></a>Netcat</h3><p>首先我Google到的是<code>gnu-netcat</code>。但是运行时报错<code>nc: core.c:372: core_tcp_connect: Assertion ret == 0&#39; failed.</code>搜索了<a href="https://github.com/msys2/MSYS2-packages/issues/1030" target="_blank" rel="noopener">相关Issus</a>之后，我更换成了<a href="https://www.archlinux.org/packages/community/x86_64/openbsd-netcat/" target="_blank" rel="noopener">openbsd-netcat</a>，问题解决。</p>
 <h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
 <li>WSL下无法使用Docker等涉及内核的操作，该缺陷在WSL2中被解决。</li>
 <li>默认无图形界面，使用GUI需自己安装X Server，较为麻烦。</li>
@@ -400,6 +409,10 @@
 
             <div class="post-nav-prev post-nav-item">
               
+                <a href="/2020/02/01/2019Summary_2020Plan/" rel="prev" title="2019年终总结&2020展望">
+                  2019年终总结&2020展望 <i class="fa fa-chevron-right"></i>
+                </a>
+              
             </div>
           </div>
         
@@ -456,7 +469,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开启WSL"><span class="nav-number">1.</span> <span class="nav-text">开启WSL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arch"><span class="nav-number">2.</span> <span class="nav-text">Arch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#体验"><span class="nav-number">3.</span> <span class="nav-text">体验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#坑"><span class="nav-number">3.1.</span> <span class="nav-text">坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Terminal"><span class="nav-number">4.</span> <span class="nav-text">Windows Terminal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug"><span class="nav-number">4.1.</span> <span class="nav-text">Bug</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WSL2"><span class="nav-number">5.</span> <span class="nav-text">WSL2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">5.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑-1"><span class="nav-number">5.2.</span> <span class="nav-text">坑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pycharm"><span class="nav-number">6.</span> <span class="nav-text">Pycharm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug-1"><span class="nav-number">6.1.</span> <span class="nav-text">Bug</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开启WSL"><span class="nav-number">1.</span> <span class="nav-text">开启WSL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arch"><span class="nav-number">2.</span> <span class="nav-text">Arch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#体验"><span class="nav-number">3.</span> <span class="nav-text">体验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#坑"><span class="nav-number">3.1.</span> <span class="nav-text">坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Netcat"><span class="nav-number">3.2.</span> <span class="nav-text">Netcat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">3.3.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Terminal"><span class="nav-number">4.</span> <span class="nav-text">Windows Terminal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug"><span class="nav-number">4.1.</span> <span class="nav-text">Bug</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WSL2"><span class="nav-number">5.</span> <span class="nav-text">WSL2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker"><span class="nav-number">5.1.</span> <span class="nav-text">Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑-1"><span class="nav-number">5.2.</span> <span class="nav-text">坑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pycharm"><span class="nav-number">6.</span> <span class="nav-text">Pycharm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug-1"><span class="nav-number">6.1.</span> <span class="nav-text">Bug</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -472,7 +485,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -545,7 +558,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
