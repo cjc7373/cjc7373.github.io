@@ -550,7 +550,7 @@ math:
 # Easily enable fast Ajax navigation on your website.
 # Dependencies: https://github.com/theme-next/theme-next-pjax
 # For moreinformation: https://github.com/MoOx/pjax
-pjax: false
+pjax: true
 
 # FancyBox is a tool that offers a nice and elegant way to add zooming functionality for images.
 # For more information: https://fancyapps.com/fancybox
@@ -618,7 +618,7 @@ comments:
 
 # Disqus
 disqus:
-  enable: true
+  enable: false
   shortname: cjc7373
   count: true
   lazyload: false
@@ -629,15 +629,15 @@ disqus:
 # Demo: https://suka.js.org/DisqusJS/
 # For more information: https://github.com/SukkaW/DisqusJS
 disqusjs:
-  enable: false
+  enable: true
   # API Endpoint of Disqus API (https://disqus.com/api/).
   # Leave api empty if you are able to connect to Disqus API.
   # Otherwise you need a reverse proxy for Disqus API.
   # For example:
   # api: https://disqus.skk.moe/disqus/
   api:
-  apikey: # Register new application from https://disqus.com/api/applications/
-  shortname: # See: https://disqus.com/admin/settings/general/
+  apikey: RTq9lZfWyC1kYUiTd01Wd2Tl2qHZXd28oT5KlrHxkVbfwW3gVKxGt9NNQ5i4xyYm # Register new application from https://disqus.com/api/applications/
+  shortname: cjc7373 # See: https://disqus.com/admin/settings/general/
 
 # Changyan
 changyan:
