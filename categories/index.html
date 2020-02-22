@@ -60,7 +60,7 @@
 <meta property="og:url" content="https://cjc7373.github.io/categories/index.html">
 <meta property="og:site_name" content="Coherence">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-22T03:10:28.955Z">
+<meta property="og:updated_time" content="2020-02-22T04:24:20.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="categories">
   <link rel="canonical" href="https://cjc7373.github.io/categories/">
@@ -80,7 +80,7 @@
   <title>categories | Coherence</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126196845-1"></script>
-  <script>
+  <script pjax>
     var host = window.location.hostname;
     if (host !== "localhost" || !true) {
       window.dataLayer = window.dataLayer || [];
@@ -423,74 +423,110 @@
 
   
   <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/pjax/pjax.min.js?v=0.2.8"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
 <script src="/js/schemes/pisces.js?v=7.4.0"></script>
 
 <script src="/js/next-boot.js?v=7.4.0"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://cjc7373.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  function disqus_config() {
-    this.page.url = "https://cjc7373.github.io/categories/index.html";
-    this.page.identifier = "categories/index.html";
-    this.page.title = 'categories';};
-  function loadComments() {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://cjc7373.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var id = element.id || '';
+    var src = element.src || '';
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (id !=='') {
+      script.id = element.id;
     }
+    if (src !== '') {
+      script.src = src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
   }
-    window.addEventListener('load', loadComments, false);
-  
+  NexT.utils.updateSidebarPosition();
+});
 </script>
 
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api: '' || 'https://disqus.com/api/',
+      apikey: 'RTq9lZfWyC1kYUiTd01Wd2Tl2qHZXd28oT5KlrHxkVbfwW3gVKxGt9NNQ5i4xyYm',
+      shortname: 'cjc7373',
+      url: "https://cjc7373.github.io/categories/index.html",
+      identifier: "categories/index.html",
+      title: 'categories',
+    });
+  }, window.DisqusJS);
+</script>
+
+    </div>
 </body>
 </html>

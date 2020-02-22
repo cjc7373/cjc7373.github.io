@@ -74,7 +74,7 @@
 <meta property="og:image" content="https://cjc7373.github.io/2019/08/07/Reinstall-hexo/1570430098775.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/08/07/Reinstall-hexo/1570431870938.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/08/07/Reinstall-hexo/1570432899620.png">
-<meta property="og:updated_time" content="2020-02-22T03:10:28.935Z">
+<meta property="og:updated_time" content="2020-02-22T04:24:20.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重新安装 Hexo">
 <meta name="twitter:description" content="缘由直接原因是 Github 的一个假装很贴心的功能：  由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。">
@@ -96,7 +96,7 @@
   <title>重新安装 Hexo | Coherence</title>
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126196845-1"></script>
-  <script>
+  <script pjax>
     var host = window.location.hostname;
     if (host !== "localhost" || !true) {
       window.dataLayer = window.dataLayer || [];
@@ -268,26 +268,12 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-22 03:10:28" itemprop="dateModified" datetime="2020-02-22T03:10:28+00:00">2020-02-22</time>
+                <time title="修改时间：2020-02-22 04:24:20" itemprop="dateModified" datetime="2020-02-22T04:24:20+00:00">2020-02-22</time>
               </span>
             
           
 
           
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2019/08/07/Reinstall-hexo/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/07/Reinstall-hexo/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
 
         </div>
       </header>
@@ -622,74 +608,110 @@
 
   
   <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/pjax/pjax.min.js?v=0.2.8"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
 <script src="/js/schemes/pisces.js?v=7.4.0"></script>
 
 <script src="/js/next-boot.js?v=7.4.0"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://cjc7373.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  function disqus_config() {
-    this.page.url = "https://cjc7373.github.io/2019/08/07/Reinstall-hexo/";
-    this.page.identifier = "2019/08/07/Reinstall-hexo/";
-    this.page.title = '重新安装 Hexo';};
-  function loadComments() {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://cjc7373.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var id = element.id || '';
+    var src = element.src || '';
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (id !=='') {
+      script.id = element.id;
     }
+    if (src !== '') {
+      script.src = src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
   }
-    window.addEventListener('load', loadComments, false);
-  
+  NexT.utils.updateSidebarPosition();
+});
 </script>
 
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api: '' || 'https://disqus.com/api/',
+      apikey: 'RTq9lZfWyC1kYUiTd01Wd2Tl2qHZXd28oT5KlrHxkVbfwW3gVKxGt9NNQ5i4xyYm',
+      shortname: 'cjc7373',
+      url: "https://cjc7373.github.io/2019/08/07/Reinstall-hexo/",
+      identifier: "2019/08/07/Reinstall-hexo/",
+      title: '重新安装 Hexo',
+    });
+  }, window.DisqusJS);
+</script>
+
+    </div>
 </body>
 </html>
