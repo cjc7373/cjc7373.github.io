@@ -34,7 +34,10 @@ tags:
 
   才能够正常读取bash配置。
 
-  
+
+### Netcat
+
+首先我Google到的是`gnu-netcat`。但是运行时报错`nc: core.c:372: core_tcp_connect: Assertion ret == 0' failed.`搜索了[相关Issus](https://github.com/msys2/MSYS2-packages/issues/1030)之后，我更换成了[openbsd-netcat](https://www.archlinux.org/packages/community/x86_64/openbsd-netcat/)，问题解决。
 
 ### 缺点
 
