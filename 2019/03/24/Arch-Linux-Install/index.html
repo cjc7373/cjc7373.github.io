@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
@@ -56,13 +56,12 @@
 </script>
 
   <meta name="description" content="前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。">
-<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Arch Linux 安装&amp;配置全过程">
 <meta property="og:url" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/index.html">
 <meta property="og:site_name" content="Coherence">
 <meta property="og:description" content="前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1554536417517.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1554535852814.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419677545.png">
@@ -70,10 +69,11 @@
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419245819.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555419316125.png">
 <meta property="og:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1555420630345.png">
-<meta property="og:updated_time" content="2019-04-24T00:00:00.000Z">
+<meta property="article:published_time" content="2019-03-24T20:12:51.000Z">
+<meta property="article:modified_time" content="2019-04-24T00:00:00.000Z">
+<meta property="article:author" content="Coherence">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Arch Linux 安装&amp;配置全过程">
-<meta name="twitter:description" content="前言以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。">
 <meta name="twitter:image" content="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/1554536417517.png">
   <link rel="canonical" href="https://cjc7373.github.io/2019/03/24/Arch-Linux-Install/">
 
@@ -362,8 +362,12 @@
 <li><p>Clipboard 能够生成二维码。（方便多设备发送网址什么的？然而我有 Chrome 同步了..）</p>
 </li>
 <li><p>开机时打开 Num Lock：根据 Wiki，KDE 自带了这个选项，在<code>Hardware/Input Devices/Keyboard</code>中。不过我转念一想，不是先启动<code>sddm</code>么？试了一下果然在<code>sddm</code>界面小键盘是关着的。于是在<code>/etc/sddm.conf</code>加入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[General]</span><br><span class="line">Numlock=on</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[General]</span><br><span class="line">Numlock&#x3D;on</span><br></pre></td></tr></table></figure>
+
+
 </li>
+</ul>
+<ul>
 <li><p>pacman 能够在升级前对比版本信息，对于我这种强迫症非常有用。</p>
 <p><img src="/2019/03/24/Arch-Linux-Install/1555419677545.png" alt="1555419677545"></p>
 </li>
@@ -417,7 +421,7 @@
 </ul>
 <blockquote>
 <p>安装完输入法，你需要把输入法添加到环境变量里才能让他生效。我目前的配置是在 <code>~/.xprofile</code>这个文件里加上下面几行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; export GTK_IM_MODULE=fcitx</span><br><span class="line">&gt; export QT_IM_MODULE=fcitx</span><br><span class="line">&gt; export XMODIFIERS=@im=fcitx</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export GTK_IM_MODULE&#x3D;fcitx</span><br><span class="line">export QT_IM_MODULE&#x3D;fcitx</span><br><span class="line">export XMODIFIERS&#x3D;@im&#x3D;fcitx</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>​        成功解决。</p>
 <ul>
@@ -569,7 +573,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         
-          <a href="/archives/">
+          <a href="/archives/%20%7C%7C%20archive">
         
           <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
@@ -650,7 +654,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Coherence</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
 
@@ -677,10 +681,18 @@
   <script src="/lib/pjax/pjax.min.js?v=0.2.8"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
-<script src="/js/schemes/pisces.js?v=7.4.0"></script>
 
-<script src="/js/next-boot.js?v=7.4.0"></script>
+<script src="/js/utils.js?v=7.4.0.js"></script>
+
+<script src="/js/motion.js?v=7.4.0.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.0.js"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.4.0.js"></script>
+
   <script>
 var pjax = new Pjax({
   selectors: [

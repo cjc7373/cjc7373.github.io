@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
@@ -56,20 +56,21 @@
 </script>
 
   <meta name="description" content="这就是乱改字体的后果..  字体修复，不只是字体修复。">
-<meta name="keywords" content="Fonts,Windows">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows10字体崩溃修复">
-<meta property="og:url" content="https://cjc7373.github.io/2018/11/02/Windows10字体崩溃修复/index.html">
+<meta property="og:url" content="https://cjc7373.github.io/2018/11/02/Windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/index.html">
 <meta property="og:site_name" content="Coherence">
 <meta property="og:description" content="这就是乱改字体的后果..  字体修复，不只是字体修复。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://cjc7373.github.io/2018/11/02/Windows10字体崩溃修复/1541154864085.png">
-<meta property="og:updated_time" content="2019-02-13T00:00:00.000Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cjc7373.github.io/2018/11/02/Windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/1541154864085.png">
+<meta property="article:published_time" content="2018-11-02T18:23:47.000Z">
+<meta property="article:modified_time" content="2019-02-13T00:00:00.000Z">
+<meta property="article:author" content="Coherence">
+<meta property="article:tag" content="Fonts">
+<meta property="article:tag" content="Windows">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Windows10字体崩溃修复">
-<meta name="twitter:description" content="这就是乱改字体的后果..  字体修复，不只是字体修复。">
-<meta name="twitter:image" content="https://cjc7373.github.io/2018/11/02/Windows10字体崩溃修复/1541154864085.png">
-  <link rel="canonical" href="https://cjc7373.github.io/2018/11/02/Windows10字体崩溃修复/">
+<meta name="twitter:image" content="https://cjc7373.github.io/2018/11/02/Windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/1541154864085.png">
+  <link rel="canonical" href="https://cjc7373.github.io/2018/11/02/Windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/">
 
 
 <script id="page-configurations">
@@ -219,7 +220,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2018/11/02/Windows10字体崩溃修复/">
+    <link itemprop="mainEntityOfPage" href="https://cjc7373.github.io/2018/11/02/Windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coherence">
@@ -297,10 +298,10 @@
 <p>然而，使用了一段时间后发现，所有的字体似乎都小了一圈，而且在cmd中出现了字体大小错乱的情况。网上找了一圈发现Win10砍掉了调整字体大小的功能，现在只能以整体缩放来调整字体大小。新的字体感觉也没有想象中的那么好。</p>
 <p>于是我把备份的默认字体又恢复了回去，按道理不会出事，然而我的电脑出锅了。一些软件的中文字体成了方框，cmd的字体也变得很奇怪。</p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>一番操作之后，发现设置里的新宋体是乱码，感觉可能是字体文件崩了。</p>
-<p><img src="/2018/11/02/Windows10字体崩溃修复/1541154864085.png" alt="1541154864085"></p>
+<p><img src="/2018/11/02/Windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/1541154864085.png" alt="1541154864085"></p>
 <p>但是<code>simsunb.ttf</code>这个文件我分明备份过。。</p>
 <p>没办法，继续面向Google解决问题，这时候找到了一个<a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-ime/%E5%9C%A8windows/d575f11c-1f2e-454c-9fcd-432809f7fd76" target="_blank" rel="noopener">微软社区页面</a>，里面给出了三条命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DISM.exe /Online /Cleanup-image /Scanhealth</span><br><span class="line">DISM.exe /Online /Cleanup-image /Restorehealth</span><br><span class="line">sfc /scannow</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DISM.exe &#x2F;Online &#x2F;Cleanup-image &#x2F;Scanhealth</span><br><span class="line">DISM.exe &#x2F;Online &#x2F;Cleanup-image &#x2F;Restorehealth</span><br><span class="line">sfc &#x2F;scannow</span><br></pre></td></tr></table></figure>
 
 <p>根据<a href="https://support.microsoft.com/zh-cn/help/947821/fix-windows-update-errors-by-using-the-dism-or-system-update-readiness" target="_blank" rel="noopener">微软官方支持页面</a>的描述，这三个命令是检查系统文件的完整性并自动通过 Windows 更新来修复。</p>
 <p>用管理员身份打开cmd，依次执行完重启，一切都恢复了原状。</p>
@@ -323,7 +324,7 @@
     <strong>本文作者： </strong>Coherence</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://cjc7373.github.io/2018/11/02/Windows10字体崩溃修复/" title="Windows10字体崩溃修复">https://cjc7373.github.io/2018/11/02/Windows10字体崩溃修复/</a>
+    <a href="https://cjc7373.github.io/2018/11/02/Windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/" title="Windows10字体崩溃修复">https://cjc7373.github.io/2018/11/02/Windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -350,7 +351,7 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2018/10/13/我为什么选择了独立博客/" rel="next" title="我为什么选择了独立博客">
+                <a href="/2018/10/13/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/" rel="next" title="我为什么选择了独立博客">
                   <i class="fa fa-chevron-left"></i> 我为什么选择了独立博客
                 </a>
               
@@ -420,7 +421,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事由"><span class="nav-number">1.</span> <span class="nav-text">事由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法"><span class="nav-number">2.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2019-2-13-更新"><span class="nav-number">3.0.1.</span> <span class="nav-text">2019/2/13 更新</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事由"><span class="nav-number">1.</span> <span class="nav-text">事由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法"><span class="nav-number">2.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2019-2-13-更新"><span class="nav-number">3.0.1.</span> <span class="nav-text">2019&#x2F;2&#x2F;13 更新</span></a></li></ol></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -434,7 +435,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         
-          <a href="/archives/">
+          <a href="/archives/%20%7C%7C%20archive">
         
           <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
@@ -515,7 +516,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Coherence</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
 
@@ -542,10 +543,18 @@
   <script src="/lib/pjax/pjax.min.js?v=0.2.8"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
-<script src="/js/schemes/pisces.js?v=7.4.0"></script>
 
-<script src="/js/next-boot.js?v=7.4.0"></script>
+<script src="/js/utils.js?v=7.4.0.js"></script>
+
+<script src="/js/motion.js?v=7.4.0.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.0.js"></script>
+
+
+
+<script src="/js/next-boot.js?v=7.4.0.js"></script>
+
   <script>
 var pjax = new Pjax({
   selectors: [
@@ -636,7 +645,7 @@ window.addEventListener('pjax:success', () => {
       api: 'https://disqus.skk.moe/disqus/' || 'https://disqus.com/api/',
       apikey: 'RTq9lZfWyC1kYUiTd01Wd2Tl2qHZXd28oT5KlrHxkVbfwW3gVKxGt9NNQ5i4xyYm',
       shortname: 'cjc7373',
-      url: "https://cjc7373.github.io/2018/11/02/Windows10字体崩溃修复/",
+      url: "https://cjc7373.github.io/2018/11/02/Windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/",
       identifier: "2018/11/02/Windows10字体崩溃修复/",
       title: 'Windows10字体崩溃修复',
     });
