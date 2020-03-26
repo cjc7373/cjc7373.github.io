@@ -14,6 +14,7 @@ date: 2018-11-03 16:37:04
 
 ## 关于博客
 
+* 2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件
 * 2020-02-22 更改评论为 `disqusjs`，详见作者的[博文](https://blog.skk.moe/post/disqusjs/)；启用 [pjax](https://github.com/theme-next/theme-next-pjax)
 * 2019-12-24 启用新域名`blog.coherence.codes`
 * 2019-10-07 升级主题至 Next V7.4.1
