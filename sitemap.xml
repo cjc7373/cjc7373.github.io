@@ -2,44 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://cjc7373.github.io/about/index.html</loc>
-    
-    <lastmod>2020-03-26T14:09:32.259Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://cjc7373.github.io/categories/index.html</loc>
     
-    <lastmod>2020-03-26T14:09:32.259Z</lastmod>
+    <lastmod>2020-04-16T03:39:16.319Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://cjc7373.github.io/tags/index.html</loc>
     
-    <lastmod>2020-03-26T14:09:32.259Z</lastmod>
+    <lastmod>2020-04-16T03:39:16.319Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://cjc7373.github.io/about/index.html</loc>
+    
+    <lastmod>2020-04-16T03:39:16.315Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://cjc7373.github.io/2020/04/12/codeforces_629_div3/</loc>
+    
+    <lastmod>2020-04-16T03:39:16.299Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://cjc7373.github.io/2020/03/26/Kickstart_2020_Round_A/</loc>
     
-    <lastmod>2020-03-26T14:09:32.239Z</lastmod>
+    <lastmod>2020-04-16T03:39:16.295Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://cjc7373.github.io/2019/08/07/Reinstall-hexo/</loc>
     
-    <lastmod>2020-03-26T14:09:32.239Z</lastmod>
+    <lastmod>2020-04-16T03:39:16.295Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://cjc7373.github.io/2019/12/08/WSL%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</loc>
     
-    <lastmod>2020-03-26T14:09:32.239Z</lastmod>
+    <lastmod>2020-04-16T03:39:16.295Z</lastmod>
     
   </url>
   
