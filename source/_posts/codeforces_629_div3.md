@@ -1,10 +1,14 @@
 ---
-title: Codeforces Round #629 (Div. 3) 题解
+title: Codeforces Round \#629 (Div. 3) 题解
 date: 2020-04-12 19:00:00
 mathjax: true
 tags:
 	- 算法
 ---
+
+快乐划水。
+
+<!-- more -->
 
 ## [1328A - Divisibility Problem](https://codeforces.com/contest/1328/problem/A)
 
