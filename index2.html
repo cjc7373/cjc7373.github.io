@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+        <title>Coherence</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Coherence</a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li><a href="/category/misc.html">misc</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content">
+<h2>All articles</h2>
+
+<ol id="post-list">
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="/zhong-guo-dian-xin-hg2543c1-guang-mao-huo-qu-chao-ji-guan-li-yuan-mi-ma.html" rel="bookmark" title="Permalink to 中国电信 HG2543C1 光猫获取超级管理员密码">中国电信 HG2543C1 光猫获取超级管理员密码</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2019-02-16T16:32:47+08:00"> Sat 16 February 2019 </time>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。</p>
+<p>Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板，准备拆机 TTL 破解光猫。</p>
+<!-- more -->
+
+<h2>0x01 拆机</h2>
+<p>拆机后发现 PCB 板上有 TTL 插针，用万用表测得倒数第二根为 GND（接地pin），然后剩余四根随机组合，测得 RX（接收数据pin）和 TX（发送数据pin）。用杜邦线连接 USB转TTL板和 TTL 插针。</p>
+<p><img alt="IMG_20190219_113847" src="fiber-modem-crack/IMG_20190219_113847.jpg"></p>
+<h2>0x02 串口调试</h2>
+<p>电脑安装好 USB转TTL板的驱动，USB端连接上电脑 …</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="/2018nian-zhong-zong-jie-2019zhan-wang.html" rel="bookmark" title="Permalink to 2018年终总结&2019展望">2018年终总结&2019展望</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2019-02-11T19:00:00+08:00"> Mon 11 February 2019 </time>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <div class="highlight"><pre><span></span><code><span class="err">- 总结</span>
+</code></pre></div>
+
+<hr>
+<p>今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。</p>
+<!-- more -->
+
+<h2>2018 总结</h2>
+<p>时间及事件依据：印象笔记、Google 相册、我的记忆。</p>
+<p>事件大致以时间顺序排列。</p>
+<ul>
+<li>一月初，经历了在西安的第一场雪。</li>
+<li>（时间未知）使用了 Windows 运行来快速启动程序，~~（感觉上）大大提高了效率~~（不（感觉装逼才是真的</li>
+</ul>
+<p><img alt="1549962279010" src="2018Summary_2019Plan/1549962279010.png"></p>
+<ul>
+<li>从 1.13 开始寒假训练， 3.24 校赛，3.31 天梯赛，5.17 左右 ACM省赛，7.19 开始暑假多校训练，10.26 徐州区域赛， 11.23 深圳 CCPC 总决赛，整个一年我算是比较积极地参与 ACM-ICPC 竞赛（虽然下半年逐渐开始划水 …</li></ul> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="/domjudge-pei-zhi-cai-keng-zhi-nan.html" rel="bookmark" title="Permalink to DOMjudge 配置/踩坑指南">DOMjudge 配置/踩坑指南</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-12-19T20:12:51+08:00"> Wed 19 December 2018 </time>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <h2>- ACM</h2>
+<p>我校新生赛也能用上 World Final 同款评测系统啦~</p>
+<p>DOMjudge 提供了详尽的<a href="https://www.domjudge.org/documentation">官方文档</a>，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。</p>
+<!-- more -->
+
+<h2>简介</h2>
+<p>DOMjudge，作为一款开源的 CCS(<a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System">Contest Control System</a>)，现已被ICPC钦定为官方的比赛评测系统。比 pc^2 这种闭源而含有诸多 Bug 的 CCS 高到不知道哪里去了啊。</p>
+<p><img alt="1545218741334" src="Domjudge-config/1545218741334.png"></p>
+<p>根据官方文档的描述，DOMjudge 的主要特性有：</p>
+<ul>
+<li>分布式且自动评测的 judge host</li>
+<li>Web 用户界面</li>
+<li>模块化的系统，方面添加不同的语言/编译器</li>
+</ul>
+<p>整个 DOMjudge 主要分为两个部分，Domserver 和 Judgehost，据其名字即可得出它们的功能。需要注意的是，DOMjudge 使用数据库来存放几乎一切数据 …</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="/shi-yong-kmsji-huo-visio.html" rel="bookmark" title="Permalink to 使用KMS激活Visio">使用KMS激活Visio</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-12-01T23:11:38+08:00"> Sat 01 December 2018 </time>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <ul>
+<li>KMS</li>
+<li>Office</li>
+</ul>
+<hr>
+<h2>题记</h2>
+<p>如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。</p>
+<!-- more -->
+
+<h2>转换Visio版本</h2>
+<p>我在<a href="http://msdn.itellyou.cn/?lang=zh-cn">MSDN我告诉你</a>和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。</p>
+<p>复制以下代码，保存为.bat文件并用管理员身份运行：</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> exist <span class="s2">&quot;%ProgramFiles%\Microsoft Office\Office16\ospp.vbs&quot;</span> <span class="nb">cd</span> /d <span class="s2">&quot;%ProgramFiles%\Microsoft Office\Office16&quot;</span>
+<span class="k">if</span> exist <span class="s2">&quot;%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs&quot;</span> <span class="nb">cd</span> /d <span class="s2">&quot;%ProgramFiles(x86)%\Microsoft Office\Office16&quot;</span>
+cscript …</code></pre></div> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="/markdownjian-jie.html" rel="bookmark" title="Permalink to Markdown简介">Markdown简介</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-11-08T20:16:56+08:00"> Thu 08 November 2018 </time>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <h2>- Markdown</h2>
+<h2><strong>什么是 Markdown?</strong></h2>
+<p>Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。</p>
+<p><img alt="哈哈哈" src="All-about-Markdown/Markdown-mark.svg.png"></p>
+<!-- more -->
+
+<hr>
+<h3>Markdown VS 富文本</h3>
+<p>基于 Markdown 写作，是属于<strong>纯文本</strong>写作。「纯文本」写作和「富文本」写作是对立的，我们来区分一下：</p>
+<h4><strong>「富文本」写作 </strong></h4>
+<p>你平时在<strong>Word</strong>上写作，就属于富文本写作。修改文字的大小、修改文字颜色、调整各种格式只需要点一下鼠标就行。富文本写作最大的特点是：<strong>所见即所得</strong>，你把格式调整成什么样子，就会直接显示出什么样的效果。</p>
+<p>然而，富文本的格式排版过于繁杂，以致于你不得不花费大量时间在这上面，而忽略了写作本身。</p>
+<p>同时，富文本存在着<strong>多平台转换不方便</strong>的问题，假如你在 Word 上写好了文档，格式也调好了 …</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="/guan-yu-wo.html" rel="bookmark" title="Permalink to 关于我">关于我</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-11-03T16:37:04+08:00"> Sat 03 November 2018 </time>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <h2>关于我</h2>
+<p>博主是一名大四学生。</p>
+<ul>
+<li>爱好一切数码产品</li>
+<li>安卓（伪）瞎折腾党</li>
+<li>ACM 打铁选手</li>
+<li>Linux 初学者</li>
+<li>科幻爱好者</li>
+</ul>
+<h2>关于博客</h2>
+<ul>
+<li>2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑</li>
+<li>2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件</li>
+<li>2020-02-22 更改评论为 <code>disqusjs</code>，详见作者的<a href="https://blog.skk.moe/post/disqusjs/">博文</a>；启用 <a href="https://github.com/theme-next/theme-next-pjax">pjax</a></li>
+<li>2019-12-24 启用新域名<code>blog.coherence.codes</code></li>
+<li>2019-10-07 升级主题至 Next V7.4.1</li>
+<li>2018-09-24 第一篇博文。采用 Hexo + NexT …</li></ul> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="/windows10zi-ti-beng-kui-xiu-fu.html" rel="bookmark" title="Permalink to Windows10字体崩溃修复">Windows10字体崩溃修复</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-11-02T18:23:47+08:00"> Fri 02 November 2018 </time>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <ul>
+<li>Fonts</li>
+<li>Windows
+categories:</li>
+<li>Windows</li>
+</ul>
+<hr>
+<blockquote>
+<p>这就是乱改字体的后果..</p>
+</blockquote>
+<p>字体修复，不只是字体修复。</p>
+<!-- more -->
+
+<h2>事由</h2>
+<p>偶然间看到一篇<a href="http://www.dgtle.com/article-25875-1.html">替换Win10字体来提升字体观感的文章</a>，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。</p>
+<p>然而，使用了一段时间后发现，所有的字体似乎都小了一圈，而且在cmd中出现了字体大小错乱的情况。网上找了一圈发现Win10砍掉了调整字体大小的功能，现在只能以整体缩放来调整字体大小。新的字体感觉也没有想象中的那么好。</p>
+<p>于是我把备份的默认字体又恢复了回去，按道理不会出事，然而我的电脑出锅了。一些软件的中文字体成了方框，cmd的字体也变得很奇怪。</p>
+<h2>解决方法</h2>
+<p>一番操作之后，发现设置里的新宋体是乱码，感觉可能是字体文件崩了。</p>
+<p><img alt="1541154864085" src="Windows10字体崩溃修复/1541154864085.png"></p>
+<p>但是<code>simsunb.ttf</code>这个文件我分明备份过。。</p>
+<p>没办法，继续面向Google解决问题，这时候找到了一个<a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-ime/%E5%9C%A8windows/d575f11c-1f2e-454c-9fcd-432809f7fd76">微软社区页面</a>，里面给出了三条命令：</p>
+<div class="highlight"><pre><span></span><code><span class="err">DISM.exe /Online /Cleanup-image /Scanhealth</span>
+<span class="err">DISM.exe /Online /Cleanup-image /Restorehealth</span>
+<span class="err">sfc /scannow …</span></code></pre></div> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="/wo-wei-shi-yao-xuan-ze-liao-du-li-bo-ke.html" rel="bookmark" title="Permalink to 我为什么选择了独立博客">我为什么选择了独立博客</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-10-13T20:13:11+08:00"> Sat 13 October 2018 </time>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p>这是一个独立博客式微的时代。</p>
+<p>独立博客没有博客平台的推荐导流系统，相比之下观之者寥寥。</p>
+<p>那我为什么还是选择了独立博客呢？</p>
+<ul>
+<li>自由，不会受外部因素的影响，可以随意添加自己想要的功能。</li>
+<li>方便，一行命令就能更新博客。</li>
+<li>可控，完全受自己管理。</li>
+</ul>
+<p>在这纷纭复杂的互联网中，拥有自己的一方小天地，似乎也是极好的。</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="/hexoda-jian-xiao-ji.html" rel="bookmark" title="Permalink to Hexo搭建小记">Hexo搭建小记</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-10-13T20:10:18+08:00"> Sat 13 October 2018 </time>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <h2>- Hexo</h2>
+<blockquote>
+<p>身为一个懒人，又不会写网页，也只能用用博客生成器了。</p>
+</blockquote>
+<!-- more -->
+
+<h2>为什么选择Hexo</h2>
+<p>其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是~~随手找了几个静态博客生成器，~~ 随手一查就找到了Hexo。</p>
+<h2>Hexo搭建过程</h2>
+<p>Hexo的官方文档有中文，这点很赞。虽然官方文档讲的不是很清楚..然而搭建还是比较简单的，加上Google了几篇教程，很快就把Hexo搭起来了。</p>
+<p>身为一个博客生成器，当然不能让我们接触到代码了。所以Hexo的基本配置均在<code>_config.yml</code>这个配置文件中。配置采用YAML语法，看看官方文档也就差不多了解了。基本上无需过多配置就搭建完成了。</p>
+<h2>Hexo主题</h2>
+<p>Hexo有许多主题，个人采用了官方推荐的 <a href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>主题，整体风格还是比较简洁的（然而用这个主题的实在是太多了...随便一个Hexo博客就是Next主题）。</p>
+<p>同时主题内已集成了许多第三方服务，如Google Analysis、DISQUS等，只要改改配置文件就能配置完成，还是相当简单的。</p>
+<h2>Hexo图片插入指引</h2>
+<p>直接用Markdown语法引用图片会导致图片在首页无法显示 …</p> </div><!-- /.entry-content -->
+        </article></li>
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="/helloworld.html" rel="bookmark" title="Permalink to 'Hello,World!'">'Hello,World!'</a></h2> </header>
+                <footer class="post-info">
+                    <time class="published" datetime="2018-09-24T11:28:47+08:00"> Mon 24 September 2018 </time>
+                    <address class="vcard author">By
+                    </address>
+                </footer><!-- /.post-info -->
+                <div class="entry-content"> <h2>- test</h2>
+<h3>Hello,World!</h3>
+<p><img alt="Hello,World" src="Hello-World-0/hello.jpeg"></p> </div><!-- /.entry-content -->
+        </article></li>
+</ol><!-- /#posts-list -->
+<p class="paginator">
+        <a href="/index.html">&#8647;</a>
+        <a href="/index.html">&laquo;</a>
+    Page 2 / 3
+        <a href="/index3.html">&raquo;</a>
+        <a href="/index3.html">&#8649;</a>
+</p>
+</section><!-- /#content -->
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+</body>
+</html>

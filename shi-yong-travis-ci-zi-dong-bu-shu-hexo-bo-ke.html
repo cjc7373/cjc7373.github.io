@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+          <title>Coherence - 使用 Travis CI 自动部署 Hexo 博客</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+
+
+
+
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Coherence</a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li class="active"><a href="/category/misc.html">misc</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/shi-yong-travis-ci-zi-dong-bu-shu-hexo-bo-ke.html" rel="bookmark"
+         title="Permalink to 使用 Travis CI 自动部署 Hexo 博客">使用 Travis CI 自动部署 Hexo 博客</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2019-04-21T20:16:56+08:00">
+      Sun 21 April 2019
+    </time>
+    <div class="category">
+        Category: <a href="/category/misc.html">misc</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <ul>
+<li>CI</li>
+<li>Hexo</li>
+</ul>
+<hr>
+<p><img alt="bg2017121901" src="use-ci-auto-deploy-blog/bg2017121901.png"></p>
+<h2>缘由</h2>
+<p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。</p>
+<p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的<code>ln -s</code>大法行不通了。</p>
+<p>于是我想到了 CI。仔细一想其实也不复杂，无非是<code>git push</code>， <code>git pull</code>两下罢了。那么，Let's do it!</p>
+<!-- more -->
+
+<h2>需求</h2>
+<p>我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。</p>
+<ul>
+<li>我更新博客之后，commit 然后 push 至 Github repo</li>
+<li>CI 自动构建博客</li>
+<li>CI 将构建完成的静态文件 push 至 Github repo</li>
+</ul>
+<p>我原先使用的是<code>hexo-deployer-git</code>插件，通过<code>hexo g -d</code>部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。</p>
+<h2>配置 Github Repo</h2>
+<p>在这个 Repo 中需要两个分支：</p>
+<ul>
+<li>master 用于存放构建完成的静态文件</li>
+<li>source 用于存放 Hexo 生成的博客源文件</li>
+</ul>
+<p>对 Hexo 文件夹的操作如下：</p>
+<div class="highlight"><pre><span></span><code><span class="err">git init</span>
+<span class="err">git remote add origin git@github.com:cjc7373/cjc7373.github.io.git</span>
+<span class="err">git checkout -b source</span>
+<span class="err">git add .</span>
+<span class="err">git commit -m &quot;To use CI to automated deploy&quot;</span>
+<span class="err">git push origin source:source</span>
+</code></pre></div>
+
+<p>本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带<code>.gitignore</code>文件，所以实际大小并没有多少。</p>
+<p><img alt="1555835090941" src="use-ci-auto-deploy-blog/1555835090941.png"></p>
+<p>然后在 Github 上将主分支切换为<code>source</code>分支。</p>
+<h2>配置 Travis CI</h2>
+<p>CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key，后者似乎有些麻烦，我选择了前者。当前需求应该只需要 repo 权限，然后在 Travis CI 的 Environment Variables 中加入这个 Token，注意不要勾选 Display value in build log。</p>
+<p>然后就是编写<code>.travis.yml</code>了。 ~~正当我准备抄大佬们的配置的时候，忽然看到 Travis CI 官方提供了<a href="https://docs.travis-ci.com/user/deployment/pages/">轮子</a>，那就用吧QAQ（其实也没简单多少）~~，然后翻车了。</p>
+<p><img alt="1555837683039" src="use-ci-auto-deploy-blog/1555837683039.png"></p>
+<p>看了下文档，我也没搞懂每个字段的意思。所以还是自己来吧。</p>
+<p>为了在 commit 记录中显示更新日期，我把 push 部分单独写成了 sh脚本。</p>
+<p><code>.travis.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">language</span><span class="o">:</span> <span class="n">node_js</span>
+<span class="n">node_js</span><span class="o">:</span> <span class="n">stable</span>
+
+<span class="err">#</span> <span class="err">只监听</span> <span class="n">source</span> <span class="err">分支的改动</span>
+<span class="n">branches</span><span class="o">:</span>
+  <span class="n">only</span><span class="o">:</span>
+    <span class="o">-</span> <span class="n">source</span>
+
+<span class="err">#</span> <span class="err">缓存依赖，节省持续集成时间</span>
+<span class="n">cache</span><span class="o">:</span>
+  <span class="n">directories</span><span class="o">:</span>
+    <span class="o">-</span> <span class="n">node_modules</span>
+
+<span class="n">install</span><span class="o">:</span>
+  <span class="o">-</span> <span class="n">npm</span> <span class="n">install</span>
+
+<span class="n">script</span><span class="o">:</span>
+  <span class="o">-</span> <span class="n">hexo</span> <span class="n">clean</span>
+  <span class="o">-</span> <span class="n">hexo</span> <span class="n">g</span>
+
+<span class="n">after_script</span><span class="o">:</span>
+  <span class="o">-</span> <span class="n">chmod</span> <span class="o">+</span><span class="n">x</span> <span class="o">./</span><span class="n">deploy</span><span class="o">.</span><span class="na">sh</span> <span class="err">#</span> <span class="err">添加可执行权限</span>
+  <span class="o">-</span> <span class="o">./</span><span class="n">deploy</span><span class="o">.</span><span class="na">sh</span>
+</code></pre></div>
+
+<p><code>deploy.sh</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nb">set</span> -ev
+<span class="nb">export</span> <span class="nv">TZ</span><span class="o">=</span><span class="s1">&#39;Asia/Shanghai&#39;</span>
+
+git config --global user.name <span class="s2">&quot;cjc7373&quot;</span>
+git config --global user.email <span class="s2">&quot;niuchangcun@163.com&quot;</span>
+
+<span class="c1"># 获取以前的 commit 记录</span>
+git clone -b master https://github.com/cjc7373/cjc7373.github.io.git .deploy
+<span class="c1"># 这么移动是为了确保不受之前文件的影响</span>
+mv .deploy/.git/ public/
+<span class="nb">cd</span> public
+git checkout master
+
+git add .
+git commit -m <span class="s2">&quot;Site updated: `date +&quot;</span>%Y-%m-%d %H:%M:%S<span class="s2">&quot;`&quot;</span>
+
+<span class="c1"># 我也不知道 token 怎么用。。抄大佬的代码</span>
+git push <span class="s2">&quot;https://</span><span class="si">${</span><span class="nv">token</span><span class="si">}</span><span class="s2">@github.com/cjc7373/cjc7373.github.io.git&quot;</span> master:master --quiet
+</code></pre></div>
+</td></tr></table>
+<p>一开始忘了给<code>deploy.sh</code>可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。</p>
+<p><img alt="1555840082905" src="use-ci-auto-deploy-blog/1555840082905.png"></p>
+<p>（看着都是成功其实都是失败。。）</p>
+<p>同时本地配合一下批处理，真正一键发布（滑稽</p>
+<div class="highlight"><pre><span></span><code><span class="err">cd C:\Users\niuch\Documents\GitHub\blog\</span>
+<span class="err">git add .</span>
+<span class="err">git commit</span>
+<span class="err">git push</span>
+<span class="err">pause</span>
+</code></pre></div>
+
+<h2>后记</h2>
+<p>历经两个多小时，终于把 CI 弄好了。虽然对 CI 还是一知半解，不过总算开了个头，也基本实现了需求。</p>
+<p>Travis CI 官方的文档很全，但是以我的英文水平看得很吃力（懒得看），中文资料的质量又参差不齐。所以还是要锻炼自己的英语水平啊。</p>
+<h2>参考资料</h2>
+<p>https://docs.travis-ci.com</p>
+<p>https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html</p>
+<p>https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/</p>
+<p>https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/</p>
+  </div><!-- /.entry-content -->
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+</body>
+</html>

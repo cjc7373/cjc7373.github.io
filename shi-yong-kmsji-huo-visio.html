@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+          <title>Coherence - 使用KMS激活Visio</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+
+
+
+
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Coherence</a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li class="active"><a href="/category/misc.html">misc</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/shi-yong-kmsji-huo-visio.html" rel="bookmark"
+         title="Permalink to 使用KMS激活Visio">使用KMS激活Visio</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2018-12-01T23:11:38+08:00">
+      Sat 01 December 2018
+    </time>
+    <div class="category">
+        Category: <a href="/category/misc.html">misc</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <ul>
+<li>KMS</li>
+<li>Office</li>
+</ul>
+<hr>
+<h2>题记</h2>
+<p>如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。</p>
+<!-- more -->
+
+<h2>转换Visio版本</h2>
+<p>我在<a href="http://msdn.itellyou.cn/?lang=zh-cn">MSDN我告诉你</a>和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。</p>
+<p>复制以下代码，保存为.bat文件并用管理员身份运行：</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> exist <span class="s2">&quot;%ProgramFiles%\Microsoft Office\Office16\ospp.vbs&quot;</span> <span class="nb">cd</span> /d <span class="s2">&quot;%ProgramFiles%\Microsoft Office\Office16&quot;</span>
+<span class="k">if</span> exist <span class="s2">&quot;%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs&quot;</span> <span class="nb">cd</span> /d <span class="s2">&quot;%ProgramFiles(x86)%\Microsoft Office\Office16&quot;</span>
+cscript ospp.vbs /rearm
+<span class="k">for</span> /f %%x <span class="k">in</span> <span class="o">(</span><span class="s1">&#39;dir /b ..\root\Licenses16\visio???vl_kms*.xrm-ms&#39;</span><span class="o">)</span> <span class="k">do</span> cscript ospp.vbs /inslic:<span class="s2">&quot;..\root\Licenses16\%%x&quot;</span> &gt;nul
+<span class="k">for</span> /f %%x <span class="k">in</span> <span class="o">(</span><span class="s1">&#39;dir /b ..\root\Licenses16\visio???vl_mak*.xrm-ms&#39;</span><span class="o">)</span> <span class="k">do</span> cscript ospp.vbs /inslic:<span class="s2">&quot;..\root\Licenses16\%%x&quot;</span> &gt;nul
+</code></pre></div>
+
+<p>以上命令的作用分别为：</p>
+<ul>
+<li>打开Office的安装目录（Visio也属于Office的一部分）</li>
+<li>重置零售激活</li>
+<li>安装KMS和MAK许可证（转换版本）</li>
+</ul>
+<p>题外话：转换Office和Project版本同理。</p>
+<p>Office：</p>
+<div class="highlight"><pre><span></span><code><span class="err">cscript ospp.vbs /rearm</span>
+<span class="err">for /f %%x in (&#39;dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms&#39;) do cscript ospp.vbs /inslic:&quot;..\root\Licenses16\%%x&quot; &gt;nul</span>
+<span class="err">for /f %%x in (&#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&#39;) do cscript ospp.vbs /inslic:&quot;..\root\Licenses16\%%x&quot; &gt;nul</span>
+</code></pre></div>
+
+<p>Project：</p>
+<div class="highlight"><pre><span></span><code><span class="err">cscript ospp.vbs /rearm</span>
+<span class="err">for /f %%x in (&#39;dir /b ..\root\Licenses16\project???vl_kms*.xrm-ms&#39;) do cscript ospp.vbs /inslic:&quot;..\root\Licenses16\%%x&quot; &gt;nul</span>
+<span class="err">for /f %%x in (&#39;dir /b ..\root\Licenses16\project???vl_mak*.xrm-ms&#39;) do cscript ospp.vbs /inslic:&quot;..\root\Licenses16\%%x&quot; &gt;nul</span>
+</code></pre></div>
+
+<p>再跑下题，为什么要用批处理呢，因为这段命令直接在cmd里执行会出错，博主没学过Shell无法理解。（留下了没有知识的泪水）</p>
+<h2>设置KMS密钥及服务器</h2>
+<p>打开Office的安装目录，也就是代码里的<code>%ProgramFiles%\Microsoft Office\Office16\</code>（64位）或者<code>%ProgramFiles(x86)%\Microsoft Office\Office16\</code>（32位）。</p>
+<p>按住Shift+右键，选择在此处打开PowerShell，输入：</p>
+<div class="highlight"><pre><span></span><code><span class="n">cscript</span> <span class="n">ospp</span><span class="p">.</span><span class="n">vbs</span> <span class="p">/</span><span class="n">inpkey</span><span class="err">:</span><span class="n">PD3PC-RHNGV-FXJ29</span><span class="p">-</span><span class="n">8JK7D-RJRJK</span>
+</code></pre></div>
+
+<p>来安装KMS密钥。注意以上命令中的KMS密钥只适用与Visio2016，其他版本可到<a href="https://docs.microsoft.com/zh-cn/DeployOffice/vlactivation/gvlks">微软官方文档</a>中查询。</p>
+<p>然后设置KMS服务器，博主用的是网上找的，以后尝试一下自己搭一个：</p>
+<div class="highlight"><pre><span></span><code><span class="err">cscript ospp.vbs /sethst:xxx.xxx</span>
+</code></pre></div>
+
+<p>由于不保证可用性，服务器名称已略去。</p>
+<p>指令Office立即连接KMS服务器进行激活：</p>
+<div class="highlight"><pre><span></span><code><span class="err">cscript ospp.vbs /act</span>
+</code></pre></div>
+
+<p>完成！</p>
+<h2>参考资料</h2>
+<p><a href="https://03k.org/kms.html">https://03k.org/kms.htm</a></p>
+<p><a href="https://segmentfault.com/a/1190000015697457">https://segmentfault.com/a/1190000015697457</a></p>
+<p><a href="https://blog.csdn.net/ywd1992/article/details/79412991">https://blog.csdn.net/ywd1992/article/details/79412991</a></p>
+  </div><!-- /.entry-content -->
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+</body>
+</html>

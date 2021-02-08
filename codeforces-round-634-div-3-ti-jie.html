@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+          <title>Coherence - Codeforces Round 634 (Div. 3) 题解</title>
+        <meta charset="utf-8" />
+        <meta name="generator" content="Pelican" />
+
+
+
+
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Coherence</a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li class="active"><a href="/category/misc.html">misc</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/codeforces-round-634-div-3-ti-jie.html" rel="bookmark"
+         title="Permalink to Codeforces Round 634 (Div. 3) 题解">Codeforces Round 634 (Div. 3) 题解</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <time class="published" datetime="2020-04-19T19:00:00+08:00">
+      Sun 19 April 2020
+    </time>
+    <div class="category">
+        Category: <a href="/category/misc.html">misc</a>
+    </div>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <div class="highlight"><pre><span></span><code><span class="err">- 算法</span>
+</code></pre></div>
+
+<hr>
+<h2><a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters</a></h2>
+<p><code>1/0 Accepted</code></p>
+<p>快乐签到。</p>
+<h2><a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String</a></h2>
+<p><code>1/0 Accepted</code></p>
+<p>先构造长度为 $a$ 的字符串，然后第 $i+a$ 个字母为第 $i$ 个字母，输出即可。</p>
+<h2><a href="https://codeforces.com/contest/1335/problem/C">1335C - Two Teams Composing</a></h2>
+<p><code>2/1 Accepted</code></p>
+<p>给 $n$ 个数，每个数有一个值，要求把它们分成数量相同的两组，一组所有的值相等，一组所有的值不等。</p>
+<p>先统计每个值的数量，得出最大个数 $m$，和不同值的数的个数 $l$，</p>
+<p><code>ans = min(l, m) if m &lt; l + 2 else ans = min(l, m) + 1</code></p>
+<h2><a href="https://codeforces.com/contest/1335/problem/D">1335D - Anti-Sudoku</a></h2>
+<p><code>1/0 Accepted</code></p>
+<p>给一个求解好的数独，求改动不超过 9 个数，使其每行、列、区块内皆有两个相同的数。</p>
+<p>想了两分钟，发现将所有的 1 替换为 2 即可。</p>
+<h2><a href="https://codeforces.com/contest/1335/problem/E2">1335E - Three Blocks Palindrome</a></h2>
+<p><code>Not Attempted</code></p>
+<p>给一个含有$n$个数的序列，定义三区块的回文数为：$[\underbrace{a, a, \dots, a}<em y>{x}, \underbrace{b, b, \dots, b}</em>, \underbrace{a, a, \dots, a}_{x}]$，$x, y$是大于等于0的整数，a可以等于b。求一个最长子序列使它为三区块的回文数。输出长度。</p>
+<p>又是一道需要神奇的优化的题。。</p>
+<p><img alt="image-20200416163610781" src="images/codeforces_634_div3/image-20200416163610781.png"></p>
+<p>按官方题解的思路是这样：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">readline</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+    <span class="n">prev</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">201</span><span class="p">)]</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">201</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">201</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="n">prev</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">prev</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">pos</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">201</span><span class="p">):</span>
+        <span class="c1"># if x == 0</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> 
+
+        <span class="c1"># if x != 0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">201</span><span class="p">):</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">prev</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="o">-</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">prev</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">j</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</code></pre></div>
+
+<p>但是超时了。翻别人的代码发现创建prev数组还能优化：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">readline</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+    <span class="n">prev</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">201</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">201</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">prev</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">prev</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">pos</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">201</span><span class="p">):</span>
+        <span class="c1"># if x == 0</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> 
+
+        <span class="c1"># if x != 0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">201</span><span class="p">):</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">prev</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="o">-</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">prev</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="n">k</span><span class="p">])</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">j</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</code></pre></div>
+
+<p>700多ms过了。。</p>
+  </div><!-- /.entry-content -->
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+</body>
+</html>
