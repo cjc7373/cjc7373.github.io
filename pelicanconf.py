@@ -43,5 +43,5 @@ MARKDOWN = {
         'markdown.extensions.meta': {},
     },
     'output_format': 'html5',
-    'tab_length': 2,
+    'tab_length': 2,  # this is the default of typora
 }
