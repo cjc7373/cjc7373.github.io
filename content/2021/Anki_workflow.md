@@ -1,5 +1,6 @@
 ---
 title: Anki 工作流
+date: 2021-02-24
 ---
 
 [Anki](https://apps.ankiweb.net/) 是一个间隔式重复的"闪卡 (flashcard)"记忆软件. 下面来谈谈我考研及日常生活中的 Anki 工作流.
