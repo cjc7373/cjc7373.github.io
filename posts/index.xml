@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Coherence's Blog</title><link>https://blog.coherence.codes/posts/</link><description>Recent content in Posts on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello, Hugo!</title><link>https://blog.coherence.codes/posts/2022/hello_hugo/</link><pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/hello_hugo/</guid><description>这是一个船新的博客！
+历史 在大二（2018）的时候，我萌生了搭建一个自己的独立博客的想法，于是就有了 hexo搭建小记，当时我随手一找找到的基本都是 Hexo，于是我就用了。引用一段当时写的关于页面：
+关于博客 2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑 2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件 2020-02-22 更改评论为 disqusjs，详见作者的博文；启用 pjax 2019-12-24 启用新域名blog.coherence.codes 2019-10-07 升级主题至 Next V7.4.1 2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %} Next 就是一个非常大众的主题，有几种变体，我用的是一个叫 pisces 的变体，长这样（原博客图已经找不到了，只能用官方 Demo 凑数了）：
+这一时期的博客位于 source 分支，最后更新于 2020-04-16。
+由于这个主题实在是太大众了，中途（2019-10 左右）我也想过换一个主题（hexo-theme-indigo，一个 Material Design 风格的主题），但是没有配置成功，theme-indigo 分支便是那次尝试。theme-indigo 的效果图长这样：
+到了 21 年 2 月，我开始重新调研博客生成器，当时看到了一个 Python 写的 Pelican，而我又希望壮大一下 Python 生态，于是就用了。用了之后发现并没有什么合适的主题，恰巧 Pelican 用的模板引擎 Jinja 和 Django Template Engine 很像，我比较熟悉，于是我就想自己写一个主题，然而这一工作从没开始过.</description></item><item><title>The 2022 Python Language Summit</title><link>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</link><pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</guid><description>每年, 在 PyCon US 的前夕, 30 多位 Python 的核心开发者将会聚集起来召开 Python 语言峰会. 今年的会议在 5/11 召开, 让我们来看看今年讨论了什么吧. 有关会议的详情可在 PSF Blog 中找到.
+CPython 的 issue 和 PR 积压 首先祝贺一下前不久 bpo 正式退休了, Python 的 issue tracker 迁移到了 Github, 无论是易用性还是审美上来说都是一件好事.
+随着 Python 的流行, issues 和 PRs 也开始累积起来了, 在 2022/05/07 时, CPython 有着 7,027 个 open issues 和 1,471 个 PRs. Python 开发者们向来对关闭一个 issue 持谨慎态度. 以低质量的功能请求 (feature requests) 为例, 我们可以粗略地把它们分为三类:
+没有任何意义的, 或显然有不利影响的, 它们能被轻易地关闭 会增加维护成本, 但似乎有点好处的, 对于它们的意见通常会很摇摆 每个人都觉得是好的, 但没人愿意真正去实现它.</description></item><item><title>民族主义自媒体是如何消费我们的</title><link>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</guid><description>目前的中文互联网上存在着大量的鼓吹民族主义, 制造中西方对立的自媒体, 令人震惊的是, 他们中大部分不但充斥着情绪输出, 甚至连大部分事实都是错误的. 我偶然间读到了这样的一篇文章, 并对其中列出的事实进行了查证, 然后感觉我的智商受到了侮辱..
+原文: 西方媒体是怎样给西方人洗脑的？ - 远方青木的回答 - 知乎, archive
+这几年欧美一直在向中国发动舆论战，我见过最离谱的一个理论甚至说什么“中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟”。
+我本以为这套歪理邪说就是欧美造谣生事的想象力极限，没想到欧美的底线可以永无止尽的被突破。
+来源: 纽约时报 中国人会购买人造肉吗？, 另见环球网报道
+评论: 虽然文章很有&amp;quot;反华&amp;quot;的倾向性, 但文章主要讲的是人造肉在中国难以推广. 肉类消费对于气候的影响是不争的事实. 所以&amp;quot;中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟&amp;quot;这句话也不能算错, 但应该把主语换成全世界人. 要求中国牺牲国民营养而减少肉类消费是不合理的, 但是推广人造肉是合理的. 作者在这里显然有断章取义之嫌.
+《华盛顿邮报》在报道中声称**“中国每年强迫种植数亿棵新树”，这简直是在“犯罪”！**
+我捋一捋他们的思路，大概意思就是说中国每年种数亿棵新树，但把这些新树种下去之前并没有征求这些树的同意，这数亿棵树是“不一定同意自己被种植”的，但全部被中国强迫种在地里了。
+因此，中国侵犯了树“自由被种植”的权力，强迫树木劳动，这属于犯罪，因此中国需要反思自己这种野蛮的行为。
+逻辑好像有那么一点点道理哦，但我怎么就觉得那么奇怪和荒谬呢。
+中国人种树怎么了？
+种树不是在保护环境吗？
+怎么拐了一圈之后种树居然成犯罪行为了？
+来源: 没有找到来源.
+评论: 据 checkyourfact, 该截图为杜撰, 最初流传于 Facebook 和 Twitter.
+更荒谬的是，同一家西方媒体，前几年报道中国的标题是**《中国对一次性筷子的成瘾正在摧毁森林》。**
+首先，一次性筷子不是用森林做出来的，一次性筷子的主要原料是一个月能长3米的竹子，以及速生经济林的边角废木料。
+用森林里的好木头确实可以做一次性筷子，但没人这么做，因为成本太高商家会亏本，只有速生林边角废料和竹子的低廉价格才能让商家赚到钱。
+其次，抛开筷子的真实原材料不谈，这家西方媒体的主要立场好像也是森林是宝贵的，森林对人类有益，并以此来指责中国。
+既然如此，为什么中国种植森林也能被指责一番。是不是中国人干什么都不行，连呼吸都是错的？
+来源: 华盛顿邮报《中国对一次性筷子的成瘾正在摧毁森林》
+评论: 华盛顿邮报 2013 年的报道, 主要援引的是时任吉林森工集团董事长柏广新的一句话: &amp;ldquo;我国每年生产800亿双一次性筷子，相当于要砍伐2000万棵生长20年的大树&amp;rdquo;. 中国政府网和光明网均能找到这句话以及相关对一次性筷子的批评. 报道中均指出了木头和竹子均是一次性筷子的原料.
+几年前，欧美媒体报道说根据科学家的研究，中国人种植水稻会产生更多的温室气体，因此中国人吃大米正在毁灭全球气候，进而导致人类灭亡。
+来源: 我都不知道怎么找..
+评论: 类似的研究肯定有, 但我不觉得哪家媒体会报道吃大米导致人类灭亡&amp;hellip;
+2019年，国际顶级科学期刊《自然》杂志发表了一篇文章，说根据科学家的研究成果，中国政府治理沙漠，大力推进的荒漠绿化工程，种树过多，可能导致人类水资源枯竭，因此会对地球自然生态造成极大影响。
+《自然》杂志本是人类最顶级的科学杂志，但写这篇文章的“科学家”逻辑推导却很简单，算一算中国政府要消灭荒漠需要种多少棵树，种这些树需要消耗多少水资源，因此得出结论中国种树会破坏自然环境。</description></item><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>本文纯属回忆, 描述可能会有偏差.
+小学时, 为方便联系, 我爸给了我一个 ZTE 的功能机, 里面只有一个打砖块的小游戏.
+后来这手机被我在路上掉了, 于是我换成了一个 LG 的功能机. 这个 LG 的神奇之处在于它自带了一个浏览器, 于是我可以用 2G 上网去起点, 纵横看小说. 另外它自带电信的一个应用商店, 里面有一些免费的小游戏可以下 (不知道是啥技术, 估计是 java..), 因为我当时并没有流量套餐, 后来还因为话费异常被我爸查到并追问我在上网干什么, 我记得我用看新闻蒙混过去了. 这个手机陪伴我度过了初中.
+考上省中后, 爸妈为了奖励我, 给我换了个新手机, 这时我爸被中国电信忽悠买了个酷派 K1 (酷派 5952).
+这也算是当时第一批 4G 手机了, 进网贴纸贴的还是进网试用. 但是 1G 的内存根本比不过同期的小米 2S.
+后来因为我忘了什么原因了我又买了个手机, 这个给我爸用. 听信了当时中华酷联的鬼话我又入了酷派的坑 (加之当时电信手机确实不好买), 买了酷派大神 F1 电信版 (酷派 8297-C00).
+它采用了&amp;quot;极为先进&amp;quot;的 64 位高通 410 SoC (据称是高通首款 64 位), 对, 我又听信了 Android 5.0 优化 (ART, Android Runtime) 和 64 位的鬼话, 买了这个 1G RAM 的手机.</description></item><item><title>我为什么选择在 Surface 上使用 Windows</title><link>https://blog.coherence.codes/posts/2022/surface_on_linux/</link><pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/surface_on_linux/</guid><description>自从购置 Surface Pro 7 以来, 曾数次不满于 Windows 的包管理, 遥测, Windows Defender 等方面. 然更换了 Linux 之后并没有一个太好的使用体验. 本文记录了 Surface Pro 7 在 Archlinux 上的体验.
+在 2021 年七月某日, 手贱尝试了一下 Windows 11 Preview (印象里是公开发布的第一版) 之后, 感叹于 Bug 之多, 奈何回滚需要重新安装 Windows, 于是一气之下装了 Archlinux.
+(此处附使用截图一张)
+在使用了近半年之后, 再次感叹, 微软自家的产品在 Linux 上体验真的不好.. 又萌生了换回 Windows 的想法.
+具体而言, 有以下几个方面. 首先, Connected standby 在 Windows 下工作地很好, 然而在 Linux 下待机的耗电非常显著, 大概一晚上能掉一半电的那种. 于是后来发现了 suspend-then-hibernate 这个策略, 理论上还算可以接受. 然其有个非常严重的 Bug, 有时候其不能够成功地进入休眠状态, 导致第二天早上起来的时候 Surface 直接没电了. 而且这个问题出现频率比较高, 大概十次待机中有两三次, 非常影响使用体验.</description></item><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.
+Archwiki 给人的感觉还是有点零碎了.. 与打包相关的条目大概有:
+Creating packages Arch package guidelines makepkg PKGBUILD AUR submission guidelines Arch Build System 好吧, 这可能就是 Wiki 的组织形式, 但对新手来说确实不友好. 另外 makepkg 和 PKGBUILD 的 man 文档也是很有用的.
+概览 ABS 是一个 ports-like 构建系统, 其打包的主要工具为 makepkg, 根据当前目录下的 PKGBUILD 打包. 据说是比 Debian 系的打包容易不少.
+打包 首先 makepkg 会下载 source 变量中指定的文件列表, 它们可以是一个 URL, 一个 git 仓库, 或一个在当前目录下的文件. makepkg 会校验文件的哈希并解压到以文件名命名的目录. 可用 -g, --geninteg 命令来下载文件并生成哈希. 注意 VCS 的 source 是没有哈希的.
+事实上看一看每种语言对应的 guidelines 是非常有用的.</description></item><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>记录一下比赛期间踩到的坑.
+签到 开始完全没有读题直接进题目, 然后想了半天没思路并随机测试了一些数.. 直到我读了题..
+进制十六——参上 显然, 大家都知道怎么编辑十六进制, 然而我并不想手输这么多文本, 于是 Google 在线 OCR, 结果 OCR 的内容有部分是错的.. 被迫找同学要了一份 OCR 结果.
+去吧！追寻自由的电波 直接 Google ffmepg 音频速度. 然而很多结果给的一个过滤器是不改变音调的方案, 后来发现直接改采样率就行了..
+[cjc@coherence hackergame_2021]$ file radio.mp3 radio.mp3: Audio file with ID3 version 2.4.0, contains: MPEG ADTS, layer III, v1, 128 kbps, 48 kHz, Stereo [cjc@coherence hackergame_2021]$ ffmpeg -i radio.mp3 -af &amp;#34;asetrate=16000&amp;#34; radio_output.mp3 命令来自这里, 虽然我根本没有看这篇文章..
+猫咪问答 Pro Max 没错, 被第二题坑了.. 以为是第四题不对, 于是写了个暴力跑了几万次..
+提示: 这是一个提示.
+卖瓜 已经被同学提示了这是个 PHP 溢出问题.</description></item><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>又到了传统艺能年终年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..
+2020 总结 一句话总结的话, 知识的广度提升了, 深度还不够, 学习状态仍旧不能让自己满意. 以及这一年我始终在担心有没有学上, 找不找得到工作.
+学业 由于疫情的爆发, 导致了 2020 春季学期完全在家上课, 更加方便摸鱼了(
+一开始港哥在群里说武汉疫情的时候, 我还不觉得这是什么大事, 后来才发现我错得离谱.
+二月底到三月初, 陆续投了几个实习, 被拒了几个, 后来决定考研之后, 又鸽了几个
+说实话我对以后能不能找到工作还是有点怀疑的..
+从三月开始, 断断续续地开始准备考研了, 然而实际上还是不够努力吧, 到考试前一天我还没完全搞懂二次型..
+不过从时间上来说, 暑假之后就全力准备考研了..
+我很想说考研让我变得更沉得下心来学习了, 但事实上这并不是真的.
+只准备了两三天之后 (因为太晚看到了), 尝试申请了一下 GSoC, 不出意外凉了..
+七月到十月, 参加开源之夏, 也算是赚到了人生的第一桶金吧
+玩 一月, 去滑雪+攀岩, 还是挺有意思的 二月初, 折腾了一下 Windows 10 on Arm for Lumia 1520, 并没有什么用, 于是继续吃灰 七月, 乘着沪通铁路的开通, 去上海玩了一次, 居然被我碰到了一次高铁延误.. 环境 二月末, 开始搞 Manjaro, 一开始两个系统都用, 逐渐就只用 Linux 了 (特别是我发现了 proton 和 lutris 之后.</description></item><item><title>Anki 工作流</title><link>https://blog.coherence.codes/posts/2021/anki_workflow/</link><pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/anki_workflow/</guid><description>Anki 是一个间隔式重复的&amp;quot;闪卡 (flashcard)&amp;ldquo;记忆软件. 下面来谈谈我考研及日常生活中的 Anki 工作流.
+为什么选择 Anki 和市面上其他的记忆软件一样, Anki 也是基于遗忘曲线, 基于间隔式重复这一原理的. 最大的不同在于它是高度自定义的. 自己制作卡组, 设计模板, 甚至编写自己的插件. 还有很多特性例如 Notes 和 Cards 相分离我其实并没有用到.
+其次 Anki 是一款开源软件, 在我希望所有软件都用自由软件替换的如今, 这无疑是一个重要的理由.
+最后它在 Windows, Linux, Android 上都有客户端, 并支持同步. 虽然内置的同步服务器是由 Ankiweb 提供的 (我至今不知道 Ankiweb 和 Anki 的关系以及它是如何运作的), 然而也能够用自建的替换.
+虽然网上能够找到很多已制作好的卡组, 然而这些卡组并不一定适合自己. 以记单词而言, 卡组中的许多卡片都是自己已经熟知的. 况且制卡这个过程本身能够帮助自己记忆. 所以我还是选择了自己构建卡组的方式.
+基础卡片 对于一般的记忆来说, 基础的 Note type 就够用了.. 比如我一开始用 Anki 来提醒我复习新概念英语, 用的是以下的 Note type:
+十分简单.
+考研 考研的时候打算用 Anki 背单词, 于是我做真题的时候碰到不认识的单词记录下来, 然后用 Anki 制卡.
+卡片字段设计和工作流受到了考研英语真题生词这个卡组的启发.
+其中最主要的问题是音标, 发音和释义.</description></item><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>1335A - Candies and Two Sisters 1/0 Accepted
+快乐签到。
+1335B - Construct the String 1/0 Accepted
+先构造长度为 $a$ 的字符串，然后第 $i+a$ 个字母为第 $i$ 个字母，输出即可。
+1335C - Two Teams Composing 2/1 Accepted
+给 $n$ 个数，每个数有一个值，要求把它们分成数量相同的两组，一组所有的值相等，一组所有的值不等。
+先统计每个值的数量，得出最大个数 $m$，和不同值的数的个数 $l$，
+ans = min(l, m) if m &amp;lt; l + 2 else ans = min(l, m) + 1
+1335D - Anti-Sudoku 1/0 Accepted
+给一个求解好的数独，求改动不超过 9 个数，使其每行、列、区块内皆有两个相同的数。
+想了两分钟，发现将所有的 1 替换为 2 即可。
+1335E - Three Blocks Palindrome Not Attempted</description></item><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>快乐划水。
+1328A - Divisibility Problem 1/0 Accepted
+快乐签到。
+1328B - K-th Beautiful String 1/0 Accepted
+给一个数n，要求构造一个字符串，包含n-2个a，2个b，且在这个字符串的按字典序的全排列中排在第k个。
+找b的位置即可。
+t = int(input()) for _ in range(t): n, k = [int(i) for i in input().split()] for p in range(max(n+1,k+1)): if (p - 1) * p / 2 &amp;gt;= k: break pos1 = n - p pos2 = n - (k - int(((p - 1) * (p - 2) / 2))) for i in range(n): if i == pos1 or i == pos2: print(&amp;#39;b&amp;#39;, end=&amp;#39;&amp;#39;) else: print(&amp;#39;a&amp;#39;, end=&amp;#39;&amp;#39;) print() 1328C - Ternary XOR 1/0 Accepted</description></item><item><title>博客图片文件夹迁移</title><link>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</link><pubDate>Wed, 01 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</guid><description>我原来的博客文件夹结构是这样的：
+博文数量少的时候，还挺直观，但是数量一多，看着就很杂乱，因此，萌生了重新归类的想法。
+思路大概是这样：按年份归类，然后图片统一放到当前目录下的images文件夹里。
+实践 脚本的逻辑大概是对每一篇博文，寻找其元数据的 date 字段，将其移动到对应的文件夹下，同时对同名的文件夹也进行递归移动。由于图片都是相对引用的，所以不会出问题。（即使出了咱还有 git）</description></item><item><title>Kickstart 2020 Round A 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</link><pubDate>Thu, 26 Mar 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</guid><description>第一次打Kickstart，体验还是很不错的。
+比赛链接
+迟了几分钟进比赛，发现前十已经两题AC了。
+Allocation 1/0 Accepted
+签到题，排序后从大到小输出即可。
+Plates 2/0 TLE, WA
+N叠盘子，每叠K个，每个盘子有一个beauty值，从中取P个，但对于每叠只能从上到下取，求beauty值最大为多少。
+先写了一个每次取最大的，WA，发现不对，然后去做第三题了。后又写了个dfs，TLE了。当时心态有点崩，因为TOP 10基本是两分钟AC，想到DP，但没有深入想。
+官方题解是对于每一叠盘子，先预处理前n个的beauty值和sum，然后对于每一个状态dp[i][j]，即在前i叠盘子和取j个盘子时能取到的最大值，有状态转移方程dp[i][j] = max(dp[i][j], sum[i][x]+dp[i-1][j-x])。循环求dp即可。
+if __name__==&amp;#39;__main__&amp;#39;: t = int(input()) for i in range(1, t+1): out = &amp;#34;Case #{}: &amp;#34;.format(i) n, k, p = [int(i) for i in input().split()] a = [] sum = [] for i in range(n): a.append([int(i) for i in input().split()]) sum.append([0]) s = 0 for j in a[i]: s += j sum[i].append(s) cur = [0 for i in range(n)] dp = [[0] * (p+1) for i in range(n)] dp[0] = sum[0] + [0] * (p-k) for i in range(1, n): for j in range(1, p+1): for x in range(min(j+1, k+1)): dp[i][j] = max(dp[i][j], sum[i][x] + dp[i-1][j-x]) ans = 0 for i in range(n): ans = max(ans, dp[i][p]) out += str(ans) print(out) Workout 2/1 Accepted</description></item><item><title>2019年终总结&amp;2020展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</link><pubDate>Sat, 01 Feb 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</guid><description>又是一年一度的年终总结时间了，进入二十一世纪的第二个十年，我的心情十分激动……
+好吧，激动是假的。时空是连续的，进入2020和平常的一天没有任何区别。转眼间已经来到了庚子鼠年的大年初八，我恍然记得我的年终总结还没有写，于是准备把这个传统艺能发扬下去，也看一看2019定的目标完成了多少。
+2019 总结 时间及事件依据：印象笔记、Google 相册、我的记忆、Telegram。
+事件尽量归类，未归类的大致以时间顺序排列。
+找到了一个记录生活吐槽的平台。
+这个channel的内容输入延续至今。
+一月，金工实习和数学建模美赛，虽然没学到什么，还是挺有意思的。
+图为某数控机床。
+三月上旬，重新开始在印象笔记写日记。三月末更换至纸质方式。
+之后觉得日记意义不大，更换为每日计划，但是没有坚持。
+三月，在外租房居住。
+三月和十二月，分别安排了我校ACM的校赛和新生赛。
+请记住我这句话，都是泪。
+寒假里把N1刷了一遍OMV，但存储只有一个U盘。暑假刷回了无灯的固件，买了个硬盘盒+320G机械，勉强能当NAS来用。
+Ingress，从入坑到弃坑，大概是二月到五月的事。（其实以前玩过
+因为这个游戏还出去玩了挺多次的。
+三月末，开始入坑Arch Linux。
+然后发现这是个巨坑。（折腾万岁
+投资方面。
+和去年没多大变化吧。看的还是那两个人，还是没有系统地学经济学。只不过跟着大盘走盈利了一些罢了。
+英语方面。自我感觉英语能力有了较大提升。
+年度英美刷剧（和去年总结对比了一下）：Friends二刷，The Newsroom，Person of Interest 两季，The IT Crowd一季多。
+十月份想去考一考托福，大概也学了一段时间，后来无限期搁置了。
+用Kindle读原著方面，把三体一看完了，又开了个哈利波特的坑，也看完了第一部。
+我看了多少书？
+买了好多书。（然而都没有看 Linux&amp;amp;Unix大学教程基本看完了。后来又买了本鸟哥的，还没看。 Head First with HTML&amp;amp;CSS 还剩最后两章没看。 Computer Networking: A Top-down Approach，18年7月在图书馆里借了第五版影印版，一年基本没看，大三上由于要学计算机网络，好歹看了点，后又从淘宝打印了第七版英文版，看了三分之二左右。 四月初，启用了Digital Wellbeing，但是并没有起到限制玩手机时间的作用。
+四月末，参加了一次西安GDG活动。
+剁手记录。
+二月初，给家中置换了一个新的显示器，淘汰了老AOC 21&amp;rsquo; 1680*1050 服役十二年的历史。 图为 AOC 27&amp;rsquo; 4K 某型号。
+二月，给笔记本加了根8G的内存。年末的时候这个价钱可以买到16G的。
+四月末，出售 Bose Sleepbuds。
+八月末，入手人生中第一台相机，Sony α7m2，带28-70镜头。于是周末又有很多次出去拍照。
+本年度还是没有换笔记本。
+十月末，在宿舍购置了显示器，同样是AOC（因为便宜），27&amp;rsquo; 2K 带Type-C接口。</description></item><item><title>WSL使用体验</title><link>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link><pubDate>Sun, 08 Dec 2019 19:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid><description>首先，WSL真香！
+开启WSL 最简单的方式是使用管理员权限运行Powershell，然后输入：
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+重启电脑，然后在应用商店中安装WSL发行版。
+Arch 注意到WSL是没有Arch Linux发行版的（以前有一个非官方的，很快被下架了），但是我们有办法添加Arch发行版。去这个仓库下载打包好的appx文件和证书，首先将证书导入至受信任的根证书颁发机构，然后安装appx即可。
+体验 坑 默认WSL不会读取~/.bashrc而会读取~/.bash_profile，所以需要在~/.bash_profile中写入：
+if [[ -f ~/.bashrc ]] ; then . ~/.bashrc fi 才能够正常读取bash配置。
+Netcat 首先我Google到的是gnu-netcat。但是运行时报错nc: core.c:372: core_tcp_connect: Assertion ret == 0' failed.搜索了相关Issus之后，我更换成了openbsd-netcat，问题解决。
+缺点 WSL下无法使用Docker等涉及内核的操作，该缺陷在WSL2中被解决。 默认无图形界面，使用GUI需自己安装X Server，较为麻烦。 Windows Terminal 注意，截至目前，Windows Terminal仍处于预览阶段，正式发布预计要到2020年4月。
+安装WSL后，Windows Terminal能够自动识别WSL并添加至可用Terminal列表中。
+Bug 启动Shell后的工作目录为Windows当前用户的Home目录，而非Linux的用户Home目录。 ​ 可以通过在配置文件中加入&amp;quot;commandline&amp;quot; : &amp;quot;wsl ~&amp;quot;来解决，不过这个方案只适用于默认WSL发行版，对于其他发行版无效，可以通过在.bashrc中添加一条判断语句来解决。
+Windows Terminal目前暂无法自动添加至右键菜单上下文，需手动添加注册表。
+往Terminal中粘贴内容是会自动在行间加空格。（更新：这个bug是由于\r\n与\n的处理问题，在0.7中被解决）
+WSL2 Docker 可喜可贺，WSL终于能用Docker了。
+配置镜像源（无systemd）：
+在配置文件 /etc/default/docker 中的 DOCKER_OPTS 中配置Hub地址：
+DOCKER_OPTS=&amp;#34;--registry-mirror=https://docker.mirrors.ustc.edu.cn/&amp;#34; 重新启动服务:
+sudo service docker restart 坑 官方宣称在18945之后的版本中Windows访问WSL提供的网络服务只需使用localhost即可（服务需绑定之0.</description></item><item><title>重新安装 Hexo</title><link>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</link><pubDate>Wed, 07 Aug 2019 16:03:29 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</guid><description>缘由 直接原因是 Github 的一个假装很贴心的功能：
+由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。
+过程 环境 node.js 6.4.1
+hexo 3.9.0
+hexo-cli 2.0.0
+官方文档上写需要 node.js 6.9+，然而我是 6.4，不知道会不会锅。
+Hexo 安装 首先，把仓库 clone 下来后，备份一份源文件。然后找一个空文件夹，按照官方文档的指引，执行：
+hexo init npm install （我发现现在 hexo init 会同时自动执行 npm install命令了）
+然而还是有一个漏洞，不管了。
+然后删除原文件夹中文件（保留.git），把新的文件复制过去。同时把备份文件夹中的source文件夹覆盖过去。（自动创建 .gitignore 好评）
+这时候基本的安装就完成了，接下来打开 Github Desktop 开始对比差异。
+在全局配置_config.yml中，
+这个配置是为每篇博文创建一个单独的资源文件夹。
+基本不用变，直接 discard changes 即可。
+.travis.yml 和 deploy.sh 也直接还原。
+图片的问题先不管，有问题再说。
+主题安装 剩下的差异全是主题文件。既然都重新搞了，那就换一个主题吧。在自己的 stars 里找了个主题 hexo-theme-indigo，看了下也支持 Analysis、Disqus，就决定用它了。
+接下来就开始按照主题文档来安装。首先 clone 仓库，我选择 card 分支，感觉比较好看（其实也没有对比）。
+在 hexo 根目录执行git clone -b card https://github.</description></item><item><title>大二下学期期末复习</title><link>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link><pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</guid><description>软件工程试卷 来源： Harbor Zeng</description></item><item><title>软通实习</title><link>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</link><pubDate>Wed, 17 Jul 2019 15:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</guid><description>序 二年级下学期期末，有一个两周的实习，学校给了我们三个选项，其中软通算是知名度最高的一家公司了。 然而网上这家公司的风评很差，不过其他两家似乎更差，于是我们班大概四分之三的人都来了软通。
+经历 实习第一天，上午讲的开发流程，团队角色，每日例行项目好似我们已经接手了一个实际项目，然而到了下午瞬间变成培训班，开始教我们配置环境。看下发的文档是用 Java Spring Boot 框架来开发。第二天又开始复习 Java。然后到了第三天，负责我们的老师（就叫他项目经理好了）突然说，你们想用什么技术就用什么技术吧。终于不用写 Java 了（逃
+我们大概使用的是 Scrum 敏捷开发方法，最有特色的一点大概就是每日站会了。还有 Story 列表其实也挺不错的，只是没有贴在公告板上感觉失去了灵魂。
+可能是时间短的原因，从一开始需求包括 Story 列表就已经确定了，我认为如果只是说做一个什么系统而不说具体需求会让大家的产品更有差异化，亮点也会更多。
+技术栈 由于我很倾向 Python，加上青岛大学的开源 OJ 采用的就是 Django+Vue 前后端分离的开发模式，于是我便也想采用这个模式。
+最终我们决定采用前后端完全分离，前后端之间使用 HTTP 协议通信。前端采用：HTML+CSS+JavaScript（JQuery+AJAX），后端采用：Django，数据库采用：PostgreSQL
+版本管理 我有一些 Git 的知识，然而软通提供的版本管理工具是 SVN。用了一段时间后发现，两个工具没有本质的区别，最大的大概是 SVN 需要中心服务器，权限控制似乎也比较强大，所以像在公司内部比较好用，而 Git 分布式，分支创建极为方便，在开源社区中被广泛使用。
+然而我们甚至没有用到分支这个功能，总体上还是没有利用好版本管理。
+前端：三剑客 zpc 第一天就不知道在哪找了个模板网站，然后冲了十块钱下了个模板。接下来就开始改改改。
+调试 一个问题是，后端的代码如何给前端调试。我们选择：
+后端首先使用 Django 的本地服务器，用 Postman 进行测试，测试通过后上传代码。 不定期部署至服务器上 前端从服务器调用接口调试 然而，在其他组答辩的时候，我们才知道有个东西叫 mock，能够简化调试难度。
+后端：Django 很早就听说了 Python Web 一些有名的框架，后来又知道了青岛大学的开源 OJ 后端使用的就是 Django，所以很想尝试一下。曾经看过几节慕课，也看了一些官方文档（一开始是真的看不懂）。在做微信小程序的时候，我就想用 Django，奈何技术不够，放弃了。
+实习前，我去找 zjb 两小时速成了一下 Django，发现 Django 虽然是 MTV（Model——Template——View）三级结构，但是前后端分离的话就没有模板了，同时我们用了 REST Framework，在函数名中直接声明要调用的方法，大大简化了开发。REST Framework 也提供了官方中文文档，不过感觉写得不是很好。</description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Wed, 24 Apr 2019 08:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>前言 以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。
+这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。
+下面列出笔记本的配置，以供参考。
+部件 型号 CPU Intel i5-7300HQ 内存 16G 硬盘 128G NVME SSD + 1T 机械 显卡 GeForce GTX 1050 Ti + Intel HD Graphics 630 无线网卡 Reltek RTL8822BE 触摸板 Synaptics 为什么选择 Arch 滚动更新天下第一！（误
+听说社区非常友好（然而我还没感受到
+基本安装 安装参考了 以官方Wiki的方式安装ArchLinux 和 官方Wiki的 Installation Guide。在未安装图形界面前，基本一切顺利。
+题外话：说起无线网卡，之前装 Ubuntu 的时候，没有驱动，需要手动安装。不过内核从 4.x 某个版本之后，加入了对我这个网卡的驱动，现在无需配置即可使用了。
+由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。
+在配置sudo时，使用visudo命令编辑配置文件，然而这个 vi编辑器有毒，许多操作都无法执行，感觉是个 bug。（Update：原来 vi 和 vim 是有挺大的区别的&amp;hellip;）
+图形界面 众所周知，Linux社区似乎对于 Nvidia+Intel 双显卡不怎么友好，在我安装过的数个发行版中（包括 Ubuntu, Debian, Manjaro, Deepin），基本都出现了启动黑屏/在Logo处冻结的情况，本次安装 Arch Linux，同样遇到了此问题。</description></item><item><title>使用 Travis CI 自动部署 Hexo 博客</title><link>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</link><pubDate>Sun, 21 Apr 2019 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</guid><description>缘由 其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。
+前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的ln -s大法行不通了。
+于是我想到了 CI。仔细一想其实也不复杂，无非是git push， git pull两下罢了。那么，Let&amp;rsquo;s do it!
+需求 我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。
+我更新博客之后，commit 然后 push 至 Github repo CI 自动构建博客 CI 将构建完成的静态文件 push 至 Github repo 我原先使用的是hexo-deployer-git插件，通过hexo g -d部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。
+配置 Github Repo 在这个 Repo 中需要两个分支：
+master 用于存放构建完成的静态文件 source 用于存放 Hexo 生成的博客源文件 对 Hexo 文件夹的操作如下：
+git init git remote add origin git@github.</description></item><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。
+Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板，准备拆机 TTL 破解光猫。
+0x01 拆机 拆机后发现 PCB 板上有 TTL 插针，用万用表测得倒数第二根为 GND（接地pin），然后剩余四根随机组合，测得 RX（接收数据pin）和 TX（发送数据pin）。用杜邦线连接 USB转TTL板和 TTL 插针。
+0x02 串口调试 电脑安装好 USB转TTL板的驱动，USB端连接上电脑。网上的教程一般使用 SecureCRT， 然而我后来发现 Xshell 也能连接串口，遂用 Xshell 进行调试。
+如图设置参数，port 按照自己的情况设置。
+然后连接。接通电源后等待。大概等待两分钟后，按回车，出现 Login: 字样，用 root/hg2x0 登陆。
+用 cat /proc/cpuinfo 看一下 CPU 信息，居然是 MIPS&amp;hellip;
+超级密码在/flash/cfg/agentconf/factory.conf 文件中。文件前两行即为管理员账户和密码。至此，光猫破解完成。
+0x03 参考资料 如何通过TTL调试光猫 破解电信光猫</description></item><item><title>2018年终总结&amp;2019展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</link><pubDate>Mon, 11 Feb 2019 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</guid><description>今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。
+2018 总结 时间及事件依据：印象笔记、Google 相册、我的记忆。
+事件大致以时间顺序排列。
+一月初，经历了在西安的第一场雪。 （时间未知）使用了 Windows 运行来快速启动程序，（感觉上）大大提高了效率（不（感觉装逼才是真的 从 1.13 开始寒假训练， 3.24 校赛，3.31 天梯赛，5.17 左右 ACM省赛，7.19 开始暑假多校训练，10.26 徐州区域赛， 11.23 深圳 CCPC 总决赛，整个一年我算是比较积极地参与 ACM-ICPC 竞赛（虽然下半年逐渐开始划水 （六张照片依次为 CCPC、寒假训练、省赛、校赛、天梯赛、徐州区域赛）
+一月末，开始种草轻薄本，并寻求把游戏本卖了，未果。 从年初开始，用空闲资金进行投资，并开始学习相关知识。一月末我第一次买入了一个基金，入坑。一开始赚了点钱很高兴，后来贸易战开始就亏了。七月初买了一本金融方面的书然而并没有看多少。八月开始跟投某大V的投资计划，九月末把主要账户转移到且慢。回想起一开始什么都不懂就冲着某个行业买基金，现在慢慢有些了解但知识仍然很浅薄。时刻要提醒自己：不要盲从。 定下（并践行）了在美（英）剧中学英语的目标，然后每当我看剧时总是自我安慰同时我也在学习（并没有）。 到目前为止看过的剧有（不限于18年）：Friends，Sherlock，Black Mirror 一季， The IT Crowd 两季，Monday Mornings，Greys Anatomy 一季， Person of Interest 三季，Modern Family 半季多
+从3月份开始，我开始撸 DigitalOcean 的 Github 学生优惠，到现在为止服务器运维的相关知识增长地挺快&amp;hellip;应该是从大学开始吧，我开始用VPS自建SS，一开始是 Cloudcone 还是 Vultr 后来撸到了 DO，再后来19年年初的时候知道了一个超便宜的深港专线，后来又撸了阿里云的学生机。 四月中旬看了死亡诗社，Seize the day 成了我的座右铭，虽然我一直没有做到这一点。 整个一年我总有一种感觉，学习不在状态，有时候一直陷入一种昏昏沉沉的状态，那种状态下，犯困，没有学习的心思，干其他事也提不起兴趣。仿佛就在虚度光阴。从那个寒假开始我就（似乎）养成了不良的生活习惯。 四五月份入了创新IE3P 和 iPad 2018，拔草成功，却没有对我的学习质量有多大的改善。后来又开始种草蓝牙降噪耳机&amp;hellip; 六月末，转专业考试。一年中最重要的一件事，从环境科学与工程转到了软件工程专业，进入了理想的专业。 然而同时打算换宿舍的（非常不喜欢我们宿舍的氛围和作息），最终没有成功。后来也尝试过 Bose Sleepbuds 这个方案，效果不佳。遂产生了租房的想法。 尝试读英文原著，从大一上开始读星际穿越的剧本，读到18年年中读完了。然后开始看三体的英文版，到现在看了一半多。 九月中旬开始用 Excel 记账，对日常消费进行记录和管理，持续至今。 九月中旬，在学校有了一辆自己的自行车。 大二上是忙碌的一学期。首先课就很多，粗略统计之下每周有38个学时，作为对比，大一上是27学时，大一下是33学时。然后学期初的时候偶然间看到网络中心招学生助理，于是去了。（并没有学什么东西好歹还是学了点的）然后是计协（主要）和其他社团的活动。 学习成绩仍然不尽如人意，而且有着每学期逐步下滑的趋势&amp;hellip; 记不清某个时间了，折腾过Ubuntu，碰到了N+I卡驱动的问题，卡启动Logo，最后也没解决。后来就弃疗了，平时就瞎搞搞虚拟机和 WSL 了。 十二月下旬，我校ACM新生赛，我负责了评测环境的搭建，这大概是我一年来做过的最有意义的一件事。 好多书都只读到一半，然后处于半弃坑状态，比如未来简史，值得反思&amp;hellip; 下半年的印象笔记笔记数量似乎少了很多&amp;hellip; 更加怀念高中时候的生活了&amp;hellip;或许到了工作之后我也会更加怀念大学的生活吧。 2019 年初计划 学习 Linux，参考书目《Linux&amp;amp;Unix 大学教程》 学习 Git，参考书目 《Pro Git》 学习计算机网络，参考书目《Computer Networking:A Top-down Approach》（这本书TM还是去年七月下旬借的） 学习使用 Anki （去年九月初就知道了这个软件并一直想学 emmm.</description></item><item><title>DOMjudge 配置/踩坑指南</title><link>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</link><pubDate>Wed, 19 Dec 2018 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</guid><description>我校新生赛也能用上 World Final 同款评测系统啦~
+DOMjudge 提供了详尽的官方文档，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。
+简介 DOMjudge，作为一款开源的 CCS(Contest Control System)，现已被ICPC钦定为官方的比赛评测系统。比 pc^2 这种闭源而含有诸多 Bug 的 CCS 高到不知道哪里去了啊。
+根据官方文档的描述，DOMjudge 的主要特性有：
+分布式且自动评测的 judge host Web 用户界面 模块化的系统，方面添加不同的语言/编译器 整个 DOMjudge 主要分为两个部分，Domserver 和 Judgehost，据其名字即可得出它们的功能。需要注意的是，DOMjudge 使用数据库来存放几乎一切数据，所以我们还需配置 MySQL 或者 MariaDB。
+安装 DOMjudge 只能运行在 Linux 环境下。博主的运行环境是 Ubuntu Server 18.04 LTS，以及 DOMjudge 7.1.1。
+除了传统的安装方式外，DOMjudge 还提供了 Docker 镜像以供安装，这样就大大简化了安装的困难程度。
+关于 Docker 的使用这里不作详细描述。（其实是博主也一知半解）
+然而官方的 Docker 文档中仅使用了命令来启动容器，为了进一步简化安装，也为了方便修改配置，我决定采用 Docker Compose 。以下是 docker-compose.yml 文件：
+version: &amp;#34;3&amp;#34; services: mariadb: image: mariadb container_name: dj-mariadb environment: - MYSQL_ROOT_PASSWORD=rootpw - MYSQL_USER=domjudge - MYSQL_PASSWORD=djpw - MYSQL_DATABASE=domjudge volumes: - $PWD/data:/var/lib/mysql ports: - 13306:3306 command: - --max-connections=1000 - --innodb-log-file-size=480M domserver: image: domjudge/domserver:latest container_name: domserver environment: - MYSQL_HOST=mariadb - MYSQL_USER=domjudge - MYSQL_DATABASE=domjudge - MYSQL_PASSWORD=djpw - MYSQL_ROOT_PASSWORD=rootpw - CONTAINER_TIMEZONE=Asia/Shanghai restart: always depends_on: - phpmyadmin - mariadb ports: - 80:80 links: - mariadb judgehost: image: domjudge/judgehost:latest container_name: judgedaemon-0 privileged: true environment: - CONTAINER_TIMEZONE=Asia/Shanghai - DAEMON_ID=0 - JUDGEDAEMON_PASSWORD=whatthehell depends_on: - domserver links: - domserver restart: always volumes: - /sys/fs/cgroup:/sys/fs/cgroup:ro phpmyadmin: image: phpmyadmin/phpmyadmin container_name: myadmin ports: - 8080:80 environment: - PMA_HOST=mariadb links: - mariadb:mariadb 然后运行 docker-compose up -d 即可完成部署。</description></item><item><title>使用KMS激活Visio</title><link>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</link><pubDate>Sat, 01 Dec 2018 23:11:38 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</guid><description>题记 如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。
+转换Visio版本 我在MSDN我告诉你和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。
+复制以下代码，保存为.bat文件并用管理员身份运行：
+if exist &amp;#34;%ProgramFiles%\Microsoft Office\Office16\ospp.vbs&amp;#34; cd /d &amp;#34;%ProgramFiles%\Microsoft Office\Office16&amp;#34; if exist &amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs&amp;#34; cd /d &amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16&amp;#34; cscript ospp.vbs /rearm for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\visio???vl_kms*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\visio???vl_mak*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul 以上命令的作用分别为：
+打开Office的安装目录（Visio也属于Office的一部分） 重置零售激活 安装KMS和MAK许可证（转换版本） 题外话：转换Office和Project版本同理。
+Office：
+cscript ospp.vbs /rearm for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul for /f %%x in (&amp;#39;dir /b .</description></item><item><title>Markdown简介</title><link>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</link><pubDate>Thu, 08 Nov 2018 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</guid><description>什么是 Markdown? Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。
+Markdown VS 富文本 基于 Markdown 写作，是属于纯文本写作。「纯文本」写作和「富文本」写作是对立的，我们来区分一下：
+**「富文本」写作 ** 你平时在Word上写作，就属于富文本写作。修改文字的大小、修改文字颜色、调整各种格式只需要点一下鼠标就行。富文本写作最大的特点是：所见即所得，你把格式调整成什么样子，就会直接显示出什么样的效果。
+然而，富文本的格式排版过于繁杂，以致于你不得不花费大量时间在这上面，而忽略了写作本身。
+同时，富文本存在着多平台转换不方便的问题，假如你在 Word 上写好了文档，格式也调好了，复制粘贴到其他写作平台的时候发现：格式全乱啦；即使是转发给其他人也可能因为 Word 版本的不同而导致显示的差别很大。（如果你有过去打印店打印文档的经历的话，相信体会很深吧）富文本一般需要使用专用软件打开（如Word）。
+「Markdown」写作 基于 Markdown 写作，就是纯文本写作。它允许人们使用纯文本格式来编写文档。如果你想设置某段文字的格式，只需要使用一些简单的符号来代表即可。所以文字和格式都是纯文本。能够用普通的文本编辑器打开。
+Markdown正好处在富文本的对立面，由于其简洁的特性，导致其格式只有寥寥几种，功能上也远不如富文本编辑器。
+Markdown 的优点
+纯文本所以兼容性极强，可以用所有文本编辑器打开
+让你更专注于文字而不是排版
+格式转换方便，Markdown 文本你可以轻松转换为 html、电子书等
+Markdown 的标记语法有极好的可读性
+Markdown的主要用途
+博客（自建、简书、CSDN等等） 笔记，随笔等 Github 编辑器推荐 Typora Markdown也能所见即所得！ 基本语法 Markdown语法主要分为如下几大部分： 标题，段落，区块引用，代码区块，强调，列表，分割线，链接，图片，反斜杠 \，行内引用。
+1. 标题 使用#，可表示1-6级标题。
+# 一级标题 ## 二级标题 ### 三级标题 #### 四级标题 ##### 五级标题 ###### 六级标题
+效果：
+一级标题 二级标题 三级标题 四级标题 五级标题 六级标题 2. 段落 段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用两个以上空格加上回车（引用中换行省略回车）。
+3. 区块引用 在段落的每行或者只在第一行使用符号&amp;gt;,还可使用多个嵌套引用，如：</description></item><item><title>关于我</title><link>https://blog.coherence.codes/posts/2020_and_before/about_me/</link><pubDate>Sat, 03 Nov 2018 16:37:04 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/about_me/</guid><description>关于我 博主是一名大四学生。
+爱好一切数码产品 安卓（伪）瞎折腾党 ACM 打铁选手 Linux 初学者 科幻爱好者 关于博客 2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑 2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件 2020-02-22 更改评论为 disqusjs，详见作者的博文；启用 pjax 2019-12-24 启用新域名blog.coherence.codes 2019-10-07 升级主题至 Next V7.4.1 2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %} 联系我 Telegram：@Coherence0
+Email：niuchangcun@gmail.com</description></item><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>这就是乱改字体的后果..
+字体修复，不只是字体修复。
+事由 偶然间看到一篇替换Win10字体来提升字体观感的文章，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。
+然而，使用了一段时间后发现，所有的字体似乎都小了一圈，而且在cmd中出现了字体大小错乱的情况。网上找了一圈发现Win10砍掉了调整字体大小的功能，现在只能以整体缩放来调整字体大小。新的字体感觉也没有想象中的那么好。
+于是我把备份的默认字体又恢复了回去，按道理不会出事，然而我的电脑出锅了。一些软件的中文字体成了方框，cmd的字体也变得很奇怪。
+解决方法 一番操作之后，发现设置里的新宋体是乱码，感觉可能是字体文件崩了。
+但是simsunb.ttf这个文件我分明备份过。。
+没办法，继续面向Google解决问题，这时候找到了一个微软社区页面，里面给出了三条命令：
+DISM.exe /Online /Cleanup-image /Scanhealth DISM.exe /Online /Cleanup-image /Restorehealth sfc /scannow 根据微软官方支持页面的描述，这三个命令是检查系统文件的完整性并自动通过 Windows 更新来修复。
+用管理员身份打开cmd，依次执行完重启，一切都恢复了原状。
+后记 看了一些知乎回答，感觉Win10的字体也并没有那么糟糕。事实上我一直以来用着默认的字体也没有感到不舒服。可能是我眼瞎吧。
+另外，上述的三个命令理论上能解决Windows的许多问题，碰到问题可以尝试。
+2019/2/13 更新 目前家里入了 4K 显示器，200% 缩放，观感上没有任何问题。</description></item><item><title>我为什么选择了独立博客</title><link>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</link><pubDate>Sat, 13 Oct 2018 20:13:11 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</guid><description>这是一个独立博客式微的时代。
+独立博客没有博客平台的推荐导流系统，相比之下观之者寥寥。
+那我为什么还是选择了独立博客呢？
+自由，不会受外部因素的影响，可以随意添加自己想要的功能。 方便，一行命令就能更新博客。 可控，完全受自己管理。 在这纷纭复杂的互联网中，拥有自己的一方小天地，似乎也是极好的。</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>身为一个懒人，又不会写网页，也只能用用博客生成器了。
+为什么选择Hexo 其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是随手找了几个静态博客生成器， 随手一查就找到了Hexo。
+Hexo搭建过程 Hexo的官方文档有中文，这点很赞。虽然官方文档讲的不是很清楚..然而搭建还是比较简单的，加上Google了几篇教程，很快就把Hexo搭起来了。
+身为一个博客生成器，当然不能让我们接触到代码了。所以Hexo的基本配置均在_config.yml这个配置文件中。配置采用YAML语法，看看官方文档也就差不多了解了。基本上无需过多配置就搭建完成了。
+Hexo主题 Hexo有许多主题，个人采用了官方推荐的 NexT.Pisces主题，整体风格还是比较简洁的（然而用这个主题的实在是太多了&amp;hellip;随便一个Hexo博客就是Next主题）。
+同时主题内已集成了许多第三方服务，如Google Analysis、DISQUS等，只要改改配置文件就能配置完成，还是相当简单的。
+Hexo图片插入指引 直接用Markdown语法引用图片会导致图片在首页无法显示，官网给出了一个解决方案，就是利用内置的插件，形式如下：
+{% asset_path slug %} 然而这个方法会破环原生Markdown语法，对编辑者的预览等造成不便。
+很奇怪官方为什么要采用这种方法。
+更好的解决方案是安装hexo-asset-image这个插件。进入博客目录，使用如下命令安装插件：
+npm install https://github.com/CodeFalling/hexo-asset-image --save 安装完成后，即可使用原生Markdown语法插入图片。
+To Do 已实现功能 评论，采用DISQUS 数据统计，采用Google Analytics 图片显示在首页 搜索引擎收录，Google Search Console 首页文章不显示全部 git配置，hexo g -d一条命令部署 使用Travis CI自动生成及部署 待实现功能 更多的自定义操作 文章访问量统计 在自己的服务器也部署博客，然后用 CI 实现自动部署 使用 CDN 加速 Github Pages 的访问 评论点击加载 参考文章 hexo中完美插入本地图片
+为HEXO博客中每篇文章的浏览量统计
+Hexo官方文档
+NexT使用文档
+theme-next!Hexo网站的一次华丽升级</description></item><item><title>Hello,World!</title><link>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</link><pubDate>Mon, 24 Sep 2018 11:28:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</guid><description>Hello,World!</description></item><item><title>Lumia1520 使用体验</title><link>https://blog.coherence.codes/posts/2020_and_before/lumia1520_%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/lumia1520_%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid><description>都8102年了，你还在用Windows Phone？
+缘由 早年在htc线下店体验过Windows Phone，当时感觉这样的Launcher很新奇，也带给了我对于Windows Phone的第一印象。
+前些日子闲聊时谈起Windows Phone，不禁扼腕叹息，一个有着和Android，iOS三分天下实力的平台就这样毁在了微软的手里。由此产生了买一台Windows Phone设备来纪念这个也曾假装辉煌过的移动平台。
+购买之前，我也不曾详细了解过Lumia的产品线，只知微软收购诺记移动业务之后，便淡化了诺基亚和Lumia的商标</description></item><item><title>SSD科普——小白向</title><link>https://blog.coherence.codes/posts/2020_and_before/ssd-knowledge/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/ssd-knowledge/</guid><description>首先声明，博主的知识水平有限，本篇文章大部分均为网络搜集资料所得，如有错误还请指正。
+简介 固态硬盘（英语：Solid-state drive，简称SSD）是一种主要以闪存作为永久性存储器的计算机存储设备。
+一般来说，固态硬盘是相较于机械硬盘而言的，大致区别如下：
+固态硬盘 机械硬盘 读写速度 访问延时 使用寿命 我将在下文详细解释表格中出现的名词的详细含义。
+原理 目前的 SSD 绝大部分采用的是 NAND FLASH，要想详细了解 SSD 的各种特性，比如 SSD 为什么有寿命限制，为什么需要 Garbage Collection，都要从 NAND FLASH 开始讲起。
+NAND FLASH 是一种非易失性存储器，即断电后还能保留数据，这也是它能被用来当作硬盘的原因。
+参考链接 干货！史上最全SSD科普贴：科学购买SSD 小白科普：没想到你是这样的固态硬盘 维基百科</description></item></channel></rss>

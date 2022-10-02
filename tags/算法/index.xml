@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>算法 on Coherence's Blog</title><link>https://blog.coherence.codes/tags/%E7%AE%97%E6%B3%95/</link><description>Recent content in 算法 on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 19 Apr 2020 19:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml"/><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>1335A - Candies and Two Sisters 1/0 Accepted
+快乐签到。
+1335B - Construct the String 1/0 Accepted
+先构造长度为 $a$ 的字符串，然后第 $i+a$ 个字母为第 $i$ 个字母，输出即可。
+1335C - Two Teams Composing 2/1 Accepted
+给 $n$ 个数，每个数有一个值，要求把它们分成数量相同的两组，一组所有的值相等，一组所有的值不等。
+先统计每个值的数量，得出最大个数 $m$，和不同值的数的个数 $l$，
+ans = min(l, m) if m &amp;lt; l + 2 else ans = min(l, m) + 1
+1335D - Anti-Sudoku 1/0 Accepted
+给一个求解好的数独，求改动不超过 9 个数，使其每行、列、区块内皆有两个相同的数。
+想了两分钟，发现将所有的 1 替换为 2 即可。
+1335E - Three Blocks Palindrome Not Attempted</description></item><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>快乐划水。
+1328A - Divisibility Problem 1/0 Accepted
+快乐签到。
+1328B - K-th Beautiful String 1/0 Accepted
+给一个数n，要求构造一个字符串，包含n-2个a，2个b，且在这个字符串的按字典序的全排列中排在第k个。
+找b的位置即可。
+t = int(input()) for _ in range(t): n, k = [int(i) for i in input().split()] for p in range(max(n+1,k+1)): if (p - 1) * p / 2 &amp;gt;= k: break pos1 = n - p pos2 = n - (k - int(((p - 1) * (p - 2) / 2))) for i in range(n): if i == pos1 or i == pos2: print(&amp;#39;b&amp;#39;, end=&amp;#39;&amp;#39;) else: print(&amp;#39;a&amp;#39;, end=&amp;#39;&amp;#39;) print() 1328C - Ternary XOR 1/0 Accepted</description></item><item><title>Kickstart 2020 Round A 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</link><pubDate>Thu, 26 Mar 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</guid><description>第一次打Kickstart，体验还是很不错的。
+比赛链接
+迟了几分钟进比赛，发现前十已经两题AC了。
+Allocation 1/0 Accepted
+签到题，排序后从大到小输出即可。
+Plates 2/0 TLE, WA
+N叠盘子，每叠K个，每个盘子有一个beauty值，从中取P个，但对于每叠只能从上到下取，求beauty值最大为多少。
+先写了一个每次取最大的，WA，发现不对，然后去做第三题了。后又写了个dfs，TLE了。当时心态有点崩，因为TOP 10基本是两分钟AC，想到DP，但没有深入想。
+官方题解是对于每一叠盘子，先预处理前n个的beauty值和sum，然后对于每一个状态dp[i][j]，即在前i叠盘子和取j个盘子时能取到的最大值，有状态转移方程dp[i][j] = max(dp[i][j], sum[i][x]+dp[i-1][j-x])。循环求dp即可。
+if __name__==&amp;#39;__main__&amp;#39;: t = int(input()) for i in range(1, t+1): out = &amp;#34;Case #{}: &amp;#34;.format(i) n, k, p = [int(i) for i in input().split()] a = [] sum = [] for i in range(n): a.append([int(i) for i in input().split()]) sum.append([0]) s = 0 for j in a[i]: s += j sum[i].append(s) cur = [0 for i in range(n)] dp = [[0] * (p+1) for i in range(n)] dp[0] = sum[0] + [0] * (p-k) for i in range(1, n): for j in range(1, p+1): for x in range(min(j+1, k+1)): dp[i][j] = max(dp[i][j], sum[i][x] + dp[i-1][j-x]) ans = 0 for i in range(n): ans = max(ans, dp[i][p]) out += str(ans) print(out) Workout 2/1 Accepted</description></item></channel></rss>

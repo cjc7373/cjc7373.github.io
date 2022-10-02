@@ -1,0 +1,76 @@
+<!doctype html><html><head><title>使用 Travis CI 自动部署 Hexo 博客</title><meta charset=utf-8><meta name=X-UA-Compatible content="IE=edge"><meta name=google-site-verification content><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name=viewport><meta content="telephone=no" name=format-detection><meta name=description content><meta name=renderer content="webkit"><meta name=theme-color content="#ffffff"><link rel=stylesheet href=/scss/journal.min.0f46f98b723f2aad4b02d9370bb6aa7848b5c2b2a5579642014082283683d2d8.css integrity="sha256-D0b5i3I/Kq1LAtk3C7aqeEi1wrKlV5ZCAUCCKDaD0tg=" media=screen><link rel=stylesheet href=/scss/dark-mode.min.79c34391dbcff20df8b4dac718e2606701efcbfdb9f3b08447ac39ac9dc7b463.css integrity="sha256-ecNDkdvP8g34tNrHGOJgZwHvy/2587CER6w5rJ3HtGM=" media=screen><script src=/js/toc.js></script>
+<link type=text/css rel=stylesheet href=/vendor/css/bootstrap.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Material+Icons"><script async defer data-domain=blog.coherence.codes src=https://analytics.coherence.space/js/plausible.js></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css integrity=sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js integrity=sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8 crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js integrity=sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl crossorigin=anonymous></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})})</script></head><body><div id=app><div id=sideContainer class=side-container><a class="a-block nav-head false" href=https://blog.coherence.codes/><div class=nav-title>Coherence's Blog</div></a><div class=nav-link-list><a class="a-block nav-link-item active" href=/posts>存档</a>
+<a class="a-block nav-link-item false" href=/tags>标签</a>
+<a class="a-block nav-link-item false" href=/categories>分类</a>
+<a class="a-block nav-link-item false" href=/index.xml>RSS Feed</a></div><div class=nav-footer><a href=https://github.com/cjc7373/hugo-theme-diary>Modified</a> Hugo Theme <a href=https://github.com/amazingrise/hugo-theme-diary>Diary</a> by <a href=https://risehere.net/>Rise</a><br>移植自 <a href=https://mak1t0.cc/ target=_blank rel="noreferrer noopener">Makito</a>'s <a href=https://github.com/SumiMakito/hexo-theme-journal/ target=_blank rel="noreferrer noopener">Journal.</a><br><br>&copy;
+2022 Coherence's Blog</div></div><div id=extraContainer class=extra-container><div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }"><div class=toc-content><center>- 目录 -</center><ul><ul><li><a href=#%e7%bc%98%e7%94%b1 onclick="onNavClick(`#缘由-nav`)" id=缘由-nav>缘由</a></li><li><a href=#%e9%9c%80%e6%b1%82 onclick="onNavClick(`#需求-nav`)" id=需求-nav>需求</a></li><li><a href=#%e9%85%8d%e7%bd%ae-github-repo onclick="onNavClick(`#配置-github-repo-nav`)" id=配置-github-repo-nav>配置 Github Repo</a></li><li><a href=#%e9%85%8d%e7%bd%ae-travis-ci onclick="onNavClick(`#配置-travis-ci-nav`)" id=配置-travis-ci-nav>配置 Travis CI</a></li><li><a href=#%e5%90%8e%e8%ae%b0 onclick="onNavClick(`#后记-nav`)" id=后记-nav>后记</a></li><li><a href=#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99 onclick="onNavClick(`#参考资料-nav`)" id=参考资料-nav>参考资料</a></li></ul></div></div><div class=pagination><a id=globalBackToTop class="pagination-action animated-visibility" href=#top :class="{ invisible: scrollY == 0 }"><i class="material-icons pagination-action-icon">keyboard_arrow_up</i></a>
+<a type=button class=pagination-action id=darkModeToggleButton><span class="material-icons pagination-action-icon" id=darkModeToggleIcon>dark_mode</span></a></div></div><div class=single-column-drawer-container id=drawer v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }"><div class=drawer-content><div class=drawer-menu><a class="a-block drawer-menu-item active" href=/posts>存档</a>
+<a class="a-block drawer-menu-item false" href=/tags>标签</a>
+<a class="a-block drawer-menu-item false" href=/categories>分类</a>
+<a class="a-block drawer-menu-item false" href=/index.xml>RSS Feed</a><div class=toc><div class=toc-content><center>- 目录 -</center><ul><ul><li><a href=#%e7%bc%98%e7%94%b1 onclick="onNavClick(`#缘由-nav`)" id=缘由-nav>缘由</a></li><li><a href=#%e9%9c%80%e6%b1%82 onclick="onNavClick(`#需求-nav`)" id=需求-nav>需求</a></li><li><a href=#%e9%85%8d%e7%bd%ae-github-repo onclick="onNavClick(`#配置-github-repo-nav`)" id=配置-github-repo-nav>配置 Github Repo</a></li><li><a href=#%e9%85%8d%e7%bd%ae-travis-ci onclick="onNavClick(`#配置-travis-ci-nav`)" id=配置-travis-ci-nav>配置 Travis CI</a></li><li><a href=#%e5%90%8e%e8%ae%b0 onclick="onNavClick(`#后记-nav`)" id=后记-nav>后记</a></li><li><a href=#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99 onclick="onNavClick(`#参考资料-nav`)" id=参考资料-nav>参考资料</a></li></ul></div></div></div></div></div><transition name=fade><div id=drawer-mask v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if=isDrawerOpen v-on:click=toggleDrawer></div></transition><nav id=navBar class="navbar sticky-top navbar-light single-column-nav-container"><div id=navBackground class=nav-background></div><div class="container container-narrow nav-content"><button id=nav_dropdown_btn class=nav-dropdown-toggle type=button v-on:click=toggleDrawer>
+<i class=material-icons>menu</i></button>
+<a id=navTitle class=navbar-brand href=https://blog.coherence.codes/>Coherence's Blog</a>
+<button type=button class=nav-darkmode-toggle id=darkModeToggleButton2>
+<i class=material-icons id=darkModeToggleIcon2>dark_mode</i></button></div></nav><div class=single-column-header-container id=pageHead v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }"><a href=https://blog.coherence.codes/><div class=single-column-header-title>Coherence's Blog</div></a></div><div id=content><div id=streamContainer class=stream-container><div class="post-list-container post-list-container-shadow"><div class=post><div class=post-head-wrapper-text-only><div class=post-title>使用 Travis CI 自动部署 Hexo 博客<div class=post-meta><time itemprop=datePublished>2019-04-21 20:16</time>
+<i class=material-icons>label</i>
+<a href=/tags/ci>CI</a>
+&nbsp;
+<a href=/tags/hexo>Hexo</a>
+&nbsp;</div></div></div><div class=post-body-wrapper><div class=post-body v-pre><p><img src=./bg2017121901.png alt=bg2017121901></p><h2 id=缘由>缘由</h2><p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。</p><p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的<code>ln -s</code>大法行不通了。</p><p>于是我想到了 CI。仔细一想其实也不复杂，无非是<code>git push</code>， <code>git pull</code>两下罢了。那么，Let&rsquo;s do it!</p><h2 id=需求>需求</h2><p>我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。</p><ul><li>我更新博客之后，commit 然后 push 至 Github repo</li><li>CI 自动构建博客</li><li>CI 将构建完成的静态文件 push 至 Github repo</li></ul><p>我原先使用的是<code>hexo-deployer-git</code>插件，通过<code>hexo g -d</code>部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。</p><h2 id=配置-github-repo>配置 Github Repo</h2><p>在这个 Repo 中需要两个分支：</p><ul><li>master 用于存放构建完成的静态文件</li><li>source 用于存放 Hexo 生成的博客源文件</li></ul><p>对 Hexo 文件夹的操作如下：</p><pre tabindex=0><code>git init
+git remote add origin git@github.com:cjc7373/cjc7373.github.io.git
+git checkout -b source
+git add .
+git commit -m &#34;To use CI to automated deploy&#34;
+git push origin source:source
+</code></pre><p>本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带<code>.gitignore</code>文件，所以实际大小并没有多少。</p><p><img src=./1555835090941.png alt=1555835090941></p><p>然后在 Github 上将主分支切换为<code>source</code>分支。</p><h2 id=配置-travis-ci>配置 Travis CI</h2><p>CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key，后者似乎有些麻烦，我选择了前者。当前需求应该只需要 repo 权限，然后在 Travis CI 的 Environment Variables 中加入这个 Token，注意不要勾选 Display value in build log。</p><p>然后就是编写<code>.travis.yml</code>了。 <del>正当我准备抄大佬们的配置的时候，忽然看到 Travis CI 官方提供了<a href=https://docs.travis-ci.com/user/deployment/pages/>轮子</a>，那就用吧QAQ（其实也没简单多少）</del>，然后翻车了。</p><p><img src=./1555837683039.png alt=1555837683039></p><p>看了下文档，我也没搞懂每个字段的意思。所以还是自己来吧。</p><p>为了在 commit 记录中显示更新日期，我把 push 部分单独写成了 sh脚本。</p><p><code>.travis.yml</code>:</p><pre tabindex=0><code>language: node_js
+node_js: stable
+
+# 只监听 source 分支的改动
+branches:
+  only:
+    - source
+
+# 缓存依赖，节省持续集成时间
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install
+
+script:
+  - hexo clean
+  - hexo g
+
+after_script:
+  - chmod +x ./deploy.sh # 添加可执行权限
+  - ./deploy.sh
+</code></pre><p><code>deploy.sh</code>:</p><pre tabindex=0><code>#!/bin/bash
+set -ev
+export TZ=&#39;Asia/Shanghai&#39;
+
+git config --global user.name &#34;cjc7373&#34;
+git config --global user.email &#34;niuchangcun@163.com&#34;
+
+# 获取以前的 commit 记录
+git clone -b master https://github.com/cjc7373/cjc7373.github.io.git .deploy
+# 这么移动是为了确保不受之前文件的影响
+mv .deploy/.git/ public/
+cd public
+git checkout master
+
+git add .
+git commit -m &#34;Site updated: `date +&#34;%Y-%m-%d %H:%M:%S&#34;`&#34;
+
+# 我也不知道 token 怎么用。。抄大佬的代码
+git push &#34;https://${token}@github.com/cjc7373/cjc7373.github.io.git&#34; master:master --quiet
+</code></pre><p>一开始忘了给<code>deploy.sh</code>可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。</p><p><img src=./1555840082905.png alt=1555840082905></p><p>（看着都是成功其实都是失败。。）</p><p>同时本地配合一下批处理，真正一键发布（滑稽</p><pre tabindex=0><code>cd C:\Users\niuch\Documents\GitHub\blog\
+git add .
+git commit
+git push
+pause
+</code></pre><h2 id=后记>后记</h2><p>历经两个多小时，终于把 CI 弄好了。虽然对 CI 还是一知半解，不过总算开了个头，也基本实现了需求。</p><p>Travis CI 官方的文档很全，但是以我的英文水平看得很吃力（懒得看），中文资料的质量又参差不齐。所以还是要锻炼自己的英语水平啊。</p><h2 id=参考资料>参考资料</h2><p><a href=https://docs.travis-ci.com>https://docs.travis-ci.com</a></p><p><a href=https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html>https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html</a></p><p><a href=https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/>https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/</a></p><p><a href=https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/>https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/</a></p><hr width=100% id=EOF><p style=color:#777>最后修改于 2019-04-21</p></div></div><nav class=post-pagination><a class=newer-posts href=/posts/2020_and_before/arch-linux-install/>下回<br>Arch Linux 安装&配置全过程</a>
+<a class=older-posts href=/posts/2020_and_before/fiber-modem-crack/>上回<br>中国电信 HG2543C1 光猫获取超级管理员密码</a></nav><div class=post-comment-wrapper></div></div></div></div></div><div id=single-column-footer><a href=https://github.com/cjc7373/hugo-theme-diary>Modified</a> Hugo Theme <a href=https://github.com/amazingrise/hugo-theme-diary>Diary</a> by <a href=https://risehere.net/>Rise</a><br>移植自 <a href=https://mak1t0.cc/ target=_blank rel="noreferrer noopener">Makito</a>'s <a href=https://github.com/SumiMakito/hexo-theme-journal/ target=_blank rel="noreferrer noopener">Journal.</a><br><br>&copy;
+2022 Coherence's Blog</div></div><script src=/js/journal.js></script></body></html>

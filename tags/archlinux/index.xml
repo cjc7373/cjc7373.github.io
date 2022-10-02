@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Archlinux on Coherence's Blog</title><link>https://blog.coherence.codes/tags/archlinux/</link><description>Recent content in Archlinux on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 08 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/archlinux/index.xml" rel="self" type="application/rss+xml"/><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.
+Archwiki 给人的感觉还是有点零碎了.. 与打包相关的条目大概有:
+Creating packages Arch package guidelines makepkg PKGBUILD AUR submission guidelines Arch Build System 好吧, 这可能就是 Wiki 的组织形式, 但对新手来说确实不友好. 另外 makepkg 和 PKGBUILD 的 man 文档也是很有用的.
+概览 ABS 是一个 ports-like 构建系统, 其打包的主要工具为 makepkg, 根据当前目录下的 PKGBUILD 打包. 据说是比 Debian 系的打包容易不少.
+打包 首先 makepkg 会下载 source 变量中指定的文件列表, 它们可以是一个 URL, 一个 git 仓库, 或一个在当前目录下的文件. makepkg 会校验文件的哈希并解压到以文件名命名的目录. 可用 -g, --geninteg 命令来下载文件并生成哈希. 注意 VCS 的 source 是没有哈希的.
+事实上看一看每种语言对应的 guidelines 是非常有用的.</description></item></channel></rss>

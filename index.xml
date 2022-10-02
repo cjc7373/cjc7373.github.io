@@ -1,0 +1,613 @@
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello, Hugo!</title><link>https://blog.coherence.codes/posts/2022/hello_hugo/</link><pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/hello_hugo/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/hello_hugo/ -&lt;p>这是一个船新的博客！&lt;/p>
+&lt;h2 id="历史">历史&lt;/h2>
+&lt;p>在大二（2018）的时候，我萌生了搭建一个自己的独立博客的想法，于是就有了 &lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/">hexo搭建小记&lt;/a>，当时我随手一找找到的基本都是 Hexo，于是我就用了。引用一段当时写的关于页面：&lt;/p>
+&lt;blockquote>
+&lt;h2 id="关于博客">关于博客&lt;/h2>
+&lt;ul>
+&lt;li>2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑&lt;/li>
+&lt;li>2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件&lt;/li>
+&lt;li>2020-02-22 更改评论为 &lt;code>disqusjs&lt;/code>，详见作者的&lt;a href="https://blog.skk.moe/post/disqusjs/">博文&lt;/a>；启用 &lt;a href="https://github.com/theme-next/theme-next-pjax">pjax&lt;/a>&lt;/li>
+&lt;li>2019-12-24 启用新域名&lt;code>blog.coherence.codes&lt;/code>&lt;/li>
+&lt;li>2019-10-07 升级主题至 Next V7.4.1&lt;/li>
+&lt;li>2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %}&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;p>Next 就是一个非常大众的主题，有几种变体，我用的是一个叫 &lt;code>pisces&lt;/code> 的变体，长这样（原博客图已经找不到了，只能用官方 Demo 凑数了）：&lt;/p>
+&lt;p>&lt;img src="image-20221002165030564.png" alt="image-20221002165030564">&lt;/p>
+&lt;p>这一时期的博客位于 &lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/source/source">source 分支&lt;/a>，最后更新于 2020-04-16。&lt;/p>
+&lt;p>由于这个主题实在是太大众了，中途（2019-10 左右）我也想过换一个主题（&lt;a href="https://github.com/yscoder/hexo-theme-indigo">hexo-theme-indigo&lt;/a>，一个 Material Design 风格的主题），但是没有配置成功，&lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/theme-indigo">theme-indigo 分支&lt;/a>便是那次尝试。theme-indigo 的效果图长这样：&lt;/p>
+&lt;p>&lt;img src="image-20221002165819783.png" alt="image-20221002165819783">&lt;/p>
+&lt;p>到了 21 年 2 月，我开始重新调研博客生成器，当时看到了一个 Python 写的 Pelican，而我又希望壮大一下 Python 生态，于是就用了。用了之后发现并没有什么合适的主题，恰巧 Pelican 用的模板引擎 Jinja 和 Django Template Engine 很像，我比较熟悉，于是我就想自己写一个主题，然而这一工作从没开始过.. 于是我现在的博客是这样的（&lt;del>极简主义&lt;/del>）：&lt;/p>
+&lt;p>&lt;img src="image-20221002171314620.png" alt="image-20221002171314620">&lt;/p>
+&lt;p>这段时间里我还写过一个&lt;a href="https://github.com/cjc7373/pelican-markdown-image">处理图片的 Pelican 插件&lt;/a>，虽然现在看起来挺蠢的..&lt;/p>
+&lt;p>再后来，我又对 Rust 产生了兴趣，于是又发现了 Zola，这时候我找到了 &lt;a href="https://github.com/AmazingRise/hugo-theme-diary">hugo-theme-diary&lt;/a> 这个主题，感觉非常不错，于是就想把它移植到 zola，在 port 了一个 head 之后，这个计划就被无限期搁置了。&lt;/p>
+&lt;p>终于，我感觉还是有必要有一个好看的博客的，于是我最终选择了 Hugo+hugo-theme-diary，加上一点点自己的魔改。&lt;/p>
+&lt;h2 id="迁移">迁移&lt;/h2>
+&lt;p>Hugo 对于资源文件的处理有&lt;a href="https://gohugo.io/content-management/image-processing/">自己的一套规则&lt;/a>，即博客文章位于 &lt;code>posts/post_name/index.md&lt;/code>，这篇文章资源文件放在 &lt;code>posts/post_name/&lt;/code> 这个路径下面。而我原来的文件结构为文章位于 &lt;code>posts/post_name.md&lt;/code>，资源文件位于 &lt;code>posts/post_name/&lt;/code>。所以我不得不写了一个脚本来迁移图片：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pathlib &lt;span style="color:#f92672">import&lt;/span> Path
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> re
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>md_image &lt;span style="color:#f92672">=&lt;/span> re&lt;span style="color:#f92672">.&lt;/span>compile(&lt;span style="color:#e6db74">r&lt;/span>&lt;span style="color:#e6db74">&amp;#34;!\[(.*)\]\((.*)\)&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">replace_image_reference_in_a_md_file&lt;/span>(md, dry_run&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(md, &lt;span style="color:#e6db74">&amp;#34;r&amp;#34;&lt;/span>, encoding&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;utf8&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content &lt;span style="color:#f92672">=&lt;/span> f&lt;span style="color:#f92672">.&lt;/span>read()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">replace&lt;/span>(match):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> match[0]: all matched string
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> match[1]: name
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> match[2]: image path
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rep &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;![&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>match[&lt;span style="color:#ae81ff">1&lt;/span>]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">](./&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>match[&lt;span style="color:#ae81ff">2&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>split(&lt;span style="color:#e6db74">&amp;#39;/&amp;#39;&lt;/span>)[&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Replacing &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>match[&lt;span style="color:#ae81ff">0&lt;/span>]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74"> with &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>rep&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> rep
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content &lt;span style="color:#f92672">=&lt;/span> md_image&lt;span style="color:#f92672">.&lt;/span>sub(replace, content)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">not&lt;/span> dry_run:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(md, &lt;span style="color:#e6db74">&amp;#34;w&amp;#34;&lt;/span>, encoding&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;utf8&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(content)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>to_mig: list[Path] &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>working_dir &lt;span style="color:#f92672">=&lt;/span> Path(&lt;span style="color:#e6db74">&amp;#34;./2022&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> f &lt;span style="color:#f92672">in&lt;/span> working_dir&lt;span style="color:#f92672">.&lt;/span>iterdir():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> f&lt;span style="color:#f92672">.&lt;/span>suffix &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;.md&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> to_mig&lt;span style="color:#f92672">.&lt;/span>append(f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(to_mig)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> f &lt;span style="color:#f92672">in&lt;/span> to_mig:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> replace_image_reference_in_a_md_file(f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>rename(working_dir &lt;span style="color:#f92672">/&lt;/span> Path(f&lt;span style="color:#f92672">.&lt;/span>stem) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#e6db74">&amp;#34;index.md&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># print(f&amp;#34;Move {f} to {Path(f.stem) / &amp;#39;index.md&amp;#39;}&amp;#34;)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugo 用的模板引擎是 Go 标准库里的，这点好评，Helm 用的同样是这个模板引擎。&lt;/p>
+&lt;h2 id="todo">TODO&lt;/h2>
+&lt;ul>
+&lt;li>Hugo 处理页面之间链接也有&lt;a href="https://gohugo.io/content-management/cross-references/">自己的规则&lt;/a>，目前好多跨页面链接是坏的&lt;/li>
+&lt;/ul>
+- https://blog.coherence.codes/posts/2022/hello_hugo/ -</description></item><item><title>The 2022 Python Language Summit</title><link>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</link><pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ -&lt;p>每年, 在 PyCon US 的前夕, 30 多位 Python 的核心开发者将会聚集起来召开 Python 语言峰会. 今年的会议在 5/11 召开, 让我们来看看今年讨论了什么吧. 有关会议的详情可在 &lt;a href="https://pyfound.blogspot.com/2022/05/the-2022-python-language-summit_01678898482.html">PSF Blog&lt;/a> 中找到.&lt;/p>
+&lt;h2 id="cpython-的-issue-和-pr-积压">CPython 的 issue 和 PR 积压&lt;/h2>
+&lt;p>首先祝贺一下前不久 &lt;a href="https://bugs.python.org">bpo&lt;/a> 正式退休了, Python 的 issue tracker 迁移到了 Github, 无论是易用性还是审美上来说都是一件好事.&lt;/p>
+&lt;p>随着 Python 的流行, issues 和 PRs 也开始累积起来了, 在 2022/05/07 时, CPython 有着 7,027 个 open issues 和 1,471 个 PRs. Python 开发者们向来对关闭一个 issue 持谨慎态度. 以低质量的功能请求 (feature requests) 为例, 我们可以粗略地把它们分为三类:&lt;/p>
+&lt;ul>
+&lt;li>没有任何意义的, 或显然有不利影响的, 它们能被轻易地关闭&lt;/li>
+&lt;li>会增加维护成本, 但似乎有点好处的, 对于它们的意见通常会很摇摆&lt;/li>
+&lt;li>每个人都觉得是好的, 但没人愿意真正去实现它.. 这些 issues 通常会存在很久, 如 &lt;a href="https://github.com/python/cpython/issues/36387">BPO-539907&lt;/a>, 一个存在了二十年的 issue.&lt;/li>
+&lt;/ul>
+&lt;p>开发者 Katriel 认为, 把这些 issues 留在 issue tracker 上是有害的, 增加了整个项目的维护成本. 有关这一论断, 一种极端的做法是关闭所有不活跃的 issues, 当然这是不可取的, 可以参看 &lt;a href="https://drewdevault.com/2021/10/26/stalebot.html">GitHub stale bot considered harmful&lt;/a>.&lt;/p>
+&lt;p>与会者们认为这一问题没有简单的答案, 但增加 triage 的人力显然是一种办法, CPython triage 团队目前在逐渐壮大, 这是好事. PEP 594 计划移除一些年久失修的标准库, 这也能缓解一些问题.&lt;/p>
+&lt;h2 id="没有-gil-的-python">没有 GIL 的 Python&lt;/h2>
+&lt;p>GIL 是 CPython 中一个臭名昭著的特性, 它也被开发者们翻来覆去地讨论了. 今年, 这一传统得到延续, 开发者 Sam Gross 讨论了 &lt;a href="https://github.com/colesbury/nogil">nogil&lt;/a>, 一个移除 GIL 的 Proof of Concept.&lt;/p>
+&lt;p>移除 GIL 意味着为了保证线程安全, 需要加入许多 locks, 这非常困难, 而且会影响单线程性能.&lt;/p>
+&lt;p>Gross 希望能在 Python 3.12 中加入一个编译选项来禁用 GIL. 与会者对其表示了支持, 但许多问题还有待考虑, 如这一巨大的更改如何合并入主线, 其对第三方库的影响, 对于 CPython 开发的影响等.&lt;/p>
+&lt;p>我个人感觉移除 GIL 还是不太现实的..&lt;/p>
+&lt;h2 id="每个解释器一个-gil">每个解释器一个 GIL&lt;/h2>
+&lt;p>在 1997 年, CPython 加入了 &lt;code>PyInterpreterState&lt;/code> 结构体, 这使得多个解释器能运行在一个进程中.&lt;/p>
+&lt;p>然而, 多个解释器之间并不是完全隔离的, 许多共享的全局变量通过 GIL 来实现互斥访问. 开发者 Eric Snow 希望每个解释器能有一个自己的 GIL 来解决这一问题, 这同样能够使子解释器之间实现真正的并行. 到目前为止, 仍然存在着约 1200 个全局变量.
+Snow 认为这一工作和 Gross 的移除 GIL 不是互斥的, &amp;ldquo;这些工作不管在哪里都是一个好主意&amp;rdquo;, 他说.&lt;/p>
+&lt;p>目前子解释器只能通过 C-API 使用, &lt;a href="https://peps.python.org/pep-0554/">PEP 554&lt;/a> 提出了在 Python 中使用子解释器, 然而该 PEP 仍处于草案状态.&lt;/p>
+&lt;p>我表示并不是很懂子解释器的意义所在&amp;hellip; 或许是方便共享数据? 多进程之间通信是要求一个对象可序列化的..&lt;/p>
+&lt;h2 id="faster-python">Faster Python&lt;/h2>
+&lt;p>好消息! 好消息! Python 3.11 相比于 3.10 会有平均 25% 的性能提升!&lt;/p>
+&lt;p>一年之前, 微软出钱, 组建了 Faster CPython 团队, 由开发者 Mark Shannon 和 Python 之父&lt;del>廖雪峰&lt;/del> Guido van Rossum 领导来做性能优化. Shannon 分享了他们接下来的计划.
+第一个问题是测量. 我们首先要知道 Python 在哪些地方慢, 为什么慢, 才能做针对性的性能优化. 为此, 我们需要更多的&lt;del>跑分&lt;/del>基准测试 (benchmarks), Shannon 希望更多人能去贡献 &lt;a href="https://github.com/python/pyperformance">pyperformance&lt;/a> 项目.&lt;/p>
+&lt;p>3.11 的很大一部分改进来自于 PEP 659, &amp;ldquo;专门化的自适应解释器&amp;rdquo;, 简而言之是在执行时用更快的字节码去替代原有的字节码. PEP 659 仍有待继续推进.&lt;/p>
+&lt;p>Shannon 也谈到了 JIT, &amp;ldquo;每个人都想要一个 JIT 编译器, 即使这毫无意义&amp;rdquo;, 像 &lt;a href="https://github.com/tonybaloney/Pyjion">pyjion&lt;/a> 这样的项目用第三方库的形式把 JIT 带到了 CPython 中, 然而在 CPython 中本身集成 JIT 可能要等到 3.13 之后了.&lt;/p>
+&lt;h2 id="python-和浏览器">Python 和浏览器&lt;/h2>
+&lt;p>在过去两年间, 60 多个和 WebAssembly 相关的 PR 合入了主线. 如今, &lt;code>main&lt;/code> 分支已经能够成功交叉编译成 wasm 了.
+WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码相近的性能. 而 wasm 是机器无关的.&lt;/p>
+&lt;p>这一 feature 仍然是高度实验性的, 许多模块在 wasm 下是不可用的.
+除了 CPython 之外, 一众第三方项目如 PyScript, Pyodide 已经能更好地支持 wasm 了.&lt;/p>
+&lt;h2 id="在语法中应用-f-strings">在语法中应用 f-strings&lt;/h2>
+&lt;p>在 Python 3.6 中引入的 f-strings 迅速成为了大家最喜爱的新 features 之一.&lt;/p>
+&lt;p>&lt;code>f&amp;quot;Interpolating an arbitrary expression into a string: {1 + 1}.&amp;quot;&lt;/code>&lt;/p>
+&lt;p>在运行时, 大括号中的表达式会被执行, 然后 &lt;code>str()&lt;/code> 会被调用, 最后的结果会被插入合适的位置.&lt;/p>
+&lt;p>然而, f-strings 目前的实现是 1,400 行 C 代码, 和其他 Python 代码的 Parsing 逻辑完全分离. 这带来了可维护性上的问题和许多隐藏的 bug.&lt;/p>
+&lt;p>Python 3.9 带来了全新的 PEG parser, 能够实现许多复杂的 parsing. 开发者 Pablo Galindo Salgado 希望能把 f-strings 的 parsing 结合到 CPython 的语法中.&lt;/p>
+&lt;p>比如以下问题:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&amp;gt;&amp;gt;&amp;gt; my_list_of_strings &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;b&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;c&amp;#39;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;gt;&amp;gt;&amp;gt; f&lt;span style="color:#e6db74">&amp;#39;Here is a list: {&amp;#34;\n&amp;#34;.join(my_list_of_strings)}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> File &lt;span style="color:#e6db74">&amp;#34;&amp;lt;stdin&amp;gt;&amp;#34;&lt;/span>, line &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#e6db74">&amp;#39;Here is a list: {&amp;#34;\n&amp;#34;.join(my_list_of_strings)}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ^
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SyntaxError: f-string expression part cannot include a backslash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在新方案下将会不存在.&lt;/p>
+&lt;h2 id="从-cinder-合并回上游">从 Cinder 合并回上游&lt;/h2>
+&lt;p>在 2021 年 5 月, Instagram 团队开源了 Cinder, 这是 CPython 的一个以性能为目标的 fork. Cinder 包括了 &amp;ldquo;协程的及早求值&amp;rdquo;, 一个 JIT 编译器, 利用了 type hints 的&amp;quot;实验性的字节码编译器&amp;quot;等 features. (我一直以为 type hints 完全是静态检查, 翻了翻 PEP 发现运行时类型检查以及可能的利用类型进行性能优化是可以接受的)&lt;/p>
+&lt;p>Instagram 的工程师 Itamar Ostricher 分享了 async 和协程相关的更改, 并希望这些更改能合并回上游.
+一个例子:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> asyncio
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">IO_bound_function&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;This function could finish immediately... or not!&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Body of this function here&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">important_other_task&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> asyncio&lt;span style="color:#f92672">.&lt;/span>sleep(&lt;span style="color:#ae81ff">5&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Task done!&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> asyncio&lt;span style="color:#f92672">.&lt;/span>gather(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IO_bound_function(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> important_other_task()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;All done!&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__ &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;__main__&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> asyncio&lt;span style="color:#f92672">.&lt;/span>run(main)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果 &lt;code>IO_bound_function&lt;/code> 能立即返回的话, 创建一个协程就毫无意义了. Ostricher 的团队扩展了 &lt;a href="https://docs.python.org/3/c-api/call.html#the-vectorcall-protocol">vectorcall&lt;/a> 协议, 使得被调用者能够知道这次调用是否被调用者 &lt;code>await&lt;/code> 了. 这意味着 &lt;code>awaitables&lt;/code> (可被 &lt;code>await&lt;/code> 的对象) 能够被&lt;em>及早求值&lt;/em>, 多余的协程不会被创建了. Ostricher 的团队在重度使用 &lt;code>async&lt;/code> 的场景下观察到了 ~5% 的性能提升.&lt;/p>
+&lt;p>这个改动能否被合入主线呢? 一个重要的问题是公平性. 如果某些 &lt;code>awaitables&lt;/code> 能被及早求值, 那么可能会使事件循环中的优先级发生改变, 可能会造成不向后兼容的更改. 同时, 其对于 3.11 中 asyncio &lt;em>task groups&lt;/em> 的影响也尚不明确.&lt;/p>
+&lt;h2 id="达到永恒">达到永恒&lt;/h2>
+&lt;p>在 Python 中, 任何东西是一个对象. 所有对象都维护了自己的引用计数, 以便进行垃圾回收. 这就意味着不可变对象在 C 的层次上是可变的, 这会影响 CPU 和内存性能. 例如 &lt;code>None&lt;/code> 对象经常被使用, 对其引用计数的更改也非常多.&lt;/p>
+&lt;p>&lt;a href="https://peps.python.org/pep-0683/">PEP 683&lt;/a> 提出了 &amp;ldquo;永恒的对象 (Immortal objects)&amp;rdquo;, 它们的运行时状态不会改变, 即引用计数不会到达 0, 也不会被垃圾回收.&lt;/p>
+&lt;p>这是一个 CPython 内部的 feature, 即公开 API 不会改变.
+与会者们提出了一些怀疑, 比如它的好处是否只是潜在的, 以及改变引用计数的语义会带来第三方库的兼容性问题. 目前该 PEP 仍处于草案状态.&lt;/p>
+&lt;p>我并没有理解这个 PEP 的好处在哪.. 目前的实现在回归测试中导致了 ~2% 的性能损失..&lt;/p>
+&lt;h2 id="尾巴">尾巴&lt;/h2>
+&lt;p>本次会议很大程度上讨论了 Python 的性能改善, 然而大多数变化是琐碎且渐进的, 想要看到某个改动带来的性能飞跃似乎不太可能 &lt;del>(除了 GIL)&lt;/del>. 我们希望去年 Language Summit 上 Guido 吹下的牛── 4 年里将 CPython 的性能提升 5 倍──能够实现吧.&lt;/p>
+- https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ -</description></item><item><title>民族主义自媒体是如何消费我们的</title><link>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ -&lt;p>目前的中文互联网上存在着大量的鼓吹民族主义, 制造中西方对立的自媒体, 令人震惊的是, 他们中大部分不但充斥着情绪输出, 甚至连大部分事实都是错误的. 我偶然间读到了这样的一篇文章, 并对其中列出的事实进行了查证, 然后感觉我的智商受到了侮辱..&lt;/p>
+&lt;p>原文: &lt;a href="https://www.zhihu.com/question/428451991/answer/2431916538">西方媒体是怎样给西方人洗脑的？ - 远方青木的回答 - 知乎&lt;/a>, &lt;a href="http://web.archive.org/web/20220429053052/https://www.zhihu.com/question/428451991/answer/2431916538">archive&lt;/a>&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;p>这几年欧美一直在向中国发动舆论战，我见过最离谱的一个理论甚至说什么“中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟”。&lt;/p>
+&lt;p>我本以为这套歪理邪说就是欧美造谣生事的想象力极限，没想到欧美的底线可以永无止尽的被突破。&lt;/p>
+&lt;/blockquote>
+&lt;p>来源: &lt;a href="https://www.nytimes.com/2020/01/07/business/fake-pork-china.html">纽约时报 中国人会购买人造肉吗？&lt;/a>, 另见&lt;a href="https://world.huanqiu.com/article/9CaKrnKoNzC">环球网报道&lt;/a>&lt;/p>
+&lt;p>评论: 虽然文章很有&amp;quot;反华&amp;quot;的倾向性, 但文章主要讲的是人造肉在中国难以推广. 肉类消费对于气候的影响是不争的事实. 所以&amp;quot;中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟&amp;quot;这句话也不能算错, 但应该把主语换成全世界人.
+要求中国牺牲国民营养而减少肉类消费是不合理的, 但是推广人造肉是合理的. 作者在这里显然有断章取义之嫌.&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;p>《&lt;a href="https://web.archive.org/web/20220429053052mp_/https://www.zhihu.com/search?q=%E5%8D%8E%E7%9B%9B%E9%A1%BF%E9%82%AE%E6%8A%A5&amp;amp;search_source=Entity&amp;amp;hybrid_search_source=Entity&amp;amp;hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A2431916538%7D">华盛顿邮报&lt;/a>》在报道中声称**“中国每年强迫种植数亿棵新树”，这简直是在“犯罪”！**&lt;/p>
+&lt;p>&lt;img src="./e577e26ef47585f1faae27fb45123efd.png" alt="e577e26ef47585f1faae27fb45123efd.png">&lt;/p>
+&lt;p>我捋一捋他们的思路，&lt;strong>大概意思就是说中国每年种数亿棵新树，但把这些新树种下去之前并没有征求这些树的同意，这数亿棵树是“不一定同意自己被种植”的，但全部被中国强迫种在地里了。&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>因此，中国侵犯了树“自由被种植”的权力，强迫树木劳动，这属于犯罪，因此中国需要反思自己这种野蛮的行为。&lt;/strong>&lt;/p>
+&lt;p>逻辑好像有那么一点点道理哦，但我怎么就觉得那么奇怪和荒谬呢。&lt;/p>
+&lt;p>中国人种树怎么了？&lt;/p>
+&lt;p>种树不是在保护环境吗？&lt;/p>
+&lt;p>怎么拐了一圈之后种树居然成犯罪行为了？&lt;/p>
+&lt;/blockquote>
+&lt;p>来源: 没有找到来源.&lt;/p>
+&lt;p>评论: 据 &lt;a href="https://checkyourfact.com/2022/04/18/fact-check-washington-post-china-trees-article/">checkyourfact&lt;/a>, 该截图为杜撰, 最初流传于 Facebook 和 Twitter.&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;p>更荒谬的是，同一家西方媒体，前几年报道中国的标题是**《中国对一次性筷子的成瘾正在摧毁森林》。**&lt;/p>
+&lt;p>首先，一次性筷子不是用森林做出来的，一次性筷子的主要原料是一个月能长3米的竹子，以及速生经济林的边角废木料。&lt;/p>
+&lt;p>用森林里的好木头确实可以做一次性筷子，但没人这么做，因为成本太高商家会亏本，只有速生林边角废料和竹子的低廉价格才能让商家赚到钱。&lt;/p>
+&lt;p>其次，抛开筷子的真实原材料不谈，这家西方媒体的主要立场好像也是森林是宝贵的，森林对人类有益，并以此来指责中国。&lt;/p>
+&lt;p>&lt;strong>既然如此，为什么中国种植森林也能被指责一番。是不是中国人干什么都不行，连呼吸都是错的？&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>来源: &lt;a href="https://www.washingtonpost.com/news/worldviews/wp/2013/03/14/chinas-disposable-chopstick-addiction-is-destroying-its-forests/">华盛顿邮报《中国对一次性筷子的成瘾正在摧毁森林》&lt;/a>&lt;/p>
+&lt;p>评论: 华盛顿邮报 2013 年的报道, 主要援引的是时任吉林森工集团董事长柏广新的一句话: &amp;ldquo;我国每年生产800亿双一次性筷子，相当于要砍伐2000万棵生长20年的大树&amp;rdquo;. &lt;a href="http://www.gov.cn/2013lh/content_2349497.htm">中国政府网&lt;/a>和&lt;a href="http://cpc.people.com.cn/pinglun/n/2013/0312/c78779-20759994.html">光明网&lt;/a>均能找到这句话以及相关对一次性筷子的批评. 报道中均指出了木头和竹子均是一次性筷子的原料.&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;p>几年前，欧美媒体报道说根据科学家的研究，中国人种植水稻会产生更多的温室气体，因此中国人吃大米正在毁灭全球气候，进而导致人类灭亡。&lt;/p>
+&lt;/blockquote>
+&lt;p>来源: 我都不知道怎么找..&lt;/p>
+&lt;p>评论: 类似的研究肯定有, 但我不觉得哪家媒体会报道吃大米导致人类灭亡&amp;hellip;&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;p>2019年，国际顶级科学期刊《自然》杂志发表了一篇文章，说根据科学家的研究成果，中国政府治理沙漠，大力推进的荒漠绿化工程，种树过多，可能导致人类水资源枯竭，因此会对地球自然生态造成极大影响。&lt;/p>
+&lt;p>《自然》杂志本是人类最顶级的科学杂志，但写这篇文章的“科学家”逻辑推导却很简单，算一算中国政府要消灭荒漠需要种多少棵树，种这些树需要消耗多少水资源，&lt;strong>因此得出结论中国种树会破坏自然环境。&lt;/strong>&lt;/p>
+&lt;p>别笑，这是真事。&lt;/p>
+&lt;p>&lt;strong>中国人花费几代心血把沙漠变成了绿洲，对人类如此巨大的贡献居然招来西方期刊的指责？&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>治理沙漠居然都能成为破坏环境的罪证。&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>来源: &lt;a href="https://www.nature.com/articles/d41586-019-02789-w">nature 文章 China&amp;rsquo;s tree-planting drive could falter in a warming world&lt;/a>&lt;/p>
+&lt;p>评论: 但凡看一下文章就会觉得文章的中立性是没问题的. 文章警告了非原产地树木对当地水资源的大量消耗, 可能会导致干旱地区的扩散. 也引用了多位中国科学家的意见.&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;p>巴西烧毁森林种地的时候，西方批判，说这样会造成水土流失，土地荒漠化，从而破坏人类环境。&lt;/p>
+&lt;p>中国种树消灭荒漠的时候，西方又批判，说这是在破坏人类环境，还不如让土地继续荒漠化。&lt;/p>
+&lt;p>澳大利亚和美国森林大火，烧毁无数森林，漫天黑烟，西方说这都是很正常的行为，对人类环境没有丝毫损害。&lt;/p>
+&lt;/blockquote>
+&lt;p>来源: 不知道怎么找.&lt;/p>
+&lt;p>评论: 因果倒置, 是气候变化导致了森林火灾的可能性增加&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;p>但没有西方人说那群在荒漠里植树造林的中国人有功劳，反而把一个从来不种树的嘴炮少女捧为“环保公主”。&lt;/p>
+&lt;/blockquote>
+&lt;p>评论: 讽刺 Greta Thunberg 也是传统艺能了, 不过我个人对她的评价还是比较积极的, 她组织了贯穿整个欧洲的学生罢课, 多次在 COP 上演讲. 她的&lt;a href="https://en.wikipedia.org/wiki/Greta_Thunberg">维基百科页面&lt;/a>也是比较正面的. 她频繁提到过 IPCC 的 &lt;a href="https://www.ipcc.ch/site/assets/uploads/sites/2/2019/09/IPCC-Special-Report-1.5-SPM_zh.pdf">全球升温 1.5°C&lt;/a>, 我也推荐大家去读一读, 这算是为什么要应对气候变化的科学基础.&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;p>欧美人种一点点树就是天大的功劳，但中国不是，不仅无功，反而有罪。&lt;/p>
+&lt;p>类似的双标相当常见，当初意大利封城，那就是**“冒着经济风险保欧洲”&lt;strong>，而中国封城则是&lt;/strong>“以牺牲人民自由为代价”**，两篇文章不仅在同一家媒体《纽约时报》发布，而且时间居然只差了20分钟。&lt;/p>
+&lt;p>&lt;img src="./9d2d417242ceec2596a90beaaebb71a8.png" alt="9d2d417242ceec2596a90beaaebb71a8.png">&lt;/p>
+&lt;/blockquote>
+&lt;p>来源: &lt;a href="https://twitter.com/nytimes/status/1236479276586807296">https://twitter.com/nytimes/status/1236479276586807296&lt;/a>, &lt;a href="https://twitter.com/nytimes/status/1236484352965521408">https://twitter.com/nytimes/status/1236484352965521408&lt;/a>&lt;/p>
+&lt;p>评论: 单看这两条推特确实是西方媒体的偏见..&lt;/p>
+&lt;hr>
+&lt;blockquote>
+&lt;p>另一招，就是在报道中国正面的同时，再加上一句，就是鼎鼎大名的**“但代价是什么”。**&lt;/p>
+&lt;p>组合起来的效果给大家展示一下，比如说**“中国也许有效控制了疫情，但代价惨重”。**&lt;/p>
+&lt;p>比如说，&lt;strong>中国正在变得智能，但代价是什么？&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="./246b296018db3460d935bb2e9d121731.png" alt="246b296018db3460d935bb2e9d121731.png">&lt;/p>
+&lt;p>这，就是欧美媒体对中国报道的常规格式。&lt;/p>
+&lt;p>把中国的好事变坏简直太简单了，&lt;strong>你这个好事似乎存在，但代价是什么？&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>评论: 虚空打靶.. 别只看个标题啊, 你倒是具体说说西方媒体说了啥啊.&lt;/p>
+&lt;hr>
+&lt;p>总结: 看这种自媒体真的降智商.. 以后要少看..&lt;/p>
+- https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ -</description></item><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ -&lt;p>本文纯属回忆, 描述可能会有偏差.&lt;/p>
+&lt;p>小学时, 为方便联系, 我爸给了我一个 ZTE 的功能机, 里面只有一个打砖块的小游戏.&lt;/p>
+&lt;p>后来这手机被我在路上掉了, 于是我换成了一个 LG 的功能机. 这个 LG 的神奇之处在于它自带了一个浏览器, 于是我可以用 2G 上网去起点, 纵横看小说. 另外它自带电信的一个应用商店, 里面有一些免费的小游戏可以下 (不知道是啥技术, 估计是 java..), 因为我当时并没有流量套餐, 后来还因为话费异常被我爸查到并追问我在上网干什么, 我记得我用看新闻蒙混过去了. 这个手机陪伴我度过了初中.&lt;/p>
+&lt;p>考上省中后, 爸妈为了奖励我, 给我换了个新手机, 这时我爸被中国电信忽悠买了个酷派 K1 (酷派 5952).&lt;/p>
+&lt;p>&lt;img src="./eaf7170a1d32cc48175600e65db56628.png" alt="eaf7170a1d32cc48175600e65db56628.png">&lt;/p>
+&lt;p>这也算是当时第一批 4G 手机了, 进网贴纸贴的还是进网试用. 但是 1G 的内存根本比不过同期的小米 2S.&lt;/p>
+&lt;p>后来因为我忘了什么原因了我又买了个手机, 这个给我爸用. 听信了当时中华酷联的鬼话我又入了酷派的坑 (加之当时电信手机确实不好买), 买了酷派大神 F1 电信版 (酷派 8297-C00).&lt;/p>
+&lt;p>&lt;img src="image-20221002163705814.png" alt="image-20221002163705814">&lt;/p>
+&lt;p>它采用了&amp;quot;极为先进&amp;quot;的 64 位高通 410 SoC (据称是高通首款 64 位), 对, 我又听信了 Android 5.0 优化 (ART, Android Runtime) 和 64 位的鬼话, 买了这个 1G RAM 的手机.
+事实上出厂系统还是 4.4, 32 位. 于是我天天去酷派论坛蹲, 还真蹲到了 64 位的 5.0. 但事实上硬件的局限在那, 提升并没有那么大.
+于是当时整天折腾各种 ROM, 各种优化. 在那个我 root 还靠各种一键 root app 的年代, 很难想象我都在优化什么.&lt;/p>
+&lt;p>这里提一件我印象很深的事. 酷派自带的系统有个安全 app, 叫酷管家, 显然我并不想用它, 但是一旦你删了它或者想动它什么组件, 手机就会弹一个正在优化系统的弹窗 (实际上是软重启), 然后一切归零.
+另外还值得一提的是刚拿到手机的那几个月里系统更新还是很频繁的, 而且似乎确实解决了一些问题, 这点还是好评.&lt;/p>
+&lt;p>&lt;img src="./c64f78b386179a872744127b8ef9a0b6.png" alt="c64f78b386179a872744127b8ef9a0b6.png">
+ROM 之家这种网站也是时代的眼泪了&lt;/p>
+&lt;p>后来由于学习的原因手机被迫上交. 但没过多久我偷偷搞到了我爸之前用的一个安卓 2.3 的小手机. 型号已经忘了, 大概是 htc, 性能非常差, 大概只有单核, 200 多 MB 内存, 触摸屏中间一部分还是坏的, 但用来看小说完全够了.&lt;/p>
+&lt;p>到了高三娱乐活动更加匮乏, 于是我托同学在闲鱼上买了个 iPhone 5s, 顿时感到苹果是多么好看, 多么精致, 还有极为先进的 Touch ID, 当时用它打炉石感到难以想象地流畅 (毕竟之前的垃圾酷派实在是卡). 唯一的问题是被卖家坑了, 电池雪崩, 有时一半电直接关机. 但是其和温度有很大关系, 有时候你把它捂一会捂热它就又能开机了. 后来不得已花了一百多换了块电池.&lt;/p>
+&lt;p>用了一段时间我顿感苹果索然无味, 于是卖了买了 Nexus 6. 在 16, 17 年高通 805 + 3G RAM + 5.95&amp;rsquo; 2k 屏说不上顶配, 但也足够优秀了, 很难想象这是 14 年发布的手机. Google 亲儿子无成本解锁 BL 的特性让刷机和 root 变得非常方便.
+而且它那个屏幕的手感非常不错, 在现在看来滑动也是丝般顺滑, 可惜后来屏幕被我摔碎了.&lt;/p>
+&lt;p>高中毕业后, 虽然 Nexus 6 性能还够用, 但这不能给我爸妈看到呀, 于是直接买新手机. 一开始抢小米 6 没抢到, 然后买了一加 5. (还好没抢到!) 以我现在的眼光自然是觉得 Oxygen OS 这种类原生是要比 MIUI 好很多的.&lt;/p>
+&lt;p>这一加 5 钉子户一当就当了四年. 到大学毕业实在感到 835 性能不够用了. 我当时是想挑一个小屏旗舰, 挑来挑去也没挑出来, 要么太贵, 要么不能解锁 BL, 于是又买了一加, 一加 8T.&lt;/p>
+- https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ -</description></item><item><title>我为什么选择在 Surface 上使用 Windows</title><link>https://blog.coherence.codes/posts/2022/surface_on_linux/</link><pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/surface_on_linux/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/surface_on_linux/ -&lt;p>自从购置 Surface Pro 7 以来, 曾数次不满于 Windows 的包管理, 遥测, Windows Defender 等方面. 然更换了 Linux 之后并没有一个太好的使用体验. 本文记录了 Surface Pro 7 在 Archlinux 上的体验.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>在 2021 年七月某日, 手贱尝试了一下 Windows 11 Preview (印象里是公开发布的第一版) 之后, 感叹于 Bug 之多, 奈何回滚需要重新安装 Windows, 于是一气之下装了 Archlinux.&lt;/p>
+&lt;p>&lt;img src="./8a7b6609572d402bb2b747b706ef0c62.png" alt="img">(此处附使用截图一张)&lt;/p>
+&lt;p>在使用了近半年之后, 再次感叹, 微软自家的产品在 Linux 上体验真的不好.. 又萌生了换回 Windows 的想法.&lt;/p>
+&lt;p>具体而言, 有以下几个方面. 首先, Connected standby 在 Windows 下工作地很好, 然而在 Linux 下待机的耗电非常显著, 大概一晚上能掉一半电的那种. 于是后来发现了 suspend-then-hibernate 这个策略, 理论上还算可以接受. 然其有个非常严重的 Bug, 有时候其不能够成功地进入休眠状态, 导致第二天早上起来的时候 Surface 直接没电了. 而且这个问题出现频率比较高, 大概十次待机中有两三次, 非常影响使用体验. 在电量不足 10% 内核的频率调度会非常激进, 基本只能维持在 1.5G (即使电源已连接), 这时候系统会非常卡, 进一步导致了开机后仍有十多分钟的不可用状态. 这个 Bug 是我想换回 Windows 的直接原因.&lt;/p>
+&lt;p>&lt;img src="./image-20220226111426078.png" alt="image-20220226111426078">
+(图为在个人 issue tracker 中的记录, 实际和内核更新无关)&lt;/p>
+&lt;p>其次, 由于主线内核的支持有限, 我选择了第三方的 &lt;a href="https://github.com/linux-surface/linux-surface">linux-surface&lt;/a> 内核, 然其支持仍然有限. 最主要为缺乏 Surface Pen 和多点触控的支持. 加之我使用的 KDE 桌面环境对于平板设备的支持几乎为零, 我的 Surface 事实上是当成笔记本电脑来使用的.&lt;/p>
+&lt;p>另外, 还有 KDE 对于触控板手势缺乏支持 (在 Wayland 中已实现了部分支持); 续航较之 Windows 差了很多; Xorg 不支持多显示器不同缩放; 无法使用摄像头/Windows Hello 等等问题.&lt;/p>
+&lt;p>更换 Windows 之后:&lt;/p>
+&lt;ul>
+&lt;li>需要重新配置环境, 然包管理器选用 winget, dotfiles 使用 chezmoi 管理, 应该不会有太多麻烦&lt;/li>
+&lt;li>Windows defender, 遥测等占用资源, 然应该可用组策略解决&lt;/li>
+&lt;li>失去了 krunner, 可以用其他软件替代, 或者开始菜单将就用..&lt;/li>
+&lt;li>还可以使用腾讯会议等 Windows 专有软件 (Linux 版的体验很不好)&lt;/li>
+&lt;/ul>
+&lt;p>综上, 我又反复横跳回来了..&lt;/p>
+- https://blog.coherence.codes/posts/2022/surface_on_linux/ -</description></item><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ -&lt;p>记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>Archwiki 给人的感觉还是有点零碎了.. 与打包相关的条目大概有:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://wiki.archlinux.org/title/Creating_packages">Creating packages&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://wiki.archlinux.org/title/Arch_package_guidelines">Arch package guidelines&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://wiki.archlinux.org/title/Makepkg">makepkg&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://wiki.archlinux.org/title/PKGBUILD">PKGBUILD&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://wiki.archlinux.org/title/AUR_submission_guidelines">AUR submission guidelines&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://wiki.archlinux.org/title/Arch_Build_System">Arch Build System&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>好吧, 这可能就是 Wiki 的组织形式, 但对新手来说确实不友好. 另外 makepkg 和 PKGBUILD 的 man 文档也是很有用的.&lt;/p>
+&lt;h2 id="概览">概览&lt;/h2>
+&lt;p>ABS 是一个 &lt;a href="https://en.wikipedia.org/wiki/Ports_collection">ports&lt;/a>-like 构建系统, 其打包的主要工具为 makepkg, 根据当前目录下的 PKGBUILD 打包. 据说是比 Debian 系的打包容易不少.&lt;/p>
+&lt;h2 id="打包">打包&lt;/h2>
+&lt;p>首先 makepkg 会下载 source 变量中指定的文件列表, 它们可以是一个 URL, 一个 git 仓库, 或一个在当前目录下的文件. makepkg 会校验文件的哈希并解压到以文件名命名的目录. 可用 &lt;code>-g, --geninteg&lt;/code> 命令来下载文件并生成哈希. 注意 VCS 的 source 是没有哈希的.&lt;/p>
+&lt;p>事实上看一看每种语言对应的 guidelines 是非常有用的.&lt;/p>
+&lt;p>&lt;img src="./image-20211208122231668.png" alt="image-20211208122231668">&lt;/p>
+&lt;p>我在打这个 go 包的时候, makepkg 有个警告: &lt;code>==&amp;gt; WARNING: Package contains reference to $srcdir&lt;/code>, 而 Go package guideline 里就给了解决办法.&lt;/p>
+&lt;h2 id="上传-aur">上传 AUR&lt;/h2>
+&lt;p>AUR 还挺有意思的, 它是个 git 仓库, 我们只要 push 一个仓库到 &lt;code>ssh://aur@aur.archlinux.org/pkgbase.git&lt;/code> 就能创建一个 pkgbase 包. 当然, 除了创建新包外,应该是只有 maintainer 有权限了. 所以首先我们需要去 AUR 的网页里添加公钥. 顺便吐槽一下 SSO 什么时候才能被应用到所有 Arch 的网站中.&lt;/p>
+&lt;p>每次修改 PKGBUILD 上传 AUR 之前, 我们都必须运行 &lt;code>makepkg --printsrcinfo &amp;gt; .SRCINFO&lt;/code> 来生成 &lt;code>.SRCINFO&lt;/code>, 这是 AUR 显示在网页上的元数据.&lt;/p>
+- https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ -</description></item><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ -&lt;p>记录一下比赛期间踩到的坑.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="签到">签到&lt;/h2>
+&lt;p>开始完全没有读题直接进题目, 然后想了半天没思路并随机测试了一些数.. 直到我读了题..&lt;/p>
+&lt;h2 id="进制十六参上">进制十六——参上&lt;/h2>
+&lt;p>显然, 大家都知道怎么编辑十六进制, 然而我并不想手输这么多文本, 于是 Google 在线 OCR, 结果 OCR 的内容有部分是错的.. 被迫找同学要了一份 OCR 结果.&lt;/p>
+&lt;h2 id="去吧追寻自由的电波">去吧！追寻自由的电波&lt;/h2>
+&lt;p>直接 Google ffmepg 音频速度. 然而很多结果给的一个过滤器是不改变音调的方案, 后来发现直接改采样率就行了..&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>cjc@coherence hackergame_2021&lt;span style="color:#f92672">]&lt;/span>$ file radio.mp3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>radio.mp3: Audio file with ID3 version 2.4.0, contains: MPEG ADTS, layer III, v1, &lt;span style="color:#ae81ff">128&lt;/span> kbps, &lt;span style="color:#ae81ff">48&lt;/span> kHz, Stereo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>cjc@coherence hackergame_2021&lt;span style="color:#f92672">]&lt;/span>$ ffmpeg -i radio.mp3 -af &lt;span style="color:#e6db74">&amp;#34;asetrate=16000&amp;#34;&lt;/span> radio_output.mp3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>命令来自&lt;a href="http://johnriselvato.com/ffmpeg-how-to-change-the-pitch-sample-rate-of-an-audio-track-mp3/">这里&lt;/a>, 虽然我根本没有看这篇文章..&lt;/p>
+&lt;h2 id="猫咪问答-pro-max">猫咪问答 Pro Max&lt;/h2>
+&lt;p>没错, 被第二题坑了.. 以为是第四题不对, 于是写了个暴力跑了几万次..&lt;/p>
+&lt;p>&lt;img src="./image-20211030151026284.png" alt="image-20211030151026284">&lt;/p>
+&lt;p>提示: 这是一个提示.&lt;/p>
+&lt;h2 id="卖瓜">卖瓜&lt;/h2>
+&lt;p>已经被同学提示了这是个 PHP 溢出问题.. 甚至都找到了 (同学给的) &lt;a href="https://www.php.net/manual/zh/language.types.integer.php#125251">PHP 文档中的一条评论 (甚至题解也给了这个)&lt;/a>, 但是并不知道怎么做.. 于是用 &lt;code>b1=2**63//6+n&lt;/code> (n 为 -10~10 之间的一个随机数) 瞎试做出来了.&lt;/p>
+&lt;h2 id="透明的文件">透明的文件&lt;/h2>
+&lt;p>看&lt;a href="https://learnku.com/articles/26231">这篇文章&lt;/a>学到了一些 ANSI 转义序列的知识. 题解上说只需简单地在 &lt;code>[&lt;/code> 前加上 &lt;code>\x1b&lt;/code> 就行, 然而并不行.. 我的终端并不能解析这些转义序列..&lt;/p>
+&lt;p>&lt;img src="./image-20211030153759137.png" alt="image-20211030153759137">&lt;/p>
+&lt;p>于是在进行了一些我也忘记了是什么的操作之后终于成功了:&lt;/p>
+&lt;p>&lt;img src="./image-20211030154033261.png" alt="image-20211030154033261">&lt;/p>
+&lt;p>只记得 Python 从文件读然后 print 和直接 print 一个字符串的结果还不一样.. (也可能是是否在 REPL 下的区别.. 不管了)&lt;/p>
+&lt;p>找个时间可以好好学一学这方面的内容..&lt;/p>
+&lt;p>PS: 直接使用 &lt;code>cat transparent.txt | sed 's/\[/\x1b[/g' | sed 's/ /#/g'&lt;/code> 是可以的.. 那看来是 VSCode 的替换的锅了.. 在 VSCode 中我直接用字符串 &lt;code>\x1b&lt;/code> 替换的.. 而 sed 替换出来的是一个字节 &lt;code>\x1b&lt;/code>..&lt;/p>
+&lt;h2 id="旅行照片">旅行照片&lt;/h2>
+&lt;p>纯社工题. 第五题题解中说的百度街景里并没有找到.. 小红书发挥了重要作用..&lt;/p>
+&lt;h2 id="flag-助力大红包">FLAG 助力大红包&lt;/h2>
+&lt;p>居然真的有人在求助力..&lt;/p>
+&lt;p>&lt;img src="./image-20211030154537778.png" alt="image-20211030154537778">&lt;/p>
+&lt;p>第一时间就想到了 &lt;code>X-Forwarded-For&lt;/code>. 我以为并不会这么简单, 没想到恰恰是这么简单..&lt;/p>
+&lt;p>这题因为题目的请求并发限制还被坑了一会..&lt;/p>
+&lt;h2 id="amnesia">Amnesia&lt;/h2>
+&lt;p>没想到题解这么简单, &lt;code>putchar&lt;/code> 一个 char 字符会被分配到栈上, 我还用了一个很魔法的方法..&lt;/p>
+&lt;p>&lt;img src="./image-20211030164358742.png" alt="image-20211030164358742">&lt;/p>
+&lt;p>这样似乎能强制把 b 数组放到 .text 段上..&lt;/p>
+&lt;p>第二问显然我不会..&lt;/p>
+&lt;h2 id="图之上的信息">图之上的信息&lt;/h2>
+&lt;p>基本没遇到什么障碍, Google 到 &lt;a href="https://stackoverflow.com/questions/34199982/how-to-query-all-the-graphql-type-fields-without-writing-a-long-query">How to query all the GraphQL type fields without writing a long query?&lt;/a> 之后试了几分钟就试出来了.&lt;/p>
+&lt;h2 id="easy-rsa">Easy RSA&lt;/h2>
+&lt;p>get_p 用一下 &lt;a href="https://en.wikipedia.org/wiki/Wilson%27s_theorem">Wilson&amp;rsquo;s theorem&lt;/a> 就行, 但 get_q 直到比赛结束还没想出来.. 还是数理基础不够扎实(&lt;/p>
+&lt;p>原来 get_q 也是一次 RSA 的加密过程! 我还一直在试图解 $value_q = q^e mod\ n$ 这个方程.. (能解出来就有鬼了)&lt;/p>
+&lt;p>那么现在虽然我还不懂 RSA 的正确性, &lt;del>我已经完全掌握 RSA 了&lt;/del>.&lt;/p>
+&lt;h2 id="加密的-u-盘">加密的 U 盘&lt;/h2>
+&lt;p>一开始各种 Google &lt;code>luks exploit&lt;/code>, &lt;code>luks attack&lt;/code>, 但是总感觉这么一个应用广泛的标准有明显的漏洞不太可能.. 直到我读了一下 &lt;code>man cryptsetup&lt;/code>..&lt;/p>
+&lt;p>&lt;img src="./image-20211030160044184.png" alt="image-20211030160044184">&lt;/p>
+&lt;p>从题解中我得知了 LUKS 使用 passphrase 用来加密 master key, master key 加密全盘文件, 这是为了避免改 passphrase 时重新加密全盘的开销.&lt;/p>
+&lt;h2 id="赛博厨房">赛博厨房&lt;/h2>
+&lt;p>Level 0 和 1 很简单.&lt;/p>
+&lt;p>从同学处得到的提示每日菜谱是根据哈希来的, 于是写了个暴力, 然而跑了几个小时都没跑出结果..&lt;/p>
+&lt;p>&lt;img src="./image-20211030175312389.png" alt="image-20211030175312389">&lt;/p>
+&lt;p>题解确实是暴力.. 但是我这样枚举是不对的, 因为菜谱是哈希, 所以只要稍微改一点点程序就能得到一个不一样的菜谱, 然后赌哈希的结果.. (相当于工作量证明了..)&lt;/p>
+&lt;p>Level 3 显然看都没看..&lt;/p>
+&lt;h2 id="阵列恢复大师">阵列恢复大师&lt;/h2>
+&lt;p>尝试暴力了一下磁盘顺序, 看了题解发现离正确答案还有很远.. 比如 chunk 的大小, 文件系统类型 (这两个我想到了, 但不知道怎么获得), &lt;code>mdadm --build&lt;/code> 和 &lt;code>mdadm --create&lt;/code> 的区别..&lt;/p>
+&lt;p>&lt;img src="./image-20211030175155176.png" alt="image-20211030175155176">&lt;/p>
+&lt;h2 id="马赛克">马赛克&lt;/h2>
+&lt;p>尝试了一下最后只把定位点给恢复出来了.. 题解的思路是暴力枚举, 思路确实很简单, 难的是实现..&lt;/p>
+&lt;h2 id="minecraft">minecRaft&lt;/h2>
+&lt;p>扫了一遍源码发现核心逻辑应该是在 flag.js 中. 打开一看经典混淆了.. 操作了一番 (指替换变量名) 后尝试把 &lt;code>gyflagh&lt;/code> 函数的返回改成 &lt;code>true&lt;/code>, 发现并没有用. 那看来是要解密那个字符串了..&lt;/p>
+&lt;p>&lt;img src="./image-20211030161245519.png" alt="image-20211030161245519">&lt;/p>
+&lt;p>核心逻辑在 code 函数里:&lt;/p>
+&lt;p>&lt;img src="./image-20211030161353309.png" alt="image-20211030161353309">&lt;/p>
+&lt;p>本以为这个过程是不可逆的, 但最后一天仔细看了一下后发现第 68 行 array_a[0] 的操作中只涉及了 array_a[1], 第 71 行也是同理, 于是只要简单地减一下就行了.&lt;/p>
+&lt;p>&lt;img src="./image-20211030161717407.png" alt="image-20211030161717407">&lt;/p>
+&lt;p>还好几个辅助函数比如 &lt;code>LongToBase16&lt;/code>, &lt;code>Base16ToLong&lt;/code> 没有混淆.. 不然肯定做不出了..&lt;/p>
+&lt;h2 id="其他">其他&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>震惊! 排行榜上有选手公然发题解!&lt;/p>
+&lt;p>&lt;img src="./image-20211030145149135.png" alt="image-20211030145149135">&lt;/p>
+&lt;p>嗯.. 看昵称就知道是什么了..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>最后校内排名 29, 总排名推测一下应该在 100~200 之间&lt;/p>
+&lt;p>&lt;img src="./image-20211030165413748.png" alt="image-20211030165413748">&lt;/p>
+&lt;p>全靠 web 和 general 拿分..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>不过在第一天甚至短暂地冲到过第一, 人生巅峰.jpg&lt;/p>
+&lt;p>&lt;img src="./image-20211030165521990.png" alt="image-20211030165521990">&lt;/p>
+&lt;/li>
+&lt;/ul>
+- https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ -</description></item><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/2020summary_2021plan/ -&lt;p>又到了传统艺能&lt;del>年终&lt;/del>年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="2020-总结">2020 总结&lt;/h2>
+&lt;p>一句话总结的话, 知识的广度提升了, 深度还不够, 学习状态仍旧不能让自己满意. 以及这一年我始终在担心有没有学上, 找不找得到工作.&lt;/p>
+&lt;h3 id="学业">学业&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>由于疫情的爆发, 导致了 2020 春季学期完全在家上课, 更加方便摸鱼了(&lt;/p>
+&lt;p>一开始港哥在群里说武汉疫情的时候, 我还不觉得这是什么大事, 后来才发现我错得离谱.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>二月底到三月初, 陆续投了几个实习, 被拒了几个, 后来决定考研之后, 又鸽了几个&lt;/p>
+&lt;p>&lt;img src="./image-20210225125307219.png" alt="image-20210225125307219">&lt;/p>
+&lt;p>说实话我对以后能不能找到工作还是有点怀疑的..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>从三月开始, 断断续续地开始准备考研了, 然而实际上还是不够努力吧, 到考试前一天我还没完全搞懂二次型..&lt;/p>
+&lt;p>不过从时间上来说, 暑假之后就全力准备考研了..&lt;/p>
+&lt;p>我很想说考研让我变得更沉得下心来学习了, 但事实上这并不是真的.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>只准备了两三天之后 (因为太晚看到了), 尝试申请了一下 GSoC, 不出意外凉了..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>七月到十月, 参加开源之夏, 也算是赚到了人生的第一桶金吧&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="玩">玩&lt;/h3>
+&lt;ul>
+&lt;li>一月, 去滑雪+攀岩, 还是挺有意思的&lt;/li>
+&lt;li>二月初, 折腾了一下 Windows 10 on Arm for Lumia 1520, 并没有什么用, 于是继续吃灰&lt;/li>
+&lt;li>七月, 乘着沪通铁路的开通, 去上海玩了一次, 居然被我碰到了一次高铁延误..&lt;/li>
+&lt;/ul>
+&lt;h3 id="环境">环境&lt;/h3>
+&lt;ul>
+&lt;li>二月末, 开始搞 Manjaro, 一开始两个系统都用, 逐渐就只用 Linux 了 (特别是我发现了 proton 和 lutris 之后..)&lt;/li>
+&lt;li>三月初, 开始尝试 Typora+第三方云同步&lt;/li>
+&lt;li>七月, 从 Onedrive 转向 Syncthing (是不是有一种 Anything can be self-hosted 的趋势呢..&lt;/li>
+&lt;/ul>
+&lt;h3 id="书">书&lt;/h3>
+&lt;p>本年度仍然没有怎么看书..&lt;/p>
+&lt;ul>
+&lt;li>看完了心理学与生活, 心理学啊, exciting&lt;/li>
+&lt;li>看完了 Dark Forest&lt;/li>
+&lt;/ul>
+&lt;h3 id="代码">代码&lt;/h3>
+&lt;p>总的来说, 感觉自己乱七八糟的项目一堆, 却没什么拿得出手的..&lt;/p>
+&lt;ul>
+&lt;li>zaobot, 基本一整年都在维护 (虽然目前的代码还是挺是💩的, 打算再次重构&lt;/li>
+&lt;li>云盘在年初把后端重构了一下, 后来就鸽了 (事实上我这是重复造轮子, seafile 的体验就很好..)&lt;/li>
+&lt;li>pip, 四五月吧, 修了一些 bug, 做了点微小的贡献, 主要还是 codebase 没太理解..&lt;/li>
+&lt;li>Hackergame, 七到九月, 后端应该基本可用了, 然后答应的前端鸽了.. 当时天天看文档..&lt;/li>
+&lt;li>九十月考研的时候, 稍微学了一点 Anki, 为了自己用得顺手, 写了一个小插件.&lt;/li>
+&lt;li>建了个&lt;a href="https://github.com/cjc7373/my_scripts">仓库&lt;/a>写一些日常使用的脚本, 然而目前觉得可以全扔 Ansible 里..&lt;/li>
+&lt;li>花&lt;del>半个小时&lt;/del>三天写了个课程评价, 然而并没有人用..&lt;/li>
+&lt;/ul>
+&lt;h3 id="学习">学习&lt;/h3>
+&lt;ul>
+&lt;li>年中, 学了下小鹤双拼, 虽然似乎打字速度没快多少..&lt;/li>
+&lt;li>十一月, 终于把 Learning How To Learn 学完了, 然而我学到了什么呢..&lt;/li>
+&lt;/ul>
+&lt;h3 id="剁手">剁手&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>一月初, 本来已经买了联想小新 Pro 13, 然而压感触控的体验不是很好, 又碰到了下方向键有概率用不了的问题, 于是退了..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>一月, 购置了网件 R7900p, 终于能在电视上用 smb 看电影不卡了.. 然而 ipv6 是个坑..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>二月, 捡了个洋垃圾 Surface 3, 虽然电池有坑, 但是 Surface 总体还是可以的. 后来出了.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>六月中, 入手了 Surface Pro 7, 除了续航有点差其他都很满意. 18 年开始就种下的草 (指买轻薄本) 终于拔了.&lt;/p>
+&lt;p>附一张合照:&lt;/p>
+&lt;p>&lt;img src="./image-20210225152027832.png" alt="image-20210225152027832">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>十一月, 由于创新 IE3P 的线老是掉, 我终于买了个无线耳机, Galaxy Bud+.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="财务">财务&lt;/h3>
+&lt;p>基金今年还是没怎么动, 看着大盘涨.. 稍微学了点投资的知识.&lt;/p>
+&lt;p>记账方面, Spendee 在年中放弃了, 因为感觉意义不大. 后来知道了 Plain Text Accounting, 于是学了点 Beancount, 不过还没应用到实践中.&lt;/p>
+&lt;h3 id="其他">其他&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;img src="./image-20210225144517669.png" alt="image-20210225144517669">&lt;/p>
+&lt;p>事实证明这是很好的追踪一个问题的工具..&lt;/p>
+&lt;p>&lt;img src="./image-20210225150738841.png" alt="image-20210225150738841">&lt;/p>
+&lt;p>但是浏览条目还是有些不爽 (比较慢)..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>六月, 开始用 KeePassXC 管理密码.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>暑假里, 看了人类星球, 自然与人文纪录片交汇的佳作&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>2020 秋季学期运动的次数显著增加了, 经常会去打打羽毛球.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>十月, 和 Moo 在北门合租了, 环境比之前在樱花广场好了很多..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>十二月, 用 rsync 删了一波自己的 home 目录, 血的教训.. 没想到我也有删库的一天..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>这一年没怎么管博客, 因为考研, 外加想着迁移 Pelican, 结果又挖了一个大坑&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="2021-计划">2021 计划&lt;/h2>
+&lt;p>还有两天考研出分了.. 说实话挺害怕的.. 考不上就只能找工作了.&lt;/p>
+&lt;ul>
+&lt;li>今年还是想尝试一下 GSoC, 到四月中旬申请结束还有一个半月.. 努力去混混脸熟吧.&lt;/li>
+&lt;li>事实上, 我还有一堆开的坑, 包括但不限于:
+&lt;ul>
+&lt;li>给 Wikipedia 贡献一个优良条目的翻译&lt;/li>
+&lt;li>写个 (或者找找) 各板块指数的 PB 中值温度计.&lt;/li>
+&lt;li>所有 VPS 都使用 Ansible 维护&lt;/li>
+&lt;li>写一个 Pelican 的主题, 类似 &lt;a href="https://github.com/amazingrise/hugo-theme-diary">diary&lt;/a>.&lt;/li>
+&lt;li>学习 CSAPP&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>毕设, 写一个第三方网易云, 毕竟是自己提的项目, 还是要好好写的.. 这又是一大堆不熟悉的技术栈..&lt;/li>
+&lt;li>还是要多看点书..&lt;/li>
+&lt;/ul>
+&lt;p>不管怎么样, 我还是要以更加积极的心态去迎接未来. 冲!&lt;/p>
+- https://blog.coherence.codes/posts/2021/2020summary_2021plan/ -</description></item><item><title>Anki 工作流</title><link>https://blog.coherence.codes/posts/2021/anki_workflow/</link><pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/anki_workflow/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/anki_workflow/ -&lt;p>&lt;a href="https://apps.ankiweb.net/">Anki&lt;/a> 是一个间隔式重复的&amp;quot;闪卡 (flashcard)&amp;ldquo;记忆软件. 下面来谈谈我考研及日常生活中的 Anki 工作流.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="为什么选择-anki">为什么选择 Anki&lt;/h2>
+&lt;p>和市面上其他的记忆软件一样, Anki 也是基于遗忘曲线, 基于间隔式重复这一原理的. 最大的不同在于它是高度自定义的. 自己制作卡组, 设计模板, 甚至编写自己的插件. 还有很多特性例如 Notes 和 Cards 相分离我其实并没有用到.&lt;/p>
+&lt;p>其次 Anki 是一款开源软件, 在我希望所有软件都用自由软件替换的如今, 这无疑是一个重要的理由.&lt;/p>
+&lt;p>最后它在 Windows, Linux, Android 上都有客户端, 并支持同步. 虽然内置的同步服务器是由 Ankiweb 提供的 (我至今不知道 Ankiweb 和 Anki 的关系以及它是如何运作的), 然而也能够用自建的替换.&lt;/p>
+&lt;p>虽然网上能够找到很多已制作好的卡组, 然而这些卡组并不一定适合自己. 以记单词而言, 卡组中的许多卡片都是自己已经熟知的. 况且制卡这个过程本身能够帮助自己记忆. 所以我还是选择了自己构建卡组的方式.&lt;/p>
+&lt;h2 id="基础卡片">基础卡片&lt;/h2>
+&lt;p>对于一般的记忆来说, 基础的 Note type 就够用了.. 比如我一开始用 Anki 来提醒我复习新概念英语, 用的是以下的 Note type:&lt;/p>
+&lt;p>&lt;img src="./image-20210224200941341.png" alt="image-20210224200941341">&lt;/p>
+&lt;p>十分简单.&lt;/p>
+&lt;h2 id="考研">考研&lt;/h2>
+&lt;p>考研的时候打算用 Anki 背单词, 于是我做真题的时候碰到不认识的单词记录下来, 然后用 Anki 制卡.&lt;/p>
+&lt;p>卡片字段设计和工作流受到了&lt;a href="https://ankiweb.net/shared/info/934622764">考研英语真题生词&lt;/a>这个卡组的启发.&lt;/p>
+&lt;p>其中最主要的问题是音标, 发音和释义. 一开始想的办法是发音用 TTS, 于是找到了 Azure 的 API, 然而一个缺点是每次制卡要等很久 (请求 API), 而且 Azure 的 API 很贵.. 我给一个几百张卡的卡组加发音花了我五块钱..&lt;/p>
+&lt;p>于是我就想到了从词典中导入, 我平时主要使用的词典是 OALD8 (很久之前从 &lt;a href="https://www.pdawiki.com/forum/">pdawiki&lt;/a> 下的), 于是我就自己糊了个&lt;a href="https://ankiweb.net/shared/info/738556640">插件&lt;/a>.. 功能很简单, 根据单词字段从词典 mdx 文件里查询音标和发音, 并填充到相应字段中.&lt;/p>
+&lt;p>最后的成品卡片是这样的:&lt;/p>
+&lt;p>&lt;img src="./image-20210224201415659.png" alt="image-20210224201415659">&lt;/p>
+&lt;p>制卡的时候首先手打单词和例句, 然后从词典里选一个释义复制过来就行了. 个人感觉也不是很麻烦..&lt;/p>
+&lt;p>看一下成果:&lt;/p>
+&lt;p>&lt;img src="./image-20210224202958005.png" alt="image-20210224202958005">&lt;/p>
+&lt;p>考研的那一百多天里我总共背了 364 个单词.. 其实挺少的..&lt;/p>
+&lt;p>之后的卡组中我优化了一下 Note 的字段, 于是现在变成了这样:&lt;/p>
+&lt;p>&lt;img src="./image-20210224201845315.png" alt="image-20210224201845315">&lt;/p>
+&lt;h2 id="咕咕咕时间">咕咕咕时间&lt;/h2>
+&lt;ul>
+&lt;li>释义的导入我肯定也想自动化的. 而选择释义势必要做一个弹窗, 那么这就涉及到 Qt 的知识了, 于是目前搁置了&lt;/li>
+&lt;li>有的单词不同的词性有不同的发音, 这个也没有处理..&lt;/li>
+&lt;li>有一个 &lt;a href="https://github.com/ninja33/ODH">chrome 插件&lt;/a>已经基本上把我想做的都实现了, 可以借鉴一下..&lt;/li>
+&lt;/ul>
+- https://blog.coherence.codes/posts/2021/anki_workflow/ -</description></item><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ -&lt;h2 id="1335a---candies-and-two-sistershttpscodeforcescomcontest1335problema">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>快乐签到。&lt;/p>
+&lt;h2 id="1335b---construct-the-stringhttpscodeforcescomcontest1335problemb">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>先构造长度为 $a$ 的字符串，然后第 $i+a$ 个字母为第 $i$ 个字母，输出即可。&lt;/p>
+&lt;h2 id="1335c---two-teams-composinghttpscodeforcescomcontest1335problemc">&lt;a href="https://codeforces.com/contest/1335/problem/C">1335C - Two Teams Composing&lt;/a>&lt;/h2>
+&lt;p>&lt;code>2/1 Accepted&lt;/code>&lt;/p>
+&lt;p>给 $n$ 个数，每个数有一个值，要求把它们分成数量相同的两组，一组所有的值相等，一组所有的值不等。&lt;/p>
+&lt;p>先统计每个值的数量，得出最大个数 $m$，和不同值的数的个数 $l$，&lt;/p>
+&lt;p>&lt;code>ans = min(l, m) if m &amp;lt; l + 2 else ans = min(l, m) + 1&lt;/code>&lt;/p>
+&lt;h2 id="1335d---anti-sudokuhttpscodeforcescomcontest1335problemd">&lt;a href="https://codeforces.com/contest/1335/problem/D">1335D - Anti-Sudoku&lt;/a>&lt;/h2>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>给一个求解好的数独，求改动不超过 9 个数，使其每行、列、区块内皆有两个相同的数。&lt;/p>
+&lt;p>想了两分钟，发现将所有的 1 替换为 2 即可。&lt;/p>
+&lt;h2 id="1335e---three-blocks-palindromehttpscodeforcescomcontest1335probleme2">&lt;a href="https://codeforces.com/contest/1335/problem/E2">1335E - Three Blocks Palindrome&lt;/a>&lt;/h2>
+&lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p>
+&lt;p>给一个含有$n$个数的序列，定义三区块的回文数为：$[\underbrace{a, a, \dots, a}&lt;em>{x}, \underbrace{b, b, \dots, b}&lt;/em>{y}, \underbrace{a, a, \dots, a}_{x}]$，$x, y$是大于等于0的整数，a可以等于b。求一个最长子序列使它为三区块的回文数。输出长度。&lt;/p>
+&lt;p>又是一道需要神奇的优化的题。。&lt;/p>
+&lt;p>&lt;img src="./image-20200416163610781.png" alt="image-20200416163610781">&lt;/p>
+&lt;p>按官方题解的思路是这样：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sys
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input &lt;span style="color:#f92672">=&lt;/span> sys&lt;span style="color:#f92672">.&lt;/span>stdin&lt;span style="color:#f92672">.&lt;/span>readline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>t &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(t):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev &lt;span style="color:#f92672">=&lt;/span> [[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> n &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos &lt;span style="color:#f92672">=&lt;/span> [[] &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>: &lt;span style="color:#66d9ef">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev[j][i] &lt;span style="color:#f92672">=&lt;/span> prev[j][i&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev[s[i]][i] &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos[s[i]]&lt;span style="color:#f92672">.&lt;/span>append(i)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># if x == 0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, len(pos[i]))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># if x != 0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, (len(pos[i]) &lt;span style="color:#f92672">//&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> k &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m &lt;span style="color:#f92672">=&lt;/span> max(m, prev[k][pos[i][&lt;span style="color:#f92672">-&lt;/span>j]&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">-&lt;/span> prev[k][pos[i][j&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, m &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">*&lt;/span> j)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(ans)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是超时了。翻别人的代码发现创建prev数组还能优化：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sys
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input &lt;span style="color:#f92672">=&lt;/span> sys&lt;span style="color:#f92672">.&lt;/span>stdin&lt;span style="color:#f92672">.&lt;/span>readline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>t &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(t):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev &lt;span style="color:#f92672">=&lt;/span> [[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">201&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> n
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos &lt;span style="color:#f92672">=&lt;/span> [[] &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev[i] &lt;span style="color:#f92672">=&lt;/span> prev[i&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>copy()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev[i][s[i]] &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos[s[i]]&lt;span style="color:#f92672">.&lt;/span>append(i)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># if x == 0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, len(pos[i]))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># if x != 0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, (len(pos[i]) &lt;span style="color:#f92672">//&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> k &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m &lt;span style="color:#f92672">=&lt;/span> max(m, prev[pos[i][&lt;span style="color:#f92672">-&lt;/span>j]&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>][k] &lt;span style="color:#f92672">-&lt;/span> prev[pos[i][j&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]][k])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, m &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">*&lt;/span> j)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(ans)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>700多ms过了。。&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ -</description></item></channel></rss>

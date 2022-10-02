@@ -1,0 +1,1070 @@
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/ -&lt;p>快乐划水。&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="1328a---divisibility-problemhttpscodeforcescomcontest1328problema">&lt;a href="https://codeforces.com/contest/1328/problem/A">1328A - Divisibility Problem&lt;/a>&lt;/h2>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>快乐签到。&lt;/p>
+&lt;h2 id="1328b---k-th-beautiful-stringhttpscodeforcescomcontest1328problemb">&lt;a href="https://codeforces.com/contest/1328/problem/B">1328B - K-th Beautiful String&lt;/a>&lt;/h2>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>给一个数n，要求构造一个字符串，包含n-2个a，2个b，且在这个字符串的按字典序的全排列中排在第k个。&lt;/p>
+&lt;p>找b的位置即可。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>t &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(t):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n, k &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> p &lt;span style="color:#f92672">in&lt;/span> range(max(n&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>,k&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (p &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">*&lt;/span> p &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">&amp;gt;=&lt;/span> k:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos1 &lt;span style="color:#f92672">=&lt;/span> n &lt;span style="color:#f92672">-&lt;/span> p
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos2 &lt;span style="color:#f92672">=&lt;/span> n &lt;span style="color:#f92672">-&lt;/span> (k &lt;span style="color:#f92672">-&lt;/span> int(((p &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">*&lt;/span> (p &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">==&lt;/span> pos1 &lt;span style="color:#f92672">or&lt;/span> i &lt;span style="color:#f92672">==&lt;/span> pos2:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;b&amp;#39;&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328c---ternary-xorhttpscodeforcescomcontest1328problemc">&lt;a href="https://codeforces.com/contest/1328/problem/C">1328C - Ternary XOR&lt;/a>&lt;/h2>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>给一个三进制数x，求两个数a，b，使这两个数的异或为x，且max(a, b)最小。&lt;/p>
+&lt;p>从左往右对每一位考虑最优解，若是0或2，则平均分配，若为1，则分配到0的那方获得接下来所有的数。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>t &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(t):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> x &lt;span style="color:#f92672">=&lt;/span> input()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans1 &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans2 &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(len(x)):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> x[i] &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#39;0&amp;#39;&lt;/span> &lt;span style="color:#f92672">or&lt;/span> x[i] &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#39;2&amp;#39;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans1 &lt;span style="color:#f92672">+=&lt;/span> str(int(x[i]) &lt;span style="color:#f92672">//&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans2 &lt;span style="color:#f92672">+=&lt;/span> str(int(x[i]) &lt;span style="color:#f92672">//&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans1 &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;1&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans2 &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;0&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(i&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, len(x)):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans1 &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#e6db74">&amp;#39;0&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans2 &lt;span style="color:#f92672">+=&lt;/span> x[j]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(ans1, ans2, sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328d---carouselhttpscodeforcescomcontest1328problemd">&lt;a href="https://codeforces.com/contest/1328/problem/D">1328D - Carousel&lt;/a>&lt;/h2>
+&lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p>
+&lt;p>大概是能做的，只是到了十二点太困了。。就睡觉去了。&lt;/p>
+&lt;p>n个动物围成一圈，相邻的不同动物要有不同的颜色，求最少的颜色和对应的颜色序列。&lt;/p>
+&lt;p>考虑几种情况：所有动物都相同，总数为偶数，总数为奇数但存在相邻的相同动物，总数为奇数且不存在相邻的相同动物。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>t &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(t):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> figure &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> figure&lt;span style="color:#f92672">.&lt;/span>count(figure[&lt;span style="color:#ae81ff">0&lt;/span>]) &lt;span style="color:#f92672">==&lt;/span> n:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;1 &amp;#39;&lt;/span> &lt;span style="color:#f92672">*&lt;/span> n)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">elif&lt;/span> n &lt;span style="color:#f92672">%&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#ae81ff">2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(i &lt;span style="color:#f92672">%&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39; &amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> flg &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> figure[i] &lt;span style="color:#f92672">==&lt;/span> figure[i&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]: &lt;span style="color:#75715e"># -1 即最后一个&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> flg &lt;span style="color:#f92672">=&lt;/span> i
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> flg &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#ae81ff">2&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">&amp;lt;&lt;/span> flg:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(i &lt;span style="color:#f92672">%&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39; &amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print((i &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">%&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39; &amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#ae81ff">3&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(i &lt;span style="color:#f92672">%&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39; &amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#ae81ff">3&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328e---tree-querieshttpscodeforcescomcontest1328probleme">&lt;a href="https://codeforces.com/contest/1328/problem/E">1328E - Tree Queries&lt;/a>&lt;/h2>
+&lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p>
+&lt;p>给一棵树，有m个查询，每个查询给出树上的一些节点，若有一条从根节点出发的路径，使这些节点属于这条路径或和这条路径上某个点的距离为一，输出 YES，否则为 NO。&lt;/p>
+&lt;p>补题的时候都是泪。按题解写了个 dfs 序，然后对每个查询去它的父节点，对每个节点检查其是否为最深的那个节点的祖先。&lt;/p>
+&lt;p>然后上来一个 CE：&lt;/p>
+&lt;p>&lt;img src="./image-20200406110417718.png" alt="image-20200406110417718">&lt;/p>
+&lt;p>我就奇怪了你为什么不用 utf-8，而且之前交过带中文注释的正常啊。于是把注释改回英文。&lt;/p>
+&lt;p>之后是无尽的 RE 和 TLE。分析了一波复杂度没毛病啊，只能是优化的锅了。&lt;/p>
+&lt;p>&lt;img src="./image-20200406110610535.png" alt="image-20200406110610535">&lt;/p>
+&lt;p>看了别人的代码，主要是两点：用栈模拟 dfs 和输入使用&lt;code>input = sys.stdin.readline&lt;/code>。试了一下确实，直接 dfs 会爆栈空间，不优化输入会 TLE。&lt;/p>
+&lt;p>最终结果可以看出，PyPy 和 CPython 差距还是挺大的。&lt;/p>
+&lt;p>&lt;img src="./image-20200406110757605.png" alt="image-20200406110757605">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sys
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input &lt;span style="color:#f92672">=&lt;/span> sys&lt;span style="color:#f92672">.&lt;/span>stdin&lt;span style="color:#f92672">.&lt;/span>readline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n, m &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tree &lt;span style="color:#f92672">=&lt;/span> [[] &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(n&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> u, v &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tree[u]&lt;span style="color:#f92672">.&lt;/span>append(v)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tree[v]&lt;span style="color:#f92672">.&lt;/span>append(u)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>t &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tin &lt;span style="color:#f92672">=&lt;/span> [&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(n&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tout &lt;span style="color:#f92672">=&lt;/span> [&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(n&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>par &lt;span style="color:#f92672">=&lt;/span> [&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(n&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dep &lt;span style="color:#f92672">=&lt;/span> [&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(n&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>stack &lt;span style="color:#f92672">=&lt;/span> [(&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">0&lt;/span>, &lt;span style="color:#ae81ff">1&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> stack:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> to, parent, depth, state &lt;span style="color:#f92672">=&lt;/span> stack&lt;span style="color:#f92672">.&lt;/span>pop()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> state:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> par[to] &lt;span style="color:#f92672">=&lt;/span> parent
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dep[to] &lt;span style="color:#f92672">=&lt;/span> depth
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tin[to] &lt;span style="color:#f92672">=&lt;/span> t
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> stack&lt;span style="color:#f92672">.&lt;/span>append((to, parent, depth, &lt;span style="color:#ae81ff">0&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> tree[to]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">==&lt;/span> parent: &lt;span style="color:#66d9ef">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> stack&lt;span style="color:#f92672">.&lt;/span>append((i, to, depth&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, &lt;span style="color:#ae81ff">1&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tout[to] &lt;span style="color:#f92672">=&lt;/span> t
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># print(f&amp;#34;tin={tin}\ntout={tout}&amp;#34;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(m):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># replace every non-root vertex with its parent&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> query &lt;span style="color:#f92672">=&lt;/span> [par[int(i)] &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">!=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;1&amp;#34;&lt;/span> &lt;span style="color:#66d9ef">else&lt;/span> int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">del&lt;/span>(query[&lt;span style="color:#ae81ff">0&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fv &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> max_dep &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> query:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># search the deepest vertex fv&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> dep[i] &lt;span style="color:#f92672">&amp;gt;&lt;/span> max_dep:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> max_dep &lt;span style="color:#f92672">=&lt;/span> dep[i]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fv &lt;span style="color:#f92672">=&lt;/span> i
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> flg &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># for every vertex, should be fv&amp;#39;s parent&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> query:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">not&lt;/span> (tin[i] &lt;span style="color:#f92672">&amp;lt;=&lt;/span> tin[fv] &lt;span style="color:#f92672">and&lt;/span> tout[fv] &lt;span style="color:#f92672">&amp;lt;=&lt;/span> tout[i]):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> flg &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> flg: print(&lt;span style="color:#e6db74">&amp;#34;NO&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>: print(&lt;span style="color:#e6db74">&amp;#34;YES&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328f---make-k-equalhttpscodeforcescomcontest1328problemf">&lt;a href="https://codeforces.com/contest/1328/problem/F">1328F - Make k Equal&lt;/a>&lt;/h2>
+&lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p>
+&lt;p>给 n 个数，给一个数 k &amp;lt;= n，要使得至少 k 个数相等。有两种操作：使一个最小的数 +1，使一个最大的数 -1。求最少的操作数。&lt;/p>
+&lt;p>根据&lt;a href="https://www.cnblogs.com/st1vdy/p/12579249.html">这篇题解&lt;/a>，本题一共三种情况，给最大值 -1，给最小值 +1，同时进行两种操作（此时一定有 $a_1=a_n$ ）。（这个解法感觉比官方的还要好）&lt;/p>
+&lt;p>第一和第二种情况类似，将最左（右）边的 k 个数变为一致即可。第三种情况下，$\sum_{i=1}^{\frac{n}{2}}(a_{n-i}-a_i)$即将所有数变为相同（但是如果 n 为奇数，中间那个数怎么办？待考虑。。但结果是对的），但我们只需要 k 个，所以减去$n-k$。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sys
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input &lt;span style="color:#f92672">=&lt;/span> sys&lt;span style="color:#f92672">.&lt;/span>stdin&lt;span style="color:#f92672">.&lt;/span>readline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>n, k &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>a &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>a&lt;span style="color:#f92672">.&lt;/span>sort()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n&lt;span style="color:#f92672">-&lt;/span>k&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> a[i] &lt;span style="color:#f92672">==&lt;/span> a[i&lt;span style="color:#f92672">+&lt;/span>k&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sys&lt;span style="color:#f92672">.&lt;/span>exit(&lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>l &lt;span style="color:#f92672">=&lt;/span> r &lt;span style="color:#f92672">=&lt;/span> m &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># suppose val is the number where k numbers are the same&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># case 1, turn the leftmost k numbers to val (or val-1)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(k&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l &lt;span style="color:#f92672">+=&lt;/span> a[k&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">-&lt;/span> a[i]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(k&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, n&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>): &lt;span style="color:#75715e"># if a[k-1] have many same numbers&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> a[i] &lt;span style="color:#f92672">==&lt;/span> a[i&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> l &lt;span style="color:#f92672">-=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># case 2, turn the rightmost k numbers to val (or val-1)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>a_reverse &lt;span style="color:#f92672">=&lt;/span> a[::&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(k&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#f92672">-&lt;/span>(a_reverse[k&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">-&lt;/span> a_reverse[i])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(k&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, n&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> a_reverse[i] &lt;span style="color:#f92672">==&lt;/span> a_reverse[i&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> r &lt;span style="color:#f92672">-=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># case 3, all the numbers are val or val-1 or val+1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n&lt;span style="color:#f92672">//&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m &lt;span style="color:#f92672">+=&lt;/span> a[n&lt;span style="color:#f92672">-&lt;/span>i&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">-&lt;/span> a[i]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>m &lt;span style="color:#f92672">-=&lt;/span> n &lt;span style="color:#f92672">-&lt;/span> k
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(min(l, r, m))
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/ -</description></item><item><title>博客图片文件夹迁移</title><link>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</link><pubDate>Wed, 01 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/ -&lt;p>我原来的博客文件夹结构是这样的：&lt;/p>
+&lt;p>&lt;img src="./image-20200328175914444.png" alt="image-20200328175914444">&lt;/p>
+&lt;p>博文数量少的时候，还挺直观，但是数量一多，看着就很杂乱，因此，萌生了重新归类的想法。&lt;/p>
+&lt;p>思路大概是这样：按年份归类，然后图片统一放到当前目录下的&lt;code>images&lt;/code>文件夹里。&lt;/p>
+&lt;h2 id="实践">实践&lt;/h2>
+&lt;p>脚本的逻辑大概是对每一篇博文，寻找其元数据的 date 字段，将其移动到对应的文件夹下，同时对同名的文件夹也进行递归移动。由于图片都是相对引用的，所以不会出问题。（即使出了咱还有 git）&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/ -</description></item><item><title>Kickstart 2020 Round A 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</link><pubDate>Thu, 26 Mar 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/ -&lt;p>第一次打Kickstart，体验还是很不错的。&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>&lt;a href="https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ffc7">比赛链接&lt;/a>&lt;/p>
+&lt;p>迟了几分钟进比赛，发现前十已经两题AC了。&lt;/p>
+&lt;h2 id="allocation">Allocation&lt;/h2>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>签到题，排序后从大到小输出即可。&lt;/p>
+&lt;h2 id="plates">Plates&lt;/h2>
+&lt;p>&lt;code>2/0 TLE, WA&lt;/code>&lt;/p>
+&lt;p>N叠盘子，每叠K个，每个盘子有一个beauty值，从中取P个，但对于每叠只能从上到下取，求beauty值最大为多少。&lt;/p>
+&lt;p>先写了一个每次取最大的，WA，发现不对，然后去做第三题了。后又写了个dfs，TLE了。当时心态有点崩，因为TOP 10基本是两分钟AC，想到DP，但没有深入想。&lt;/p>
+&lt;p>官方题解是对于每一叠盘子，先预处理前n个的beauty值和sum，然后对于每一个状态&lt;code>dp[i][j]&lt;/code>，即在前i叠盘子和取j个盘子时能取到的最大值，有状态转移方程&lt;code>dp[i][j] = max(dp[i][j], sum[i][x]+dp[i-1][j-x])&lt;/code>。循环求dp即可。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__&lt;span style="color:#f92672">==&lt;/span>&lt;span style="color:#e6db74">&amp;#39;__main__&amp;#39;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, t&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Case #&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">: &amp;#34;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(i)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n, k, p &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a&lt;span style="color:#f92672">.&lt;/span>append([int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum&lt;span style="color:#f92672">.&lt;/span>append([&lt;span style="color:#ae81ff">0&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> a[i]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">+=&lt;/span> j
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum[i]&lt;span style="color:#f92672">.&lt;/span>append(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur &lt;span style="color:#f92672">=&lt;/span> [&lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dp &lt;span style="color:#f92672">=&lt;/span> [[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> (p&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dp[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> sum[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">+&lt;/span> [&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> (p&lt;span style="color:#f92672">-&lt;/span>k)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, p&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> x &lt;span style="color:#f92672">in&lt;/span> range(min(j&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, k&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dp[i][j] &lt;span style="color:#f92672">=&lt;/span> max(dp[i][j], sum[i][x] &lt;span style="color:#f92672">+&lt;/span> dp[i&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>][j&lt;span style="color:#f92672">-&lt;/span>x])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, dp[i][p])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out &lt;span style="color:#f92672">+=&lt;/span> str(ans)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(out)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="workout">Workout&lt;/h2>
+&lt;p>&lt;code>2/1 Accepted&lt;/code>&lt;/p>
+&lt;p>给一个递增的数列，插入K个值，求每两个值的差的最小值。&lt;/p>
+&lt;p>这道题和我校2017新生赛的一题类似，对结果二分即可。&lt;/p>
+&lt;h2 id="bundling">Bundling&lt;/h2>
+&lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p>
+&lt;p>把N个字符串分成K组，每组的分数为最长公共前缀的长度，求全局最高分。&lt;/p>
+&lt;p>直接进行分组比较困难，我们可以考虑每组的分数同时也是共同前缀的个数。那么对于每个前缀，若有p个单词拥有这个前缀，则这个前缀会给结果贡献&lt;code>p // K&lt;/code>分。由此求字符串中的每个前缀和拥有这个前缀的字符串数即可。&lt;/p>
+&lt;p>使用前缀树可很容易求得。一开始我的做法是递归这棵树，用了两种写法都RE了，Google了一圈找到测试数据会导致爆栈，故采用了list来模拟栈遍历。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__&lt;span style="color:#f92672">==&lt;/span>&lt;span style="color:#e6db74">&amp;#39;__main__&amp;#39;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, t&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Case #&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">: &amp;#34;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(i)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n, k &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tree &lt;span style="color:#f92672">=&lt;/span> {&lt;span style="color:#e6db74">&amp;#39;pre_num&amp;#39;&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> word &lt;span style="color:#f92672">=&lt;/span> input()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur &lt;span style="color:#f92672">=&lt;/span> tree
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> c &lt;span style="color:#f92672">in&lt;/span> word:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur &lt;span style="color:#f92672">=&lt;/span> cur&lt;span style="color:#f92672">.&lt;/span>setdefault(c, {&lt;span style="color:#e6db74">&amp;#39;pre_num&amp;#39;&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur[&lt;span style="color:#e6db74">&amp;#39;pre_num&amp;#39;&lt;/span>] &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> stack &lt;span style="color:#f92672">=&lt;/span> [tree]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> len(stack):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node &lt;span style="color:#f92672">=&lt;/span> stack&lt;span style="color:#f92672">.&lt;/span>pop()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">+=&lt;/span> node[&lt;span style="color:#e6db74">&amp;#39;pre_num&amp;#39;&lt;/span>] &lt;span style="color:#f92672">//&lt;/span> k
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> node:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#39;pre_num&amp;#39;&lt;/span>: &lt;span style="color:#66d9ef">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> stack&lt;span style="color:#f92672">.&lt;/span>append(node[i])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out &lt;span style="color:#f92672">+=&lt;/span> str(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(out)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/ -</description></item><item><title>2019年终总结&amp;2020展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</link><pubDate>Sat, 01 Feb 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/ -&lt;p>又是一年一度的年终总结时间了，进入二十一世纪的第二个十年，我的心情十分激动……&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>好吧，激动是假的。时空是连续的，进入2020和平常的一天没有任何区别。转眼间已经来到了庚子鼠年的大年初八，我恍然记得我的年终总结还没有写，于是准备把这个传统艺能发扬下去，也看一看2019定的目标完成了多少。&lt;/p>
+&lt;h2 id="2019-总结">2019 总结&lt;/h2>
+&lt;p>时间及事件依据：印象笔记、Google 相册、我的记忆、Telegram。&lt;/p>
+&lt;p>事件尽量归类，未归类的大致以时间顺序排列。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>找到了一个&lt;del>记录生活&lt;/del>吐槽的平台。&lt;/p>
+&lt;p>&lt;img src="./image-20200201201451074.png" alt="image-20200201201451074">&lt;/p>
+&lt;p>这个channel的内容输入延续至今。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>一月，金工实习和数学建模美赛，虽然没学到什么，还是挺有意思的。&lt;/p>
+&lt;p>&lt;img src="./image-20200201202345974.png" alt="image-20200201202345974">&lt;/p>
+&lt;p>图为某数控机床。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>三月上旬，重新开始在印象笔记写日记。三月末更换至纸质方式。&lt;/p>
+&lt;p>之后觉得日记意义不大，更换为每日计划，但是没有坚持。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>三月，在外租房居住。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>三月和十二月，分别安排了我校ACM的校赛和新生赛。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;img src="./image-20200201215603263.png" alt="image-20200201215603263">&lt;/p>
+&lt;p>请记住我这句话，都是泪。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>寒假里把N1刷了一遍OMV，但存储只有一个U盘。暑假刷回了无灯的固件，买了个硬盘盒+320G机械，勉强能当NAS来用。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ingress，从入坑到弃坑，大概是二月到五月的事。&lt;del>（其实以前玩过&lt;/del>&lt;/p>
+&lt;p>因为这个游戏还出去玩了挺多次的。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>三月末，开始入坑Arch Linux。&lt;/p>
+&lt;p>然后发现这是个巨坑。（折腾万岁&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>投资方面。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>和去年没多大变化吧。看的还是那两个人，还是没有系统地学经济学。只不过跟着大盘走盈利了一些罢了。&lt;/p>
+&lt;p>&lt;img src="./image-20200222105649825.png" alt="image-20200222105649825">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>英语方面。自我感觉英语能力有了较大提升。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>年度英美刷剧（和去年总结对比了一下）：Friends二刷，The Newsroom，Person of Interest 两季，The IT Crowd一季多。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>十月份想去考一考托福，大概也学了一段时间，后来无限期搁置了。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>用Kindle读原著方面，把三体一看完了，又开了个哈利波特的坑，也看完了第一部。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>我看了多少书？&lt;/p>
+&lt;ul>
+&lt;li>买了好多书。&lt;del>（然而都没有看&lt;/del>&lt;/li>
+&lt;li>Linux&amp;amp;Unix大学教程基本看完了。后来又买了本鸟哥的，还没看。&lt;/li>
+&lt;li>Head First with HTML&amp;amp;CSS 还剩最后两章没看。&lt;/li>
+&lt;li>Computer Networking: A Top-down Approach，18年7月在图书馆里借了第五版影印版，一年基本没看，大三上由于要学计算机网络，好歹看了点，后又从淘宝打印了第七版英文版，看了三分之二左右。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>四月初，启用了Digital Wellbeing，但是并没有起到限制玩手机时间的作用。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>四月末，参加了一次西安GDG活动。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>剁手记录。&lt;/p>
+&lt;ul>
+&lt;li>二月初，给家中置换了一个新的显示器，淘汰了老AOC 21&amp;rsquo; 1680*1050 服役十二年的历史。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="./image-20200201203042582.png" alt="image-20200201203042582">&lt;/p>
+&lt;p>图为 AOC 27&amp;rsquo; 4K 某型号。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>二月，给笔记本加了根8G的内存。年末的时候这个价钱可以买到16G的。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>四月末，出售 Bose Sleepbuds。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>八月末，入手人生中第一台相机，Sony α7m2，带28-70镜头。于是周末又有很多次出去拍照。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>本年度还是没有换笔记本。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>十月末，在宿舍购置了显示器，同样是AOC（因为便宜），27&amp;rsquo; 2K 带Type-C接口。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>双十一期间，购置了东芝RC500 500G固态。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>陆续参加了天文协会的几次活动。知识竞赛，航天厂科普，石门山野观。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>大三上开学初，想加入一个实验室，后未果。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>整个一年曾多次试图维护QOJ项目，未果。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>我学了些什么？&lt;/p>
+&lt;ul>
+&lt;li>五月，参加了微信小程序开发大赛。学了一点JS。&lt;/li>
+&lt;li>七月初，软通实训。快乐划水半个月。学了点前端，学了点HTTP。&lt;/li>
+&lt;li>暑假里，学了点前端（HTML+CSS），帮我爸写了个小软件。&lt;/li>
+&lt;li>暑假及大三上的前半学期，在Coursera学完了吴恩达机器学习课。&lt;/li>
+&lt;li>同样在Coursera，Learning how to learn 看了一年了还没看完。&lt;/li>
+&lt;li>七月末，开始学Vue。&lt;/li>
+&lt;li>九月开始，做一个访客认证的项目，学了些认证相关的协议。&lt;/li>
+&lt;li>十一月，学了一点正则。&lt;/li>
+&lt;li>十一月中旬，学了一点AutoHotkey，自己写了一个简单的脚本，用着还挺舒服的。&lt;/li>
+&lt;li>十二月，因软件测试的课程作业学了一点CI/CD和Github Actions。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>我写了多少代码？&lt;/p>
+&lt;p>​ &lt;img src="./image-20200202132048404.png" alt="image-20200202132048404">&lt;/p>
+&lt;ul>
+&lt;li>五月，微信小程序，一个相册。&lt;/li>
+&lt;li>十一月开始，作为项目管理课程的大作业，也是我希望我校有的，和同学写了个西大云盘。Vue+Django。&lt;/li>
+&lt;li>十一月，Python 课程作业，用Tkinter写了个小软件，调用了一下Bing Map的API显示了个地图。&lt;/li>
+&lt;li>十一月末，根据TUNA群的经验写了个zaobot。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>记账。这个习惯保持下来了，不过从Excel转移到了Spendee。有好处也有坏处吧。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>系统上，从Windows到Win+Arch双系统到Windows+WSL，折腾了很多，却感觉没有深入多少东西。&lt;/p>
+&lt;p>重装了好多次系统.. 一开始换专业版重装了一次，换硬盘又重装了一次。配置环境什么就很麻烦。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>入门了维基百科的一些原则及基础的编辑方式。但离一个合格的编辑还很远。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>国庆借舍友的Switch打了七天的塞尔达，Switch好感+++&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="去年的年初计划">去年的年初计划&lt;/h2>
+&lt;p>大部分都实现了。&lt;/p>
+&lt;h2 id="2020-年初计划">2020 年初计划&lt;/h2>
+&lt;ul>
+&lt;li>参与一个开源项目。&lt;/li>
+&lt;li>找一个实习。&lt;/li>
+&lt;li>考研。&lt;/li>
+&lt;li>继续寻找方向。&lt;/li>
+&lt;li>多写一些博客，输出自己的知识，同时也提高自己的能力。&lt;/li>
+&lt;/ul>
+- https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/ -</description></item><item><title>WSL使用体验</title><link>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link><pubDate>Sun, 08 Dec 2019 19:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/ -&lt;p>首先，WSL真香！&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="开启wsl">开启WSL&lt;/h2>
+&lt;p>最简单的方式是使用管理员权限运行Powershell，然后输入：&lt;/p>
+&lt;p>&lt;code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux&lt;/code>&lt;/p>
+&lt;p>重启电脑，然后在应用商店中安装WSL发行版。&lt;/p>
+&lt;h2 id="arch">Arch&lt;/h2>
+&lt;p>注意到WSL是没有Arch Linux发行版的（以前有一个非官方的，很快被下架了），但是我们有办法添加Arch发行版。去&lt;a href="https://github.com/yuk7/ArchWSL">这个仓库&lt;/a>下载打包好的appx文件和证书，首先将证书导入至受信任的根证书颁发机构，然后安装appx即可。&lt;/p>
+&lt;h2 id="体验">体验&lt;/h2>
+&lt;h3 id="坑">坑&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>默认WSL不会读取&lt;code>~/.bashrc&lt;/code>而会读取&lt;code>~/.bash_profile&lt;/code>，所以需要在&lt;code>~/.bash_profile&lt;/code>中写入：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> -f ~/.bashrc &lt;span style="color:#f92672">]]&lt;/span> ; &lt;span style="color:#66d9ef">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . ~/.bashrc
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>才能够正常读取bash配置。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="netcat">Netcat&lt;/h3>
+&lt;p>首先我Google到的是&lt;code>gnu-netcat&lt;/code>。但是运行时报错&lt;code>nc: core.c:372: core_tcp_connect: Assertion ret == 0' failed.&lt;/code>搜索了&lt;a href="https://github.com/msys2/MSYS2-packages/issues/1030">相关Issus&lt;/a>之后，我更换成了&lt;a href="https://www.archlinux.org/packages/community/x86_64/openbsd-netcat/">openbsd-netcat&lt;/a>，问题解决。&lt;/p>
+&lt;h3 id="缺点">缺点&lt;/h3>
+&lt;ul>
+&lt;li>WSL下无法使用Docker等涉及内核的操作，该缺陷在WSL2中被解决。&lt;/li>
+&lt;li>默认无图形界面，使用GUI需自己安装X Server，较为麻烦。&lt;/li>
+&lt;/ul>
+&lt;h2 id="windows-terminal">Windows Terminal&lt;/h2>
+&lt;p>注意，截至目前，Windows Terminal仍处于预览阶段，正式发布预计要到2020年4月。&lt;/p>
+&lt;p>&lt;img src="./image-20191115231943950.png" alt="image-20191115231943950">&lt;/p>
+&lt;p>安装WSL后，Windows Terminal能够自动识别WSL并添加至可用Terminal列表中。&lt;/p>
+&lt;h3 id="bug">Bug&lt;/h3>
+&lt;ul>
+&lt;li>启动Shell后的工作目录为Windows当前用户的Home目录，而非Linux的用户Home目录。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="./image-20191115232130240.png" alt="image-20191115232130240">&lt;/p>
+&lt;p>​ 可以通过在配置文件中加入&lt;code>&amp;quot;commandline&amp;quot; : &amp;quot;wsl ~&amp;quot;&lt;/code>来解决，不过这个方案只适用于默认WSL发行版，对于其他发行版无效，可以通过在&lt;code>.bashrc&lt;/code>中添加一条判断语句来解决。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Windows Terminal目前暂无法自动添加至右键菜单上下文，需手动添加注册表。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>往Terminal中粘贴内容是会自动在行间加空格。（更新：这个bug是由于\r\n与\n的处理问题，在0.7中被解决）&lt;/p>
+&lt;p>&lt;img src="./image-20191115233340872.png" alt="image-20191115233340872">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="wsl2">WSL2&lt;/h2>
+&lt;h3 id="docker">Docker&lt;/h3>
+&lt;p>可喜可贺，WSL终于能用Docker了。&lt;/p>
+&lt;p>配置镜像源（无systemd）：&lt;/p>
+&lt;blockquote>
+&lt;p>在配置文件 &lt;code>/etc/default/docker&lt;/code> 中的 &lt;code>DOCKER_OPTS&lt;/code> 中配置Hub地址：&lt;/p>
+&lt;pre tabindex="0">&lt;code>DOCKER_OPTS=&amp;#34;--registry-mirror=https://docker.mirrors.ustc.edu.cn/&amp;#34;
+&lt;/code>&lt;/pre>&lt;p>重新启动服务:&lt;/p>
+&lt;pre tabindex="0">&lt;code>sudo service docker restart
+&lt;/code>&lt;/pre>&lt;/blockquote>
+&lt;h3 id="坑-1">坑&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>官方宣称在18945之后的版本中Windows访问WSL提供的网络服务只需使用localhost即可（服务需绑定之0.0.0.0而不是127.0.0.1，因为实际上这些连接被认为是局域网中的连接）。&lt;/p>
+&lt;p>尝试在Docker中使用。&lt;/p>
+&lt;p>&lt;img src="./image-20191116233838273.png" alt="image-20191116233838273">&lt;/p>
+&lt;p>使用&lt;code>netstat -ano&lt;/code>如下：&lt;/p>
+&lt;p>&lt;img src="./image-20191116233912110.png" alt="image-20191116233912110">&lt;/p>
+&lt;p>然而在Windows下只能使用IPv6地址访问：&lt;/p>
+&lt;p>&lt;img src="./image-20191116233953189.png" alt="image-20191116233953189">b&lt;/p>
+&lt;p>而不能使用IPv4：&lt;/p>
+&lt;p>&lt;img src="./image-20191116234023402.png" alt="image-20191116234023402">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>无法使用systemd。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="pycharm">Pycharm&lt;/h2>
+&lt;p>Pycharm能够将Python解释器设置为WSL中的Python。&lt;/p>
+&lt;p>&lt;img src="./image-20191119150317595.png" alt="image-20191119150317595">&lt;/p>
+&lt;p>同时能够将terminal设置为WSL：&lt;/p>
+&lt;p>&lt;img src="./image-20191119150135830.png" alt="image-20191119150135830">&lt;/p>
+&lt;p>只需要将Shell path设置成&lt;code>bash.exe&lt;/code>即可。注意设置为&lt;code>arch.exe&lt;/code>等自定义的发行版名称时，无法将当前工作目录传递给Shell。&lt;/p>
+&lt;p>注意到由于WSL没有图形界面，无法在Python中运行GUI程序。&lt;/p>
+&lt;h3 id="bug-1">Bug&lt;/h3>
+&lt;p>&lt;del>在WSL中安装的包无法被识别：&lt;/del>&lt;/p>
+&lt;p>&lt;img src="./image-20191119150405724.png" alt="image-20191119150405724">&lt;/p>
+&lt;p>&lt;del>因此也无法使用这个包的自动补全、查看定义等一系列功能。&lt;/del>&lt;/p>
+&lt;p>&lt;a href="https://www.jetbrains.com/help/pycharm/using-wsl-as-a-remote-interpreter.html">文档里&lt;/a>写得清清楚楚：&lt;/p>
+&lt;p>&lt;img src="./image-20191208194351006.png" alt="image-20191208194351006">&lt;/p>
+&lt;p>我错了，我应该看文档的。安装rsync之后问题解决。&lt;/p>
+&lt;h2 id="参考资料">参考资料&lt;/h2>
+- https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/ -</description></item><item><title>重新安装 Hexo</title><link>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</link><pubDate>Wed, 07 Aug 2019 16:03:29 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/ -&lt;h2 id="缘由">缘由&lt;/h2>
+&lt;p>直接原因是 Github 的一个假装很贴心的功能：&lt;/p>
+&lt;p>&lt;img src="./1565183420437.png" alt="1565183420437">&lt;/p>
+&lt;p>由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="过程">过程&lt;/h2>
+&lt;h3 id="环境">环境&lt;/h3>
+&lt;p>node.js 6.4.1&lt;/p>
+&lt;p>hexo 3.9.0&lt;/p>
+&lt;p>hexo-cli 2.0.0&lt;/p>
+&lt;p>&lt;img src="./1565186395227.png" alt="1565186395227">&lt;/p>
+&lt;p>官方文档上写需要 node.js 6.9+，然而我是 6.4，不知道会不会锅。&lt;/p>
+&lt;h3 id="hexo-安装">Hexo 安装&lt;/h3>
+&lt;p>首先，把仓库 clone 下来后，备份一份源文件。然后找一个空文件夹，按照官方文档的指引，执行：&lt;/p>
+&lt;pre tabindex="0">&lt;code>hexo init
+npm install
+&lt;/code>&lt;/pre>&lt;p>（我发现现在 &lt;code>hexo init&lt;/code> 会同时自动执行 &lt;code>npm install&lt;/code>命令了）&lt;/p>
+&lt;p>&lt;img src="./1565185528852.png" alt="1565185528852">&lt;/p>
+&lt;p>然而还是有一个漏洞，不管了。&lt;/p>
+&lt;p>然后删除原文件夹中文件（保留.git），把新的文件复制过去。同时把备份文件夹中的&lt;code>source&lt;/code>文件夹覆盖过去。（自动创建 .gitignore 好评）&lt;/p>
+&lt;p>这时候基本的安装就完成了，接下来打开 Github Desktop 开始对比差异。&lt;/p>
+&lt;p>在全局配置&lt;code>_config.yml&lt;/code>中，&lt;/p>
+&lt;p>&lt;img src="./1565184499949.png" alt="1565184499949">&lt;/p>
+&lt;p>这个配置是为每篇博文创建一个单独的资源文件夹。&lt;/p>
+&lt;p>基本不用变，直接 discard changes 即可。&lt;/p>
+&lt;p>&lt;code>.travis.yml&lt;/code> 和 &lt;code>deploy.sh&lt;/code> 也直接还原。&lt;/p>
+&lt;p>&lt;a href="https://cjc7373.github.io/2018/10/13/Hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/#Hexo%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%8C%87%E5%BC%95">图片的问题&lt;/a>先不管，有问题再说。&lt;/p>
+&lt;h3 id="主题安装">主题安装&lt;/h3>
+&lt;p>剩下的差异全是主题文件。既然都重新搞了，那就换一个主题吧。在自己的 stars 里找了个主题 &lt;a href="https://github.com/yscoder/hexo-theme-indigo">hexo-theme-indigo&lt;/a>，看了下也支持 Analysis、Disqus，就决定用它了。&lt;/p>
+&lt;p>接下来就开始按照&lt;a href="https://github.com/yscoder/hexo-theme-indigo/wiki">主题文档&lt;/a>来安装。首先 clone 仓库，我选择 card 分支，感觉比较好看（其实也没有对比）。&lt;/p>
+&lt;p>在 hexo 根目录执行&lt;code>git clone -b card https://github.com/yscoder/hexo-theme-indigo.git themes/indigo&lt;/code>，下载主题文件。安装插件&lt;code>hexo-renderer-less hexo-generator-feed hexo-generator-json-content hexo-helper-qrcode&lt;/code>。&lt;/p>
+&lt;blockquote>
+&lt;h2 id="开启标签页">开启标签页&lt;/h2>
+&lt;pre tabindex="0">&lt;code>hexo new page tags
+&lt;/code>&lt;/pre>&lt;p>修改 &lt;code>hexo/source/tags/index.md&lt;/code> 的元数据&lt;/p>
+&lt;pre tabindex="0">&lt;code>layout: tags
+comments: false
+---
+&lt;/code>&lt;/pre>&lt;h2 id="开启分类页">开启分类页&lt;/h2>
+&lt;p>仅 card theme 支持。&lt;/p>
+&lt;pre tabindex="0">&lt;code>hexo new page categories
+&lt;/code>&lt;/pre>&lt;p>修改 &lt;code>hexo/source/categories/index.md&lt;/code> 的元数据&lt;/p>
+&lt;pre tabindex="0">&lt;code>layout: categories
+comments: false
+---
+&lt;/code>&lt;/pre>&lt;/blockquote>
+&lt;p>话说用 Github Desktop commit 的时候因为主题文件夹也是一个 git 仓库，所以报错了，在命令行中 add，提示&lt;/p>
+&lt;p>&lt;img src="./1565227855897.png" alt="1565227855897">&lt;/p>
+&lt;p>于是我去 Google 了下&lt;a href="%5Bhttps://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97%5D(https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)">子模块&lt;/a>，感觉这会让问题变复杂，同时这个主题已经很久没更新过了，干脆把主题的版本库删了吧。删除 &lt;code>.git&lt;/code>文件夹后，提交成功。&lt;/p>
+&lt;h3 id="主题配置">主题配置&lt;/h3>
+&lt;p>编辑站点配置文件。启用主题&lt;code>theme: indigo&lt;/code>。feed 是用来 rss 的，不管。jsonContent 用来搜索，如下：&lt;/p>
+&lt;blockquote>
+&lt;h3 id="jsoncontent配置">jsonContent配置&lt;/h3>
+&lt;p>为了节约资源，可以对 jsonContent 插件生成的数据字段进行配置，减少数据文件大小。参考 &lt;a href="https://github.com/alexbruno/hexo-generator-json-content">hexo-generator-json-content&lt;/a>&lt;/p>
+&lt;pre tabindex="0">&lt;code>jsonContent:
+meta: false
+pages: false
+posts:
+title: true
+date: true
+path: true
+text: true
+raw: false
+content: false
+slug: false
+updated: false
+comments: false
+link: false
+permalink: false
+excerpt: false
+categories: false
+tags: true
+&lt;/code>&lt;/pre>&lt;/blockquote>
+&lt;p>编辑主题配置文件，&lt;code>themes/indigo/_config.yml&lt;/code>。&lt;/p>
+&lt;p>左侧菜单：&lt;/p>
+&lt;blockquote>
+&lt;p>添加新菜单项时，在 menu 下增加子属性即可。属性说明如下：&lt;/p>
+&lt;pre tabindex="0">&lt;code>menu:
+link: # fontawesome图标，省略前缀，本主题前缀为 icon-，必须
+text: About # 菜单显示的文字，如果省略即默认与图标一致，首字母会转大写
+url: /about # 链接，绝对或相对路径，必须
+target: _blank # 是否跳出，省略则在当前页面打开
+&lt;/code>&lt;/pre>&lt;p>fontawesome 图标已集成到主题中，你可以到 &lt;a href="http://fontawesome.io/icons/">这个页面&lt;/a> 挑选合适的图标。&lt;/p>
+&lt;/blockquote>
+&lt;p>我修改为如下：&lt;/p>
+&lt;pre tabindex="0">&lt;code>menu:
+home:
+text: 主页
+url: /
+archives:
+url: /archives
+tags:
+url: /tags
+th-list:
+text: Categories
+url: /categories
+github:
+url: https://github.com/cjc7373
+target: _blank
+user:
+text: 关于
+url: /about
+&lt;/code>&lt;/pre>&lt;p>其余改动略。&lt;/p>
+&lt;p>由于这个主题为国人制作，配置文件都带有中文注释，还是很友好的。&lt;/p>
+&lt;h2 id="修锅">修锅&lt;/h2>
+&lt;p>图片不出意外地崩了。。而且不止首页图片，是所有。。装插件试试。&lt;code>npm install hexo-asset-image --save&lt;/code>。装完又多了两个漏洞，这插件是有多久没更新了。。自动修复试试。&lt;/p>
+&lt;p>&lt;img src="./1565232540544.png" alt="1565232540544">&lt;/p>
+&lt;p>GG。&lt;/p>
+&lt;p>语言是错的。hexo 配置文件改成 zh-cn 试试。&lt;/p>
+&lt;p>头像好丑。改成猫头鹰了。&lt;/p>
+&lt;hr>
+&lt;p>坑爹啊，img不说清楚在哪里。。我在根目录下创建了img，结果找了一下发现是在&lt;code>themes\indigo\source\img&lt;/code>下，图片还是炸。待修。暂时回滚至以前的版本。&lt;/p>
+&lt;h2 id="回滚">回滚&lt;/h2>
+&lt;p>Updated in 2019/10/7&lt;/p>
+&lt;p>&lt;img src="./1570428603861.png" alt="1570428603861">&lt;/p>
+&lt;p>时隔两个月,重新拾回了我的博客..&lt;/p>
+&lt;p>这个主题的锅不想修了..&lt;/p>
+&lt;p>又看了几个主题之后,看看似乎原主题也挺好的..&lt;/p>
+&lt;p>所以我又用回了 Next..&lt;/p>
+&lt;p>看了一下 Next 换维护者了..&lt;/p>
+&lt;p>&lt;img src="./1570429427612.png" alt="1570429427612">&lt;/p>
+&lt;p>仓库地址从&lt;a href="https://github.com/iissnan/hexo-theme-next">这个&lt;/a>变为&lt;a href="https://github.com/theme-next/hexo-theme-next">这个&lt;/a>(话说居然不是 fork 过去的)&lt;/p>
+&lt;p>大致过程是&lt;del>重来一遍上述过程&lt;/del>回退到某一个提交即可.&lt;/p>
+&lt;p>不过我把 node.js 的版本更新到了 v12.11.1&lt;/p>
+&lt;p>首先这四个 commit 记录不需要了,我建了个新的分支 theme-indigo 扔着..&lt;/p>
+&lt;p>然后,先fetch一下,因为我在远程仓库上回滚了之前的更改..然后发现记错了,回滚的是 master 分支..&lt;/p>
+&lt;p>然后看一下 log, 回退到 2939aa 这个 commit.&lt;/p>
+&lt;p>&lt;img src="./1570429889982.png" alt="1570429889982">&lt;/p>
+&lt;p>&lt;code>git reset --hard 2939aa&lt;/code>&lt;/p>
+&lt;p>此时本地分支已经落后于远程分支了,需要强制推送一遍.&lt;code>git push --force&lt;/code>&lt;/p>
+&lt;p>&lt;img src="./1570430098775.png" alt="1570430098775">&lt;/p>
+&lt;p>看了一下这个提交是 [Hexo 安装](#Hexo 安装) 完成之后.&lt;/p>
+&lt;p>接下来安装主题, 先从 Github 下载一个 release. 目前是 v7.4.1&lt;/p>
+&lt;p>看了一眼&lt;a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/UPDATE-FROM-5.1.X.md">从5.x升级&lt;/a>文档, 全局配置中 language 要从 zh-Hans 变为 zh-CN&lt;/p>
+&lt;p>&lt;del>然后并没有发现其他配置文档&lt;/del> 是有的, 只不过是英文, 在&lt;a href="https://theme-next.org/docs/getting-started/">这里&lt;/a>, 只能一行一行看 &lt;code>_config.yml&lt;/code> 了.&lt;/p>
+&lt;p>用 sublimerge 对比一下新旧配置文件的差异..&lt;/p>
+&lt;p>&lt;img src="./1570431870938.png" alt="1570431870938">&lt;/p>
+&lt;p>瞎改了一点.&lt;/p>
+&lt;p>ok. 测试一下, 果然图片又崩了. 原因引用的图片地址多了一级. 把多余的地址删掉是能够正常显示的.&lt;/p>
+&lt;p>&lt;img src="./1570432899620.png" alt="1570432899620">&lt;/p>
+&lt;p>然而原来那个插件 &lt;code>hexo-asset-image&lt;/code> 没用了. 无奈继续 Google, 找到了一篇&lt;a href="https://liolok.github.io/en/How-to-Add-Image-to-Hexo-Blog-Post/">英文博文&lt;/a>, 指出了另一个插件&lt;a href="https://github.com/liolok/hexo-asset-link">hexo-asset-link&lt;/a>, 尝试之, 发现能完美在首页及内容页显示图片.&lt;/p>
+&lt;p>至此, 我的博客算是修好了. (这篇博客写得不成样子,大雾,希望没人看到吧&lt;/p>
+&lt;h2 id="结语">结语&lt;/h2>
+&lt;p>两次修锅的过程, 让我看到了 Hexo 的插入图片的巨坑. 用图床能够避免这个问题, 然而图床也有缺点, 我还是更喜欢直接插入图片. 感觉上这部分是由 Hexo 来处理的, 与主题无关, 所以还是可以换个主题玩玩的, 目前来说, 还是先专注于内容吧.&lt;/p>
+&lt;p>有时间也可以试试 Typecho, Jekyll, Pelican, Hugo 等其他博客生成器.&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/ -</description></item><item><title>大二下学期期末复习</title><link>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link><pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/ -&lt;h2 id="软件工程试卷">软件工程试卷&lt;/h2>
+&lt;p>来源： &lt;a href="https://tellyouwhat.cn/p/northwest-university-software-engineering-review-materials/">Harbor Zeng&lt;/a>&lt;/p>
+&lt;p>&lt;img src="./bd61005egy1g0cx8lnllsj20rt112adk.jpg" alt="img">&lt;/p>
+&lt;p>&lt;img src="./bd61005egy1g0cx8izobuj22eo37kb29.jpg" alt="img">&lt;/p>
+&lt;p>&lt;img src="./bd61005egy1g0cx8p7mccj20rt112adg.jpg" alt="img">&lt;/p>
+&lt;p>&lt;img src="./bd61005egy1g0cx8t4qtvj20rt11241p.jpg" alt="img">&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/ -</description></item><item><title>软通实习</title><link>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</link><pubDate>Wed, 17 Jul 2019 15:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/ -&lt;h2 id="序">序&lt;/h2>
+&lt;p>二年级下学期期末，有一个两周的实习，学校给了我们三个选项，其中软通算是知名度最高的一家公司了。
+&lt;img src="./isoftstone.png" alt="“isoftstone”的图片搜索结果">&lt;/p>
+&lt;p>然而网上这家公司的风评很差，不过其他两家似乎更差，于是我们班大概四分之三的人都来了软通。&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="经历">经历&lt;/h2>
+&lt;p>实习第一天，上午讲的开发流程，团队角色，每日例行项目好似我们已经接手了一个实际项目，然而到了下午瞬间变成培训班，开始教我们配置环境。看下发的文档是用 Java Spring Boot 框架来开发。第二天又开始复习 Java。然后到了第三天，负责我们的老师（就叫他项目经理好了）突然说，你们想用什么技术就用什么技术吧。终于不用写 Java 了（逃&lt;/p>
+&lt;p>我们大概使用的是 Scrum 敏捷开发方法，最有特色的一点大概就是每日站会了。还有 Story 列表其实也挺不错的，只是没有贴在公告板上感觉失去了灵魂。&lt;/p>
+&lt;p>可能是时间短的原因，从一开始需求包括 Story 列表就已经确定了，我认为如果只是说做一个什么系统而不说具体需求会让大家的产品更有差异化，亮点也会更多。&lt;/p>
+&lt;h2 id="技术栈">技术栈&lt;/h2>
+&lt;p>由于我很倾向 Python，加上青岛大学的开源 OJ 采用的就是 Django+Vue 前后端分离的开发模式，于是我便也想采用这个模式。&lt;/p>
+&lt;p>最终我们决定采用前后端完全分离，前后端之间使用 HTTP 协议通信。前端采用：HTML+CSS+JavaScript（JQuery+AJAX），后端采用：Django，数据库采用：PostgreSQL&lt;/p>
+&lt;h2 id="版本管理">版本管理&lt;/h2>
+&lt;p>我有一些 Git 的知识，然而软通提供的版本管理工具是 SVN。用了一段时间后发现，两个工具没有本质的区别，最大的大概是 SVN 需要中心服务器，权限控制似乎也比较强大，所以像在公司内部比较好用，而 Git 分布式，分支创建极为方便，在开源社区中被广泛使用。&lt;/p>
+&lt;p>&lt;img src="./1563352303687.png" alt="1563352303687">&lt;/p>
+&lt;p>然而我们甚至没有用到分支这个功能，总体上还是没有利用好版本管理。&lt;/p>
+&lt;h2 id="前端三剑客">前端：三剑客&lt;/h2>
+&lt;p>zpc 第一天就不知道在哪找了个模板网站，然后冲了十块钱下了个模板。接下来就开始改改改。&lt;/p>
+&lt;h3 id="调试">调试&lt;/h3>
+&lt;p>一个问题是，后端的代码如何给前端调试。我们选择：&lt;/p>
+&lt;ol>
+&lt;li>后端首先使用 Django 的本地服务器，用 Postman 进行测试，测试通过后上传代码。&lt;/li>
+&lt;li>不定期部署至服务器上&lt;/li>
+&lt;li>前端从服务器调用接口调试&lt;/li>
+&lt;/ol>
+&lt;p>然而，在其他组答辩的时候，我们才知道有个东西叫 &lt;a href="http://mockjs.com/">mock&lt;/a>，能够简化调试难度。&lt;/p>
+&lt;h2 id="后端django">后端：Django&lt;/h2>
+&lt;p>很早就听说了 Python Web 一些有名的框架，后来又知道了青岛大学的开源 OJ 后端使用的就是 Django，所以很想尝试一下。曾经看过几节慕课，也看了一些官方文档（一开始是真的看不懂）。在做微信小程序的时候，我就想用 Django，奈何技术不够，放弃了。&lt;/p>
+&lt;p>实习前，我去找 zjb 两小时速成了一下 Django，发现 Django 虽然是 MTV（Model——Template——View）三级结构，但是前后端分离的话就没有模板了，同时我们用了 REST Framework，在函数名中直接声明要调用的方法，大大简化了开发。REST Framework 也提供了&lt;a href="https://q1mi.github.io/Django-REST-framework-documentation/">官方中文文档&lt;/a>，不过感觉写得不是很好。&lt;/p>
+&lt;p>后端代码非常简单，我们先用&lt;code>token = request.COOKIES.get(&amp;quot;token&amp;quot;)&lt;/code>获取token，查询&lt;code>user = User.objects.get(userToken=token)&lt;/code>，若 token 无效则会抛出&lt;code>User.DoesNotExist&lt;/code>错误，查询操作之后调用一个序列化方法&lt;code>users = serializers.serialize(&amp;quot;json&amp;quot;, allMessage, fields=(&amp;quot;userID&amp;quot;))&lt;/code>，但是如果直接这样返回会有问题，所以需要把它转化成字典类型&lt;code>rtn['data']=json.loads(users)&lt;/code>，然后调用&lt;code>JsonResponse&lt;/code>返回。&lt;/p>
+&lt;p>Django 查询数据库返回的是一个 &lt;a href="https://docs.djangoproject.com/zh-hans/2.2/ref/models/querysets/">QuerySet&lt;/a> 对象，我们能对它进行很多操作，但是其实我们都没用到..&lt;/p>
+&lt;h3 id="cookies">Cookies&lt;/h3>
+&lt;p>我一开始以为 Cookies 是前端负责维护的，后来发现这只是浏览器的工作。所以实际上 Cookies 是后端维护的。在登陆时设置 Cookie，调用 API 时获取 Cookie，退出时删除 Cookie 即可。&lt;/p>
+&lt;h3 id="测试">测试&lt;/h3>
+&lt;p>我们用了 Postman 模拟 HTTP 请求进行测试，很可惜的是没有用到 Django 的自动化测试。&lt;/p>
+&lt;h3 id="几个坑">几个坑&lt;/h3>
+&lt;p>Django 的文档宣称：&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>会自动重新加载的服务器 &lt;a href="https://docs.djangoproject.com/zh-hans/2.2/ref/django-admin/#django-admin-runserver">&lt;code>runserver&lt;/code>&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>用于开发的服务器在需要的情况下会对每一次的访问请求重新载入一遍 Python 代码。所以你不需要为了让修改的代码生效而频繁的重新启动服务器。然而，一些动作，比如添加新文件，将不会触发自动重新加载，这时你得自己手动重启服务器。&lt;/p>
+&lt;/blockquote>
+&lt;p>然而有时候重新载入并不会生效（可能是 PyCharm 的问题？），这种时候就很烦..&lt;/p>
+&lt;p>数据库中的&lt;code>DateTimeField&lt;/code>字段存储的时间总是 UTC 时间，在&lt;code>settings.py&lt;/code>中设置：&lt;/p>
+&lt;pre tabindex="0">&lt;code>TIME_ZONE = &amp;#39;Asia/Shanghai&amp;#39;
+USE_TZ = False
+&lt;/code>&lt;/pre>&lt;p>这样返回的时间是正常的，虽然数据库里的时间还是 UTC 时间，不过不影响了。&lt;/p>
+&lt;h2 id="数据库postgresql">数据库：&lt;strong>PostgreSQL&lt;/strong>&lt;/h2>
+&lt;p>据说 PostgreSQL 和 MySQL 的区别是..&lt;/p>
+&lt;p>&lt;img src="./1563367521827.png" alt="1563367521827">&lt;/p>
+&lt;p>&lt;img src="./1563367537890.png" alt="1563367537890">&lt;/p>
+&lt;p>虽说 Django 官方支持 PostgreSQL，而且我们的数据库部署在服务器上，但是本地还是要一个中间件&lt;code>psycopg2 &lt;/code>，在 Windows 下安装无问题，在 Linux 下需要一个额外的包 &lt;code>libpq-dev&lt;/code>，而在 Mac 下需要先安装 PostgreSQL。这也是一个坑点。&lt;/p>
+&lt;p>图形化管理界面方面，我使用了 pgadmin，一开始我以为这是个客户端，还奇怪为什么它提供 Docker 镜像，下完才发现它是网页端。果断卸载然后 docker pull..&lt;/p>
+&lt;p>数据库由于我们的设计问题，改了一万次。&lt;/p>
+&lt;p>&lt;img src="./1563368286617.png" alt="1563368286617">&lt;/p>
+&lt;p>七次其实还是我们重置过一次数据库的结果，真实改动可能有十一二次吧。虽然 Django 提供了方便的 migrate 功能，但是这功能锅很多，能不改还是尽量不改。&lt;/p>
+&lt;ul>
+&lt;li>在自己设置主键然后又取消使用自动主键时，Django 会报没有默认值的错。？？？AutoField 你要什么默认值。网上也有同样的情况，应该是 Django 的 Bug。&lt;/li>
+&lt;li>在改某张表的时候一直碰到报错一个不存在的列不存在，这张表就似乎坏了。我们的解决方案是重建一张新的表2333&lt;/li>
+&lt;/ul>
+&lt;h2 id="接口">接口&lt;/h2>
+&lt;h3 id="文档">文档&lt;/h3>
+&lt;p>我们的接口文档直接写在 Story 列表后面。主要写明了接口地址，方法（GET，POST，PUT，DELETE，我是想 RESTful 的，可是其他人基本随缘了），请求字段，响应字段，以及相应的解释和示例。&lt;/p>
+&lt;h3 id="跨域">跨域&lt;/h3>
+&lt;p>前端调试接口的时候产生了跨域的问题。Cookie，Ajax 请求都会遭到浏览器&lt;a href="https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">同源策略&lt;/a>的限制。临时的解决方案是，在 Django 上装一个插件 &lt;a href="https://github.com/ottoyiu/django-cors-headers">&lt;code>django-cors-headers&lt;/code>&lt;/a>，并且修改&lt;code>settings.py&lt;/code>，在&lt;code>INSTALLED_APPS&lt;/code>中加入&lt;code>corsheaders&lt;/code>，在&lt;code>MIDDLEWARE&lt;/code>中加入&lt;code>corsheaders.middleware.CorsMiddleware&lt;/code>（位置尽量靠前），并设置字段：&lt;/p>
+&lt;pre tabindex="0">&lt;code>CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+&lt;/code>&lt;/pre>&lt;p>而在前端每个 Ajax 请求中加上：&lt;/p>
+&lt;p>&lt;img src="./1563353270812.png" alt="1563353270812">&lt;/p>
+&lt;p>而在生产环境中由于同源，所以不存在跨域的问题。&lt;/p>
+&lt;p>然而，一个新的问题是，本地浏览器并不能够成功地存储 Cookie，当时的解决办法是，每改动一个页面就部署至服务器上进行调试，然而这个方法效率极低。后来我发现其实这只是 Chrome 浏览器的问题，其他浏览器则没有这个问题。&lt;/p>
+&lt;h2 id="部署">部署&lt;/h2>
+&lt;p>在开发中，采取的方案是前端静态网页由 Nginx 部署，而后端 Django 代码则使用 Django 自带的服务器部署，而显然，这绝不能用于生产环境。&lt;/p>
+&lt;blockquote>
+&lt;p>DO NOT USE THIS SERVER IN A PRODUCTION SETTING. It has not gone through security audits or performance tests.&lt;/p>
+&lt;/blockquote>
+&lt;p>（不过我还是用了，甚至都没关 DEBUG 选项）&lt;/p>
+&lt;p>因为 Django 服务器使用 &lt;code>python3 manage.py runserver&lt;/code>运行的， SSH 断开后进程就被中断了，所以需要让它能够后台运行，尝试了 nohup，子 shell 等方法后（都不好用），最终选择了 screen。主要命令有：&lt;/p>
+&lt;pre tabindex="0">&lt;code>screen -S [NAME] 创建一个新 shell
+screen -ls 查看后台 shell
+screen -r [ID] 进入某个 shell
+Ctrl+A,D 把当前 shell 切换至后台
+&lt;/code>&lt;/pre>&lt;p>Nginx 配置我就直接改默认配置了，路径在&lt;code>/etc/nginx/sites-enabled/default&lt;/code>下。除了静态页面外，还需配置后端请求转发：&lt;/p>
+&lt;pre tabindex="0">&lt;code>location /api {
+proxy_pass http://127.0.0.1:8000;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header Host $http_host;
+client_max_body_size 200M;
+}
+&lt;/code>&lt;/pre>&lt;p>（这个配置我是抄青岛大学 OJ 的）&lt;/p>
+&lt;h3 id="https">HTTPS&lt;/h3>
+&lt;p>尝试把域名解析至阿里云的服务器，发现不管是 HTTP 还是 HTTPS 请求都会被拦截，并被劫持到一个备案页面。&lt;/p>
+&lt;p>&lt;img src="./1563512996274.png" alt="1563512996274">&lt;/p>
+&lt;p>于是换用 GCP，一切顺利。使用 Let&amp;rsquo;s Encrypt 的证书以及官方推荐的 &lt;a href="https://certbot.eff.org/">certbot&lt;/a> 工具。简单几步即可签发证书并自动配置 Nginx。&lt;/p>
+&lt;p>&lt;img src="./1563513130043.png" alt="1563513130043">&lt;/p>
+&lt;h2 id="参考资料">参考资料&lt;/h2>
+&lt;p>&lt;a href="https://blog.csdn.net/summer2day/article/details/81358815">前后端分离的django项目服务器跨域&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://harttle.land/2016/12/28/cors-with-cookie.html">CORS 跨域发送 Cookie&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/tutorials/Django_and_nginx.html">使用uWSGI和nginx来设置Django和你的web服务器&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.cnblogs.com/lhj588/archive/2011/10/27/2226976.html">django web Cookie 和 Sessions 应用&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.jianshu.com/p/15af33d2c2c4">从零开始建立单元测试-以Django项目为例&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://www.liujiangblog.com/course/django/129">查询操作&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.runoob.com/django/django-model.html">Django 模型&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://blog.csdn.net/zhu_free/article/details/48176779">django DateTimeField 时区问题解决&lt;/a>&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/ -</description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Wed, 24 Apr 2019 08:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ -&lt;h2 id="前言">前言&lt;/h2>
+&lt;p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p>
+&lt;p>这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p>
+&lt;p>&lt;img src="./1554536417517.png" alt="1554536417517">&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>下面列出笔记本的配置，以供参考。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>部件&lt;/th>
+&lt;th>型号&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>CPU&lt;/td>
+&lt;td>Intel i5-7300HQ&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>内存&lt;/td>
+&lt;td>16G&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>硬盘&lt;/td>
+&lt;td>128G NVME SSD + 1T 机械&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>显卡&lt;/td>
+&lt;td>GeForce GTX 1050 Ti + Intel HD Graphics 630&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>无线网卡&lt;/td>
+&lt;td>Reltek RTL8822BE&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>触摸板&lt;/td>
+&lt;td>Synaptics&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="为什么选择-arch">为什么选择 Arch&lt;/h2>
+&lt;p>滚动更新天下第一！（误&lt;/p>
+&lt;p>听说社区非常友好（然而我还没感受到&lt;/p>
+&lt;h2 id="基本安装">基本安装&lt;/h2>
+&lt;p>安装参考了 &lt;a href="https://www.viseator.com/2017/05/17/arch_install/">以官方Wiki的方式安装ArchLinux&lt;/a> 和 官方Wiki的 &lt;a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Installation Guide&lt;/a>。在未安装图形界面前，基本一切顺利。&lt;/p>
+&lt;p>题外话：说起无线网卡，之前装 Ubuntu 的时候，没有驱动，需要手动安装。不过内核从 4.x 某个版本之后，加入了对我这个网卡的驱动，现在无需配置即可使用了。&lt;/p>
+&lt;p>由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。&lt;/p>
+&lt;p>在配置&lt;code>sudo&lt;/code>时，使用&lt;code>visudo&lt;/code>命令编辑配置文件，然而这个 vi编辑器有毒，许多操作都无法执行，感觉是个 bug。（Update：原来 vi 和 vim 是有挺大的区别的&amp;hellip;）&lt;/p>
+&lt;h2 id="图形界面">图形界面&lt;/h2>
+&lt;p>&lt;del>众所周知&lt;/del>，Linux社区似乎对于 Nvidia+Intel 双显卡不怎么友好，在我安装过的数个发行版中（包括 Ubuntu, Debian, Manjaro, Deepin），基本都出现了启动黑屏/在Logo处冻结的情况，本次安装 Arch Linux，同样遇到了此问题。&lt;/p>
+&lt;p>由于我准备使用双系统，所以并不准备安装 Nvidia 驱动，仅安装了 Intel 的显卡驱动。&lt;/p>
+&lt;p>在装完 Xorg，KDE，sddm 之后，我尝试启动图形界面，成功卡在了 KDE 加载的地方。在随后的尝试中，我发现连 &lt;code>screenfetch&lt;/code>, &lt;code>lspci&lt;/code> 这样的命令都会导致系统/虚拟控制台（tty）无响应。一开始觉得是内核的问题，因为 Arch 默认安装了 5.0 内核，遂降级至 4.20，问题依旧。&lt;/p>
+&lt;p>搜索发现问题可能与N卡的开源驱动 &lt;code>Nouveau&lt;/code>有关，（我寻思我也没装nouveau啊），于是创建 &lt;code>/etc/modprobe.d/blacklist.conf&lt;/code>，并在文件中写入&lt;code>blacklist nouveau&lt;/code>，执行 &lt;code>update-initramfs -u&lt;/code>（大概是更新内核配置？）。顺便安装&lt;code>bbswitch&lt;/code>把N卡给禁了，具体配置按照&lt;a href="https://coolrc.me/2016/11/28/28115748/">这篇文章&lt;/a>。&lt;/p>
+&lt;p>重启问题解决，于是又把内核升到 5.0.2，重启卡在命令行界面（甚至没有见到 sddm）。于是进 live cd，回滚 4.20，重启问题解决。&lt;/p>
+&lt;p>话说以后可以试试 Wayland？&lt;/p>
+&lt;h3 id="问题解决">问题解决&lt;/h3>
+&lt;p>发现开机时有一行报错，&lt;code>Failed to load Linux Kernel Modules&lt;/code>，用&lt;code>systemctl status systemd-modules-load.service&lt;/code>查看发现是&lt;code>bbswitch&lt;/code>加载失败了。所有东西似乎有着千丝万缕的联系&amp;hellip;&lt;/p>
+&lt;p>对比发现 5.x 内核启动时并没有报错，于是删除 &lt;code>bbswtich&lt;/code>，再升级 5.0 内核，成功启动&lt;code>sddm&lt;/code>，问题解决（终于可以愉快地滚系统啦）。&lt;/p>
+&lt;p>&lt;img src="./1554535852814.png" alt="1554535852814">&lt;/p>
+&lt;p>原因可能是 &lt;code>bbswitch&lt;/code> 配置不当，具体原因不明。此时开始仍然会报&lt;code>Failed to load Linux Kernel Modules&lt;/code>，需要手动将&lt;code>/etc/modprobe.d/bbswitch.conf&lt;/code>及&lt;code>/etc/modprobe.d/&lt;/code>中某个文件中（我忘了）的&lt;code>bbswitch&lt;/code>删除。&lt;/p>
+&lt;h2 id="必要软件">必要软件&lt;/h2>
+&lt;ul>
+&lt;li>Arch Linux CN 源，包含了许多 AUR 中的软件。第一次加入源的时候不知道要安装 keyring，导致安装包时卡在了 GPG 签名校验那一步。我还寻思为什么 Arch 的签名老出锅。。（BTW：为什么需要 keyring？）&lt;/li>
+&lt;li>Shadowsocks，装完命令行版的 Shadowsocks，根据 Wiki 描述，应用 &lt;code>ss-local&lt;/code>启动，然而&lt;code>commend not found&lt;/code>，未能解决，于是又装了 Shadowsocks-qt5。&lt;/li>
+&lt;li>&lt;del>Chrome，ArchCN 源中有（话说什么时候试试 Chromium）。&lt;/del> Chrome 不支持硬件加速，现已更换 Chromium。同步等功能一切正常。&lt;/li>
+&lt;li>字体，不安装中文字体许多中文字是框框（然而为什么不是所有呢），我选择了&lt;code>wqy-microhei&lt;/code>，然而系统自带的英文字体也很丑。按照&lt;a href="https://wiki.archlinux.org/index.php/Microsoft_fonts_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">官方Wiki&lt;/a>把Windows中的字体复制了过来，然而发现英文字体的间距变得非常小。中文字体看着挺舒服（应该是雅黑？）。&lt;/li>
+&lt;li>中文输入法，装了谷歌拼音发现打出来的字是繁体，还找不到相关选项（Update：把简繁转换关了就好了）。现在在用 Rime。&lt;/li>
+&lt;li>印象笔记，在 Linux 有开源的客户端 Tusk。然而 Tusk 不支持 Markdown&amp;hellip;.&lt;/li>
+&lt;li>Tim/QQ，ArchCN 源包含。本质上是魔改过配置的 Wine 容器。&lt;/li>
+&lt;/ul>
+&lt;h2 id="省电">省电&lt;/h2>
+&lt;p>在用 Linux 之前，我一直认为 Linux 会比 Windows 更加省电，没想到刚好相反。所以为了省电，我不得不做许多额外的配置。&lt;/p>
+&lt;p>首先，耗电的大头还是在 CPU，我们请出&lt;code>cpupower&lt;/code>，启用&lt;code>powersave&lt;/code>调度，风扇安静了，掉电也少了不少。&lt;/p>
+&lt;p>除了 CPU，其他部件也耗电呐。好在有个包能够统一地管理电源消耗，那就是&lt;code>laptop-mode-tools&lt;/code>，然而这玩意似乎用处不大。。&lt;/p>
+&lt;h2 id="折腾">折腾&lt;/h2>
+&lt;h3 id="瞎改配置">瞎改配置&lt;/h3>
+&lt;p>Linux Mode Setting 可以提前启动？虽然不知道有什么用。&lt;/p>
+&lt;p>编辑&lt;code>/etc/mkinitcpio.conf&lt;/code>，修改&lt;code>MODULES&lt;/code>一行，改为&lt;code>MODULES=(i915)&lt;/code>（Intel 显卡）。&lt;/p>
+&lt;h3 id="目前遇到的问题">目前遇到的问题&lt;/h3>
+&lt;ul>
+&lt;li>为什么任务栏有两个音量图标？（一个是 Audio Volume，一个是 KMix，然而这不都是 KDE 自带的么..）&lt;/li>
+&lt;li>触摸板无法使用手势&lt;/li>
+&lt;li>还是想禁用独显，参考资料&lt;a href="https://xuchen.wang/archives/archbbswitch.html">https://xuchen.wang/archives/archbbswitch.html&lt;/a>&lt;/li>
+&lt;li>Tim 字体发虚，&lt;a href="https://github.com/countstarlight/deepin-wine-tim-arch">官方仓库&lt;/a>似乎给出了解决方案。&lt;/li>
+&lt;li>风扇调度误我，只要CPU占用率高个那么几秒，风扇就像起飞了一样&lt;/li>
+&lt;li>Typora 打开时不能恢复上次打开的文件夹&lt;/li>
+&lt;/ul>
+&lt;h2 id="实用技巧">实用技巧&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>显示桌面：在 Panel Option 中添加 Show Desktop 小工具，然后设置快捷键为 Win+D。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Clipboard 能够生成二维码。（方便多设备发送网址什么的？然而我有 Chrome 同步了..）&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>开机时打开 Num Lock：根据 Wiki，KDE 自带了这个选项，在&lt;code>Hardware/Input Devices/Keyboard&lt;/code>中。不过我转念一想，不是先启动&lt;code>sddm&lt;/code>么？试了一下果然在&lt;code>sddm&lt;/code>界面小键盘是关着的。于是在&lt;code>/etc/sddm.conf&lt;/code>加入&lt;/p>
+&lt;pre tabindex="0">&lt;code>[General]
+Numlock=on
+&lt;/code>&lt;/pre>&lt;/li>
+&lt;li>
+&lt;p>pacman 能够在升级前对比版本信息，对于我这种强迫症非常有用。&lt;/p>
+&lt;p>&lt;img src="./1555419677545.png" alt="1555419677545">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>修改 &lt;code>/etc/fstab&lt;/code>，加入以下内容，使得开机时能够自动以只读模式挂载 Windows 分区。&lt;/p>
+&lt;p>&lt;img src="./1556519535880.png" alt="1556519535880">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>日志相关。由于&lt;code>systemd&lt;/code>这个神奇的存在，似乎所有日志都可以通过&lt;code>systemd&lt;/code>带的&lt;code>journalctl&lt;/code>查看。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>查看启动时&lt;code>tty1&lt;/code>的滚过去的那一大堆日志：&lt;code>journalctl /usr/lib/systemd/systemd -b&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>查看加载失败的 unit：&lt;code>systemctl --failed&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>查看某个 unit 的日志：&lt;code>journalctl -u nginx.service --since today&lt;/code>&lt;/p>
+&lt;p>（另外&lt;code>systemctl status&lt;/code>也能显示最新的大概十行日志）&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>增强 Bash 的自动补全：&lt;code>pacman -S bash-completion&lt;/code>，重启终端即可。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="trouble-shooting">Trouble Shooting&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>今天打开tusk发现闪退。。用终端运行报&lt;code>tusk: error while loading shared libraries: libnode.so: cannot open shared object file: No such file or directory&lt;/code>，我干什么了我？我啥都没干啊。。重新安装未解决问题。重启同样未解决。&lt;/p>
+&lt;p>于是 Google，StackOverflow 上有一个帖子建议我先找找有没有这个库。&lt;/p>
+&lt;p>&lt;img src="./1555419245819.png" alt="1555419245819">&lt;/p>
+&lt;p>发现是有的，ls 看下。&lt;/p>
+&lt;p>&lt;img src="./1555419316125.png" alt="1555419316125">&lt;/p>
+&lt;p>然而链接到了另一个文件，一看，果然那个文件没了。。（推测和包更新了有关？）但是 Typora 有这个库呀，于是尝试链接到 Typora 带的那个库，然后问题解决了。。。我被我这波操作惊呆了。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>觉得字体不好看，然后似乎改崩了&amp;hellip;目前把 Windows 的字体扔了，重新安装的字体列表有：&lt;/p>
+&lt;ul>
+&lt;li>wqy-zenhei&lt;/li>
+&lt;li>wqy-microhei&lt;/li>
+&lt;li>adobe-source-han-sans-cn-fonts&lt;/li>
+&lt;li>adobe-source-han-serif-cn-fonts&lt;/li>
+&lt;/ul>
+&lt;p>然后把终端的字体改成了 Consolas（AUR），感觉还是这个字体好看，不过中文字体好像变丑了。。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>尝试安装 Tim。&lt;/p>
+&lt;p>&lt;img src="./1555420630345.png" alt="1555420630345">&lt;/p>
+&lt;p>？？？说好的自动解决依赖关系呢？&lt;/p>
+&lt;p>直接构建发现会报一堆依赖的错，查看 Github 项目发现：&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;code>deepin-wine-tim&lt;/code>依赖&lt;code>Multilib&lt;/code>仓库中的&lt;code>wine&lt;/code>，&lt;code>wine_gecko&lt;/code>和&lt;code>wine-mono&lt;/code>，Archlinux默认没有开启&lt;code>Multilib&lt;/code>仓库，需要编辑&lt;code>/etc/pacman.conf&lt;/code>，取消对应行前面的注释(&lt;a href="https://wiki.archlinux.org/index.php/Official_repositories#multilib">Archlinux wiki&lt;/a>)&lt;/p>
+&lt;/blockquote>
+&lt;p>懂了，我以后一定先 RTFM（&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Windows 分区在 Windows 启用了快速启动或者处于休眠状态时只能以只读方式挂载。什么傻吊设计。（因为我想把博客文件夹 &lt;code>ln&lt;/code> 到 Arch 下，使得双系统能够同步写作）&lt;/p>
+&lt;p>解决方案：使用 Travis CI 自动部署 Hexo。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>输入法在终端和 Telegram，Kate 下（以及更多）不能使用。&lt;/p>
+&lt;p>根据&lt;a href="http://www.towdium.me/2017/04/11/manjaro-config-diary/">某大佬的博客&lt;/a>：&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>安装完输入法，你需要把输入法添加到环境变量里才能让他生效。我目前的配置是在 &lt;code>~/.xprofile&lt;/code>这个文件里加上下面几行：&lt;/p>
+&lt;pre tabindex="0">&lt;code>export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+&lt;/code>&lt;/pre>&lt;/blockquote>
+&lt;p>​ 成功解决。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>改完&lt;code>fstab&lt;/code>之后，开机发现闪过一行[FAILED]，查看日志发现&lt;code>sys-fs-fuse-connections.mount&lt;/code>这个服务（mount）失败了。日志为：&lt;/p>
+&lt;blockquote>
+&lt;p>May 02 14:19:10 Coherence systemd[1]: Condition check resulted in FUSE Control File System being skipped.
+May 02 14:19:11 Coherence systemd[1]: sys-fs-fuse-connections.mount: Start request repeated too quickly.
+May 02 14:19:11 Coherence systemd[1]: sys-fs-fuse-connections.mount: Failed with result &amp;lsquo;start-limit-hit&amp;rsquo;.
+May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&lt;/p>
+&lt;/blockquote>
+&lt;p>Google 了下，没找到原因，尝试 restart，成功了。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>active (mounted)&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>有待进一步观察。。（未复现&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="to-do">TO DO&lt;/h2>
+&lt;ul>
+&lt;li>zsh&lt;/li>
+&lt;/ul>
+&lt;h2 id="吐槽">吐槽&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>在 Linux 下，什么东西装好不用折腾就能用我反而觉得不正常&amp;hellip;&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>附一段不太恰当的比喻：&lt;/p>
+&lt;blockquote>
+&lt;p>Windows 是人妻，啥都有，啥都会，啥都包玩的舒服，就是经常还往家里带一些你不想要的
+MacOS 是女朋友，带出去在人前倍有feel，但是只能按照她的规则玩不然一脚踹下床
+Linux 是小萝莉，懵懂无知，你怎么调教就怎么跟你玩，但是调教过猛经常会把腰闪了，萝莉也玩坏了。。。&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;/ul>
+- https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ -</description></item><item><title>使用 Travis CI 自动部署 Hexo 博客</title><link>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</link><pubDate>Sun, 21 Apr 2019 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ -&lt;p>&lt;img src="./bg2017121901.png" alt="bg2017121901">&lt;/p>
+&lt;h2 id="缘由">缘由&lt;/h2>
+&lt;p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。&lt;/p>
+&lt;p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的&lt;code>ln -s&lt;/code>大法行不通了。&lt;/p>
+&lt;p>于是我想到了 CI。仔细一想其实也不复杂，无非是&lt;code>git push&lt;/code>， &lt;code>git pull&lt;/code>两下罢了。那么，Let&amp;rsquo;s do it!&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="需求">需求&lt;/h2>
+&lt;p>我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。&lt;/p>
+&lt;ul>
+&lt;li>我更新博客之后，commit 然后 push 至 Github repo&lt;/li>
+&lt;li>CI 自动构建博客&lt;/li>
+&lt;li>CI 将构建完成的静态文件 push 至 Github repo&lt;/li>
+&lt;/ul>
+&lt;p>我原先使用的是&lt;code>hexo-deployer-git&lt;/code>插件，通过&lt;code>hexo g -d&lt;/code>部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。&lt;/p>
+&lt;h2 id="配置-github-repo">配置 Github Repo&lt;/h2>
+&lt;p>在这个 Repo 中需要两个分支：&lt;/p>
+&lt;ul>
+&lt;li>master 用于存放构建完成的静态文件&lt;/li>
+&lt;li>source 用于存放 Hexo 生成的博客源文件&lt;/li>
+&lt;/ul>
+&lt;p>对 Hexo 文件夹的操作如下：&lt;/p>
+&lt;pre tabindex="0">&lt;code>git init
+git remote add origin git@github.com:cjc7373/cjc7373.github.io.git
+git checkout -b source
+git add .
+git commit -m &amp;#34;To use CI to automated deploy&amp;#34;
+git push origin source:source
+&lt;/code>&lt;/pre>&lt;p>本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带&lt;code>.gitignore&lt;/code>文件，所以实际大小并没有多少。&lt;/p>
+&lt;p>&lt;img src="./1555835090941.png" alt="1555835090941">&lt;/p>
+&lt;p>然后在 Github 上将主分支切换为&lt;code>source&lt;/code>分支。&lt;/p>
+&lt;h2 id="配置-travis-ci">配置 Travis CI&lt;/h2>
+&lt;p>CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key，后者似乎有些麻烦，我选择了前者。当前需求应该只需要 repo 权限，然后在 Travis CI 的 Environment Variables 中加入这个 Token，注意不要勾选 Display value in build log。&lt;/p>
+&lt;p>然后就是编写&lt;code>.travis.yml&lt;/code>了。 &lt;del>正当我准备抄大佬们的配置的时候，忽然看到 Travis CI 官方提供了&lt;a href="https://docs.travis-ci.com/user/deployment/pages/">轮子&lt;/a>，那就用吧QAQ（其实也没简单多少）&lt;/del>，然后翻车了。&lt;/p>
+&lt;p>&lt;img src="./1555837683039.png" alt="1555837683039">&lt;/p>
+&lt;p>看了下文档，我也没搞懂每个字段的意思。所以还是自己来吧。&lt;/p>
+&lt;p>为了在 commit 记录中显示更新日期，我把 push 部分单独写成了 sh脚本。&lt;/p>
+&lt;p>&lt;code>.travis.yml&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code>language: node_js
+node_js: stable
+# 只监听 source 分支的改动
+branches:
+only:
+- source
+# 缓存依赖，节省持续集成时间
+cache:
+directories:
+- node_modules
+install:
+- npm install
+script:
+- hexo clean
+- hexo g
+after_script:
+- chmod +x ./deploy.sh # 添加可执行权限
+- ./deploy.sh
+&lt;/code>&lt;/pre>&lt;p>&lt;code>deploy.sh&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code>#!/bin/bash
+set -ev
+export TZ=&amp;#39;Asia/Shanghai&amp;#39;
+git config --global user.name &amp;#34;cjc7373&amp;#34;
+git config --global user.email &amp;#34;niuchangcun@163.com&amp;#34;
+# 获取以前的 commit 记录
+git clone -b master https://github.com/cjc7373/cjc7373.github.io.git .deploy
+# 这么移动是为了确保不受之前文件的影响
+mv .deploy/.git/ public/
+cd public
+git checkout master
+git add .
+git commit -m &amp;#34;Site updated: `date +&amp;#34;%Y-%m-%d %H:%M:%S&amp;#34;`&amp;#34;
+# 我也不知道 token 怎么用。。抄大佬的代码
+git push &amp;#34;https://${token}@github.com/cjc7373/cjc7373.github.io.git&amp;#34; master:master --quiet
+&lt;/code>&lt;/pre>&lt;p>一开始忘了给&lt;code>deploy.sh&lt;/code>可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。&lt;/p>
+&lt;p>&lt;img src="./1555840082905.png" alt="1555840082905">&lt;/p>
+&lt;p>（看着都是成功其实都是失败。。）&lt;/p>
+&lt;p>同时本地配合一下批处理，真正一键发布（滑稽&lt;/p>
+&lt;pre tabindex="0">&lt;code>cd C:\Users\niuch\Documents\GitHub\blog\
+git add .
+git commit
+git push
+pause
+&lt;/code>&lt;/pre>&lt;h2 id="后记">后记&lt;/h2>
+&lt;p>历经两个多小时，终于把 CI 弄好了。虽然对 CI 还是一知半解，不过总算开了个头，也基本实现了需求。&lt;/p>
+&lt;p>Travis CI 官方的文档很全，但是以我的英文水平看得很吃力（懒得看），中文资料的质量又参差不齐。所以还是要锻炼自己的英语水平啊。&lt;/p>
+&lt;h2 id="参考资料">参考资料&lt;/h2>
+&lt;p>&lt;a href="https://docs.travis-ci.com">https://docs.travis-ci.com&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html">https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a>&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ -</description></item></channel></rss>

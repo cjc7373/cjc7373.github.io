@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hexo on Coherence's Blog</title><link>https://blog.coherence.codes/tags/hexo/</link><description>Recent content in Hexo on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 21 Apr 2019 20:16:56 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/hexo/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Travis CI 自动部署 Hexo 博客</title><link>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</link><pubDate>Sun, 21 Apr 2019 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</guid><description>缘由 其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。
+前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的ln -s大法行不通了。
+于是我想到了 CI。仔细一想其实也不复杂，无非是git push， git pull两下罢了。那么，Let&amp;rsquo;s do it!
+需求 我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。
+我更新博客之后，commit 然后 push 至 Github repo CI 自动构建博客 CI 将构建完成的静态文件 push 至 Github repo 我原先使用的是hexo-deployer-git插件，通过hexo g -d部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。
+配置 Github Repo 在这个 Repo 中需要两个分支：
+master 用于存放构建完成的静态文件 source 用于存放 Hexo 生成的博客源文件 对 Hexo 文件夹的操作如下：
+git init git remote add origin git@github.</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>身为一个懒人，又不会写网页，也只能用用博客生成器了。
+为什么选择Hexo 其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是随手找了几个静态博客生成器， 随手一查就找到了Hexo。
+Hexo搭建过程 Hexo的官方文档有中文，这点很赞。虽然官方文档讲的不是很清楚..然而搭建还是比较简单的，加上Google了几篇教程，很快就把Hexo搭起来了。
+身为一个博客生成器，当然不能让我们接触到代码了。所以Hexo的基本配置均在_config.yml这个配置文件中。配置采用YAML语法，看看官方文档也就差不多了解了。基本上无需过多配置就搭建完成了。
+Hexo主题 Hexo有许多主题，个人采用了官方推荐的 NexT.Pisces主题，整体风格还是比较简洁的（然而用这个主题的实在是太多了&amp;hellip;随便一个Hexo博客就是Next主题）。
+同时主题内已集成了许多第三方服务，如Google Analysis、DISQUS等，只要改改配置文件就能配置完成，还是相当简单的。
+Hexo图片插入指引 直接用Markdown语法引用图片会导致图片在首页无法显示，官网给出了一个解决方案，就是利用内置的插件，形式如下：
+{% asset_path slug %} 然而这个方法会破环原生Markdown语法，对编辑者的预览等造成不便。
+很奇怪官方为什么要采用这种方法。
+更好的解决方案是安装hexo-asset-image这个插件。进入博客目录，使用如下命令安装插件：
+npm install https://github.com/CodeFalling/hexo-asset-image --save 安装完成后，即可使用原生Markdown语法插入图片。
+To Do 已实现功能 评论，采用DISQUS 数据统计，采用Google Analytics 图片显示在首页 搜索引擎收录，Google Search Console 首页文章不显示全部 git配置，hexo g -d一条命令部署 使用Travis CI自动生成及部署 待实现功能 更多的自定义操作 文章访问量统计 在自己的服务器也部署博客，然后用 CI 实现自动部署 使用 CDN 加速 Github Pages 的访问 评论点击加载 参考文章 hexo中完美插入本地图片
+为HEXO博客中每篇文章的浏览量统计
+Hexo官方文档
+NexT使用文档
+theme-next!Hexo网站的一次华丽升级</description></item></channel></rss>

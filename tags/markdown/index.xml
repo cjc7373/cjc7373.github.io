@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Markdown on Coherence's Blog</title><link>https://blog.coherence.codes/tags/markdown/</link><description>Recent content in Markdown on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 08 Nov 2018 20:16:56 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/markdown/index.xml" rel="self" type="application/rss+xml"/><item><title>Markdown简介</title><link>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</link><pubDate>Thu, 08 Nov 2018 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</guid><description>什么是 Markdown? Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。
+Markdown VS 富文本 基于 Markdown 写作，是属于纯文本写作。「纯文本」写作和「富文本」写作是对立的，我们来区分一下：
+**「富文本」写作 ** 你平时在Word上写作，就属于富文本写作。修改文字的大小、修改文字颜色、调整各种格式只需要点一下鼠标就行。富文本写作最大的特点是：所见即所得，你把格式调整成什么样子，就会直接显示出什么样的效果。
+然而，富文本的格式排版过于繁杂，以致于你不得不花费大量时间在这上面，而忽略了写作本身。
+同时，富文本存在着多平台转换不方便的问题，假如你在 Word 上写好了文档，格式也调好了，复制粘贴到其他写作平台的时候发现：格式全乱啦；即使是转发给其他人也可能因为 Word 版本的不同而导致显示的差别很大。（如果你有过去打印店打印文档的经历的话，相信体会很深吧）富文本一般需要使用专用软件打开（如Word）。
+「Markdown」写作 基于 Markdown 写作，就是纯文本写作。它允许人们使用纯文本格式来编写文档。如果你想设置某段文字的格式，只需要使用一些简单的符号来代表即可。所以文字和格式都是纯文本。能够用普通的文本编辑器打开。
+Markdown正好处在富文本的对立面，由于其简洁的特性，导致其格式只有寥寥几种，功能上也远不如富文本编辑器。
+Markdown 的优点
+纯文本所以兼容性极强，可以用所有文本编辑器打开
+让你更专注于文字而不是排版
+格式转换方便，Markdown 文本你可以轻松转换为 html、电子书等
+Markdown 的标记语法有极好的可读性
+Markdown的主要用途
+博客（自建、简书、CSDN等等） 笔记，随笔等 Github 编辑器推荐 Typora Markdown也能所见即所得！ 基本语法 Markdown语法主要分为如下几大部分： 标题，段落，区块引用，代码区块，强调，列表，分割线，链接，图片，反斜杠 \，行内引用。
+1. 标题 使用#，可表示1-6级标题。
+# 一级标题 ## 二级标题 ### 三级标题 #### 四级标题 ##### 五级标题 ###### 六级标题
+效果：
+一级标题 二级标题 三级标题 四级标题 五级标题 六级标题 2. 段落 段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用两个以上空格加上回车（引用中换行省略回车）。
+3. 区块引用 在段落的每行或者只在第一行使用符号&amp;gt;,还可使用多个嵌套引用，如：</description></item></channel></rss>
