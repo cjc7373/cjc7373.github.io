@@ -85,6 +85,14 @@ for f in to_mig:
 
 Hugo 用的模板引擎是 Go 标准库里的，这点好评，Helm 用的同样是这个模板引擎。
 
+## 部署
+
+现在的部署简单好多啊，只需一个配置文件，Github Actions 因为是自家产品的缘故连 token 都不需要了，自定义域名 CNAME 也只需在配置文件中增加一行，相比于三年之前的部署体验真的是天差地别..
+
 ## TODO
 
 - Hugo 处理页面之间链接也有[自己的规则](https://gohugo.io/content-management/cross-references/)，目前好多跨页面链接是坏的
+
+- 代码高亮的配色非常诡异..
+
+  ![image-20221003005014257](image-20221003005014257.png)

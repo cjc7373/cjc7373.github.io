@@ -26,4 +26,5 @@ weight = 4
 
 [params]
 plausibleAnalyticsServer = "https://analytics.coherence.space"
+googleSiteVerification = "3MbbliKSwhNvv713tGB2RL8xvrJC404x1BFONabsw7g"
 enableLaTeX=true
