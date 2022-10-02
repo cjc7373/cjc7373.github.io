@@ -1,0 +1,3 @@
+[submodule "themes/diary"]
+	path = themes/diary
+	url = git@github.com:cjc7373/hugo-theme-diary.git

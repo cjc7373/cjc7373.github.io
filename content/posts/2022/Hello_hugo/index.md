@@ -1,7 +1,10 @@
 ---
 title: Hello, Hugo!
-date: 2022-10-02 
+date: 2022-10-02
+tags: [blog]
 ---
+
+这是一个船新的博客！
 
 ## 历史
 
