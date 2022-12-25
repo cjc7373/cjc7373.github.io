@@ -20,9 +20,14 @@ name = "存档"
 weight = 1
 
 [[menu.main]]
+url = "/about"
+name = "关于"
+weight = 4
+
+[[menu.main]]
 url = "/index.xml"
 name = "RSS Feed"
-weight = 4
+weight = 5
 
 [params]
 plausibleAnalyticsServer = "https://analytics.coherence.space"

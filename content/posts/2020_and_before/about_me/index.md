@@ -26,6 +26,6 @@ date: 2018-11-03 16:37:04
 
 Telegram：@Coherence0
 
-Email：niuchangcun@gmail.com
+Email：niuchangcun AT gmail.com
 
 
