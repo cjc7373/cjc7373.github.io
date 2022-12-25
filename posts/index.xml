@@ -247,7 +247,7 @@ Markdown的主要用途
 一级标题 二级标题 三级标题 四级标题 五级标题 六级标题 2. 段落 段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用两个以上空格加上回车（引用中换行省略回车）。
 3. 区块引用 在段落的每行或者只在第一行使用符号&amp;gt;,还可使用多个嵌套引用，如：</description></item><item><title>关于我</title><link>https://blog.coherence.codes/posts/2020_and_before/about_me/</link><pubDate>Sat, 03 Nov 2018 16:37:04 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/about_me/</guid><description>关于我 博主是一名大四学生。
 爱好一切数码产品 安卓（伪）瞎折腾党 ACM 打铁选手 Linux 初学者 科幻爱好者 关于博客 2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑 2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件 2020-02-22 更改评论为 disqusjs，详见作者的博文；启用 pjax 2019-12-24 启用新域名blog.coherence.codes 2019-10-07 升级主题至 Next V7.4.1 2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %} 联系我 Telegram：@Coherence0
-Email：niuchangcun@gmail.com</description></item><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>这就是乱改字体的后果..
+Email：niuchangcun AT gmail.com</description></item><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>这就是乱改字体的后果..
 字体修复，不只是字体修复。
 事由 偶然间看到一篇替换Win10字体来提升字体观感的文章，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。
 然而，使用了一段时间后发现，所有的字体似乎都小了一圈，而且在cmd中出现了字体大小错乱的情况。网上找了一圈发现Win10砍掉了调整字体大小的功能，现在只能以整体缩放来调整字体大小。新的字体感觉也没有想象中的那么好。
@@ -277,13 +277,4 @@ To Do 已实现功能 评论，采用DISQUS 数据统计，采用Google Analytic
 为HEXO博客中每篇文章的浏览量统计
 Hexo官方文档
 NexT使用文档
-theme-next!Hexo网站的一次华丽升级</description></item><item><title>Hello,World!</title><link>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</link><pubDate>Mon, 24 Sep 2018 11:28:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</guid><description>Hello,World!</description></item><item><title>Lumia1520 使用体验</title><link>https://blog.coherence.codes/posts/2020_and_before/lumia1520_%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/lumia1520_%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid><description>都8102年了，你还在用Windows Phone？
-缘由 早年在htc线下店体验过Windows Phone，当时感觉这样的Launcher很新奇，也带给了我对于Windows Phone的第一印象。
-前些日子闲聊时谈起Windows Phone，不禁扼腕叹息，一个有着和Android，iOS三分天下实力的平台就这样毁在了微软的手里。由此产生了买一台Windows Phone设备来纪念这个也曾假装辉煌过的移动平台。
-购买之前，我也不曾详细了解过Lumia的产品线，只知微软收购诺记移动业务之后，便淡化了诺基亚和Lumia的商标</description></item><item><title>SSD科普——小白向</title><link>https://blog.coherence.codes/posts/2020_and_before/ssd-knowledge/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/ssd-knowledge/</guid><description>首先声明，博主的知识水平有限，本篇文章大部分均为网络搜集资料所得，如有错误还请指正。
-简介 固态硬盘（英语：Solid-state drive，简称SSD）是一种主要以闪存作为永久性存储器的计算机存储设备。
-一般来说，固态硬盘是相较于机械硬盘而言的，大致区别如下：
-固态硬盘 机械硬盘 读写速度 访问延时 使用寿命 我将在下文详细解释表格中出现的名词的详细含义。
-原理 目前的 SSD 绝大部分采用的是 NAND FLASH，要想详细了解 SSD 的各种特性，比如 SSD 为什么有寿命限制，为什么需要 Garbage Collection，都要从 NAND FLASH 开始讲起。
-NAND FLASH 是一种非易失性存储器，即断电后还能保留数据，这也是它能被用来当作硬盘的原因。
-参考链接 干货！史上最全SSD科普贴：科学购买SSD 小白科普：没想到你是这样的固态硬盘 维基百科</description></item></channel></rss>
+theme-next!Hexo网站的一次华丽升级</description></item><item><title>Hello,World!</title><link>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</link><pubDate>Mon, 24 Sep 2018 11:28:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</guid><description>Hello,World!</description></item></channel></rss>

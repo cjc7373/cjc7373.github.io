@@ -72,6 +72,7 @@
 &lt;li>
 &lt;p>代码高亮的配色非常诡异..&lt;/p>
 &lt;p>&lt;img src="image-20221003005014257.png" alt="image-20221003005014257">&lt;/p>
+&lt;p>发现在本地的配色是正常的，检查发现本地是 Hugo extended version，于是在 actions 中也启用了 extended 后恢复正常，挺奇怪的..&lt;/p>
 &lt;/li>
 &lt;/ul>
 - https://blog.coherence.codes/posts/2022/hello_hugo/ -</description></item><item><title>The 2022 Python Language Summit</title><link>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</link><pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ -&lt;p>每年, 在 PyCon US 的前夕, 30 多位 Python 的核心开发者将会聚集起来召开 Python 语言峰会. 今年的会议在 5/11 召开, 让我们来看看今年讨论了什么吧. 有关会议的详情可在 &lt;a href="https://pyfound.blogspot.com/2022/05/the-2022-python-language-summit_01678898482.html">PSF Blog&lt;/a> 中找到.&lt;/p>
