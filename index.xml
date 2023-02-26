@@ -1,4 +1,4 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello, Hugo!</title><link>https://blog.coherence.codes/posts/2022/hello_hugo/</link><pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/hello_hugo/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/hello_hugo/ -&lt;p>这是一个船新的博客！&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello, Hugo!</title><link>https://blog.coherence.codes/posts/2022/hello_hugo/</link><pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/hello_hugo/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/hello_hugo/ -&lt;p>这是一个船新的博客！&lt;/p>
 &lt;h2 id="历史">历史&lt;/h2>
 &lt;p>在大二（2018）的时候，我萌生了搭建一个自己的独立博客的想法，于是就有了 &lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/">hexo搭建小记&lt;/a>，当时我随手一找找到的基本都是 Hexo，于是我就用了。引用一段当时写的关于页面：&lt;/p>
 &lt;blockquote>
@@ -75,7 +75,7 @@
 &lt;p>发现在本地的配色是正常的，检查发现本地是 Hugo extended version，于是在 actions 中也启用了 extended 后恢复正常，挺奇怪的..&lt;/p>
 &lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2022/hello_hugo/ -</description></item><item><title>The 2022 Python Language Summit</title><link>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</link><pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ -&lt;p>每年, 在 PyCon US 的前夕, 30 多位 Python 的核心开发者将会聚集起来召开 Python 语言峰会. 今年的会议在 5/11 召开, 让我们来看看今年讨论了什么吧. 有关会议的详情可在 &lt;a href="https://pyfound.blogspot.com/2022/05/the-2022-python-language-summit_01678898482.html">PSF Blog&lt;/a> 中找到.&lt;/p>
+- https://blog.coherence.codes/posts/2022/hello_hugo/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>The 2022 Python Language Summit</title><link>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</link><pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ -&lt;p>每年, 在 PyCon US 的前夕, 30 多位 Python 的核心开发者将会聚集起来召开 Python 语言峰会. 今年的会议在 5/11 召开, 让我们来看看今年讨论了什么吧. 有关会议的详情可在 &lt;a href="https://pyfound.blogspot.com/2022/05/the-2022-python-language-summit_01678898482.html">PSF Blog&lt;/a> 中找到.&lt;/p>
 &lt;h2 id="cpython-的-issue-和-pr-积压">CPython 的 issue 和 PR 积压&lt;/h2>
 &lt;p>首先祝贺一下前不久 &lt;a href="https://bugs.python.org">bpo&lt;/a> 正式退休了, Python 的 issue tracker 迁移到了 Github, 无论是易用性还是审美上来说都是一件好事.&lt;/p>
 &lt;p>随着 Python 的流行, issues 和 PRs 也开始累积起来了, 在 2022/05/07 时, CPython 有着 7,027 个 open issues 和 1,471 个 PRs. Python 开发者们向来对关闭一个 issue 持谨慎态度. 以低质量的功能请求 (feature requests) 为例, 我们可以粗略地把它们分为三类:&lt;/p>
@@ -159,7 +159,7 @@ WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码
 &lt;p>我并没有理解这个 PEP 的好处在哪.. 目前的实现在回归测试中导致了 ~2% 的性能损失..&lt;/p>
 &lt;h2 id="尾巴">尾巴&lt;/h2>
 &lt;p>本次会议很大程度上讨论了 Python 的性能改善, 然而大多数变化是琐碎且渐进的, 想要看到某个改动带来的性能飞跃似乎不太可能 &lt;del>(除了 GIL)&lt;/del>. 我们希望去年 Language Summit 上 Guido 吹下的牛── 4 年里将 CPython 的性能提升 5 倍──能够实现吧.&lt;/p>
-- https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ -</description></item><item><title>民族主义自媒体是如何消费我们的</title><link>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ -&lt;p>目前的中文互联网上存在着大量的鼓吹民族主义, 制造中西方对立的自媒体, 令人震惊的是, 他们中大部分不但充斥着情绪输出, 甚至连大部分事实都是错误的. 我偶然间读到了这样的一篇文章, 并对其中列出的事实进行了查证, 然后感觉我的智商受到了侮辱..&lt;/p>
+- https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>民族主义自媒体是如何消费我们的</title><link>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ -&lt;p>目前的中文互联网上存在着大量的鼓吹民族主义, 制造中西方对立的自媒体, 令人震惊的是, 他们中大部分不但充斥着情绪输出, 甚至连大部分事实都是错误的. 我偶然间读到了这样的一篇文章, 并对其中列出的事实进行了查证, 然后感觉我的智商受到了侮辱..&lt;/p>
 &lt;p>原文: &lt;a href="https://www.zhihu.com/question/428451991/answer/2431916538">西方媒体是怎样给西方人洗脑的？ - 远方青木的回答 - 知乎&lt;/a>, &lt;a href="http://web.archive.org/web/20220429053052/https://www.zhihu.com/question/428451991/answer/2431916538">archive&lt;/a>&lt;/p>
 &lt;hr>
 &lt;blockquote>
@@ -241,7 +241,7 @@ WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码
 &lt;p>评论: 虚空打靶.. 别只看个标题啊, 你倒是具体说说西方媒体说了啥啊.&lt;/p>
 &lt;hr>
 &lt;p>总结: 看这种自媒体真的降智商.. 以后要少看..&lt;/p>
-- https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ -</description></item><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ -&lt;p>本文纯属回忆, 描述可能会有偏差.&lt;/p>
+- https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ -&lt;p>本文纯属回忆, 描述可能会有偏差.&lt;/p>
 &lt;p>小学时, 为方便联系, 我爸给了我一个 ZTE 的功能机, 里面只有一个打砖块的小游戏.&lt;/p>
 &lt;p>后来这手机被我在路上掉了, 于是我换成了一个 LG 的功能机. 这个 LG 的神奇之处在于它自带了一个浏览器, 于是我可以用 2G 上网去起点, 纵横看小说. 另外它自带电信的一个应用商店, 里面有一些免费的小游戏可以下 (不知道是啥技术, 估计是 java..), 因为我当时并没有流量套餐, 后来还因为话费异常被我爸查到并追问我在上网干什么, 我记得我用看新闻蒙混过去了. 这个手机陪伴我度过了初中.&lt;/p>
 &lt;p>考上省中后, 爸妈为了奖励我, 给我换了个新手机, 这时我爸被中国电信忽悠买了个酷派 K1 (酷派 5952).&lt;/p>
@@ -262,7 +262,7 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 而且它那个屏幕的手感非常不错, 在现在看来滑动也是丝般顺滑, 可惜后来屏幕被我摔碎了.&lt;/p>
 &lt;p>高中毕业后, 虽然 Nexus 6 性能还够用, 但这不能给我爸妈看到呀, 于是直接买新手机. 一开始抢小米 6 没抢到, 然后买了一加 5. (还好没抢到!) 以我现在的眼光自然是觉得 Oxygen OS 这种类原生是要比 MIUI 好很多的.&lt;/p>
 &lt;p>这一加 5 钉子户一当就当了四年. 到大学毕业实在感到 835 性能不够用了. 我当时是想挑一个小屏旗舰, 挑来挑去也没挑出来, 要么太贵, 要么不能解锁 BL, 于是又买了一加, 一加 8T.&lt;/p>
-- https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ -</description></item><item><title>我为什么选择在 Surface 上使用 Windows</title><link>https://blog.coherence.codes/posts/2022/surface_on_linux/</link><pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/surface_on_linux/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/surface_on_linux/ -&lt;p>自从购置 Surface Pro 7 以来, 曾数次不满于 Windows 的包管理, 遥测, Windows Defender 等方面. 然更换了 Linux 之后并没有一个太好的使用体验. 本文记录了 Surface Pro 7 在 Archlinux 上的体验.&lt;/p>
+- https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我为什么选择在 Surface 上使用 Windows</title><link>https://blog.coherence.codes/posts/2022/surface_on_linux/</link><pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/surface_on_linux/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/surface_on_linux/ -&lt;p>自从购置 Surface Pro 7 以来, 曾数次不满于 Windows 的包管理, 遥测, Windows Defender 等方面. 然更换了 Linux 之后并没有一个太好的使用体验. 本文记录了 Surface Pro 7 在 Archlinux 上的体验.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>在 2021 年七月某日, 手贱尝试了一下 Windows 11 Preview (印象里是公开发布的第一版) 之后, 感叹于 Bug 之多, 奈何回滚需要重新安装 Windows, 于是一气之下装了 Archlinux.&lt;/p>
 &lt;p>&lt;img src="./8a7b6609572d402bb2b747b706ef0c62.png" alt="img">(此处附使用截图一张)&lt;/p>
@@ -280,7 +280,7 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 &lt;li>还可以使用腾讯会议等 Windows 专有软件 (Linux 版的体验很不好)&lt;/li>
 &lt;/ul>
 &lt;p>综上, 我又反复横跳回来了..&lt;/p>
-- https://blog.coherence.codes/posts/2022/surface_on_linux/ -</description></item><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ -&lt;p>记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.&lt;/p>
+- https://blog.coherence.codes/posts/2022/surface_on_linux/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ -&lt;p>记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>Archwiki 给人的感觉还是有点零碎了.. 与打包相关的条目大概有:&lt;/p>
 &lt;ul>
@@ -302,7 +302,7 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 &lt;h2 id="上传-aur">上传 AUR&lt;/h2>
 &lt;p>AUR 还挺有意思的, 它是个 git 仓库, 我们只要 push 一个仓库到 &lt;code>ssh://aur@aur.archlinux.org/pkgbase.git&lt;/code> 就能创建一个 pkgbase 包. 当然, 除了创建新包外,应该是只有 maintainer 有权限了. 所以首先我们需要去 AUR 的网页里添加公钥. 顺便吐槽一下 SSO 什么时候才能被应用到所有 Arch 的网站中.&lt;/p>
 &lt;p>每次修改 PKGBUILD 上传 AUR 之前, 我们都必须运行 &lt;code>makepkg --printsrcinfo &amp;gt; .SRCINFO&lt;/code> 来生成 &lt;code>.SRCINFO&lt;/code>, 这是 AUR 显示在网页上的元数据.&lt;/p>
-- https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ -</description></item><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ -&lt;p>记录一下比赛期间踩到的坑.&lt;/p>
+- https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ -&lt;p>记录一下比赛期间踩到的坑.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h2 id="签到">签到&lt;/h2>
 &lt;p>开始完全没有读题直接进题目, 然后想了半天没思路并随机测试了一些数.. 直到我读了题..&lt;/p>
@@ -386,7 +386,7 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 &lt;p>&lt;img src="./image-20211030165521990.png" alt="image-20211030165521990">&lt;/p>
 &lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ -</description></item><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/2020summary_2021plan/ -&lt;p>又到了传统艺能&lt;del>年终&lt;/del>年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..&lt;/p>
+- https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/2020summary_2021plan/ -&lt;p>又到了传统艺能&lt;del>年终&lt;/del>年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h2 id="2020-总结">2020 总结&lt;/h2>
 &lt;p>一句话总结的话, 知识的广度提升了, 深度还不够, 学习状态仍旧不能让自己满意. 以及这一年我始终在担心有没有学上, 找不找得到工作.&lt;/p>
@@ -514,7 +514,7 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 &lt;li>还是要多看点书..&lt;/li>
 &lt;/ul>
 &lt;p>不管怎么样, 我还是要以更加积极的心态去迎接未来. 冲!&lt;/p>
-- https://blog.coherence.codes/posts/2021/2020summary_2021plan/ -</description></item><item><title>Anki 工作流</title><link>https://blog.coherence.codes/posts/2021/anki_workflow/</link><pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/anki_workflow/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/anki_workflow/ -&lt;p>&lt;a href="https://apps.ankiweb.net/">Anki&lt;/a> 是一个间隔式重复的&amp;quot;闪卡 (flashcard)&amp;ldquo;记忆软件. 下面来谈谈我考研及日常生活中的 Anki 工作流.&lt;/p>
+- https://blog.coherence.codes/posts/2021/2020summary_2021plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Anki 工作流</title><link>https://blog.coherence.codes/posts/2021/anki_workflow/</link><pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/anki_workflow/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/anki_workflow/ -&lt;p>&lt;a href="https://apps.ankiweb.net/">Anki&lt;/a> 是一个间隔式重复的&amp;quot;闪卡 (flashcard)&amp;ldquo;记忆软件. 下面来谈谈我考研及日常生活中的 Anki 工作流.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h2 id="为什么选择-anki">为什么选择 Anki&lt;/h2>
 &lt;p>和市面上其他的记忆软件一样, Anki 也是基于遗忘曲线, 基于间隔式重复这一原理的. 最大的不同在于它是高度自定义的. 自己制作卡组, 设计模板, 甚至编写自己的插件. 还有很多特性例如 Notes 和 Cards 相分离我其实并没有用到.&lt;/p>
@@ -544,7 +544,7 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 &lt;li>有的单词不同的词性有不同的发音, 这个也没有处理..&lt;/li>
 &lt;li>有一个 &lt;a href="https://github.com/ninja33/ODH">chrome 插件&lt;/a>已经基本上把我想做的都实现了, 可以借鉴一下..&lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2021/anki_workflow/ -</description></item><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ -&lt;h2 id="1335a---candies-and-two-sistershttpscodeforcescomcontest1335problema">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
+- https://blog.coherence.codes/posts/2021/anki_workflow/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ -&lt;h2 id="1335a---candies-and-two-sistershttpscodeforcescomcontest1335problema">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>快乐签到。&lt;/p>
 &lt;h2 id="1335b---construct-the-stringhttpscodeforcescomcontest1335problemb">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
@@ -619,4 +619,4 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, m &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">*&lt;/span> j)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(ans)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>700多ms过了。。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ -</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

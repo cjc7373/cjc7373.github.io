@@ -1,4 +1,4 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ -&lt;p>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ -&lt;p>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。&lt;/p>
 &lt;p>Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板，准备拆机 TTL 破解光猫。&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h2 id="0x01-拆机">0x01 拆机&lt;/h2>
@@ -15,7 +15,7 @@
 &lt;h2 id="0x03-参考资料">0x03 参考资料&lt;/h2>
 &lt;p>&lt;a href="https://paper.seebug.org/506/#0x03">如何通过TTL调试光猫&lt;/a>
 &lt;a href="https://m2.zhugh.com:26800/po-jie-dian-xin-guang-mao/">破解电信光猫&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ -</description></item><item><title>2018年终总结&amp;2019展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</link><pubDate>Mon, 11 Feb 2019 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ -&lt;p>今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>2018年终总结&amp;2019展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</link><pubDate>Mon, 11 Feb 2019 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ -&lt;p>今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h2 id="2018-总结">2018 总结&lt;/h2>
 &lt;p>时间及事件依据：印象笔记、Google 相册、我的记忆。&lt;/p>
@@ -79,7 +79,7 @@
 &lt;h2 id="后记">后记&lt;/h2>
 &lt;p>这篇文章写了三天才写完，写的也比较杂乱。事实上在一开始我就没有一个整体的构思。&lt;/p>
 &lt;p>2019年已经快过去了两个月，我才堪堪写完年初计划。这些计划（或者说我未来的目标）虽有个模糊的大方向，却又不甚明了，或许我还需要更深层次的思考吧。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ -</description></item><item><title>DOMjudge 配置/踩坑指南</title><link>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</link><pubDate>Wed, 19 Dec 2018 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ -&lt;p>我校新生赛也能用上 World Final 同款评测系统啦~&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>DOMjudge 配置/踩坑指南</title><link>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</link><pubDate>Wed, 19 Dec 2018 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ -&lt;p>我校新生赛也能用上 World Final 同款评测系统啦~&lt;/p>
 &lt;p>DOMjudge 提供了详尽的&lt;a href="https://www.domjudge.org/documentation">官方文档&lt;/a>，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h2 id="简介">简介&lt;/h2>
@@ -236,7 +236,7 @@ account_type fullname username password
 &lt;p>&lt;img src="./image-20191208184458561.png" alt="image-20191208184458561">&lt;/p>
 &lt;p>其实还不止这个错，还有各种奇怪的错误。幸好在正式比赛中评测机表现得很稳健，并没有出锅，应该是压力还不够大。。&lt;/p>
 &lt;p>比赛时还碰到一个bug，在一道题重测后这道题的一血变更了，但是榜单上的一血是错的，重新刷新榜单也未解决。查看数据库表发现有一张叫&lt;code>scorecache&lt;/code>的表，推测该表即为榜单的缓存，于是更改&lt;code>is_first_solved&lt;/code>字段后，成功解决。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ -</description></item><item><title>使用KMS激活Visio</title><link>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</link><pubDate>Sat, 01 Dec 2018 23:11:38 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ -&lt;h2 id="题记">题记&lt;/h2>
+- https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>使用KMS激活Visio</title><link>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</link><pubDate>Sat, 01 Dec 2018 23:11:38 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ -&lt;h2 id="题记">题记&lt;/h2>
 &lt;p>如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h2 id="转换visio版本">转换Visio版本&lt;/h2>
@@ -278,7 +278,7 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\project???vl_mak*.xrm-ms&amp;#
 &lt;p>&lt;a href="https://03k.org/kms.html">https://03k.org/kms.htm&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://segmentfault.com/a/1190000015697457">https://segmentfault.com/a/1190000015697457&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://blog.csdn.net/ywd1992/article/details/79412991">https://blog.csdn.net/ywd1992/article/details/79412991&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ -</description></item><item><title>Markdown简介</title><link>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</link><pubDate>Thu, 08 Nov 2018 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ -&lt;h2 id="什么是-markdown">&lt;strong>什么是 Markdown?&lt;/strong>&lt;/h2>
+- https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Markdown简介</title><link>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</link><pubDate>Thu, 08 Nov 2018 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ -&lt;h2 id="什么是-markdown">&lt;strong>什么是 Markdown?&lt;/strong>&lt;/h2>
 &lt;p>Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。&lt;/p>
 &lt;p>&lt;img src="./Markdown-mark.svg.png" alt="哈哈哈">&lt;/p>
 &lt;!-- raw HTML omitted -->
@@ -475,7 +475,7 @@ hello,world
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-- https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ -</description></item><item><title>关于我</title><link>https://blog.coherence.codes/posts/2020_and_before/about_me/</link><pubDate>Sat, 03 Nov 2018 16:37:04 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/about_me/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/about_me/ -&lt;h2 id="关于我">关于我&lt;/h2>
+- https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>关于我</title><link>https://blog.coherence.codes/posts/2020_and_before/about_me/</link><pubDate>Sat, 03 Nov 2018 16:37:04 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/about_me/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/about_me/ -&lt;h2 id="关于我">关于我&lt;/h2>
 &lt;p>博主是一名大四学生。&lt;/p>
 &lt;ul>
 &lt;li>爱好一切数码产品&lt;/li>
@@ -496,7 +496,7 @@ hello,world
 &lt;h2 id="联系我">联系我&lt;/h2>
 &lt;p>Telegram：@Coherence0&lt;/p>
 &lt;p>Email：niuchangcun AT gmail.com&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/about_me/ -</description></item><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ -&lt;blockquote>
+- https://blog.coherence.codes/posts/2020_and_before/about_me/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ -&lt;blockquote>
 &lt;p>这就是乱改字体的后果..&lt;/p>
 &lt;/blockquote>
 &lt;p>字体修复，不只是字体修复。&lt;/p>
@@ -520,7 +520,7 @@ sfc /scannow
 &lt;p>另外，上述的三个命令理论上能解决Windows的许多问题，碰到问题可以尝试。&lt;/p>
 &lt;h4 id="2019213-更新">2019/2/13 更新&lt;/h4>
 &lt;p>目前家里入了 4K 显示器，200% 缩放，观感上没有任何问题。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ -</description></item><item><title>我为什么选择了独立博客</title><link>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</link><pubDate>Sat, 13 Oct 2018 20:13:11 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ -&lt;p>这是一个独立博客式微的时代。&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我为什么选择了独立博客</title><link>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</link><pubDate>Sat, 13 Oct 2018 20:13:11 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ -&lt;p>这是一个独立博客式微的时代。&lt;/p>
 &lt;p>独立博客没有博客平台的推荐导流系统，相比之下观之者寥寥。&lt;/p>
 &lt;p>那我为什么还是选择了独立博客呢？&lt;/p>
 &lt;ul>
@@ -529,7 +529,7 @@ sfc /scannow
 &lt;li>可控，完全受自己管理。&lt;/li>
 &lt;/ul>
 &lt;p>在这纷纭复杂的互联网中，拥有自己的一方小天地，似乎也是极好的。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ -</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ -&lt;blockquote>
+- https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ -&lt;blockquote>
 &lt;p>身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p>
 &lt;/blockquote>
 &lt;!-- raw HTML omitted -->
@@ -574,6 +574,6 @@ sfc /scannow
 &lt;p>&lt;a href="https://hexo.io/zh-cn/docs/">Hexo官方文档&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://theme-next.iissnan.com/">NexT使用文档&lt;/a>&lt;/p>
 &lt;p>&lt;a href="http://moweide.com/2017/08/27/hexo_next_started/">theme-next!Hexo网站的一次华丽升级&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ -</description></item><item><title>Hello,World!</title><link>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</link><pubDate>Mon, 24 Sep 2018 11:28:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hello-world-0/ -&lt;h3 id="helloworld">Hello,World!&lt;/h3>
+- https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hello,World!</title><link>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</link><pubDate>Mon, 24 Sep 2018 11:28:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hello-world-0/ -&lt;h3 id="helloworld">Hello,World!&lt;/h3>
 &lt;p>&lt;img src="./hello.jpeg" alt="Hello,World">&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/hello-world-0/ -</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2020_and_before/hello-world-0/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
