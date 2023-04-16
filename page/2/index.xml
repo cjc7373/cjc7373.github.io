@@ -1,4 +1,79 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 02 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/ -&lt;p>快乐划水。&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 16 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ -&lt;h2 id="1335a---candies-and-two-sistershttpscodeforcescomcontest1335problema">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>快乐签到。&lt;/p>
+&lt;h2 id="1335b---construct-the-stringhttpscodeforcescomcontest1335problemb">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>先构造长度为 $a$ 的字符串，然后第 $i+a$ 个字母为第 $i$ 个字母，输出即可。&lt;/p>
+&lt;h2 id="1335c---two-teams-composinghttpscodeforcescomcontest1335problemc">&lt;a href="https://codeforces.com/contest/1335/problem/C">1335C - Two Teams Composing&lt;/a>&lt;/h2>
+&lt;p>&lt;code>2/1 Accepted&lt;/code>&lt;/p>
+&lt;p>给 $n$ 个数，每个数有一个值，要求把它们分成数量相同的两组，一组所有的值相等，一组所有的值不等。&lt;/p>
+&lt;p>先统计每个值的数量，得出最大个数 $m$，和不同值的数的个数 $l$，&lt;/p>
+&lt;p>&lt;code>ans = min(l, m) if m &amp;lt; l + 2 else ans = min(l, m) + 1&lt;/code>&lt;/p>
+&lt;h2 id="1335d---anti-sudokuhttpscodeforcescomcontest1335problemd">&lt;a href="https://codeforces.com/contest/1335/problem/D">1335D - Anti-Sudoku&lt;/a>&lt;/h2>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>给一个求解好的数独，求改动不超过 9 个数，使其每行、列、区块内皆有两个相同的数。&lt;/p>
+&lt;p>想了两分钟，发现将所有的 1 替换为 2 即可。&lt;/p>
+&lt;h2 id="1335e---three-blocks-palindromehttpscodeforcescomcontest1335probleme2">&lt;a href="https://codeforces.com/contest/1335/problem/E2">1335E - Three Blocks Palindrome&lt;/a>&lt;/h2>
+&lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p>
+&lt;p>给一个含有$n$个数的序列，定义三区块的回文数为：$[\underbrace{a, a, \dots, a}&lt;em>{x}, \underbrace{b, b, \dots, b}&lt;/em>{y}, \underbrace{a, a, \dots, a}_{x}]$，$x, y$是大于等于0的整数，a可以等于b。求一个最长子序列使它为三区块的回文数。输出长度。&lt;/p>
+&lt;p>又是一道需要神奇的优化的题。。&lt;/p>
+&lt;p>&lt;img src="./image-20200416163610781.png" alt="image-20200416163610781">&lt;/p>
+&lt;p>按官方题解的思路是这样：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sys
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input &lt;span style="color:#f92672">=&lt;/span> sys&lt;span style="color:#f92672">.&lt;/span>stdin&lt;span style="color:#f92672">.&lt;/span>readline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>t &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(t):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev &lt;span style="color:#f92672">=&lt;/span> [[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> n &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos &lt;span style="color:#f92672">=&lt;/span> [[] &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>: &lt;span style="color:#66d9ef">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev[j][i] &lt;span style="color:#f92672">=&lt;/span> prev[j][i&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev[s[i]][i] &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos[s[i]]&lt;span style="color:#f92672">.&lt;/span>append(i)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># if x == 0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, len(pos[i]))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># if x != 0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, (len(pos[i]) &lt;span style="color:#f92672">//&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> k &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m &lt;span style="color:#f92672">=&lt;/span> max(m, prev[k][pos[i][&lt;span style="color:#f92672">-&lt;/span>j]&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">-&lt;/span> prev[k][pos[i][j&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, m &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">*&lt;/span> j)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(ans)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是超时了。翻别人的代码发现创建prev数组还能优化：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> sys
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>input &lt;span style="color:#f92672">=&lt;/span> sys&lt;span style="color:#f92672">.&lt;/span>stdin&lt;span style="color:#f92672">.&lt;/span>readline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>t &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(t):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev &lt;span style="color:#f92672">=&lt;/span> [[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">201&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> n
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos &lt;span style="color:#f92672">=&lt;/span> [[] &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev[i] &lt;span style="color:#f92672">=&lt;/span> prev[i&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>copy()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev[i][s[i]] &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos[s[i]]&lt;span style="color:#f92672">.&lt;/span>append(i)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># if x == 0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, len(pos[i]))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># if x != 0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, (len(pos[i]) &lt;span style="color:#f92672">//&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> k &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">201&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m &lt;span style="color:#f92672">=&lt;/span> max(m, prev[pos[i][&lt;span style="color:#f92672">-&lt;/span>j]&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>][k] &lt;span style="color:#f92672">-&lt;/span> prev[pos[i][j&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]][k])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, m &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">*&lt;/span> j)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(ans)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>700多ms过了。。&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/ -&lt;p>快乐划水。&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h2 id="1328a---divisibility-problemhttpscodeforcescomcontest1328problema">&lt;a href="https://codeforces.com/contest/1328/problem/A">1328A - Divisibility Problem&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
@@ -979,92 +1054,4 @@ Linux 是小萝莉，懵懂无知，你怎么调教就怎么跟你玩，但是�
 &lt;/blockquote>
 &lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>使用 Travis CI 自动部署 Hexo 博客</title><link>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</link><pubDate>Sun, 21 Apr 2019 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ -&lt;p>&lt;img src="./bg2017121901.png" alt="bg2017121901">&lt;/p>
-&lt;h2 id="缘由">缘由&lt;/h2>
-&lt;p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。&lt;/p>
-&lt;p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的&lt;code>ln -s&lt;/code>大法行不通了。&lt;/p>
-&lt;p>于是我想到了 CI。仔细一想其实也不复杂，无非是&lt;code>git push&lt;/code>， &lt;code>git pull&lt;/code>两下罢了。那么，Let&amp;rsquo;s do it!&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="需求">需求&lt;/h2>
-&lt;p>我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。&lt;/p>
-&lt;ul>
-&lt;li>我更新博客之后，commit 然后 push 至 Github repo&lt;/li>
-&lt;li>CI 自动构建博客&lt;/li>
-&lt;li>CI 将构建完成的静态文件 push 至 Github repo&lt;/li>
-&lt;/ul>
-&lt;p>我原先使用的是&lt;code>hexo-deployer-git&lt;/code>插件，通过&lt;code>hexo g -d&lt;/code>部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。&lt;/p>
-&lt;h2 id="配置-github-repo">配置 Github Repo&lt;/h2>
-&lt;p>在这个 Repo 中需要两个分支：&lt;/p>
-&lt;ul>
-&lt;li>master 用于存放构建完成的静态文件&lt;/li>
-&lt;li>source 用于存放 Hexo 生成的博客源文件&lt;/li>
-&lt;/ul>
-&lt;p>对 Hexo 文件夹的操作如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code>git init
-git remote add origin git@github.com:cjc7373/cjc7373.github.io.git
-git checkout -b source
-git add .
-git commit -m &amp;#34;To use CI to automated deploy&amp;#34;
-git push origin source:source
-&lt;/code>&lt;/pre>&lt;p>本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带&lt;code>.gitignore&lt;/code>文件，所以实际大小并没有多少。&lt;/p>
-&lt;p>&lt;img src="./1555835090941.png" alt="1555835090941">&lt;/p>
-&lt;p>然后在 Github 上将主分支切换为&lt;code>source&lt;/code>分支。&lt;/p>
-&lt;h2 id="配置-travis-ci">配置 Travis CI&lt;/h2>
-&lt;p>CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key，后者似乎有些麻烦，我选择了前者。当前需求应该只需要 repo 权限，然后在 Travis CI 的 Environment Variables 中加入这个 Token，注意不要勾选 Display value in build log。&lt;/p>
-&lt;p>然后就是编写&lt;code>.travis.yml&lt;/code>了。 &lt;del>正当我准备抄大佬们的配置的时候，忽然看到 Travis CI 官方提供了&lt;a href="https://docs.travis-ci.com/user/deployment/pages/">轮子&lt;/a>，那就用吧QAQ（其实也没简单多少）&lt;/del>，然后翻车了。&lt;/p>
-&lt;p>&lt;img src="./1555837683039.png" alt="1555837683039">&lt;/p>
-&lt;p>看了下文档，我也没搞懂每个字段的意思。所以还是自己来吧。&lt;/p>
-&lt;p>为了在 commit 记录中显示更新日期，我把 push 部分单独写成了 sh脚本。&lt;/p>
-&lt;p>&lt;code>.travis.yml&lt;/code>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>language: node_js
-node_js: stable
-# 只监听 source 分支的改动
-branches:
-only:
-- source
-# 缓存依赖，节省持续集成时间
-cache:
-directories:
-- node_modules
-install:
-- npm install
-script:
-- hexo clean
-- hexo g
-after_script:
-- chmod +x ./deploy.sh # 添加可执行权限
-- ./deploy.sh
-&lt;/code>&lt;/pre>&lt;p>&lt;code>deploy.sh&lt;/code>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>#!/bin/bash
-set -ev
-export TZ=&amp;#39;Asia/Shanghai&amp;#39;
-git config --global user.name &amp;#34;cjc7373&amp;#34;
-git config --global user.email &amp;#34;niuchangcun@163.com&amp;#34;
-# 获取以前的 commit 记录
-git clone -b master https://github.com/cjc7373/cjc7373.github.io.git .deploy
-# 这么移动是为了确保不受之前文件的影响
-mv .deploy/.git/ public/
-cd public
-git checkout master
-git add .
-git commit -m &amp;#34;Site updated: `date +&amp;#34;%Y-%m-%d %H:%M:%S&amp;#34;`&amp;#34;
-# 我也不知道 token 怎么用。。抄大佬的代码
-git push &amp;#34;https://${token}@github.com/cjc7373/cjc7373.github.io.git&amp;#34; master:master --quiet
-&lt;/code>&lt;/pre>&lt;p>一开始忘了给&lt;code>deploy.sh&lt;/code>可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。&lt;/p>
-&lt;p>&lt;img src="./1555840082905.png" alt="1555840082905">&lt;/p>
-&lt;p>（看着都是成功其实都是失败。。）&lt;/p>
-&lt;p>同时本地配合一下批处理，真正一键发布（滑稽&lt;/p>
-&lt;pre tabindex="0">&lt;code>cd C:\Users\niuch\Documents\GitHub\blog\
-git add .
-git commit
-git push
-pause
-&lt;/code>&lt;/pre>&lt;h2 id="后记">后记&lt;/h2>
-&lt;p>历经两个多小时，终于把 CI 弄好了。虽然对 CI 还是一知半解，不过总算开了个头，也基本实现了需求。&lt;/p>
-&lt;p>Travis CI 官方的文档很全，但是以我的英文水平看得很吃力（懒得看），中文资料的质量又参差不齐。所以还是要锻炼自己的英语水平啊。&lt;/p>
-&lt;h2 id="参考资料">参考资料&lt;/h2>
-&lt;p>&lt;a href="https://docs.travis-ci.com">https://docs.travis-ci.com&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html">https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
