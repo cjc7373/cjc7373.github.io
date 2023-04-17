@@ -132,9 +132,11 @@ PMTUD 工作方式为源节点首先选择下一跳的 MTU (已知) 作为 PMTU.
 
 ![image-20230412235736591](./image-20230412235736591.png)
 
-下面来看正确处理的情况, 访问 [Test IPv6](https://test-ipv6.com/) 时, 有一项测试为 "Test IPv6 large packet", 测试内容为访问一个 MTU 为 1280 的服务器. 通过抓包发现 (忽略应该是服务器在国外导致的一堆重传) TCP 握手时的 MSS 仍为 1440, 但在第 50 个包的时候我发送了一个过大的包, 于是我的路由器 (由于运行了 PPPOE, MTU 为 1492) 返回了一个 ICMPv6 报文, 这一过程不断重复直到 MTU 被设置为 1280.
+下面来看正确处理的情况, 访问 [Test IPv6](https://test-ipv6.com/) 时, 有一项测试为 "Test IPv6 large packet", 测试内容为访问一个 MTU 为 1280 的服务器. 通过抓包发现 TCP 握手时的 MSS 仍为 1440, 但在第 862 个包的时候我发送了一个过大的包, 于是在第 864 个包我的路由器 (由于运行了 PPPOE, MTU 为 1492) 返回了一个 ICMPv6 报文, 于是在第 865 个包我重传了这个包, 把 MTU 减少到了 1492, 这一过程不断重复直到 MTU 被设置为 1280.
 
-![image-20230412233739557](./image-20230412233739557.png)
+![image-20230417221041457](./image-20230417221041457.png)
+
+> Note: 这里需要[关闭 TCP Segmentation Offload](https://wiki.wireshark.org/CaptureSetup/Offloading), 否则包长度会显示为超过 MTU, 这是因为 TCP 包的分片被 Offload 到了网卡以减轻主机 CPU 的负担.
 
 在仅 IPv4 的情况下访问 `g.alicdn.com`, 可以发现服务端发送的几个包发生了分片:
 
