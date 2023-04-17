@@ -1,4 +1,4 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 16 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>IPv6 配置入门</title><link>https://blog.coherence.codes/posts/2023/ipv6-%E5%85%A5%E9%97%A8/</link><pubDate>Sun, 16 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/ipv6-%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/ipv6-%E5%85%A5%E9%97%A8/ -&lt;h2 id="背景知识">背景知识&lt;/h2>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 16 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>IPv6 配置入门</title><link>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</link><pubDate>Sun, 16 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ -&lt;h2 id="背景知识">背景知识&lt;/h2>
 &lt;p>&lt;a href="https://datatracker.ietf.org/doc/html/rfc8200">RFC 8200 (Internet Protocol, Version 6 (IPv6) Specification)&lt;/a> 为最新的 IPv6 标准. 主要描述了头部 (Header) 定义, 拓展头部和选项定义等.&lt;/p>
 &lt;p>&lt;a href="https://datatracker.ietf.org/doc/html/rfc7084">RFC 7084 (IPv6 CE Router Requirements)&lt;/a> 定义了家用或小型办公室路由器 (IPv6 Customer Edge Routers) 配置的基本要求. OpenWrt 的配置文档遵循了这一 RFC.&lt;/p>
 &lt;p>RFC 4861 (IPv6 Neighbor Discovery) 定义了一种网络发现机制, 等效与 IPv4 中的 ARP. 下述的两种机制均依赖于 ND.&lt;/p>
@@ -131,8 +131,11 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;h3 id="一个例子">一个例子&lt;/h3>
 &lt;p>在访问淘宝时, 淘宝会访问 &lt;code>g.alicdn.com&lt;/code> 这一域名, 即 &lt;code>2408:8670:af0:9:3::3e3&lt;/code> 这个 IP. 在 TCP 握手的时候 MSS Option 被设置成了 1440 Bytes, 即 MTU 为以太网的 MTU 1500 (1440 + TCP Header 20 + IPv6 Header 40). 可以看到在第 1353 个包的时候 Wireshark 指示了 &amp;ldquo;TCP Previous Segment Not Captured&amp;rdquo;, 猜测序号 1352 和 1353 之间的某些服务器发送的包被丢了.&lt;/p>
 &lt;p>&lt;img src="./image-20230412235736591.png" alt="image-20230412235736591">&lt;/p>
-&lt;p>下面来看正确处理的情况, 访问 &lt;a href="https://test-ipv6.com/">Test IPv6&lt;/a> 时, 有一项测试为 &amp;ldquo;Test IPv6 large packet&amp;rdquo;, 测试内容为访问一个 MTU 为 1280 的服务器. 通过抓包发现 (忽略应该是服务器在国外导致的一堆重传) TCP 握手时的 MSS 仍为 1440, 但在第 50 个包的时候我发送了一个过大的包, 于是我的路由器 (由于运行了 PPPOE, MTU 为 1492) 返回了一个 ICMPv6 报文, 这一过程不断重复直到 MTU 被设置为 1280.&lt;/p>
-&lt;p>&lt;img src="./image-20230412233739557.png" alt="image-20230412233739557">&lt;/p>
+&lt;p>下面来看正确处理的情况, 访问 &lt;a href="https://test-ipv6.com/">Test IPv6&lt;/a> 时, 有一项测试为 &amp;ldquo;Test IPv6 large packet&amp;rdquo;, 测试内容为访问一个 MTU 为 1280 的服务器. 通过抓包发现 TCP 握手时的 MSS 仍为 1440, 但在第 862 个包的时候我发送了一个过大的包, 于是在第 864 个包我的路由器 (由于运行了 PPPOE, MTU 为 1492) 返回了一个 ICMPv6 报文, 于是在第 865 个包我重传了这个包, 把 MTU 减少到了 1492, 这一过程不断重复直到 MTU 被设置为 1280.&lt;/p>
+&lt;p>&lt;img src="./image-20230417221041457.png" alt="image-20230417221041457">&lt;/p>
+&lt;blockquote>
+&lt;p>Note: 这里需要&lt;a href="https://wiki.wireshark.org/CaptureSetup/Offloading">关闭 TCP Segmentation Offload&lt;/a>, 否则包长度会显示为超过 MTU, 这是因为 TCP 包的分片被 Offload 到了网卡以减轻主机 CPU 的负担.&lt;/p>
+&lt;/blockquote>
 &lt;p>在仅 IPv4 的情况下访问 &lt;code>g.alicdn.com&lt;/code>, 可以发现服务端发送的几个包发生了分片:&lt;/p>
 &lt;p>&lt;img src="./image-20230416141447823.png" alt="image-20230416141447823">&lt;/p>
 &lt;h2 id="其他">其他&lt;/h2>
@@ -148,7 +151,7 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;li>&lt;a href="https://blog.apnic.net/2016/05/19/fragmenting-ipv6/">Fragmenting IPv6&lt;/a> 讨论了和分片有关的问题, 包括 UDP 下的处理&lt;/li>
 &lt;li>&lt;a href="https://www.v2ex.com/t/800024">开启 IPv6 后网速变得很慢？可能是 PMTU 黑洞的问题 - V2EX&lt;/a>&lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2023/ipv6-%E5%85%A5%E9%97%A8/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hello, Hugo!</title><link>https://blog.coherence.codes/posts/2022/hello_hugo/</link><pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/hello_hugo/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/hello_hugo/ -&lt;p>这是一个船新的博客！&lt;/p>
+- https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hello, Hugo!</title><link>https://blog.coherence.codes/posts/2022/hello_hugo/</link><pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/hello_hugo/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/hello_hugo/ -&lt;p>这是一个船新的博客！&lt;/p>
 &lt;h2 id="历史">历史&lt;/h2>
 &lt;p>在大二（2018）的时候，我萌生了搭建一个自己的独立博客的想法，于是就有了 &lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/">hexo搭建小记&lt;/a>，当时我随手一找找到的基本都是 Hexo，于是我就用了。引用一段当时写的关于页面：&lt;/p>
 &lt;blockquote>
