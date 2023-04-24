@@ -1,4 +1,7 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 16 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>IPv6 配置入门</title><link>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</link><pubDate>Sun, 16 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ -&lt;h2 id="背景知识">背景知识&lt;/h2>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 24 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>博客里应该写什么</title><link>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</link><pubDate>Mon, 24 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ -&lt;p>我的 Chrome 有一个插件叫 &lt;a href="https://www.one-tab.com/">Onetab&lt;/a>，本意是用来放一些稍后阅读的标签页。但是稍后阅读这种东西，最终都会转变成垃圾桶，标签越积越多。随着我的几次设备/系统更替（比如从我的老暗影精灵到 deskmini），迁移来迁移去很多上古标签页居然没丢.&lt;/p>
+&lt;p>今天在 Onetab 里翻找找到了&lt;a href="https://pureage.info/2014/08/25/hiding-302-using-proxy-pass.html">用 proxy_intercept_errors 和 recursive_error_pages 代理多次 302&lt;/a> 这样一篇文章。文章本身讲的是 nginx 用于反代时如何 follow 上游的 302 的问题，这是一篇普通的技术博客。但是翻看他的博客，却有很多生活随想，日记游记之类的内容。篇幅也长短不一，最短的寥寥一两句话。而翻看我自己的博客，合计三十一篇博文，其中（质量很低的）技术博文占了绝大多数。我不禁有些感慨，写博客究竟是为了什么。是为了在面试时多一个展现自己的方面，还是仅仅是作为一个写作的平台，无所约束地抒发自己的心情？&lt;/p>
+&lt;p>还记得我的博客刚搭起来的时候，我写过一篇&lt;a href="https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/">我为什么选择了独立博客&lt;/a>，内容是瞎扯的，但是最后一句话「庞大的互联网中的一方天地」我倒是现在也很认同。&lt;/p>
+- https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>IPv6 配置入门</title><link>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</link><pubDate>Sun, 16 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ -&lt;h2 id="背景知识">背景知识&lt;/h2>
 &lt;p>&lt;a href="https://datatracker.ietf.org/doc/html/rfc8200">RFC 8200 (Internet Protocol, Version 6 (IPv6) Specification)&lt;/a> 为最新的 IPv6 标准. 主要描述了头部 (Header) 定义, 拓展头部和选项定义等.&lt;/p>
 &lt;p>&lt;a href="https://datatracker.ietf.org/doc/html/rfc7084">RFC 7084 (IPv6 CE Router Requirements)&lt;/a> 定义了家用或小型办公室路由器 (IPv6 Customer Edge Routers) 配置的基本要求. OpenWrt 的配置文档遵循了这一 RFC.&lt;/p>
 &lt;p>RFC 4861 (IPv6 Neighbor Discovery) 定义了一种网络发现机制, 等效与 IPv4 中的 ARP. 下述的两种机制均依赖于 ND.&lt;/p>
@@ -173,7 +176,7 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;p>到了 21 年 2 月，我开始重新调研博客生成器，当时看到了一个 Python 写的 Pelican，而我又希望壮大一下 Python 生态，于是就用了。用了之后发现并没有什么合适的主题，恰巧 Pelican 用的模板引擎 Jinja 和 Django Template Engine 很像，我比较熟悉，于是我就想自己写一个主题，然而这一工作从没开始过.. 于是我现在的博客是这样的（&lt;del>极简主义&lt;/del>）：&lt;/p>
 &lt;p>&lt;img src="image-20221002171314620.png" alt="image-20221002171314620">&lt;/p>
 &lt;p>这段时间里我还写过一个&lt;a href="https://github.com/cjc7373/pelican-markdown-image">处理图片的 Pelican 插件&lt;/a>，虽然现在看起来挺蠢的..&lt;/p>
-&lt;p>再后来，我又对 Rust 产生了兴趣，于是又发现了 Zola，这时候我找到了 &lt;a href="https://github.com/AmazingRise/hugo-theme-diary">hugo-theme-diary&lt;/a> 这个主题，感觉非常不错，于是就想把它移植到 zola，在 port 了一个 head 之后，这个计划就被无限期搁置了。&lt;/p>
+&lt;p>再后来，我又对 Rust 产生了兴趣，于是又发现了 Zola，这时候我找到了 &lt;a href="https://github.com/AmazingRise/hugo-theme-diary">hugo-theme-diary&lt;/a> 这个主题，感觉非常不错。这个主题是从 &lt;a href="https://byvoid.com/zhs/">BYVoid&lt;/a> 那看来的，好看，有响应式，也有文章内目录。于是就想把它移植到 zola，在 port 了一个 head 之后，这个计划就被无限期搁置了。&lt;/p>
 &lt;p>终于，我感觉还是有必要有一个好看的博客的，于是我最终选择了 Hugo+hugo-theme-diary，加上一点点自己的魔改。&lt;/p>
 &lt;h2 id="迁移">迁移&lt;/h2>
 &lt;p>Hugo 对于资源文件的处理有&lt;a href="https://gohugo.io/content-management/image-processing/">自己的一套规则&lt;/a>，即博客文章位于 &lt;code>posts/post_name/index.md&lt;/code>，这篇文章资源文件放在 &lt;code>posts/post_name/&lt;/code> 这个路径下面。而我原来的文件结构为文章位于 &lt;code>posts/post_name.md&lt;/code>，资源文件位于 &lt;code>posts/post_name/&lt;/code>。所以我不得不写了一个脚本来迁移图片：&lt;/p>
@@ -217,10 +220,10 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugo 用的模板引擎是 Go 标准库里的，这点好评，Helm 用的同样是这个模板引擎。&lt;/p>
 &lt;h2 id="部署">部署&lt;/h2>
 &lt;p>现在的部署简单好多啊，只需一个配置文件，Github Actions 因为是自家产品的缘故连 token 都不需要了，自定义域名 CNAME 也只需在配置文件中增加一行，相比于三年之前的部署体验真的是天差地别..&lt;/p>
-&lt;h2 id="todo">TODO&lt;/h2>
+&lt;h2 id="一些问题">一些问题&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>Hugo 处理页面之间链接也有&lt;a href="https://gohugo.io/content-management/cross-references/">自己的规则&lt;/a>，目前好多跨页面链接是坏的&lt;/p>
+&lt;p>Hugo 处理页面之间链接也有&lt;a href="https://gohugo.io/content-management/cross-references/">自己的规则&lt;/a>，需要转换，不过我好像也没什么跨页面链接&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>代码高亮的配色非常诡异..&lt;/p>
@@ -667,34 +670,4 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 &lt;li>还是要多看点书..&lt;/li>
 &lt;/ul>
 &lt;p>不管怎么样, 我还是要以更加积极的心态去迎接未来. 冲!&lt;/p>
-- https://blog.coherence.codes/posts/2021/2020summary_2021plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Anki 工作流</title><link>https://blog.coherence.codes/posts/2021/anki_workflow/</link><pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/anki_workflow/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/anki_workflow/ -&lt;p>&lt;a href="https://apps.ankiweb.net/">Anki&lt;/a> 是一个间隔式重复的&amp;quot;闪卡 (flashcard)&amp;ldquo;记忆软件. 下面来谈谈我考研及日常生活中的 Anki 工作流.&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="为什么选择-anki">为什么选择 Anki&lt;/h2>
-&lt;p>和市面上其他的记忆软件一样, Anki 也是基于遗忘曲线, 基于间隔式重复这一原理的. 最大的不同在于它是高度自定义的. 自己制作卡组, 设计模板, 甚至编写自己的插件. 还有很多特性例如 Notes 和 Cards 相分离我其实并没有用到.&lt;/p>
-&lt;p>其次 Anki 是一款开源软件, 在我希望所有软件都用自由软件替换的如今, 这无疑是一个重要的理由.&lt;/p>
-&lt;p>最后它在 Windows, Linux, Android 上都有客户端, 并支持同步. 虽然内置的同步服务器是由 Ankiweb 提供的 (我至今不知道 Ankiweb 和 Anki 的关系以及它是如何运作的), 然而也能够用自建的替换.&lt;/p>
-&lt;p>虽然网上能够找到很多已制作好的卡组, 然而这些卡组并不一定适合自己. 以记单词而言, 卡组中的许多卡片都是自己已经熟知的. 况且制卡这个过程本身能够帮助自己记忆. 所以我还是选择了自己构建卡组的方式.&lt;/p>
-&lt;h2 id="基础卡片">基础卡片&lt;/h2>
-&lt;p>对于一般的记忆来说, 基础的 Note type 就够用了.. 比如我一开始用 Anki 来提醒我复习新概念英语, 用的是以下的 Note type:&lt;/p>
-&lt;p>&lt;img src="./image-20210224200941341.png" alt="image-20210224200941341">&lt;/p>
-&lt;p>十分简单.&lt;/p>
-&lt;h2 id="考研">考研&lt;/h2>
-&lt;p>考研的时候打算用 Anki 背单词, 于是我做真题的时候碰到不认识的单词记录下来, 然后用 Anki 制卡.&lt;/p>
-&lt;p>卡片字段设计和工作流受到了&lt;a href="https://ankiweb.net/shared/info/934622764">考研英语真题生词&lt;/a>这个卡组的启发.&lt;/p>
-&lt;p>其中最主要的问题是音标, 发音和释义. 一开始想的办法是发音用 TTS, 于是找到了 Azure 的 API, 然而一个缺点是每次制卡要等很久 (请求 API), 而且 Azure 的 API 很贵.. 我给一个几百张卡的卡组加发音花了我五块钱..&lt;/p>
-&lt;p>于是我就想到了从词典中导入, 我平时主要使用的词典是 OALD8 (很久之前从 &lt;a href="https://www.pdawiki.com/forum/">pdawiki&lt;/a> 下的), 于是我就自己糊了个&lt;a href="https://ankiweb.net/shared/info/738556640">插件&lt;/a>.. 功能很简单, 根据单词字段从词典 mdx 文件里查询音标和发音, 并填充到相应字段中.&lt;/p>
-&lt;p>最后的成品卡片是这样的:&lt;/p>
-&lt;p>&lt;img src="./image-20210224201415659.png" alt="image-20210224201415659">&lt;/p>
-&lt;p>制卡的时候首先手打单词和例句, 然后从词典里选一个释义复制过来就行了. 个人感觉也不是很麻烦..&lt;/p>
-&lt;p>看一下成果:&lt;/p>
-&lt;p>&lt;img src="./image-20210224202958005.png" alt="image-20210224202958005">&lt;/p>
-&lt;p>考研的那一百多天里我总共背了 364 个单词.. 其实挺少的..&lt;/p>
-&lt;p>之后的卡组中我优化了一下 Note 的字段, 于是现在变成了这样:&lt;/p>
-&lt;p>&lt;img src="./image-20210224201845315.png" alt="image-20210224201845315">&lt;/p>
-&lt;h2 id="咕咕咕时间">咕咕咕时间&lt;/h2>
-&lt;ul>
-&lt;li>释义的导入我肯定也想自动化的. 而选择释义势必要做一个弹窗, 那么这就涉及到 Qt 的知识了, 于是目前搁置了&lt;/li>
-&lt;li>有的单词不同的词性有不同的发音, 这个也没有处理..&lt;/li>
-&lt;li>有一个 &lt;a href="https://github.com/ninja33/ODH">chrome 插件&lt;/a>已经基本上把我想做的都实现了, 可以借鉴一下..&lt;/li>
-&lt;/ul>
-- https://blog.coherence.codes/posts/2021/anki_workflow/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2021/2020summary_2021plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
