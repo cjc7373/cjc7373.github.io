@@ -1,6 +1,7 @@
 ---
 title: Hello, Hugo!
 date: 2022-10-02
+lastmod: 2023-04-24
 tags: [blog]
 ---
 
@@ -35,7 +36,7 @@ Next 就是一个非常大众的主题，有几种变体，我用的是一个叫
 
 这段时间里我还写过一个[处理图片的 Pelican 插件](https://github.com/cjc7373/pelican-markdown-image)，虽然现在看起来挺蠢的..
 
-再后来，我又对 Rust 产生了兴趣，于是又发现了 Zola，这时候我找到了 [hugo-theme-diary](https://github.com/AmazingRise/hugo-theme-diary) 这个主题，感觉非常不错，于是就想把它移植到 zola，在 port 了一个 head 之后，这个计划就被无限期搁置了。
+再后来，我又对 Rust 产生了兴趣，于是又发现了 Zola，这时候我找到了 [hugo-theme-diary](https://github.com/AmazingRise/hugo-theme-diary) 这个主题，感觉非常不错。这个主题是从 [BYVoid](https://byvoid.com/zhs/) 那看来的，好看，有响应式，也有文章内目录。于是就想把它移植到 zola，在 port 了一个 head 之后，这个计划就被无限期搁置了。
 
 终于，我感觉还是有必要有一个好看的博客的，于是我最终选择了 Hugo+hugo-theme-diary，加上一点点自己的魔改。
 
@@ -89,9 +90,9 @@ Hugo 用的模板引擎是 Go 标准库里的，这点好评，Helm 用的同样
 
 现在的部署简单好多啊，只需一个配置文件，Github Actions 因为是自家产品的缘故连 token 都不需要了，自定义域名 CNAME 也只需在配置文件中增加一行，相比于三年之前的部署体验真的是天差地别..
 
-## TODO
+## 一些问题
 
-- Hugo 处理页面之间链接也有[自己的规则](https://gohugo.io/content-management/cross-references/)，目前好多跨页面链接是坏的
+- Hugo 处理页面之间链接也有[自己的规则](https://gohugo.io/content-management/cross-references/)，需要转换，不过我好像也没什么跨页面链接
 
 - 代码高亮的配色非常诡异..
 
