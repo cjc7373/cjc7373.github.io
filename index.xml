@@ -1,4 +1,34 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 24 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>博客里应该写什么</title><link>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</link><pubDate>Mon, 24 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ -&lt;p>我的 Chrome 有一个插件叫 &lt;a href="https://www.one-tab.com/">Onetab&lt;/a>，本意是用来放一些稍后阅读的标签页。但是稍后阅读这种东西，最终都会转变成垃圾桶，标签越积越多。随着我的几次设备/系统更替（比如从我的老暗影精灵到 deskmini），迁移来迁移去很多上古标签页居然没丢.&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 30 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes 生态中的航海隐喻</title><link>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</link><pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ -&lt;blockquote>
+&lt;p>Disclaimer: 本文的结论大多是根据名字推断出来的，并没有得到项目开发者的证实。&lt;/p>
+&lt;/blockquote>
+&lt;p>Kubernetes 在 2014 年 9 月发布，在这之前 Docker 已经大行其道了。Docker 发布于 2013 年，意为码头工人，其 logo 是个鲸鱼驮着一些集装箱。&lt;/p>
+&lt;p>&lt;img src="./610px-Docker_(container_engine)_logo.svg.png" alt="File:Docker (container engine) logo.svg">&lt;/p>
+&lt;p>后来这个 Logo 又变得扁平了一点：&lt;/p>
+&lt;p>&lt;img src="./512px-Docker_logo.svg.png" alt="File:Docker logo.svg">&lt;/p>
+&lt;p>很显然这个名字和和 Logo 都与集装箱（container，即容器）有关。&lt;/p>
+&lt;p>Kubernetes 这个名字来源于古希腊语 κυβερνήτης，意为舵手（steersman）/领航员（pilot）/船长（captain）。其 logo 是一个舵轮的形状。身为一个容器编排系统，Kubernetes 负责着一艘船的航向，倒也合理。&lt;/p>
+&lt;figure>&lt;img src="617px-Kubernetes_logo_without_workmark.svg.png" width="200px"/>
+&lt;/figure>
+&lt;p>值得一提是和 Kubernetes 共享词源 κυβερνήτης 的还有 governor（州长/统治者/主管）和 cybernetics（控制论）。&lt;/p>
+&lt;p>Helm 官方的 slogan 是 Kubernetes 的包管理器，helm 意为舵轮，logo 和 Kubernetes 类似，也是一个舵轮的形状。&lt;/p>
+&lt;figure>&lt;img src="helm.svg" width="200px"/>
+&lt;/figure>
+&lt;p>在 Helm 2 时代，helm 还需要一个部署在集群内的组件 tiller 才能工作。tiller 似乎是舵柄的意思，它和舵直接相连。下图展示了一个舵柄和舵轮的区别：&lt;/p>
+&lt;figure>&lt;img src="1280px-Tiller_and_helm_orders.svg.png" width="300px"/>
+&lt;/figure>
+&lt;p>Argo 项目包含了 CD/Workflows/Rollouts 等一系列项目，总体是和应用交付、CI/CD 相关。在希腊神话中，Argo （阿尔戈号）是一艘船，由伊阿宋等希腊英雄在雅典娜帮助下建成，众英雄乘该船取得金羊毛。此后阿尔戈号作为进献雅典娜的祭品被焚毁，南船座（Argo Navis, or simply Argo）由此而来。Navis 词源为古希腊语，意为船（ship）。但是 Argo 的 logo （应该？）是一只章鱼，很奇怪的联系..&lt;/p>
+&lt;figure>&lt;img src="argo.svg" width="200px"/>
+&lt;/figure>
+&lt;p>cert-manager，虽然名字和航海没什么关系，但它的 logo 是一个锚..&lt;/p>
+&lt;figure>&lt;img src="cert-manager.svg" width="200px"/>
+&lt;/figure>
+&lt;p>上面说到 Argo 就是南船座，南船座本来是天空中最大的星座，但在十八世纪被拆分为四个单独的星座，其中之一为船帆座（Vela），所以 Kubevela 的 logo 是一艘帆船。Kubevela 同样属于负责应用交付的组件，和 ArgoCD 在功能上有重叠和互补的地方。&lt;/p>
+&lt;figure>&lt;img src="kube-vela.svg" width="200px"/>
+&lt;/figure>
+&lt;p>最后要说的是 Harbor，非常直白，就是港口，作为一个 container registry 也很合理，其 logo 是一个灯塔的形状。&lt;/p>
+&lt;figure>&lt;img src="harbor.svg" width="200px"/>
+&lt;/figure>
+- https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>博客里应该写什么</title><link>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</link><pubDate>Mon, 24 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ -&lt;p>我的 Chrome 有一个插件叫 &lt;a href="https://www.one-tab.com/">Onetab&lt;/a>，本意是用来放一些稍后阅读的标签页。但是稍后阅读这种东西，最终都会转变成垃圾桶，标签越积越多。随着我的几次设备/系统更替（比如从我的老暗影精灵到 deskmini），迁移来迁移去很多上古标签页居然没丢.&lt;/p>
 &lt;p>今天在 Onetab 里翻找找到了&lt;a href="https://pureage.info/2014/08/25/hiding-302-using-proxy-pass.html">用 proxy_intercept_errors 和 recursive_error_pages 代理多次 302&lt;/a> 这样一篇文章。文章本身讲的是 nginx 用于反代时如何 follow 上游的 302 的问题，这是一篇普通的技术博客。但是翻看他的博客，却有很多生活随想，日记游记之类的内容。篇幅也长短不一，最短的寥寥一两句话。而翻看我自己的博客，合计三十一篇博文，其中（质量很低的）技术博文占了绝大多数。我不禁有些感慨，写博客究竟是为了什么。是为了在面试时多一个展现自己的方面，还是仅仅是作为一个写作的平台，无所约束地抒发自己的心情？&lt;/p>
 &lt;p>还记得我的博客刚搭起来的时候，我写过一篇&lt;a href="https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/">我为什么选择了独立博客&lt;/a>，内容是瞎扯的，但是最后一句话「庞大的互联网中的一方天地」我倒是现在也很认同。&lt;/p>
 - https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>IPv6 配置入门</title><link>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</link><pubDate>Sun, 16 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ -&lt;h2 id="背景知识">背景知识&lt;/h2>
@@ -542,132 +572,4 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 &lt;p>&lt;img src="./image-20211030165521990.png" alt="image-20211030165521990">&lt;/p>
 &lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/2020summary_2021plan/ -&lt;p>又到了传统艺能&lt;del>年终&lt;/del>年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="2020-总结">2020 总结&lt;/h2>
-&lt;p>一句话总结的话, 知识的广度提升了, 深度还不够, 学习状态仍旧不能让自己满意. 以及这一年我始终在担心有没有学上, 找不找得到工作.&lt;/p>
-&lt;h3 id="学业">学业&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;p>由于疫情的爆发, 导致了 2020 春季学期完全在家上课, 更加方便摸鱼了(&lt;/p>
-&lt;p>一开始港哥在群里说武汉疫情的时候, 我还不觉得这是什么大事, 后来才发现我错得离谱.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>二月底到三月初, 陆续投了几个实习, 被拒了几个, 后来决定考研之后, 又鸽了几个&lt;/p>
-&lt;p>&lt;img src="./image-20210225125307219.png" alt="image-20210225125307219">&lt;/p>
-&lt;p>说实话我对以后能不能找到工作还是有点怀疑的..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>从三月开始, 断断续续地开始准备考研了, 然而实际上还是不够努力吧, 到考试前一天我还没完全搞懂二次型..&lt;/p>
-&lt;p>不过从时间上来说, 暑假之后就全力准备考研了..&lt;/p>
-&lt;p>我很想说考研让我变得更沉得下心来学习了, 但事实上这并不是真的.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>只准备了两三天之后 (因为太晚看到了), 尝试申请了一下 GSoC, 不出意外凉了..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>七月到十月, 参加开源之夏, 也算是赚到了人生的第一桶金吧&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="玩">玩&lt;/h3>
-&lt;ul>
-&lt;li>一月, 去滑雪+攀岩, 还是挺有意思的&lt;/li>
-&lt;li>二月初, 折腾了一下 Windows 10 on Arm for Lumia 1520, 并没有什么用, 于是继续吃灰&lt;/li>
-&lt;li>七月, 乘着沪通铁路的开通, 去上海玩了一次, 居然被我碰到了一次高铁延误..&lt;/li>
-&lt;/ul>
-&lt;h3 id="环境">环境&lt;/h3>
-&lt;ul>
-&lt;li>二月末, 开始搞 Manjaro, 一开始两个系统都用, 逐渐就只用 Linux 了 (特别是我发现了 proton 和 lutris 之后..)&lt;/li>
-&lt;li>三月初, 开始尝试 Typora+第三方云同步&lt;/li>
-&lt;li>七月, 从 Onedrive 转向 Syncthing (是不是有一种 Anything can be self-hosted 的趋势呢..&lt;/li>
-&lt;/ul>
-&lt;h3 id="书">书&lt;/h3>
-&lt;p>本年度仍然没有怎么看书..&lt;/p>
-&lt;ul>
-&lt;li>看完了心理学与生活, 心理学啊, exciting&lt;/li>
-&lt;li>看完了 Dark Forest&lt;/li>
-&lt;/ul>
-&lt;h3 id="代码">代码&lt;/h3>
-&lt;p>总的来说, 感觉自己乱七八糟的项目一堆, 却没什么拿得出手的..&lt;/p>
-&lt;ul>
-&lt;li>zaobot, 基本一整年都在维护 (虽然目前的代码还是挺是💩的, 打算再次重构&lt;/li>
-&lt;li>云盘在年初把后端重构了一下, 后来就鸽了 (事实上我这是重复造轮子, seafile 的体验就很好..)&lt;/li>
-&lt;li>pip, 四五月吧, 修了一些 bug, 做了点微小的贡献, 主要还是 codebase 没太理解..&lt;/li>
-&lt;li>Hackergame, 七到九月, 后端应该基本可用了, 然后答应的前端鸽了.. 当时天天看文档..&lt;/li>
-&lt;li>九十月考研的时候, 稍微学了一点 Anki, 为了自己用得顺手, 写了一个小插件.&lt;/li>
-&lt;li>建了个&lt;a href="https://github.com/cjc7373/my_scripts">仓库&lt;/a>写一些日常使用的脚本, 然而目前觉得可以全扔 Ansible 里..&lt;/li>
-&lt;li>花&lt;del>半个小时&lt;/del>三天写了个课程评价, 然而并没有人用..&lt;/li>
-&lt;/ul>
-&lt;h3 id="学习">学习&lt;/h3>
-&lt;ul>
-&lt;li>年中, 学了下小鹤双拼, 虽然似乎打字速度没快多少..&lt;/li>
-&lt;li>十一月, 终于把 Learning How To Learn 学完了, 然而我学到了什么呢..&lt;/li>
-&lt;/ul>
-&lt;h3 id="剁手">剁手&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;p>一月初, 本来已经买了联想小新 Pro 13, 然而压感触控的体验不是很好, 又碰到了下方向键有概率用不了的问题, 于是退了..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>一月, 购置了网件 R7900p, 终于能在电视上用 smb 看电影不卡了.. 然而 ipv6 是个坑..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>二月, 捡了个洋垃圾 Surface 3, 虽然电池有坑, 但是 Surface 总体还是可以的. 后来出了.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>六月中, 入手了 Surface Pro 7, 除了续航有点差其他都很满意. 18 年开始就种下的草 (指买轻薄本) 终于拔了.&lt;/p>
-&lt;p>附一张合照:&lt;/p>
-&lt;p>&lt;img src="./image-20210225152027832.png" alt="image-20210225152027832">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>十一月, 由于创新 IE3P 的线老是掉, 我终于买了个无线耳机, Galaxy Bud+.&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="财务">财务&lt;/h3>
-&lt;p>基金今年还是没怎么动, 看着大盘涨.. 稍微学了点投资的知识.&lt;/p>
-&lt;p>记账方面, Spendee 在年中放弃了, 因为感觉意义不大. 后来知道了 Plain Text Accounting, 于是学了点 Beancount, 不过还没应用到实践中.&lt;/p>
-&lt;h3 id="其他">其他&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;p>&lt;img src="./image-20210225144517669.png" alt="image-20210225144517669">&lt;/p>
-&lt;p>事实证明这是很好的追踪一个问题的工具..&lt;/p>
-&lt;p>&lt;img src="./image-20210225150738841.png" alt="image-20210225150738841">&lt;/p>
-&lt;p>但是浏览条目还是有些不爽 (比较慢)..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>六月, 开始用 KeePassXC 管理密码.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>暑假里, 看了人类星球, 自然与人文纪录片交汇的佳作&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>2020 秋季学期运动的次数显著增加了, 经常会去打打羽毛球.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>十月, 和 Moo 在北门合租了, 环境比之前在樱花广场好了很多..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>十二月, 用 rsync 删了一波自己的 home 目录, 血的教训.. 没想到我也有删库的一天..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>这一年没怎么管博客, 因为考研, 外加想着迁移 Pelican, 结果又挖了一个大坑&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="2021-计划">2021 计划&lt;/h2>
-&lt;p>还有两天考研出分了.. 说实话挺害怕的.. 考不上就只能找工作了.&lt;/p>
-&lt;ul>
-&lt;li>今年还是想尝试一下 GSoC, 到四月中旬申请结束还有一个半月.. 努力去混混脸熟吧.&lt;/li>
-&lt;li>事实上, 我还有一堆开的坑, 包括但不限于:
-&lt;ul>
-&lt;li>给 Wikipedia 贡献一个优良条目的翻译&lt;/li>
-&lt;li>写个 (或者找找) 各板块指数的 PB 中值温度计.&lt;/li>
-&lt;li>所有 VPS 都使用 Ansible 维护&lt;/li>
-&lt;li>写一个 Pelican 的主题, 类似 &lt;a href="https://github.com/amazingrise/hugo-theme-diary">diary&lt;/a>.&lt;/li>
-&lt;li>学习 CSAPP&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>毕设, 写一个第三方网易云, 毕竟是自己提的项目, 还是要好好写的.. 这又是一大堆不熟悉的技术栈..&lt;/li>
-&lt;li>还是要多看点书..&lt;/li>
-&lt;/ul>
-&lt;p>不管怎么样, 我还是要以更加积极的心态去迎接未来. 冲!&lt;/p>
-- https://blog.coherence.codes/posts/2021/2020summary_2021plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
