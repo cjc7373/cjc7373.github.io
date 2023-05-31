@@ -83,6 +83,8 @@ RFC 4862 定义了一种 IPv6 接口的自动配置机制, 包括生成一个链
 
 接下来主机会广播路由器请求, 以便敦促路由器发送路由器通告. 主机根据路由器通告中的的前缀信息 (Prefix-Infromation) 选项来构造全局地址.
 
+> Note: 由于 RA 总是会广播给所有主机, 所以 SLAAC 无法做到不给某些主机分配 IP 地址
+
 一个地址的生命周期: 首选地址在首选期限 (preferred lifetime) 过期之后会成为不推荐地址 (deprecated address). 不推荐地址能够继续被用于已经建立的连接中, 但不应该被用于建立新连接. 一个地址在有效期限 (valid lifetime) 过期之后会变为无效地址 (invalid address). 无效地址不能够被用作向外连接的源地址.
 
 RFC 4862 中并没有规定 interface identifier 是如何产生的, 只说了很多情况下其由接口的链路层地址 (即 MAC 地址) 产生. 这种生成方式会带来一些隐私上的顾虑, 因而在 SLAAC 隐私扩展 (RFC 4941) 中, 主机会生成一个临时地址 (temporary address) 来负责对外通信. 另一种方式是生成一个不变的, 与 MAC 地址无关的 interface identifier, 这种方式在 RFC 7217 中定义.
