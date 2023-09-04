@@ -1,4 +1,25 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 30 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ -&lt;blockquote>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 04 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>关于我</title><link>https://blog.coherence.codes/posts/2020_and_before/about_me/</link><pubDate>Sat, 03 Nov 2018 16:37:04 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/about_me/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/about_me/ -&lt;h2 id="关于我">关于我&lt;/h2>
+&lt;p>博主是一名大四学生。&lt;/p>
+&lt;ul>
+&lt;li>爱好一切数码产品&lt;/li>
+&lt;li>安卓（伪）瞎折腾党&lt;/li>
+&lt;li>ACM 打铁选手&lt;/li>
+&lt;li>Linux 初学者&lt;/li>
+&lt;li>科幻爱好者&lt;/li>
+&lt;/ul>
+&lt;h2 id="关于博客">关于博客&lt;/h2>
+&lt;ul>
+&lt;li>2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑&lt;/li>
+&lt;li>2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件&lt;/li>
+&lt;li>2020-02-22 更改评论为 &lt;code>disqusjs&lt;/code>，详见作者的&lt;a href="https://blog.skk.moe/post/disqusjs/">博文&lt;/a>；启用 &lt;a href="https://github.com/theme-next/theme-next-pjax">pjax&lt;/a>&lt;/li>
+&lt;li>2019-12-24 启用新域名&lt;code>blog.coherence.codes&lt;/code>&lt;/li>
+&lt;li>2019-10-07 升级主题至 Next V7.4.1&lt;/li>
+&lt;li>2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见&lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/">Hexo搭建小记&lt;/a>这篇文章&lt;/li>
+&lt;/ul>
+&lt;h2 id="联系我">联系我&lt;/h2>
+&lt;p>Telegram：@Coherence0&lt;/p>
+&lt;p>Email：niuchangcun AT gmail.com&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/about_me/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ -&lt;blockquote>
 &lt;p>这就是乱改字体的后果..&lt;/p>
 &lt;/blockquote>
 &lt;p>字体修复，不只是字体修复。&lt;/p>
