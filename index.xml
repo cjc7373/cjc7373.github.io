@@ -1,4 +1,96 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 04 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>神秘的自动关闭显示器失效问题</title><link>https://blog.coherence.codes/posts/2023/%E7%A5%9E%E7%A7%98%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD%E6%98%BE%E7%A4%BA%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/</link><pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E7%A5%9E%E7%A7%98%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD%E6%98%BE%E7%A4%BA%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E7%A5%9E%E7%A7%98%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD%E6%98%BE%E7%A4%BA%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/ -&lt;h2 id="问题">问题&lt;/h2>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 05 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>MIT 6.824 学习笔记(一) GFS</title><link>https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/</link><pubDate>Tue, 05 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/ -&lt;p>Google 文件系统（The Google File System, GFS）在 2003 年于一篇同名论文中被提出，发表在系统领域顶会 SOSP 上，是 Google 大数据三驾马车之一&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。GFS 是一个成功的系统，在 00 年代早期，人们对于分布式文件系统已经有很好的理解了，但是尚未有一个可以扩展到上千个节点的系统被实现出来。很多 GFS 的设计被 HDFS 等后来的分布式文件系统上。&lt;/p>
+&lt;p>GFS 基于以下几个方面的观察：&lt;/p>
+&lt;ul>
+&lt;li>节点故障是常见的，因为其运行在大量普通机器（commodity components）上&lt;/li>
+&lt;li>存储的文件以大文件（数百 MB 到数 GB）为主，小文件应当被支持，但不应对其优化&lt;/li>
+&lt;li>对文件的大多数写入操作是追加 （append）而不是覆盖/随机写，大多数读取操作是顺序读 （1 MB 或更多）
+&lt;ul>
+&lt;li>所以系统必须有良好的并发追加操作的语义&lt;/li>
+&lt;li>工作负载通常是批处理任务，所以高吞吐量比低延时重要&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>同时设计应用和文件系统 API 有利于整个系统的灵活性&lt;/li>
+&lt;/ul>
+&lt;h2 id="架构">架构&lt;/h2>
+&lt;p>&lt;img src="./image-20230901145431686.png" alt="image-20230901145431686">&lt;/p>
+&lt;p>GFS 采用 Master/Slave 架构，集群中存在一个 master 和多个 chunkservers，并且被多个 clients 访问。（由于单 master 的存在，GFS 存在单点故障的可能性，虽然 master 同样有备份，但恢复可能需要人工干预）一个文件将被分割成多个 chunk。chunk 的特性如下：&lt;/p>
+&lt;ul>
+&lt;li>固定大小，Google 的选择是 64 MB，这么大的 chunk 将有如下好处：
+&lt;ul>
+&lt;li>减少 client 和 master 的通信，因为在获取到 chunk 的信息后，client 只需要和 chunkserver 交互进行读写&lt;/li>
+&lt;li>减少 metadata 的尺寸，以便所有 metadata 可以保存在内存中&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>作为一个普通的 Linux 文件存储在 chunkserver 上&lt;/li>
+&lt;li>每个 chunk 由一个不可变的、唯一的 64 位 chunk handle 标记，其由 master 在 chunk 创建时指定
+&lt;ul>
+&lt;li>chunkserver 根据 chunk handle 和偏移（byte range）来读写 chunk&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>为了可靠性，每个 chunk 会被复制到多个 chunkservers 上 （通常为三个）&lt;/li>
+&lt;/ul>
+&lt;p>master 管理了所有的元数据，用 Go 代码大概表示为：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">ChunkHandle&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Handle&lt;/span> &lt;span style="color:#66d9ef">int64&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ChunkServers&lt;/span> []&lt;span style="color:#a6e22e">ChuckServer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ReplicaNum&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Version&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#75715e">// 为了区分数据是否是最新的
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#a6e22e">Primary&lt;/span> &lt;span style="color:#a6e22e">ChuckServer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">LeaseExpiration&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Time&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Master&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Files&lt;/span> &lt;span style="color:#66d9ef">map&lt;/span>[&lt;span style="color:#a6e22e">Filename&lt;/span>][]&lt;span style="color:#a6e22e">ChunkHandle&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>除此之外，还需要 log 和 checkpoint 机制来持久化元数据。元数据中 Handle, ReplicaNum 和 Version 应该是非易失的（non-volatile)。没有持久化 ChunkServers 字段可能是因为 chunkserver 会经常变动。&lt;/p>
+&lt;h2 id="一致性模型">一致性模型&lt;/h2>
+&lt;p>GFS 采用了一种宽松的一致性模型，不同于 Raft 等强一致性协议，其允许不一致的情况出现。不一致的情况将由应用处理。这实际上是为了性能而牺牲了一些一致性。&lt;/p>
+&lt;p>&lt;img src="./image-20230901182949527.png" alt="image-20230901182949527">&lt;/p>
+&lt;p>对于一个文件区域，GFS 定义了几种状态：&lt;/p>
+&lt;ul>
+&lt;li>一致的（consistent）：无论从哪个 replica 读，所有 clients 都会看到同样的数据&lt;/li>
+&lt;li>确定的（defined）：在一次写入之后，数据是一致的，并且 clients 都能完整看到这次写入写了什么。&lt;/li>
+&lt;li>不一致的（inconsistent）：不同的 client 能够读到不一样的结果&lt;/li>
+&lt;/ul>
+&lt;p>这三种状态发生于以下情况：&lt;/p>
+&lt;ul>
+&lt;li>当没有并发写的写入成功后，这块区域就是确定的&lt;/li>
+&lt;li>当若干写入操作并发成功后，这块文件区域是不确定但一致的：所有 clients 都能看到同样的数据，但这块可能不能反映出其中任何一次写入的结果（通常是这几次写入的结果交织在一起）&lt;/li>
+&lt;li>失败的写入使得这块区域不一致&lt;/li>
+&lt;/ul>
+&lt;p>GFS 中的写入（mutation）分为指定偏移量的写入（Write）和记录末尾追加（Record Append），record append 能够保证原子的至少一次（at least once）追加，但是有小概率会出现 padding 或者重复数据。GFS 的应用可以通过在每条记录后加入校验来处理不完整的记录，还可以通过加入唯一的标识符来处理重复记录。GFS 的客户端库中包含了这些通用的处理不一致的功能。&lt;/p>
+&lt;h2 id="实现">实现&lt;/h2>
+&lt;p>GFS 使用租约（lease）来维护一个一致的写入顺序（consistent mutation order）。租约就是在一段时间内，master 让某一 replica 成为 primary，master 将保证在这段时间内不会分配另一个 primary，而 primary 将保证在租约过期后不再履行 primary 的职责。primary 将指定一个 chunk 的写入顺序，其他的 replica 则跟随 primary 的顺序。&lt;/p>
+&lt;h3 id="写入">写入&lt;/h3>
+&lt;p>&lt;img src="./image-20230905110612114.png" alt="image-20230905110612114">&lt;/p>
+&lt;p>client 首先向 master 请求 primary 和其他 replicas 的位置。如果尚未有一个 primary，master 会首先增大版本号并通知所有 replicas，然后选定一个 primary 并向其分配租约。&lt;/p>
+&lt;p>client 随后向所有 replica 推送数据，数据被存储在 chunkserver 的本地缓存中等待被使用。数据流和控制流是分离的，这是为了更有效地利用网络。数据流采用了一种流水线的形式，首先 client 向距离其最近的 chunkserver 推送数据，这个 chunkserver 再向其最近的 chunkserver 转发，链式地发送数据，转发不会等待 chunk 传输完而是立即开始的。&lt;/p>
+&lt;p>当所有 repicas 都 ACK 收到了数据之后，client 向 primary 请求写入。由于可能存在并发，primary 为所有写入分配一个序列号，在本地应用这些写入，并转发写入请求到其他 replicas。所有 replicas 都 ACK 之后，primary 向 client 回复。如果任何一个 replica 出错，那么被修改的区域就处于不一致的状态，此时由 client 来负责重试失败的写入。（如果在 primary 就出错的话，那么它不会转发写入请求，此时数据应该仍然处于一致的状态）&lt;/p>
+&lt;p>当应用写入的区域很大时，GFS client 会将其切分成一个一个 chunk，并分为多个写入操作来执行，此时如果有并发操作，则会出现一致但不确定的状态。&lt;/p>
+&lt;h3 id="记录追加record-append">记录追加（Record Append）&lt;/h3>
+&lt;p>此操作中 client 只指定文件而不指定偏移，GFS 保证该操作在 GFS 指定的偏移处原子地完成至少一次，并向客户端返回这个偏移。GFS 的应用中有很多是多生产者/单消费者模型，很适合使用记录追加操作。&lt;/p>
+&lt;p>记录追加操作和写入大致相同，惟 primary 会检查要追加的数据是否会超出当前 chunk，如果会的话，它将 pad 这个 chunk 到 64MB，指示其他 replicas 也这么操作，并指示客户端重试。（记录追加操作限制最大数据大小为四分之一个 最大 chunk size 以便控制碎片的大小）如果没有超出，则按写入的流程进行，此时 primary 会选择一个 offset （即它所认为的文件末尾）告知其他 replicas 进行写入。如果任何一个 replica 失败，客户端会重试操作。这种情况下部分 replica 将会出现重复的记录，但是数据肯定以某一偏移写入了所有 replicas。&lt;/p>
+&lt;h2 id="问题">问题&lt;/h2>
+&lt;ul>
+&lt;li>如果 chunk 的版本号只在分配租约是增加的话，假设一个 replica （非 primary）在某一时刻挂了，因此错过了几个写入，如果版本号此时不改变的话，在那个 replica 恢复之后，client 就会读到过时数据了。论文里好像也没提这种情况怎么处理..&lt;/li>
+&lt;/ul>
+&lt;h2 id="总结">总结&lt;/h2>
+&lt;p>以上并未包含论文的完整内容。GFS 我早在去年夏天就开始学了，然后就一直搁置在一旁，直到这两天才重新拿起来&amp;hellip;&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;p>本文的内容来源于：&lt;/p>
+&lt;ul>
+&lt;li>GFS 论文&lt;/li>
+&lt;li>&lt;a href="https://www.youtube.com/watch?v=EpIgvowZr00&amp;amp;t=1935s">6.824 Lecture 3: GFS&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://mr-dai.github.io/gfs/">Google File System 总结&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>另外两篇论文是 MapReduce: Simplified Data Processing on Large Clusters 和 Bigtable: A Distributed Storage System for Structured Data&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div>
+- https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>神秘的自动关闭显示器失效问题</title><link>https://blog.coherence.codes/posts/2023/%E7%A5%9E%E7%A7%98%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD%E6%98%BE%E7%A4%BA%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/</link><pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E7%A5%9E%E7%A7%98%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD%E6%98%BE%E7%A4%BA%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E7%A5%9E%E7%A7%98%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD%E6%98%BE%E7%A4%BA%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/ -&lt;h2 id="问题">问题&lt;/h2>
 &lt;p>我的桌面环境为 KDE/X11，我在 KDE 的 Power Management 设置中设置了 &lt;code>Screen Energy Saving: Switch off after 5 min&lt;/code>，这个选项时不时地出问题，表现为刚开机时能够正常工作，在闲置五分钟后关闭显示器，但在一段时间过后就不行了，这个一段时间可长可短。重启电脑又能重新工作，而锁屏后也能够正常工作。这个问题从我用 KDE 开始就一直困扰着我，时至今日。&lt;/p>
 &lt;h2 id="排查">排查&lt;/h2>
 &lt;p>KDE 的电源管理由 powerdevil 控制，其作为 &lt;code>plasma-powerdevil.service&lt;/code> 用户服务运行，查询日志发现有一些神秘的 &lt;code>org_kde_powerdevil[1310]: QObject::disconnect: Unexpected nullptr parameter&lt;/code> 报错，之后证实该报错与本问题无关。&lt;/p>
@@ -540,22 +632,4 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 而且它那个屏幕的手感非常不错, 在现在看来滑动也是丝般顺滑, 可惜后来屏幕被我摔碎了.&lt;/p>
 &lt;p>高中毕业后, 虽然 Nexus 6 性能还够用, 但这不能给我爸妈看到呀, 于是直接买新手机. 一开始抢小米 6 没抢到, 然后买了一加 5. (还好没抢到!) 以我现在的眼光自然是觉得 Oxygen OS 这种类原生是要比 MIUI 好很多的.&lt;/p>
 &lt;p>这一加 5 钉子户一当就当了四年. 到大学毕业实在感到 835 性能不够用了. 我当时是想挑一个小屏旗舰, 挑来挑去也没挑出来, 要么太贵, 要么不能解锁 BL, 于是又买了一加, 一加 8T.&lt;/p>
-- https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我为什么选择在 Surface 上使用 Windows</title><link>https://blog.coherence.codes/posts/2022/surface_on_linux/</link><pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/surface_on_linux/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/surface_on_linux/ -&lt;p>自从购置 Surface Pro 7 以来, 曾数次不满于 Windows 的包管理, 遥测, Windows Defender 等方面. 然更换了 Linux 之后并没有一个太好的使用体验. 本文记录了 Surface Pro 7 在 Archlinux 上的体验.&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;p>在 2021 年七月某日, 手贱尝试了一下 Windows 11 Preview (印象里是公开发布的第一版) 之后, 感叹于 Bug 之多, 奈何回滚需要重新安装 Windows, 于是一气之下装了 Archlinux.&lt;/p>
-&lt;p>&lt;img src="./8a7b6609572d402bb2b747b706ef0c62.png" alt="img">(此处附使用截图一张)&lt;/p>
-&lt;p>在使用了近半年之后, 再次感叹, 微软自家的产品在 Linux 上体验真的不好.. 又萌生了换回 Windows 的想法.&lt;/p>
-&lt;p>具体而言, 有以下几个方面. 首先, Connected standby 在 Windows 下工作地很好, 然而在 Linux 下待机的耗电非常显著, 大概一晚上能掉一半电的那种. 于是后来发现了 suspend-then-hibernate 这个策略, 理论上还算可以接受. 然其有个非常严重的 Bug, 有时候其不能够成功地进入休眠状态, 导致第二天早上起来的时候 Surface 直接没电了. 而且这个问题出现频率比较高, 大概十次待机中有两三次, 非常影响使用体验. 在电量不足 10% 内核的频率调度会非常激进, 基本只能维持在 1.5G (即使电源已连接), 这时候系统会非常卡, 进一步导致了开机后仍有十多分钟的不可用状态. 这个 Bug 是我想换回 Windows 的直接原因.&lt;/p>
-&lt;p>&lt;img src="./image-20220226111426078.png" alt="image-20220226111426078">
-(图为在个人 issue tracker 中的记录, 实际和内核更新无关)&lt;/p>
-&lt;p>其次, 由于主线内核的支持有限, 我选择了第三方的 &lt;a href="https://github.com/linux-surface/linux-surface">linux-surface&lt;/a> 内核, 然其支持仍然有限. 最主要为缺乏 Surface Pen 和多点触控的支持. 加之我使用的 KDE 桌面环境对于平板设备的支持几乎为零, 我的 Surface 事实上是当成笔记本电脑来使用的.&lt;/p>
-&lt;p>另外, 还有 KDE 对于触控板手势缺乏支持 (在 Wayland 中已实现了部分支持); 续航较之 Windows 差了很多; Xorg 不支持多显示器不同缩放; 无法使用摄像头/Windows Hello 等等问题.&lt;/p>
-&lt;p>更换 Windows 之后:&lt;/p>
-&lt;ul>
-&lt;li>需要重新配置环境, 然包管理器选用 winget, dotfiles 使用 chezmoi 管理, 应该不会有太多麻烦&lt;/li>
-&lt;li>Windows defender, 遥测等占用资源, 然应该可用组策略解决&lt;/li>
-&lt;li>失去了 krunner, 可以用其他软件替代, 或者开始菜单将就用..&lt;/li>
-&lt;li>还可以使用腾讯会议等 Windows 专有软件 (Linux 版的体验很不好)&lt;/li>
-&lt;/ul>
-&lt;p>综上, 我又反复横跳回来了..&lt;/p>
-- https://blog.coherence.codes/posts/2022/surface_on_linux/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

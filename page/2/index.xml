@@ -1,4 +1,22 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 04 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ -&lt;p>记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 05 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>我为什么选择在 Surface 上使用 Windows</title><link>https://blog.coherence.codes/posts/2022/surface_on_linux/</link><pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/surface_on_linux/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/surface_on_linux/ -&lt;p>自从购置 Surface Pro 7 以来, 曾数次不满于 Windows 的包管理, 遥测, Windows Defender 等方面. 然更换了 Linux 之后并没有一个太好的使用体验. 本文记录了 Surface Pro 7 在 Archlinux 上的体验.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>在 2021 年七月某日, 手贱尝试了一下 Windows 11 Preview (印象里是公开发布的第一版) 之后, 感叹于 Bug 之多, 奈何回滚需要重新安装 Windows, 于是一气之下装了 Archlinux.&lt;/p>
+&lt;p>&lt;img src="./8a7b6609572d402bb2b747b706ef0c62.png" alt="img">(此处附使用截图一张)&lt;/p>
+&lt;p>在使用了近半年之后, 再次感叹, 微软自家的产品在 Linux 上体验真的不好.. 又萌生了换回 Windows 的想法.&lt;/p>
+&lt;p>具体而言, 有以下几个方面. 首先, Connected standby 在 Windows 下工作地很好, 然而在 Linux 下待机的耗电非常显著, 大概一晚上能掉一半电的那种. 于是后来发现了 suspend-then-hibernate 这个策略, 理论上还算可以接受. 然其有个非常严重的 Bug, 有时候其不能够成功地进入休眠状态, 导致第二天早上起来的时候 Surface 直接没电了. 而且这个问题出现频率比较高, 大概十次待机中有两三次, 非常影响使用体验. 在电量不足 10% 内核的频率调度会非常激进, 基本只能维持在 1.5G (即使电源已连接), 这时候系统会非常卡, 进一步导致了开机后仍有十多分钟的不可用状态. 这个 Bug 是我想换回 Windows 的直接原因.&lt;/p>
+&lt;p>&lt;img src="./image-20220226111426078.png" alt="image-20220226111426078">
+(图为在个人 issue tracker 中的记录, 实际和内核更新无关)&lt;/p>
+&lt;p>其次, 由于主线内核的支持有限, 我选择了第三方的 &lt;a href="https://github.com/linux-surface/linux-surface">linux-surface&lt;/a> 内核, 然其支持仍然有限. 最主要为缺乏 Surface Pen 和多点触控的支持. 加之我使用的 KDE 桌面环境对于平板设备的支持几乎为零, 我的 Surface 事实上是当成笔记本电脑来使用的.&lt;/p>
+&lt;p>另外, 还有 KDE 对于触控板手势缺乏支持 (在 Wayland 中已实现了部分支持); 续航较之 Windows 差了很多; Xorg 不支持多显示器不同缩放; 无法使用摄像头/Windows Hello 等等问题.&lt;/p>
+&lt;p>更换 Windows 之后:&lt;/p>
+&lt;ul>
+&lt;li>需要重新配置环境, 然包管理器选用 winget, dotfiles 使用 chezmoi 管理, 应该不会有太多麻烦&lt;/li>
+&lt;li>Windows defender, 遥测等占用资源, 然应该可用组策略解决&lt;/li>
+&lt;li>失去了 krunner, 可以用其他软件替代, 或者开始菜单将就用..&lt;/li>
+&lt;li>还可以使用腾讯会议等 Windows 专有软件 (Linux 版的体验很不好)&lt;/li>
+&lt;/ul>
+&lt;p>综上, 我又反复横跳回来了..&lt;/p>
+- https://blog.coherence.codes/posts/2022/surface_on_linux/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ -&lt;p>记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>Archwiki 给人的感觉还是有点零碎了.. 与打包相关的条目大概有:&lt;/p>
 &lt;ul>
@@ -770,91 +788,4 @@
 &lt;li>继续寻找方向。&lt;/li>
 &lt;li>多写一些博客，输出自己的知识，同时也提高自己的能力。&lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>WSL使用体验</title><link>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link><pubDate>Sun, 08 Dec 2019 19:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/ -&lt;p>首先，WSL真香！&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="开启wsl">开启WSL&lt;/h2>
-&lt;p>最简单的方式是使用管理员权限运行Powershell，然后输入：&lt;/p>
-&lt;p>&lt;code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux&lt;/code>&lt;/p>
-&lt;p>重启电脑，然后在应用商店中安装WSL发行版。&lt;/p>
-&lt;h2 id="arch">Arch&lt;/h2>
-&lt;p>注意到WSL是没有Arch Linux发行版的（以前有一个非官方的，很快被下架了），但是我们有办法添加Arch发行版。去&lt;a href="https://github.com/yuk7/ArchWSL">这个仓库&lt;/a>下载打包好的appx文件和证书，首先将证书导入至受信任的根证书颁发机构，然后安装appx即可。&lt;/p>
-&lt;h2 id="体验">体验&lt;/h2>
-&lt;h3 id="坑">坑&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;p>默认WSL不会读取&lt;code>~/.bashrc&lt;/code>而会读取&lt;code>~/.bash_profile&lt;/code>，所以需要在&lt;code>~/.bash_profile&lt;/code>中写入：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">[[&lt;/span> -f ~/.bashrc &lt;span style="color:#f92672">]]&lt;/span> ; &lt;span style="color:#66d9ef">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . ~/.bashrc
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>才能够正常读取bash配置。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="netcat">Netcat&lt;/h3>
-&lt;p>首先我Google到的是&lt;code>gnu-netcat&lt;/code>。但是运行时报错&lt;code>nc: core.c:372: core_tcp_connect: Assertion ret == 0' failed.&lt;/code>搜索了&lt;a href="https://github.com/msys2/MSYS2-packages/issues/1030">相关Issus&lt;/a>之后，我更换成了&lt;a href="https://www.archlinux.org/packages/community/x86_64/openbsd-netcat/">openbsd-netcat&lt;/a>，问题解决。&lt;/p>
-&lt;h3 id="缺点">缺点&lt;/h3>
-&lt;ul>
-&lt;li>WSL下无法使用Docker等涉及内核的操作，该缺陷在WSL2中被解决。&lt;/li>
-&lt;li>默认无图形界面，使用GUI需自己安装X Server，较为麻烦。&lt;/li>
-&lt;/ul>
-&lt;h2 id="windows-terminal">Windows Terminal&lt;/h2>
-&lt;p>注意，截至目前，Windows Terminal仍处于预览阶段，正式发布预计要到2020年4月。&lt;/p>
-&lt;p>&lt;img src="./image-20191115231943950.png" alt="image-20191115231943950">&lt;/p>
-&lt;p>安装WSL后，Windows Terminal能够自动识别WSL并添加至可用Terminal列表中。&lt;/p>
-&lt;h3 id="bug">Bug&lt;/h3>
-&lt;ul>
-&lt;li>启动Shell后的工作目录为Windows当前用户的Home目录，而非Linux的用户Home目录。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="./image-20191115232130240.png" alt="image-20191115232130240">&lt;/p>
-&lt;p>​ 可以通过在配置文件中加入&lt;code>&amp;quot;commandline&amp;quot; : &amp;quot;wsl ~&amp;quot;&lt;/code>来解决，不过这个方案只适用于默认WSL发行版，对于其他发行版无效，可以通过在&lt;code>.bashrc&lt;/code>中添加一条判断语句来解决。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>Windows Terminal目前暂无法自动添加至右键菜单上下文，需手动添加注册表。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>往Terminal中粘贴内容是会自动在行间加空格。（更新：这个bug是由于\r\n与\n的处理问题，在0.7中被解决）&lt;/p>
-&lt;p>&lt;img src="./image-20191115233340872.png" alt="image-20191115233340872">&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="wsl2">WSL2&lt;/h2>
-&lt;h3 id="docker">Docker&lt;/h3>
-&lt;p>可喜可贺，WSL终于能用Docker了。&lt;/p>
-&lt;p>配置镜像源（无systemd）：&lt;/p>
-&lt;blockquote>
-&lt;p>在配置文件 &lt;code>/etc/default/docker&lt;/code> 中的 &lt;code>DOCKER_OPTS&lt;/code> 中配置Hub地址：&lt;/p>
-&lt;pre tabindex="0">&lt;code>DOCKER_OPTS=&amp;#34;--registry-mirror=https://docker.mirrors.ustc.edu.cn/&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>重新启动服务:&lt;/p>
-&lt;pre tabindex="0">&lt;code>sudo service docker restart
-&lt;/code>&lt;/pre>&lt;/blockquote>
-&lt;h3 id="坑-1">坑&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;p>官方宣称在18945之后的版本中Windows访问WSL提供的网络服务只需使用localhost即可（服务需绑定之0.0.0.0而不是127.0.0.1，因为实际上这些连接被认为是局域网中的连接）。&lt;/p>
-&lt;p>尝试在Docker中使用。&lt;/p>
-&lt;p>&lt;img src="./image-20191116233838273.png" alt="image-20191116233838273">&lt;/p>
-&lt;p>使用&lt;code>netstat -ano&lt;/code>如下：&lt;/p>
-&lt;p>&lt;img src="./image-20191116233912110.png" alt="image-20191116233912110">&lt;/p>
-&lt;p>然而在Windows下只能使用IPv6地址访问：&lt;/p>
-&lt;p>&lt;img src="./image-20191116233953189.png" alt="image-20191116233953189">b&lt;/p>
-&lt;p>而不能使用IPv4：&lt;/p>
-&lt;p>&lt;img src="./image-20191116234023402.png" alt="image-20191116234023402">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>无法使用systemd。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="pycharm">Pycharm&lt;/h2>
-&lt;p>Pycharm能够将Python解释器设置为WSL中的Python。&lt;/p>
-&lt;p>&lt;img src="./image-20191119150317595.png" alt="image-20191119150317595">&lt;/p>
-&lt;p>同时能够将terminal设置为WSL：&lt;/p>
-&lt;p>&lt;img src="./image-20191119150135830.png" alt="image-20191119150135830">&lt;/p>
-&lt;p>只需要将Shell path设置成&lt;code>bash.exe&lt;/code>即可。注意设置为&lt;code>arch.exe&lt;/code>等自定义的发行版名称时，无法将当前工作目录传递给Shell。&lt;/p>
-&lt;p>注意到由于WSL没有图形界面，无法在Python中运行GUI程序。&lt;/p>
-&lt;h3 id="bug-1">Bug&lt;/h3>
-&lt;p>&lt;del>在WSL中安装的包无法被识别：&lt;/del>&lt;/p>
-&lt;p>&lt;img src="./image-20191119150405724.png" alt="image-20191119150405724">&lt;/p>
-&lt;p>&lt;del>因此也无法使用这个包的自动补全、查看定义等一系列功能。&lt;/del>&lt;/p>
-&lt;p>&lt;a href="https://www.jetbrains.com/help/pycharm/using-wsl-as-a-remote-interpreter.html">文档里&lt;/a>写得清清楚楚：&lt;/p>
-&lt;p>&lt;img src="./image-20191208194351006.png" alt="image-20191208194351006">&lt;/p>
-&lt;p>我错了，我应该看文档的。安装rsync之后问题解决。&lt;/p>
-&lt;h2 id="参考资料">参考资料&lt;/h2>
-- https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
