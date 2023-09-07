@@ -5,6 +5,8 @@ categories:
 - Distributed System
 ---
 
+存储系统通常是一个分布式系统的基石，通常应用可以是无状态的，而所有状态便由存储系统来管理。
+
 Google 文件系统（The Google File System, GFS）在 2003 年于一篇同名论文中被提出，发表在系统领域顶会 SOSP 上，是 Google 大数据三驾马车之一[^1]。GFS 是一个成功的系统，在 00 年代早期，人们对于分布式文件系统已经有很好的理解了，但是尚未有一个可以扩展到上千个节点的系统被实现出来。很多 GFS 的设计被 HDFS 等后来的分布式文件系统上。
 
 [^1]: 另外两篇论文是 MapReduce: Simplified Data Processing on Large Clusters 和 Bigtable: A Distributed Storage System for Structured Data
@@ -78,7 +80,7 @@ GFS 使用租约（lease）来维护一个一致的写入顺序（consistent mut
 
 ![image-20230905110612114](./image-20230905110612114.png)
 
-client 首先向 master 请求 primary 和其他 replicas 的位置。如果尚未有一个 primary，master 会首先增大版本号并通知所有 replicas，然后选定一个 primary 并向其分配租约。
+client 首先向 master 请求 primary 和其他 replicas 的位置。如果尚未有一个 primary，master 会首先增大版本号并通知所有 replicas，然后选定一个 primary 并向其分配租约。client 会缓存这些元数据，以减少 master 的负载。
 
 client 随后向所有 replica 推送数据，数据被存储在 chunkserver 的本地缓存中等待被使用。数据流和控制流是分离的，这是为了更有效地利用网络。数据流采用了一种流水线的形式，首先 client 向距离其最近的 chunkserver 推送数据，这个 chunkserver 再向其最近的 chunkserver 转发，链式地发送数据，转发不会等待 chunk 传输完而是立即开始的。
 
