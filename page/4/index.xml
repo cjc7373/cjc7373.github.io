@@ -1,4 +1,46 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 05 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Markdown简介</title><link>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</link><pubDate>Thu, 08 Nov 2018 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ -&lt;h2 id="什么是-markdown">&lt;strong>什么是 Markdown?&lt;/strong>&lt;/h2>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 18 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>使用KMS激活Visio</title><link>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</link><pubDate>Sat, 01 Dec 2018 23:11:38 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ -&lt;h2 id="题记">题记&lt;/h2>
+&lt;p>如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="转换visio版本">转换Visio版本&lt;/h2>
+&lt;p>我在&lt;a href="http://msdn.itellyou.cn/?lang=zh-cn">MSDN我告诉你&lt;/a>和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。&lt;/p>
+&lt;p>复制以下代码，保存为.bat文件并用管理员身份运行：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> exist &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span> cd /d &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles%\Microsoft Office\Office16&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> exist &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span> cd /d &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cscript ospp.vbs /rearm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> /f %%x in &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;dir /b ..\root\Licenses16\visio???vl_kms*.xrm-ms&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> cscript ospp.vbs /inslic:&lt;span style="color:#e6db74">&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span> &amp;gt;nul
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> /f %%x in &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;dir /b ..\root\Licenses16\visio???vl_mak*.xrm-ms&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> cscript ospp.vbs /inslic:&lt;span style="color:#e6db74">&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span> &amp;gt;nul
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上命令的作用分别为：&lt;/p>
+&lt;ul>
+&lt;li>打开Office的安装目录（Visio也属于Office的一部分）&lt;/li>
+&lt;li>重置零售激活&lt;/li>
+&lt;li>安装KMS和MAK许可证（转换版本）&lt;/li>
+&lt;/ul>
+&lt;p>题外话：转换Office和Project版本同理。&lt;/p>
+&lt;p>Office：&lt;/p>
+&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /rearm
+for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
+for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
+&lt;/code>&lt;/pre>&lt;p>Project：&lt;/p>
+&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /rearm
+for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\project???vl_kms*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
+for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\project???vl_mak*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
+&lt;/code>&lt;/pre>&lt;p>再跑下题，为什么要用批处理呢，因为这段命令直接在cmd里执行会出错，博主没学过Shell无法理解。（留下了没有知识的泪水）&lt;/p>
+&lt;h2 id="设置kms密钥及服务器">设置KMS密钥及服务器&lt;/h2>
+&lt;p>打开Office的安装目录，也就是代码里的&lt;code>%ProgramFiles%\Microsoft Office\Office16\&lt;/code>（64位）或者&lt;code>%ProgramFiles(x86)%\Microsoft Office\Office16\&lt;/code>（32位）。&lt;/p>
+&lt;p>按住Shift+右键，选择在此处打开PowerShell，输入：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>cscript ospp.vbs /inpkey&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>PD3PC-RHNGV-FXJ29-8JK7D-RJRJK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>来安装KMS密钥。注意以上命令中的KMS密钥只适用与Visio2016，其他版本可到&lt;a href="https://docs.microsoft.com/zh-cn/DeployOffice/vlactivation/gvlks">微软官方文档&lt;/a>中查询。&lt;/p>
+&lt;p>然后设置KMS服务器，博主用的是网上找的，以后尝试一下自己搭一个：&lt;/p>
+&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /sethst:xxx.xxx
+&lt;/code>&lt;/pre>&lt;p>由于不保证可用性，服务器名称已略去。&lt;/p>
+&lt;p>指令Office立即连接KMS服务器进行激活：&lt;/p>
+&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /act
+&lt;/code>&lt;/pre>&lt;p>完成！&lt;/p>
+&lt;h2 id="参考资料">参考资料&lt;/h2>
+&lt;p>&lt;a href="https://03k.org/kms.html">https://03k.org/kms.htm&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://segmentfault.com/a/1190000015697457">https://segmentfault.com/a/1190000015697457&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://blog.csdn.net/ywd1992/article/details/79412991">https://blog.csdn.net/ywd1992/article/details/79412991&lt;/a>&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Markdown简介</title><link>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</link><pubDate>Thu, 08 Nov 2018 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ -&lt;h2 id="什么是-markdown">&lt;strong>什么是 Markdown?&lt;/strong>&lt;/h2>
 &lt;p>Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。&lt;/p>
 &lt;p>&lt;img src="./Markdown-mark.svg.png" alt="哈哈哈">&lt;/p>
 &lt;!-- raw HTML omitted -->

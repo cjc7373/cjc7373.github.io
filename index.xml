@@ -1,4 +1,162 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 05 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>MIT 6.824 学习笔记(一) GFS</title><link>https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/</link><pubDate>Tue, 05 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/ -&lt;p>存储系统通常是一个分布式系统的基石，通常应用可以是无状态的，而所有状态便由存储系统来管理。&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 18 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>git 入门</title><link>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</link><pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/ -&lt;p>本文的大部分内容来自于 &lt;a href="https://git-scm.com/book/en/v2">Pro Git&lt;/a> 这本书。&lt;/p>
+&lt;h2 id="objects">Objects&lt;/h2>
+&lt;p>git 中最基础的元素是 object，每个 object 由一个 object ID (OID) 唯一标识，OID 是一个 160 bits （用 hex 字符串表示为四十个字符） 的 SHA-1 哈希。具体而言，git 中主要存在三种 objects：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;code>blobs&lt;/code>: 存储文件内容，OID 即为文件内容的哈希&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>trees&lt;/code>: 一个文件名（path entries）的有序列表，OID 为这个列表的哈希。子目录同样是 trees。项目的根目录即为 root tree。所有的 trees 构成了一棵 Merkle tree，&lt;del>所以 git 就是区块链（即答&lt;/del>。下图中三角代表 trees，方块为 blobs&lt;/p>
+&lt;p>&lt;img src="./image-20230918111328708.png" alt="image-20230918111328708">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>commits&lt;/code>: 一个&lt;strong>快照&lt;/strong>（snapshot），每个 commit 包含了一个到根 tree 的引用，和一个（或多个）到 parent 的引用。parent 就是上一个 commit 的 OID。在一个 merge commit 中会包含多个 parents。下图中圆形代表 commits&lt;/p>
+&lt;p>&lt;img src="./image-20230918111515508.png" alt="image-20230918111515508">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>objects 的特性决定了它们是不可变的，一旦修改了某个 object 中的内容，哈希将会改变，因而会生成一个新的 object.&lt;/p>
+&lt;p>可以使用 &lt;code>git cat-file -t&lt;/code> 来检查一个 object 的类型，用 &lt;code>git cat-file -p&lt;/code> 来打印其内容，以本博客的 git 仓库为例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git log
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit 10142e0fb1f636288c7f5a6a164e67c1efc13ef4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Author: Harold Cheng &amp;lt;niuchangcun@gmail.com&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Date: Tue Sep &lt;span style="color:#ae81ff">5&lt;/span> 17:30:57 &lt;span style="color:#ae81ff">2023&lt;/span> +0800
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> The Google File System
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git cat-file -t 10142e0fb1f636288c7f5a6a164e67c1efc13ef4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git cat-file -p 10142e0fb1f636288c7f5a6a164e67c1efc13ef4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tree f1f161d92d0c7341ed35e76a66855383334005ab
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parent 0e72a3f169a8bbc80904ab7750d3c37853a31dc7
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>author Harold Cheng &amp;lt;niuchangcun@gmail.com&amp;gt; &lt;span style="color:#ae81ff">1693906257&lt;/span> +0800
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>committer Harold Cheng &amp;lt;niuchangcun@gmail.com&amp;gt; &lt;span style="color:#ae81ff">1693906257&lt;/span> +0800
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpgsig -----BEGIN PGP SIGNATURE-----
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;omitted&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -----END PGP SIGNATURE-----
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The Google File System
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git cat-file -p f1f161d92d0c7341ed35e76a66855383334005ab
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">040000&lt;/span> tree 9a76f18c0bca57de0ecf8b9bf15e0e9b7adf5621 .github
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">100644&lt;/span> blob 1fc4aa8f76027dd0fb8f9b533810770236d5c234 .gitignore
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">100644&lt;/span> blob 0b47f42f9ec57c58c474dc1f335e14163dd7a549 .gitmodules
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">040000&lt;/span> tree f5b1aa13654d360771df3da98296ac958d537d88 archetypes
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">100644&lt;/span> blob 8c082a36fd3b90a9e77ec19b17deceb47665e4c7 config.toml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">040000&lt;/span> tree 81200165da89a43766f03762e4a8d8443357f1ed content
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">040000&lt;/span> tree 336e0cfa73193fc3f76ba2b2de182e82b010f599 themes
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这些 objects 都被存在项目的 &lt;code>.git/objects&lt;/code> 目录下，由 SHA-1 的前两个字符作为子目录的文件名，后 38 个字符为 object 的文件名。这些 objects 使用 zlib 压缩，根据 &lt;a href="https://unix.stackexchange.com/questions/22834/how-to-uncompress-zlib-data-in-unix">stackoverflow 上的魔法&lt;/a>，可以用 gzip 来解压这些文件：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ ll .git/objects/10/142e0fb1f636288c7f5a6a164e67c1efc13ef4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-r--r--r-- &lt;span style="color:#ae81ff">1&lt;/span> cjc cjc &lt;span style="color:#ae81ff">833&lt;/span> Sep &lt;span style="color:#ae81ff">5&lt;/span> 17:30 .git/objects/10/142e0fb1f636288c7f5a6a164e67c1efc13ef4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ printf &lt;span style="color:#e6db74">&amp;#34;\x1f\x8b\x08\x00\x00\x00\x00\x00&amp;#34;&lt;/span> | cat - .git/objects/10/142e0fb1f636288c7f5a6a164e67c1efc13ef4 | gzip -dc
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit 1098tree f1f161d92d0c7341ed35e76a66855383334005ab
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parent 0e72a3f169a8bbc80904ab7750d3c37853a31dc7
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>author Harold Cheng &amp;lt;niuchangcun@gmail.com&amp;gt; &lt;span style="color:#ae81ff">1693906257&lt;/span> +0800
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>committer Harold Cheng &amp;lt;niuchangcun@gmail.com&amp;gt; &lt;span style="color:#ae81ff">1693906257&lt;/span> +0800
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpgsig -----BEGIN PGP SIGNATURE-----
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;omitted&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -----END PGP SIGNATURE-----
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The Google File System
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gzip: stdin: unexpected end of file
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ printf &lt;span style="color:#e6db74">&amp;#34;\x1f\x8b\x08\x00\x00\x00\x00\x00&amp;#34;&lt;/span> | cat - .git/objects/10/142e0fb1f636288c7f5a6a164e67c1efc13ef4 | gzip -dc &amp;gt; test.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gzip: stdin: unexpected end of file
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sha1sum test.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>10142e0fb1f636288c7f5a6a164e67c1efc13ef4 test.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>SHA-1 与 commit 的 OID 一致。&lt;/p>
+&lt;h2 id="references">References&lt;/h2>
+&lt;p>objects 虽然简洁明了，但是它的名字太不好记了。所以 git 引入了 references (或 refs) 作为对某个 object 的引用，它们被存储在 &lt;code>.git/refs&lt;/code> 中，这就是分支。我们可以通过 &lt;code>git update-ref refs/heads/xxxx hash&lt;/code> 来更新/新建一个 ref，&lt;code>git branch&lt;/code> 命令基本等同于使用 &lt;code>update-ref&lt;/code> 创建一个指向当前分支最后一个 commit 的 ref。&lt;/p>
+&lt;p>git 通过一个特殊的 HEAD 文件来获得当前分支最后一个 commit 的信息，通常情况下 HEAD 是对某个 ref 的引用：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat .git/HEAD
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ref: refs/heads/source_hugo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是当我们 checkout 一个 tag/commit/远程分支时，我们就会进入到所谓的 &amp;ldquo;detached HEAD&amp;rdquo; 状态：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git checkout f25ea89160baa34af6587ebc4399cba9b82152ab
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Note: switching to &lt;span style="color:#e6db74">&amp;#39;f25ea89160baa34af6587ebc4399cba9b82152ab&amp;#39;&lt;/span>.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>You are in &lt;span style="color:#e6db74">&amp;#39;detached HEAD&amp;#39;&lt;/span> state. You can look around, make experimental
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>changes and commit them, and you can discard any commits you make in this
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>state without impacting any branches by switching back to a branch.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>If you want to create a new branch to retain commits you create, you may
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">do&lt;/span> so &lt;span style="color:#f92672">(&lt;/span>now or later&lt;span style="color:#f92672">)&lt;/span> by using -c with the switch command. Example:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> git switch -c &amp;lt;new-branch-name&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Or undo this operation with:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> git switch -
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Turn off this advice by setting config variable advice.detachedHead to false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HEAD is now at f25ea8916 fix: Add CHANGELOG link
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在这种状态作出的 commits 将成为 dangleing commits，因为没有 refs 能够间接引用到它们。我们可以在 &lt;code>git reflog&lt;/code> 中看到它们，但它们在一段时间后可能会被 git 垃圾回收掉。如果因为误操作“丢失”了一些 commit，大部分情况下只是没有 ref 能够间接引用它们了，所以我们能在 reflog 中找到并恢复它们。&lt;/p>
+&lt;p>除了分支之外，另一种 ref 是 tag。tag 被存储在 &lt;code>.git/refs/tags&lt;/code> 中，和 branch 不同的是，tag 是不可变的。git 中有两种类型的 tag：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>lightweight tag: 使用 &lt;code>git tag&lt;/code> 创建，其 ref 直接指向一个 commit&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>annotated tag: 使用 &lt;code>git tag -a&lt;/code> 创建，需要像 commit 一样写一段 tag message，其 ref 指向 git 中的第四种 object 类型，tag。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git tag -a v1.2.3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cat .git/refs/tags/v1.2.3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>295e429586c0dc7764077b7ec3b15402b9299532
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git cat-file -t 295e429586c0dc7764077b7ec3b15402b9299532
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tag
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git cat-file -p 295e429586c0dc7764077b7ec3b15402b9299532
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>object 0996cddadea886287fd606b4102304814eb3785c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>type commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tag v1.2.3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tagger Harold Cheng &amp;lt;niuchangcun@gmail.com&amp;gt; &lt;span style="color:#ae81ff">1695018502&lt;/span> +0800
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>xxxxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#75715e"># object 字段就是对 commit 的引用&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git cat-file -t 0996cddadea886287fd606b4102304814eb3785c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是 tag 并不是必须指向一个 commit，tag 任何 object 都是可以的。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git tag -a tree-tag 9ff1e32671b9ac918dd665020c8da93c44787e33
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cat .git/refs/tags/tree-tag
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3b94c91c60f92b16336050aa445c7a293e61ec2e
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git cat-file -p 3b94c91c60f92b16336050aa445c7a293e61ec2e
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>object 9ff1e32671b9ac918dd665020c8da93c44787e33
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>type tree
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tag tree-tag
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tagger Harold Cheng &amp;lt;niuchangcun@gmail.com&amp;gt; &lt;span style="color:#ae81ff">1695018786&lt;/span> +0800
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>a tag &lt;span style="color:#66d9ef">for&lt;/span> tree
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="merge-and-rebase">Merge and Rebase&lt;/h2>
+&lt;p>最简单的 merge 类型是 fast-forward，git 简单地移动 ref 来完成 merge。另一种常见的 merge 如图所示：&lt;/p>
+&lt;p>&lt;img src="./basic-merging-1.png" alt="Three snapshots used in a typical merge">&lt;/p>
+&lt;p>我们想要在 master 分支上执行 &lt;code>git merge iss53&lt;/code>，git 会找到三个 commits，C5、C4 和它们的共同祖先 C2，然后执行&lt;a href="https://stackoverflow.com/questions/4129049/why-is-a-3-way-merge-advantageous-over-a-2-way-merge">三方合并&lt;/a> (three-way merge)，high-level 地看，git 需要把每个 commit 的 tree 划分成一个一个 chunk，chunk 可以是文件，或文件的一块，或行，这由具体的 merge 策略决定。git 会比较这些 chunks，对于某一个 chunk：&lt;/p>
+&lt;ul>
+&lt;li>如果在 C2、C4、C5 中都相等，则不作更改&lt;/li>
+&lt;li>如果 C2、C4 相等，但和 C5 不等，取 C5 的版本，反之同理&lt;/li>
+&lt;li>如果 C4、C5 相等，和 C2 不等，那么两个分支作了同样的更改，取任何一个版本&lt;/li>
+&lt;li>如果三者都不相等，则发生 merge 冲突，需要手动处理&lt;/li>
+&lt;/ul>
+&lt;p>如果我们不寻找 C2，只比较 C4、C5，这就是所谓的 two-way merge，由于失去了祖先的信息，我们无法处理第二种情况。实际进行 merge 时，我们可能会看到如下信息：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git merge b1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Auto-merging 1.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Merge made by the &lt;span style="color:#e6db74">&amp;#39;ort&amp;#39;&lt;/span> strategy.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 1.txt | &lt;span style="color:#ae81ff">1&lt;/span> +
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> file changed, &lt;span style="color:#ae81ff">1&lt;/span> insertion&lt;span style="color:#f92672">(&lt;/span>+&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这个过程中，git 会创建一棵新 tree，把两个分支作为 parent 创建一个新的 commit，这就是 merge commit。&lt;/p>
+&lt;p>rabase 则是完全不同的方式。如果 cherry-pick 一个 commit：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git cherry-pick 2f6c412
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>master 2aa02d0&lt;span style="color:#f92672">]&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Date: Tue Sep &lt;span style="color:#ae81ff">19&lt;/span> 16:32:32 &lt;span style="color:#ae81ff">2023&lt;/span> +0800
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1&lt;/span> file changed, &lt;span style="color:#ae81ff">1&lt;/span> insertion&lt;span style="color:#f92672">(&lt;/span>+&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>本质上是 diff 2f6c412 和 2f6c412 的 parent，然后在当前分支重新应用这个 diff。rebase 本质上是自动的 cherry-pick。&lt;/p>
+&lt;p>&lt;img src="./basic-rebase-1.png" alt="Simple divergent history">&lt;/p>
+&lt;p>在 experiment 分支执行 &lt;code>git rebase master&lt;/code> 则会找到 experiment 和 master 的共同祖先 C2，然后发现 experiment 分支有一个新的 commit C4，git 会在 master 重做这个 commit。&lt;/p>
+&lt;h2 id="一个-fsck-导致的问题">一个 fsck 导致的问题&lt;/h2>
+&lt;p>某日我在检查软件更新时，发现 KeePassDX f-droid 版没有随着上游更新，进而发现了&lt;a href="https://github.com/Kunzisoft/KeePassDX/issues/1333">这个 issue&lt;/a>，问题的原因是 KeePassDX 的仓库中有几个 tree object 不合法，运行 &lt;code>git fsck&lt;/code> 会报错 &lt;code>error in tree b7a0b493966f9077f6fcd7de37244699bb73615e: duplicateEntries: contains duplicate file entries&lt;/code>。&lt;/p>
+&lt;p>git 不允许一个 tree 中含有两个相同的文件名，但是不知为何这个错误发生了（包含这个 tree 的 commit 可以追溯到 2009 年，可能是由于 Windows 不区分文件名大小写且在上古时期 git 处理这个的逻辑有问题）。而 f-droid 在几个月前启用了 git clone 时的 fsck 检查（&lt;code>transfer.fsckObjects&lt;/code> 等配置），导致 build 时 clone 仓库失败。顺便一提 Github push 现在也有 git fsck 检查，所以把这个仓库往另一个仓库 push 也会失败。&lt;/p>
+&lt;p>fsck 失败的问题在多个仓库出现过，包括&lt;a href="https://github.com/highlightjs/highlight.js/issues/1733">highlight.js&lt;/a>, &lt;a href="https://github.com/Behat/Behat">Behat&lt;/a>, &lt;a href="https://github.com/psf/requests/issues/2690">requests&lt;/a>，无一例外都能追溯到某些上古 commit，目前看来除了重写所有 commits 并没有什么办法来修复这些错误。我尝试了 &lt;a href="https://stackoverflow.com/questions/10931954/git-tree-contains-duplicate-file-entries">replace 的魔法&lt;/a>发现并不能够使其通过 git fsck（毕竟出错的 tree 还在）。&lt;/p>
+&lt;p>回到 KeePassDX 的问题只能让 f-droid 在 clone 的时候做一些 workaround 来绕过了&amp;hellip;&lt;/p>
+- https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>MIT 6.824 学习笔记(一) GFS</title><link>https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/</link><pubDate>Tue, 05 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/ -&lt;p>存储系统通常是一个分布式系统的基石，通常应用可以是无状态的，而所有状态便由存储系统来管理。&lt;/p>
 &lt;p>Google 文件系统（The Google File System, GFS）在 2003 年于一篇同名论文中被提出，发表在系统领域顶会 SOSP 上，是 Google 大数据三驾马车之一&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。GFS 是一个成功的系统，在 00 年代早期，人们对于分布式文件系统已经有很好的理解了，但是尚未有一个可以扩展到上千个节点的系统被实现出来。很多 GFS 的设计被 HDFS 等后来的分布式文件系统上。&lt;/p>
 &lt;p>GFS 基于以下几个方面的观察：&lt;/p>
 &lt;ul>
@@ -612,25 +770,4 @@ WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码
 &lt;p>评论: 虚空打靶.. 别只看个标题啊, 你倒是具体说说西方媒体说了啥啊.&lt;/p>
 &lt;hr>
 &lt;p>总结: 看这种自媒体真的降智商.. 以后要少看..&lt;/p>
-- https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ -&lt;p>本文纯属回忆, 描述可能会有偏差.&lt;/p>
-&lt;p>小学时, 为方便联系, 我爸给了我一个 ZTE 的功能机, 里面只有一个打砖块的小游戏.&lt;/p>
-&lt;p>后来这手机被我在路上掉了, 于是我换成了一个 LG 的功能机. 这个 LG 的神奇之处在于它自带了一个浏览器, 于是我可以用 2G 上网去起点, 纵横看小说. 另外它自带电信的一个应用商店, 里面有一些免费的小游戏可以下 (不知道是啥技术, 估计是 java..), 因为我当时并没有流量套餐, 后来还因为话费异常被我爸查到并追问我在上网干什么, 我记得我用看新闻蒙混过去了. 这个手机陪伴我度过了初中.&lt;/p>
-&lt;p>考上省中后, 爸妈为了奖励我, 给我换了个新手机, 这时我爸被中国电信忽悠买了个酷派 K1 (酷派 5952).&lt;/p>
-&lt;p>&lt;img src="./eaf7170a1d32cc48175600e65db56628.png" alt="eaf7170a1d32cc48175600e65db56628.png">&lt;/p>
-&lt;p>这也算是当时第一批 4G 手机了, 进网贴纸贴的还是进网试用. 但是 1G 的内存根本比不过同期的小米 2S.&lt;/p>
-&lt;p>后来因为我忘了什么原因了我又买了个手机, 这个给我爸用. 听信了当时中华酷联的鬼话我又入了酷派的坑 (加之当时电信手机确实不好买), 买了酷派大神 F1 电信版 (酷派 8297-C00).&lt;/p>
-&lt;p>&lt;img src="image-20221002163705814.png" alt="image-20221002163705814">&lt;/p>
-&lt;p>它采用了&amp;quot;极为先进&amp;quot;的 64 位高通 410 SoC (据称是高通首款 64 位), 对, 我又听信了 Android 5.0 优化 (ART, Android Runtime) 和 64 位的鬼话, 买了这个 1G RAM 的手机.
-事实上出厂系统还是 4.4, 32 位. 于是我天天去酷派论坛蹲, 还真蹲到了 64 位的 5.0. 但事实上硬件的局限在那, 提升并没有那么大.
-于是当时整天折腾各种 ROM, 各种优化. 在那个我 root 还靠各种一键 root app 的年代, 很难想象我都在优化什么.&lt;/p>
-&lt;p>这里提一件我印象很深的事. 酷派自带的系统有个安全 app, 叫酷管家, 显然我并不想用它, 但是一旦你删了它或者想动它什么组件, 手机就会弹一个正在优化系统的弹窗 (实际上是软重启), 然后一切归零.
-另外还值得一提的是刚拿到手机的那几个月里系统更新还是很频繁的, 而且似乎确实解决了一些问题, 这点还是好评.&lt;/p>
-&lt;p>&lt;img src="./c64f78b386179a872744127b8ef9a0b6.png" alt="c64f78b386179a872744127b8ef9a0b6.png">
-ROM 之家这种网站也是时代的眼泪了&lt;/p>
-&lt;p>后来由于学习的原因手机被迫上交. 但没过多久我偷偷搞到了我爸之前用的一个安卓 2.3 的小手机. 型号已经忘了, 大概是 htc, 性能非常差, 大概只有单核, 200 多 MB 内存, 触摸屏中间一部分还是坏的, 但用来看小说完全够了.&lt;/p>
-&lt;p>到了高三娱乐活动更加匮乏, 于是我托同学在闲鱼上买了个 iPhone 5s, 顿时感到苹果是多么好看, 多么精致, 还有极为先进的 Touch ID, 当时用它打炉石感到难以想象地流畅 (毕竟之前的垃圾酷派实在是卡). 唯一的问题是被卖家坑了, 电池雪崩, 有时一半电直接关机. 但是其和温度有很大关系, 有时候你把它捂一会捂热它就又能开机了. 后来不得已花了一百多换了块电池.&lt;/p>
-&lt;p>用了一段时间我顿感苹果索然无味, 于是卖了买了 Nexus 6. 在 16, 17 年高通 805 + 3G RAM + 5.95&amp;rsquo; 2k 屏说不上顶配, 但也足够优秀了, 很难想象这是 14 年发布的手机. Google 亲儿子无成本解锁 BL 的特性让刷机和 root 变得非常方便.
-而且它那个屏幕的手感非常不错, 在现在看来滑动也是丝般顺滑, 可惜后来屏幕被我摔碎了.&lt;/p>
-&lt;p>高中毕业后, 虽然 Nexus 6 性能还够用, 但这不能给我爸妈看到呀, 于是直接买新手机. 一开始抢小米 6 没抢到, 然后买了一加 5. (还好没抢到!) 以我现在的眼光自然是觉得 Oxygen OS 这种类原生是要比 MIUI 好很多的.&lt;/p>
-&lt;p>这一加 5 钉子户一当就当了四年. 到大学毕业实在感到 835 性能不够用了. 我当时是想挑一个小屏旗舰, 挑来挑去也没挑出来, 要么太贵, 要么不能解锁 BL, 于是又买了一加, 一加 8T.&lt;/p>
-- https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

@@ -1,4 +1,25 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 05 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>我为什么选择在 Surface 上使用 Windows</title><link>https://blog.coherence.codes/posts/2022/surface_on_linux/</link><pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/surface_on_linux/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/surface_on_linux/ -&lt;p>自从购置 Surface Pro 7 以来, 曾数次不满于 Windows 的包管理, 遥测, Windows Defender 等方面. 然更换了 Linux 之后并没有一个太好的使用体验. 本文记录了 Surface Pro 7 在 Archlinux 上的体验.&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 18 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ -&lt;p>本文纯属回忆, 描述可能会有偏差.&lt;/p>
+&lt;p>小学时, 为方便联系, 我爸给了我一个 ZTE 的功能机, 里面只有一个打砖块的小游戏.&lt;/p>
+&lt;p>后来这手机被我在路上掉了, 于是我换成了一个 LG 的功能机. 这个 LG 的神奇之处在于它自带了一个浏览器, 于是我可以用 2G 上网去起点, 纵横看小说. 另外它自带电信的一个应用商店, 里面有一些免费的小游戏可以下 (不知道是啥技术, 估计是 java..), 因为我当时并没有流量套餐, 后来还因为话费异常被我爸查到并追问我在上网干什么, 我记得我用看新闻蒙混过去了. 这个手机陪伴我度过了初中.&lt;/p>
+&lt;p>考上省中后, 爸妈为了奖励我, 给我换了个新手机, 这时我爸被中国电信忽悠买了个酷派 K1 (酷派 5952).&lt;/p>
+&lt;p>&lt;img src="./eaf7170a1d32cc48175600e65db56628.png" alt="eaf7170a1d32cc48175600e65db56628.png">&lt;/p>
+&lt;p>这也算是当时第一批 4G 手机了, 进网贴纸贴的还是进网试用. 但是 1G 的内存根本比不过同期的小米 2S.&lt;/p>
+&lt;p>后来因为我忘了什么原因了我又买了个手机, 这个给我爸用. 听信了当时中华酷联的鬼话我又入了酷派的坑 (加之当时电信手机确实不好买), 买了酷派大神 F1 电信版 (酷派 8297-C00).&lt;/p>
+&lt;p>&lt;img src="image-20221002163705814.png" alt="image-20221002163705814">&lt;/p>
+&lt;p>它采用了&amp;quot;极为先进&amp;quot;的 64 位高通 410 SoC (据称是高通首款 64 位), 对, 我又听信了 Android 5.0 优化 (ART, Android Runtime) 和 64 位的鬼话, 买了这个 1G RAM 的手机.
+事实上出厂系统还是 4.4, 32 位. 于是我天天去酷派论坛蹲, 还真蹲到了 64 位的 5.0. 但事实上硬件的局限在那, 提升并没有那么大.
+于是当时整天折腾各种 ROM, 各种优化. 在那个我 root 还靠各种一键 root app 的年代, 很难想象我都在优化什么.&lt;/p>
+&lt;p>这里提一件我印象很深的事. 酷派自带的系统有个安全 app, 叫酷管家, 显然我并不想用它, 但是一旦你删了它或者想动它什么组件, 手机就会弹一个正在优化系统的弹窗 (实际上是软重启), 然后一切归零.
+另外还值得一提的是刚拿到手机的那几个月里系统更新还是很频繁的, 而且似乎确实解决了一些问题, 这点还是好评.&lt;/p>
+&lt;p>&lt;img src="./c64f78b386179a872744127b8ef9a0b6.png" alt="c64f78b386179a872744127b8ef9a0b6.png">
+ROM 之家这种网站也是时代的眼泪了&lt;/p>
+&lt;p>后来由于学习的原因手机被迫上交. 但没过多久我偷偷搞到了我爸之前用的一个安卓 2.3 的小手机. 型号已经忘了, 大概是 htc, 性能非常差, 大概只有单核, 200 多 MB 内存, 触摸屏中间一部分还是坏的, 但用来看小说完全够了.&lt;/p>
+&lt;p>到了高三娱乐活动更加匮乏, 于是我托同学在闲鱼上买了个 iPhone 5s, 顿时感到苹果是多么好看, 多么精致, 还有极为先进的 Touch ID, 当时用它打炉石感到难以想象地流畅 (毕竟之前的垃圾酷派实在是卡). 唯一的问题是被卖家坑了, 电池雪崩, 有时一半电直接关机. 但是其和温度有很大关系, 有时候你把它捂一会捂热它就又能开机了. 后来不得已花了一百多换了块电池.&lt;/p>
+&lt;p>用了一段时间我顿感苹果索然无味, 于是卖了买了 Nexus 6. 在 16, 17 年高通 805 + 3G RAM + 5.95&amp;rsquo; 2k 屏说不上顶配, 但也足够优秀了, 很难想象这是 14 年发布的手机. Google 亲儿子无成本解锁 BL 的特性让刷机和 root 变得非常方便.
+而且它那个屏幕的手感非常不错, 在现在看来滑动也是丝般顺滑, 可惜后来屏幕被我摔碎了.&lt;/p>
+&lt;p>高中毕业后, 虽然 Nexus 6 性能还够用, 但这不能给我爸妈看到呀, 于是直接买新手机. 一开始抢小米 6 没抢到, 然后买了一加 5. (还好没抢到!) 以我现在的眼光自然是觉得 Oxygen OS 这种类原生是要比 MIUI 好很多的.&lt;/p>
+&lt;p>这一加 5 钉子户一当就当了四年. 到大学毕业实在感到 835 性能不够用了. 我当时是想挑一个小屏旗舰, 挑来挑去也没挑出来, 要么太贵, 要么不能解锁 BL, 于是又买了一加, 一加 8T.&lt;/p>
+- https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我为什么选择在 Surface 上使用 Windows</title><link>https://blog.coherence.codes/posts/2022/surface_on_linux/</link><pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/surface_on_linux/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/surface_on_linux/ -&lt;p>自从购置 Surface Pro 7 以来, 曾数次不满于 Windows 的包管理, 遥测, Windows Defender 等方面. 然更换了 Linux 之后并没有一个太好的使用体验. 本文记录了 Surface Pro 7 在 Archlinux 上的体验.&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>在 2021 年七月某日, 手贱尝试了一下 Windows 11 Preview (印象里是公开发布的第一版) 之后, 感叹于 Bug 之多, 奈何回滚需要重新安装 Windows, 于是一气之下装了 Archlinux.&lt;/p>
 &lt;p>&lt;img src="./8a7b6609572d402bb2b747b706ef0c62.png" alt="img">(此处附使用截图一张)&lt;/p>
@@ -622,170 +643,4 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> stack&lt;span style="color:#f92672">.&lt;/span>append(node[i])
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out &lt;span style="color:#f92672">+=&lt;/span> str(s)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(out)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>2019年终总结&amp;2020展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</link><pubDate>Sat, 01 Feb 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/ -&lt;p>又是一年一度的年终总结时间了，进入二十一世纪的第二个十年，我的心情十分激动……&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;p>好吧，激动是假的。时空是连续的，进入2020和平常的一天没有任何区别。转眼间已经来到了庚子鼠年的大年初八，我恍然记得我的年终总结还没有写，于是准备把这个传统艺能发扬下去，也看一看2019定的目标完成了多少。&lt;/p>
-&lt;h2 id="2019-总结">2019 总结&lt;/h2>
-&lt;p>时间及事件依据：印象笔记、Google 相册、我的记忆、Telegram。&lt;/p>
-&lt;p>事件尽量归类，未归类的大致以时间顺序排列。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>找到了一个&lt;del>记录生活&lt;/del>吐槽的平台。&lt;/p>
-&lt;p>&lt;img src="./image-20200201201451074.png" alt="image-20200201201451074">&lt;/p>
-&lt;p>这个channel的内容输入延续至今。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>一月，金工实习和数学建模美赛，虽然没学到什么，还是挺有意思的。&lt;/p>
-&lt;p>&lt;img src="./image-20200201202345974.png" alt="image-20200201202345974">&lt;/p>
-&lt;p>图为某数控机床。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>三月上旬，重新开始在印象笔记写日记。三月末更换至纸质方式。&lt;/p>
-&lt;p>之后觉得日记意义不大，更换为每日计划，但是没有坚持。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>三月，在外租房居住。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>三月和十二月，分别安排了我校ACM的校赛和新生赛。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;img src="./image-20200201215603263.png" alt="image-20200201215603263">&lt;/p>
-&lt;p>请记住我这句话，都是泪。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>寒假里把N1刷了一遍OMV，但存储只有一个U盘。暑假刷回了无灯的固件，买了个硬盘盒+320G机械，勉强能当NAS来用。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Ingress，从入坑到弃坑，大概是二月到五月的事。&lt;del>（其实以前玩过&lt;/del>&lt;/p>
-&lt;p>因为这个游戏还出去玩了挺多次的。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>三月末，开始入坑Arch Linux。&lt;/p>
-&lt;p>然后发现这是个巨坑。（折腾万岁&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>投资方面。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>和去年没多大变化吧。看的还是那两个人，还是没有系统地学经济学。只不过跟着大盘走盈利了一些罢了。&lt;/p>
-&lt;p>&lt;img src="./image-20200222105649825.png" alt="image-20200222105649825">&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>英语方面。自我感觉英语能力有了较大提升。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>年度英美刷剧（和去年总结对比了一下）：Friends二刷，The Newsroom，Person of Interest 两季，The IT Crowd一季多。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>十月份想去考一考托福，大概也学了一段时间，后来无限期搁置了。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>用Kindle读原著方面，把三体一看完了，又开了个哈利波特的坑，也看完了第一部。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>我看了多少书？&lt;/p>
-&lt;ul>
-&lt;li>买了好多书。&lt;del>（然而都没有看&lt;/del>&lt;/li>
-&lt;li>Linux&amp;amp;Unix大学教程基本看完了。后来又买了本鸟哥的，还没看。&lt;/li>
-&lt;li>Head First with HTML&amp;amp;CSS 还剩最后两章没看。&lt;/li>
-&lt;li>Computer Networking: A Top-down Approach，18年7月在图书馆里借了第五版影印版，一年基本没看，大三上由于要学计算机网络，好歹看了点，后又从淘宝打印了第七版英文版，看了三分之二左右。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>四月初，启用了Digital Wellbeing，但是并没有起到限制玩手机时间的作用。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>四月末，参加了一次西安GDG活动。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>剁手记录。&lt;/p>
-&lt;ul>
-&lt;li>二月初，给家中置换了一个新的显示器，淘汰了老AOC 21&amp;rsquo; 1680*1050 服役十二年的历史。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="./image-20200201203042582.png" alt="image-20200201203042582">&lt;/p>
-&lt;p>图为 AOC 27&amp;rsquo; 4K 某型号。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>二月，给笔记本加了根8G的内存。年末的时候这个价钱可以买到16G的。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>四月末，出售 Bose Sleepbuds。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>八月末，入手人生中第一台相机，Sony α7m2，带28-70镜头。于是周末又有很多次出去拍照。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>本年度还是没有换笔记本。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>十月末，在宿舍购置了显示器，同样是AOC（因为便宜），27&amp;rsquo; 2K 带Type-C接口。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>双十一期间，购置了东芝RC500 500G固态。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>陆续参加了天文协会的几次活动。知识竞赛，航天厂科普，石门山野观。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>大三上开学初，想加入一个实验室，后未果。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>整个一年曾多次试图维护QOJ项目，未果。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>我学了些什么？&lt;/p>
-&lt;ul>
-&lt;li>五月，参加了微信小程序开发大赛。学了一点JS。&lt;/li>
-&lt;li>七月初，软通实训。快乐划水半个月。学了点前端，学了点HTTP。&lt;/li>
-&lt;li>暑假里，学了点前端（HTML+CSS），帮我爸写了个小软件。&lt;/li>
-&lt;li>暑假及大三上的前半学期，在Coursera学完了吴恩达机器学习课。&lt;/li>
-&lt;li>同样在Coursera，Learning how to learn 看了一年了还没看完。&lt;/li>
-&lt;li>七月末，开始学Vue。&lt;/li>
-&lt;li>九月开始，做一个访客认证的项目，学了些认证相关的协议。&lt;/li>
-&lt;li>十一月，学了一点正则。&lt;/li>
-&lt;li>十一月中旬，学了一点AutoHotkey，自己写了一个简单的脚本，用着还挺舒服的。&lt;/li>
-&lt;li>十二月，因软件测试的课程作业学了一点CI/CD和Github Actions。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>我写了多少代码？&lt;/p>
-&lt;p>​ &lt;img src="./image-20200202132048404.png" alt="image-20200202132048404">&lt;/p>
-&lt;ul>
-&lt;li>五月，微信小程序，一个相册。&lt;/li>
-&lt;li>十一月开始，作为项目管理课程的大作业，也是我希望我校有的，和同学写了个西大云盘。Vue+Django。&lt;/li>
-&lt;li>十一月，Python 课程作业，用Tkinter写了个小软件，调用了一下Bing Map的API显示了个地图。&lt;/li>
-&lt;li>十一月末，根据TUNA群的经验写了个zaobot。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>记账。这个习惯保持下来了，不过从Excel转移到了Spendee。有好处也有坏处吧。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>系统上，从Windows到Win+Arch双系统到Windows+WSL，折腾了很多，却感觉没有深入多少东西。&lt;/p>
-&lt;p>重装了好多次系统.. 一开始换专业版重装了一次，换硬盘又重装了一次。配置环境什么就很麻烦。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>入门了维基百科的一些原则及基础的编辑方式。但离一个合格的编辑还很远。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>国庆借舍友的Switch打了七天的塞尔达，Switch好感+++&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="去年的年初计划">去年的年初计划&lt;/h2>
-&lt;p>大部分都实现了。&lt;/p>
-&lt;h2 id="2020-年初计划">2020 年初计划&lt;/h2>
-&lt;ul>
-&lt;li>参与一个开源项目。&lt;/li>
-&lt;li>找一个实习。&lt;/li>
-&lt;li>考研。&lt;/li>
-&lt;li>继续寻找方向。&lt;/li>
-&lt;li>多写一些博客，输出自己的知识，同时也提高自己的能力。&lt;/li>
-&lt;/ul>
-- https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

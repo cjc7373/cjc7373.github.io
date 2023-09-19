@@ -1,4 +1,170 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 05 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>WSL使用体验</title><link>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link><pubDate>Sun, 08 Dec 2019 19:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/ -&lt;p>首先，WSL真香！&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 18 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>2019年终总结&amp;2020展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</link><pubDate>Sat, 01 Feb 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/ -&lt;p>又是一年一度的年终总结时间了，进入二十一世纪的第二个十年，我的心情十分激动……&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>好吧，激动是假的。时空是连续的，进入2020和平常的一天没有任何区别。转眼间已经来到了庚子鼠年的大年初八，我恍然记得我的年终总结还没有写，于是准备把这个传统艺能发扬下去，也看一看2019定的目标完成了多少。&lt;/p>
+&lt;h2 id="2019-总结">2019 总结&lt;/h2>
+&lt;p>时间及事件依据：印象笔记、Google 相册、我的记忆、Telegram。&lt;/p>
+&lt;p>事件尽量归类，未归类的大致以时间顺序排列。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>找到了一个&lt;del>记录生活&lt;/del>吐槽的平台。&lt;/p>
+&lt;p>&lt;img src="./image-20200201201451074.png" alt="image-20200201201451074">&lt;/p>
+&lt;p>这个channel的内容输入延续至今。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>一月，金工实习和数学建模美赛，虽然没学到什么，还是挺有意思的。&lt;/p>
+&lt;p>&lt;img src="./image-20200201202345974.png" alt="image-20200201202345974">&lt;/p>
+&lt;p>图为某数控机床。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>三月上旬，重新开始在印象笔记写日记。三月末更换至纸质方式。&lt;/p>
+&lt;p>之后觉得日记意义不大，更换为每日计划，但是没有坚持。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>三月，在外租房居住。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>三月和十二月，分别安排了我校ACM的校赛和新生赛。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;img src="./image-20200201215603263.png" alt="image-20200201215603263">&lt;/p>
+&lt;p>请记住我这句话，都是泪。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>寒假里把N1刷了一遍OMV，但存储只有一个U盘。暑假刷回了无灯的固件，买了个硬盘盒+320G机械，勉强能当NAS来用。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ingress，从入坑到弃坑，大概是二月到五月的事。&lt;del>（其实以前玩过&lt;/del>&lt;/p>
+&lt;p>因为这个游戏还出去玩了挺多次的。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>三月末，开始入坑Arch Linux。&lt;/p>
+&lt;p>然后发现这是个巨坑。（折腾万岁&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>投资方面。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>和去年没多大变化吧。看的还是那两个人，还是没有系统地学经济学。只不过跟着大盘走盈利了一些罢了。&lt;/p>
+&lt;p>&lt;img src="./image-20200222105649825.png" alt="image-20200222105649825">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>英语方面。自我感觉英语能力有了较大提升。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>年度英美刷剧（和去年总结对比了一下）：Friends二刷，The Newsroom，Person of Interest 两季，The IT Crowd一季多。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>十月份想去考一考托福，大概也学了一段时间，后来无限期搁置了。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>用Kindle读原著方面，把三体一看完了，又开了个哈利波特的坑，也看完了第一部。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>我看了多少书？&lt;/p>
+&lt;ul>
+&lt;li>买了好多书。&lt;del>（然而都没有看&lt;/del>&lt;/li>
+&lt;li>Linux&amp;amp;Unix大学教程基本看完了。后来又买了本鸟哥的，还没看。&lt;/li>
+&lt;li>Head First with HTML&amp;amp;CSS 还剩最后两章没看。&lt;/li>
+&lt;li>Computer Networking: A Top-down Approach，18年7月在图书馆里借了第五版影印版，一年基本没看，大三上由于要学计算机网络，好歹看了点，后又从淘宝打印了第七版英文版，看了三分之二左右。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>四月初，启用了Digital Wellbeing，但是并没有起到限制玩手机时间的作用。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>四月末，参加了一次西安GDG活动。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>剁手记录。&lt;/p>
+&lt;ul>
+&lt;li>二月初，给家中置换了一个新的显示器，淘汰了老AOC 21&amp;rsquo; 1680*1050 服役十二年的历史。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="./image-20200201203042582.png" alt="image-20200201203042582">&lt;/p>
+&lt;p>图为 AOC 27&amp;rsquo; 4K 某型号。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>二月，给笔记本加了根8G的内存。年末的时候这个价钱可以买到16G的。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>四月末，出售 Bose Sleepbuds。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>八月末，入手人生中第一台相机，Sony α7m2，带28-70镜头。于是周末又有很多次出去拍照。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>本年度还是没有换笔记本。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>十月末，在宿舍购置了显示器，同样是AOC（因为便宜），27&amp;rsquo; 2K 带Type-C接口。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>双十一期间，购置了东芝RC500 500G固态。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>陆续参加了天文协会的几次活动。知识竞赛，航天厂科普，石门山野观。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>大三上开学初，想加入一个实验室，后未果。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>整个一年曾多次试图维护QOJ项目，未果。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>我学了些什么？&lt;/p>
+&lt;ul>
+&lt;li>五月，参加了微信小程序开发大赛。学了一点JS。&lt;/li>
+&lt;li>七月初，软通实训。快乐划水半个月。学了点前端，学了点HTTP。&lt;/li>
+&lt;li>暑假里，学了点前端（HTML+CSS），帮我爸写了个小软件。&lt;/li>
+&lt;li>暑假及大三上的前半学期，在Coursera学完了吴恩达机器学习课。&lt;/li>
+&lt;li>同样在Coursera，Learning how to learn 看了一年了还没看完。&lt;/li>
+&lt;li>七月末，开始学Vue。&lt;/li>
+&lt;li>九月开始，做一个访客认证的项目，学了些认证相关的协议。&lt;/li>
+&lt;li>十一月，学了一点正则。&lt;/li>
+&lt;li>十一月中旬，学了一点AutoHotkey，自己写了一个简单的脚本，用着还挺舒服的。&lt;/li>
+&lt;li>十二月，因软件测试的课程作业学了一点CI/CD和Github Actions。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>我写了多少代码？&lt;/p>
+&lt;p>​ &lt;img src="./image-20200202132048404.png" alt="image-20200202132048404">&lt;/p>
+&lt;ul>
+&lt;li>五月，微信小程序，一个相册。&lt;/li>
+&lt;li>十一月开始，作为项目管理课程的大作业，也是我希望我校有的，和同学写了个西大云盘。Vue+Django。&lt;/li>
+&lt;li>十一月，Python 课程作业，用Tkinter写了个小软件，调用了一下Bing Map的API显示了个地图。&lt;/li>
+&lt;li>十一月末，根据TUNA群的经验写了个zaobot。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>记账。这个习惯保持下来了，不过从Excel转移到了Spendee。有好处也有坏处吧。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>系统上，从Windows到Win+Arch双系统到Windows+WSL，折腾了很多，却感觉没有深入多少东西。&lt;/p>
+&lt;p>重装了好多次系统.. 一开始换专业版重装了一次，换硬盘又重装了一次。配置环境什么就很麻烦。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>入门了维基百科的一些原则及基础的编辑方式。但离一个合格的编辑还很远。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>国庆借舍友的Switch打了七天的塞尔达，Switch好感+++&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="去年的年初计划">去年的年初计划&lt;/h2>
+&lt;p>大部分都实现了。&lt;/p>
+&lt;h2 id="2020-年初计划">2020 年初计划&lt;/h2>
+&lt;ul>
+&lt;li>参与一个开源项目。&lt;/li>
+&lt;li>找一个实习。&lt;/li>
+&lt;li>考研。&lt;/li>
+&lt;li>继续寻找方向。&lt;/li>
+&lt;li>多写一些博客，输出自己的知识，同时也提高自己的能力。&lt;/li>
+&lt;/ul>
+- https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>WSL使用体验</title><link>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link><pubDate>Sun, 08 Dec 2019 19:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/ -&lt;p>首先，WSL真香！&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h2 id="开启wsl">开启WSL&lt;/h2>
 &lt;p>最简单的方式是使用管理员权限运行Powershell，然后输入：&lt;/p>
@@ -872,46 +1038,4 @@ account_type fullname username password
 &lt;p>&lt;img src="./image-20191208184458561.png" alt="image-20191208184458561">&lt;/p>
 &lt;p>其实还不止这个错，还有各种奇怪的错误。幸好在正式比赛中评测机表现得很稳健，并没有出锅，应该是压力还不够大。。&lt;/p>
 &lt;p>比赛时还碰到一个bug，在一道题重测后这道题的一血变更了，但是榜单上的一血是错的，重新刷新榜单也未解决。查看数据库表发现有一张叫&lt;code>scorecache&lt;/code>的表，推测该表即为榜单的缓存，于是更改&lt;code>is_first_solved&lt;/code>字段后，成功解决。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>使用KMS激活Visio</title><link>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</link><pubDate>Sat, 01 Dec 2018 23:11:38 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ -&lt;h2 id="题记">题记&lt;/h2>
-&lt;p>如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="转换visio版本">转换Visio版本&lt;/h2>
-&lt;p>我在&lt;a href="http://msdn.itellyou.cn/?lang=zh-cn">MSDN我告诉你&lt;/a>和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。&lt;/p>
-&lt;p>复制以下代码，保存为.bat文件并用管理员身份运行：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> exist &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span> cd /d &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles%\Microsoft Office\Office16&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> exist &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span> cd /d &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cscript ospp.vbs /rearm
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> /f %%x in &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;dir /b ..\root\Licenses16\visio???vl_kms*.xrm-ms&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> cscript ospp.vbs /inslic:&lt;span style="color:#e6db74">&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span> &amp;gt;nul
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> /f %%x in &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;dir /b ..\root\Licenses16\visio???vl_mak*.xrm-ms&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> cscript ospp.vbs /inslic:&lt;span style="color:#e6db74">&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span> &amp;gt;nul
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上命令的作用分别为：&lt;/p>
-&lt;ul>
-&lt;li>打开Office的安装目录（Visio也属于Office的一部分）&lt;/li>
-&lt;li>重置零售激活&lt;/li>
-&lt;li>安装KMS和MAK许可证（转换版本）&lt;/li>
-&lt;/ul>
-&lt;p>题外话：转换Office和Project版本同理。&lt;/p>
-&lt;p>Office：&lt;/p>
-&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /rearm
-for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
-for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
-&lt;/code>&lt;/pre>&lt;p>Project：&lt;/p>
-&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /rearm
-for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\project???vl_kms*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
-for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\project???vl_mak*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
-&lt;/code>&lt;/pre>&lt;p>再跑下题，为什么要用批处理呢，因为这段命令直接在cmd里执行会出错，博主没学过Shell无法理解。（留下了没有知识的泪水）&lt;/p>
-&lt;h2 id="设置kms密钥及服务器">设置KMS密钥及服务器&lt;/h2>
-&lt;p>打开Office的安装目录，也就是代码里的&lt;code>%ProgramFiles%\Microsoft Office\Office16\&lt;/code>（64位）或者&lt;code>%ProgramFiles(x86)%\Microsoft Office\Office16\&lt;/code>（32位）。&lt;/p>
-&lt;p>按住Shift+右键，选择在此处打开PowerShell，输入：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>cscript ospp.vbs /inpkey&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>PD3PC-RHNGV-FXJ29-8JK7D-RJRJK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>来安装KMS密钥。注意以上命令中的KMS密钥只适用与Visio2016，其他版本可到&lt;a href="https://docs.microsoft.com/zh-cn/DeployOffice/vlactivation/gvlks">微软官方文档&lt;/a>中查询。&lt;/p>
-&lt;p>然后设置KMS服务器，博主用的是网上找的，以后尝试一下自己搭一个：&lt;/p>
-&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /sethst:xxx.xxx
-&lt;/code>&lt;/pre>&lt;p>由于不保证可用性，服务器名称已略去。&lt;/p>
-&lt;p>指令Office立即连接KMS服务器进行激活：&lt;/p>
-&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /act
-&lt;/code>&lt;/pre>&lt;p>完成！&lt;/p>
-&lt;h2 id="参考资料">参考资料&lt;/h2>
-&lt;p>&lt;a href="https://03k.org/kms.html">https://03k.org/kms.htm&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://segmentfault.com/a/1190000015697457">https://segmentfault.com/a/1190000015697457&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://blog.csdn.net/ywd1992/article/details/79412991">https://blog.csdn.net/ywd1992/article/details/79412991&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

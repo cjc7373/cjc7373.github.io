@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>git on Coherence's Blog</title><link>https://blog.coherence.codes/tags/git/</link><description>Recent content in git on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 18 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>git 入门</title><link>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</link><pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</guid><description>本文的大部分内容来自于 Pro Git 这本书。
+Objects git 中最基础的元素是 object，每个 object 由一个 object ID (OID) 唯一标识，OID 是一个 160 bits （用 hex 字符串表示为四十个字符） 的 SHA-1 哈希。具体而言，git 中主要存在三种 objects：
+blobs: 存储文件内容，OID 即为文件内容的哈希
+trees: 一个文件名（path entries）的有序列表，OID 为这个列表的哈希。子目录同样是 trees。项目的根目录即为 root tree。所有的 trees 构成了一棵 Merkle tree，所以 git 就是区块链（即答。下图中三角代表 trees，方块为 blobs
+commits: 一个快照（snapshot），每个 commit 包含了一个到根 tree 的引用，和一个（或多个）到 parent 的引用。parent 就是上一个 commit 的 OID。在一个 merge commit 中会包含多个 parents。下图中圆形代表 commits
+objects 的特性决定了它们是不可变的，一旦修改了某个 object 中的内容，哈希将会改变，因而会生成一个新的 object.
+可以使用 git cat-file -t 来检查一个 object 的类型，用 git cat-file -p 来打印其内容，以本博客的 git 仓库为例：</description></item></channel></rss>
