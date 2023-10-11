@@ -1,15 +1,12 @@
 ---
 title: MIT 6.824 学习笔记(二) Raft
 date: 2023-10-01
+lastmod: 2023-10-11
 categories:
 - Distributed System
 ---
 
 > Note: 为了保持准确性，我会尽量使用英文术语。
-
-为了解决单点故障问题，Raft 采用了 Majority Vote，基本上任何操作都需要得到多数确认才能够执行。为了避免 tie，Raft 的节点数量必须为奇数。因此在一个 2f+1 个节点的系统中，最多允许 f 个节点故障，f+1 即为法定人数（quorum）。
-
-如果 server 不出错，网络也很稳定，共识算法是很简单的，比如在 Raft 中，leader 被选举出来，client 的请求由 leader 处理并转发给 followers，所有 server 都和 leader 保持一致，这个过程是很简单并且直观的。这些算法真正处理的、细节繁杂的地方是 server 出错、RPC 受网络影响（包括包的延迟，重复，顺序改变，丢失，网络分区）的时候。
 
 ## Introduction
 
@@ -18,6 +15,10 @@ categories:
 相较于 Paxos，Raft 的目标是易于理解且符合直觉。为了使 Raft 易于理解，作者采取了解耦 (Raft 将共识问题分解成几个子问题 leader election, log replication, safety, and membership changes) 和缩减状态空间的方式。
 
 Raft 和已有的共识算法类似（尤其是 Viewstamped Replication），但它有一些新特性。Raft 采取了强 leader 的设计，例如 log entry 只会从 leader 向其他节点分发。这可能是为了性能考虑（比无 leader 要更快，RPC 也更少）Raft 采用基于随机计时器的 leader 选举, 从而用一种简单的方法来解决冲突。另外还有处理成员变更方面的改进。
+
+为了解决单点故障问题，Raft 采用了 Majority Vote，基本上任何操作都需要得到多数确认才能够执行。为了避免 tie，Raft 的节点数量必须为奇数。因此在一个 2f+1 个节点的系统中，最多允许 f 个节点故障，f+1 即为法定人数（quorum）。
+
+如果 server 不出错，网络也很稳定，共识算法是很简单的，比如在 Raft 中，leader 被选举出来，client 的请求由 leader 处理并转发给 followers，所有 server 都和 leader 保持一致，这个过程是很简单并且直观的。这些算法真正处理的、细节繁杂的地方是 server 出错、RPC 受网络影响（包括包的延迟，重复，顺序改变，丢失，网络分区）的时候。
 
 ## Replicated state machines (复制状态机)
 
@@ -60,6 +61,8 @@ Raft 首先将选举一个 leader, leader 的存在能够简化对 replicated lo
 - Leader Completeness: 如果一个 log entry 在某一 term 中 commit 了, 这个 entry 会存在于任何更高任期的 leader 的 log 中
 - State Machine Safety: 如果一个 server 将一个指定 index 的 log entry 应用到了 state machine 中（i.e. commit 了这个 entry）, 没有其他 server 会在那个 index 上会应用其他的 entry
 
+这些性质看起来比较抽象，然而是保证 Raft 的安全性所必须的，下文会详细解释。
+
 ### leader 选举
 
 任何一个节点处于以下三种状态: leader, follower, candidate
@@ -73,6 +76,8 @@ Raft 首先将选举一个 leader, leader 的存在能够简化对 replicated lo
 - Candidate -> Follower：如果 candidate 收到其他 server 的 AppendEntries RPC 宣称是 leader，并且其 term 不小于 candidate 的当前 term，则该 leader 合法，candidate 回退到 follower 状态
 - Candidate -> Candidate：如果没有产生多数票，在超时后选举将重复进行，为了打破僵局 Raft 使用随机的选举超时时间
 - 无论何时，candidate 和 leader 只要收到一个 term 比自己大的 RPC，它必须转变为 follower
+
+由于在任何一个 term 中，一个 server 只能够投一次票，而只有得到多数票才能成为 leader，所以 Election Safety（一个任期中只有一个 leader）得以满足。
 
 ### log 复制 (replication)
 
@@ -91,20 +96,20 @@ Raft 协议中的 Log Matching 性质实际上由两部分组成：
 
 ![image-20230907180012141](./image-20230907180012141.png)
 
-正常情况下所有 server 的 log 会保持一致，然而当 leader crash 时便会产生不一致。follower 可能会缺一些 entries，也可能多一些，也可能两者都有。leader 通过强制 follower 的 log 和自己同步来解决不一致。leader 为每个 follower 维护一个 `nextIndex`，即下一个将会被发给 follower 的 log entry。在一开始 leader 会初始化 `nextIndex` 为它最新一个 log entry 的下一个位置，当某个 follower 拒绝了一次 AppendEntries 之后，leader 递减 `nextIndex` 并重试 AppendEntries RPC。最终 `nextIndex` 会到达一个 leader 和 follower 都一致的位置，follower 在那个位置之后的所有 entries 都会被 leader 的覆盖。上述描述同时也符合了 Leader Append-Only 这个性质。
+正常情况下所有 server 的 log 会保持一致，然而当 leader crash 时便会产生不一致。follower 可能会缺一些 entries，也可能多一些，也可能两者都有。leader 通过强制 follower 的 log 和自己同步来解决不一致。leader 为每个 follower 维护一个 `nextIndex`，即下一个将会被发给 follower 的 log entry。在一开始 leader 会初始化 `nextIndex` 为它最新一个 log entry 的下一个位置，当某个 follower 拒绝了一次 AppendEntries 之后，leader 递减 `nextIndex` 并重试 AppendEntries RPC。最终 `nextIndex` 会到达一个 leader 和 follower 都一致的位置，follower 在那个位置之后的所有 entries 都会被 leader 的覆盖。上述描述同时也符合了 Leader Append-Only（leader 只会追加自己的 log） 这个性质。
 
 ### 安全性
 
-如果 Figure 7 中的 (f) 被选举为了下一个 leader，那么 term 4 及之后的更改岂不是都丢失了？因此 Raft 限制了谁能够被选为 leader，以便满足 Leader Completeness 性质。如果 candidate 的 log 至少和多数 log 一样新（at least as up-to-date as any other log in the majority）那么它包含了所有 committed entries。如果 log 的最后一个 entry term 更大，那么它就更新。如果 term 相同，那么更长的 log 更新。在 RequestVote RPC 中，candidate 会包含 `lastLogIndex` 和 `lastLogTerm`，只有当 candidate 的 log 更新时一个 server 才会投票给它。
+如果 Figure 7 中的 (f) 被选举为了下一个 leader，那么 term 4 及之后的更改岂不是都丢失了？因此 Raft 限制了谁能够被选为 leader，以便满足 Leader Completeness 性质（committed entry 会存在于任何更高任期的 leader 的 log 中）。首先给出 log 新旧的定义：如果 candidate 的 log 至少和多数 log 一样新（at least as up-to-date as any other log in the majority）那么它包含了所有 committed entries；如果 log 的最后一个 entry term 更大，那么它就更新。如果 term 相同，那么更长的 log 更新。在 RequestVote RPC 中，candidate 会包含 `lastLogIndex` 和 `lastLogTerm`，只有当 candidate 的 log 更新时一个 server 才会投票给它。
 
 ![image-20230909175357672](./image-20230909175357672.png)
 
 当 leader commit 一个来自它之前 term 的 entry 时，可能会遭遇上图的问题，在 (c) 中，来自 term 2 的 entry 已经被复制到多数 server 上了，然而如果 (d) 发生了，它仍然会被来自 term 3 的 entry 覆盖。因此 Raft 将 commit 定义为只有来时当前 term 的 entry 才能够通过 replica 计数来 commit，而来自之前任期的 entry 只能够通过在它之后的 entry 被 commit 来间接 commit（Log Matching 性质）。
 
-我们可以用反证法来证明这么做的安全性（非严格证明），假设节点数量为 2f+1，log index m 已经被 commit 了，并且位于 f+1 个 server 上。此时一个不包含 m 的 server x 想要竞选 leader。为了得到多数票，至少有一个包含 m 的 server y需要投票给 x，此时需要 x 比 y 更新。根据 up-to-date 的定义，可能有以下两种情况：TODO
+我们可以用反证法来证明这么做的安全性（非严格证明），假设节点数量为 2f+1，log index m 已经被 commit 了，并且位于 f+1 个 server 上。此时一个不包含 m 的 server x 想要竞选 leader。为了得到多数票，至少有一个包含 m 的 server y需要投票给 x，此时需要 x 比 y 更新。根据 up-to-date 的定义，可能有以下两种情况：
 
-- x 和 y 的最后一个 log entry term 相同，且 x 的 log 至少和 y 一样长
-- x 的最后一个 log entry term 更大
+- x 和 y 的最后一个 log entry term 相同，且 x 的 log 至少和 y 一样长。此时根据 Log Matching 性质，x 必然包含 m，故产生矛盾。
+- x 的最后一个 log entry（设为 p）term 更大。那么 p 的 term 必然大于 m 的 term。既然 m 已经 commit 了，创建了 p 的那一任 leader 必然在 log 中包含了 m，所以 x 也必然包含 m，产生矛盾。
 
 ### 时机和可用性
 
