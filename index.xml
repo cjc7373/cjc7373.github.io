@@ -1,4 +1,129 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 18 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>git 入门</title><link>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</link><pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/ -&lt;p>本文的大部分内容来自于 &lt;a href="https://git-scm.com/book/en/v2">Pro Git&lt;/a> 这本书。&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 01 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>MIT 6.824 学习笔记(二) Raft</title><link>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</link><pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/ -&lt;blockquote>
+&lt;p>Note: 为了保持准确性，我会尽量使用英文术语。&lt;/p>
+&lt;/blockquote>
+&lt;p>为了解决单点故障问题，Raft 采用了 Majority Vote，基本上任何操作都需要得到多数确认才能够执行。为了避免 tie，Raft 的节点数量必须为奇数。因此在一个 2f+1 个节点的系统中，最多允许 f 个节点故障，f+1 即为法定人数（quorum）。&lt;/p>
+&lt;p>如果 server 不出错，网络也很稳定，共识算法是很简单的，比如在 Raft 中，leader 被选举出来，client 的请求由 leader 处理并转发给 followers，所有 server 都和 leader 保持一致，这个过程是很简单并且直观的。这些算法真正处理的、细节繁杂的地方是 server 出错、RPC 受网络影响（包括包的延迟，重复，顺序改变，丢失，网络分区）的时候。&lt;/p>
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>在过去十年, Leslie Lamport 的 Paxos 几乎成了共识的同义词.. Paxos 首先定义了一种协议来对单个决定达成共识, 比如一条单个的 log entry, 这被称为 single-decree Paxos. 其支持多个决定的版本 (比如 log) 被称为 muti-Paxos。然而，Paxos 的缺点是难以理解，并且没有提供一个良好的基础来构建可行的实现。&lt;/p>
+&lt;p>相较于 Paxos，Raft 的目标是易于理解且符合直觉。为了使 Raft 易于理解，作者采取了解耦 (Raft 将共识问题分解成几个子问题 leader election, log replication, safety, and membership changes) 和缩减状态空间的方式。&lt;/p>
+&lt;p>Raft 和已有的共识算法类似（尤其是 Viewstamped Replication），但它有一些新特性。Raft 采取了强 leader 的设计，例如 log entry 只会从 leader 向其他节点分发。这可能是为了性能考虑（比无 leader 要更快，RPC 也更少）Raft 采用基于随机计时器的 leader 选举, 从而用一种简单的方法来解决冲突。另外还有处理成员变更方面的改进。&lt;/p>
+&lt;h2 id="replicated-state-machines-复制状态机">Replicated state machines (复制状态机)&lt;/h2>
+&lt;p>通常实现主从复制有两种方法：&lt;/p>
+&lt;ul>
+&lt;li>状态转移（State trasnsfer），主服务器将存储的所有状态都发送给从服务器&lt;/li>
+&lt;li>复制状态机（Replicated State Machine），将服务器视为确定性的状态机，主服务器将所有输入发送给从服务器，那么他们在任意时刻的状态都是相同的&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="./image-20230907175938021.png" alt="image-20230907175938021">&lt;/p>
+&lt;p>Replicated state machines 通常使用 replicated log 实现. 每个节点存储一份 log (一系列指令), 其状态机按顺序执行它们. 每个状态机获得的 log 都是完全一致的, 所以它们是确定性的, 存储有完全相同的状态. Replicated log 的一致性由共识算法保证, 一个节点上的共识模块从 client 接收指令, 并把它们加到 log 中, 它和其他节点的共识模块通信以保证 log 存储了相同顺序的指令。在 Raft 中，状态机由上层应用负责处理。&lt;/p>
+&lt;p>共识算法需要具有以下属性:&lt;/p>
+&lt;ul>
+&lt;li>在非拜占庭错误 (包括 network delays, partitions, and packet loss, duplication, and reordering) 下保证安全性 (safety), 即不会返回不正确的结果&lt;/li>
+&lt;li>只要多数 (即超过一半) 节点工作, 服务就是可用的&lt;/li>
+&lt;li>不依赖时间来确保一致性, 错误的时间或是极端情况下的延迟只会导致可用性问题&lt;/li>
+&lt;li>只要多数节点回应, 一条命令就能够完成, 少数 slow servers 不会影响整个系统的性能&lt;/li>
+&lt;/ul>
+&lt;h2 id="raft-共识算法">Raft 共识算法&lt;/h2>
+&lt;p>&lt;img src="./image-20230908182459520.png" alt="image-20230908182459520">&lt;/p>
+&lt;p>这张图（论文中的 Figure 2）总结了 Raft 协议（除了成员变更和 log 压缩），我们在实现 Raft 协议时会反复看这张图。&lt;/p>
+&lt;p>Raft 主要由两个 RPC 构成：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>RequestVote RPC&lt;/code>，由 candidate 请求，用于收集投票&lt;/li>
+&lt;li>&lt;code>AppendEntries RPC&lt;/code>，由 leader 请求，用于心跳和复制 log entries&lt;/li>
+&lt;/ul>
+&lt;p>Raft 首先将选举一个 leader, leader 的存在能够简化对 replicated log 的管理，比如 leader 能够独自决定把新的 entry 放在哪里，数据自然地由 leader 流向其他 servers。leader 拥有完全管理 replicated log 的权力，leader 从 clients 接受 log entries, 分发给其他节点, 并告诉它们何时能应用这些 log entries 到它们自己的状态机。&lt;/p>
+&lt;p>关键性质:&lt;/p>
+&lt;ul>
+&lt;li>Election Safety: 一个任期中只有一个 leader&lt;/li>
+&lt;li>Leader Append-Only: leader 不会覆盖或删除自己的 log entry, 只会 append&lt;/li>
+&lt;li>Log Matching: 如果两份 log 中某一个 entry 的 index 和 term 相同, 那么两份 log 从头开始直到该 entry 都是相同的&lt;/li>
+&lt;li>Leader Completeness: 如果一个 log entry 在某一 term 中 commit 了, 这个 entry 会存在于任何更高任期的 leader 的 log 中&lt;/li>
+&lt;li>State Machine Safety: 如果一个 server 将一个指定 index 的 log entry 应用到了 state machine 中（i.e. commit 了这个 entry）, 没有其他 server 会在那个 index 上会应用其他的 entry&lt;/li>
+&lt;/ul>
+&lt;h3 id="leader-选举">leader 选举&lt;/h3>
+&lt;p>任何一个节点处于以下三种状态: leader, follower, candidate&lt;/p>
+&lt;p>&lt;img src="./image-20230907175951530.png" alt="image-20230907175951530">&lt;/p>
+&lt;p>上图描述了 server 所有的状态变化，下面描述几个关键的步骤：&lt;/p>
+&lt;ul>
+&lt;li>Follower -&amp;gt; Candidate：开始选举，follower 递增 term 并进入 candidate 状态，它接着给自己投票并向其他 server 发送 RequestVote RPC。每个 server 在一个 term 只能给一个 candidate 投票，基于先来先得的原则&lt;/li>
+&lt;li>Candidate -&amp;gt; Leader：当 candidate 接收到了多数票（majority）之后将赢得选举，接着它会马上发送心跳包宣告自己的权威并阻止新的选举。leader 会一直保持 leader 状态，除非 a). 它 fail 了 b). 由于丢包等原因导致某个 follower 的选举计时器超时了&lt;/li>
+&lt;li>Candidate -&amp;gt; Follower：如果 candidate 收到其他 server 的 AppendEntries RPC 宣称是 leader，并且其 term 不小于 candidate 的当前 term，则该 leader 合法，candidate 回退到 follower 状态&lt;/li>
+&lt;li>Candidate -&amp;gt; Candidate：如果没有产生多数票，在超时后选举将重复进行，为了打破僵局 Raft 使用随机的选举超时时间&lt;/li>
+&lt;li>无论何时，candidate 和 leader 只要收到一个 term 比自己大的 RPC，它必须转变为 follower&lt;/li>
+&lt;/ul>
+&lt;h3 id="log-复制-replication">log 复制 (replication)&lt;/h3>
+&lt;p>log 由 entry 组成，每个 entry 都有一个唯一递增的 log index（可以理解为在数组中的 index）。entry 中包含 term 和给状态机的指令。&lt;/p>
+&lt;p>当一个 log entry 能够被应用到状态机上时 (i.e. 当 leader 知道这个 entry 已经被 replicate 到多数 server 上时，但下文会说明一种例外情况), 我们称这个 entry 为 committed. leader 决定哪些 entry 能够 commit，并在下一次 AppendEntries RPC 中将这个状态告知 followers. Raft 保证了 commited entries 是持久的并&lt;strong>最终&lt;/strong>会应用到所有 servers 上。&lt;/p>
+&lt;p>leader 维护 &lt;code>commitIndex&lt;/code>，即最高的 committed entry index，并且会将这个 index 包含在 AppendEntries RPC 中。&lt;/p>
+&lt;p>Raft 协议中的 Log Matching 性质实际上由两部分组成：&lt;/p>
+&lt;ul>
+&lt;li>如果两份 log 中某一个 entry 的 index 和 term 相同, 那么这两个 entry 相同
+&lt;ul>
+&lt;li>这是因为一个 term 只有一个 leader，而一个 leader 对于给定 log index 只能创建最多一个 entry，并且 log entry 从不改变它们在 log 中的位置&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>如果两份 log 中某一个 entry 的 index 和 term 相同, 它们之前的 entries 都是相同的
+&lt;ul>
+&lt;li>这个性质由 AppendEntries 的一个一致性检查保证。leader 会把新 entries 的前一个 entry 的 index 和 term 包含在 AppendEntries RPC 中（&lt;code>prevLogIndex&lt;/code> 和 &lt;code>prevLogTerm&lt;/code>），这样如果 follower 找不到这样一个 entry，它就会拒绝新的 entries&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="./image-20230907180012141.png" alt="image-20230907180012141">&lt;/p>
+&lt;p>正常情况下所有 server 的 log 会保持一致，然而当 leader crash 时便会产生不一致。follower 可能会缺一些 entries，也可能多一些，也可能两者都有。leader 通过强制 follower 的 log 和自己同步来解决不一致。leader 为每个 follower 维护一个 &lt;code>nextIndex&lt;/code>，即下一个将会被发给 follower 的 log entry。在一开始 leader 会初始化 &lt;code>nextIndex&lt;/code> 为它最新一个 log entry 的下一个位置，当某个 follower 拒绝了一次 AppendEntries 之后，leader 递减 &lt;code>nextIndex&lt;/code> 并重试 AppendEntries RPC。最终 &lt;code>nextIndex&lt;/code> 会到达一个 leader 和 follower 都一致的位置，follower 在那个位置之后的所有 entries 都会被 leader 的覆盖。上述描述同时也符合了 Leader Append-Only 这个性质。&lt;/p>
+&lt;h3 id="安全性">安全性&lt;/h3>
+&lt;p>如果 Figure 7 中的 (f) 被选举为了下一个 leader，那么 term 4 及之后的更改岂不是都丢失了？因此 Raft 限制了谁能够被选为 leader，以便满足 Leader Completeness 性质。如果 candidate 的 log 至少和多数 log 一样新（at least as up-to-date as any other log in the majority）那么它包含了所有 committed entries。如果 log 的最后一个 entry term 更大，那么它就更新。如果 term 相同，那么更长的 log 更新。在 RequestVote RPC 中，candidate 会包含 &lt;code>lastLogIndex&lt;/code> 和 &lt;code>lastLogTerm&lt;/code>，只有当 candidate 的 log 更新时一个 server 才会投票给它。&lt;/p>
+&lt;p>&lt;img src="./image-20230909175357672.png" alt="image-20230909175357672">&lt;/p>
+&lt;p>当 leader commit 一个来自它之前 term 的 entry 时，可能会遭遇上图的问题，在 (c) 中，来自 term 2 的 entry 已经被复制到多数 server 上了，然而如果 (d) 发生了，它仍然会被来自 term 3 的 entry 覆盖。因此 Raft 将 commit 定义为只有来时当前 term 的 entry 才能够通过 replica 计数来 commit，而来自之前任期的 entry 只能够通过在它之后的 entry 被 commit 来间接 commit（Log Matching 性质）。&lt;/p>
+&lt;p>我们可以用反证法来证明这么做的安全性（非严格证明），假设节点数量为 2f+1，log index m 已经被 commit 了，并且位于 f+1 个 server 上。此时一个不包含 m 的 server x 想要竞选 leader。为了得到多数票，至少有一个包含 m 的 server y需要投票给 x，此时需要 x 比 y 更新。根据 up-to-date 的定义，可能有以下两种情况：TODO&lt;/p>
+&lt;ul>
+&lt;li>x 和 y 的最后一个 log entry term 相同，且 x 的 log 至少和 y 一样长&lt;/li>
+&lt;li>x 的最后一个 log entry term 更大&lt;/li>
+&lt;/ul>
+&lt;h3 id="时机和可用性">时机和可用性&lt;/h3>
+&lt;p>在 leader 选举中，时机（Timing）是很关键的，如果 RPC 用时过长，那么 candidate 在超时之前将无法赢得选举。Raft 需要满足以下时机约束：$broadcastTime ≪ electionTimeout ≪ MTBF$，broadcastTime 是平均一次 RPC 的时间，electionTimeout 是选举超时时间，MTBF（Mean Time Between Failures）是发生两次 server 故障的平均间隔时间。&lt;/p>
+&lt;h2 id="集群成员变更">集群成员变更&lt;/h2>
+&lt;p>这里指的是增减 server。虽然我们总是能够通过下线整个集群、更新配置、上线集群的方式来增减 server，但这样就减少了可用性。为了使配置变更是安全的，必须保证同一 term 不可能有两个 leader 被选举出来。然而，任何直接由旧配置转变为新配置的做法都是不安全的，如下图所示：&lt;/p>
+&lt;p>&lt;img src="./image-20230928111923370.png" alt="image-20230928111923370">&lt;/p>
+&lt;p>为了保证安全性，Raft 采取了一种两阶段的策略，集群会切换到一个过渡的配置，称为 joint consensus。论文没有给出这个过程的具体实现，我对这部分也理解得不是很清楚。&lt;/p>
+&lt;h2 id="log-压缩compaction">log 压缩（compaction）&lt;/h2>
+&lt;p>如果没有压缩，log 的大小会无限增长，并且在 server 故障重启后重新应用 log 的时间会非常长，这显然是不划算的。&lt;/p>
+&lt;p>快照（snapshot）是最简单的压缩方式。在一次快照中，当前的系统状态被写入到非易失存储中，然后到这个时刻的所有 log 将被丢弃。&lt;/p>
+&lt;p>&lt;img src="./image-20230928141311077.png" alt="image-20230928141311077">&lt;/p>
+&lt;p>然而，快照带来了新的复杂度。如果一个 leader 的 log 如上图所示，在一次快照之后 log 中的第一个 entry 为 6，但是如果一个 follower 的 log 还停留在最后一个 entry 为 4，那么这个 follower 永远无法获得 entry 5 了。Raft 的做法是引入了一个新的 InstallSnapshot RPC，用于把 leader 的当前 snapshot 发送给 follower。&lt;/p>
+&lt;p>snapshot 的创建过程依赖于上层应用，因为 Raft 对于状态机里的状态知之甚少。但是何时创建 snapshot 由 Raft 决定，一个简单的策略是当 log 达到固定大小时创建。&lt;/p>
+&lt;p>每个 server 能够独立创建 snapshots，因而其偏离了 Raft 的强 leader 原则，但是由于在创建 snapshot 时共识已经达成了，所以这不会有问题。如果只有 leader 能创建 snapshot，那么有两个缺点 a) 每次发送 snapshot 都会浪费网络带宽 b) leader 的实现会变得复杂，因为它必须同时发送 snapshot 和新的 entries。&lt;/p>
+&lt;h2 id="客户端交互">客户端交互&lt;/h2>
+&lt;p>client 只会和 leader 交互，在 client 刚启动时，它可能会连接到一个随机的 server，若该 server 不为 leader，则 server 会拒绝这个请求并提供 leader 的信息。&lt;/p>
+&lt;p>Raft 的目标是提供可线性化（linearizable）的语义，即每个操作会在调用和回复之间的某个时间立刻执行执行一次（exactly once）。然而，Raft 可能会执行一个操作多次，如果 leader 在 commit log entry 之后回复 client 之前崩溃了，client 会重试请求，导致一个操作执行了两次。这个问题的解决方案是对每个操作分配一个独特的序列号，如果 leader 收到了一个请求包含已经被执行的序列号，那么它就不会再次执行这个请求。&lt;/p>
+&lt;p>如果没有额外的措施，读请求可能会读到过时的（stale）数据，如由于网络分区当前 leader 已经被新的 leader 取代了，但是当前 leader 并不知道这一点。为了保证不会读到过时的数据，在 leader 刚当选时它必须发送一个 no-op entry，以便找出哪些 entry 已经 commit 了。其次 leader 必须检查它是否被新的 leader 取代了，这可以通过发送心跳包来检查是否有多数 server 回应来实现。&lt;/p>
+&lt;h2 id="notes">Notes&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>Raft 是强一致性的协议，因为 commit 过的 log 总是一致的，如果出现网络分区则只有多数区能够达成共识，所以其符合了 CAP 原则中的 CP。另一种应对 split-brain 的方式是允许 split-brain，在网络恢复之后通过一些机制来调谐分叉的状态（reconcile the diverging state），通常这被称为最终一致性。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Q：一个 Raft 集群通常位于一个物理位置还是说可以部署在地理上不同的数据中心里？&lt;/p>
+&lt;p>A：典型的部署方式是一个数据中心。我们会在之后看到一些运行 Paxos 的系统（如 Spanner）能够跨数据中心，其通常是一种无 leader 的设计，以便一个 client 能够同一个本地 server 通信。&lt;/p>
+&lt;p>Google 的 Chubby 论文报告了它们的 Chubby 部署通常是在一个数据中心里，除了 root Chubby 是跨数据中心的（chubby 并未使用 raft，而是用了基于 Paxos 的一个内部库）&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="可线性化linearizability">可线性化（Linearizability）&lt;/h2>
+&lt;p>并发和不确定性的存在，导致分布式系统很容易存在一些微妙的 bug。除非使用形式化方法，否则我们只能依赖测试来验证系统的正确性。&lt;/p>
+&lt;p>通过 Linearizability 这样一种一致性模型，我们可以基于一种顺序的规格形式地确定并发操作的正确性。在一个 linearizable 的系统中，每个操作看起来是在调用和回复之间的某个时间点原子、瞬间执行。可线性化可以被视作强一致性的同义词。&lt;/p>
+&lt;blockquote>
+&lt;p>Definition of linearizability:&lt;/p>
+&lt;p>Execution history is linearizable if there exists a total order of the operations in the history that matches real time for non-concurrent requests. Each read sees the value of the most recent write in order.&lt;/p>
+&lt;/blockquote>
+&lt;p>下图所示的执行历史是可线性化的：&lt;/p>
+&lt;p>&lt;img src="./image-20231001151607479.png" alt="image-20231001151607479">&lt;/p>
+&lt;p>而下图则不是：&lt;/p>
+&lt;p>&lt;img src="./image-20231001151618755.png" alt="image-20231001151618755">&lt;/p>
+&lt;h2 id="heading">&lt;/h2>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>Raft 论文&lt;/li>
+&lt;li>&lt;a href="https://pdos.csail.mit.edu/6.824/papers/raft-faq.txt">6.824 Raft FAQ&lt;/a>&lt;/li>
+&lt;/ul>
+- https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>git 入门</title><link>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</link><pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/ -&lt;p>本文的大部分内容来自于 &lt;a href="https://git-scm.com/book/en/v2">Pro Git&lt;/a> 这本书。&lt;/p>
 &lt;h2 id="objects">Objects&lt;/h2>
 &lt;p>git 中最基础的元素是 object，每个 object 由一个 object ID (OID) 唯一标识，OID 是一个 160 bits （用 hex 字符串表示为四十个字符） 的 SHA-1 哈希。具体而言，git 中主要存在三种 objects：&lt;/p>
 &lt;ul>
@@ -227,7 +352,7 @@
 &lt;p>当应用写入的区域很大时，GFS client 会将其切分成一个一个 chunk，并分为多个写入操作来执行，此时如果有并发操作，则会出现一致但不确定的状态。&lt;/p>
 &lt;h3 id="记录追加record-append">记录追加（Record Append）&lt;/h3>
 &lt;p>此操作中 client 只指定文件而不指定偏移，GFS 保证该操作在 GFS 指定的偏移处原子地完成至少一次，并向客户端返回这个偏移。GFS 的应用中有很多是多生产者/单消费者模型，很适合使用记录追加操作。&lt;/p>
-&lt;p>记录追加操作和写入大致相同，惟 primary 会检查要追加的数据是否会超出当前 chunk，如果会的话，它将 pad 这个 chunk 到 64MB，指示其他 replicas 也这么操作，并指示客户端重试。（记录追加操作限制最大数据大小为四分之一个 最大 chunk size 以便控制碎片的大小）如果没有超出，则按写入的流程进行，此时 primary 会选择一个 offset （即它所认为的文件末尾）告知其他 replicas 进行写入。如果任何一个 replica 失败，客户端会重试操作。这种情况下部分 replica 将会出现重复的记录，但是数据肯定以某一偏移写入了所有 replicas。&lt;/p>
+&lt;p>记录追加操作和写入大致相同，惟 primary 会检查要追加的数据是否会超出当前 chunk，如果会的话，它将 pad 这个 chunk 到 64MB，指示其他 replicas 也这么操作，并指示客户端重试。（记录追加操作限制最大数据大小为四分之一个最大 chunk size 以便控制碎片的大小）如果没有超出，则按写入的流程进行，此时 primary 会选择一个 offset （即它所认为的文件末尾）告知其他 replicas 进行写入。如果任何一个 replica 失败，客户端会重试操作。这种情况下部分 replica 将会出现重复的记录，但是数据肯定以某一偏移写入了所有 replicas。&lt;/p>
 &lt;h2 id="问题">问题&lt;/h2>
 &lt;ul>
 &lt;li>如果 chunk 的版本号只在分配租约是增加的话，假设一个 replica （非 primary）在某一时刻挂了，因此错过了几个写入，如果版本号此时不改变的话，在那个 replica 恢复之后，client 就会读到过时数据了。论文里好像也没提这种情况怎么处理..&lt;/li>
@@ -688,86 +813,4 @@ WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码
 &lt;p>我并没有理解这个 PEP 的好处在哪.. 目前的实现在回归测试中导致了 ~2% 的性能损失..&lt;/p>
 &lt;h2 id="尾巴">尾巴&lt;/h2>
 &lt;p>本次会议很大程度上讨论了 Python 的性能改善, 然而大多数变化是琐碎且渐进的, 想要看到某个改动带来的性能飞跃似乎不太可能 &lt;del>(除了 GIL)&lt;/del>. 我们希望去年 Language Summit 上 Guido 吹下的牛── 4 年里将 CPython 的性能提升 5 倍──能够实现吧.&lt;/p>
-- https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>民族主义自媒体是如何消费我们的</title><link>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ -&lt;p>目前的中文互联网上存在着大量的鼓吹民族主义, 制造中西方对立的自媒体, 令人震惊的是, 他们中大部分不但充斥着情绪输出, 甚至连大部分事实都是错误的. 我偶然间读到了这样的一篇文章, 并对其中列出的事实进行了查证, 然后感觉我的智商受到了侮辱..&lt;/p>
-&lt;p>原文: &lt;a href="https://www.zhihu.com/question/428451991/answer/2431916538">西方媒体是怎样给西方人洗脑的？ - 远方青木的回答 - 知乎&lt;/a>, &lt;a href="http://web.archive.org/web/20220429053052/https://www.zhihu.com/question/428451991/answer/2431916538">archive&lt;/a>&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>这几年欧美一直在向中国发动舆论战，我见过最离谱的一个理论甚至说什么“中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟”。&lt;/p>
-&lt;p>我本以为这套歪理邪说就是欧美造谣生事的想象力极限，没想到欧美的底线可以永无止尽的被突破。&lt;/p>
-&lt;/blockquote>
-&lt;p>来源: &lt;a href="https://www.nytimes.com/2020/01/07/business/fake-pork-china.html">纽约时报 中国人会购买人造肉吗？&lt;/a>, 另见&lt;a href="https://world.huanqiu.com/article/9CaKrnKoNzC">环球网报道&lt;/a>&lt;/p>
-&lt;p>评论: 虽然文章很有&amp;quot;反华&amp;quot;的倾向性, 但文章主要讲的是人造肉在中国难以推广. 肉类消费对于气候的影响是不争的事实. 所以&amp;quot;中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟&amp;quot;这句话也不能算错, 但应该把主语换成全世界人.
-要求中国牺牲国民营养而减少肉类消费是不合理的, 但是推广人造肉是合理的. 作者在这里显然有断章取义之嫌.&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>《&lt;a href="https://web.archive.org/web/20220429053052mp_/https://www.zhihu.com/search?q=%E5%8D%8E%E7%9B%9B%E9%A1%BF%E9%82%AE%E6%8A%A5&amp;amp;search_source=Entity&amp;amp;hybrid_search_source=Entity&amp;amp;hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A2431916538%7D">华盛顿邮报&lt;/a>》在报道中声称**“中国每年强迫种植数亿棵新树”，这简直是在“犯罪”！**&lt;/p>
-&lt;p>&lt;img src="./e577e26ef47585f1faae27fb45123efd.png" alt="e577e26ef47585f1faae27fb45123efd.png">&lt;/p>
-&lt;p>我捋一捋他们的思路，&lt;strong>大概意思就是说中国每年种数亿棵新树，但把这些新树种下去之前并没有征求这些树的同意，这数亿棵树是“不一定同意自己被种植”的，但全部被中国强迫种在地里了。&lt;/strong>&lt;/p>
-&lt;p>&lt;strong>因此，中国侵犯了树“自由被种植”的权力，强迫树木劳动，这属于犯罪，因此中国需要反思自己这种野蛮的行为。&lt;/strong>&lt;/p>
-&lt;p>逻辑好像有那么一点点道理哦，但我怎么就觉得那么奇怪和荒谬呢。&lt;/p>
-&lt;p>中国人种树怎么了？&lt;/p>
-&lt;p>种树不是在保护环境吗？&lt;/p>
-&lt;p>怎么拐了一圈之后种树居然成犯罪行为了？&lt;/p>
-&lt;/blockquote>
-&lt;p>来源: 没有找到来源.&lt;/p>
-&lt;p>评论: 据 &lt;a href="https://checkyourfact.com/2022/04/18/fact-check-washington-post-china-trees-article/">checkyourfact&lt;/a>, 该截图为杜撰, 最初流传于 Facebook 和 Twitter.&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>更荒谬的是，同一家西方媒体，前几年报道中国的标题是**《中国对一次性筷子的成瘾正在摧毁森林》。**&lt;/p>
-&lt;p>首先，一次性筷子不是用森林做出来的，一次性筷子的主要原料是一个月能长3米的竹子，以及速生经济林的边角废木料。&lt;/p>
-&lt;p>用森林里的好木头确实可以做一次性筷子，但没人这么做，因为成本太高商家会亏本，只有速生林边角废料和竹子的低廉价格才能让商家赚到钱。&lt;/p>
-&lt;p>其次，抛开筷子的真实原材料不谈，这家西方媒体的主要立场好像也是森林是宝贵的，森林对人类有益，并以此来指责中国。&lt;/p>
-&lt;p>&lt;strong>既然如此，为什么中国种植森林也能被指责一番。是不是中国人干什么都不行，连呼吸都是错的？&lt;/strong>&lt;/p>
-&lt;/blockquote>
-&lt;p>来源: &lt;a href="https://www.washingtonpost.com/news/worldviews/wp/2013/03/14/chinas-disposable-chopstick-addiction-is-destroying-its-forests/">华盛顿邮报《中国对一次性筷子的成瘾正在摧毁森林》&lt;/a>&lt;/p>
-&lt;p>评论: 华盛顿邮报 2013 年的报道, 主要援引的是时任吉林森工集团董事长柏广新的一句话: &amp;ldquo;我国每年生产800亿双一次性筷子，相当于要砍伐2000万棵生长20年的大树&amp;rdquo;. &lt;a href="http://www.gov.cn/2013lh/content_2349497.htm">中国政府网&lt;/a>和&lt;a href="http://cpc.people.com.cn/pinglun/n/2013/0312/c78779-20759994.html">光明网&lt;/a>均能找到这句话以及相关对一次性筷子的批评. 报道中均指出了木头和竹子均是一次性筷子的原料.&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>几年前，欧美媒体报道说根据科学家的研究，中国人种植水稻会产生更多的温室气体，因此中国人吃大米正在毁灭全球气候，进而导致人类灭亡。&lt;/p>
-&lt;/blockquote>
-&lt;p>来源: 我都不知道怎么找..&lt;/p>
-&lt;p>评论: 类似的研究肯定有, 但我不觉得哪家媒体会报道吃大米导致人类灭亡&amp;hellip;&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>2019年，国际顶级科学期刊《自然》杂志发表了一篇文章，说根据科学家的研究成果，中国政府治理沙漠，大力推进的荒漠绿化工程，种树过多，可能导致人类水资源枯竭，因此会对地球自然生态造成极大影响。&lt;/p>
-&lt;p>《自然》杂志本是人类最顶级的科学杂志，但写这篇文章的“科学家”逻辑推导却很简单，算一算中国政府要消灭荒漠需要种多少棵树，种这些树需要消耗多少水资源，&lt;strong>因此得出结论中国种树会破坏自然环境。&lt;/strong>&lt;/p>
-&lt;p>别笑，这是真事。&lt;/p>
-&lt;p>&lt;strong>中国人花费几代心血把沙漠变成了绿洲，对人类如此巨大的贡献居然招来西方期刊的指责？&lt;/strong>&lt;/p>
-&lt;p>&lt;strong>治理沙漠居然都能成为破坏环境的罪证。&lt;/strong>&lt;/p>
-&lt;/blockquote>
-&lt;p>来源: &lt;a href="https://www.nature.com/articles/d41586-019-02789-w">nature 文章 China&amp;rsquo;s tree-planting drive could falter in a warming world&lt;/a>&lt;/p>
-&lt;p>评论: 但凡看一下文章就会觉得文章的中立性是没问题的. 文章警告了非原产地树木对当地水资源的大量消耗, 可能会导致干旱地区的扩散. 也引用了多位中国科学家的意见.&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>巴西烧毁森林种地的时候，西方批判，说这样会造成水土流失，土地荒漠化，从而破坏人类环境。&lt;/p>
-&lt;p>中国种树消灭荒漠的时候，西方又批判，说这是在破坏人类环境，还不如让土地继续荒漠化。&lt;/p>
-&lt;p>澳大利亚和美国森林大火，烧毁无数森林，漫天黑烟，西方说这都是很正常的行为，对人类环境没有丝毫损害。&lt;/p>
-&lt;/blockquote>
-&lt;p>来源: 不知道怎么找.&lt;/p>
-&lt;p>评论: 因果倒置, 是气候变化导致了森林火灾的可能性增加&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>但没有西方人说那群在荒漠里植树造林的中国人有功劳，反而把一个从来不种树的嘴炮少女捧为“环保公主”。&lt;/p>
-&lt;/blockquote>
-&lt;p>评论: 讽刺 Greta Thunberg 也是传统艺能了, 不过我个人对她的评价还是比较积极的, 她组织了贯穿整个欧洲的学生罢课, 多次在 COP 上演讲. 她的&lt;a href="https://en.wikipedia.org/wiki/Greta_Thunberg">维基百科页面&lt;/a>也是比较正面的. 她频繁提到过 IPCC 的 &lt;a href="https://www.ipcc.ch/site/assets/uploads/sites/2/2019/09/IPCC-Special-Report-1.5-SPM_zh.pdf">全球升温 1.5°C&lt;/a>, 我也推荐大家去读一读, 这算是为什么要应对气候变化的科学基础.&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>欧美人种一点点树就是天大的功劳，但中国不是，不仅无功，反而有罪。&lt;/p>
-&lt;p>类似的双标相当常见，当初意大利封城，那就是**“冒着经济风险保欧洲”&lt;strong>，而中国封城则是&lt;/strong>“以牺牲人民自由为代价”**，两篇文章不仅在同一家媒体《纽约时报》发布，而且时间居然只差了20分钟。&lt;/p>
-&lt;p>&lt;img src="./9d2d417242ceec2596a90beaaebb71a8.png" alt="9d2d417242ceec2596a90beaaebb71a8.png">&lt;/p>
-&lt;/blockquote>
-&lt;p>来源: &lt;a href="https://twitter.com/nytimes/status/1236479276586807296">https://twitter.com/nytimes/status/1236479276586807296&lt;/a>, &lt;a href="https://twitter.com/nytimes/status/1236484352965521408">https://twitter.com/nytimes/status/1236484352965521408&lt;/a>&lt;/p>
-&lt;p>评论: 单看这两条推特确实是西方媒体的偏见..&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>另一招，就是在报道中国正面的同时，再加上一句，就是鼎鼎大名的**“但代价是什么”。**&lt;/p>
-&lt;p>组合起来的效果给大家展示一下，比如说**“中国也许有效控制了疫情，但代价惨重”。**&lt;/p>
-&lt;p>比如说，&lt;strong>中国正在变得智能，但代价是什么？&lt;/strong>&lt;/p>
-&lt;p>&lt;img src="./246b296018db3460d935bb2e9d121731.png" alt="246b296018db3460d935bb2e9d121731.png">&lt;/p>
-&lt;p>这，就是欧美媒体对中国报道的常规格式。&lt;/p>
-&lt;p>把中国的好事变坏简直太简单了，&lt;strong>你这个好事似乎存在，但代价是什么？&lt;/strong>&lt;/p>
-&lt;/blockquote>
-&lt;p>评论: 虚空打靶.. 别只看个标题啊, 你倒是具体说说西方媒体说了啥啊.&lt;/p>
-&lt;hr>
-&lt;p>总结: 看这种自媒体真的降智商.. 以后要少看..&lt;/p>
-- https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

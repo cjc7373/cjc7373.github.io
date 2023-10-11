@@ -1,4 +1,74 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 18 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>2019年终总结&amp;2020展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</link><pubDate>Sat, 01 Feb 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/ -&lt;p>又是一年一度的年终总结时间了，进入二十一世纪的第二个十年，我的心情十分激动……&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 01 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Kickstart 2020 Round A 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</link><pubDate>Thu, 26 Mar 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/ -&lt;p>第一次打Kickstart，体验还是很不错的。&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>&lt;a href="https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ffc7">比赛链接&lt;/a>&lt;/p>
+&lt;p>迟了几分钟进比赛，发现前十已经两题AC了。&lt;/p>
+&lt;h2 id="allocation">Allocation&lt;/h2>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>签到题，排序后从大到小输出即可。&lt;/p>
+&lt;h2 id="plates">Plates&lt;/h2>
+&lt;p>&lt;code>2/0 TLE, WA&lt;/code>&lt;/p>
+&lt;p>N叠盘子，每叠K个，每个盘子有一个beauty值，从中取P个，但对于每叠只能从上到下取，求beauty值最大为多少。&lt;/p>
+&lt;p>先写了一个每次取最大的，WA，发现不对，然后去做第三题了。后又写了个dfs，TLE了。当时心态有点崩，因为TOP 10基本是两分钟AC，想到DP，但没有深入想。&lt;/p>
+&lt;p>官方题解是对于每一叠盘子，先预处理前n个的beauty值和sum，然后对于每一个状态&lt;code>dp[i][j]&lt;/code>，即在前i叠盘子和取j个盘子时能取到的最大值，有状态转移方程&lt;code>dp[i][j] = max(dp[i][j], sum[i][x]+dp[i-1][j-x])&lt;/code>。循环求dp即可。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__&lt;span style="color:#f92672">==&lt;/span>&lt;span style="color:#e6db74">&amp;#39;__main__&amp;#39;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, t&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Case #&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">: &amp;#34;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(i)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n, k, p &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a&lt;span style="color:#f92672">.&lt;/span>append([int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum&lt;span style="color:#f92672">.&lt;/span>append([&lt;span style="color:#ae81ff">0&lt;/span>])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> a[i]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">+=&lt;/span> j
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum[i]&lt;span style="color:#f92672">.&lt;/span>append(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur &lt;span style="color:#f92672">=&lt;/span> [&lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dp &lt;span style="color:#f92672">=&lt;/span> [[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> (p&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n)]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dp[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> sum[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">+&lt;/span> [&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> (p&lt;span style="color:#f92672">-&lt;/span>k)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, p&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> x &lt;span style="color:#f92672">in&lt;/span> range(min(j&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, k&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dp[i][j] &lt;span style="color:#f92672">=&lt;/span> max(dp[i][j], sum[i][x] &lt;span style="color:#f92672">+&lt;/span> dp[i&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>][j&lt;span style="color:#f92672">-&lt;/span>x])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, dp[i][p])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out &lt;span style="color:#f92672">+=&lt;/span> str(ans)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(out)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="workout">Workout&lt;/h2>
+&lt;p>&lt;code>2/1 Accepted&lt;/code>&lt;/p>
+&lt;p>给一个递增的数列，插入K个值，求每两个值的差的最小值。&lt;/p>
+&lt;p>这道题和我校2017新生赛的一题类似，对结果二分即可。&lt;/p>
+&lt;h2 id="bundling">Bundling&lt;/h2>
+&lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p>
+&lt;p>把N个字符串分成K组，每组的分数为最长公共前缀的长度，求全局最高分。&lt;/p>
+&lt;p>直接进行分组比较困难，我们可以考虑每组的分数同时也是共同前缀的个数。那么对于每个前缀，若有p个单词拥有这个前缀，则这个前缀会给结果贡献&lt;code>p // K&lt;/code>分。由此求字符串中的每个前缀和拥有这个前缀的字符串数即可。&lt;/p>
+&lt;p>使用前缀树可很容易求得。一开始我的做法是递归这棵树，用了两种写法都RE了，Google了一圈找到测试数据会导致爆栈，故采用了list来模拟栈遍历。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__&lt;span style="color:#f92672">==&lt;/span>&lt;span style="color:#e6db74">&amp;#39;__main__&amp;#39;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t &lt;span style="color:#f92672">=&lt;/span> int(input())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, t&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Case #&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">: &amp;#34;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(i)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n, k &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tree &lt;span style="color:#f92672">=&lt;/span> {&lt;span style="color:#e6db74">&amp;#39;pre_num&amp;#39;&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> word &lt;span style="color:#f92672">=&lt;/span> input()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur &lt;span style="color:#f92672">=&lt;/span> tree
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> c &lt;span style="color:#f92672">in&lt;/span> word:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur &lt;span style="color:#f92672">=&lt;/span> cur&lt;span style="color:#f92672">.&lt;/span>setdefault(c, {&lt;span style="color:#e6db74">&amp;#39;pre_num&amp;#39;&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur[&lt;span style="color:#e6db74">&amp;#39;pre_num&amp;#39;&lt;/span>] &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> stack &lt;span style="color:#f92672">=&lt;/span> [tree]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> len(stack):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node &lt;span style="color:#f92672">=&lt;/span> stack&lt;span style="color:#f92672">.&lt;/span>pop()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">+=&lt;/span> node[&lt;span style="color:#e6db74">&amp;#39;pre_num&amp;#39;&lt;/span>] &lt;span style="color:#f92672">//&lt;/span> k
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> node:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#39;pre_num&amp;#39;&lt;/span>: &lt;span style="color:#66d9ef">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> stack&lt;span style="color:#f92672">.&lt;/span>append(node[i])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out &lt;span style="color:#f92672">+=&lt;/span> str(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(out)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>2019年终总结&amp;2020展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</link><pubDate>Sat, 01 Feb 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/ -&lt;p>又是一年一度的年终总结时间了，进入二十一世纪的第二个十年，我的心情十分激动……&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;p>好吧，激动是假的。时空是连续的，进入2020和平常的一天没有任何区别。转眼间已经来到了庚子鼠年的大年初八，我恍然记得我的年终总结还没有写，于是准备把这个传统艺能发扬下去，也看一看2019定的目标完成了多少。&lt;/p>
 &lt;h2 id="2019-总结">2019 总结&lt;/h2>
@@ -881,161 +951,4 @@ Linux 是小萝莉，懵懂无知，你怎么调教就怎么跟你玩，但是�
 &lt;h2 id="后记">后记&lt;/h2>
 &lt;p>这篇文章写了三天才写完，写的也比较杂乱。事实上在一开始我就没有一个整体的构思。&lt;/p>
 &lt;p>2019年已经快过去了两个月，我才堪堪写完年初计划。这些计划（或者说我未来的目标）虽有个模糊的大方向，却又不甚明了，或许我还需要更深层次的思考吧。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>DOMjudge 配置/踩坑指南</title><link>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</link><pubDate>Wed, 19 Dec 2018 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ -&lt;p>我校新生赛也能用上 World Final 同款评测系统啦~&lt;/p>
-&lt;p>DOMjudge 提供了详尽的&lt;a href="https://www.domjudge.org/documentation">官方文档&lt;/a>，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="简介">简介&lt;/h2>
-&lt;p>DOMjudge，作为一款开源的 CCS(&lt;a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System">Contest Control System&lt;/a>)，现已被ICPC钦定为官方的比赛评测系统。比 pc^2 这种闭源而含有诸多 Bug 的 CCS 高到不知道哪里去了啊。&lt;/p>
-&lt;p>&lt;img src="./1545218741334.png" alt="1545218741334">&lt;/p>
-&lt;p>根据官方文档的描述，DOMjudge 的主要特性有：&lt;/p>
-&lt;ul>
-&lt;li>分布式且自动评测的 judge host&lt;/li>
-&lt;li>Web 用户界面&lt;/li>
-&lt;li>模块化的系统，方面添加不同的语言/编译器&lt;/li>
-&lt;/ul>
-&lt;p>整个 DOMjudge 主要分为两个部分，Domserver 和 Judgehost，据其名字即可得出它们的功能。需要注意的是，DOMjudge 使用数据库来存放几乎一切数据，所以我们还需配置 MySQL 或者 MariaDB。&lt;/p>
-&lt;h2 id="安装">安装&lt;/h2>
-&lt;p>DOMjudge 只能运行在 Linux 环境下。博主的运行环境是 Ubuntu Server 18.04 LTS，以及 DOMjudge 7.1.1。&lt;/p>
-&lt;p>除了传统的安装方式外，DOMjudge 还提供了 Docker 镜像以供安装，这样就大大简化了安装的困难程度。&lt;/p>
-&lt;p>关于 Docker 的使用这里不作详细描述。（其实是博主也一知半解）&lt;/p>
-&lt;p>然而&lt;a href="https://hub.docker.com/r/domjudge/domserver">官方的 Docker 文档中&lt;/a>仅使用了命令来启动容器，为了进一步简化安装，也为了方便修改配置，我决定采用 Docker Compose 。以下是 &lt;code>docker-compose.yml &lt;/code>文件：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;3&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">services&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">mariadb&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">dj-mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_ROOT_PASSWORD=rootpw&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_USER=domjudge&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_PASSWORD=djpw&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_DATABASE=domjudge&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">$PWD/data:/var/lib/mysql&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">13306&lt;/span>:&lt;span style="color:#ae81ff">3306&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">command&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - --&lt;span style="color:#ae81ff">max-connections=1000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - --&lt;span style="color:#ae81ff">innodb-log-file-size=480M&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">domserver&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">domjudge/domserver:latest&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">domserver&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_HOST=mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_USER=domjudge&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_DATABASE=domjudge&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_PASSWORD=djpw&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_ROOT_PASSWORD=rootpw&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">CONTAINER_TIMEZONE=Asia/Shanghai&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">always&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">depends_on&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">phpmyadmin&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">80&lt;/span>:&lt;span style="color:#ae81ff">80&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">links&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">judgehost&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">domjudge/judgehost:latest&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">judgedaemon-0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">privileged&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">CONTAINER_TIMEZONE=Asia/Shanghai&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">DAEMON_ID=0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">JUDGEDAEMON_PASSWORD=whatthehell&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">depends_on&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">domserver&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">links&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">domserver&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">always&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/sys/fs/cgroup:/sys/fs/cgroup:ro&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">phpmyadmin&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">phpmyadmin/phpmyadmin&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">myadmin&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8080&lt;/span>:&lt;span style="color:#ae81ff">80&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">PMA_HOST=mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">links&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">mariadb:mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后运行 &lt;code>docker-compose up -d&lt;/code> 即可完成部署。&lt;/p>
-&lt;p>Judgehost 利用了 Linux 内核的 Cgroup 特性，所以需进行一步额外设置（似乎部分内核较新的系统不需要）。编辑 &lt;code>/etc/default/grub&lt;/code> 文件，将默认的命令改为：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>GRUB_CMDLINE_LINUX_DEFAULT&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;quiet cgroup_enable=memory swapaccount=1&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GRUB_CMDLINE_LINUX&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;quiet cgroup_enable=memory swapaccount=1&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后运行 &lt;code>update-grub&lt;/code> 并重启。&lt;/p>
-&lt;p>需要多核判题的话创建多个 Judgehost 容器并修改 DAEMON_ID 为不同的值即可。&lt;/p>
-&lt;p>目前存在的问题：&lt;/p>
-&lt;ul>
-&lt;li>judgehost 用户的初始密码不定，需要手动去 web 端更改并添加 &lt;code>JUDGEDAEMON_PASSWORD&lt;/code> 的环境变量。（默认环境变量的密码是 &lt;code>password&lt;/code>）&lt;/li>
-&lt;li>整个系统对我来说是个黑盒&amp;hellip;&lt;/li>
-&lt;/ul>
-&lt;p>除了 MariaDB , DOMserver , Judgehost 这三个必要的容器外，我还使用了 phpMyAdmin 来进行图形化的数据库管理（备份)。数据库（即 &lt;code>mariadb&lt;/code> 容器的数据卷）创建在了当前目录的&lt;code>data&lt;/code>文件夹下，方便备份。&lt;/p>
-&lt;p>其中，Domserver 映射到了主机的 80 端口， phpMyAdmin 映射到了 8080 端口。由于是内网环境，故不准备采用 HTTPS 加密。&lt;/p>
-&lt;p>需要注意的是，DOMjudge 提供的 Judgehost 镜像中仅包含 C, C++, Java 三种语言的运行环境。&lt;/p>
-&lt;h2 id="配置">配置&lt;/h2>
-&lt;p>Domserver 部署成功后，即可通过 Web 端来访问了。默认的管理员账号用户名 &lt;code>admin&lt;/code> ，默认密码被打印在domserver启动时的日志中，同时也可以用&lt;code>docker exec -it domserver cat /opt/domjudge/domserver/etc/initial_admin_password.secret&lt;/code>来获取 。&lt;/p>
-&lt;p>可以在 Config Checker 中进行配置检查。&lt;/p>
-&lt;p>C++ 的默认编译选项没有 C++11， 需手动添加。&lt;/p>
-&lt;h3 id="题目导入">题目导入&lt;/h3>
-&lt;p>DOMjudge 支持用 zip 格式的压缩包导入/导出题目。&lt;/p>
-&lt;p>具体的文件结构是：&lt;/p>
-&lt;pre tabindex="0">&lt;code>│ domjudge-problem.ini
-│
-├─data
-│ ├─sample
-│ └─secret
-│
-└─problem_statement
-problem.{pdf,html,txt}
-&lt;/code>&lt;/pre>&lt;p>在 &lt;code>domjudge-problem.ini&lt;/code> 中定义了如下信息：&lt;/p>
-&lt;p>&lt;img src="./1545219324330.png" alt="1545219324330">&lt;/p>
-&lt;p>（懒得翻译了，有时间再补）&lt;/p>
-&lt;p>在 secret 文件夹中存放测试数据，在 sample 文件夹中存放样例数据， 在 problem_statement 存放题面。&lt;/p>
-&lt;p>（不知道为什么博主在压缩包内上传题面没有成功过，只能通过 Web 端来上传）&lt;/p>
-&lt;p>测试数据的扩展名为 &lt;code>.in&lt;/code> 和 &lt;code>.ans&lt;/code>。&lt;/p>
-&lt;h3 id="队伍导入">队伍导入&lt;/h3>
-&lt;p>队伍及用户导入采用 tsv(&lt;em>tab-separated values&lt;/em>) 格式，即信息之间采用制表符（TAB）分隔。事实上，文件的扩展名并不需要采用&lt;code>.tsv&lt;/code>。我们可以直接在Excel中创建一个表格然后将其后复制至一个文本文件中。&lt;/p>
-&lt;p>格式由&lt;a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System_Requirements#Appendix:_File_formats"> ICPC 官方定义&lt;/a>。&lt;/p>
-&lt;p>teams 格式：&lt;/p>
-&lt;pre tabindex="0">&lt;code>teams 1
-team_id external_ID group_id team_name institution_name institution_short_name country_code
-&lt;/code>&lt;/pre>&lt;p>参考&lt;a href="https://cubercsl.cn/notes/DOMjudge-Note.html">CSL的博客&lt;/a>发现：&lt;/p>
-&lt;blockquote>
-&lt;p>在导入teams表的时候，在&lt;code>Country Code&lt;/code>后追加一列，填写&lt;code>Institution External ID&lt;/code>。
-这步是阅读&lt;a href="https://github.com/DOMjudge/domjudge/blob/master/lib/lib.impexp.php#L108">源代码&lt;/a>后猜测的，当时的实际操作是直接在数据库中的&lt;code>team_affiliation&lt;/code>用SQL语句更新&lt;code>ExternalID&lt;/code>的。&lt;/p>
-&lt;/blockquote>
-&lt;p>博主采用了这种方式，并在导入队伍后通过 Web 界面手动添加 Affiliation 信息。&lt;/p>
-&lt;p>事实上，institution_name institution_short_name country_code这三个字段都不是必要的，只需要有External ID就可以。而如果没有External ID的话，会创建和队伍数量一样多的Affiliation。&lt;/p>
-&lt;p>accounts 格式：&lt;/p>
-&lt;pre tabindex="0">&lt;code>accounts 1
-account_type fullname username password
-&lt;/code>&lt;/pre>&lt;p>一种（可能）简单的方式是先导入队伍再导入用户，并且用户 username 的后缀数字与 team_id 相同。不需要的字段可以直接留空。（不能缺少分隔符）&lt;/p>
-&lt;p>tsv 文件可以采用 Excel 生成。在 Excel 中输入完数据后选择另存为文本文件（制表符分隔）即可。&lt;/p>
-&lt;p>如需使用&lt;code>institution_name institution_short_name country_code&lt;/code> 三项需在 Team Affiliations 中提前创建相应的条目。&lt;/p>
-&lt;h3 id="api">API&lt;/h3>
-&lt;p>参考官方的 API 说明，DOMjudge 包含&lt;a href="https://clics.ecs.baylor.edu/index.php/Contest_API"> ICPC 定义的 API &lt;/a>和&lt;a href="https://www.domjudge.org/demoweb/api/doc">自有的 API&lt;/a>。&lt;/p>
-&lt;p>&lt;img src="./1545220336183.png" alt="1545220336183">&lt;/p>
-&lt;h3 id="滚榜">滚榜&lt;/h3>
-&lt;p>尝试使用官方的 &lt;a href="https://icpc.baylor.edu/icpctools/">ICPC tools&lt;/a>，发现总是提示比赛未结束，查阅日志认为是 DOMjudge 的 event feed 格式与 ICPC tools 提供的 resolver 工具的格式不兼容。&lt;/p>
-&lt;p>尝试 DOMjura 发现同样不能正确读取 event-feed 。&lt;/p>
-&lt;hr>
-&lt;p>2019年校赛补充：滚榜采用了 Github 上的&lt;a href="https://github.com/hex539/scoreboard">这个项目&lt;/a>。这比官方的滚榜工具好用多了，但是也有坑。&lt;/p>
-&lt;p>首先它使用bazel作为构建工具，但是bazel对于Windows很不友好（至少对于这个项目而言），会有奇怪的报错。所以我使用了Ubuntu。其次，由于构建过程中大部分源都在国外，对于国内的网络环境来说很不友好。我的解决办法是使用proxychains代理bazel，实测无需任何配置即可支持Domjudge 7.1.1（2019/12/7）。&lt;/p>
-&lt;h2 id="2018冬季新生赛概况">2018冬季新生赛概况&lt;/h2>
-&lt;p>闲扯几句。&lt;/p>
-&lt;p>热身赛一切良好。出题人数据出锅，被批判了一个多小时2333。&lt;/p>
-&lt;p>正式赛赛前比赛账号导入的时候，有个人是后来添加的，和之前的版本没有对应上，导致部分队伍登录到了后一个队伍的账号，重新导入 team 后发现无法登录，还需导入 accounts。这导致比赛推迟了 5 分钟。&lt;/p>
-&lt;p>由于 Submission 的输出数据是保留的，而赛前我的服务器硬盘空间本来就不多了，比赛时当服务器的硬盘占用达到 90% 时，所有 judgehost 就都被关了。我只能胡乱删几个软件包腾出空间。还好没有造成大的影响。&lt;/p>
-&lt;p>然后直到最后还是没有搞出滚榜。&lt;/p>
-&lt;p>GG。总体来说还是挺顺利的，服务器没有崩，甚至平均 CPU load 只有 1.0 左右，就是感觉比较吃 I/O，还好我用的是固态（&lt;del>先见之明&lt;/del>）。&lt;/p>
-&lt;p>总结一下，DOMjudge 体验极佳，可以在校赛再推广一波。&lt;/p>
-&lt;h2 id="2019冬季新生赛概况">2019冬季新生赛概况&lt;/h2>
-&lt;p>由于今年懒得去嫖学校的服务器了，所以打算用公网服务器。本来在GCP和阿里云之间纠结用哪个，给我恰好滑稽给我提供了他在镇江的独服，于是建了一个16C，16G内存的虚拟机用作评测服务器（顺带送了个域名）。&lt;/p>
-&lt;p>这台服务器的网络结构比较复杂，首先，他是Windows Server，通过一个软件把某些端口的流量转发至一台Debian虚拟机中（为了方便管理证书等），然后由Debian上的Nginx反代至Domjudge的虚拟机中。这样我自己就不用配置证书也能有HTTPS。&lt;/p>
-&lt;p>但是Windows有一个老生常谈的坑：时间问题。Windows的硬件时钟是本地时间，而Linux为UTC时间，这导致了一开始Domjudge里的时间是假的，需要手动设置。&lt;/p>
-&lt;p>本次Domjudge的配置基本与之前相同，用Docker-compose一键部署。&lt;/p>
-&lt;p>之前一直没有做过压力测试一直是我的遗憾，这次在研究了Domjudge的&lt;a href="https://www.domjudge.org/demoweb/api/doc">API文档&lt;/a>之后，写了一个&lt;a href="Domjudge-config/submit.py">自动交题的脚本&lt;/a>，并且用Locust辅助做压力测试，然后评测机不负众望炸了。。&lt;/p>
-&lt;p>&lt;img src="./image-20191208184458561.png" alt="image-20191208184458561">&lt;/p>
-&lt;p>其实还不止这个错，还有各种奇怪的错误。幸好在正式比赛中评测机表现得很稳健，并没有出锅，应该是压力还不够大。。&lt;/p>
-&lt;p>比赛时还碰到一个bug，在一道题重测后这道题的一血变更了，但是榜单上的一血是错的，重新刷新榜单也未解决。查看数据库表发现有一张叫&lt;code>scorecache&lt;/code>的表，推测该表即为榜单的缓存，于是更改&lt;code>is_first_solved&lt;/code>字段后，成功解决。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
