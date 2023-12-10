@@ -1,4 +1,33 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 01 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>MIT 6.824 学习笔记(二) Raft</title><link>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</link><pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/ -&lt;blockquote>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 10 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>记一次 mpv 异常关闭的调试</title><link>https://blog.coherence.codes/posts/2023/mpv_debug/</link><pubDate>Sun, 10 Dec 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mpv_debug/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mpv_debug/ -&lt;h2 id="查不出的问题">查不出的问题&lt;/h2>
+&lt;p>长久以来我都被 mpv 的一个问题所困扰，那就是在正常播放视频时 mpv 有概率会自动退出（通常是按下暂停键的时候）。通过 &lt;code>-v -v -v&lt;/code> 参数查看详细日志发现 mpv 接收到了 stop 命令：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>cplayer&lt;span style="color:#f92672">]&lt;/span> Run command: stop, flags&lt;span style="color:#f92672">=&lt;/span>64, args&lt;span style="color:#f92672">=[&lt;/span>flags&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是这个命令是谁发的不得而知。一开始怀疑是插件的问题，然而禁用所有插件（&lt;code>~/.config/mpv/scripts&lt;/code> 目录）后问题依旧。后尝试用 &lt;code>--no-config&lt;/code> 参数禁用所有配置，发现问题消失，于是尝试注释掉所有 &lt;code>mpv.conf&lt;/code> 中的配置，发现问题依旧。我还怀疑过是 &lt;code>pipewire&lt;/code>/&lt;code>xorg&lt;/code> 的问题，但是并没有搜索到相关信息。&lt;/p>
+&lt;p>我还观察到 vlc 是不是也会出现播放时自动停止的现象，另外 youtube/bilibili 播放视频时会经常自动跳转到开头。后来证实这其实都是同一个问题导致的..&lt;/p>
+&lt;h2 id="线索">线索&lt;/h2>
+&lt;p>在 mpv 的 issue 中找到了一个问题相同的 &lt;a href="https://github.com/mpv-player/mpv/issues/11988">bug report&lt;/a>，开发者认为这是插件导致的，但是我已经禁用所有插件了，于是我留言询问应该如何排查，有一个人指出了可能和 &lt;code>mpv-mpris&lt;/code> 有关。&lt;/p>
+&lt;p>&lt;a href="https://wiki.archlinux.org/title/MPRIS">MPRIS&lt;/a> 是一个 dbus 接口，提供了控制媒体播放器的相应 API，绝大多数应用，包括上述提到的几个，都支持这一接口。mpv 的 mpris 支持通过 &lt;code>mpv-mpris&lt;/code> 包提供。看到这个名字我恍然大悟，&lt;code>mpv-mpris&lt;/code> 由系统包管理器安装，因此并没有出现在用户的插件目录下。当即我查看了 &lt;code>mpv-mpris&lt;/code> 的源码，发现其为 mpv C 拓展，而不是常见的 Lua 拓展。&lt;/p>
+&lt;p>从&lt;a href="https://github.com/hoyon/mpv-mpris/blob/16fee38988bb0f4a0865b6e8c3b332df2d6d8f14/mpris.c#L602C26-L602C26">这里&lt;/a>可以看到，它在收到 mpris 的 &lt;code>Stop()&lt;/code> 方法后，会向 mpv 发送 stop 命令，因此我准备加一行日志看看到底是不是 &lt;code>mpv-mpris&lt;/code> 导致了上述问题。询问了 ChatGPT 之后发现其对于如何在 mpv C 扩展中打印日志完全是在瞎扯.. 后来发现直接用 &lt;code>printf&lt;/code> 就行.. 从函数签名可以看到其包含了 sender 的信息，于是将其打印。这里我并没有 clone 仓库进行构建，而是直接复制 archlinux 中的 PKGBUILD，先用 &lt;code>makepkg -o&lt;/code> 下载解压源码，修改后再用 &lt;code>makepkg -e&lt;/code> 进行构建，这样做的好处是无需关心具体的构建流程以及如何应用构建后的插件，build 完直接装就行。&lt;/p>
+&lt;p>在复现问题之后发现果然是 &lt;code>mpv-mpris&lt;/code> 调用了 stop 命令，日志为：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mpris: sender: :1.41, _object_path: /org/mpris/MediaPlayer2, interface_name: org.mpris.MediaPlayer2.Player, method_name: Stop, parameters: &lt;span style="color:#f92672">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>继续询问 ChatGPT 如何从 &lt;code>:1.41&lt;/code> 这个标识符得到发送者的进程，这次它倒没有瞎扯，告诉我 dbus 包含一个内省方法：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ dbus-send --session --dest&lt;span style="color:#f92672">=&lt;/span>org.freedesktop.DBus --type&lt;span style="color:#f92672">=&lt;/span>method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.GetConnectionUnixProcessID string:&lt;span style="color:#e6db74">&amp;#34;:1.41&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>method &lt;span style="color:#66d9ef">return&lt;/span> time&lt;span style="color:#f92672">=&lt;/span>1702192468.323155 sender&lt;span style="color:#f92672">=&lt;/span>org.freedesktop.DBus -&amp;gt; destination&lt;span style="color:#f92672">=&lt;/span>:1.2850 serial&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">3&lt;/span> reply_serial&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> uint32 &lt;span style="color:#ae81ff">1688&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>再用 ps 等命令查看，发现该进程为 kdeconnect。直接上 bugs.kde.org 搜索得到一个类似的 &lt;a href="https://bugs.kde.org/show_bug.cgi?id=476123">bug report&lt;/a>，不过除了作者没有人回应。&lt;/p>
+&lt;p>翻找源码发现大概是在 &lt;a href="https://invent.kde.org/network/kdeconnect-kde/-/blob/master/plugins/mpriscontrol/mpriscontrolplugin.cpp#L284">mpriscontrolplugin.cpp#L284&lt;/a> 调用的 mpris Stop 方法，去掉注释重新编译后查看日志发现如下条目：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>kdeconnect.core: TCP connection done (i&amp;#39;m the existing device)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kdeconnect.core: Starting server ssl (I&amp;#39;m the client TCP socket)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kdeconnect.core: Socket successfully established an SSL connection
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kdeconnect.core: It is a known device &amp;#34;xxxx&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kdeconnect.plugin.mpris: Calling action &amp;#34;Stop&amp;#34; in &amp;#34;org.mpris.MediaPlayer2.mpv&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kdeconnect.plugin.notification: Not found noti by internal Id: &amp;#34;0|org.kde.kdeconnect_tp|-1850276765|null|10264&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kdeconnect.plugin.mpris: MPRIS service &amp;#34;org.mpris.MediaPlayer2.mpv&amp;#34; just went offline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kdeconnect.plugin.mpris: Mpris removePlayer &amp;#34;org.mpris.MediaPlayer2.mpv&amp;#34; -&amp;gt; &amp;#34;mpv&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>基本能够确认是从这里进行调用的了。根据函数推断该函数是处理配对的其他设备发送的请求，出问题时我配对的设备只有我的安卓手机，所以问题应该出在安卓端。看了眼 kdeconnect-android 的源码，看不懂啊&amp;hellip; 本次 debug 到此结束。&lt;/p>
+&lt;p>由于 vlc/chromium 同样实现 mpris 接口，所以上面观察到的现象基本可以确认也是 kdeconnect 导致的了。&lt;/p>
+&lt;h2 id="怎么办呢">怎么办呢？&lt;/h2>
+&lt;p>目前的 workaround 是关闭 KDE Connect 中的 Multimedia control receiver 插件，drawback 是其他设备无法再控制本机的媒体播放器了，不过我也不怎么用，问题不大。&lt;/p>
+- https://blog.coherence.codes/posts/2023/mpv_debug/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>MIT 6.824 学习笔记(二) Raft</title><link>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</link><pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/ -&lt;blockquote>
 &lt;p>Note: 为了保持准确性，我会尽量使用英文术语。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="introduction">Introduction&lt;/h2>
@@ -240,7 +269,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#75715e"># object 字段就是对 commit 的引用&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git cat-file -t 0996cddadea886287fd606b4102304814eb3785c
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>commit
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是 tag 并不是必须指向一个 commit，tag 任何 object 都是可以的。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是 tag 并不是必须指向一个 commit，tag 任何 object 都是可以的。虽然在实践中好像 tag 非 commit 并没有什么用..&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git tag -a tree-tag 9ff1e32671b9ac918dd665020c8da93c44787e33
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cat .git/refs/tags/tree-tag
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3b94c91c60f92b16336050aa445c7a293e61ec2e
@@ -731,88 +760,4 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;p>发现在本地的配色是正常的，检查发现本地是 Hugo extended version，于是在 actions 中也启用了 extended 后恢复正常，挺奇怪的..&lt;/p>
 &lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2022/hello_hugo/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>The 2022 Python Language Summit</title><link>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</link><pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ -&lt;p>每年, 在 PyCon US 的前夕, 30 多位 Python 的核心开发者将会聚集起来召开 Python 语言峰会. 今年的会议在 5/11 召开, 让我们来看看今年讨论了什么吧. 有关会议的详情可在 &lt;a href="https://pyfound.blogspot.com/2022/05/the-2022-python-language-summit_01678898482.html">PSF Blog&lt;/a> 中找到.&lt;/p>
-&lt;h2 id="cpython-的-issue-和-pr-积压">CPython 的 issue 和 PR 积压&lt;/h2>
-&lt;p>首先祝贺一下前不久 &lt;a href="https://bugs.python.org">bpo&lt;/a> 正式退休了, Python 的 issue tracker 迁移到了 Github, 无论是易用性还是审美上来说都是一件好事.&lt;/p>
-&lt;p>随着 Python 的流行, issues 和 PRs 也开始累积起来了, 在 2022/05/07 时, CPython 有着 7,027 个 open issues 和 1,471 个 PRs. Python 开发者们向来对关闭一个 issue 持谨慎态度. 以低质量的功能请求 (feature requests) 为例, 我们可以粗略地把它们分为三类:&lt;/p>
-&lt;ul>
-&lt;li>没有任何意义的, 或显然有不利影响的, 它们能被轻易地关闭&lt;/li>
-&lt;li>会增加维护成本, 但似乎有点好处的, 对于它们的意见通常会很摇摆&lt;/li>
-&lt;li>每个人都觉得是好的, 但没人愿意真正去实现它.. 这些 issues 通常会存在很久, 如 &lt;a href="https://github.com/python/cpython/issues/36387">BPO-539907&lt;/a>, 一个存在了二十年的 issue.&lt;/li>
-&lt;/ul>
-&lt;p>开发者 Katriel 认为, 把这些 issues 留在 issue tracker 上是有害的, 增加了整个项目的维护成本. 有关这一论断, 一种极端的做法是关闭所有不活跃的 issues, 当然这是不可取的, 可以参看 &lt;a href="https://drewdevault.com/2021/10/26/stalebot.html">GitHub stale bot considered harmful&lt;/a>.&lt;/p>
-&lt;p>与会者们认为这一问题没有简单的答案, 但增加 triage 的人力显然是一种办法, CPython triage 团队目前在逐渐壮大, 这是好事. PEP 594 计划移除一些年久失修的标准库, 这也能缓解一些问题.&lt;/p>
-&lt;h2 id="没有-gil-的-python">没有 GIL 的 Python&lt;/h2>
-&lt;p>GIL 是 CPython 中一个臭名昭著的特性, 它也被开发者们翻来覆去地讨论了. 今年, 这一传统得到延续, 开发者 Sam Gross 讨论了 &lt;a href="https://github.com/colesbury/nogil">nogil&lt;/a>, 一个移除 GIL 的 Proof of Concept.&lt;/p>
-&lt;p>移除 GIL 意味着为了保证线程安全, 需要加入许多 locks, 这非常困难, 而且会影响单线程性能.&lt;/p>
-&lt;p>Gross 希望能在 Python 3.12 中加入一个编译选项来禁用 GIL. 与会者对其表示了支持, 但许多问题还有待考虑, 如这一巨大的更改如何合并入主线, 其对第三方库的影响, 对于 CPython 开发的影响等.&lt;/p>
-&lt;p>我个人感觉移除 GIL 还是不太现实的..&lt;/p>
-&lt;h2 id="每个解释器一个-gil">每个解释器一个 GIL&lt;/h2>
-&lt;p>在 1997 年, CPython 加入了 &lt;code>PyInterpreterState&lt;/code> 结构体, 这使得多个解释器能运行在一个进程中.&lt;/p>
-&lt;p>然而, 多个解释器之间并不是完全隔离的, 许多共享的全局变量通过 GIL 来实现互斥访问. 开发者 Eric Snow 希望每个解释器能有一个自己的 GIL 来解决这一问题, 这同样能够使子解释器之间实现真正的并行. 到目前为止, 仍然存在着约 1200 个全局变量.
-Snow 认为这一工作和 Gross 的移除 GIL 不是互斥的, &amp;ldquo;这些工作不管在哪里都是一个好主意&amp;rdquo;, 他说.&lt;/p>
-&lt;p>目前子解释器只能通过 C-API 使用, &lt;a href="https://peps.python.org/pep-0554/">PEP 554&lt;/a> 提出了在 Python 中使用子解释器, 然而该 PEP 仍处于草案状态.&lt;/p>
-&lt;p>我表示并不是很懂子解释器的意义所在&amp;hellip; 或许是方便共享数据? 多进程之间通信是要求一个对象可序列化的..&lt;/p>
-&lt;h2 id="faster-python">Faster Python&lt;/h2>
-&lt;p>好消息! 好消息! Python 3.11 相比于 3.10 会有平均 25% 的性能提升!&lt;/p>
-&lt;p>一年之前, 微软出钱, 组建了 Faster CPython 团队, 由开发者 Mark Shannon 和 Python 之父&lt;del>廖雪峰&lt;/del> Guido van Rossum 领导来做性能优化. Shannon 分享了他们接下来的计划.
-第一个问题是测量. 我们首先要知道 Python 在哪些地方慢, 为什么慢, 才能做针对性的性能优化. 为此, 我们需要更多的&lt;del>跑分&lt;/del>基准测试 (benchmarks), Shannon 希望更多人能去贡献 &lt;a href="https://github.com/python/pyperformance">pyperformance&lt;/a> 项目.&lt;/p>
-&lt;p>3.11 的很大一部分改进来自于 PEP 659, &amp;ldquo;专门化的自适应解释器&amp;rdquo;, 简而言之是在执行时用更快的字节码去替代原有的字节码. PEP 659 仍有待继续推进.&lt;/p>
-&lt;p>Shannon 也谈到了 JIT, &amp;ldquo;每个人都想要一个 JIT 编译器, 即使这毫无意义&amp;rdquo;, 像 &lt;a href="https://github.com/tonybaloney/Pyjion">pyjion&lt;/a> 这样的项目用第三方库的形式把 JIT 带到了 CPython 中, 然而在 CPython 中本身集成 JIT 可能要等到 3.13 之后了.&lt;/p>
-&lt;h2 id="python-和浏览器">Python 和浏览器&lt;/h2>
-&lt;p>在过去两年间, 60 多个和 WebAssembly 相关的 PR 合入了主线. 如今, &lt;code>main&lt;/code> 分支已经能够成功交叉编译成 wasm 了.
-WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码相近的性能. 而 wasm 是机器无关的.&lt;/p>
-&lt;p>这一 feature 仍然是高度实验性的, 许多模块在 wasm 下是不可用的.
-除了 CPython 之外, 一众第三方项目如 PyScript, Pyodide 已经能更好地支持 wasm 了.&lt;/p>
-&lt;h2 id="在语法中应用-f-strings">在语法中应用 f-strings&lt;/h2>
-&lt;p>在 Python 3.6 中引入的 f-strings 迅速成为了大家最喜爱的新 features 之一.&lt;/p>
-&lt;p>&lt;code>f&amp;quot;Interpolating an arbitrary expression into a string: {1 + 1}.&amp;quot;&lt;/code>&lt;/p>
-&lt;p>在运行时, 大括号中的表达式会被执行, 然后 &lt;code>str()&lt;/code> 会被调用, 最后的结果会被插入合适的位置.&lt;/p>
-&lt;p>然而, f-strings 目前的实现是 1,400 行 C 代码, 和其他 Python 代码的 Parsing 逻辑完全分离. 这带来了可维护性上的问题和许多隐藏的 bug.&lt;/p>
-&lt;p>Python 3.9 带来了全新的 PEG parser, 能够实现许多复杂的 parsing. 开发者 Pablo Galindo Salgado 希望能把 f-strings 的 parsing 结合到 CPython 的语法中.&lt;/p>
-&lt;p>比如以下问题:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&amp;gt;&amp;gt;&amp;gt; my_list_of_strings &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;b&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;c&amp;#39;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;gt;&amp;gt;&amp;gt; f&lt;span style="color:#e6db74">&amp;#39;Here is a list: {&amp;#34;\n&amp;#34;.join(my_list_of_strings)}&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> File &lt;span style="color:#e6db74">&amp;#34;&amp;lt;stdin&amp;gt;&amp;#34;&lt;/span>, line &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#e6db74">&amp;#39;Here is a list: {&amp;#34;\n&amp;#34;.join(my_list_of_strings)}&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ^
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SyntaxError: f-string expression part cannot include a backslash
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在新方案下将会不存在.&lt;/p>
-&lt;h2 id="从-cinder-合并回上游">从 Cinder 合并回上游&lt;/h2>
-&lt;p>在 2021 年 5 月, Instagram 团队开源了 Cinder, 这是 CPython 的一个以性能为目标的 fork. Cinder 包括了 &amp;ldquo;协程的及早求值&amp;rdquo;, 一个 JIT 编译器, 利用了 type hints 的&amp;quot;实验性的字节码编译器&amp;quot;等 features. (我一直以为 type hints 完全是静态检查, 翻了翻 PEP 发现运行时类型检查以及可能的利用类型进行性能优化是可以接受的)&lt;/p>
-&lt;p>Instagram 的工程师 Itamar Ostricher 分享了 async 和协程相关的更改, 并希望这些更改能合并回上游.
-一个例子:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> asyncio
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">IO_bound_function&lt;/span>():
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;This function could finish immediately... or not!&amp;#34;&amp;#34;&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Body of this function here&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">important_other_task&lt;/span>():
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> asyncio&lt;span style="color:#f92672">.&lt;/span>sleep(&lt;span style="color:#ae81ff">5&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Task done!&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>():
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> asyncio&lt;span style="color:#f92672">.&lt;/span>gather(
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IO_bound_function(),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> important_other_task()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;All done!&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__ &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;__main__&amp;#34;&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> asyncio&lt;span style="color:#f92672">.&lt;/span>run(main)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果 &lt;code>IO_bound_function&lt;/code> 能立即返回的话, 创建一个协程就毫无意义了. Ostricher 的团队扩展了 &lt;a href="https://docs.python.org/3/c-api/call.html#the-vectorcall-protocol">vectorcall&lt;/a> 协议, 使得被调用者能够知道这次调用是否被调用者 &lt;code>await&lt;/code> 了. 这意味着 &lt;code>awaitables&lt;/code> (可被 &lt;code>await&lt;/code> 的对象) 能够被&lt;em>及早求值&lt;/em>, 多余的协程不会被创建了. Ostricher 的团队在重度使用 &lt;code>async&lt;/code> 的场景下观察到了 ~5% 的性能提升.&lt;/p>
-&lt;p>这个改动能否被合入主线呢? 一个重要的问题是公平性. 如果某些 &lt;code>awaitables&lt;/code> 能被及早求值, 那么可能会使事件循环中的优先级发生改变, 可能会造成不向后兼容的更改. 同时, 其对于 3.11 中 asyncio &lt;em>task groups&lt;/em> 的影响也尚不明确.&lt;/p>
-&lt;h2 id="达到永恒">达到永恒&lt;/h2>
-&lt;p>在 Python 中, 任何东西是一个对象. 所有对象都维护了自己的引用计数, 以便进行垃圾回收. 这就意味着不可变对象在 C 的层次上是可变的, 这会影响 CPU 和内存性能. 例如 &lt;code>None&lt;/code> 对象经常被使用, 对其引用计数的更改也非常多.&lt;/p>
-&lt;p>&lt;a href="https://peps.python.org/pep-0683/">PEP 683&lt;/a> 提出了 &amp;ldquo;永恒的对象 (Immortal objects)&amp;rdquo;, 它们的运行时状态不会改变, 即引用计数不会到达 0, 也不会被垃圾回收.&lt;/p>
-&lt;p>这是一个 CPython 内部的 feature, 即公开 API 不会改变.
-与会者们提出了一些怀疑, 比如它的好处是否只是潜在的, 以及改变引用计数的语义会带来第三方库的兼容性问题. 目前该 PEP 仍处于草案状态.&lt;/p>
-&lt;p>我并没有理解这个 PEP 的好处在哪.. 目前的实现在回归测试中导致了 ~2% 的性能损失..&lt;/p>
-&lt;h2 id="尾巴">尾巴&lt;/h2>
-&lt;p>本次会议很大程度上讨论了 Python 的性能改善, 然而大多数变化是琐碎且渐进的, 想要看到某个改动带来的性能飞跃似乎不太可能 &lt;del>(除了 GIL)&lt;/del>. 我们希望去年 Language Summit 上 Guido 吹下的牛── 4 年里将 CPython 的性能提升 5 倍──能够实现吧.&lt;/p>
-- https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2022/hello_hugo/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

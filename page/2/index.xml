@@ -1,4 +1,88 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 01 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>民族主义自媒体是如何消费我们的</title><link>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ -&lt;p>目前的中文互联网上存在着大量的鼓吹民族主义, 制造中西方对立的自媒体, 令人震惊的是, 他们中大部分不但充斥着情绪输出, 甚至连大部分事实都是错误的. 我偶然间读到了这样的一篇文章, 并对其中列出的事实进行了查证, 然后感觉我的智商受到了侮辱..&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 10 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>The 2022 Python Language Summit</title><link>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</link><pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ -&lt;p>每年, 在 PyCon US 的前夕, 30 多位 Python 的核心开发者将会聚集起来召开 Python 语言峰会. 今年的会议在 5/11 召开, 让我们来看看今年讨论了什么吧. 有关会议的详情可在 &lt;a href="https://pyfound.blogspot.com/2022/05/the-2022-python-language-summit_01678898482.html">PSF Blog&lt;/a> 中找到.&lt;/p>
+&lt;h2 id="cpython-的-issue-和-pr-积压">CPython 的 issue 和 PR 积压&lt;/h2>
+&lt;p>首先祝贺一下前不久 &lt;a href="https://bugs.python.org">bpo&lt;/a> 正式退休了, Python 的 issue tracker 迁移到了 Github, 无论是易用性还是审美上来说都是一件好事.&lt;/p>
+&lt;p>随着 Python 的流行, issues 和 PRs 也开始累积起来了, 在 2022/05/07 时, CPython 有着 7,027 个 open issues 和 1,471 个 PRs. Python 开发者们向来对关闭一个 issue 持谨慎态度. 以低质量的功能请求 (feature requests) 为例, 我们可以粗略地把它们分为三类:&lt;/p>
+&lt;ul>
+&lt;li>没有任何意义的, 或显然有不利影响的, 它们能被轻易地关闭&lt;/li>
+&lt;li>会增加维护成本, 但似乎有点好处的, 对于它们的意见通常会很摇摆&lt;/li>
+&lt;li>每个人都觉得是好的, 但没人愿意真正去实现它.. 这些 issues 通常会存在很久, 如 &lt;a href="https://github.com/python/cpython/issues/36387">BPO-539907&lt;/a>, 一个存在了二十年的 issue.&lt;/li>
+&lt;/ul>
+&lt;p>开发者 Katriel 认为, 把这些 issues 留在 issue tracker 上是有害的, 增加了整个项目的维护成本. 有关这一论断, 一种极端的做法是关闭所有不活跃的 issues, 当然这是不可取的, 可以参看 &lt;a href="https://drewdevault.com/2021/10/26/stalebot.html">GitHub stale bot considered harmful&lt;/a>.&lt;/p>
+&lt;p>与会者们认为这一问题没有简单的答案, 但增加 triage 的人力显然是一种办法, CPython triage 团队目前在逐渐壮大, 这是好事. PEP 594 计划移除一些年久失修的标准库, 这也能缓解一些问题.&lt;/p>
+&lt;h2 id="没有-gil-的-python">没有 GIL 的 Python&lt;/h2>
+&lt;p>GIL 是 CPython 中一个臭名昭著的特性, 它也被开发者们翻来覆去地讨论了. 今年, 这一传统得到延续, 开发者 Sam Gross 讨论了 &lt;a href="https://github.com/colesbury/nogil">nogil&lt;/a>, 一个移除 GIL 的 Proof of Concept.&lt;/p>
+&lt;p>移除 GIL 意味着为了保证线程安全, 需要加入许多 locks, 这非常困难, 而且会影响单线程性能.&lt;/p>
+&lt;p>Gross 希望能在 Python 3.12 中加入一个编译选项来禁用 GIL. 与会者对其表示了支持, 但许多问题还有待考虑, 如这一巨大的更改如何合并入主线, 其对第三方库的影响, 对于 CPython 开发的影响等.&lt;/p>
+&lt;p>我个人感觉移除 GIL 还是不太现实的..&lt;/p>
+&lt;h2 id="每个解释器一个-gil">每个解释器一个 GIL&lt;/h2>
+&lt;p>在 1997 年, CPython 加入了 &lt;code>PyInterpreterState&lt;/code> 结构体, 这使得多个解释器能运行在一个进程中.&lt;/p>
+&lt;p>然而, 多个解释器之间并不是完全隔离的, 许多共享的全局变量通过 GIL 来实现互斥访问. 开发者 Eric Snow 希望每个解释器能有一个自己的 GIL 来解决这一问题, 这同样能够使子解释器之间实现真正的并行. 到目前为止, 仍然存在着约 1200 个全局变量.
+Snow 认为这一工作和 Gross 的移除 GIL 不是互斥的, &amp;ldquo;这些工作不管在哪里都是一个好主意&amp;rdquo;, 他说.&lt;/p>
+&lt;p>目前子解释器只能通过 C-API 使用, &lt;a href="https://peps.python.org/pep-0554/">PEP 554&lt;/a> 提出了在 Python 中使用子解释器, 然而该 PEP 仍处于草案状态.&lt;/p>
+&lt;p>我表示并不是很懂子解释器的意义所在&amp;hellip; 或许是方便共享数据? 多进程之间通信是要求一个对象可序列化的..&lt;/p>
+&lt;h2 id="faster-python">Faster Python&lt;/h2>
+&lt;p>好消息! 好消息! Python 3.11 相比于 3.10 会有平均 25% 的性能提升!&lt;/p>
+&lt;p>一年之前, 微软出钱, 组建了 Faster CPython 团队, 由开发者 Mark Shannon 和 Python 之父&lt;del>廖雪峰&lt;/del> Guido van Rossum 领导来做性能优化. Shannon 分享了他们接下来的计划.
+第一个问题是测量. 我们首先要知道 Python 在哪些地方慢, 为什么慢, 才能做针对性的性能优化. 为此, 我们需要更多的&lt;del>跑分&lt;/del>基准测试 (benchmarks), Shannon 希望更多人能去贡献 &lt;a href="https://github.com/python/pyperformance">pyperformance&lt;/a> 项目.&lt;/p>
+&lt;p>3.11 的很大一部分改进来自于 PEP 659, &amp;ldquo;专门化的自适应解释器&amp;rdquo;, 简而言之是在执行时用更快的字节码去替代原有的字节码. PEP 659 仍有待继续推进.&lt;/p>
+&lt;p>Shannon 也谈到了 JIT, &amp;ldquo;每个人都想要一个 JIT 编译器, 即使这毫无意义&amp;rdquo;, 像 &lt;a href="https://github.com/tonybaloney/Pyjion">pyjion&lt;/a> 这样的项目用第三方库的形式把 JIT 带到了 CPython 中, 然而在 CPython 中本身集成 JIT 可能要等到 3.13 之后了.&lt;/p>
+&lt;h2 id="python-和浏览器">Python 和浏览器&lt;/h2>
+&lt;p>在过去两年间, 60 多个和 WebAssembly 相关的 PR 合入了主线. 如今, &lt;code>main&lt;/code> 分支已经能够成功交叉编译成 wasm 了.
+WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码相近的性能. 而 wasm 是机器无关的.&lt;/p>
+&lt;p>这一 feature 仍然是高度实验性的, 许多模块在 wasm 下是不可用的.
+除了 CPython 之外, 一众第三方项目如 PyScript, Pyodide 已经能更好地支持 wasm 了.&lt;/p>
+&lt;h2 id="在语法中应用-f-strings">在语法中应用 f-strings&lt;/h2>
+&lt;p>在 Python 3.6 中引入的 f-strings 迅速成为了大家最喜爱的新 features 之一.&lt;/p>
+&lt;p>&lt;code>f&amp;quot;Interpolating an arbitrary expression into a string: {1 + 1}.&amp;quot;&lt;/code>&lt;/p>
+&lt;p>在运行时, 大括号中的表达式会被执行, 然后 &lt;code>str()&lt;/code> 会被调用, 最后的结果会被插入合适的位置.&lt;/p>
+&lt;p>然而, f-strings 目前的实现是 1,400 行 C 代码, 和其他 Python 代码的 Parsing 逻辑完全分离. 这带来了可维护性上的问题和许多隐藏的 bug.&lt;/p>
+&lt;p>Python 3.9 带来了全新的 PEG parser, 能够实现许多复杂的 parsing. 开发者 Pablo Galindo Salgado 希望能把 f-strings 的 parsing 结合到 CPython 的语法中.&lt;/p>
+&lt;p>比如以下问题:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&amp;gt;&amp;gt;&amp;gt; my_list_of_strings &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;b&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;c&amp;#39;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;gt;&amp;gt;&amp;gt; f&lt;span style="color:#e6db74">&amp;#39;Here is a list: {&amp;#34;\n&amp;#34;.join(my_list_of_strings)}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> File &lt;span style="color:#e6db74">&amp;#34;&amp;lt;stdin&amp;gt;&amp;#34;&lt;/span>, line &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#e6db74">&amp;#39;Here is a list: {&amp;#34;\n&amp;#34;.join(my_list_of_strings)}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ^
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SyntaxError: f-string expression part cannot include a backslash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在新方案下将会不存在.&lt;/p>
+&lt;h2 id="从-cinder-合并回上游">从 Cinder 合并回上游&lt;/h2>
+&lt;p>在 2021 年 5 月, Instagram 团队开源了 Cinder, 这是 CPython 的一个以性能为目标的 fork. Cinder 包括了 &amp;ldquo;协程的及早求值&amp;rdquo;, 一个 JIT 编译器, 利用了 type hints 的&amp;quot;实验性的字节码编译器&amp;quot;等 features. (我一直以为 type hints 完全是静态检查, 翻了翻 PEP 发现运行时类型检查以及可能的利用类型进行性能优化是可以接受的)&lt;/p>
+&lt;p>Instagram 的工程师 Itamar Ostricher 分享了 async 和协程相关的更改, 并希望这些更改能合并回上游.
+一个例子:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> asyncio
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">IO_bound_function&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;This function could finish immediately... or not!&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Body of this function here&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">important_other_task&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> asyncio&lt;span style="color:#f92672">.&lt;/span>sleep(&lt;span style="color:#ae81ff">5&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Task done!&amp;#39;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> asyncio&lt;span style="color:#f92672">.&lt;/span>gather(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IO_bound_function(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> important_other_task()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;All done!&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__ &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;__main__&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> asyncio&lt;span style="color:#f92672">.&lt;/span>run(main)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果 &lt;code>IO_bound_function&lt;/code> 能立即返回的话, 创建一个协程就毫无意义了. Ostricher 的团队扩展了 &lt;a href="https://docs.python.org/3/c-api/call.html#the-vectorcall-protocol">vectorcall&lt;/a> 协议, 使得被调用者能够知道这次调用是否被调用者 &lt;code>await&lt;/code> 了. 这意味着 &lt;code>awaitables&lt;/code> (可被 &lt;code>await&lt;/code> 的对象) 能够被&lt;em>及早求值&lt;/em>, 多余的协程不会被创建了. Ostricher 的团队在重度使用 &lt;code>async&lt;/code> 的场景下观察到了 ~5% 的性能提升.&lt;/p>
+&lt;p>这个改动能否被合入主线呢? 一个重要的问题是公平性. 如果某些 &lt;code>awaitables&lt;/code> 能被及早求值, 那么可能会使事件循环中的优先级发生改变, 可能会造成不向后兼容的更改. 同时, 其对于 3.11 中 asyncio &lt;em>task groups&lt;/em> 的影响也尚不明确.&lt;/p>
+&lt;h2 id="达到永恒">达到永恒&lt;/h2>
+&lt;p>在 Python 中, 任何东西是一个对象. 所有对象都维护了自己的引用计数, 以便进行垃圾回收. 这就意味着不可变对象在 C 的层次上是可变的, 这会影响 CPU 和内存性能. 例如 &lt;code>None&lt;/code> 对象经常被使用, 对其引用计数的更改也非常多.&lt;/p>
+&lt;p>&lt;a href="https://peps.python.org/pep-0683/">PEP 683&lt;/a> 提出了 &amp;ldquo;永恒的对象 (Immortal objects)&amp;rdquo;, 它们的运行时状态不会改变, 即引用计数不会到达 0, 也不会被垃圾回收.&lt;/p>
+&lt;p>这是一个 CPython 内部的 feature, 即公开 API 不会改变.
+与会者们提出了一些怀疑, 比如它的好处是否只是潜在的, 以及改变引用计数的语义会带来第三方库的兼容性问题. 目前该 PEP 仍处于草案状态.&lt;/p>
+&lt;p>我并没有理解这个 PEP 的好处在哪.. 目前的实现在回归测试中导致了 ~2% 的性能损失..&lt;/p>
+&lt;h2 id="尾巴">尾巴&lt;/h2>
+&lt;p>本次会议很大程度上讨论了 Python 的性能改善, 然而大多数变化是琐碎且渐进的, 想要看到某个改动带来的性能飞跃似乎不太可能 &lt;del>(除了 GIL)&lt;/del>. 我们希望去年 Language Summit 上 Guido 吹下的牛── 4 年里将 CPython 的性能提升 5 倍──能够实现吧.&lt;/p>
+- https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>民族主义自媒体是如何消费我们的</title><link>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ -&lt;p>目前的中文互联网上存在着大量的鼓吹民族主义, 制造中西方对立的自媒体, 令人震惊的是, 他们中大部分不但充斥着情绪输出, 甚至连大部分事实都是错误的. 我偶然间读到了这样的一篇文章, 并对其中列出的事实进行了查证, 然后感觉我的智商受到了侮辱..&lt;/p>
 &lt;p>原文: &lt;a href="https://www.zhihu.com/question/428451991/answer/2431916538">西方媒体是怎样给西方人洗脑的？ - 远方青木的回答 - 知乎&lt;/a>, &lt;a href="http://web.archive.org/web/20220429053052/https://www.zhihu.com/question/428451991/answer/2431916538">archive&lt;/a>&lt;/p>
 &lt;hr>
 &lt;blockquote>
@@ -649,10 +733,4 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m &lt;span style="color:#f92672">+=&lt;/span> a[n&lt;span style="color:#f92672">-&lt;/span>i&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>] &lt;span style="color:#f92672">-&lt;/span> a[i]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>m &lt;span style="color:#f92672">-=&lt;/span> n &lt;span style="color:#f92672">-&lt;/span> k
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(min(l, r, m))
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>博客图片文件夹迁移</title><link>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</link><pubDate>Wed, 01 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/ -&lt;p>我原来的博客文件夹结构是这样的：&lt;/p>
-&lt;p>&lt;img src="./image-20200328175914444.png" alt="image-20200328175914444">&lt;/p>
-&lt;p>博文数量少的时候，还挺直观，但是数量一多，看着就很杂乱，因此，萌生了重新归类的想法。&lt;/p>
-&lt;p>思路大概是这样：按年份归类，然后图片统一放到当前目录下的&lt;code>images&lt;/code>文件夹里。&lt;/p>
-&lt;h2 id="实践">实践&lt;/h2>
-&lt;p>脚本的逻辑大概是对每一篇博文，寻找其元数据的 date 字段，将其移动到对应的文件夹下，同时对同名的文件夹也进行递归移动。由于图片都是相对引用的，所以不会出问题。（即使出了咱还有 git）&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>- https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
