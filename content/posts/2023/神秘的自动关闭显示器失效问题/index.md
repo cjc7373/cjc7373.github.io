@@ -3,6 +3,7 @@ title: 神秘的自动关闭显示器失效问题
 date: 2023-09-04
 tags:
 - KDE
+- Linux Desktop
 ---
 
 ## 问题

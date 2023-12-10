@@ -143,7 +143,7 @@ HEAD is now at f25ea8916 fix: Add CHANGELOG link
   commit
   ```
 
-  但是 tag 并不是必须指向一个 commit，tag 任何 object 都是可以的。
+  但是 tag 并不是必须指向一个 commit，tag 任何 object 都是可以的。虽然在实践中好像 tag 非 commit 并没有什么用..
 
   ```bash
   $ git tag -a tree-tag 9ff1e32671b9ac918dd665020c8da93c44787e33
