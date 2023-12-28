@@ -13,11 +13,17 @@ git 中最基础的元素是 object，每个 object 由一个 object ID (OID) �
 
 - `blobs`: 存储文件内容，OID 即为文件内容的哈希
 
-- `trees`: 一个文件名（path entries）的有序列表，OID 为这个列表的哈希。子目录同样是 trees。项目的根目录即为 root tree。所有的 trees 构成了一棵 Merkle tree，~~所以 git 就是区块链（即答~~。下图中三角代表 trees，方块为 blobs
+- `trees`: 一个文件名（path entries）的有序列表，OID 为这个列表的哈希。列表的每一行如下：
+
+  ```
+  100644 blob 1fc4aa8f76027dd0fb8f9b533810770236d5c234    .gitignore
+  ```
+
+  容易推测这几个字段分别为权限、object 类型、哈希、文件名。子目录同样是 trees。项目的根目录即为 root tree。所有的 trees 构成了一棵 Merkle tree，~~所以 git 就是区块链（即答~~。下图中三角代表 trees，方块为 blobs
 
   ![image-20230918111328708](./image-20230918111328708.png)
 
-- `commits`: 一个**快照**（snapshot），每个 commit 包含了一个到根 tree 的引用，和一个（或多个）到 parent 的引用。parent 就是上一个 commit 的 OID。在一个 merge commit 中会包含多个 parents。下图中圆形代表 commits
+- `commits`: 一个**快照**（snapshot），每个 commit 包含了一个到根 tree 的引用，和一个（或多个）到 parent 的引用。parent 就是上一个 commit 的 OID。在一个 merge commit 中会包含多个 parents。由于 Commit 存储的是快照而不是 diff，所以 Git checkout（切换分支）的速度很快。下图中圆形代表 commits
 
   ![image-20230918111515508](./image-20230918111515508.png)
 

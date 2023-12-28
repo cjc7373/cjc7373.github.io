@@ -141,9 +141,9 @@ snapshot 的创建过程依赖于上层应用，因为 Raft 对于状态机里�
 
 client 只会和 leader 交互，在 client 刚启动时，它可能会连接到一个随机的 server，若该 server 不为 leader，则 server 会拒绝这个请求并提供 leader 的信息。
 
-Raft 的目标是提供可线性化（linearizable）的语义，即每个操作会在调用和回复之间的某个时间立刻执行执行一次（exactly once）。然而，Raft 可能会执行一个操作多次，如果 leader 在 commit log entry 之后回复 client 之前崩溃了，client 会重试请求，导致一个操作执行了两次。这个问题的解决方案是对每个操作分配一个独特的序列号，如果 leader 收到了一个请求包含已经被执行的序列号，那么它就不会再次执行这个请求。
+Raft 的目标是提供可线性化（linearizable）的语义，即每个操作会在调用和回复之间的某个时间立刻执行执行一次（exactly once）。然而，Raft 可能会执行一个操作多次，如果 leader 在 commit log entry 之后回复 client 之前崩溃了，client 会重试请求，导致一个操作执行了两次。这个问题的解决方案是每个 client 为对每个操作分配一个递增的序列号，leader 维护每个 client 最新的序列号。如果 leader 收到了一个请求包含已经被执行的序列号，那么它就不会再次执行这个请求。
 
-如果没有额外的措施，读请求可能会读到过时的（stale）数据，如由于网络分区当前 leader 已经被新的 leader 取代了，但是当前 leader 并不知道这一点。为了保证不会读到过时的数据，在 leader 刚当选时它必须发送一个 no-op entry，以便找出哪些 entry 已经 commit 了。其次 leader 必须检查它是否被新的 leader 取代了，这可以通过发送心跳包来检查是否有多数 server 回应来实现。
+我们能够不向 log 写任何东西就处理读请求（Read-only operations），然而如果没有额外的措施，读请求可能会读到过时的（stale）数据。如由于网络分区当前 leader 已经被新的 leader 取代了，但是当前 leader 并不知道这一点。为了保证不会读到过时的数据，在 leader 刚当选时它必须发送一个 no-op entry，以便找出哪些 entry 已经 commit 了。其次 leader 必须检查它是否被新的 leader 取代了，这可以通过发送心跳包来检查是否有多数 server 回应来实现。
 
 ## Notes
 
@@ -173,7 +173,7 @@ Raft 的目标是提供可线性化（linearizable）的语义，即每个操作
 
 ![image-20231001151618755](./image-20231001151618755.png)
 
-## 
+我的理解是 Linearizability 是从外部观测获得的一种性质，它并没有说明具体的实现。
 
 ## 参考
 
