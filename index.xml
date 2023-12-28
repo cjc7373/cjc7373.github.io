@@ -124,8 +124,8 @@
 &lt;p>每个 server 能够独立创建 snapshots，因而其偏离了 Raft 的强 leader 原则，但是由于在创建 snapshot 时共识已经达成了，所以这不会有问题。如果只有 leader 能创建 snapshot，那么有两个缺点 a) 每次发送 snapshot 都会浪费网络带宽 b) leader 的实现会变得复杂，因为它必须同时发送 snapshot 和新的 entries。&lt;/p>
 &lt;h2 id="客户端交互">客户端交互&lt;/h2>
 &lt;p>client 只会和 leader 交互，在 client 刚启动时，它可能会连接到一个随机的 server，若该 server 不为 leader，则 server 会拒绝这个请求并提供 leader 的信息。&lt;/p>
-&lt;p>Raft 的目标是提供可线性化（linearizable）的语义，即每个操作会在调用和回复之间的某个时间立刻执行执行一次（exactly once）。然而，Raft 可能会执行一个操作多次，如果 leader 在 commit log entry 之后回复 client 之前崩溃了，client 会重试请求，导致一个操作执行了两次。这个问题的解决方案是对每个操作分配一个独特的序列号，如果 leader 收到了一个请求包含已经被执行的序列号，那么它就不会再次执行这个请求。&lt;/p>
-&lt;p>如果没有额外的措施，读请求可能会读到过时的（stale）数据，如由于网络分区当前 leader 已经被新的 leader 取代了，但是当前 leader 并不知道这一点。为了保证不会读到过时的数据，在 leader 刚当选时它必须发送一个 no-op entry，以便找出哪些 entry 已经 commit 了。其次 leader 必须检查它是否被新的 leader 取代了，这可以通过发送心跳包来检查是否有多数 server 回应来实现。&lt;/p>
+&lt;p>Raft 的目标是提供可线性化（linearizable）的语义，即每个操作会在调用和回复之间的某个时间立刻执行执行一次（exactly once）。然而，Raft 可能会执行一个操作多次，如果 leader 在 commit log entry 之后回复 client 之前崩溃了，client 会重试请求，导致一个操作执行了两次。这个问题的解决方案是每个 client 为对每个操作分配一个递增的序列号，leader 维护每个 client 最新的序列号。如果 leader 收到了一个请求包含已经被执行的序列号，那么它就不会再次执行这个请求。&lt;/p>
+&lt;p>我们能够不向 log 写任何东西就处理读请求（Read-only operations），然而如果没有额外的措施，读请求可能会读到过时的（stale）数据。如由于网络分区当前 leader 已经被新的 leader 取代了，但是当前 leader 并不知道这一点。为了保证不会读到过时的数据，在 leader 刚当选时它必须发送一个 no-op entry，以便找出哪些 entry 已经 commit 了。其次 leader 必须检查它是否被新的 leader 取代了，这可以通过发送心跳包来检查是否有多数 server 回应来实现。&lt;/p>
 &lt;h2 id="notes">Notes&lt;/h2>
 &lt;ul>
 &lt;li>
@@ -148,7 +148,7 @@
 &lt;p>&lt;img src="./image-20231001151607479.png" alt="image-20231001151607479">&lt;/p>
 &lt;p>而下图则不是：&lt;/p>
 &lt;p>&lt;img src="./image-20231001151618755.png" alt="image-20231001151618755">&lt;/p>
-&lt;h2 id="heading">&lt;/h2>
+&lt;p>我的理解是 Linearizability 是从外部观测获得的一种性质，它并没有说明具体的实现。&lt;/p>
 &lt;h2 id="参考">参考&lt;/h2>
 &lt;ul>
 &lt;li>Raft 论文&lt;/li>
@@ -162,11 +162,13 @@
 &lt;p>&lt;code>blobs&lt;/code>: 存储文件内容，OID 即为文件内容的哈希&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;code>trees&lt;/code>: 一个文件名（path entries）的有序列表，OID 为这个列表的哈希。子目录同样是 trees。项目的根目录即为 root tree。所有的 trees 构成了一棵 Merkle tree，&lt;del>所以 git 就是区块链（即答&lt;/del>。下图中三角代表 trees，方块为 blobs&lt;/p>
+&lt;p>&lt;code>trees&lt;/code>: 一个文件名（path entries）的有序列表，OID 为这个列表的哈希。列表的每一行如下：&lt;/p>
+&lt;pre tabindex="0">&lt;code>100644 blob 1fc4aa8f76027dd0fb8f9b533810770236d5c234 .gitignore
+&lt;/code>&lt;/pre>&lt;p>容易推测这几个字段分别为权限、object 类型、哈希、文件名。子目录同样是 trees。项目的根目录即为 root tree。所有的 trees 构成了一棵 Merkle tree，&lt;del>所以 git 就是区块链（即答&lt;/del>。下图中三角代表 trees，方块为 blobs&lt;/p>
 &lt;p>&lt;img src="./image-20230918111328708.png" alt="image-20230918111328708">&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;code>commits&lt;/code>: 一个&lt;strong>快照&lt;/strong>（snapshot），每个 commit 包含了一个到根 tree 的引用，和一个（或多个）到 parent 的引用。parent 就是上一个 commit 的 OID。在一个 merge commit 中会包含多个 parents。下图中圆形代表 commits&lt;/p>
+&lt;p>&lt;code>commits&lt;/code>: 一个&lt;strong>快照&lt;/strong>（snapshot），每个 commit 包含了一个到根 tree 的引用，和一个（或多个）到 parent 的引用。parent 就是上一个 commit 的 OID。在一个 merge commit 中会包含多个 parents。由于 Commit 存储的是快照而不是 diff，所以 Git checkout（切换分支）的速度很快。下图中圆形代表 commits&lt;/p>
 &lt;p>&lt;img src="./image-20230918111515508.png" alt="image-20230918111515508">&lt;/p>
 &lt;/li>
 &lt;/ul>
