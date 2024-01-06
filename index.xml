@@ -1,4 +1,94 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 10 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>记一次 mpv 异常关闭的调试</title><link>https://blog.coherence.codes/posts/2023/mpv_debug/</link><pubDate>Sun, 10 Dec 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mpv_debug/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mpv_debug/ -&lt;h2 id="查不出的问题">查不出的问题&lt;/h2>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sat, 06 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Go 包管理（一）入门和设计原则</title><link>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</link><pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/ -&lt;p>在我初学 Go 的时候，曾被网上的过时教程和各种对 &lt;code>$GOPATH&lt;/code> 的操作搞得云里雾里，而现在我们已经基本用不到 &lt;code>$GOPATH&lt;/code> 了，因为在 2023 年， Go Modules 已经一统天下了。但是在这之前，是群魔乱舞的时代，对这段历史感兴趣的同学可以参考&lt;a href="https://blog.wolfogre.com/posts/golang-package-history/">这篇博客&lt;/a>。Go 包管理的转折来源于 2018 年 2 月 Go 作者之一 Russ Cox 在其博客上连发数篇文章进行了 Go Modules 的设计：&lt;/p>
+&lt;p>&lt;img src="./image-20231227012240619.png" alt="image-20231227012240619">&lt;/p>
+&lt;p>并最终在 Go 1.11 (2018/8) 中发布。&lt;/p>
+&lt;p>按照 &lt;a href="https://go.dev/wiki/GOPATH">GOPATH wiki&lt;/a> 所述，从 Go 1.16 (2021/2) 开始，&lt;code>GO111MODULE=on&lt;/code> 变量被默认设置，除非显式修改该变量，否则 Go Modules 会默认启用。当使用 Go Modules 时，GOPATH 将不再用于解析导入路径。但它仍然被用于存储下载的包（&lt;code>$GOPATH/pkg/mod&lt;/code>）和二进制命令（&lt;code>$GOPATH/bin&lt;/code>）。比如 Go 的 language server &lt;code>gopls&lt;/code> 通常会被安装到 &lt;code>$GOPATH/bin&lt;/code> 下，所以这个目录通常会加入到 &lt;code>$PATH&lt;/code> 中。&lt;/p>
+&lt;p>以下内容皆以 Go Modules 启用为前提。&lt;/p>
+&lt;h2 id="组织代码">组织代码&lt;/h2>
+&lt;p>Go 程序被组织成包（packages）。一个包是一组在&lt;strong>同一文件夹&lt;/strong>下的源代码文件的集合。在同一文件中定义的函数、类型、变量、常量在同一个包的所有其他文件中可见。一般而言，包名就是文件夹名，但这只是惯例，而非规定。如果却有需要可以不一致。&lt;/p>
+&lt;p>一个文件夹下无法拥有多个包。编译器会报错 &lt;code>found packages a (a.go) and b (b.go) in xxx&lt;/code>。&lt;/p>
+&lt;p>一个仓库（repository，这里指 VCS，如 git 的仓库）包含一个或多个模块（modules）。一个模块是一组相关的、一起发布的包的集合。一个 Go 仓库通常只有一个模块，位于仓库的根目录。一个名为 &lt;code>go.mod&lt;/code> 的文件声明了&lt;em>模块路径&lt;/em>：模块中所有包的导入路径（import path）前缀。包含 &lt;code>go.mod&lt;/code> 文件的目录是模块的根目录，这个模块包含了根目录及其所有子目录下的包，直到另一个包含 &lt;code>go.mod&lt;/code> 文件的目录为止（如果有的话）。&lt;/p>
+&lt;p>每个模块的路径不仅用于其包的导入路径前缀，也指示了 &lt;code>go&lt;/code> 命令应该到哪里去下载它。举例来说，为了下载 &lt;code>golang.org/x/tools&lt;/code> 模块，&lt;code>go&lt;/code> 命令会去 &lt;code>https://golang.org/x/tools&lt;/code> 寻找仓库。&lt;/p>
+&lt;p>如果只是在本地测试，模块路径可以随便起，比如 &lt;code>example.com/what&lt;/code> 这种。当然如果你未来想要发布它，那就得遵循 Go 的规则，比如 &lt;code>github.com/your-username/your-repo-name&lt;/code>。&lt;/p>
+&lt;p>&lt;em>导入路径&lt;/em>是一个用于导入一个包的字符串。一个包的导入路径是模块路径加上它在模块中的子目录。标准库中的包没有模块路径前缀。例如，模块 &lt;code>github.com/google/go-cmp&lt;/code> 在路径 &lt;code>cmp/&lt;/code> 下包含了一个包，这个包的导入路径为 &lt;code>github.com/google/go-cmp/cmp&lt;/code>。这个规则也适用于项目本身的包，如果 &lt;code>go-cmp&lt;/code> 项目在 &lt;code>foo/&lt;/code> 路径下的代码同样也导入了上述包，导入路径同样为 &lt;code>github.com/google/go-cmp/cmp&lt;/code>。&lt;/p>
+&lt;p>Go 项目的 layout 可以参考&lt;a href="https://github.com/golang-standards/project-layout">这里&lt;/a>，简而言之：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;code>/cmd&lt;/code> 程序的入口放在这里，每个二进制文件一个包，包名为 &lt;code>main&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>所有在 &lt;code>internal/&lt;/code> 文件夹下的包只能被它的子包或者兄弟包引用。比如 &lt;code>.../a/b/c/internal/d/e/f&lt;/code> 这个包能够被 &lt;code>.../a/b/c&lt;/code> 路径下的包导入，而无法被 &lt;code>.../a/b/g&lt;/code> 路径下的包导入&lt;/p>
+&lt;p>在项目根目录下的 &lt;code>/internel&lt;/code> 文件夹就意味着它们只能被项目本身引用&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>/pkg&lt;/code> 库的代码，并且允许其他项目使用的，放在这里&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>一个典型的项目结构如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>├── cmd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│   └── bc_node
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│      └── main.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── docs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│   └── designs.md
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── go.mod
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── go.sum
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── pkg
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│   └── block
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│      └── block.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── internal
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│   ├── block
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│   │   ├── block.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│   ├── db
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│   │   └── db.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│   └── network
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│      ├── rpc_client
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│      │   └── rpc_client.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│      ├── rpc_server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│      │   └── rpc_server.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│      ├── rpc_test.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>│      └── state.go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>├── Makefile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>└── README.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="包管理">包管理&lt;/h2>
+&lt;p>Go 模块的版本采用&lt;a href="https://semver.org/">语义化版本&lt;/a>（semantic versioning, semver），想必大家都很熟悉了。&lt;/p>
+&lt;p>大版本的更新会导致导入路径的变化，v0/v1 版本的模块名没有版本后缀，如 &lt;code>github.com/xx/xxxx&lt;/code>。从 v2 开始需要版本后缀，如 &lt;code>github.com/xx/xxxx/v2&lt;/code>，这个后缀需要在 &lt;code>go.mod&lt;/code> 中声明。如果一个模块发布了 v2，但是没有在 &lt;code>go.mod&lt;/code> 中加入 &lt;code>/v2&lt;/code> 的后缀，其他包将无法 import v2 版本：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ go get -u github.com/cjc7373/go-module-test/c@v2.0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go: github.com/cjc7373/go-module-test/c@v2.0.0: invalid version: module contains a go.mod file, so module path must match major version &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;github.com/cjc7373/go-module-test/c/v2&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果一个模块没有使用 Go Modules（即没有 &lt;code>go.mod&lt;/code> 文件），并且发布了一个 v2 及以上的版本，那么它作为一个依赖被引入时，我们会看到 &lt;code>github.com/xx/xxxx v4.1.0+incompatible&lt;/code> 这样的版本号。&lt;/p>
+&lt;p>模块的发布依赖于 VCS 的 tagging 功能。发布一个包就是打一个 tag。如果一个仓库有多个模块，则需要在 tagging 中加上模块路径的前缀，如果仓库位于 &lt;code>example.com/mymodules/&lt;/code>，模块路径为 &lt;code>example.com/mymodules/module1&lt;/code>，则打的 tag 应该为 &lt;code>module1/v1.2.3&lt;/code> 这种形式。（TODO：我不清楚模块路径是否要和文件夹路径对应..）&lt;/p>
+&lt;h2 id="设计原则">设计原则&lt;/h2>
+&lt;p>所有的包管理都是为了解决依赖地狱问题（&lt;a href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency hell&lt;/a>），即一些包拥有同样的共享的包，但它们依赖与这些包的不同的、互不兼容的版本。&lt;/p>
+&lt;p>Russ Cox 在&lt;a href="https://research.swtch.com/vgo-principles">他的博客&lt;/a>中回顾了 Go Modules 的设计原则。总结一下就是：&lt;/p>
+&lt;ul>
+&lt;li>导入兼容性原则：如果旧包和新包的导入路径相同，则新包必须兼容旧包。&lt;/li>
+&lt;li>最小版本选择原则：使用满足需求的最旧版本，而不是最新版本。&lt;/li>
+&lt;/ul>
+&lt;p>为什么要这么设计呢？&lt;/p>
+&lt;h3 id="兼容性">兼容性&lt;/h3>
+&lt;p>Go 非常重视向后兼容。&lt;/p>
+&lt;blockquote>
+&lt;p>遵循 Go 1 规范编写的软件应该能够在规范的生命周期之内继续正确地编译和运行，并无需更改。在现在能够工作 Go 程序应该能够在未来的 Go 1 版本中继续工作。&lt;/p>
+&lt;p>— &lt;a href="https://golang.org/doc/go1compat">&lt;em>golang.org/doc/go1compat&lt;/em>&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>所以 Go 选择了 semver。semver 保证了只有 major version 的变化才会有 breaking changes，在此情况下，模块的导入路径会发生变化（即带上大版本后缀）。否则，新版本的模块必须向后兼容旧版本。&lt;/p>
+&lt;p>这么做的另一个好处是大型项目可以逐渐更新一个依赖，因为上述做法允许了一个模块的两个大版本同时存在。&lt;/p>
+&lt;h3 id="可重复性">可重复性&lt;/h3>
+&lt;p>最小版本选择原则是为了可重复性。从依赖的约束中得到依赖的具体版本被称为依赖解析（Dependency Resolution）。对于其他的包管理器（如 pip, cargo, npm）来说，一般都会选择满足约束的最新版本，并且有一个 lock 文件来保证构建的可重复性。即第一次构建（依赖解析时）会生成 lock 文件，之后的构建都会从 lock 文件里取得和第一次一样的依赖版本。然而，lock 文件只对当前项目生效。现在假设如下情况：&lt;/p>
+&lt;p>&lt;img src="./image-20240104191444433.png" alt="image-20240104191444433">&lt;/p>
+&lt;p>C 1.8 指定了 D &amp;gt;= 1.4 的约束，并且在 lock file 中选择了 D 1.5 作为依赖。现在 A 指定了 C 1.8 作为依赖，A 在构建时会重新进行依赖解析，假设这是 D 1.5 是最新的，那么 A 就会选择 D 1.5 作为依赖。过了几个月之后，D 发布了 1.6，它 break 了 C 1.8，这时候 C 因为有 lock file 仍然能正常构建。但是如果另一个项目 B 新依赖了 C 1.8，那么依赖解析时就会选择到 D 1.6，这就 break 了 B。依赖解析到的版本和时间有关，破坏了可重复性。&lt;/p>
+&lt;p>版本选择问题是一个 NP 完全问题，本质上在解决一个可满足性问题。对于给定约束，可能存在多个结果，依赖解析中选择哪一种结果是不确定的。考虑如下情况：&lt;/p>
+&lt;p>&lt;img src="./image-20240104192822040.png" alt="image-20240104192822040">&lt;/p>
+&lt;p>图中以 Dep 和 Go Modules 为例说明了依赖解析的过程，这里虽然两者选择的 D 版本不同，但都能够成功构建。现在假设 D 发布了有 bug 的 1.6 版本，break 了 C 1.8。C 的开发者为了绕过 bug 添加了 D &amp;lt; 1.6 的约束，并发布了 1.9 版本。这时让 Dep 重新进行依赖解析：&lt;/p>
+&lt;p>&lt;img src="./image-20240104193149370.png" alt="image-20240104193149370">&lt;/p>
+&lt;p>会产生不止一种满足约束的结果。此时 Dep 首先会尝试使用最新的 B 1.4 和 C 1.9，但是这并不能满足约束。如果 Dep 接着尝试使用下一个 B 版本 1.3（右图），那么会解析到 D 1.5，构建成功；如果 Dep 尝试用下一个 C 版本 1.8（左图），那么会解析到 D 1.6，构建失败。Dep 选择哪种结果完全取决于它的内部实现，并不确定。而 Go Modules 则具备可重复性。&lt;/p>
+&lt;h2 id="尾巴">尾巴&lt;/h2>
+&lt;p>在下一篇博客中，我们会讨论模块镜像（Proxy）、校验数据库和工作区。&lt;/p>
+&lt;h2 id="see-also">See also&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://go.dev/doc/code">How to Write Go Code&lt;/a> 是 Go 代码组织的简明指南&lt;/li>
+&lt;li>&lt;a href="https://go.dev/doc/modules/managing-source">Managing module source&lt;/a> 中说明了一个仓库中管理多个模块的方式&lt;/li>
+&lt;li>&lt;a href="https://stackoverflow.com/questions/57355929/what-does-incompatible-in-go-mod-mean-will-it-cause-harm">What does &amp;lsquo;incompatible&amp;rsquo; in go.mod mean, will it cause harm?&lt;/a> 虽然问的是 incompatible 的含义，但是最高赞答案实际解释了 Go Modules 的大部分概念&lt;/li>
+&lt;/ul>
+- https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>记一次 mpv 异常关闭的调试</title><link>https://blog.coherence.codes/posts/2023/mpv_debug/</link><pubDate>Sun, 10 Dec 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mpv_debug/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mpv_debug/ -&lt;h2 id="查不出的问题">查不出的问题&lt;/h2>
 &lt;p>长久以来我都被 mpv 的一个问题所困扰，那就是在正常播放视频时 mpv 有概率会自动退出（通常是按下暂停键的时候）。通过 &lt;code>-v -v -v&lt;/code> 参数查看详细日志发现 mpv 接收到了 stop 命令：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>cplayer&lt;span style="color:#f92672">]&lt;/span> Run command: stop, flags&lt;span style="color:#f92672">=&lt;/span>64, args&lt;span style="color:#f92672">=[&lt;/span>flags&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是这个命令是谁发的不得而知。一开始怀疑是插件的问题，然而禁用所有插件（&lt;code>~/.config/mpv/scripts&lt;/code> 目录）后问题依旧。后尝试用 &lt;code>--no-config&lt;/code> 参数禁用所有配置，发现问题消失，于是尝试注释掉所有 &lt;code>mpv.conf&lt;/code> 中的配置，发现问题依旧。我还怀疑过是 &lt;code>pipewire&lt;/code>/&lt;code>xorg&lt;/code> 的问题，但是并没有搜索到相关信息。&lt;/p>
@@ -685,81 +775,4 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;li>&lt;a href="https://blog.apnic.net/2016/05/19/fragmenting-ipv6/">Fragmenting IPv6&lt;/a> 讨论了和分片有关的问题, 包括 UDP 下的处理&lt;/li>
 &lt;li>&lt;a href="https://www.v2ex.com/t/800024">开启 IPv6 后网速变得很慢？可能是 PMTU 黑洞的问题 - V2EX&lt;/a>&lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hello, Hugo!</title><link>https://blog.coherence.codes/posts/2022/hello_hugo/</link><pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/hello_hugo/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/hello_hugo/ -&lt;p>这是一个船新的博客！&lt;/p>
-&lt;h2 id="历史">历史&lt;/h2>
-&lt;p>在大二（2018）的时候，我萌生了搭建一个自己的独立博客的想法，于是就有了 &lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/">hexo搭建小记&lt;/a>，当时我随手一找找到的基本都是 Hexo，于是我就用了。引用一段当时写的关于页面：&lt;/p>
-&lt;blockquote>
-&lt;h2 id="关于博客">关于博客&lt;/h2>
-&lt;ul>
-&lt;li>2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑&lt;/li>
-&lt;li>2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件&lt;/li>
-&lt;li>2020-02-22 更改评论为 &lt;code>disqusjs&lt;/code>，详见作者的&lt;a href="https://blog.skk.moe/post/disqusjs/">博文&lt;/a>；启用 &lt;a href="https://github.com/theme-next/theme-next-pjax">pjax&lt;/a>&lt;/li>
-&lt;li>2019-12-24 启用新域名&lt;code>blog.coherence.codes&lt;/code>&lt;/li>
-&lt;li>2019-10-07 升级主题至 Next V7.4.1&lt;/li>
-&lt;li>2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %}&lt;/li>
-&lt;/ul>
-&lt;/blockquote>
-&lt;p>Next 就是一个非常大众的主题，有几种变体，我用的是一个叫 &lt;code>pisces&lt;/code> 的变体，长这样（原博客图已经找不到了，只能用官方 Demo 凑数了）：&lt;/p>
-&lt;p>&lt;img src="image-20221002165030564.png" alt="image-20221002165030564">&lt;/p>
-&lt;p>这一时期的博客位于 &lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/source/source">source 分支&lt;/a>，最后更新于 2020-04-16。&lt;/p>
-&lt;p>由于这个主题实在是太大众了，中途（2019-10 左右）我也想过换一个主题（&lt;a href="https://github.com/yscoder/hexo-theme-indigo">hexo-theme-indigo&lt;/a>，一个 Material Design 风格的主题），但是没有配置成功，&lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/theme-indigo">theme-indigo 分支&lt;/a>便是那次尝试。theme-indigo 的效果图长这样：&lt;/p>
-&lt;p>&lt;img src="image-20221002165819783.png" alt="image-20221002165819783">&lt;/p>
-&lt;p>到了 21 年 2 月，我开始重新调研博客生成器，当时看到了一个 Python 写的 Pelican，而我又希望壮大一下 Python 生态，于是就用了。用了之后发现并没有什么合适的主题，恰巧 Pelican 用的模板引擎 Jinja 和 Django Template Engine 很像，我比较熟悉，于是我就想自己写一个主题，然而这一工作从没开始过.. 于是我现在的博客是这样的（&lt;del>极简主义&lt;/del>）：&lt;/p>
-&lt;p>&lt;img src="image-20221002171314620.png" alt="image-20221002171314620">&lt;/p>
-&lt;p>这段时间里我还写过一个&lt;a href="https://github.com/cjc7373/pelican-markdown-image">处理图片的 Pelican 插件&lt;/a>，虽然现在看起来挺蠢的..&lt;/p>
-&lt;p>再后来，我又对 Rust 产生了兴趣，于是又发现了 Zola，这时候我找到了 &lt;a href="https://github.com/AmazingRise/hugo-theme-diary">hugo-theme-diary&lt;/a> 这个主题，感觉非常不错。这个主题是从 &lt;a href="https://byvoid.com/zhs/">BYVoid&lt;/a> 那看来的，好看，有响应式，也有文章内目录。于是就想把它移植到 zola，在 port 了一个 head 之后，这个计划就被无限期搁置了。&lt;/p>
-&lt;p>终于，我感觉还是有必要有一个好看的博客的，于是我最终选择了 Hugo+hugo-theme-diary，加上一点点自己的魔改。&lt;/p>
-&lt;h2 id="迁移">迁移&lt;/h2>
-&lt;p>Hugo 对于资源文件的处理有&lt;a href="https://gohugo.io/content-management/image-processing/">自己的一套规则&lt;/a>，即博客文章位于 &lt;code>posts/post_name/index.md&lt;/code>，这篇文章资源文件放在 &lt;code>posts/post_name/&lt;/code> 这个路径下面。而我原来的文件结构为文章位于 &lt;code>posts/post_name.md&lt;/code>，资源文件位于 &lt;code>posts/post_name/&lt;/code>。所以我不得不写了一个脚本来迁移图片：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pathlib &lt;span style="color:#f92672">import&lt;/span> Path
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> re
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>md_image &lt;span style="color:#f92672">=&lt;/span> re&lt;span style="color:#f92672">.&lt;/span>compile(&lt;span style="color:#e6db74">r&lt;/span>&lt;span style="color:#e6db74">&amp;#34;!\[(.*)\]\((.*)\)&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">replace_image_reference_in_a_md_file&lt;/span>(md, dry_run&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(md, &lt;span style="color:#e6db74">&amp;#34;r&amp;#34;&lt;/span>, encoding&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;utf8&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content &lt;span style="color:#f92672">=&lt;/span> f&lt;span style="color:#f92672">.&lt;/span>read()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">replace&lt;/span>(&lt;span style="color:#66d9ef">match&lt;/span>):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> match[0]: all matched string
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> match[1]: name
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> match[2]: image path
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rep &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;![&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>match[&lt;span style="color:#ae81ff">1&lt;/span>]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">](./&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>match[&lt;span style="color:#ae81ff">2&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>split(&lt;span style="color:#e6db74">&amp;#39;/&amp;#39;&lt;/span>)[&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Replacing &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>match[&lt;span style="color:#ae81ff">0&lt;/span>]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74"> with &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>rep&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> rep
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content &lt;span style="color:#f92672">=&lt;/span> md_image&lt;span style="color:#f92672">.&lt;/span>sub(replace, content)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">not&lt;/span> dry_run:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(md, &lt;span style="color:#e6db74">&amp;#34;w&amp;#34;&lt;/span>, encoding&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;utf8&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(content)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>to_mig: list[Path] &lt;span style="color:#f92672">=&lt;/span> []
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>working_dir &lt;span style="color:#f92672">=&lt;/span> Path(&lt;span style="color:#e6db74">&amp;#34;./2022&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> f &lt;span style="color:#f92672">in&lt;/span> working_dir&lt;span style="color:#f92672">.&lt;/span>iterdir():
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> f&lt;span style="color:#f92672">.&lt;/span>suffix &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;.md&amp;#34;&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> to_mig&lt;span style="color:#f92672">.&lt;/span>append(f)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(to_mig)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> f &lt;span style="color:#f92672">in&lt;/span> to_mig:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> replace_image_reference_in_a_md_file(f)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>rename(working_dir &lt;span style="color:#f92672">/&lt;/span> Path(f&lt;span style="color:#f92672">.&lt;/span>stem) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#e6db74">&amp;#34;index.md&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># print(f&amp;#34;Move {f} to {Path(f.stem) / &amp;#39;index.md&amp;#39;}&amp;#34;)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugo 用的模板引擎是 Go 标准库里的，这点好评，Helm 用的同样是这个模板引擎。&lt;/p>
-&lt;h2 id="部署">部署&lt;/h2>
-&lt;p>现在的部署简单好多啊，只需一个配置文件，Github Actions 因为是自家产品的缘故连 token 都不需要了，自定义域名 CNAME 也只需在配置文件中增加一行，相比于三年之前的部署体验真的是天差地别..&lt;/p>
-&lt;h2 id="一些问题">一些问题&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>Hugo 处理页面之间链接也有&lt;a href="https://gohugo.io/content-management/cross-references/">自己的规则&lt;/a>，需要转换，不过我好像也没什么跨页面链接&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>代码高亮的配色非常诡异..&lt;/p>
-&lt;p>&lt;img src="image-20221003005014257.png" alt="image-20221003005014257">&lt;/p>
-&lt;p>发现在本地的配色是正常的，检查发现本地是 Hugo extended version，于是在 actions 中也启用了 extended 后恢复正常，挺奇怪的..&lt;/p>
-&lt;/li>
-&lt;/ul>
-- https://blog.coherence.codes/posts/2022/hello_hugo/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

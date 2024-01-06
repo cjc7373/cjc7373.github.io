@@ -1,4 +1,21 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 10 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>2018年终总结&amp;2019展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</link><pubDate>Mon, 11 Feb 2019 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ -&lt;p>今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sat, 06 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ -&lt;p>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。&lt;/p>
+&lt;p>Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板，准备拆机 TTL 破解光猫。&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="0x01-拆机">0x01 拆机&lt;/h2>
+&lt;p>拆机后发现 PCB 板上有 TTL 插针，用万用表测得倒数第二根为 GND（接地pin），然后剩余四根随机组合，测得 RX（接收数据pin）和 TX（发送数据pin）。用杜邦线连接 USB转TTL板和 TTL 插针。&lt;/p>
+&lt;p>&lt;img src="./IMG_20190219_113847.jpg" alt="IMG_20190219_113847">&lt;/p>
+&lt;h2 id="0x02-串口调试">0x02 串口调试&lt;/h2>
+&lt;p>电脑安装好 USB转TTL板的驱动，USB端连接上电脑。网上的教程一般使用 SecureCRT， 然而我后来发现 Xshell 也能连接串口，遂用 Xshell 进行调试。&lt;/p>
+&lt;p>&lt;img src="./1550548463370.png" alt="1550548463370">&lt;/p>
+&lt;p>如图设置参数，port 按照自己的情况设置。&lt;/p>
+&lt;p>然后连接。接通电源后等待。大概等待两分钟后，按回车，出现 &lt;code>Login:&lt;/code> 字样，用 &lt;code>root/hg2x0&lt;/code> 登陆。&lt;/p>
+&lt;p>用 &lt;code>cat /proc/cpuinfo&lt;/code> 看一下 CPU 信息，居然是 MIPS&amp;hellip;&lt;/p>
+&lt;p>&lt;img src="./1550306022384.png" alt="1550306022384">&lt;/p>
+&lt;p>超级密码在&lt;code>/flash/cfg/agentconf/factory.conf &lt;/code>文件中。文件前两行即为管理员账户和密码。至此，光猫破解完成。&lt;/p>
+&lt;h2 id="0x03-参考资料">0x03 参考资料&lt;/h2>
+&lt;p>&lt;a href="https://paper.seebug.org/506/#0x03">如何通过TTL调试光猫&lt;/a>
+&lt;a href="https://m2.zhugh.com:26800/po-jie-dian-xin-guang-mao/">破解电信光猫&lt;/a>&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>2018年终总结&amp;2019展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</link><pubDate>Mon, 11 Feb 2019 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ -&lt;p>今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。&lt;/p>
 &lt;!-- raw HTML omitted -->
 &lt;h2 id="2018-总结">2018 总结&lt;/h2>
 &lt;p>时间及事件依据：印象笔记、Google 相册、我的记忆。&lt;/p>
