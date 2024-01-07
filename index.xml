@@ -1,4 +1,6 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sat, 06 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Go 包管理（一）入门和设计原则</title><link>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</link><pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/ -&lt;p>在我初学 Go 的时候，曾被网上的过时教程和各种对 &lt;code>$GOPATH&lt;/code> 的操作搞得云里雾里，而现在我们已经基本用不到 &lt;code>$GOPATH&lt;/code> 了，因为在 2023 年， Go Modules 已经一统天下了。但是在这之前，是群魔乱舞的时代，对这段历史感兴趣的同学可以参考&lt;a href="https://blog.wolfogre.com/posts/golang-package-history/">这篇博客&lt;/a>。Go 包管理的转折来源于 2018 年 2 月 Go 作者之一 Russ Cox 在其博客上连发数篇文章进行了 Go Modules 的设计：&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sat, 06 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Go 包管理（一）入门和设计原则</title><link>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</link><pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/ -&lt;p>在我初学 Go 的时候，曾被网上的过时教程和各种对 &lt;code>$GOPATH&lt;/code> 的操作搞得云里雾里，而现在我们已经基本用不到 &lt;code>$GOPATH&lt;/code> 了，因为在 2023 年， Go Modules 已经一统天下了。但是在这之前，是群魔乱舞的时代，对这段历史感兴趣的同学可以参考&lt;a href="https://blog.wolfogre.com/posts/golang-package-history/">这篇博客&lt;/a>。&lt;/p>
+&lt;p>顺便提一下，GOPATH 时代包没有“版本”的概念，这可能是因为 Google 内部采用 monorepo 的方式（即所有代码都放在一个仓库中）管理代码，所有人都基于 HEAD 来 build，所以当有人的改动 break 了其他人的代码时，很容易在 build 时反映出来。Go 作者之一 Rob Pike 的文章 &lt;a href="https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html">What We Got Right, What We Got Wrong&lt;/a> 中提到了这一点。&lt;/p>
+&lt;p>Go 包管理的转折来源于 2018 年 2 月 Go 作者之一 Russ Cox 在其博客上连发数篇文章进行了 Go Modules 的设计：&lt;/p>
 &lt;p>&lt;img src="./image-20231227012240619.png" alt="image-20231227012240619">&lt;/p>
 &lt;p>并最终在 Go 1.11 (2018/8) 中发布。&lt;/p>
 &lt;p>按照 &lt;a href="https://go.dev/wiki/GOPATH">GOPATH wiki&lt;/a> 所述，从 Go 1.16 (2021/2) 开始，&lt;code>GO111MODULE=on&lt;/code> 变量被默认设置，除非显式修改该变量，否则 Go Modules 会默认启用。当使用 Go Modules 时，GOPATH 将不再用于解析导入路径。但它仍然被用于存储下载的包（&lt;code>$GOPATH/pkg/mod&lt;/code>）和二进制命令（&lt;code>$GOPATH/bin&lt;/code>）。比如 Go 的 language server &lt;code>gopls&lt;/code> 通常会被安装到 &lt;code>$GOPATH/bin&lt;/code> 下，所以这个目录通常会加入到 &lt;code>$PATH&lt;/code> 中。&lt;/p>
@@ -69,12 +71,18 @@
 &lt;p>遵循 Go 1 规范编写的软件应该能够在规范的生命周期之内继续正确地编译和运行，并无需更改。在现在能够工作 Go 程序应该能够在未来的 Go 1 版本中继续工作。&lt;/p>
 &lt;p>— &lt;a href="https://golang.org/doc/go1compat">&lt;em>golang.org/doc/go1compat&lt;/em>&lt;/a>&lt;/p>
 &lt;/blockquote>
-&lt;p>所以 Go 选择了 semver。semver 保证了只有 major version 的变化才会有 breaking changes，在此情况下，模块的导入路径会发生变化（即带上大版本后缀）。否则，新版本的模块必须向后兼容旧版本。&lt;/p>
+&lt;p>Go 的&lt;a href="https://go.dev/blog/publishing-go-modules">一篇博客&lt;/a>中有一个例子，标准库中的 &lt;code>strings&lt;/code> 包有两个函数：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Split&lt;/code> 把一个字符串分割成由参数中的分隔符分割的一些子串&lt;/li>
+&lt;li>&lt;code>SplitN&lt;/code> 能够控制分割的子串的数量&lt;/li>
+&lt;/ul>
+&lt;p>但是又存在 &lt;code>Replace&lt;/code> 函数来替换字符串中的某个子串 n 次，&lt;code>ReplaceAll&lt;/code> 函数来替换所有出现的子串。我们肯定觉得，为什么不使用 &lt;code>Split&lt;/code> 的命名规则，把它们命名成 &lt;code>Replace&lt;/code> 和 &lt;code>ReplaceN&lt;/code> 呢？但是为了向后兼容，Go 没有这么做。&lt;/p>
+&lt;p>所以 Go Modules 选择了 semver。semver 保证了只有 major version 的变化才会有 breaking changes，在此情况下，模块的导入路径会发生变化（即带上大版本后缀）。否则，新版本的模块必须向后兼容旧版本。&lt;/p>
 &lt;p>这么做的另一个好处是大型项目可以逐渐更新一个依赖，因为上述做法允许了一个模块的两个大版本同时存在。&lt;/p>
 &lt;h3 id="可重复性">可重复性&lt;/h3>
 &lt;p>最小版本选择原则是为了可重复性。从依赖的约束中得到依赖的具体版本被称为依赖解析（Dependency Resolution）。对于其他的包管理器（如 pip, cargo, npm）来说，一般都会选择满足约束的最新版本，并且有一个 lock 文件来保证构建的可重复性。即第一次构建（依赖解析时）会生成 lock 文件，之后的构建都会从 lock 文件里取得和第一次一样的依赖版本。然而，lock 文件只对当前项目生效。现在假设如下情况：&lt;/p>
 &lt;p>&lt;img src="./image-20240104191444433.png" alt="image-20240104191444433">&lt;/p>
-&lt;p>C 1.8 指定了 D &amp;gt;= 1.4 的约束，并且在 lock file 中选择了 D 1.5 作为依赖。现在 A 指定了 C 1.8 作为依赖，A 在构建时会重新进行依赖解析，假设这是 D 1.5 是最新的，那么 A 就会选择 D 1.5 作为依赖。过了几个月之后，D 发布了 1.6，它 break 了 C 1.8，这时候 C 因为有 lock file 仍然能正常构建。但是如果另一个项目 B 新依赖了 C 1.8，那么依赖解析时就会选择到 D 1.6，这就 break 了 B。依赖解析到的版本和时间有关，破坏了可重复性。&lt;/p>
+&lt;p>C 1.8 指定了 D &amp;gt;= 1.4 的约束，并且在 lock file 中选择了 D 1.5 作为依赖。现在 A 指定了 C 1.8 作为依赖，A 在构建时会重新进行依赖解析，假设这时 D 1.5 是最新的，那么 A 就会选择 D 1.5 作为依赖。过了几个月之后，D 发布了 1.6，它 break 了 C 1.8，这时候 C 因为有 lock file 仍然能正常构建。但是如果另一个项目 B 新依赖了 C 1.8，那么依赖解析时就会选择到 D 1.6，这就 break 了 B。依赖解析到的版本和时间有关，破坏了可重复性。&lt;/p>
 &lt;p>版本选择问题是一个 NP 完全问题，本质上在解决一个可满足性问题。对于给定约束，可能存在多个结果，依赖解析中选择哪一种结果是不确定的。考虑如下情况：&lt;/p>
 &lt;p>&lt;img src="./image-20240104192822040.png" alt="image-20240104192822040">&lt;/p>
 &lt;p>图中以 Dep 和 Go Modules 为例说明了依赖解析的过程，这里虽然两者选择的 D 版本不同，但都能够成功构建。现在假设 D 发布了有 bug 的 1.6 版本，break 了 C 1.8。C 的开发者为了绕过 bug 添加了 D &amp;lt; 1.6 的约束，并发布了 1.9 版本。这时让 Dep 重新进行依赖解析：&lt;/p>
