@@ -1,12 +1,17 @@
 ---
 title: Go 包管理（一）入门和设计原则
 date: 2024-01-06
+lastmod: 2024-01-07
 tags:
 - Golang
 - Package Management
 ---
 
-在我初学 Go 的时候，曾被网上的过时教程和各种对 `$GOPATH` 的操作搞得云里雾里，而现在我们已经基本用不到 `$GOPATH` 了，因为在 2023 年， Go Modules 已经一统天下了。但是在这之前，是群魔乱舞的时代，对这段历史感兴趣的同学可以参考[这篇博客](https://blog.wolfogre.com/posts/golang-package-history/)。Go 包管理的转折来源于 2018 年 2 月 Go 作者之一 Russ Cox 在其博客上连发数篇文章进行了 Go Modules 的设计：
+在我初学 Go 的时候，曾被网上的过时教程和各种对 `$GOPATH` 的操作搞得云里雾里，而现在我们已经基本用不到 `$GOPATH` 了，因为在 2023 年， Go Modules 已经一统天下了。但是在这之前，是群魔乱舞的时代，对这段历史感兴趣的同学可以参考[这篇博客](https://blog.wolfogre.com/posts/golang-package-history/)。
+
+顺便提一下，GOPATH 时代包没有“版本”的概念，这可能是因为 Google 内部采用 monorepo 的方式（即所有代码都放在一个仓库中）管理代码，所有人都基于 HEAD 来 build，所以当有人的改动 break 了其他人的代码时，很容易在 build 时反映出来。Go 作者之一 Rob Pike 的文章 [What We Got Right, What We Got Wrong](https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html) 中提到了这一点。 
+
+Go 包管理的转折来源于 2018 年 2 月 Go 作者之一 Russ Cox 在其博客上连发数篇文章进行了 Go Modules 的设计：
 
 ![image-20231227012240619](./image-20231227012240619.png)
 
@@ -103,7 +108,14 @@ Go 非常重视向后兼容。
 >
 >— [*golang.org/doc/go1compat*](https://golang.org/doc/go1compat)
 
-所以 Go 选择了 semver。semver 保证了只有 major version 的变化才会有 breaking changes，在此情况下，模块的导入路径会发生变化（即带上大版本后缀）。否则，新版本的模块必须向后兼容旧版本。
+Go 的[一篇博客](https://go.dev/blog/publishing-go-modules)中有一个例子，标准库中的 `strings` 包有两个函数：
+
+- `Split` 把一个字符串分割成由参数中的分隔符分割的一些子串
+- `SplitN` 能够控制分割的子串的数量
+
+但是又存在 `Replace` 函数来替换字符串中的某个子串 n 次，`ReplaceAll` 函数来替换所有出现的子串。我们肯定觉得，为什么不使用 `Split` 的命名规则，把它们命名成 `Replace` 和 `ReplaceN` 呢？但是为了向后兼容，Go 没有这么做。
+
+所以 Go Modules 选择了 semver。semver 保证了只有 major version 的变化才会有 breaking changes，在此情况下，模块的导入路径会发生变化（即带上大版本后缀）。否则，新版本的模块必须向后兼容旧版本。
 
 这么做的另一个好处是大型项目可以逐渐更新一个依赖，因为上述做法允许了一个模块的两个大版本同时存在。
 
@@ -113,7 +125,7 @@ Go 非常重视向后兼容。
 
 ![image-20240104191444433](./image-20240104191444433.png)
 
-C 1.8 指定了 D >= 1.4 的约束，并且在 lock file 中选择了 D 1.5 作为依赖。现在 A 指定了 C 1.8 作为依赖，A 在构建时会重新进行依赖解析，假设这是 D 1.5 是最新的，那么 A 就会选择 D 1.5 作为依赖。过了几个月之后，D 发布了 1.6，它 break 了 C 1.8，这时候 C 因为有 lock file 仍然能正常构建。但是如果另一个项目 B 新依赖了 C 1.8，那么依赖解析时就会选择到 D 1.6，这就 break 了 B。依赖解析到的版本和时间有关，破坏了可重复性。 
+C 1.8 指定了 D >= 1.4 的约束，并且在 lock file 中选择了 D 1.5 作为依赖。现在 A 指定了 C 1.8 作为依赖，A 在构建时会重新进行依赖解析，假设这时 D 1.5 是最新的，那么 A 就会选择 D 1.5 作为依赖。过了几个月之后，D 发布了 1.6，它 break 了 C 1.8，这时候 C 因为有 lock file 仍然能正常构建。但是如果另一个项目 B 新依赖了 C 1.8，那么依赖解析时就会选择到 D 1.6，这就 break 了 B。依赖解析到的版本和时间有关，破坏了可重复性。 
 
 版本选择问题是一个 NP 完全问题，本质上在解决一个可满足性问题。对于给定约束，可能存在多个结果，依赖解析中选择哪一种结果是不确定的。考虑如下情况：
 
