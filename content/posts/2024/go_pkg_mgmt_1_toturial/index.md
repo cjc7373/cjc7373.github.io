@@ -17,13 +17,13 @@ Go 包管理的转折来源于 2018 年 2 月 Go 作者之一 Russ Cox 在其博
 
 并最终在 Go 1.11 (2018/8) 中发布。
 
-按照 [GOPATH wiki](https://go.dev/wiki/GOPATH) 所述，从 Go 1.16 (2021/2) 开始，`GO111MODULE=on` 变量被默认设置，除非显式修改该变量，否则 Go Modules 会默认启用。当使用 Go Modules 时，GOPATH 将不再用于解析导入路径。但它仍然被用于存储下载的包（`$GOPATH/pkg/mod`）和二进制命令（`$GOPATH/bin`）。比如 Go 的 language server `gopls` 通常会被安装到 `$GOPATH/bin` 下，所以这个目录通常会加入到 `$PATH` 中。
+按照 [GOPATH wiki](https://go.dev/wiki/GOPATH) 所述，从 Go 1.16 (2021/2) 开始，`GO111MODULE=on` 变量被默认设置，除非显式修改该变量，否则 Go Modules 会默认启用。当使用 Go Modules 时，`GOPATH` 将不再用于解析导入路径。但它仍然被用于存储下载的包（`$GOPATH/pkg/mod`）和二进制命令（`$GOPATH/bin`）。比如 Go 的 language server `gopls` 通常会被安装到 `$GOPATH/bin` 下，所以这个目录通常会加入到 `$PATH` 中。
 
 以下内容皆以 Go Modules 启用为前提。
 
 ## 组织代码
 
-Go 程序被组织成包（packages）。一个包是一组在**同一文件夹**下的源代码文件的集合。在同一文件中定义的函数、类型、变量、常量在同一个包的所有其他文件中可见。一般而言，包名就是文件夹名，但这只是惯例，而非规定。如果却有需要可以不一致。
+Go 程序被组织成包（packages）。一个包是一组在**同一文件夹**下的源代码文件的集合。在同一文件中定义的函数、类型、变量、常量在同一个包的所有其他文件中可见。
 
 一个文件夹下无法拥有多个包。编译器会报错 `found packages a (a.go) and b (b.go) in xxx`。
 
@@ -34,6 +34,16 @@ Go 程序被组织成包（packages）。一个包是一组在**同一文件夹*
 如果只是在本地测试，模块路径可以随便起，比如 `example.com/what` 这种。当然如果你未来想要发布它，那就得遵循 Go 的规则，比如 `github.com/your-username/your-repo-name`。
 
 *导入路径*是一个用于导入一个包的字符串。一个包的导入路径是模块路径加上它在模块中的子目录。标准库中的包没有模块路径前缀。例如，模块 `github.com/google/go-cmp` 在路径 `cmp/` 下包含了一个包，这个包的导入路径为 `github.com/google/go-cmp/cmp`。这个规则也适用于项目本身的包，如果 `go-cmp` 项目在 `foo/` 路径下的代码同样也导入了上述包，导入路径同样为 `github.com/google/go-cmp/cmp`。
+
+通俗理解一下，导入路径就是文件夹路径。当一个包导入之后，我们就可以用包名来引用它了。一般而言，包名就是文件夹名，但这只是惯例，而非规定，如果确有需要可以不一致。所以下面的写法是合法的：
+
+```go
+import "example.com/xxx/pkga" // actually it's package name is pkgb
+
+func main() {
+    pkgb.Func()
+}
+```
 
 Go 项目的 layout 可以参考[这里](https://github.com/golang-standards/project-layout)，简而言之：
 
@@ -87,7 +97,7 @@ go: github.com/cjc7373/go-module-test/c@v2.0.0: invalid version: module contains
 
 如果一个模块没有使用 Go Modules（即没有 `go.mod` 文件），并且发布了一个 v2 及以上的版本，那么它作为一个依赖被引入时，我们会看到 `github.com/xx/xxxx v4.1.0+incompatible` 这样的版本号。
 
-模块的发布依赖于 VCS 的 tagging 功能。发布一个包就是打一个 tag。如果一个仓库有多个模块，则需要在 tagging 中加上模块路径的前缀，如果仓库位于 `example.com/mymodules/`，模块路径为 `example.com/mymodules/module1`，则打的 tag 应该为 `module1/v1.2.3` 这种形式。（TODO：我不清楚模块路径是否要和文件夹路径对应..）
+模块的发布依赖于 VCS 的 tagging 功能。发布一个包就是打一个 tag。如果一个仓库有多个模块，则需要在 tagging 中加上模块路径的前缀，如果仓库位于 `example.com/mymodules/`，模块路径为 `example.com/mymodules/module1`，则打的 tag 应该为 `module1/v1.2.3` 这种形式。（这里猜测模块路径是和文件夹路径对应的，但我没有实验过）
 
 ## 设计原则
 
