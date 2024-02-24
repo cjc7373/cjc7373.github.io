@@ -1,6 +1,7 @@
 ---
 title: IPv6 配置入门
 date: 2023-04-16
+lastmod: 2024-02-24
 ---
 
 ## 背景知识
@@ -75,6 +76,8 @@ RFC 4861 定义了一种网络发现机制 (Neighbor Discovery Protocol, NDP), �
 4. 邻居通告 (Neighbor Advertisement)
 5. 重定向 (Redirect)
 
+下文所述的 SLAAC 即使用 NDP 协议通信.
+
 ## RFC 4862 (IPv6 Stateless Address Autoconfiguration)
 
 RFC 4862 定义了一种 IPv6 接口的自动配置机制, 包括生成一个链路本地地址和全局地址, 和一种重复地址检测 (Duplicate address detection) 机制来验证一条链路上地址的唯一性.
@@ -93,16 +96,28 @@ RFC 4862 中并没有规定 interface identifier 是如何产生的, 只说了�
 
 RFC 8415 定义了一个 C/S 协议 DHCPv6, 其功能包括向一个设备提供地址或其他配置, 自动委派 IPv6 前缀等. 当 DHCP 只被用于提供除地址和前缀之外的其他配置 (如 DNS) 时, 它不必维护任何状态, 因此, 这种模式被称为无状态 DHCPv6 (stateless DHCPv6). 与之相对的是有状态 DHCPv6 (stateful DHCPv6). RFC 8415 是一个庞大的 RFC, 废弃了许多之前的 DHCPv6 标准, 如 RFC 3315 (原始的 DHCPv6 标准), RFC 3633 (prefix delegation), RFC 3736 (Stateless Dynamic Host Configuration Protocol (DHCP) Service for IPv6) 等.
 
-前缀委派 (Prefix Delegation) 用于一个委派路由器 (delegating router) (作为 DHCP 服务器) 向一个请求路由器 (requesting routers) (作为 DHCP 客户端) 委派前缀. 这一机制通常被用于 ISP 向用户委派 (delegate) 一个前缀, 这个前缀将被用于用户网络中的设备.
-
-![image-20230410222528623](./image-20230410222528623.png)
-
 DHCP 消息类型 (部分):
 
 - Solicit: 客户端发送, 用于定位服务器
 - Advertise: 服务器发送, 对于 solicit 的回复
 - Request: 客户端发送: 用于请求配置
 - Reply: 服务器发送, 包含租约和其他配置, 是对于 Solicit, Request, Renew, 或 Rebind 的回复
+
+### IPV6-PD
+
+前缀委派 (Prefix Delegation) 用于一个委派路由器 (delegating router) (作为 DHCP 服务器) 向一个请求路由器 (requesting routers) (作为 DHCP 客户端) 委派前缀. 这一机制通常被用于 ISP 向用户委派 (delegate) 一个前缀, 这个前缀将被用于用户网络中的设备. 比如用于 SLAAC 中路由器通告的前缀部分.
+
+![image-20230410222528623](./image-20230410222528623.png)
+
+PD 是通过 DHCPv6 中的 `IA_PD` 选项来工作的. 为了方便抓包分析, 这里描述一下这个选项的字段.
+
+![image-20240224202640142](./image-20240224202640142.png)
+
+- DHCPv6 的 option 有固定的 option-code 和 option-len 字段, 分别占 2 字节. 对于 `IA_PD`, option-code 为 `OPTION_IA_PD` (25)
+- IAID: 一个唯一的标识符
+- T1: 在多久之后客户端应该刷新获得的前缀的有效时间
+- T2: 没看懂和 T1 的区别是什么..
+- IA_PD-options: 包含了前缀的具体信息. 请求和响应都会采用同样的 option 格式, 只不过响应会在这个字段中附上前缀信息
 
 ## PMTU 问题
 
