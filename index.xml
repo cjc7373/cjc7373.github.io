@@ -3,16 +3,22 @@
 &lt;p>Go 包管理的转折来源于 2018 年 2 月 Go 作者之一 Russ Cox 在其博客上连发数篇文章进行了 Go Modules 的设计：&lt;/p>
 &lt;p>&lt;img src="./image-20231227012240619.png" alt="image-20231227012240619">&lt;/p>
 &lt;p>并最终在 Go 1.11 (2018/8) 中发布。&lt;/p>
-&lt;p>按照 &lt;a href="https://go.dev/wiki/GOPATH">GOPATH wiki&lt;/a> 所述，从 Go 1.16 (2021/2) 开始，&lt;code>GO111MODULE=on&lt;/code> 变量被默认设置，除非显式修改该变量，否则 Go Modules 会默认启用。当使用 Go Modules 时，GOPATH 将不再用于解析导入路径。但它仍然被用于存储下载的包（&lt;code>$GOPATH/pkg/mod&lt;/code>）和二进制命令（&lt;code>$GOPATH/bin&lt;/code>）。比如 Go 的 language server &lt;code>gopls&lt;/code> 通常会被安装到 &lt;code>$GOPATH/bin&lt;/code> 下，所以这个目录通常会加入到 &lt;code>$PATH&lt;/code> 中。&lt;/p>
+&lt;p>按照 &lt;a href="https://go.dev/wiki/GOPATH">GOPATH wiki&lt;/a> 所述，从 Go 1.16 (2021/2) 开始，&lt;code>GO111MODULE=on&lt;/code> 变量被默认设置，除非显式修改该变量，否则 Go Modules 会默认启用。当使用 Go Modules 时，&lt;code>GOPATH&lt;/code> 将不再用于解析导入路径。但它仍然被用于存储下载的包（&lt;code>$GOPATH/pkg/mod&lt;/code>）和二进制命令（&lt;code>$GOPATH/bin&lt;/code>）。比如 Go 的 language server &lt;code>gopls&lt;/code> 通常会被安装到 &lt;code>$GOPATH/bin&lt;/code> 下，所以这个目录通常会加入到 &lt;code>$PATH&lt;/code> 中。&lt;/p>
 &lt;p>以下内容皆以 Go Modules 启用为前提。&lt;/p>
 &lt;h2 id="组织代码">组织代码&lt;/h2>
-&lt;p>Go 程序被组织成包（packages）。一个包是一组在&lt;strong>同一文件夹&lt;/strong>下的源代码文件的集合。在同一文件中定义的函数、类型、变量、常量在同一个包的所有其他文件中可见。一般而言，包名就是文件夹名，但这只是惯例，而非规定。如果却有需要可以不一致。&lt;/p>
+&lt;p>Go 程序被组织成包（packages）。一个包是一组在&lt;strong>同一文件夹&lt;/strong>下的源代码文件的集合。在同一文件中定义的函数、类型、变量、常量在同一个包的所有其他文件中可见。&lt;/p>
 &lt;p>一个文件夹下无法拥有多个包。编译器会报错 &lt;code>found packages a (a.go) and b (b.go) in xxx&lt;/code>。&lt;/p>
 &lt;p>一个仓库（repository，这里指 VCS，如 git 的仓库）包含一个或多个模块（modules）。一个模块是一组相关的、一起发布的包的集合。一个 Go 仓库通常只有一个模块，位于仓库的根目录。一个名为 &lt;code>go.mod&lt;/code> 的文件声明了&lt;em>模块路径&lt;/em>：模块中所有包的导入路径（import path）前缀。包含 &lt;code>go.mod&lt;/code> 文件的目录是模块的根目录，这个模块包含了根目录及其所有子目录下的包，直到另一个包含 &lt;code>go.mod&lt;/code> 文件的目录为止（如果有的话）。&lt;/p>
 &lt;p>每个模块的路径不仅用于其包的导入路径前缀，也指示了 &lt;code>go&lt;/code> 命令应该到哪里去下载它。举例来说，为了下载 &lt;code>golang.org/x/tools&lt;/code> 模块，&lt;code>go&lt;/code> 命令会去 &lt;code>https://golang.org/x/tools&lt;/code> 寻找仓库。&lt;/p>
 &lt;p>如果只是在本地测试，模块路径可以随便起，比如 &lt;code>example.com/what&lt;/code> 这种。当然如果你未来想要发布它，那就得遵循 Go 的规则，比如 &lt;code>github.com/your-username/your-repo-name&lt;/code>。&lt;/p>
 &lt;p>&lt;em>导入路径&lt;/em>是一个用于导入一个包的字符串。一个包的导入路径是模块路径加上它在模块中的子目录。标准库中的包没有模块路径前缀。例如，模块 &lt;code>github.com/google/go-cmp&lt;/code> 在路径 &lt;code>cmp/&lt;/code> 下包含了一个包，这个包的导入路径为 &lt;code>github.com/google/go-cmp/cmp&lt;/code>。这个规则也适用于项目本身的包，如果 &lt;code>go-cmp&lt;/code> 项目在 &lt;code>foo/&lt;/code> 路径下的代码同样也导入了上述包，导入路径同样为 &lt;code>github.com/google/go-cmp/cmp&lt;/code>。&lt;/p>
-&lt;p>Go 项目的 layout 可以参考&lt;a href="https://github.com/golang-standards/project-layout">这里&lt;/a>，简而言之：&lt;/p>
+&lt;p>通俗理解一下，导入路径就是文件夹路径。当一个包导入之后，我们就可以用包名来引用它了。一般而言，包名就是文件夹名，但这只是惯例，而非规定，如果确有需要可以不一致。所以下面的写法是合法的：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;example.com/xxx/pkga&amp;#34;&lt;/span> &lt;span style="color:#75715e">// actually it&amp;#39;s package name is pkgb
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">pkgb&lt;/span>.&lt;span style="color:#a6e22e">Func&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Go 项目的 layout 可以参考&lt;a href="https://github.com/golang-standards/project-layout">这里&lt;/a>，简而言之：&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>&lt;code>/cmd&lt;/code> 程序的入口放在这里，每个二进制文件一个包，包名为 &lt;code>main&lt;/code>&lt;/p>
@@ -56,7 +62,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ go get -u github.com/cjc7373/go-module-test/c@v2.0.0
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go: github.com/cjc7373/go-module-test/c@v2.0.0: invalid version: module contains a go.mod file, so module path must match major version &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;github.com/cjc7373/go-module-test/c/v2&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果一个模块没有使用 Go Modules（即没有 &lt;code>go.mod&lt;/code> 文件），并且发布了一个 v2 及以上的版本，那么它作为一个依赖被引入时，我们会看到 &lt;code>github.com/xx/xxxx v4.1.0+incompatible&lt;/code> 这样的版本号。&lt;/p>
-&lt;p>模块的发布依赖于 VCS 的 tagging 功能。发布一个包就是打一个 tag。如果一个仓库有多个模块，则需要在 tagging 中加上模块路径的前缀，如果仓库位于 &lt;code>example.com/mymodules/&lt;/code>，模块路径为 &lt;code>example.com/mymodules/module1&lt;/code>，则打的 tag 应该为 &lt;code>module1/v1.2.3&lt;/code> 这种形式。（TODO：我不清楚模块路径是否要和文件夹路径对应..）&lt;/p>
+&lt;p>模块的发布依赖于 VCS 的 tagging 功能。发布一个包就是打一个 tag。如果一个仓库有多个模块，则需要在 tagging 中加上模块路径的前缀，如果仓库位于 &lt;code>example.com/mymodules/&lt;/code>，模块路径为 &lt;code>example.com/mymodules/module1&lt;/code>，则打的 tag 应该为 &lt;code>module1/v1.2.3&lt;/code> 这种形式。（这里猜测模块路径是和文件夹路径对应的，但我没有实验过）&lt;/p>
 &lt;h2 id="设计原则">设计原则&lt;/h2>
 &lt;p>所有的包管理都是为了解决依赖地狱问题（&lt;a href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency hell&lt;/a>），即一些包拥有同样的共享的包，但它们依赖与这些包的不同的、互不兼容的版本。&lt;/p>
 &lt;p>Russ Cox 在&lt;a href="https://research.swtch.com/vgo-principles">他的博客&lt;/a>中回顾了 Go Modules 的设计原则。总结一下就是：&lt;/p>
@@ -727,6 +733,7 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;li>邻居通告 (Neighbor Advertisement)&lt;/li>
 &lt;li>重定向 (Redirect)&lt;/li>
 &lt;/ol>
+&lt;p>下文所述的 SLAAC 即使用 NDP 协议通信.&lt;/p>
 &lt;h2 id="rfc-4862-ipv6-stateless-address-autoconfiguration">RFC 4862 (IPv6 Stateless Address Autoconfiguration)&lt;/h2>
 &lt;p>RFC 4862 定义了一种 IPv6 接口的自动配置机制, 包括生成一个链路本地地址和全局地址, 和一种重复地址检测 (Duplicate address detection) 机制来验证一条链路上地址的唯一性.&lt;/p>
 &lt;p>自动配置过程将首先生成链路本地地址. 其由一个链路本地前缀 (RFC 4291 中定义的)+一个接口的标识符 (interface identifier), 当这个地址被分配到一个接口之前, 它是一个暂定地址 (tentative address). 一个节点必须验证它在链路上的唯一性. 具体来说, 节点会发送一个邻居请求报文, 将这个暂定地址作为目标地址. 如果另一个节点正在使用这个地址, 它会返回一个邻居通告来拒绝这个请求. 在验证成功后, 这个地址会成为首选地址 (preferred address).&lt;/p>
@@ -738,14 +745,24 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;p>RFC 4862 中并没有规定 interface identifier 是如何产生的, 只说了很多情况下其由接口的链路层地址 (即 MAC 地址) 产生. 这种生成方式会带来一些隐私上的顾虑, 因而在 SLAAC 隐私扩展 (RFC 4941) 中, 主机会生成一个临时地址 (temporary address) 来负责对外通信. 另一种方式是生成一个不变的, 与 MAC 地址无关的 interface identifier, 这种方式在 RFC 7217 中定义.&lt;/p>
 &lt;h2 id="rfc-8415-dynamic-host-configuration-protocol-for-ipv6">RFC 8415 (Dynamic Host Configuration Protocol for IPv6)&lt;/h2>
 &lt;p>RFC 8415 定义了一个 C/S 协议 DHCPv6, 其功能包括向一个设备提供地址或其他配置, 自动委派 IPv6 前缀等. 当 DHCP 只被用于提供除地址和前缀之外的其他配置 (如 DNS) 时, 它不必维护任何状态, 因此, 这种模式被称为无状态 DHCPv6 (stateless DHCPv6). 与之相对的是有状态 DHCPv6 (stateful DHCPv6). RFC 8415 是一个庞大的 RFC, 废弃了许多之前的 DHCPv6 标准, 如 RFC 3315 (原始的 DHCPv6 标准), RFC 3633 (prefix delegation), RFC 3736 (Stateless Dynamic Host Configuration Protocol (DHCP) Service for IPv6) 等.&lt;/p>
-&lt;p>前缀委派 (Prefix Delegation) 用于一个委派路由器 (delegating router) (作为 DHCP 服务器) 向一个请求路由器 (requesting routers) (作为 DHCP 客户端) 委派前缀. 这一机制通常被用于 ISP 向用户委派 (delegate) 一个前缀, 这个前缀将被用于用户网络中的设备.&lt;/p>
-&lt;p>&lt;img src="./image-20230410222528623.png" alt="image-20230410222528623">&lt;/p>
 &lt;p>DHCP 消息类型 (部分):&lt;/p>
 &lt;ul>
 &lt;li>Solicit: 客户端发送, 用于定位服务器&lt;/li>
 &lt;li>Advertise: 服务器发送, 对于 solicit 的回复&lt;/li>
 &lt;li>Request: 客户端发送: 用于请求配置&lt;/li>
 &lt;li>Reply: 服务器发送, 包含租约和其他配置, 是对于 Solicit, Request, Renew, 或 Rebind 的回复&lt;/li>
+&lt;/ul>
+&lt;h3 id="ipv6-pd">IPV6-PD&lt;/h3>
+&lt;p>前缀委派 (Prefix Delegation) 用于一个委派路由器 (delegating router) (作为 DHCP 服务器) 向一个请求路由器 (requesting routers) (作为 DHCP 客户端) 委派前缀. 这一机制通常被用于 ISP 向用户委派 (delegate) 一个前缀, 这个前缀将被用于用户网络中的设备. 比如用于 SLAAC 中路由器通告的前缀部分.&lt;/p>
+&lt;p>&lt;img src="./image-20230410222528623.png" alt="image-20230410222528623">&lt;/p>
+&lt;p>PD 是通过 DHCPv6 中的 &lt;code>IA_PD&lt;/code> 选项来工作的. 为了方便抓包分析, 这里描述一下这个选项的字段.&lt;/p>
+&lt;p>&lt;img src="./image-20240224202640142.png" alt="image-20240224202640142">&lt;/p>
+&lt;ul>
+&lt;li>DHCPv6 的 option 有固定的 option-code 和 option-len 字段, 分别占 2 字节. 对于 &lt;code>IA_PD&lt;/code>, option-code 为 &lt;code>OPTION_IA_PD&lt;/code> (25)&lt;/li>
+&lt;li>IAID: 一个唯一的标识符&lt;/li>
+&lt;li>T1: 在多久之后客户端应该刷新获得的前缀的有效时间&lt;/li>
+&lt;li>T2: 没看懂和 T1 的区别是什么..&lt;/li>
+&lt;li>IA_PD-options: 包含了前缀的具体信息. 请求和响应都会采用同样的 option 格式, 只不过响应会在这个字段中附上前缀信息&lt;/li>
 &lt;/ul>
 &lt;h2 id="pmtu-问题">PMTU 问题&lt;/h2>
 &lt;p>在配置 IPv6 的过程中一个常见的问题是 PMTU 问题. Path MTU Discovery (PMTUD) 是确定 MTU 的一种标准方式, 在 &lt;a href="https://datatracker.ietf.org/doc/html/rfc8201">RFC 8201 (Path MTU Discovery for IP version 6)&lt;/a> 中定义. RFC 中这样描述:&lt;/p>
