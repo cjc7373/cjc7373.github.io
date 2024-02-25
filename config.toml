@@ -1,6 +1,6 @@
 baseURL = 'https://blog.coherence.codes/'
 languageCode = 'zh-cn'
-DefaultContentLanguage = "zh"
+defaultContentLanguage = "zh"
 title = "Coherence's Blog"
 copyright = "Coherence. 本站遵循 CC BY-NC-SA 4.0 协议"
 theme = "diary"
