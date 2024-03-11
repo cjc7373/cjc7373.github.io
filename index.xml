@@ -638,7 +638,7 @@ Strip the smallest prefix containing num leading slashes from each file name fou
 &lt;p>&lt;a href="https://datatracker.ietf.org/doc/html/rfc7084">RFC 7084 (IPv6 CE Router Requirements)&lt;/a> 定义了家用或小型办公室路由器 (IPv6 Customer Edge Routers) 配置的基本要求. OpenWrt 的配置文档遵循了这一 RFC.&lt;/p>
 &lt;p>RFC 4861 (IPv6 Neighbor Discovery) 定义了一种网络发现机制, 等效与 IPv4 中的 ARP. 下述的两种机制均依赖于 ND.&lt;/p>
 &lt;p>&lt;a href="https://datatracker.ietf.org/doc/html/rfc4862">RFC 4862 (IPv6 Stateless Address Autoconfiguration, SLAAC)&lt;/a> 定义了一种无状态配置地址的机制. &lt;a href="https://datatracker.ietf.org/doc/html/rfc8415">RFC 8415 (Dynamic Host Configuration Protocol for IPv6 (DHCPv6))&lt;/a> 定义了一种配置 IP 地址和前缀的机制. DHCPv6 可以替代 SLAAC 或和 SLAAC 一起工作.&lt;/p>
-&lt;p>本文并不是一篇针对 IPv6 的详尽介绍, 而只是对家用 IPv6 配置过程中的一些机制作了阐述.&lt;/p>
+&lt;p>本文并不是一篇针对 IPv6 的详尽介绍, 而只是对家用 IPv6 配置过程中的一些机制作了阐述. 在最后分享了几个 IPv6 问题排查的例子.&lt;/p>
 &lt;h2 id="术语">术语&lt;/h2>
 &lt;ul>
 &lt;li>
@@ -733,11 +733,14 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;li>邻居通告 (Neighbor Advertisement)&lt;/li>
 &lt;li>重定向 (Redirect)&lt;/li>
 &lt;/ol>
+&lt;p>所以 NDP 协议的包实际上是封装在 ICMPv6 协议的包里的. 这里插播一下 ICMPv6 的包结构, 非常简单:&lt;/p>
+&lt;p>&lt;img src="./image-20240311214614781.png" alt="image-20240311214614781">&lt;/p>
+&lt;p>IPv6 下的 ping 命令和 IPv4 下类似, 也是使用 ICMP 协议实现的. ICMPv6 定义了 Echo Request (Type 128) 和 Echo Reply (Type 129) 类型来给 ping 使用.&lt;/p>
 &lt;p>下文所述的 SLAAC 即使用 NDP 协议通信.&lt;/p>
 &lt;h2 id="rfc-4862-ipv6-stateless-address-autoconfiguration">RFC 4862 (IPv6 Stateless Address Autoconfiguration)&lt;/h2>
-&lt;p>RFC 4862 定义了一种 IPv6 接口的自动配置机制, 包括生成一个链路本地地址和全局地址, 和一种重复地址检测 (Duplicate address detection) 机制来验证一条链路上地址的唯一性.&lt;/p>
+&lt;p>RFC 4862 定义了一种 IPv6 接口的自动配置机制 (即 SLAAC), 包括生成一个链路本地地址和全局地址, 和一种重复地址检测 (Duplicate address detection) 机制来验证一条链路上地址的唯一性.&lt;/p>
 &lt;p>自动配置过程将首先生成链路本地地址. 其由一个链路本地前缀 (RFC 4291 中定义的)+一个接口的标识符 (interface identifier), 当这个地址被分配到一个接口之前, 它是一个暂定地址 (tentative address). 一个节点必须验证它在链路上的唯一性. 具体来说, 节点会发送一个邻居请求报文, 将这个暂定地址作为目标地址. 如果另一个节点正在使用这个地址, 它会返回一个邻居通告来拒绝这个请求. 在验证成功后, 这个地址会成为首选地址 (preferred address).&lt;/p>
-&lt;p>接下来主机会广播路由器请求, 以便敦促路由器发送路由器通告. 主机根据路由器通告中的的前缀信息 (Prefix-Infromation) 选项来构造全局地址.&lt;/p>
+&lt;p>接下来主机会广播路由器请求 (RS), 以便敦促路由器发送路由器通告 (RA). 主机根据路由器通告中的的前缀信息 (Prefix-Infromation) 选项来构造全局地址.&lt;/p>
 &lt;blockquote>
 &lt;p>Note: 由于 RA 总是会广播给所有主机, 所以 SLAAC 无法做到不给某些主机分配 IP 地址&lt;/p>
 &lt;/blockquote>
@@ -787,6 +790,25 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;/blockquote>
 &lt;p>在仅 IPv4 的情况下访问 &lt;code>g.alicdn.com&lt;/code>, 可以发现服务端发送的几个包发生了分片:&lt;/p>
 &lt;p>&lt;img src="./image-20230416141447823.png" alt="image-20230416141447823">&lt;/p>
+&lt;h2 id="pd-过早失效的问题">PD 过早失效的问题&lt;/h2>
+&lt;p>我现在的移动网是光猫拨号, 用一个软路由装了 OpenWRT 当主路由. 发现 IPv6 会在一天之后停止工作.. 抓 wan 口 DHCPv6 包发现 PD 的有效期写的是两天.. 怀疑和这个有关.. 待调查.&lt;/p>
+&lt;h2 id="ndp-不工作的问题">NDP 不工作的问题&lt;/h2>
+&lt;p>某日, 突然发现我的手机在 WiFi 下某些 App 加载非常慢, 而使用移动数据则正常, 直觉告诉我是 IPv6 的锅, 然而检查 OpenWRT 发现已经开启 TCP MSS Clamping, MTU 设置的 1420 也比较小了, 遂在路由器 eth0 接口 (wan 口) 抓包查看.&lt;/p>
+&lt;p>抓包发现手机的 v6 地址不可达.. 图中 &lt;code>103e&lt;/code> 结尾的地址是路由器, &lt;code>edc6&lt;/code> 结尾的地址是手机, 可见手机发起 TCP 握手之后, 对方的 SYN 并没有发到我手机 (因为手机发起了重传), 之后路由器给对方发送了网络不可达报文..&lt;/p>
+&lt;p>&lt;img src="./image-20240311215940125.png" alt="image-20240311215940125">&lt;/p>
+&lt;p>在路由器上用 &lt;code>ip neighbour&lt;/code> 检查发现:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>root@FriendlyWrt:~# ip neighbour
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fd00:ab:cd:0:9d74:c147:f069:edc6 dev br-lan FAILED
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2409:8a28:ed8:1e51:9d74:c147:f069:edc6 dev br-lan INCOMPLETE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查询 man 可知这是 NDP 发现未能成功:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span> incomplete
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> the neighbour entry has not &lt;span style="color:#f92672">(&lt;/span>yet&lt;span style="color:#f92672">)&lt;/span> been validated/resolved.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> failed max number of probes exceeded without success, neighbor validation has ultimately failed.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后继续观察 Wireshark, 发现手机确实不响应 NDP Neighbor Solicitation, 这种情况闻所未闻..&lt;/p>
+&lt;p>根据重启重装重买定律, 重启手机, 问题解决.. 尚不清楚真正的问题是什么.. (我觉得一加大概率背锅)&lt;/p>
 &lt;h2 id="其他">其他&lt;/h2>
 &lt;ul>
 &lt;li>一个典型的 IPv4 路由器会使用 NAT, 因此默认阻止所有入站连接, 其通常使用 UPnP 来开放某一端口. 而 IPv6 不使用 NAT, 因此正确配置防火墙是必要的.&lt;/li>
