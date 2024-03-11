@@ -14,7 +14,7 @@ RFC 4861 (IPv6 Neighbor Discovery) 定义了一种网络发现机制, 等效与 
 
 [RFC 4862 (IPv6 Stateless Address Autoconfiguration, SLAAC)](https://datatracker.ietf.org/doc/html/rfc4862) 定义了一种无状态配置地址的机制. [RFC 8415 (Dynamic Host Configuration Protocol for IPv6 (DHCPv6))](https://datatracker.ietf.org/doc/html/rfc8415) 定义了一种配置 IP 地址和前缀的机制. DHCPv6 可以替代 SLAAC 或和 SLAAC 一起工作.
 
-本文并不是一篇针对 IPv6 的详尽介绍, 而只是对家用 IPv6 配置过程中的一些机制作了阐述.
+本文并不是一篇针对 IPv6 的详尽介绍, 而只是对家用 IPv6 配置过程中的一些机制作了阐述. 在最后分享了几个 IPv6 问题排查的例子.
 
 ## 术语
 - 节点 (node): 一个实现了 IP 协议的设备
@@ -76,15 +76,21 @@ RFC 4861 定义了一种网络发现机制 (Neighbor Discovery Protocol, NDP), �
 4. 邻居通告 (Neighbor Advertisement)
 5. 重定向 (Redirect)
 
+所以 NDP 协议的包实际上是封装在 ICMPv6 协议的包里的. 这里插播一下 ICMPv6 的包结构, 非常简单:
+
+![image-20240311214614781](./image-20240311214614781.png)
+
+IPv6 下的 ping 命令和 IPv4 下类似, 也是使用 ICMP 协议实现的. ICMPv6 定义了 Echo Request (Type 128) 和 Echo Reply (Type 129) 类型来给 ping 使用.
+
 下文所述的 SLAAC 即使用 NDP 协议通信.
 
 ## RFC 4862 (IPv6 Stateless Address Autoconfiguration)
 
-RFC 4862 定义了一种 IPv6 接口的自动配置机制, 包括生成一个链路本地地址和全局地址, 和一种重复地址检测 (Duplicate address detection) 机制来验证一条链路上地址的唯一性.
+RFC 4862 定义了一种 IPv6 接口的自动配置机制 (即 SLAAC), 包括生成一个链路本地地址和全局地址, 和一种重复地址检测 (Duplicate address detection) 机制来验证一条链路上地址的唯一性.
 
 自动配置过程将首先生成链路本地地址. 其由一个链路本地前缀 (RFC 4291 中定义的)+一个接口的标识符 (interface identifier), 当这个地址被分配到一个接口之前, 它是一个暂定地址 (tentative address). 一个节点必须验证它在链路上的唯一性. 具体来说, 节点会发送一个邻居请求报文, 将这个暂定地址作为目标地址. 如果另一个节点正在使用这个地址, 它会返回一个邻居通告来拒绝这个请求. 在验证成功后, 这个地址会成为首选地址 (preferred address).
 
-接下来主机会广播路由器请求, 以便敦促路由器发送路由器通告. 主机根据路由器通告中的的前缀信息 (Prefix-Infromation) 选项来构造全局地址.
+接下来主机会广播路由器请求 (RS), 以便敦促路由器发送路由器通告 (RA). 主机根据路由器通告中的的前缀信息 (Prefix-Infromation) 选项来构造全局地址.
 
 > Note: 由于 RA 总是会广播给所有主机, 所以 SLAAC 无法做到不给某些主机分配 IP 地址
 
@@ -158,6 +164,41 @@ PMTUD 工作方式为源节点首先选择下一跳的 MTU (已知) 作为 PMTU.
 在仅 IPv4 的情况下访问 `g.alicdn.com`, 可以发现服务端发送的几个包发生了分片:
 
 ![image-20230416141447823](./image-20230416141447823.png)
+
+## PD 过早失效的问题
+
+我现在的移动网是光猫拨号, 用一个软路由装了 OpenWRT 当主路由. 发现 IPv6 会在一天之后停止工作.. 抓 wan 口 DHCPv6 包发现 PD 的有效期写的是两天.. 怀疑和这个有关.. 待调查.
+
+## NDP 不工作的问题
+
+某日, 突然发现我的手机在 WiFi 下某些 App 加载非常慢, 而使用移动数据则正常, 直觉告诉我是 IPv6 的锅, 然而检查 OpenWRT 发现已经开启 TCP MSS Clamping, MTU 设置的 1420 也比较小了, 遂在路由器 eth0 接口 (wan 口) 抓包查看.
+
+抓包发现手机的 v6 地址不可达.. 图中 `103e` 结尾的地址是路由器, `edc6` 结尾的地址是手机, 可见手机发起 TCP 握手之后, 对方的 SYN 并没有发到我手机 (因为手机发起了重传), 之后路由器给对方发送了网络不可达报文..
+
+![image-20240311215940125](./image-20240311215940125.png)
+
+在路由器上用 `ip neighbour` 检查发现:
+
+```bash
+root@FriendlyWrt:~# ip neighbour
+...
+fd00:ab:cd:0:9d74:c147:f069:edc6 dev br-lan FAILED 
+2409:8a28:ed8:1e51:9d74:c147:f069:edc6 dev br-lan INCOMPLETE 
+...
+```
+
+查询 man 可知这是 NDP 发现未能成功:
+
+```bash
+ incomplete
+        the neighbour entry has not (yet) been validated/resolved.
+
+ failed max number of probes exceeded without success, neighbor validation has ultimately failed.
+```
+
+之后继续观察 Wireshark, 发现手机确实不响应 NDP Neighbor Solicitation, 这种情况闻所未闻..
+
+根据重启重装重买定律, 重启手机, 问题解决.. 尚不清楚真正的问题是什么.. (我觉得一加大概率背锅)
 
 ## 其他
 
