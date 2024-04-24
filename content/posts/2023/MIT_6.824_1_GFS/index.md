@@ -1,7 +1,7 @@
 ---
 title: MIT 6.824 学习笔记(一) GFS
 date: 2023-09-05
-categories:
+tags:
 - Distributed System
 ---
 

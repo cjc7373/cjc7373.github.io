@@ -2,7 +2,7 @@
 title: MIT 6.824 学习笔记(二) Raft
 date: 2023-10-01
 lastmod: 2023-10-11
-categories:
+tags:
 - Distributed System
 ---
 
