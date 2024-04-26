@@ -140,10 +140,29 @@
 &lt;p>在日本，你几乎能完全依靠公共交通，而且基本都是铁路。我们没有坐过公交车和出租车。在东京，基本上方圆一公里之内必有一个车站（当然，这可能只是市区的情况）。&lt;/p>
 &lt;h2 id="其他感受">其他感受&lt;/h2>
 &lt;ul>
-&lt;li>日本人真有礼貌，动不动就すみません（私密马赛）。&lt;/li>
-&lt;li>水很贵，一瓶 100-140 日元不等，但是 7-11 里 2L 的水也是 100 日元，就很奇怪。见到的最便宜的饮料是 80 日元的罐装咖啡，比水都便宜。&lt;/li>
-&lt;li>语言方面，碰到的大部分人会简单的英语。也有英语比较好的，比如成田机场 skyliner 售票处、JR East 旅客服务中心和那位黑人老哥。东京第一晚青旅的前台小哥英文也很好，不过他看上去不是日本人。餐厅点餐、便利店买东西用英文进行简单的交流基本都没问题，当然还有另一种选择，那就是 Google 翻译。&lt;/li>
-&lt;li>这次旅行基本都在看城市，下次还有机会去日本的话想去看看国家公园之类的地方，爬一爬富士山。七天的时间还是有点赶的，像在青旅的那桌人，基本都是一个月或者好几个月出来旅游。而在中国这种感觉不太现实，毕业成为社畜之后更难有大段的空闲时间了。&lt;/li>
+&lt;li>
+&lt;p>日本人真有礼貌，动不动就すみません（私密马赛）。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>水很贵，一瓶 100-140 日元不等，但是 7-11 里 2L 的水也是 100 日元，就很奇怪。见到的最便宜的饮料是 80 日元的罐装咖啡，比水都便宜。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>语言方面，碰到的大部分人会简单的英语。也有英语比较好的，比如成田机场 skyliner 售票处、JR East 旅客服务中心和那位黑人老哥。东京第一晚青旅的前台小哥英文也很好，不过他看上去不是日本人。餐厅点餐、便利店买东西用英文进行简单的交流基本都没问题，当然还有另一种选择，那就是 Google 翻译。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>这次旅行基本都在看城市，下次还有机会去日本的话想去看看国家公园之类的地方，爬一爬富士山。七天的时间还是有点赶的，像在青旅的那桌人，基本都是一个月或者好几个月出来旅游。而在中国这种感觉不太现实，毕业成为社畜之后更难有大段的空闲时间了。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>这次旅行共计花费 9k 不到一点，机票占了 30%，酒店也差不多，剩下的是吃饭和景点门票。&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2024/japan_trip/image-20240427023038805.png" width="400px">
+&lt;/figure>
+&lt;p>出发前我换了 4w 日元，到了日本后 Moo 又换了 4w 日元。几乎任何一个便利店都会有个 ATM 机以供取钱，在 7-11 取钱的时候好像会收十几块的手续费，走 JCB 的渠道购汇。剩下的消费靠信用卡。&lt;/p>
+&lt;p>Suica 或者其他交通卡非常通用，几乎哪都能用。只是少数地方是 cash-only，不过我们在大阪见到的很多自动售货机都是 cash-only，比较落后。支付宝微信的普及度也很高，基本上能刷卡的地方就能用支付宝微信。&lt;/p>
+&lt;p>&lt;img src="./image-20240427023828844.png" alt="image-20240427023828844">&lt;/p>
+&lt;p>（7-11 门口贴的支付方式一览）&lt;/p>
+&lt;p>在米原吃饭的时候，Moo 想用微信支付结账，店员还操作了好一会（他们那块牌牌上写了支持微信支付），显然是第一次用（&lt;del>有种县城小饭店刷信用卡的感觉&lt;/del>）。&lt;/p>
+&lt;/li>
 &lt;/ul>
 - https://blog.coherence.codes/posts/2024/japan_trip/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Go 包管理（一）入门和设计原则</title><link>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</link><pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/ -&lt;p>在我初学 Go 的时候，曾被网上的过时教程和各种对 &lt;code>$GOPATH&lt;/code> 的操作搞得云里雾里，而现在我们已经基本用不到 &lt;code>$GOPATH&lt;/code> 了，因为在 2023 年， Go Modules 已经一统天下了。但是在这之前，是群魔乱舞的时代，对这段历史感兴趣的同学可以参考&lt;a href="https://blog.wolfogre.com/posts/golang-package-history/">这篇博客&lt;/a>。&lt;/p>
 &lt;p>顺便提一下，GOPATH 时代包没有“版本”的概念，这可能是因为 Google 内部采用 monorepo 的方式（即所有代码都放在一个仓库中）管理代码，所有人都基于 HEAD 来 build，所以当有人的改动 break 了其他人的代码时，很容易在 build 时反映出来。Go 作者之一 Rob Pike 的文章 &lt;a href="https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html">What We Got Right, What We Got Wrong&lt;/a> 中提到了这一点。&lt;/p>
