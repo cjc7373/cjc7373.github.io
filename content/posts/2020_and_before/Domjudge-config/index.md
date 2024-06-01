@@ -242,7 +242,7 @@ GG。总体来说还是挺顺利的，服务器没有崩，甚至平均 CPU load
 
 本次Domjudge的配置基本与之前相同，用Docker-compose一键部署。
 
-之前一直没有做过压力测试一直是我的遗憾，这次在研究了Domjudge的[API文档](https://www.domjudge.org/demoweb/api/doc)之后，写了一个[自动交题的脚本](Domjudge-config/submit.py)，并且用Locust辅助做压力测试，然后评测机不负众望炸了。。
+之前一直没有做过压力测试一直是我的遗憾，这次在研究了Domjudge的[API文档](https://www.domjudge.org/demoweb/api/doc)之后，写了一个[自动交题的脚本](./submit.py)，并且用Locust辅助做压力测试，然后评测机不负众望炸了。。
 
 ![image-20191208184458561](./image-20191208184458561.png)
 

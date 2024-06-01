@@ -123,7 +123,7 @@ Turn off this advice by setting config variable advice.detachedHead to false
 HEAD is now at f25ea8916 fix: Add CHANGELOG link
 ```
 
-在这种状态作出的 commits 将成为 dangleing commits，因为没有 refs 能够间接引用到它们。我们可以在 `git reflog` 中看到它们，但它们在一段时间后可能会被 git 垃圾回收掉。如果因为误操作“丢失”了一些 commit，大部分情况下只是没有 ref 能够间接引用它们了，所以我们能在 reflog 中找到并恢复它们。
+在这种状态作出的 commits 将成为 dangling commits，因为没有 refs 能够间接引用到它们。我们可以在 `git reflog` 中看到它们，但它们在一段时间后可能会被 git 垃圾回收掉。如果因为误操作“丢失”了一些 commit，大部分情况下只是没有 ref 能够间接引用它们了，所以我们能在 reflog 中找到并恢复它们。
 
 除了分支之外，另一种 ref 是 tag。tag 被存储在 `.git/refs/tags` 中，和 branch 不同的是，tag 是不可变的。git 中有两种类型的 tag：
 

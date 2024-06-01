@@ -1,16 +1,24 @@
 ---
 title: MIT 6.824 学习笔记(二) Raft
 date: 2023-10-01
-lastmod: 2023-10-11
+lastmod: 2024-06-02
 tags:
 - Distributed System
 ---
 
-> Note: 为了保持准确性，我会尽量使用英文术语。
+本文主要是对 Raft 论文的翻译，为了保持准确性，我会尽量使用英文术语。
 
 ## Introduction
 
-在过去十年, Leslie Lamport 的 Paxos 几乎成了共识的同义词.. Paxos 首先定义了一种协议来对单个决定达成共识, 比如一条单个的 log entry, 这被称为 single-decree Paxos. 其支持多个决定的版本 (比如 log) 被称为 muti-Paxos。然而，Paxos 的缺点是难以理解，并且没有提供一个良好的基础来构建可行的实现。
+在过去十年，Leslie Lamport 的 Paxos 协议几乎成为了共识的同义词。Paxos 首先定义了一种协议来对单个决定达成共识, 比如一条单个的 log entry, 这被称为 single-decree Paxos。 其支持多个决定的版本 (比如 log) 被称为 muti-Paxos。然而，Paxos 的缺点是难以理解，并且没有提供一个良好的基础来构建可行的实现。
+
+> 试图为这个主题增添一点幽默的尝试以惨淡的失败告终。……这个希腊寓言显然使阅读论文的人们分心了，以致于他们无法理解这个算法。我把论文发给了一些人，其中包括 Nancy Lynch, Vassos Hadzilacos 和 Phil Bernstein，他们声称读过了论文。几个月后我发邮件给他们问了如下问题：
+>
+>     你能否实现一个分布式数据库，它能容忍任何进程的故障（可能是所有进程）而不牺牲一致性，并且在超过半数进程恢复之后继续正常工作？
+>
+> 没有人察觉到这个问题和 Paxos 算法之间有任何联系。
+>
+> —— Leslie Lamport [对 The Part-Time Parliament 的评论](https://lamport.azurewebsites.net/pubs/pubs.html?from=https://research.microsoft.com/users/lamport/pubs/pubs.html&type=path#lamport-paxos)
 
 相较于 Paxos，Raft 的目标是易于理解且符合直觉。为了使 Raft 易于理解，作者采取了解耦 (Raft 将共识问题分解成几个子问题 leader election, log replication, safety, and membership changes) 和缩减状态空间的方式。
 
