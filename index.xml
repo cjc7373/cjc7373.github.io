@@ -120,7 +120,7 @@
 &lt;p>（东京台场附近的一列车）&lt;/p>
 &lt;p>&lt;img src="./image-20240427021228647.png" alt="image-20240427021228647">&lt;/p>
 &lt;p>（大阪梅田附近的一条铁路）&lt;/p>
-&lt;p>第一次坐 toei subway 的线路时感觉非常迷惑，地铁居然还分车的类型？还开往不同的终点站？一列车还能同时运行在两条线路上？到后来就习惯了。&lt;/p>
+&lt;p>第一次坐 toei subway 的线路时感觉非常迷惑，地铁居然还分车的类型？还开往不同的终点站？一列车还能同时运行在两条线路上（即&lt;a href="https://zh.wikipedia.org/zh-cn/%E7%9B%B4%E9%80%9A%E9%81%8B%E8%A1%8C">贯通运营&lt;/a>）？到后来就习惯了。&lt;/p>
 &lt;p>&lt;img src="./image-20240424014310226.png" alt="image-20240424014310226">&lt;/p>
 &lt;p>日本每条线路都会有一个或两个英文字母的编号，每个站有个数字编号，所以看 Google Maps 的时候只需要看比如乘坐 T(Tozai Line) T02-&amp;gt;T03 换乘 JY(Yamanote Line) 到 JY20，而不需要去记站名了。但是 Google Maps 只对东京市内铁路有这个提示，其他铁路只会写线路编号，而没有站名编号了。&lt;/p>
 &lt;p>常开式的闸机也是好文明！就在不久前，&lt;a href="https://mp.weixin.qq.com/s/iR9kZtepYqPwEkyct5NWCg">上海地铁也开始试点&lt;/a>这种模式了，真就学习国外先进经验了。&lt;/p>
@@ -163,6 +163,9 @@
 &lt;p>&lt;img src="./image-20240427023828844.png" alt="image-20240427023828844">&lt;/p>
 &lt;p>（7-11 门口贴的支付方式一览）&lt;/p>
 &lt;p>在米原吃饭的时候，Moo 想用微信支付结账，店员还操作了好一会（他们那块牌牌上写了支持微信支付），显然是第一次用（&lt;del>有种县城小饭店刷信用卡的感觉&lt;/del>）。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>关于垃圾分类，日本的垃圾分类感觉没有一个统一的标准，每个城市甚至每个行政区都有细微的差别。另一个直观的感受是在街上见不到垃圾桶，能见到的也是只能扔瓶子的垃圾桶，到最后我们的垃圾基本只能去便利店扔。&lt;/p>
 &lt;/li>
 &lt;/ul>
 - https://blog.coherence.codes/posts/2024/japan_trip/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Go 包管理（一）入门和设计原则</title><link>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</link><pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/ -&lt;p>在我初学 Go 的时候，曾被网上的过时教程和各种对 &lt;code>$GOPATH&lt;/code> 的操作搞得云里雾里，而现在我们已经基本用不到 &lt;code>$GOPATH&lt;/code> 了，因为在 2023 年， Go Modules 已经一统天下了。但是在这之前，是群魔乱舞的时代，对这段历史感兴趣的同学可以参考&lt;a href="https://blog.wolfogre.com/posts/golang-package-history/">这篇博客&lt;/a>。&lt;/p>
@@ -298,11 +301,16 @@
 &lt;p>由于 vlc/chromium 同样实现 mpris 接口，所以上面观察到的现象基本可以确认也是 kdeconnect 导致的了。&lt;/p>
 &lt;h2 id="怎么办呢">怎么办呢？&lt;/h2>
 &lt;p>目前的 workaround 是关闭 KDE Connect 中的 Multimedia control receiver 插件，drawback 是其他设备无法再控制本机的媒体播放器了，不过我也不怎么用，问题不大。&lt;/p>
-- https://blog.coherence.codes/posts/2023/mpv_debug/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>MIT 6.824 学习笔记(二) Raft</title><link>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</link><pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/ -&lt;blockquote>
-&lt;p>Note: 为了保持准确性，我会尽量使用英文术语。&lt;/p>
-&lt;/blockquote>
+- https://blog.coherence.codes/posts/2023/mpv_debug/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>MIT 6.824 学习笔记(二) Raft</title><link>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</link><pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/ -&lt;p>本文主要是对 Raft 论文的翻译，为了保持准确性，我会尽量使用英文术语。&lt;/p>
 &lt;h2 id="introduction">Introduction&lt;/h2>
-&lt;p>在过去十年, Leslie Lamport 的 Paxos 几乎成了共识的同义词.. Paxos 首先定义了一种协议来对单个决定达成共识, 比如一条单个的 log entry, 这被称为 single-decree Paxos. 其支持多个决定的版本 (比如 log) 被称为 muti-Paxos。然而，Paxos 的缺点是难以理解，并且没有提供一个良好的基础来构建可行的实现。&lt;/p>
+&lt;p>在过去十年，Leslie Lamport 的 Paxos 协议几乎成为了共识的同义词。Paxos 首先定义了一种协议来对单个决定达成共识, 比如一条单个的 log entry, 这被称为 single-decree Paxos。 其支持多个决定的版本 (比如 log) 被称为 muti-Paxos。然而，Paxos 的缺点是难以理解，并且没有提供一个良好的基础来构建可行的实现。&lt;/p>
+&lt;blockquote>
+&lt;p>试图为这个主题增添一点幽默的尝试以惨淡的失败告终。……这个希腊寓言显然使阅读论文的人们分心了，以致于他们无法理解这个算法。我把论文发给了一些人，其中包括 Nancy Lynch, Vassos Hadzilacos 和 Phil Bernstein，他们声称读过了论文。几个月后我发邮件给他们问了如下问题：&lt;/p>
+&lt;pre>&lt;code>你能否实现一个分布式数据库，它能容忍任何进程的故障（可能是所有进程）而不牺牲一致性，并且在超过半数进程恢复之后继续正常工作？
+&lt;/code>&lt;/pre>
+&lt;p>没有人察觉到这个问题和 Paxos 算法之间有任何联系。&lt;/p>
+&lt;p>—— Leslie Lamport &lt;a href="https://lamport.azurewebsites.net/pubs/pubs.html?from=https://research.microsoft.com/users/lamport/pubs/pubs.html&amp;amp;type=path#lamport-paxos">对 The Part-Time Parliament 的评论&lt;/a>&lt;/p>
+&lt;/blockquote>
 &lt;p>相较于 Paxos，Raft 的目标是易于理解且符合直觉。为了使 Raft 易于理解，作者采取了解耦 (Raft 将共识问题分解成几个子问题 leader election, log replication, safety, and membership changes) 和缩减状态空间的方式。&lt;/p>
 &lt;p>Raft 和已有的共识算法类似（尤其是 Viewstamped Replication），但它有一些新特性。Raft 采取了强 leader 的设计，例如 log entry 只会从 leader 向其他节点分发。这可能是为了性能考虑（比无 leader 要更快，RPC 也更少）Raft 采用基于随机计时器的 leader 选举, 从而用一种简单的方法来解决冲突。另外还有处理成员变更方面的改进。&lt;/p>
 &lt;p>为了解决单点故障问题，Raft 采用了 Majority Vote，基本上任何操作都需要得到多数确认才能够执行。为了避免 tie，Raft 的节点数量必须为奇数。因此在一个 2f+1 个节点的系统中，最多允许 f 个节点故障，f+1 即为法定人数（quorum）。&lt;/p>
@@ -519,7 +527,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Turn off this advice by setting config variable advice.detachedHead to false
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HEAD is now at f25ea8916 fix: Add CHANGELOG link
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在这种状态作出的 commits 将成为 dangleing commits，因为没有 refs 能够间接引用到它们。我们可以在 &lt;code>git reflog&lt;/code> 中看到它们，但它们在一段时间后可能会被 git 垃圾回收掉。如果因为误操作“丢失”了一些 commit，大部分情况下只是没有 ref 能够间接引用它们了，所以我们能在 reflog 中找到并恢复它们。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在这种状态作出的 commits 将成为 dangling commits，因为没有 refs 能够间接引用到它们。我们可以在 &lt;code>git reflog&lt;/code> 中看到它们，但它们在一段时间后可能会被 git 垃圾回收掉。如果因为误操作“丢失”了一些 commit，大部分情况下只是没有 ref 能够间接引用它们了，所以我们能在 reflog 中找到并恢复它们。&lt;/p>
 &lt;p>除了分支之外，另一种 ref 是 tag。tag 被存储在 &lt;code>.git/refs/tags&lt;/code> 中，和 branch 不同的是，tag 是不可变的。git 中有两种类型的 tag：&lt;/p>
 &lt;ul>
 &lt;li>

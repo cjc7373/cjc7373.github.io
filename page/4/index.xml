@@ -439,7 +439,7 @@ account_type fullname username password
 &lt;p>这台服务器的网络结构比较复杂，首先，他是Windows Server，通过一个软件把某些端口的流量转发至一台Debian虚拟机中（为了方便管理证书等），然后由Debian上的Nginx反代至Domjudge的虚拟机中。这样我自己就不用配置证书也能有HTTPS。&lt;/p>
 &lt;p>但是Windows有一个老生常谈的坑：时间问题。Windows的硬件时钟是本地时间，而Linux为UTC时间，这导致了一开始Domjudge里的时间是假的，需要手动设置。&lt;/p>
 &lt;p>本次Domjudge的配置基本与之前相同，用Docker-compose一键部署。&lt;/p>
-&lt;p>之前一直没有做过压力测试一直是我的遗憾，这次在研究了Domjudge的&lt;a href="https://www.domjudge.org/demoweb/api/doc">API文档&lt;/a>之后，写了一个&lt;a href="Domjudge-config/submit.py">自动交题的脚本&lt;/a>，并且用Locust辅助做压力测试，然后评测机不负众望炸了。。&lt;/p>
+&lt;p>之前一直没有做过压力测试一直是我的遗憾，这次在研究了Domjudge的&lt;a href="https://www.domjudge.org/demoweb/api/doc">API文档&lt;/a>之后，写了一个&lt;a href="./submit.py">自动交题的脚本&lt;/a>，并且用Locust辅助做压力测试，然后评测机不负众望炸了。。&lt;/p>
 &lt;p>&lt;img src="./image-20191208184458561.png" alt="image-20191208184458561">&lt;/p>
 &lt;p>其实还不止这个错，还有各种奇怪的错误。幸好在正式比赛中评测机表现得很稳健，并没有出锅，应该是压力还不够大。。&lt;/p>
 &lt;p>比赛时还碰到一个bug，在一道题重测后这道题的一血变更了，但是榜单上的一血是错的，重新刷新榜单也未解决。查看数据库表发现有一张叫&lt;code>scorecache&lt;/code>的表，推测该表即为榜单的缓存，于是更改&lt;code>is_first_solved&lt;/code>字段后，成功解决。&lt;/p>
