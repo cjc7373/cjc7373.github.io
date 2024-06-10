@@ -1,5 +1,7 @@
 ## 关于我
-这一部分真的很难写，嗯，那干脆就跳过了吧。
+- Arch Linux User
+- Interested in distributed system, cloud native
+- Sci-fi fan
 
 ## 关于留言
 
@@ -16,8 +18,6 @@
 见 [Hello, Hugo!]({{< ref "Hello_hugo" >}}) 这篇文章。
 
 ## 联系我
-Telegram：@Coherence0
-
 Github: https://github.com/cjc7373
 
 Email：niuchangcun AT gmail.com
