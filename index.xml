@@ -167,6 +167,9 @@
 &lt;li>
 &lt;p>关于垃圾分类，日本的垃圾分类感觉没有一个统一的标准，每个城市甚至每个行政区都有细微的差别。另一个直观的感受是在街上见不到垃圾桶，能见到的也是只能扔瓶子的垃圾桶，到最后我们的垃圾基本只能去便利店扔。&lt;/p>
 &lt;/li>
+&lt;li>
+&lt;p>关于无障碍设施，我们在东京的街头看到了很多独自出行的残疾人，包括坐在轮椅上的人和盲人，这在国内基本上是看不见的。基本上每个红绿灯都有无障碍提示音设备，也没有见过盲道被占用的情况。&lt;/p>
+&lt;/li>
 &lt;/ul>
 - https://blog.coherence.codes/posts/2024/japan_trip/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Go 包管理（一）入门和设计原则</title><link>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</link><pubDate>Sat, 06 Jan 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/ -&lt;p>在我初学 Go 的时候，曾被网上的过时教程和各种对 &lt;code>$GOPATH&lt;/code> 的操作搞得云里雾里，而现在我们已经基本用不到 &lt;code>$GOPATH&lt;/code> 了，因为在 2023 年， Go Modules 已经一统天下了。但是在这之前，是群魔乱舞的时代，对这段历史感兴趣的同学可以参考&lt;a href="https://blog.wolfogre.com/posts/golang-package-history/">这篇博客&lt;/a>。&lt;/p>
 &lt;p>顺便提一下，GOPATH 时代包没有“版本”的概念，这可能是因为 Google 内部采用 monorepo 的方式（即所有代码都放在一个仓库中）管理代码，所有人都基于 HEAD 来 build，所以当有人的改动 break 了其他人的代码时，很容易在 build 时反映出来。Go 作者之一 Rob Pike 的文章 &lt;a href="https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html">What We Got Right, What We Got Wrong&lt;/a> 中提到了这一点。&lt;/p>

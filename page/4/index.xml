@@ -1,4 +1,7 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 24 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ -&lt;h2 id="前言">前言&lt;/h2>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 24 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ -&lt;blockquote>
+&lt;p>Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="前言">前言&lt;/h2>
 &lt;p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p>
 &lt;p>这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p>
 &lt;p>&lt;img src="./1554536417517.png" alt="1554536417517">&lt;/p>
@@ -193,17 +196,7 @@ May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&
 &lt;/ul>
 &lt;h2 id="吐槽">吐槽&lt;/h2>
 &lt;ul>
-&lt;li>
-&lt;p>在 Linux 下，什么东西装好不用折腾就能用我反而觉得不正常&amp;hellip;&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>附一段不太恰当的比喻：&lt;/p>
-&lt;blockquote>
-&lt;p>Windows 是人妻，啥都有，啥都会，啥都包玩的舒服，就是经常还往家里带一些你不想要的
-MacOS 是女朋友，带出去在人前倍有feel，但是只能按照她的规则玩不然一脚踹下床
-Linux 是小萝莉，懵懂无知，你怎么调教就怎么跟你玩，但是调教过猛经常会把腰闪了，萝莉也玩坏了。。。&lt;/p>
-&lt;/blockquote>
-&lt;/li>
+&lt;li>在 Linux 下，什么东西装好不用折腾就能用我反而觉得不正常&amp;hellip;&lt;/li>
 &lt;/ul>
 - https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ -&lt;p>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。&lt;/p>
 &lt;p>Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板，准备拆机 TTL 破解光猫。&lt;/p>

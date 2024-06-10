@@ -248,7 +248,8 @@ hexo init npm install （我发现现在 hexo init 会同时自动执行 npm ins
 我更新博客之后，commit 然后 push 至 Github repo CI 自动构建博客 CI 将构建完成的静态文件 push 至 Github repo 我原先使用的是hexo-deployer-git插件，通过hexo g -d部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。
 配置 Github Repo 在这个 Repo 中需要两个分支：
 master 用于存放构建完成的静态文件 source 用于存放 Hexo 生成的博客源文件 对 Hexo 文件夹的操作如下：
-git init git remote add origin git@github.</description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>前言 以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。
+git init git remote add origin git@github.</description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。
+前言 以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。
 这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。
 下面列出笔记本的配置，以供参考。
 部件 型号 CPU Intel i5-7300HQ 内存 16G 硬盘 128G NVME SSD + 1T 机械 显卡 GeForce GTX 1050 Ti + Intel HD Graphics 630 无线网卡 Reltek RTL8822BE 触摸板 Synaptics 为什么选择 Arch 滚动更新天下第一！（误
@@ -256,8 +257,7 @@ git init git remote add origin git@github.</description></item><item><title>Arch
 基本安装 安装参考了 以官方Wiki的方式安装ArchLinux 和 官方Wiki的 Installation Guide。在未安装图形界面前，基本一切顺利。
 题外话：说起无线网卡，之前装 Ubuntu 的时候，没有驱动，需要手动安装。不过内核从 4.x 某个版本之后，加入了对我这个网卡的驱动，现在无需配置即可使用了。
 由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。
-在配置sudo时，使用visudo命令编辑配置文件，然而这个 vi编辑器有毒，许多操作都无法执行，感觉是个 bug。（Update：原来 vi 和 vim 是有挺大的区别的&amp;hellip;）
-图形界面 众所周知，Linux社区似乎对于 Nvidia+Intel 双显卡不怎么友好，在我安装过的数个发行版中（包括 Ubuntu, Debian, Manjaro, Deepin），基本都出现了启动黑屏/在Logo处冻结的情况，本次安装 Arch Linux，同样遇到了此问题。</description></item><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。
+在配置sudo时，使用visudo命令编辑配置文件，然而这个 vi编辑器有毒，许多操作都无法执行，感觉是个 bug。（Update：原来 vi 和 vim 是有挺大的区别的&amp;hellip;）</description></item><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。
 Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板，准备拆机 TTL 破解光猫。
 0x01 拆机 拆机后发现 PCB 板上有 TTL 插针，用万用表测得倒数第二根为 GND（接地pin），然后剩余四根随机组合，测得 RX（接收数据pin）和 TX（发送数据pin）。用杜邦线连接 USB转TTL板和 TTL 插针。
 0x02 串口调试 电脑安装好 USB转TTL板的驱动，USB端连接上电脑。网上的教程一般使用 SecureCRT， 然而我后来发现 Xshell 也能连接串口，遂用 Xshell 进行调试。
