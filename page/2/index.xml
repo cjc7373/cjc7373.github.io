@@ -98,7 +98,7 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;li>邻居通告 (Neighbor Advertisement)&lt;/li>
 &lt;li>重定向 (Redirect)&lt;/li>
 &lt;/ol>
-&lt;p>所以 NDP 协议的包实际上是封装在 ICMPv6 协议的包里的. 这里插播一下 ICMPv6 的包结构, 非常简单:&lt;/p>
+&lt;p>所有 NDP 协议的包实际上是封装在 ICMPv6 协议的包里的. 这里插播一下 ICMPv6 的包结构, 非常简单:&lt;/p>
 &lt;p>&lt;img src="./image-20240311214614781.png" alt="image-20240311214614781">&lt;/p>
 &lt;p>IPv6 下的 ping 命令和 IPv4 下类似, 也是使用 ICMP 协议实现的. ICMPv6 定义了 Echo Request (Type 128) 和 Echo Reply (Type 129) 类型来给 ping 使用.&lt;/p>
 &lt;p>下文所述的 SLAAC 即使用 NDP 协议通信.&lt;/p>

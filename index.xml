@@ -181,8 +181,13 @@
 &lt;h2 id="组织代码">组织代码&lt;/h2>
 &lt;p>Go 程序被组织成包（packages）。一个包是一组在&lt;strong>同一文件夹&lt;/strong>下的源代码文件的集合。在同一文件中定义的函数、类型、变量、常量在同一个包的所有其他文件中可见。&lt;/p>
 &lt;p>一个文件夹下无法拥有多个包。编译器会报错 &lt;code>found packages a (a.go) and b (b.go) in xxx&lt;/code>。&lt;/p>
-&lt;p>一个仓库（repository，这里指 VCS，如 git 的仓库）包含一个或多个模块（modules）。一个模块是一组相关的、一起发布的包的集合。一个 Go 仓库通常只有一个模块，位于仓库的根目录。一个名为 &lt;code>go.mod&lt;/code> 的文件声明了&lt;em>模块路径&lt;/em>：模块中所有包的导入路径（import path）前缀。包含 &lt;code>go.mod&lt;/code> 文件的目录是模块的根目录，这个模块包含了根目录及其所有子目录下的包，直到另一个包含 &lt;code>go.mod&lt;/code> 文件的目录为止（如果有的话）。&lt;/p>
-&lt;p>每个模块的路径不仅用于其包的导入路径前缀，也指示了 &lt;code>go&lt;/code> 命令应该到哪里去下载它。举例来说，为了下载 &lt;code>golang.org/x/tools&lt;/code> 模块，&lt;code>go&lt;/code> 命令会去 &lt;code>https://golang.org/x/tools&lt;/code> 寻找仓库。&lt;/p>
+&lt;p>一个仓库（repository，这里指 VCS，如 git 的仓库）包含一个或多个模块（modules）。一个&lt;strong>模块&lt;/strong>是一组相关的、一起发布的&lt;strong>包&lt;/strong>的集合。一个 Go 仓库通常只有一个模块，位于仓库的根目录。一个名为 &lt;code>go.mod&lt;/code> 的文件声明了&lt;em>模块路径&lt;/em>：模块中所有包的导入路径（import path）前缀。包含 &lt;code>go.mod&lt;/code> 文件的目录是模块的根目录，这个模块包含了根目录及其所有子目录下的包，直到另一个包含 &lt;code>go.mod&lt;/code> 文件的目录为止（如果有的话）。举个例子，下面的目录中根目录是一个模块，而 &lt;code>pkg/api&lt;/code> 目录是另一个。&lt;/p>
+&lt;pre tabindex="0">&lt;code>├── go.mod
+├── pkg
+│   ├── api
+│   |  └── go.mod
+| └── other_pkg
+&lt;/code>&lt;/pre>&lt;p>每个模块的路径不仅用于其包的导入路径前缀，也指示了 &lt;code>go&lt;/code> 命令应该到哪里去下载它。举例来说，为了下载 &lt;code>golang.org/x/tools&lt;/code> 模块，&lt;code>go&lt;/code> 命令会去 &lt;code>https://golang.org/x/tools&lt;/code> 寻找仓库。&lt;/p>
 &lt;p>如果只是在本地测试，模块路径可以随便起，比如 &lt;code>example.com/what&lt;/code> 这种。当然如果你未来想要发布它，那就得遵循 Go 的规则，比如 &lt;code>github.com/your-username/your-repo-name&lt;/code>。&lt;/p>
 &lt;p>&lt;em>导入路径&lt;/em>是一个用于导入一个包的字符串。一个包的导入路径是模块路径加上它在模块中的子目录。标准库中的包没有模块路径前缀。例如，模块 &lt;code>github.com/google/go-cmp&lt;/code> 在路径 &lt;code>cmp/&lt;/code> 下包含了一个包，这个包的导入路径为 &lt;code>github.com/google/go-cmp/cmp&lt;/code>。这个规则也适用于项目本身的包，如果 &lt;code>go-cmp&lt;/code> 项目在 &lt;code>foo/&lt;/code> 路径下的代码同样也导入了上述包，导入路径同样为 &lt;code>github.com/google/go-cmp/cmp&lt;/code>。&lt;/p>
 &lt;p>通俗理解一下，导入路径就是文件夹路径。当一个包导入之后，我们就可以用包名来引用它了。一般而言，包名就是文件夹名，但这只是惯例，而非规定，如果确有需要可以不一致。所以下面的写法是合法的：&lt;/p>
