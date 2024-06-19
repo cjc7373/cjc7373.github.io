@@ -1,7 +1,8 @@
 ## 关于我
 - Arch Linux User
-- Interested in distributed system, cloud native
-- Sci-fi fan
+- A Computer Science student. Interested in distributed system and cloud native
+- Also interested in psychology, economics and philosophy
+- Sci-Fi fan
 
 ## 关于留言
 

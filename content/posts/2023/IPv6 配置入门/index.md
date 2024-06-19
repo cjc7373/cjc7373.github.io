@@ -1,7 +1,7 @@
 ---
 title: IPv6 配置入门
 date: 2023-04-16
-lastmod: 2024-02-24
+lastmod: 2024-06-11
 ---
 
 ## 背景知识
@@ -76,7 +76,7 @@ RFC 4861 定义了一种网络发现机制 (Neighbor Discovery Protocol, NDP), �
 4. 邻居通告 (Neighbor Advertisement)
 5. 重定向 (Redirect)
 
-所以 NDP 协议的包实际上是封装在 ICMPv6 协议的包里的. 这里插播一下 ICMPv6 的包结构, 非常简单:
+所有 NDP 协议的包实际上是封装在 ICMPv6 协议的包里的. 这里插播一下 ICMPv6 的包结构, 非常简单:
 
 ![image-20240311214614781](./image-20240311214614781.png)
 
