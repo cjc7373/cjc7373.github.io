@@ -107,6 +107,26 @@ go: github.com/cjc7373/go-module-test/c@v2.0.0: invalid version: module contains
 
 模块的发布依赖于 VCS 的 tagging 功能。发布一个包就是打一个 tag。如果一个仓库有多个模块，则需要在 tagging 中加上模块路径的前缀，如果仓库位于 `example.com/mymodules/`，模块路径为 `example.com/mymodules/module1`，则打的 tag 应该为 `module1/v1.2.3` 这种形式。（这里猜测模块路径是和文件夹路径对应的，但我没有实验过）
 
+## `go.mod`
+
+`go.mod` 文件中，除了最常用的 `require` 指令之外，还能够包括其他一些指令，例如：
+
+- `exclude`，用于阻止一个模块版本被载入。这一指令仅对当前的 main 模块生效（也就是说，如果一个依赖的 `go.mod` 文件中包含了 `exclude` 指令，该指令将不会生效）。
+
+- `replace`，用于替换一个模块指定版本（或是所有版本）的内容，替换的路径可以是模块的另一个版本，另一个模块，或是一个相对路径。例如：
+
+  ```go.mod
+  replace (
+      golang.org/x/net v1.2.3 => example.com/fork/net v1.4.5
+      golang.org/x/net => example.com/fork/net v1.4.5
+      golang.org/x/net => ./fork/net
+  )
+  ```
+
+  这一指令同样仅对当前的 main 模块生效。
+
+详细的文档可见[这里](https://go.dev/ref/mod#go-mod-file)。
+
 ## 设计原则
 
 所有的包管理都是为了解决依赖地狱问题（[Dependency hell](https://en.wikipedia.org/wiki/Dependency_hell)），即一些包拥有同样的共享的包，但它们依赖与这些包的不同的、互不兼容的版本。
@@ -114,7 +134,7 @@ go: github.com/cjc7373/go-module-test/c@v2.0.0: invalid version: module contains
 Russ Cox 在[他的博客](https://research.swtch.com/vgo-principles)中回顾了 Go Modules 的设计原则。总结一下就是：
 
 - 导入兼容性原则：如果旧包和新包的导入路径相同，则新包必须兼容旧包。
-- 最小版本选择原则：使用满足需求的最旧版本，而不是最新版本。
+- 最小版本选择（Minimal Version Selection, MVS）原则：使用满足需求的最旧版本，而不是最新版本。
 
 为什么要这么设计呢？
 
@@ -154,6 +174,14 @@ C 1.8 指定了 D >= 1.4 的约束，并且在 lock file 中选择了 D 1.5 作�
 ![image-20240104193149370](./image-20240104193149370.png)
 
 会产生不止一种满足约束的结果。此时 Dep 首先会尝试使用最新的 B 1.4 和 C 1.9，但是这并不能满足约束。如果 Dep 接着尝试使用下一个 B 版本 1.3（右图），那么会解析到 D 1.5，构建成功；如果 Dep 尝试用下一个 C 版本 1.8（左图），那么会解析到 D 1.6，构建失败。Dep 选择哪种结果完全取决于它的内部实现，并不确定。而 Go Modules 则具备可重复性。
+
+MVS 的设计使得 go 的依赖解析是确定性的，所以 go 并不需要一个 lock 文件。`go.sum` 仅仅起了存储校验信息的作用，并不起 lock 文件的作用。
+
+## // indirect
+
+等一下，按照上面对于 MVS 的理解，我们只需要记录当前模块的所有直接依赖，但是为什么在 `go.mod` 文件中还能看见大量的 `require example.com/foo // indirect` 的语句呢？这里 indirect 指的就是模块的间接依赖。答案是在 1.16 之前，除非需要一个和 MVS 解析到的版本不同的版本，才需要给间接依赖加上 `require` 指令。但是在 1.17 及之后，需要它来提供一些额外信息。
+
+这便是[懒模块加载](https://go.googlesource.com/proposal/+/master/design/36460-lazy-module-loading.md)，
 
 ## 尾巴
 
