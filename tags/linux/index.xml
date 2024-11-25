@@ -1,10 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Coherence's Blog</title><link>https://blog.coherence.codes/tags/linux/</link><description>Recent content in Linux on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 24 Apr 2019 08:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。
-前言 以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。
-这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。
-下面列出笔记本的配置，以供参考。
-部件 型号 CPU Intel i5-7300HQ 内存 16G 硬盘 128G NVME SSD + 1T 机械 显卡 GeForce GTX 1050 Ti + Intel HD Graphics 630 无线网卡 Reltek RTL8822BE 触摸板 Synaptics 为什么选择 Arch 滚动更新天下第一！（误
-听说社区非常友好（然而我还没感受到
-基本安装 安装参考了 以官方Wiki的方式安装ArchLinux 和 官方Wiki的 Installation Guide。在未安装图形界面前，基本一切顺利。
-题外话：说起无线网卡，之前装 Ubuntu 的时候，没有驱动，需要手动安装。不过内核从 4.x 某个版本之后，加入了对我这个网卡的驱动，现在无需配置即可使用了。
-由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。
-在配置sudo时，使用visudo命令编辑配置文件，然而这个 vi编辑器有毒，许多操作都无法执行，感觉是个 bug。（Update：原来 vi 和 vim 是有挺大的区别的&amp;hellip;）</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Coherence's Blog</title><link>https://blog.coherence.codes/tags/linux/</link><description>Recent content in Linux on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 14 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux 内存管理初探</title><link>https://blog.coherence.codes/posts/2024/linux_memory_management/</link><pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/linux_memory_management/</guid><description>&lt;p>本文试图解释两个简单的问题：&lt;code>free&lt;/code> 命令中的 used/free/available 等字段究竟代表了什么？而 &lt;code>ps&lt;/code> 命令中的 VSZ/RSS 又代表了什么？&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ free -h
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> total used free shared buff/cache available
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Mem: 38Gi 15Gi 834Mi 3.3Gi 25Gi 22Gi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Swap: 19Gi 5.3Gi 14Gi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ps aux --sort&lt;span style="color:#f92672">=&lt;/span>-rss | head -5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cjc &lt;span style="color:#ae81ff">3354&lt;/span> 2.3 4.6 &lt;span style="color:#ae81ff">97222056&lt;/span> &lt;span style="color:#ae81ff">1917888&lt;/span> ? Ssl Oct07 37:42 /usr/bin/qbittorrent
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cjc &lt;span style="color:#ae81ff">354324&lt;/span> 1.3 2.7 &lt;span style="color:#ae81ff">2772076&lt;/span> &lt;span style="color:#ae81ff">1137784&lt;/span> ? Ssl 12:05 1:59 /usr/bin/telegram-desktop
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cjc &lt;span style="color:#ae81ff">2806&lt;/span> 6.6 2.3 &lt;span style="color:#ae81ff">4141220&lt;/span> &lt;span style="color:#ae81ff">941484&lt;/span> ? Sl Oct07 109:17 /usr/bin/kwin_wayland ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cjc &lt;span style="color:#ae81ff">3390&lt;/span> 1.5 1.9 &lt;span style="color:#ae81ff">3994932&lt;/span> &lt;span style="color:#ae81ff">792364&lt;/span> ? Sl Oct07 26:10 /usr/lib/zotero/zotero-bin ...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>本文假定读者具有虚拟内存的基础知识，文中的代码将以 C 语言为例。&lt;/p></description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>&lt;blockquote>
+&lt;p>Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="前言">前言&lt;/h2>
+&lt;p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p>
+&lt;p>这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p>
+&lt;p>&lt;img src="./1554536417517.png" alt="1554536417517">&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;p>下面列出笔记本的配置，以供参考。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>部件&lt;/th>
+ &lt;th>型号&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>CPU&lt;/td>
+ &lt;td>Intel i5-7300HQ&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>内存&lt;/td>
+ &lt;td>16G&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>硬盘&lt;/td>
+ &lt;td>128G NVME SSD + 1T 机械&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>显卡&lt;/td>
+ &lt;td>GeForce GTX 1050 Ti + Intel HD Graphics 630&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>无线网卡&lt;/td>
+ &lt;td>Reltek RTL8822BE&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>触摸板&lt;/td>
+ &lt;td>Synaptics&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="为什么选择-arch">为什么选择 Arch&lt;/h2>
+&lt;p>滚动更新天下第一！（误&lt;/p>
+&lt;p>听说社区非常友好（然而我还没感受到&lt;/p>
+&lt;h2 id="基本安装">基本安装&lt;/h2>
+&lt;p>安装参考了 &lt;a href="https://www.viseator.com/2017/05/17/arch_install/">以官方Wiki的方式安装ArchLinux&lt;/a> 和 官方Wiki的 &lt;a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Installation Guide&lt;/a>。在未安装图形界面前，基本一切顺利。&lt;/p>
+&lt;p>题外话：说起无线网卡，之前装 Ubuntu 的时候，没有驱动，需要手动安装。不过内核从 4.x 某个版本之后，加入了对我这个网卡的驱动，现在无需配置即可使用了。&lt;/p>
+&lt;p>由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。&lt;/p></description></item></channel></rss>

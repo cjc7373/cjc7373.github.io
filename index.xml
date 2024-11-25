@@ -1,4 +1,334 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 24 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>日本之旅</title><link>https://blog.coherence.codes/posts/2024/japan_trip/</link><pubDate>Wed, 24 Apr 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/japan_trip/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/japan_trip/ -&lt;h2 id="计划">计划&lt;/h2>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 24 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>OpenWrt 搭建透明代理</title><link>https://blog.coherence.codes/posts/2024/openwrt_transparent_proxy/</link><pubDate>Sun, 24 Nov 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/openwrt_transparent_proxy/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/openwrt_transparent_proxy/ -&lt;p>openclash、shellclash 之类的方案感觉都太复杂了。我的需求只是给 chromecast 用上代理，并且在代理失效时不要影响局域网中的其他设备。所以想找一个简单的方案。&lt;/p>
+&lt;p>经过一番摸索，发现 Macvlan 很适合我，具体步骤如下：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>创建一个 macvlan 设备&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-openwrt" data-lang="openwrt">config device
+option type &amp;#39;macvlan&amp;#39;
+option ifname &amp;#39;br-lan&amp;#39;
+option mode &amp;#39;bridge&amp;#39;
+option name &amp;#39;br-lanmac0&amp;#39;
+option ipv6 &amp;#39;1&amp;#39;
+&lt;/code>&lt;/pre>&lt;p>注意这里需要选择启用 ipv6，否则 br-lan 不会下发 RA，导致局域网内设备没有 v6 地址，具体原因还不清楚。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>创建一个接口绑定到这个设备&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-openwrt" data-lang="openwrt">config interface &amp;#39;clash&amp;#39;
+option proto &amp;#39;static&amp;#39;
+option device &amp;#39;br-lanmac0&amp;#39;
+option ipaddr &amp;#39;192.168.2.2&amp;#39;
+option netmask &amp;#39;255.255.255.0&amp;#39;
+option gateway &amp;#39;192.168.2.1&amp;#39;
+option defaultroute &amp;#39;0&amp;#39;
+&lt;/code>&lt;/pre>&lt;p>IP 地址分配一个在局域网段下的，网关填 lan 地址。注意关闭默认路由，否则会把 PPPoE 的路由给删了，导致局域网内设备连不上网，具体原因也不清楚。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>下载 mihomo （原 clash-meta）二进制，配置 tun 绑定到之前的设备上&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">tun&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">stack&lt;/span>: &lt;span style="color:#ae81ff">system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">auto-route&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">auto-redirect&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">include-interface&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">br-lanmac0&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>写入 init 脚本到 &lt;code>/etc/init.d/clash&lt;/code>，以便开机自启&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#!/bin/sh /etc/rc.common
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>START&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">99&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>start&lt;span style="color:#f92672">()&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> export HOME&lt;span style="color:#f92672">=&lt;/span>/root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> nohup /root/clash/clash &amp;gt; /root/clash/log.txt &amp;amp;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># commands to launch application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>stop&lt;span style="color:#f92672">()&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># commands to kill application &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> killall clash
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启用脚本 &lt;code>/etc/init.d/clash enable&lt;/code>。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>在需要代理的设备上指定网关为 &lt;code>192.168.2.2&lt;/code>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>然后，就没有然后了。它工作！具体为什么能工作呢，咱也不知道&amp;hellip;&lt;/p>
+- https://blog.coherence.codes/posts/2024/openwrt_transparent_proxy/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Linux 内存管理初探</title><link>https://blog.coherence.codes/posts/2024/linux_memory_management/</link><pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/linux_memory_management/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/linux_memory_management/ -&lt;p>本文试图解释两个简单的问题：&lt;code>free&lt;/code> 命令中的 used/free/available 等字段究竟代表了什么？而 &lt;code>ps&lt;/code> 命令中的 VSZ/RSS 又代表了什么？&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ free -h
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> total used free shared buff/cache available
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Mem: 38Gi 15Gi 834Mi 3.3Gi 25Gi 22Gi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Swap: 19Gi 5.3Gi 14Gi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ps aux --sort&lt;span style="color:#f92672">=&lt;/span>-rss | head -5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cjc &lt;span style="color:#ae81ff">3354&lt;/span> 2.3 4.6 &lt;span style="color:#ae81ff">97222056&lt;/span> &lt;span style="color:#ae81ff">1917888&lt;/span> ? Ssl Oct07 37:42 /usr/bin/qbittorrent
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cjc &lt;span style="color:#ae81ff">354324&lt;/span> 1.3 2.7 &lt;span style="color:#ae81ff">2772076&lt;/span> &lt;span style="color:#ae81ff">1137784&lt;/span> ? Ssl 12:05 1:59 /usr/bin/telegram-desktop
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cjc &lt;span style="color:#ae81ff">2806&lt;/span> 6.6 2.3 &lt;span style="color:#ae81ff">4141220&lt;/span> &lt;span style="color:#ae81ff">941484&lt;/span> ? Sl Oct07 109:17 /usr/bin/kwin_wayland ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cjc &lt;span style="color:#ae81ff">3390&lt;/span> 1.5 1.9 &lt;span style="color:#ae81ff">3994932&lt;/span> &lt;span style="color:#ae81ff">792364&lt;/span> ? Sl Oct07 26:10 /usr/lib/zotero/zotero-bin ...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>本文假定读者具有虚拟内存的基础知识，文中的代码将以 C 语言为例。&lt;/p>
+&lt;h2 id="从虚拟内存开始说起">从虚拟内存开始说起&lt;/h2>
+&lt;p>我们先来复习一下虚拟内存地址转换的流程。&lt;/p>
+&lt;p>&lt;img src="./image-20240905013733596.png" alt="image-20240905013733596">
+（图源：CSAPP)&lt;/p>
+&lt;p>当程序访问一个虚拟地址时，在汇编层面体现为一条读指令（&lt;code>mov&lt;/code> 之类的），由 CPU 中的 MMU 处理地址转换。MMU（Memory Management Unit）首先根据页表基址寄存器（Page Table Base Register, PTBR）的地址加上虚拟地址的页面偏移（也就是虚拟地址的前 x 位）找到页表条目（Page Table Entry, PTE）的地址（这里省略了 TLB 的部分），这个地址当然是物理地址。PTE 中存储了这一页的物理地址，以及标记该页是否在内存中的有效位。如果该页存在内存，那么 CPU 直接访问内存进行读取。如果不存在，则进入缺页异常（page fault）程序，程序由用户态进入内核态。此时程序可能会被阻塞并换出，直到页被读入内存。&lt;/p>
+&lt;p>这里我们就要问了，为什么一个页会不在内存呢？在 Linux 中，存在两种情况：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>这一页是匿名内存（anonymous memory），它们通常是程序运行时动态分配的内存（比如 C 中的 &lt;code>malloc&lt;/code> 函数）。它们没有文件后备，但如果系统中启用了 swap 交换文件，那么它们也能被换出到 swap 中。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>这一页是 page cache，也就是文件内存（file memory），它们可能是代码（比如 &lt;code>.text&lt;/code> 段）或缓存的数据（比如通过 mmap 映射的文件，mmap 是个非常重要的系统调用，下面还会提到）。它们是文件后备的（backed by file），所以能够被换出，或者也被称为回收（reclaim）。&lt;/p>
+&lt;p>这里其实还能再细分一下，如果这一页是未修改过的（clean），那么可以直接修改页表有效位，不需要其他操作。如果是修改过的页面（dirty），则需要先将变更写入磁盘后才能回收。（为什么会存在脏页？请看下文）&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="page-cache">Page Cache&lt;/h2>
+&lt;p>那我们为什么需要 Page Cache呢？&lt;a href="https://web.archive.org/web/20221222014954/https://manybutfinite.com/post/page-cache-the-affair-between-memory-and-files/">Page Cache, the Affair Between Memory and Files&lt;/a> 这篇非常精彩的文章讲述了 Page Cache。当操作系统开始处理文件时，会碰到两个问题：&lt;/p>
+&lt;ul>
+&lt;li>读写磁盘相比于读写内存慢了好几个数量级&lt;/li>
+&lt;li>对于一些文件（比如代码和共享库），需要只载入一次，而在多个进程之间共享&lt;/li>
+&lt;/ul>
+&lt;p>而这两个问题都能被 page cache 解决。正如其名，page cache 就是内核存储的按页大小分割的文件。操作系统将文件缓存在内存中，解决了第一个问题。对于能够共享的文件，操作系统在内存中只存储一份副本，解决了第二个问题。常规的文件读写都会通过 page cache 进行。&lt;/p>
+&lt;p>那是不是文件只会存储在 page cache 中呢？当我们读取一个文件时，需要：&lt;/p>
+&lt;ul>
+&lt;li>使用 &lt;code>malloc()&lt;/code> 分配一块堆内存作为缓冲区，假设为 4K。这块内存是匿名内存。&lt;/li>
+&lt;li>使用 &lt;code>open()&lt;/code> 打开一个文件获取文件描述符，使用 &lt;code>read()&lt;/code> 读取文件到缓冲区。此时内核将读取一个页大小的文件内容存放到 page cache 中，再把 page cache 的内容复制到程序的堆内存上。&lt;/li>
+&lt;/ul>
+&lt;p>看到问题了吗？一份数据在内存中存了两份！解决这个问题的方式是内存映射文件（Memory-mapped files）。在 Linux 上也就是 &lt;code>mmap&lt;/code> 系统调用。mmap 的流程如下：&lt;/p>
+&lt;ul>
+&lt;li>使用 &lt;code>mmap()&lt;/code> 将一个文件映射到虚拟地址空间中的某一段地址，长度为用户给定。&lt;/li>
+&lt;li>直接读取这段地址中的某一个。&lt;/li>
+&lt;li>触发常规访存流程。也就是说，如果这个地址所在的页不在内存中，则触发缺页中断把这个页读进内存。&lt;/li>
+&lt;/ul>
+&lt;p>因为 page cache 的存在，对文件的写入（&lt;code>write()&lt;/code> 系统调用）不会马上写入到磁盘。内核会把修改写入到 page cache 中，同时把该页标记为脏（dirty），因此文件写入不会阻塞。&lt;/p>
+&lt;p>由于脏页的存在，Linux 需要处理文件（在内存/磁盘中）的一致性。存在两种实现文件一致性的方法：&lt;/p>
+&lt;ul>
+&lt;li>Write Through（直写/写穿）：对文件的写入会直接写到磁盘。这是通过 &lt;code>fsync&lt;/code>, &lt;code>fdatasync&lt;/code> 等系统调用实现的。&lt;/li>
+&lt;li>Write back（写回）：对文件的写入暂存在内存。系统中存在定期任务（表现形式为内核线程），周期性地同步文件系统中文件脏数据块。这是 Linux 的默认行为。&lt;/li>
+&lt;/ul>
+&lt;p>我们能做个小实验验证这个行为：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat /proc/meminfo | grep Dirty &lt;span style="color:#75715e"># 查看当前脏页大小&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Dirty: &lt;span style="color:#ae81ff">828&lt;/span> kB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ dd &lt;span style="color:#66d9ef">if&lt;/span>&lt;span style="color:#f92672">=&lt;/span>/dev/zero of&lt;span style="color:#f92672">=&lt;/span>testfile.txt bs&lt;span style="color:#f92672">=&lt;/span>1M count&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>10+0 records in
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>10+0 records out
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">10485760&lt;/span> bytes &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#ae81ff">10&lt;/span> MB, &lt;span style="color:#ae81ff">10&lt;/span> MiB&lt;span style="color:#f92672">)&lt;/span> copied, 0.00600495 s, 1.7 GB/s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cat /proc/meminfo | grep Dirty &lt;span style="color:#75715e"># 此时对文件的写入只存在 page cache 中&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Dirty: &lt;span style="color:#ae81ff">10596&lt;/span> kB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ sync &lt;span style="color:#75715e"># 刷脏&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cat /proc/meminfo | grep Dirty
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Dirty: &lt;span style="color:#ae81ff">364&lt;/span> kB
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后，上文提到了“常规”的文件读写是通过 page cache 进行的，通过在 &lt;code>open()&lt;/code> 时使用 &lt;code>O_DIRECT&lt;/code> 选项等方法能够绕过 page cache。这就是所谓的 Direct IO，一些数据库会采取这种方法进行 IO，以获取更高的性能。&lt;/p>
+&lt;p>一个文件映射可以是私有（private）或者共享（shared）的。&lt;/p>
+&lt;ul>
+&lt;li>更新一个共享的文件映射对其他进程可见，同时也会更新到其映射的文件上。&lt;/li>
+&lt;li>更新一个私有的文件映射同理，不对其他进程可见，也不会更新到其映射的文件上。&lt;/li>
+&lt;/ul>
+&lt;p>那如果有两个进程同时映射了一个文件，并且使用了私有映射，这个文件是不是就要在内存中存两份了？当然不会。内核使用了 CoW（copy on write，写时复制）来解决这一问题。&lt;/p>
+&lt;p>&lt;img src="./copyOnWrite.png" alt="The Copy-On-Write mechanism">
+（图源：&lt;a href="https://web.archive.org/web/20221222014954/https://manybutfinite.com/post/page-cache-the-affair-between-memory-and-files/">Page Cache, the Affair Between Memory and Files&lt;/a>）&lt;/p>
+&lt;p>&lt;code>render&lt;/code> 和 &lt;code>render3d&lt;/code> 两个进程私有地 map 了相同的文件，这些页被内核标记成只读（事实上，只读标记并不意味着它们是&lt;strong>只读&lt;/strong>的，只是为了区分它们和非 CoW 的页）。&lt;code>render&lt;/code> 进程随后修改了一部分文件，由于只读标记的存在，程序访存时将触发 page fault，内核将该页复制一份成为匿名页（因为私有的文件映射并不会实际更新到文件中），并修改页表将原先的虚拟地址指向新的匿名页。随后对该匿名页进行写入。这一机制对应用程序完全透明。&lt;/p>
+&lt;p>这一技术也被用在 fork 一个进程时。&lt;/p>
+&lt;h2 id="vszrss">VSZ/RSS&lt;/h2>
+&lt;p>有了上面的基础知识，就可以说说 VSZ/RSS 了。查询 &lt;code>man top&lt;/code> （top 的手册解释得比 ps 更详细）可知：&lt;/p>
+&lt;ul>
+&lt;li>VSZ（virtual memory size，虚拟内存大小），或 VIRT（virtual），程序所申请的内存大小。&lt;/li>
+&lt;li>RSS （resident set size，常驻集大小？我也不知道怎么翻译），或 RES（resident memory size）进程实际占用的物理内存，也就是那些未被换出的页的大小。&lt;/li>
+&lt;/ul>
+&lt;p>我们有时候能够见到 VSZ 远大于 RSS，比如这堆申请了几十G内存的 chromium：&lt;/p>
+&lt;p>&lt;img src="./image-20241012005445767.png" alt="image-20241012005445767">&lt;/p>
+&lt;p>这是因为内核使用了惰性分配（lazy allocation），也就是程序请求内存分配的时候，只分配虚拟地址。程序第一次访问虚拟地址的时候，才分配物理内存。这种做法进一步提高了系统的内存利用率。&lt;/p>
+&lt;p>更进一步，Linux 采取了超额分配（overcommit）的方式，也就是程序申请的内存可以大于物理内存+swap 的总数。与之相对，Windows 则并不允许 overcommit，所有程序申请的总内存必须小于物理内存+swap 的总数。&lt;/p>
+&lt;p>需要注意的是，RSS 并不能代表程序“需要”的内存，RSS 很大可能仅仅是系统的内存水位不高，不需要的页尚未被回收。比如设想一下一个程序 mmap 了一个 40G 大小的文件，全部读取并进行了一些操作。由于程序之后可能还会用到这个文件，这段内存并没有被 munmap。此时程序的 RSS 为 40G，但是程序可能很久都不会用到这 40G。&lt;/p>
+&lt;p>另一个能够反映程序内存占用的指标是 WSS（working set size，工作集大小），也就是一段时间内（比如 10min）程序使用的内存大小。Linux 并没有提供一个很简单的方式读取进程的 WSS，但是使用一些工具能做到这一点，参照&lt;a href="https://www.brendangregg.com/blog/2018-01-17/measure-working-set-size.html">这篇文章&lt;/a>。&lt;/p>
+&lt;p>上面说到 fork 时内核使用了 CoW，我们可以做一个小实验观察这一点：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-c" data-lang="c">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;stdlib.h&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;unistd.h&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;string.h&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#f92672">*&lt;/span>ptr;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">size_t&lt;/span> size &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">1024&lt;/span> &lt;span style="color:#f92672">*&lt;/span> &lt;span style="color:#ae81ff">1024&lt;/span> &lt;span style="color:#f92672">*&lt;/span> (&lt;span style="color:#66d9ef">size_t&lt;/span>)&lt;span style="color:#ae81ff">1024&lt;/span>; &lt;span style="color:#75715e">// 10G
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> ptr &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">malloc&lt;/span>(size);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// use 10G memory
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#a6e22e">memset&lt;/span>(ptr, &lt;span style="color:#ae81ff">0&lt;/span>, size);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> (&lt;span style="color:#66d9ef">int&lt;/span> i &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>; i &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">10&lt;/span>; i&lt;span style="color:#f92672">++&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span> pid &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">fork&lt;/span>();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (pid &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e">// do not fork again
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#66d9ef">break&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">sleep&lt;/span>(&lt;span style="color:#ae81ff">100&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="./image-20240905021713812.png" alt="image-20240905021713812">&lt;/p>
+&lt;p>可以看到每个 fork 出来的进程的 RSS 都是 10G，而我的系统并没有 100G 内存。这也从侧面说明了简单将 RSS 相加统计系统的内存用量是不可靠的。&lt;/p>
+&lt;p>除了 ps/top，有没有办法能够获得更细节的进程内存信息呢？当然是有的。这就是 &lt;code>/proc/&amp;lt;pid&amp;gt;/maps&lt;/code> 和 &lt;code>/proc/&amp;lt;pid&amp;gt;/smaps&lt;/code>。smaps 相比比 maps 包含了更详细的信息。通过一个&lt;a href="https://github.com/cjc7373/my_scripts/blob/master/active/parse_proc_smaps.py">简单的 Python 脚本&lt;/a>就可以对 smaps 中的信息进行汇总。&lt;/p>
+&lt;p>比如看一下 qbittorrent 的：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ python parse_proc_smaps.py /proc/2179/smaps
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">========================================================================================================================&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Private_Clean Private_Dirty Shared_Clean Shared_Dirty Rss Pss VSZ library
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">========================================================================================================================&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">36360&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">36360&lt;/span> kB &lt;span style="color:#ae81ff">36360&lt;/span> kB &lt;span style="color:#ae81ff">2274188&lt;/span> kB &lt;span style="color:#f92672">[&lt;/span>anonymous&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">39536&lt;/span> kB &lt;span style="color:#ae81ff">39536&lt;/span> kB &lt;span style="color:#ae81ff">19768&lt;/span> kB &lt;span style="color:#ae81ff">39536&lt;/span> kB /memfd:wayland-shm &lt;span style="color:#f92672">(&lt;/span>deleted&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">18464&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">18464&lt;/span> kB &lt;span style="color:#ae81ff">18464&lt;/span> kB &lt;span style="color:#ae81ff">18508&lt;/span> kB &lt;span style="color:#f92672">[&lt;/span>heap&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">4764&lt;/span> kB anon_inode:i915.gem
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">128&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">128&lt;/span> kB &lt;span style="color:#ae81ff">128&lt;/span> kB &lt;span style="color:#ae81ff">132&lt;/span> kB &lt;span style="color:#f92672">[&lt;/span>stack&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">8&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">8&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">8&lt;/span> kB &lt;span style="color:#f92672">[&lt;/span>vdso&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">16&lt;/span> kB &lt;span style="color:#f92672">[&lt;/span>vvar&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">4&lt;/span> kB &lt;span style="color:#f92672">[&lt;/span>vsyscall&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">========================================================================================================================&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">2087680&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">2087680&lt;/span> kB &lt;span style="color:#ae81ff">2087680&lt;/span> kB &lt;span style="color:#ae81ff">60184244&lt;/span> kB /mnt/gloway/TV_Series
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">51900&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">51900&lt;/span> kB &lt;span style="color:#ae81ff">51900&lt;/span> kB &lt;span style="color:#ae81ff">5558576&lt;/span> kB /mnt/gloway/Documentary
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">52&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">52&lt;/span> kB &lt;span style="color:#ae81ff">52&lt;/span> kB &lt;span style="color:#ae81ff">5302412&lt;/span> kB /mnt/gloway/Movies
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">2988&lt;/span> kB &lt;span style="color:#ae81ff">7664&lt;/span> kB &lt;span style="color:#ae81ff">62508&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">73160&lt;/span> kB &lt;span style="color:#ae81ff">13477&lt;/span> kB &lt;span style="color:#ae81ff">366556&lt;/span> kB /usr/lib
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">19636&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">19636&lt;/span> kB &lt;span style="color:#ae81ff">676&lt;/span> kB &lt;span style="color:#ae81ff">20236&lt;/span> kB /usr/share/fonts
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">1440&lt;/span> kB &lt;span style="color:#ae81ff">164&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">1604&lt;/span> kB &lt;span style="color:#ae81ff">1604&lt;/span> kB &lt;span style="color:#ae81ff">12584&lt;/span> kB /usr/bin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">4096&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">4096&lt;/span> kB &lt;span style="color:#ae81ff">54&lt;/span> kB &lt;span style="color:#ae81ff">6080&lt;/span> kB /usr/lib/locale
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">1976&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">1976&lt;/span> kB &lt;span style="color:#ae81ff">69&lt;/span> kB &lt;span style="color:#ae81ff">3260&lt;/span> kB /home/cjc/.cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">32&lt;/span> kB &lt;span style="color:#ae81ff">248&lt;/span> kB &lt;span style="color:#ae81ff">1308&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">1588&lt;/span> kB &lt;span style="color:#ae81ff">414&lt;/span> kB &lt;span style="color:#ae81ff">2176&lt;/span> kB /usr/lib/qt6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">52&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">544&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">596&lt;/span> kB &lt;span style="color:#ae81ff">269&lt;/span> kB &lt;span style="color:#ae81ff">1212&lt;/span> kB /usr/share/icons
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">444&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">444&lt;/span> kB &lt;span style="color:#ae81ff">16&lt;/span> kB &lt;span style="color:#ae81ff">448&lt;/span> kB /var/cache/fontconfig
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">80&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">80&lt;/span> kB &lt;span style="color:#ae81ff">3&lt;/span> kB &lt;span style="color:#ae81ff">184&lt;/span> kB /usr/share/mime
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">8&lt;/span> kB &lt;span style="color:#ae81ff">36&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">44&lt;/span> kB &lt;span style="color:#ae81ff">8&lt;/span> kB &lt;span style="color:#ae81ff">60&lt;/span> kB /usr/lib/libproxy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">28&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">28&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">28&lt;/span> kB /usr/lib/gconv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">24&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">24&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">24&lt;/span> kB /usr/share/locale
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">12&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">12&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">12&lt;/span> kB /home/cjc/.local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">12&lt;/span> kB /usr/share/qt6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">0&lt;/span> kB &lt;span style="color:#ae81ff">4&lt;/span> kB /var/lib/flatpak
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">2144144&lt;/span> kB &lt;span style="color:#ae81ff">63036&lt;/span> kB &lt;span style="color:#ae81ff">90700&lt;/span> kB &lt;span style="color:#ae81ff">39536&lt;/span> kB &lt;span style="color:#ae81ff">2337416&lt;/span> kB &lt;span style="color:#ae81ff">2230942&lt;/span> kB &lt;span style="color:#ae81ff">73795264&lt;/span> kB total
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里有一个新概念 PSS（proportional set size），对于每个 RSS 中的页，如果这个页被 n 个进程共享，那么在计算时就把它除以 n。也就是说，如果有一个库 RSS 100k，但是它被 10 个进程共享，那么每个进程的 PSS 就是 10k。&lt;/p>
+&lt;p>表中的第二部分展示了内存中文件映射的部分。从中可以看到，qb 的 2.3G RSS 有 2.1G 都是做种的文件（&lt;code>/mnt/gloway&lt;/code>），&lt;code>/usr/lib&lt;/code> 中的库文件占了 73M，但是由于共享的进程较多，PSS 只有 13M。&lt;/p>
+&lt;p>第一部分主要是堆栈的内存。&lt;code>[heap]&lt;/code> 和 &lt;code>[anonymous]&lt;/code> 实际都是堆内存（也就是通过 malloc 分配的匿名页面），&lt;/p>
+&lt;h2 id="free">free&lt;/h2>
+&lt;p>那么 free 里的内存占用是怎么计算出来的呢？简单查阅 &lt;code>man free&lt;/code> 可知，其数据来源于 &lt;code>/proc/meminfo&lt;/code>（&lt;a href="https://github.com/torvalds/linux/blob/master/Documentation/filesystems/proc.rst#meminfo">内核文档&lt;/a>），含义如下：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>total：物理内存/swap 的总数&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>used：total - available&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>free：未使用的内存&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>cache/buffer：page cache&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;blockquote>
+&lt;p>As of the 2.4 kernel, these two caches have been combined. Today, there is only one cache, the Page Cache
+&lt;a href="https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics">https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>available：对还有多少可用内存的估计。这个字段考虑了系统需要部分 page cache 来工作，并且不是所有可回收的 slab 是可回收的（由于正在被使用的项目）&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>这里就是一个反直觉的地方了。内核对可用内存的计算仅仅是一个&lt;strong>估计&lt;/strong>，内核并不知道确切的“可用”内存的数量。&lt;/p>
+&lt;p>在深究之前我们先来说一说内存的水位（watermark）和&lt;a href="https://docs.kernel.org/admin-guide/mm/concepts.html#reclaim">回收&lt;/a>。内核把物理内存空间分成多个 Zone，Zone 之间的区别在这里并不重要，可以简单理解为物理内存是所有 Zone 相加。一个 Zone 内的页面除了已用内存页，剩下的就是空闲页（free pages）。空闲页范围中有三个水位线（watermark ）评估当前内存压力情况，分别是高位（high）、低位（low）、最小位（min）。&lt;/p>
+&lt;p>如果空闲页面在 low 水位之上，内核什么也不会干。当空闲页低于 low 水位后，内核会唤醒 &lt;code>kswapd&lt;/code> 线程。它会异步扫描内存页进行内存回收，直到水位达到 high。如果内存用量进一步升高，空闲页面低于 min 水位，此时内存分配将进入直接回收（direct reclaim）。回收操作将变为同步的，内存分配操作将阻塞直到足够多的页面被回收。&lt;/p>
+&lt;p>&lt;img src="./640.webp" alt="Image">
+（图源：&lt;a href="https://mp.weixin.qq.com/s?__biz=MjM5ODYwMjI2MA==&amp;amp;mid=2649785631&amp;amp;idx=1&amp;amp;sn=4ff0a18db034174b5dec2455c759e3d8">Linux内存变低会发生什么问题-腾讯技术工程&lt;/a>)&lt;/p>
+&lt;p>内核的内存回收采取 LRU 算法。当然，有时候程序会比内核有更多的信息，知道哪些页不应该被换出，这时程序可以使用 &lt;code>mlock&lt;/code> 等系统调用阻止某些页被换出。&lt;/p>
+&lt;p>实践上，内核的内存水位设定非常保守。我们可以通过 &lt;code>/proc/zoneinfo&lt;/code> 计算得到。在我的 40G 内存的机器上面：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ cat /proc/zoneinfo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Node 0, zone DMA
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pages free &lt;span style="color:#ae81ff">262&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> boost &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> min &lt;span style="color:#ae81ff">6&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> low &lt;span style="color:#ae81ff">9&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> high &lt;span style="color:#ae81ff">12&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> spanned &lt;span style="color:#ae81ff">4095&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> present &lt;span style="color:#ae81ff">3998&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> managed &lt;span style="color:#ae81ff">3840&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Node 0, zone DMA32
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pages free &lt;span style="color:#ae81ff">212504&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> boost &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> min &lt;span style="color:#ae81ff">621&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> low &lt;span style="color:#ae81ff">996&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> high &lt;span style="color:#ae81ff">1371&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> spanned &lt;span style="color:#ae81ff">1044480&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> present &lt;span style="color:#ae81ff">395943&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> managed &lt;span style="color:#ae81ff">379492&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Node 0, zone Normal
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pages free &lt;span style="color:#ae81ff">1503321&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> boost &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> min &lt;span style="color:#ae81ff">16267&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> low &lt;span style="color:#ae81ff">26089&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> high &lt;span style="color:#ae81ff">35911&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> spanned &lt;span style="color:#ae81ff">10024960&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> present &lt;span style="color:#ae81ff">10024960&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> managed &lt;span style="color:#ae81ff">9824396&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>将三个 Zone 的水位相加（单位为页，大小 4KB）：&lt;/p>
+&lt;ul>
+&lt;li>min = 6+621+16267 = 66 MB&lt;/li>
+&lt;li>low = 9+996+26089 = 106 MB&lt;/li>
+&lt;li>high = 12+1371+35911 = 145 MB&lt;/li>
+&lt;/ul>
+&lt;p>可以看到相比于内存总数几乎可以忽略不计。回到可用内存，我们来看一眼&lt;a href="https://elixir.bootlin.com/linux/v6.11.3/source/mm/show_mem.c#L32">计算 available 的代码&lt;/a>：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-c" data-lang="c">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">long&lt;/span> available;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">unsigned&lt;/span> &lt;span style="color:#66d9ef">long&lt;/span> pagecache;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">unsigned&lt;/span> &lt;span style="color:#66d9ef">long&lt;/span> wmark_low &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">unsigned&lt;/span> &lt;span style="color:#66d9ef">long&lt;/span> reclaimable;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">struct&lt;/span> zone &lt;span style="color:#f92672">*&lt;/span>zone;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 这里就是上文的计算
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#a6e22e">for_each_zone&lt;/span>(zone)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> wmark_low &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#a6e22e">low_wmark_pages&lt;/span>(zone);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">/*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * Estimate the amount of memory available for userspace allocations,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * without causing swapping or OOM.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 空闲的页
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>available &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">global_zone_page_state&lt;/span>(NR_FREE_PAGES) &lt;span style="color:#f92672">-&lt;/span> totalreserve_pages;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">/*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * Not all the page cache can be freed, otherwise the system will
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * start swapping or thrashing. Assume at least half of the page
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * cache, or the low watermark worth of cache, needs to stay.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pagecache &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">global_node_page_state&lt;/span>(NR_ACTIVE_FILE) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">global_node_page_state&lt;/span>(NR_INACTIVE_FILE);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 加上 page cache, 减去 low 水位的预留
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>pagecache &lt;span style="color:#f92672">-=&lt;/span> &lt;span style="color:#a6e22e">min&lt;/span>(pagecache &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>, wmark_low);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>available &lt;span style="color:#f92672">+=&lt;/span> pagecache;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">/*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * Part of the reclaimable slab and other kernel memory consists of
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * items that are in use, and cannot be freed. Cap this estimate at the
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> * low watermark.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">// 再加上内核中的可回收页
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>reclaimable &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#a6e22e">global_node_page_state_pages&lt;/span>(NR_SLAB_RECLAIMABLE_B) &lt;span style="color:#f92672">+&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">global_node_page_state&lt;/span>(NR_KERNEL_MISC_RECLAIMABLE);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reclaimable &lt;span style="color:#f92672">-=&lt;/span> &lt;span style="color:#a6e22e">min&lt;/span>(reclaimable &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>, wmark_low);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>available &lt;span style="color:#f92672">+=&lt;/span> reclaimable;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> (available &lt;span style="color:#f92672">&amp;lt;&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> available &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">return&lt;/span> available;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对于大内存的机器，由于 low 水位几乎可以忽略，所以 available 约等于空闲的页 + page cache。&lt;/p>
+&lt;h2 id="swap">swap&lt;/h2>
+&lt;p>swap 并不是所谓的“紧急”内存，只有在物理内存不够时才会使用。如上文所说，swap 的意义在于让匿名内存可以被回收。操作系统总是倾向于用满物理内存，可能有的匿名页很久都不会被使用（比最久的 page cache 还久），那么它们就应当被换出到 swap 中。&lt;/p>
+&lt;p>内核参数中的 &lt;code>vm.swappiness&lt;/code> 控制在内存回收的时候，是优先回收匿名页面， 还是优先回收文件页面。这个值越高, 回收回收匿名页面的倾向越高。&lt;/p>
+&lt;h2 id="windows">Windows&lt;/h2>
+&lt;p>Linux 已经讲得够多了，那么 Windows 又是怎样的呢？其实&lt;a href="https://www.zhihu.com/question/43714216/answer/1164044678">大差不差&lt;/a>。只是 Windows 中没有 overcommit，进程申请的内存总和不能超过物理内存+swap。&lt;/p>
+&lt;p>另外扯一下 WSL。由于 WSL 2 是虚拟机，而 Linux 内核又倾向于使用尽量多的内存，导致分配给 WSL 的内存会被吃满，空闲的内存（page cache 占据的部分）没法返还给 Windows。终于在 2023 年的某次更新中，WSL 引入了&lt;a href="https://devblogs.microsoft.com/commandline/windows-subsystem-for-linux-september-2023-update/#automatic-memory-reclaim">autoReclaimMemory&lt;/a>，在 WSL 认为系统空闲后，会通过 cgroup 的 memory.reclaim 功能回收内存。&lt;/p>
+&lt;h2 id="小故事">小故事&lt;/h2>
+&lt;ul>
+&lt;li>在高速网络下，网络协议栈占用的内存可能会很可观。我同学碰到过在一个只有 500M 内存的机器上搭梯子，然后一跑测速梯子就会被 OOM Kill，最后排查出来是 tcp 的发送/接受缓存占用的内存太多。调了一下 &lt;code>net.ipv4.tcp_wmem&lt;/code> 和 &lt;code>net.ipv4.tcp_rmem&lt;/code> 就好了。&lt;/li>
+&lt;/ul>
+&lt;h2 id="ref">ref&lt;/h2>
+&lt;ul>
+&lt;li>fc 老师的两篇关于 &lt;a href="https://farseerfc.me/zhs/in-defence-of-swap.html">swap&lt;/a> 的&lt;a href="https://farseerfc.me/zhs/followup-about-swap.html">文章&lt;/a>是我的内存管理启蒙&lt;/li>
+&lt;/ul>
+- https://blog.coherence.codes/posts/2024/linux_memory_management/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>日本之旅</title><link>https://blog.coherence.codes/posts/2024/japan_trip/</link><pubDate>Wed, 24 Apr 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/japan_trip/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/japan_trip/ -&lt;h2 id="计划">计划&lt;/h2>
 &lt;p>我和 Moo 一开始说的是去新马泰，后来改为日本，真正开始做攻略已经是三月下旬了。日本只支持旅行社送签，我在 3/26 申请了签证并提交了材料，4/3 出签，花了六个工作日，还是挺快的。&lt;/p>
 &lt;p>&lt;img src="./image-20240424004023270.png" alt="image-20240424004023270">&lt;/p>
 &lt;p>订机票和酒店的时候差不多离出发还有半个月，这时候的价格已经挺贵了，可能提前两三个月订会更便宜。初步的计划是东京-&amp;gt;京都-&amp;gt;大阪，详细的计划写在 hackmd 上。实际上我们的计划并不详细，只是提前订了 Tokyo Skytree、Shibuya sky 的票，规定了一下在东京的那几天每天在哪个区域活动，而在京都和大阪的行程则完全没有计划，全靠临时起意。&lt;/p>
@@ -241,12 +571,29 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go: github.com/cjc7373/go-module-test/c@v2.0.0: invalid version: module contains a go.mod file, so module path must match major version &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#34;github.com/cjc7373/go-module-test/c/v2&amp;#34;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果一个模块没有使用 Go Modules（即没有 &lt;code>go.mod&lt;/code> 文件），并且发布了一个 v2 及以上的版本，那么它作为一个依赖被引入时，我们会看到 &lt;code>github.com/xx/xxxx v4.1.0+incompatible&lt;/code> 这样的版本号。&lt;/p>
 &lt;p>模块的发布依赖于 VCS 的 tagging 功能。发布一个包就是打一个 tag。如果一个仓库有多个模块，则需要在 tagging 中加上模块路径的前缀，如果仓库位于 &lt;code>example.com/mymodules/&lt;/code>，模块路径为 &lt;code>example.com/mymodules/module1&lt;/code>，则打的 tag 应该为 &lt;code>module1/v1.2.3&lt;/code> 这种形式。（这里猜测模块路径是和文件夹路径对应的，但我没有实验过）&lt;/p>
+&lt;h2 id="gomod">&lt;code>go.mod&lt;/code>&lt;/h2>
+&lt;p>&lt;code>go.mod&lt;/code> 文件中，除了最常用的 &lt;code>require&lt;/code> 指令之外，还能够包括其他一些指令，例如：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;code>exclude&lt;/code>，用于阻止一个模块版本被载入。这一指令仅对当前的 main 模块生效（也就是说，如果一个依赖的 &lt;code>go.mod&lt;/code> 文件中包含了 &lt;code>exclude&lt;/code> 指令，该指令将不会生效）。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>replace&lt;/code>，用于替换一个模块指定版本（或是所有版本）的内容，替换的路径可以是模块的另一个版本，另一个模块，或是一个相对路径。例如：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go.mod" data-lang="go.mod">&lt;span style="display:flex;">&lt;span>replace (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> golang.org&lt;span style="color:#f92672">/&lt;/span>x&lt;span style="color:#f92672">/&lt;/span>net v1.&lt;span style="color:#ae81ff">2.3&lt;/span> &lt;span style="color:#f92672">=&amp;gt;&lt;/span> example.com&lt;span style="color:#f92672">/&lt;/span>fork&lt;span style="color:#f92672">/&lt;/span>net v1.&lt;span style="color:#ae81ff">4.5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> golang.org&lt;span style="color:#f92672">/&lt;/span>x&lt;span style="color:#f92672">/&lt;/span>net &lt;span style="color:#f92672">=&amp;gt;&lt;/span> example.com&lt;span style="color:#f92672">/&lt;/span>fork&lt;span style="color:#f92672">/&lt;/span>net v1.&lt;span style="color:#ae81ff">4.5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> golang.org&lt;span style="color:#f92672">/&lt;/span>x&lt;span style="color:#f92672">/&lt;/span>net &lt;span style="color:#f92672">=&amp;gt;&lt;/span> .&lt;span style="color:#f92672">/&lt;/span>fork&lt;span style="color:#f92672">/&lt;/span>net
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这一指令同样仅对当前的 main 模块生效。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>详细的文档可见&lt;a href="https://go.dev/ref/mod#go-mod-file">这里&lt;/a>。&lt;/p>
 &lt;h2 id="设计原则">设计原则&lt;/h2>
 &lt;p>所有的包管理都是为了解决依赖地狱问题（&lt;a href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency hell&lt;/a>），即一些包拥有同样的共享的包，但它们依赖与这些包的不同的、互不兼容的版本。&lt;/p>
 &lt;p>Russ Cox 在&lt;a href="https://research.swtch.com/vgo-principles">他的博客&lt;/a>中回顾了 Go Modules 的设计原则。总结一下就是：&lt;/p>
 &lt;ul>
 &lt;li>导入兼容性原则：如果旧包和新包的导入路径相同，则新包必须兼容旧包。&lt;/li>
-&lt;li>最小版本选择原则：使用满足需求的最旧版本，而不是最新版本。&lt;/li>
+&lt;li>最小版本选择（Minimal Version Selection, MVS）原则：使用满足需求的最旧版本，而不是最新版本。&lt;/li>
 &lt;/ul>
 &lt;p>为什么要这么设计呢？&lt;/p>
 &lt;h3 id="兼容性">兼容性&lt;/h3>
@@ -272,6 +619,10 @@
 &lt;p>图中以 Dep 和 Go Modules 为例说明了依赖解析的过程，这里虽然两者选择的 D 版本不同，但都能够成功构建。现在假设 D 发布了有 bug 的 1.6 版本，break 了 C 1.8。C 的开发者为了绕过 bug 添加了 D &amp;lt; 1.6 的约束，并发布了 1.9 版本。这时让 Dep 重新进行依赖解析：&lt;/p>
 &lt;p>&lt;img src="./image-20240104193149370.png" alt="image-20240104193149370">&lt;/p>
 &lt;p>会产生不止一种满足约束的结果。此时 Dep 首先会尝试使用最新的 B 1.4 和 C 1.9，但是这并不能满足约束。如果 Dep 接着尝试使用下一个 B 版本 1.3（右图），那么会解析到 D 1.5，构建成功；如果 Dep 尝试用下一个 C 版本 1.8（左图），那么会解析到 D 1.6，构建失败。Dep 选择哪种结果完全取决于它的内部实现，并不确定。而 Go Modules 则具备可重复性。&lt;/p>
+&lt;p>MVS 的设计使得 go 的依赖解析是确定性的，所以 go 并不需要一个 lock 文件。&lt;code>go.sum&lt;/code> 仅仅起了存储校验信息的作用，并不起 lock 文件的作用。&lt;/p>
+&lt;h2 id="-indirect">// indirect&lt;/h2>
+&lt;p>等一下，按照上面对于 MVS 的理解，我们只需要记录当前模块的所有直接依赖，但是为什么在 &lt;code>go.mod&lt;/code> 文件中还能看见大量的 &lt;code>require example.com/foo // indirect&lt;/code> 的语句呢？这里 indirect 指的就是模块的间接依赖。答案是在 1.16 之前，除非需要一个和 MVS 解析到的版本不同的版本，才需要给间接依赖加上 &lt;code>require&lt;/code> 指令。但是在 1.17 及之后，需要它来提供一些额外信息。&lt;/p>
+&lt;p>这便是&lt;a href="https://go.googlesource.com/proposal/+/master/design/36460-lazy-module-loading.md">懒模块加载&lt;/a>，&lt;/p>
 &lt;h2 id="尾巴">尾巴&lt;/h2>
 &lt;p>在下一篇博客中，我们会讨论模块镜像（Proxy）、校验数据库和工作区。&lt;/p>
 &lt;h2 id="see-also">See also&lt;/h2>
@@ -783,37 +1134,4 @@ Strip the smallest prefix containing num leading slashes from each file name fou
 &lt;p>然后就是编译了，在等待了四个小时之后我终于成功切换回了浅色模式！&lt;/p>
 &lt;p>&lt;img src="./image-20230531125453946.png" alt="image-20230531125453946">&lt;/p>
 &lt;p>最后还是希望 &lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1046660">Issue 1046660&lt;/a> 能够被尽快解决，让我能够在设置中直接切换浅/暗色模式。&lt;/p>
-- https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Kubernetes 生态中的航海隐喻</title><link>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</link><pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ -&lt;blockquote>
-&lt;p>Disclaimer: 本文的结论大多是根据名字推断出来的，并没有得到项目开发者的证实。&lt;/p>
-&lt;/blockquote>
-&lt;p>Kubernetes 在 2014 年 9 月发布，在这之前 Docker 已经大行其道了。Docker 发布于 2013 年，意为码头工人，其 logo 是个鲸鱼驮着一些集装箱。&lt;/p>
-&lt;p>&lt;img src="./610px-Docker_(container_engine)_logo.svg.png" alt="File:Docker (container engine) logo.svg">&lt;/p>
-&lt;p>后来这个 Logo 又变得扁平了一点：&lt;/p>
-&lt;p>&lt;img src="./512px-Docker_logo.svg.png" alt="File:Docker logo.svg">&lt;/p>
-&lt;p>很显然这个名字和和 Logo 都与集装箱（container，即容器）有关。&lt;/p>
-&lt;p>Kubernetes 这个名字来源于古希腊语 κυβερνήτης，意为舵手（steersman）/领航员（pilot）/船长（captain）。其 logo 是一个舵轮的形状。身为一个容器编排系统，Kubernetes 负责着一艘船的航向，倒也合理。&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/617px-Kubernetes_logo_without_workmark.svg.png" width="200px">
-&lt;/figure>
-&lt;p>值得一提是和 Kubernetes 共享词源 κυβερνήτης 的还有 governor（州长/统治者/主管）和 cybernetics（控制论）。&lt;/p>
-&lt;p>Helm 官方的 slogan 是 Kubernetes 的包管理器，helm 意为舵轮，logo 和 Kubernetes 类似，也是一个舵轮的形状。&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/helm.svg" width="200px">
-&lt;/figure>
-&lt;p>在 Helm 2 时代，helm 还需要一个部署在集群内的组件 tiller 才能工作。tiller 似乎是舵柄的意思，它和舵直接相连。下图展示了一个舵柄和舵轮的区别：&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/1280px-Tiller_and_helm_orders.svg.png" width="300px">
-&lt;/figure>
-&lt;p>Argo 项目包含了 CD/Workflows/Rollouts 等一系列项目，总体是和应用交付、CI/CD 相关。在希腊神话中，Argo （阿尔戈号）是一艘船，由伊阿宋等希腊英雄在雅典娜帮助下建成，众英雄乘该船取得金羊毛。此后阿尔戈号作为进献雅典娜的祭品被焚毁，南船座（Argo Navis, or simply Argo）由此而来。Navis 词源为古希腊语，意为船（ship）。但是 Argo 的 logo （应该？）是一只章鱼，很奇怪的联系..&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/argo.svg" width="200px">
-&lt;/figure>
-&lt;p>cert-manager，虽然名字和航海没什么关系，但它的 logo 是一个锚..&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/cert-manager.svg" width="200px">
-&lt;/figure>
-&lt;p>上面说到 Argo 就是南船座，南船座本来是天空中最大的星座，但在十八世纪被拆分为四个单独的星座，其中之一为船帆座（Vela），所以 Kubevela 的 logo 是一艘帆船。Kubevela 同样属于负责应用交付的组件，和 ArgoCD 在功能上有重叠和互补的地方。&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/kube-vela.svg" width="200px">
-&lt;/figure>
-&lt;p>最后要说的是 Harbor，非常直白，就是港口，作为一个 container registry 也很合理，其 logo 是一个灯塔的形状。&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/harbor.svg" width="200px">
-&lt;/figure>
-- https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>博客里应该写什么</title><link>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</link><pubDate>Mon, 24 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ -&lt;p>我的 Chrome 有一个插件叫 &lt;a href="https://www.one-tab.com/">Onetab&lt;/a>，本意是用来放一些稍后阅读的标签页。但是稍后阅读这种东西，最终都会转变成垃圾桶，标签越积越多。随着我的几次设备/系统更替（比如从我的老暗影精灵到 deskmini），迁移来迁移去很多上古标签页居然没丢.&lt;/p>
-&lt;p>今天在 Onetab 里翻找找到了&lt;a href="https://pureage.info/2014/08/25/hiding-302-using-proxy-pass.html">用 proxy_intercept_errors 和 recursive_error_pages 代理多次 302&lt;/a> 这样一篇文章。文章本身讲的是 nginx 用于反代时如何 follow 上游的 302 的问题，这是一篇普通的技术博客。但是翻看他的博客，却有很多生活随想，日记游记之类的内容。篇幅也长短不一，最短的寥寥一两句话。而翻看我自己的博客，合计三十一篇博文，其中（质量很低的）技术博文占了绝大多数。我不禁有些感慨，写博客究竟是为了什么。是为了在面试时多一个展现自己的方面，还是仅仅是作为一个写作的平台，无所约束地抒发自己的心情？&lt;/p>
-&lt;p>还记得我的博客刚搭起来的时候，我写过一篇&lt;a href="https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/">我为什么选择了独立博客&lt;/a>，内容是瞎扯的，但是最后一句话「庞大的互联网中的一方天地」我倒是现在也很认同。&lt;/p>
-- https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

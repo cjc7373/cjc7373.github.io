@@ -1,4 +1,195 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 24 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ -&lt;blockquote>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 24 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>软通实习</title><link>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</link><pubDate>Wed, 17 Jul 2019 15:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/ -&lt;h2 id="序">序&lt;/h2>
+&lt;p>二年级下学期期末，有一个两周的实习，学校给了我们三个选项，其中软通算是知名度最高的一家公司了。
+&lt;img src="./isoftstone.png" alt="“isoftstone”的图片搜索结果">&lt;/p>
+&lt;p>然而网上这家公司的风评很差，不过其他两家似乎更差，于是我们班大概四分之三的人都来了软通。&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="经历">经历&lt;/h2>
+&lt;p>实习第一天，上午讲的开发流程，团队角色，每日例行项目好似我们已经接手了一个实际项目，然而到了下午瞬间变成培训班，开始教我们配置环境。看下发的文档是用 Java Spring Boot 框架来开发。第二天又开始复习 Java。然后到了第三天，负责我们的老师（就叫他项目经理好了）突然说，你们想用什么技术就用什么技术吧。终于不用写 Java 了（逃&lt;/p>
+&lt;p>我们大概使用的是 Scrum 敏捷开发方法，最有特色的一点大概就是每日站会了。还有 Story 列表其实也挺不错的，只是没有贴在公告板上感觉失去了灵魂。&lt;/p>
+&lt;p>可能是时间短的原因，从一开始需求包括 Story 列表就已经确定了，我认为如果只是说做一个什么系统而不说具体需求会让大家的产品更有差异化，亮点也会更多。&lt;/p>
+&lt;h2 id="技术栈">技术栈&lt;/h2>
+&lt;p>由于我很倾向 Python，加上青岛大学的开源 OJ 采用的就是 Django+Vue 前后端分离的开发模式，于是我便也想采用这个模式。&lt;/p>
+&lt;p>最终我们决定采用前后端完全分离，前后端之间使用 HTTP 协议通信。前端采用：HTML+CSS+JavaScript（JQuery+AJAX），后端采用：Django，数据库采用：PostgreSQL&lt;/p>
+&lt;h2 id="版本管理">版本管理&lt;/h2>
+&lt;p>我有一些 Git 的知识，然而软通提供的版本管理工具是 SVN。用了一段时间后发现，两个工具没有本质的区别，最大的大概是 SVN 需要中心服务器，权限控制似乎也比较强大，所以像在公司内部比较好用，而 Git 分布式，分支创建极为方便，在开源社区中被广泛使用。&lt;/p>
+&lt;p>&lt;img src="./1563352303687.png" alt="1563352303687">&lt;/p>
+&lt;p>然而我们甚至没有用到分支这个功能，总体上还是没有利用好版本管理。&lt;/p>
+&lt;h2 id="前端三剑客">前端：三剑客&lt;/h2>
+&lt;p>zpc 第一天就不知道在哪找了个模板网站，然后冲了十块钱下了个模板。接下来就开始改改改。&lt;/p>
+&lt;h3 id="调试">调试&lt;/h3>
+&lt;p>一个问题是，后端的代码如何给前端调试。我们选择：&lt;/p>
+&lt;ol>
+&lt;li>后端首先使用 Django 的本地服务器，用 Postman 进行测试，测试通过后上传代码。&lt;/li>
+&lt;li>不定期部署至服务器上&lt;/li>
+&lt;li>前端从服务器调用接口调试&lt;/li>
+&lt;/ol>
+&lt;p>然而，在其他组答辩的时候，我们才知道有个东西叫 &lt;a href="http://mockjs.com/">mock&lt;/a>，能够简化调试难度。&lt;/p>
+&lt;h2 id="后端django">后端：Django&lt;/h2>
+&lt;p>很早就听说了 Python Web 一些有名的框架，后来又知道了青岛大学的开源 OJ 后端使用的就是 Django，所以很想尝试一下。曾经看过几节慕课，也看了一些官方文档（一开始是真的看不懂）。在做微信小程序的时候，我就想用 Django，奈何技术不够，放弃了。&lt;/p>
+&lt;p>实习前，我去找 zjb 两小时速成了一下 Django，发现 Django 虽然是 MTV（Model——Template——View）三级结构，但是前后端分离的话就没有模板了，同时我们用了 REST Framework，在函数名中直接声明要调用的方法，大大简化了开发。REST Framework 也提供了&lt;a href="https://q1mi.github.io/Django-REST-framework-documentation/">官方中文文档&lt;/a>，不过感觉写得不是很好。&lt;/p>
+&lt;p>后端代码非常简单，我们先用&lt;code>token = request.COOKIES.get(&amp;quot;token&amp;quot;)&lt;/code>获取token，查询&lt;code>user = User.objects.get(userToken=token)&lt;/code>，若 token 无效则会抛出&lt;code>User.DoesNotExist&lt;/code>错误，查询操作之后调用一个序列化方法&lt;code>users = serializers.serialize(&amp;quot;json&amp;quot;, allMessage, fields=(&amp;quot;userID&amp;quot;))&lt;/code>，但是如果直接这样返回会有问题，所以需要把它转化成字典类型&lt;code>rtn['data']=json.loads(users)&lt;/code>，然后调用&lt;code>JsonResponse&lt;/code>返回。&lt;/p>
+&lt;p>Django 查询数据库返回的是一个 &lt;a href="https://docs.djangoproject.com/zh-hans/2.2/ref/models/querysets/">QuerySet&lt;/a> 对象，我们能对它进行很多操作，但是其实我们都没用到..&lt;/p>
+&lt;h3 id="cookies">Cookies&lt;/h3>
+&lt;p>我一开始以为 Cookies 是前端负责维护的，后来发现这只是浏览器的工作。所以实际上 Cookies 是后端维护的。在登陆时设置 Cookie，调用 API 时获取 Cookie，退出时删除 Cookie 即可。&lt;/p>
+&lt;h3 id="测试">测试&lt;/h3>
+&lt;p>我们用了 Postman 模拟 HTTP 请求进行测试，很可惜的是没有用到 Django 的自动化测试。&lt;/p>
+&lt;h3 id="几个坑">几个坑&lt;/h3>
+&lt;p>Django 的文档宣称：&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>会自动重新加载的服务器 &lt;a href="https://docs.djangoproject.com/zh-hans/2.2/ref/django-admin/#django-admin-runserver">&lt;code>runserver&lt;/code>&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>用于开发的服务器在需要的情况下会对每一次的访问请求重新载入一遍 Python 代码。所以你不需要为了让修改的代码生效而频繁的重新启动服务器。然而，一些动作，比如添加新文件，将不会触发自动重新加载，这时你得自己手动重启服务器。&lt;/p>
+&lt;/blockquote>
+&lt;p>然而有时候重新载入并不会生效（可能是 PyCharm 的问题？），这种时候就很烦..&lt;/p>
+&lt;p>数据库中的&lt;code>DateTimeField&lt;/code>字段存储的时间总是 UTC 时间，在&lt;code>settings.py&lt;/code>中设置：&lt;/p>
+&lt;pre tabindex="0">&lt;code>TIME_ZONE = &amp;#39;Asia/Shanghai&amp;#39;
+USE_TZ = False
+&lt;/code>&lt;/pre>&lt;p>这样返回的时间是正常的，虽然数据库里的时间还是 UTC 时间，不过不影响了。&lt;/p>
+&lt;h2 id="数据库postgresql">数据库：&lt;strong>PostgreSQL&lt;/strong>&lt;/h2>
+&lt;p>据说 PostgreSQL 和 MySQL 的区别是..&lt;/p>
+&lt;p>&lt;img src="./1563367521827.png" alt="1563367521827">&lt;/p>
+&lt;p>&lt;img src="./1563367537890.png" alt="1563367537890">&lt;/p>
+&lt;p>虽说 Django 官方支持 PostgreSQL，而且我们的数据库部署在服务器上，但是本地还是要一个中间件&lt;code>psycopg2 &lt;/code>，在 Windows 下安装无问题，在 Linux 下需要一个额外的包 &lt;code>libpq-dev&lt;/code>，而在 Mac 下需要先安装 PostgreSQL。这也是一个坑点。&lt;/p>
+&lt;p>图形化管理界面方面，我使用了 pgadmin，一开始我以为这是个客户端，还奇怪为什么它提供 Docker 镜像，下完才发现它是网页端。果断卸载然后 docker pull..&lt;/p>
+&lt;p>数据库由于我们的设计问题，改了一万次。&lt;/p>
+&lt;p>&lt;img src="./1563368286617.png" alt="1563368286617">&lt;/p>
+&lt;p>七次其实还是我们重置过一次数据库的结果，真实改动可能有十一二次吧。虽然 Django 提供了方便的 migrate 功能，但是这功能锅很多，能不改还是尽量不改。&lt;/p>
+&lt;ul>
+&lt;li>在自己设置主键然后又取消使用自动主键时，Django 会报没有默认值的错。？？？AutoField 你要什么默认值。网上也有同样的情况，应该是 Django 的 Bug。&lt;/li>
+&lt;li>在改某张表的时候一直碰到报错一个不存在的列不存在，这张表就似乎坏了。我们的解决方案是重建一张新的表2333&lt;/li>
+&lt;/ul>
+&lt;h2 id="接口">接口&lt;/h2>
+&lt;h3 id="文档">文档&lt;/h3>
+&lt;p>我们的接口文档直接写在 Story 列表后面。主要写明了接口地址，方法（GET，POST，PUT，DELETE，我是想 RESTful 的，可是其他人基本随缘了），请求字段，响应字段，以及相应的解释和示例。&lt;/p>
+&lt;h3 id="跨域">跨域&lt;/h3>
+&lt;p>前端调试接口的时候产生了跨域的问题。Cookie，Ajax 请求都会遭到浏览器&lt;a href="https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">同源策略&lt;/a>的限制。临时的解决方案是，在 Django 上装一个插件 &lt;a href="https://github.com/ottoyiu/django-cors-headers">&lt;code>django-cors-headers&lt;/code>&lt;/a>，并且修改&lt;code>settings.py&lt;/code>，在&lt;code>INSTALLED_APPS&lt;/code>中加入&lt;code>corsheaders&lt;/code>，在&lt;code>MIDDLEWARE&lt;/code>中加入&lt;code>corsheaders.middleware.CorsMiddleware&lt;/code>（位置尽量靠前），并设置字段：&lt;/p>
+&lt;pre tabindex="0">&lt;code>CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+&lt;/code>&lt;/pre>&lt;p>而在前端每个 Ajax 请求中加上：&lt;/p>
+&lt;p>&lt;img src="./1563353270812.png" alt="1563353270812">&lt;/p>
+&lt;p>而在生产环境中由于同源，所以不存在跨域的问题。&lt;/p>
+&lt;p>然而，一个新的问题是，本地浏览器并不能够成功地存储 Cookie，当时的解决办法是，每改动一个页面就部署至服务器上进行调试，然而这个方法效率极低。后来我发现其实这只是 Chrome 浏览器的问题，其他浏览器则没有这个问题。&lt;/p>
+&lt;h2 id="部署">部署&lt;/h2>
+&lt;p>在开发中，采取的方案是前端静态网页由 Nginx 部署，而后端 Django 代码则使用 Django 自带的服务器部署，而显然，这绝不能用于生产环境。&lt;/p>
+&lt;blockquote>
+&lt;p>DO NOT USE THIS SERVER IN A PRODUCTION SETTING. It has not gone through security audits or performance tests.&lt;/p>
+&lt;/blockquote>
+&lt;p>（不过我还是用了，甚至都没关 DEBUG 选项）&lt;/p>
+&lt;p>因为 Django 服务器使用 &lt;code>python3 manage.py runserver&lt;/code>运行的， SSH 断开后进程就被中断了，所以需要让它能够后台运行，尝试了 nohup，子 shell 等方法后（都不好用），最终选择了 screen。主要命令有：&lt;/p>
+&lt;pre tabindex="0">&lt;code>screen -S [NAME] 创建一个新 shell
+screen -ls 查看后台 shell
+screen -r [ID] 进入某个 shell
+Ctrl+A,D 把当前 shell 切换至后台
+&lt;/code>&lt;/pre>&lt;p>Nginx 配置我就直接改默认配置了，路径在&lt;code>/etc/nginx/sites-enabled/default&lt;/code>下。除了静态页面外，还需配置后端请求转发：&lt;/p>
+&lt;pre tabindex="0">&lt;code>location /api {
+proxy_pass http://127.0.0.1:8000;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header Host $http_host;
+client_max_body_size 200M;
+}
+&lt;/code>&lt;/pre>&lt;p>（这个配置我是抄青岛大学 OJ 的）&lt;/p>
+&lt;h3 id="https">HTTPS&lt;/h3>
+&lt;p>尝试把域名解析至阿里云的服务器，发现不管是 HTTP 还是 HTTPS 请求都会被拦截，并被劫持到一个备案页面。&lt;/p>
+&lt;p>&lt;img src="./1563512996274.png" alt="1563512996274">&lt;/p>
+&lt;p>于是换用 GCP，一切顺利。使用 Let&amp;rsquo;s Encrypt 的证书以及官方推荐的 &lt;a href="https://certbot.eff.org/">certbot&lt;/a> 工具。简单几步即可签发证书并自动配置 Nginx。&lt;/p>
+&lt;p>&lt;img src="./1563513130043.png" alt="1563513130043">&lt;/p>
+&lt;h2 id="参考资料">参考资料&lt;/h2>
+&lt;p>&lt;a href="https://blog.csdn.net/summer2day/article/details/81358815">前后端分离的django项目服务器跨域&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://harttle.land/2016/12/28/cors-with-cookie.html">CORS 跨域发送 Cookie&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/tutorials/Django_and_nginx.html">使用uWSGI和nginx来设置Django和你的web服务器&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.cnblogs.com/lhj588/archive/2011/10/27/2226976.html">django web Cookie 和 Sessions 应用&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.jianshu.com/p/15af33d2c2c4">从零开始建立单元测试-以Django项目为例&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://www.liujiangblog.com/course/django/129">查询操作&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.runoob.com/django/django-model.html">Django 模型&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://blog.csdn.net/zhu_free/article/details/48176779">django DateTimeField 时区问题解决&lt;/a>&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>使用 Travis CI 自动部署 Hexo 博客</title><link>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</link><pubDate>Sun, 21 Apr 2019 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ -&lt;p>&lt;img src="./bg2017121901.png" alt="bg2017121901">&lt;/p>
+&lt;h2 id="缘由">缘由&lt;/h2>
+&lt;p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。&lt;/p>
+&lt;p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的&lt;code>ln -s&lt;/code>大法行不通了。&lt;/p>
+&lt;p>于是我想到了 CI。仔细一想其实也不复杂，无非是&lt;code>git push&lt;/code>， &lt;code>git pull&lt;/code>两下罢了。那么，Let&amp;rsquo;s do it!&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="需求">需求&lt;/h2>
+&lt;p>我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。&lt;/p>
+&lt;ul>
+&lt;li>我更新博客之后，commit 然后 push 至 Github repo&lt;/li>
+&lt;li>CI 自动构建博客&lt;/li>
+&lt;li>CI 将构建完成的静态文件 push 至 Github repo&lt;/li>
+&lt;/ul>
+&lt;p>我原先使用的是&lt;code>hexo-deployer-git&lt;/code>插件，通过&lt;code>hexo g -d&lt;/code>部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。&lt;/p>
+&lt;h2 id="配置-github-repo">配置 Github Repo&lt;/h2>
+&lt;p>在这个 Repo 中需要两个分支：&lt;/p>
+&lt;ul>
+&lt;li>master 用于存放构建完成的静态文件&lt;/li>
+&lt;li>source 用于存放 Hexo 生成的博客源文件&lt;/li>
+&lt;/ul>
+&lt;p>对 Hexo 文件夹的操作如下：&lt;/p>
+&lt;pre tabindex="0">&lt;code>git init
+git remote add origin git@github.com:cjc7373/cjc7373.github.io.git
+git checkout -b source
+git add .
+git commit -m &amp;#34;To use CI to automated deploy&amp;#34;
+git push origin source:source
+&lt;/code>&lt;/pre>&lt;p>本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带&lt;code>.gitignore&lt;/code>文件，所以实际大小并没有多少。&lt;/p>
+&lt;p>&lt;img src="./1555835090941.png" alt="1555835090941">&lt;/p>
+&lt;p>然后在 Github 上将主分支切换为&lt;code>source&lt;/code>分支。&lt;/p>
+&lt;h2 id="配置-travis-ci">配置 Travis CI&lt;/h2>
+&lt;p>CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key，后者似乎有些麻烦，我选择了前者。当前需求应该只需要 repo 权限，然后在 Travis CI 的 Environment Variables 中加入这个 Token，注意不要勾选 Display value in build log。&lt;/p>
+&lt;p>然后就是编写&lt;code>.travis.yml&lt;/code>了。 &lt;del>正当我准备抄大佬们的配置的时候，忽然看到 Travis CI 官方提供了&lt;a href="https://docs.travis-ci.com/user/deployment/pages/">轮子&lt;/a>，那就用吧QAQ（其实也没简单多少）&lt;/del>，然后翻车了。&lt;/p>
+&lt;p>&lt;img src="./1555837683039.png" alt="1555837683039">&lt;/p>
+&lt;p>看了下文档，我也没搞懂每个字段的意思。所以还是自己来吧。&lt;/p>
+&lt;p>为了在 commit 记录中显示更新日期，我把 push 部分单独写成了 sh脚本。&lt;/p>
+&lt;p>&lt;code>.travis.yml&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code>language: node_js
+node_js: stable
+# 只监听 source 分支的改动
+branches:
+only:
+- source
+# 缓存依赖，节省持续集成时间
+cache:
+directories:
+- node_modules
+install:
+- npm install
+script:
+- hexo clean
+- hexo g
+after_script:
+- chmod +x ./deploy.sh # 添加可执行权限
+- ./deploy.sh
+&lt;/code>&lt;/pre>&lt;p>&lt;code>deploy.sh&lt;/code>:&lt;/p>
+&lt;pre tabindex="0">&lt;code>#!/bin/bash
+set -ev
+export TZ=&amp;#39;Asia/Shanghai&amp;#39;
+git config --global user.name &amp;#34;cjc7373&amp;#34;
+git config --global user.email &amp;#34;niuchangcun@163.com&amp;#34;
+# 获取以前的 commit 记录
+git clone -b master https://github.com/cjc7373/cjc7373.github.io.git .deploy
+# 这么移动是为了确保不受之前文件的影响
+mv .deploy/.git/ public/
+cd public
+git checkout master
+git add .
+git commit -m &amp;#34;Site updated: `date +&amp;#34;%Y-%m-%d %H:%M:%S&amp;#34;`&amp;#34;
+# 我也不知道 token 怎么用。。抄大佬的代码
+git push &amp;#34;https://${token}@github.com/cjc7373/cjc7373.github.io.git&amp;#34; master:master --quiet
+&lt;/code>&lt;/pre>&lt;p>一开始忘了给&lt;code>deploy.sh&lt;/code>可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。&lt;/p>
+&lt;p>&lt;img src="./1555840082905.png" alt="1555840082905">&lt;/p>
+&lt;p>（看着都是成功其实都是失败。。）&lt;/p>
+&lt;p>同时本地配合一下批处理，真正一键发布（滑稽&lt;/p>
+&lt;pre tabindex="0">&lt;code>cd C:\Users\niuch\Documents\GitHub\blog\
+git add .
+git commit
+git push
+pause
+&lt;/code>&lt;/pre>&lt;h2 id="后记">后记&lt;/h2>
+&lt;p>历经两个多小时，终于把 CI 弄好了。虽然对 CI 还是一知半解，不过总算开了个头，也基本实现了需求。&lt;/p>
+&lt;p>Travis CI 官方的文档很全，但是以我的英文水平看得很吃力（懒得看），中文资料的质量又参差不齐。所以还是要锻炼自己的英语水平啊。&lt;/p>
+&lt;h2 id="参考资料">参考资料&lt;/h2>
+&lt;p>&lt;a href="https://docs.travis-ci.com">https://docs.travis-ci.com&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html">https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a>&lt;/p>
+- https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ -&lt;blockquote>
 &lt;p>Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="前言">前言&lt;/h2>
@@ -658,20 +849,20 @@ hello,world
 &lt;thead>
 &lt;tr>
 &lt;th>一个普通标题&lt;/th>
-&lt;th style="text-align:center">一个普通标题&lt;/th>
-&lt;th style="text-align:right">一个普通标题&lt;/th>
+&lt;th style="text-align: center">一个普通标题&lt;/th>
+&lt;th style="text-align: right">一个普通标题&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>短文本&lt;/td>
-&lt;td style="text-align:center">中等文本&lt;/td>
-&lt;td style="text-align:right">稍微长一点的文本&lt;/td>
+&lt;td style="text-align: center">中等文本&lt;/td>
+&lt;td style="text-align: right">稍微长一点的文本&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>稍微长一点的文本&lt;/td>
-&lt;td style="text-align:center">短文本&lt;/td>
-&lt;td style="text-align:right">中等文本&lt;/td>
+&lt;td style="text-align: center">短文本&lt;/td>
+&lt;td style="text-align: right">中等文本&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -720,58 +911,4 @@ sfc /scannow
 &lt;p>另外，上述的三个命令理论上能解决Windows的许多问题，碰到问题可以尝试。&lt;/p>
 &lt;h4 id="2019213-更新">2019/2/13 更新&lt;/h4>
 &lt;p>目前家里入了 4K 显示器，200% 缩放，观感上没有任何问题。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我为什么选择了独立博客</title><link>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</link><pubDate>Sat, 13 Oct 2018 20:13:11 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ -&lt;p>这是一个独立博客式微的时代。&lt;/p>
-&lt;p>独立博客没有博客平台的推荐导流系统，相比之下观之者寥寥。&lt;/p>
-&lt;p>那我为什么还是选择了独立博客呢？&lt;/p>
-&lt;ul>
-&lt;li>自由，不会受外部因素的影响，可以随意添加自己想要的功能。&lt;/li>
-&lt;li>方便，一行命令就能更新博客。&lt;/li>
-&lt;li>可控，完全受自己管理。&lt;/li>
-&lt;/ul>
-&lt;p>在这纷纭复杂的互联网中，拥有自己的一方小天地，似乎也是极好的。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ -&lt;blockquote>
-&lt;p>身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p>
-&lt;/blockquote>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="为什么选择hexo">为什么选择Hexo&lt;/h2>
-&lt;p>其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是&lt;del>随手找了几个静态博客生成器，&lt;/del> 随手一查就找到了Hexo。&lt;/p>
-&lt;h2 id="hexo搭建过程">Hexo搭建过程&lt;/h2>
-&lt;p>Hexo的官方文档有中文，这点很赞。虽然官方文档讲的不是很清楚..然而搭建还是比较简单的，加上Google了几篇教程，很快就把Hexo搭起来了。&lt;/p>
-&lt;p>身为一个博客生成器，当然不能让我们接触到代码了。所以Hexo的基本配置均在&lt;code>_config.yml&lt;/code>这个配置文件中。配置采用YAML语法，看看官方文档也就差不多了解了。基本上无需过多配置就搭建完成了。&lt;/p>
-&lt;h2 id="hexo主题">Hexo主题&lt;/h2>
-&lt;p>Hexo有许多主题，个人采用了官方推荐的 &lt;a href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces&lt;/a>主题，整体风格还是比较简洁的（然而用这个主题的实在是太多了&amp;hellip;随便一个Hexo博客就是Next主题）。&lt;/p>
-&lt;p>同时主题内已集成了许多第三方服务，如Google Analysis、DISQUS等，只要改改配置文件就能配置完成，还是相当简单的。&lt;/p>
-&lt;h2 id="hexo图片插入指引">Hexo图片插入指引&lt;/h2>
-&lt;p>直接用Markdown语法引用图片会导致图片在首页无法显示，官网给出了一个解决方案，就是利用内置的插件，形式如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code>{% asset_path slug %}
-&lt;/code>&lt;/pre>&lt;p>然而这个方法会破环原生Markdown语法，对编辑者的预览等造成不便。&lt;/p>
-&lt;p>很奇怪官方为什么要采用这种方法。&lt;/p>
-&lt;p>更好的解决方案是安装&lt;a href="https://github.com/CodeFalling/hexo-asset-image">&lt;strong>hexo-asset-image&lt;/strong>&lt;/a>这个插件。进入博客目录，使用如下命令安装插件：&lt;/p>
-&lt;pre tabindex="0">&lt;code>npm install https://github.com/CodeFalling/hexo-asset-image --save
-&lt;/code>&lt;/pre>&lt;p>安装完成后，即可使用原生Markdown语法插入图片。&lt;/p>
-&lt;h2 id="to-do">To Do&lt;/h2>
-&lt;h5 id="已实现功能">已实现功能&lt;/h5>
-&lt;ul>
-&lt;li>评论，采用DISQUS&lt;/li>
-&lt;li>数据统计，采用Google Analytics&lt;/li>
-&lt;li>图片显示在首页&lt;/li>
-&lt;li>搜索引擎收录，Google Search Console&lt;/li>
-&lt;li>首页文章不显示全部&lt;/li>
-&lt;li>git配置，&lt;code>hexo g -d&lt;/code>一条命令部署&lt;/li>
-&lt;li>&lt;a href="use-ci-auto-deploy-blog.md">使用Travis CI自动生成及部署&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="待实现功能">待实现功能&lt;/h5>
-&lt;ul>
-&lt;li>更多的自定义操作&lt;/li>
-&lt;li>文章访问量统计&lt;/li>
-&lt;li>在自己的服务器也部署博客，然后用 CI 实现自动部署&lt;/li>
-&lt;li>使用 CDN 加速 Github Pages 的访问&lt;/li>
-&lt;li>评论点击加载&lt;/li>
-&lt;/ul>
-&lt;h2 id="参考文章">参考文章&lt;/h2>
-&lt;p>&lt;a href="http://etrd.org/2017/01/23/hexo%E4%B8%AD%E5%AE%8C%E7%BE%8E%E6%8F%92%E5%85%A5%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/">hexo中完美插入本地图片&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://gaodaxiu0406.github.io/2017/08/21/%E4%B8%BAHEXO%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%AF%8F%E7%AF%87%E6%96%87%E7%AB%A0%E7%9A%84%E6%B5%8F%E8%A7%88%E9%87%8F%E7%BB%9F%E8%AE%A1/">为HEXO博客中每篇文章的浏览量统计&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://hexo.io/zh-cn/docs/">Hexo官方文档&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://theme-next.iissnan.com/">NexT使用文档&lt;/a>&lt;/p>
-&lt;p>&lt;a href="http://moweide.com/2017/08/27/hexo_next_started/">theme-next!Hexo网站的一次华丽升级&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

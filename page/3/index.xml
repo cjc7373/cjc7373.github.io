@@ -1,4 +1,162 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 24 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ -&lt;h2 id="1335a---candies-and-two-sistershttpscodeforcescomcontest1335problema">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 24 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/2020summary_2021plan/ -&lt;p>又到了传统艺能&lt;del>年终&lt;/del>年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="2020-总结">2020 总结&lt;/h2>
+&lt;p>一句话总结的话, 知识的广度提升了, 深度还不够, 学习状态仍旧不能让自己满意. 以及这一年我始终在担心有没有学上, 找不找得到工作.&lt;/p>
+&lt;h3 id="学业">学业&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>由于疫情的爆发, 导致了 2020 春季学期完全在家上课, 更加方便摸鱼了(&lt;/p>
+&lt;p>一开始港哥在群里说武汉疫情的时候, 我还不觉得这是什么大事, 后来才发现我错得离谱.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>二月底到三月初, 陆续投了几个实习, 被拒了几个, 后来决定考研之后, 又鸽了几个&lt;/p>
+&lt;p>&lt;img src="./image-20210225125307219.png" alt="image-20210225125307219">&lt;/p>
+&lt;p>说实话我对以后能不能找到工作还是有点怀疑的..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>从三月开始, 断断续续地开始准备考研了, 然而实际上还是不够努力吧, 到考试前一天我还没完全搞懂二次型..&lt;/p>
+&lt;p>不过从时间上来说, 暑假之后就全力准备考研了..&lt;/p>
+&lt;p>我很想说考研让我变得更沉得下心来学习了, 但事实上这并不是真的.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>只准备了两三天之后 (因为太晚看到了), 尝试申请了一下 GSoC, 不出意外凉了..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>七月到十月, 参加开源之夏, 也算是赚到了人生的第一桶金吧&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="玩">玩&lt;/h3>
+&lt;ul>
+&lt;li>一月, 去滑雪+攀岩, 还是挺有意思的&lt;/li>
+&lt;li>二月初, 折腾了一下 Windows 10 on Arm for Lumia 1520, 并没有什么用, 于是继续吃灰&lt;/li>
+&lt;li>七月, 乘着沪通铁路的开通, 去上海玩了一次, 居然被我碰到了一次高铁延误..&lt;/li>
+&lt;/ul>
+&lt;h3 id="环境">环境&lt;/h3>
+&lt;ul>
+&lt;li>二月末, 开始搞 Manjaro, 一开始两个系统都用, 逐渐就只用 Linux 了 (特别是我发现了 proton 和 lutris 之后..)&lt;/li>
+&lt;li>三月初, 开始尝试 Typora+第三方云同步&lt;/li>
+&lt;li>七月, 从 Onedrive 转向 Syncthing (是不是有一种 Anything can be self-hosted 的趋势呢..&lt;/li>
+&lt;/ul>
+&lt;h3 id="书">书&lt;/h3>
+&lt;p>本年度仍然没有怎么看书..&lt;/p>
+&lt;ul>
+&lt;li>看完了心理学与生活, 心理学啊, exciting&lt;/li>
+&lt;li>看完了 Dark Forest&lt;/li>
+&lt;/ul>
+&lt;h3 id="代码">代码&lt;/h3>
+&lt;p>总的来说, 感觉自己乱七八糟的项目一堆, 却没什么拿得出手的..&lt;/p>
+&lt;ul>
+&lt;li>zaobot, 基本一整年都在维护 (虽然目前的代码还是挺是💩的, 打算再次重构&lt;/li>
+&lt;li>云盘在年初把后端重构了一下, 后来就鸽了 (事实上我这是重复造轮子, seafile 的体验就很好..)&lt;/li>
+&lt;li>pip, 四五月吧, 修了一些 bug, 做了点微小的贡献, 主要还是 codebase 没太理解..&lt;/li>
+&lt;li>Hackergame, 七到九月, 后端应该基本可用了, 然后答应的前端鸽了.. 当时天天看文档..&lt;/li>
+&lt;li>九十月考研的时候, 稍微学了一点 Anki, 为了自己用得顺手, 写了一个小插件.&lt;/li>
+&lt;li>建了个&lt;a href="https://github.com/cjc7373/my_scripts">仓库&lt;/a>写一些日常使用的脚本, 然而目前觉得可以全扔 Ansible 里..&lt;/li>
+&lt;li>花&lt;del>半个小时&lt;/del>三天写了个课程评价, 然而并没有人用..&lt;/li>
+&lt;/ul>
+&lt;h3 id="学习">学习&lt;/h3>
+&lt;ul>
+&lt;li>年中, 学了下小鹤双拼, 虽然似乎打字速度没快多少..&lt;/li>
+&lt;li>十一月, 终于把 Learning How To Learn 学完了, 然而我学到了什么呢..&lt;/li>
+&lt;/ul>
+&lt;h3 id="剁手">剁手&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>一月初, 本来已经买了联想小新 Pro 13, 然而压感触控的体验不是很好, 又碰到了下方向键有概率用不了的问题, 于是退了..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>一月, 购置了网件 R7900p, 终于能在电视上用 smb 看电影不卡了.. 然而 ipv6 是个坑..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>二月, 捡了个洋垃圾 Surface 3, 虽然电池有坑, 但是 Surface 总体还是可以的. 后来出了.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>六月中, 入手了 Surface Pro 7, 除了续航有点差其他都很满意. 18 年开始就种下的草 (指买轻薄本) 终于拔了.&lt;/p>
+&lt;p>附一张合照:&lt;/p>
+&lt;p>&lt;img src="./image-20210225152027832.png" alt="image-20210225152027832">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>十一月, 由于创新 IE3P 的线老是掉, 我终于买了个无线耳机, Galaxy Bud+.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="财务">财务&lt;/h3>
+&lt;p>基金今年还是没怎么动, 看着大盘涨.. 稍微学了点投资的知识.&lt;/p>
+&lt;p>记账方面, Spendee 在年中放弃了, 因为感觉意义不大. 后来知道了 Plain Text Accounting, 于是学了点 Beancount, 不过还没应用到实践中.&lt;/p>
+&lt;h3 id="其他">其他&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;img src="./image-20210225144517669.png" alt="image-20210225144517669">&lt;/p>
+&lt;p>事实证明这是很好的追踪一个问题的工具..&lt;/p>
+&lt;p>&lt;img src="./image-20210225150738841.png" alt="image-20210225150738841">&lt;/p>
+&lt;p>但是浏览条目还是有些不爽 (比较慢)..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>六月, 开始用 KeePassXC 管理密码.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>暑假里, 看了人类星球, 自然与人文纪录片交汇的佳作&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>2020 秋季学期运动的次数显著增加了, 经常会去打打羽毛球.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>十月, 和 Moo 在北门合租了, 环境比之前在樱花广场好了很多..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>十二月, 用 rsync 删了一波自己的 home 目录, 血的教训.. 没想到我也有删库的一天..&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>这一年没怎么管博客, 因为考研, 外加想着迁移 Pelican, 结果又挖了一个大坑&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="2021-计划">2021 计划&lt;/h2>
+&lt;p>还有两天考研出分了.. 说实话挺害怕的.. 考不上就只能找工作了.&lt;/p>
+&lt;ul>
+&lt;li>今年还是想尝试一下 GSoC, 到四月中旬申请结束还有一个半月.. 努力去混混脸熟吧.&lt;/li>
+&lt;li>事实上, 我还有一堆开的坑, 包括但不限于:
+&lt;ul>
+&lt;li>给 Wikipedia 贡献一个优良条目的翻译&lt;/li>
+&lt;li>写个 (或者找找) 各板块指数的 PB 中值温度计.&lt;/li>
+&lt;li>所有 VPS 都使用 Ansible 维护&lt;/li>
+&lt;li>写一个 Pelican 的主题, 类似 &lt;a href="https://github.com/amazingrise/hugo-theme-diary">diary&lt;/a>.&lt;/li>
+&lt;li>学习 CSAPP&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>毕设, 写一个第三方网易云, 毕竟是自己提的项目, 还是要好好写的.. 这又是一大堆不熟悉的技术栈..&lt;/li>
+&lt;li>还是要多看点书..&lt;/li>
+&lt;/ul>
+&lt;p>不管怎么样, 我还是要以更加积极的心态去迎接未来. 冲!&lt;/p>
+- https://blog.coherence.codes/posts/2021/2020summary_2021plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Anki 工作流</title><link>https://blog.coherence.codes/posts/2021/anki_workflow/</link><pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/anki_workflow/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/anki_workflow/ -&lt;p>&lt;a href="https://apps.ankiweb.net/">Anki&lt;/a> 是一个间隔式重复的&amp;quot;闪卡 (flashcard)&amp;ldquo;记忆软件. 下面来谈谈我考研及日常生活中的 Anki 工作流.&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="为什么选择-anki">为什么选择 Anki&lt;/h2>
+&lt;p>和市面上其他的记忆软件一样, Anki 也是基于遗忘曲线, 基于间隔式重复这一原理的. 最大的不同在于它是高度自定义的. 自己制作卡组, 设计模板, 甚至编写自己的插件. 还有很多特性例如 Notes 和 Cards 相分离我其实并没有用到.&lt;/p>
+&lt;p>其次 Anki 是一款开源软件, 在我希望所有软件都用自由软件替换的如今, 这无疑是一个重要的理由.&lt;/p>
+&lt;p>最后它在 Windows, Linux, Android 上都有客户端, 并支持同步. 虽然内置的同步服务器是由 Ankiweb 提供的 (我至今不知道 Ankiweb 和 Anki 的关系以及它是如何运作的), 然而也能够用自建的替换.&lt;/p>
+&lt;p>虽然网上能够找到很多已制作好的卡组, 然而这些卡组并不一定适合自己. 以记单词而言, 卡组中的许多卡片都是自己已经熟知的. 况且制卡这个过程本身能够帮助自己记忆. 所以我还是选择了自己构建卡组的方式.&lt;/p>
+&lt;h2 id="基础卡片">基础卡片&lt;/h2>
+&lt;p>对于一般的记忆来说, 基础的 Note type 就够用了.. 比如我一开始用 Anki 来提醒我复习新概念英语, 用的是以下的 Note type:&lt;/p>
+&lt;p>&lt;img src="./image-20210224200941341.png" alt="image-20210224200941341">&lt;/p>
+&lt;p>十分简单.&lt;/p>
+&lt;h2 id="考研">考研&lt;/h2>
+&lt;p>考研的时候打算用 Anki 背单词, 于是我做真题的时候碰到不认识的单词记录下来, 然后用 Anki 制卡.&lt;/p>
+&lt;p>卡片字段设计和工作流受到了&lt;a href="https://ankiweb.net/shared/info/934622764">考研英语真题生词&lt;/a>这个卡组的启发.&lt;/p>
+&lt;p>其中最主要的问题是音标, 发音和释义. 一开始想的办法是发音用 TTS, 于是找到了 Azure 的 API, 然而一个缺点是每次制卡要等很久 (请求 API), 而且 Azure 的 API 很贵.. 我给一个几百张卡的卡组加发音花了我五块钱..&lt;/p>
+&lt;p>于是我就想到了从词典中导入, 我平时主要使用的词典是 OALD8 (很久之前从 &lt;a href="https://www.pdawiki.com/forum/">pdawiki&lt;/a> 下的), 于是我就自己糊了个&lt;a href="https://ankiweb.net/shared/info/738556640">插件&lt;/a>.. 功能很简单, 根据单词字段从词典 mdx 文件里查询音标和发音, 并填充到相应字段中.&lt;/p>
+&lt;p>最后的成品卡片是这样的:&lt;/p>
+&lt;p>&lt;img src="./image-20210224201415659.png" alt="image-20210224201415659">&lt;/p>
+&lt;p>制卡的时候首先手打单词和例句, 然后从词典里选一个释义复制过来就行了. 个人感觉也不是很麻烦..&lt;/p>
+&lt;p>看一下成果:&lt;/p>
+&lt;p>&lt;img src="./image-20210224202958005.png" alt="image-20210224202958005">&lt;/p>
+&lt;p>考研的那一百多天里我总共背了 364 个单词.. 其实挺少的..&lt;/p>
+&lt;p>之后的卡组中我优化了一下 Note 的字段, 于是现在变成了这样:&lt;/p>
+&lt;p>&lt;img src="./image-20210224201845315.png" alt="image-20210224201845315">&lt;/p>
+&lt;h2 id="咕咕咕时间">咕咕咕时间&lt;/h2>
+&lt;ul>
+&lt;li>释义的导入我肯定也想自动化的. 而选择释义势必要做一个弹窗, 那么这就涉及到 Qt 的知识了, 于是目前搁置了&lt;/li>
+&lt;li>有的单词不同的词性有不同的发音, 这个也没有处理..&lt;/li>
+&lt;li>有一个 &lt;a href="https://github.com/ninja33/ODH">chrome 插件&lt;/a>已经基本上把我想做的都实现了, 可以借鉴一下..&lt;/li>
+&lt;/ul>
+- https://blog.coherence.codes/posts/2021/anki_workflow/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ -&lt;h2 id="1335a---candies-and-two-sistershttpscodeforcescomcontest1335problema">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>快乐签到。&lt;/p>
 &lt;h2 id="1335b---construct-the-stringhttpscodeforcescomcontest1335problemb">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
@@ -744,195 +902,4 @@ url: /about
 &lt;p>&lt;img src="./bd61005egy1g0cx8izobuj22eo37kb29.jpg" alt="img">&lt;/p>
 &lt;p>&lt;img src="./bd61005egy1g0cx8p7mccj20rt112adg.jpg" alt="img">&lt;/p>
 &lt;p>&lt;img src="./bd61005egy1g0cx8t4qtvj20rt11241p.jpg" alt="img">&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>软通实习</title><link>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</link><pubDate>Wed, 17 Jul 2019 15:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/ -&lt;h2 id="序">序&lt;/h2>
-&lt;p>二年级下学期期末，有一个两周的实习，学校给了我们三个选项，其中软通算是知名度最高的一家公司了。
-&lt;img src="./isoftstone.png" alt="“isoftstone”的图片搜索结果">&lt;/p>
-&lt;p>然而网上这家公司的风评很差，不过其他两家似乎更差，于是我们班大概四分之三的人都来了软通。&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="经历">经历&lt;/h2>
-&lt;p>实习第一天，上午讲的开发流程，团队角色，每日例行项目好似我们已经接手了一个实际项目，然而到了下午瞬间变成培训班，开始教我们配置环境。看下发的文档是用 Java Spring Boot 框架来开发。第二天又开始复习 Java。然后到了第三天，负责我们的老师（就叫他项目经理好了）突然说，你们想用什么技术就用什么技术吧。终于不用写 Java 了（逃&lt;/p>
-&lt;p>我们大概使用的是 Scrum 敏捷开发方法，最有特色的一点大概就是每日站会了。还有 Story 列表其实也挺不错的，只是没有贴在公告板上感觉失去了灵魂。&lt;/p>
-&lt;p>可能是时间短的原因，从一开始需求包括 Story 列表就已经确定了，我认为如果只是说做一个什么系统而不说具体需求会让大家的产品更有差异化，亮点也会更多。&lt;/p>
-&lt;h2 id="技术栈">技术栈&lt;/h2>
-&lt;p>由于我很倾向 Python，加上青岛大学的开源 OJ 采用的就是 Django+Vue 前后端分离的开发模式，于是我便也想采用这个模式。&lt;/p>
-&lt;p>最终我们决定采用前后端完全分离，前后端之间使用 HTTP 协议通信。前端采用：HTML+CSS+JavaScript（JQuery+AJAX），后端采用：Django，数据库采用：PostgreSQL&lt;/p>
-&lt;h2 id="版本管理">版本管理&lt;/h2>
-&lt;p>我有一些 Git 的知识，然而软通提供的版本管理工具是 SVN。用了一段时间后发现，两个工具没有本质的区别，最大的大概是 SVN 需要中心服务器，权限控制似乎也比较强大，所以像在公司内部比较好用，而 Git 分布式，分支创建极为方便，在开源社区中被广泛使用。&lt;/p>
-&lt;p>&lt;img src="./1563352303687.png" alt="1563352303687">&lt;/p>
-&lt;p>然而我们甚至没有用到分支这个功能，总体上还是没有利用好版本管理。&lt;/p>
-&lt;h2 id="前端三剑客">前端：三剑客&lt;/h2>
-&lt;p>zpc 第一天就不知道在哪找了个模板网站，然后冲了十块钱下了个模板。接下来就开始改改改。&lt;/p>
-&lt;h3 id="调试">调试&lt;/h3>
-&lt;p>一个问题是，后端的代码如何给前端调试。我们选择：&lt;/p>
-&lt;ol>
-&lt;li>后端首先使用 Django 的本地服务器，用 Postman 进行测试，测试通过后上传代码。&lt;/li>
-&lt;li>不定期部署至服务器上&lt;/li>
-&lt;li>前端从服务器调用接口调试&lt;/li>
-&lt;/ol>
-&lt;p>然而，在其他组答辩的时候，我们才知道有个东西叫 &lt;a href="http://mockjs.com/">mock&lt;/a>，能够简化调试难度。&lt;/p>
-&lt;h2 id="后端django">后端：Django&lt;/h2>
-&lt;p>很早就听说了 Python Web 一些有名的框架，后来又知道了青岛大学的开源 OJ 后端使用的就是 Django，所以很想尝试一下。曾经看过几节慕课，也看了一些官方文档（一开始是真的看不懂）。在做微信小程序的时候，我就想用 Django，奈何技术不够，放弃了。&lt;/p>
-&lt;p>实习前，我去找 zjb 两小时速成了一下 Django，发现 Django 虽然是 MTV（Model——Template——View）三级结构，但是前后端分离的话就没有模板了，同时我们用了 REST Framework，在函数名中直接声明要调用的方法，大大简化了开发。REST Framework 也提供了&lt;a href="https://q1mi.github.io/Django-REST-framework-documentation/">官方中文文档&lt;/a>，不过感觉写得不是很好。&lt;/p>
-&lt;p>后端代码非常简单，我们先用&lt;code>token = request.COOKIES.get(&amp;quot;token&amp;quot;)&lt;/code>获取token，查询&lt;code>user = User.objects.get(userToken=token)&lt;/code>，若 token 无效则会抛出&lt;code>User.DoesNotExist&lt;/code>错误，查询操作之后调用一个序列化方法&lt;code>users = serializers.serialize(&amp;quot;json&amp;quot;, allMessage, fields=(&amp;quot;userID&amp;quot;))&lt;/code>，但是如果直接这样返回会有问题，所以需要把它转化成字典类型&lt;code>rtn['data']=json.loads(users)&lt;/code>，然后调用&lt;code>JsonResponse&lt;/code>返回。&lt;/p>
-&lt;p>Django 查询数据库返回的是一个 &lt;a href="https://docs.djangoproject.com/zh-hans/2.2/ref/models/querysets/">QuerySet&lt;/a> 对象，我们能对它进行很多操作，但是其实我们都没用到..&lt;/p>
-&lt;h3 id="cookies">Cookies&lt;/h3>
-&lt;p>我一开始以为 Cookies 是前端负责维护的，后来发现这只是浏览器的工作。所以实际上 Cookies 是后端维护的。在登陆时设置 Cookie，调用 API 时获取 Cookie，退出时删除 Cookie 即可。&lt;/p>
-&lt;h3 id="测试">测试&lt;/h3>
-&lt;p>我们用了 Postman 模拟 HTTP 请求进行测试，很可惜的是没有用到 Django 的自动化测试。&lt;/p>
-&lt;h3 id="几个坑">几个坑&lt;/h3>
-&lt;p>Django 的文档宣称：&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;strong>会自动重新加载的服务器 &lt;a href="https://docs.djangoproject.com/zh-hans/2.2/ref/django-admin/#django-admin-runserver">&lt;code>runserver&lt;/code>&lt;/a>&lt;/strong>&lt;/p>
-&lt;p>用于开发的服务器在需要的情况下会对每一次的访问请求重新载入一遍 Python 代码。所以你不需要为了让修改的代码生效而频繁的重新启动服务器。然而，一些动作，比如添加新文件，将不会触发自动重新加载，这时你得自己手动重启服务器。&lt;/p>
-&lt;/blockquote>
-&lt;p>然而有时候重新载入并不会生效（可能是 PyCharm 的问题？），这种时候就很烦..&lt;/p>
-&lt;p>数据库中的&lt;code>DateTimeField&lt;/code>字段存储的时间总是 UTC 时间，在&lt;code>settings.py&lt;/code>中设置：&lt;/p>
-&lt;pre tabindex="0">&lt;code>TIME_ZONE = &amp;#39;Asia/Shanghai&amp;#39;
-USE_TZ = False
-&lt;/code>&lt;/pre>&lt;p>这样返回的时间是正常的，虽然数据库里的时间还是 UTC 时间，不过不影响了。&lt;/p>
-&lt;h2 id="数据库postgresql">数据库：&lt;strong>PostgreSQL&lt;/strong>&lt;/h2>
-&lt;p>据说 PostgreSQL 和 MySQL 的区别是..&lt;/p>
-&lt;p>&lt;img src="./1563367521827.png" alt="1563367521827">&lt;/p>
-&lt;p>&lt;img src="./1563367537890.png" alt="1563367537890">&lt;/p>
-&lt;p>虽说 Django 官方支持 PostgreSQL，而且我们的数据库部署在服务器上，但是本地还是要一个中间件&lt;code>psycopg2 &lt;/code>，在 Windows 下安装无问题，在 Linux 下需要一个额外的包 &lt;code>libpq-dev&lt;/code>，而在 Mac 下需要先安装 PostgreSQL。这也是一个坑点。&lt;/p>
-&lt;p>图形化管理界面方面，我使用了 pgadmin，一开始我以为这是个客户端，还奇怪为什么它提供 Docker 镜像，下完才发现它是网页端。果断卸载然后 docker pull..&lt;/p>
-&lt;p>数据库由于我们的设计问题，改了一万次。&lt;/p>
-&lt;p>&lt;img src="./1563368286617.png" alt="1563368286617">&lt;/p>
-&lt;p>七次其实还是我们重置过一次数据库的结果，真实改动可能有十一二次吧。虽然 Django 提供了方便的 migrate 功能，但是这功能锅很多，能不改还是尽量不改。&lt;/p>
-&lt;ul>
-&lt;li>在自己设置主键然后又取消使用自动主键时，Django 会报没有默认值的错。？？？AutoField 你要什么默认值。网上也有同样的情况，应该是 Django 的 Bug。&lt;/li>
-&lt;li>在改某张表的时候一直碰到报错一个不存在的列不存在，这张表就似乎坏了。我们的解决方案是重建一张新的表2333&lt;/li>
-&lt;/ul>
-&lt;h2 id="接口">接口&lt;/h2>
-&lt;h3 id="文档">文档&lt;/h3>
-&lt;p>我们的接口文档直接写在 Story 列表后面。主要写明了接口地址，方法（GET，POST，PUT，DELETE，我是想 RESTful 的，可是其他人基本随缘了），请求字段，响应字段，以及相应的解释和示例。&lt;/p>
-&lt;h3 id="跨域">跨域&lt;/h3>
-&lt;p>前端调试接口的时候产生了跨域的问题。Cookie，Ajax 请求都会遭到浏览器&lt;a href="https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">同源策略&lt;/a>的限制。临时的解决方案是，在 Django 上装一个插件 &lt;a href="https://github.com/ottoyiu/django-cors-headers">&lt;code>django-cors-headers&lt;/code>&lt;/a>，并且修改&lt;code>settings.py&lt;/code>，在&lt;code>INSTALLED_APPS&lt;/code>中加入&lt;code>corsheaders&lt;/code>，在&lt;code>MIDDLEWARE&lt;/code>中加入&lt;code>corsheaders.middleware.CorsMiddleware&lt;/code>（位置尽量靠前），并设置字段：&lt;/p>
-&lt;pre tabindex="0">&lt;code>CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-&lt;/code>&lt;/pre>&lt;p>而在前端每个 Ajax 请求中加上：&lt;/p>
-&lt;p>&lt;img src="./1563353270812.png" alt="1563353270812">&lt;/p>
-&lt;p>而在生产环境中由于同源，所以不存在跨域的问题。&lt;/p>
-&lt;p>然而，一个新的问题是，本地浏览器并不能够成功地存储 Cookie，当时的解决办法是，每改动一个页面就部署至服务器上进行调试，然而这个方法效率极低。后来我发现其实这只是 Chrome 浏览器的问题，其他浏览器则没有这个问题。&lt;/p>
-&lt;h2 id="部署">部署&lt;/h2>
-&lt;p>在开发中，采取的方案是前端静态网页由 Nginx 部署，而后端 Django 代码则使用 Django 自带的服务器部署，而显然，这绝不能用于生产环境。&lt;/p>
-&lt;blockquote>
-&lt;p>DO NOT USE THIS SERVER IN A PRODUCTION SETTING. It has not gone through security audits or performance tests.&lt;/p>
-&lt;/blockquote>
-&lt;p>（不过我还是用了，甚至都没关 DEBUG 选项）&lt;/p>
-&lt;p>因为 Django 服务器使用 &lt;code>python3 manage.py runserver&lt;/code>运行的， SSH 断开后进程就被中断了，所以需要让它能够后台运行，尝试了 nohup，子 shell 等方法后（都不好用），最终选择了 screen。主要命令有：&lt;/p>
-&lt;pre tabindex="0">&lt;code>screen -S [NAME] 创建一个新 shell
-screen -ls 查看后台 shell
-screen -r [ID] 进入某个 shell
-Ctrl+A,D 把当前 shell 切换至后台
-&lt;/code>&lt;/pre>&lt;p>Nginx 配置我就直接改默认配置了，路径在&lt;code>/etc/nginx/sites-enabled/default&lt;/code>下。除了静态页面外，还需配置后端请求转发：&lt;/p>
-&lt;pre tabindex="0">&lt;code>location /api {
-proxy_pass http://127.0.0.1:8000;
-proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header Host $http_host;
-client_max_body_size 200M;
-}
-&lt;/code>&lt;/pre>&lt;p>（这个配置我是抄青岛大学 OJ 的）&lt;/p>
-&lt;h3 id="https">HTTPS&lt;/h3>
-&lt;p>尝试把域名解析至阿里云的服务器，发现不管是 HTTP 还是 HTTPS 请求都会被拦截，并被劫持到一个备案页面。&lt;/p>
-&lt;p>&lt;img src="./1563512996274.png" alt="1563512996274">&lt;/p>
-&lt;p>于是换用 GCP，一切顺利。使用 Let&amp;rsquo;s Encrypt 的证书以及官方推荐的 &lt;a href="https://certbot.eff.org/">certbot&lt;/a> 工具。简单几步即可签发证书并自动配置 Nginx。&lt;/p>
-&lt;p>&lt;img src="./1563513130043.png" alt="1563513130043">&lt;/p>
-&lt;h2 id="参考资料">参考资料&lt;/h2>
-&lt;p>&lt;a href="https://blog.csdn.net/summer2day/article/details/81358815">前后端分离的django项目服务器跨域&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://harttle.land/2016/12/28/cors-with-cookie.html">CORS 跨域发送 Cookie&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/tutorials/Django_and_nginx.html">使用uWSGI和nginx来设置Django和你的web服务器&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://www.cnblogs.com/lhj588/archive/2011/10/27/2226976.html">django web Cookie 和 Sessions 应用&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://www.jianshu.com/p/15af33d2c2c4">从零开始建立单元测试-以Django项目为例&lt;/a>&lt;/p>
-&lt;p>&lt;a href="http://www.liujiangblog.com/course/django/129">查询操作&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://www.runoob.com/django/django-model.html">Django 模型&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://blog.csdn.net/zhu_free/article/details/48176779">django DateTimeField 时区问题解决&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>使用 Travis CI 自动部署 Hexo 博客</title><link>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</link><pubDate>Sun, 21 Apr 2019 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ -&lt;p>&lt;img src="./bg2017121901.png" alt="bg2017121901">&lt;/p>
-&lt;h2 id="缘由">缘由&lt;/h2>
-&lt;p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。&lt;/p>
-&lt;p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的&lt;code>ln -s&lt;/code>大法行不通了。&lt;/p>
-&lt;p>于是我想到了 CI。仔细一想其实也不复杂，无非是&lt;code>git push&lt;/code>， &lt;code>git pull&lt;/code>两下罢了。那么，Let&amp;rsquo;s do it!&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="需求">需求&lt;/h2>
-&lt;p>我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。&lt;/p>
-&lt;ul>
-&lt;li>我更新博客之后，commit 然后 push 至 Github repo&lt;/li>
-&lt;li>CI 自动构建博客&lt;/li>
-&lt;li>CI 将构建完成的静态文件 push 至 Github repo&lt;/li>
-&lt;/ul>
-&lt;p>我原先使用的是&lt;code>hexo-deployer-git&lt;/code>插件，通过&lt;code>hexo g -d&lt;/code>部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。&lt;/p>
-&lt;h2 id="配置-github-repo">配置 Github Repo&lt;/h2>
-&lt;p>在这个 Repo 中需要两个分支：&lt;/p>
-&lt;ul>
-&lt;li>master 用于存放构建完成的静态文件&lt;/li>
-&lt;li>source 用于存放 Hexo 生成的博客源文件&lt;/li>
-&lt;/ul>
-&lt;p>对 Hexo 文件夹的操作如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code>git init
-git remote add origin git@github.com:cjc7373/cjc7373.github.io.git
-git checkout -b source
-git add .
-git commit -m &amp;#34;To use CI to automated deploy&amp;#34;
-git push origin source:source
-&lt;/code>&lt;/pre>&lt;p>本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带&lt;code>.gitignore&lt;/code>文件，所以实际大小并没有多少。&lt;/p>
-&lt;p>&lt;img src="./1555835090941.png" alt="1555835090941">&lt;/p>
-&lt;p>然后在 Github 上将主分支切换为&lt;code>source&lt;/code>分支。&lt;/p>
-&lt;h2 id="配置-travis-ci">配置 Travis CI&lt;/h2>
-&lt;p>CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key，后者似乎有些麻烦，我选择了前者。当前需求应该只需要 repo 权限，然后在 Travis CI 的 Environment Variables 中加入这个 Token，注意不要勾选 Display value in build log。&lt;/p>
-&lt;p>然后就是编写&lt;code>.travis.yml&lt;/code>了。 &lt;del>正当我准备抄大佬们的配置的时候，忽然看到 Travis CI 官方提供了&lt;a href="https://docs.travis-ci.com/user/deployment/pages/">轮子&lt;/a>，那就用吧QAQ（其实也没简单多少）&lt;/del>，然后翻车了。&lt;/p>
-&lt;p>&lt;img src="./1555837683039.png" alt="1555837683039">&lt;/p>
-&lt;p>看了下文档，我也没搞懂每个字段的意思。所以还是自己来吧。&lt;/p>
-&lt;p>为了在 commit 记录中显示更新日期，我把 push 部分单独写成了 sh脚本。&lt;/p>
-&lt;p>&lt;code>.travis.yml&lt;/code>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>language: node_js
-node_js: stable
-# 只监听 source 分支的改动
-branches:
-only:
-- source
-# 缓存依赖，节省持续集成时间
-cache:
-directories:
-- node_modules
-install:
-- npm install
-script:
-- hexo clean
-- hexo g
-after_script:
-- chmod +x ./deploy.sh # 添加可执行权限
-- ./deploy.sh
-&lt;/code>&lt;/pre>&lt;p>&lt;code>deploy.sh&lt;/code>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>#!/bin/bash
-set -ev
-export TZ=&amp;#39;Asia/Shanghai&amp;#39;
-git config --global user.name &amp;#34;cjc7373&amp;#34;
-git config --global user.email &amp;#34;niuchangcun@163.com&amp;#34;
-# 获取以前的 commit 记录
-git clone -b master https://github.com/cjc7373/cjc7373.github.io.git .deploy
-# 这么移动是为了确保不受之前文件的影响
-mv .deploy/.git/ public/
-cd public
-git checkout master
-git add .
-git commit -m &amp;#34;Site updated: `date +&amp;#34;%Y-%m-%d %H:%M:%S&amp;#34;`&amp;#34;
-# 我也不知道 token 怎么用。。抄大佬的代码
-git push &amp;#34;https://${token}@github.com/cjc7373/cjc7373.github.io.git&amp;#34; master:master --quiet
-&lt;/code>&lt;/pre>&lt;p>一开始忘了给&lt;code>deploy.sh&lt;/code>可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。&lt;/p>
-&lt;p>&lt;img src="./1555840082905.png" alt="1555840082905">&lt;/p>
-&lt;p>（看着都是成功其实都是失败。。）&lt;/p>
-&lt;p>同时本地配合一下批处理，真正一键发布（滑稽&lt;/p>
-&lt;pre tabindex="0">&lt;code>cd C:\Users\niuch\Documents\GitHub\blog\
-git add .
-git commit
-git push
-pause
-&lt;/code>&lt;/pre>&lt;h2 id="后记">后记&lt;/h2>
-&lt;p>历经两个多小时，终于把 CI 弄好了。虽然对 CI 还是一知半解，不过总算开了个头，也基本实现了需求。&lt;/p>
-&lt;p>Travis CI 官方的文档很全，但是以我的英文水平看得很吃力（懒得看），中文资料的质量又参差不齐。所以还是要锻炼自己的英语水平啊。&lt;/p>
-&lt;h2 id="参考资料">参考资料&lt;/h2>
-&lt;p>&lt;a href="https://docs.travis-ci.com">https://docs.travis-ci.com&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html">https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

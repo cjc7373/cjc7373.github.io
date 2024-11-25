@@ -1,4 +1,37 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 24 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>IPv6 配置入门</title><link>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</link><pubDate>Sun, 16 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ -&lt;h2 id="背景知识">背景知识&lt;/h2>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 24 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes 生态中的航海隐喻</title><link>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</link><pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ -&lt;blockquote>
+&lt;p>Disclaimer: 本文的结论大多是根据名字推断出来的，并没有得到项目开发者的证实。&lt;/p>
+&lt;/blockquote>
+&lt;p>Kubernetes 在 2014 年 9 月发布，在这之前 Docker 已经大行其道了。Docker 发布于 2013 年，意为码头工人，其 logo 是个鲸鱼驮着一些集装箱。&lt;/p>
+&lt;p>&lt;img src="./610px-Docker_(container_engine)_logo.svg.png" alt="File:Docker (container engine) logo.svg">&lt;/p>
+&lt;p>后来这个 Logo 又变得扁平了一点：&lt;/p>
+&lt;p>&lt;img src="./512px-Docker_logo.svg.png" alt="File:Docker logo.svg">&lt;/p>
+&lt;p>很显然这个名字和和 Logo 都与集装箱（container，即容器）有关。&lt;/p>
+&lt;p>Kubernetes 这个名字来源于古希腊语 κυβερνήτης，意为舵手（steersman）/领航员（pilot）/船长（captain）。其 logo 是一个舵轮的形状。身为一个容器编排系统，Kubernetes 负责着一艘船的航向，倒也合理。&lt;/p>
+&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/617px-Kubernetes_logo_without_workmark.svg.png" width="200px">
+&lt;/figure>
+&lt;p>值得一提是和 Kubernetes 共享词源 κυβερνήτης 的还有 governor（州长/统治者/主管）和 cybernetics（控制论）。&lt;/p>
+&lt;p>Helm 官方的 slogan 是 Kubernetes 的包管理器，helm 意为舵轮，logo 和 Kubernetes 类似，也是一个舵轮的形状。&lt;/p>
+&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/helm.svg" width="200px">
+&lt;/figure>
+&lt;p>在 Helm 2 时代，helm 还需要一个部署在集群内的组件 tiller 才能工作。tiller 似乎是舵柄的意思，它和舵直接相连。下图展示了一个舵柄和舵轮的区别：&lt;/p>
+&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/1280px-Tiller_and_helm_orders.svg.png" width="300px">
+&lt;/figure>
+&lt;p>Argo 项目包含了 CD/Workflows/Rollouts 等一系列项目，总体是和应用交付、CI/CD 相关。在希腊神话中，Argo （阿尔戈号）是一艘船，由伊阿宋等希腊英雄在雅典娜帮助下建成，众英雄乘该船取得金羊毛。此后阿尔戈号作为进献雅典娜的祭品被焚毁，南船座（Argo Navis, or simply Argo）由此而来。Navis 词源为古希腊语，意为船（ship）。但是 Argo 的 logo （应该？）是一只章鱼，很奇怪的联系..&lt;/p>
+&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/argo.svg" width="200px">
+&lt;/figure>
+&lt;p>cert-manager，虽然名字和航海没什么关系，但它的 logo 是一个锚..&lt;/p>
+&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/cert-manager.svg" width="200px">
+&lt;/figure>
+&lt;p>上面说到 Argo 就是南船座，南船座本来是天空中最大的星座，但在十八世纪被拆分为四个单独的星座，其中之一为船帆座（Vela），所以 Kubevela 的 logo 是一艘帆船。Kubevela 同样属于负责应用交付的组件，和 ArgoCD 在功能上有重叠和互补的地方。&lt;/p>
+&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/kube-vela.svg" width="200px">
+&lt;/figure>
+&lt;p>最后要说的是 Harbor，非常直白，就是港口，作为一个 container registry 也很合理，其 logo 是一个灯塔的形状。&lt;/p>
+&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/harbor.svg" width="200px">
+&lt;/figure>
+- https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>博客里应该写什么</title><link>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</link><pubDate>Mon, 24 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ -&lt;p>我的 Chrome 有一个插件叫 &lt;a href="https://www.one-tab.com/">Onetab&lt;/a>，本意是用来放一些稍后阅读的标签页。但是稍后阅读这种东西，最终都会转变成垃圾桶，标签越积越多。随着我的几次设备/系统更替（比如从我的老暗影精灵到 deskmini），迁移来迁移去很多上古标签页居然没丢.&lt;/p>
+&lt;p>今天在 Onetab 里翻找找到了&lt;a href="https://pureage.info/2014/08/25/hiding-302-using-proxy-pass.html">用 proxy_intercept_errors 和 recursive_error_pages 代理多次 302&lt;/a> 这样一篇文章。文章本身讲的是 nginx 用于反代时如何 follow 上游的 302 的问题，这是一篇普通的技术博客。但是翻看他的博客，却有很多生活随想，日记游记之类的内容。篇幅也长短不一，最短的寥寥一两句话。而翻看我自己的博客，合计三十一篇博文，其中（质量很低的）技术博文占了绝大多数。我不禁有些感慨，写博客究竟是为了什么。是为了在面试时多一个展现自己的方面，还是仅仅是作为一个写作的平台，无所约束地抒发自己的心情？&lt;/p>
+&lt;p>还记得我的博客刚搭起来的时候，我写过一篇&lt;a href="https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/">我为什么选择了独立博客&lt;/a>，内容是瞎扯的，但是最后一句话「庞大的互联网中的一方天地」我倒是现在也很认同。&lt;/p>
+- https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>IPv6 配置入门</title><link>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</link><pubDate>Sun, 16 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ -&lt;h2 id="背景知识">背景知识&lt;/h2>
 &lt;p>&lt;a href="https://datatracker.ietf.org/doc/html/rfc8200">RFC 8200 (Internet Protocol, Version 6 (IPv6) Specification)&lt;/a> 为最新的 IPv6 标准. 主要描述了头部 (Header) 定义, 拓展头部和选项定义等.&lt;/p>
 &lt;p>&lt;a href="https://datatracker.ietf.org/doc/html/rfc7084">RFC 7084 (IPv6 CE Router Requirements)&lt;/a> 定义了家用或小型办公室路由器 (IPv6 Customer Edge Routers) 配置的基本要求. OpenWrt 的配置文档遵循了这一 RFC.&lt;/p>
 &lt;p>RFC 4861 (IPv6 Neighbor Discovery) 定义了一种网络发现机制, 等效与 IPv4 中的 ARP. 下述的两种机制均依赖于 ND.&lt;/p>
@@ -30,41 +63,41 @@
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th style="text-align:left">地址类型&lt;/th>
-&lt;th style="text-align:left">英文名称&lt;/th>
-&lt;th style="text-align:left">二进制&lt;/th>
-&lt;th style="text-align:left">16进制&lt;/th>
-&lt;th style="text-align:left">备注&lt;/th>
+&lt;th style="text-align: left">地址类型&lt;/th>
+&lt;th style="text-align: left">英文名称&lt;/th>
+&lt;th style="text-align: left">二进制&lt;/th>
+&lt;th style="text-align: left">16进制&lt;/th>
+&lt;th style="text-align: left">备注&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td style="text-align:left">链路本地地址&lt;/td>
-&lt;td style="text-align:left">Link-local address&lt;/td>
-&lt;td style="text-align:left">1111 1110 10&lt;/td>
-&lt;td style="text-align:left">fe80::/10&lt;/td>
-&lt;td style="text-align:left">单链路通信, 中间 54 bits 为 0, 末尾 64 bits 为 interface ID.&lt;/td>
+&lt;td style="text-align: left">链路本地地址&lt;/td>
+&lt;td style="text-align: left">Link-local address&lt;/td>
+&lt;td style="text-align: left">1111 1110 10&lt;/td>
+&lt;td style="text-align: left">fe80::/10&lt;/td>
+&lt;td style="text-align: left">单链路通信, 中间 54 bits 为 0, 末尾 64 bits 为 interface ID.&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td style="text-align:left">唯一本地地址&lt;/td>
-&lt;td style="text-align:left">Unique local address, ULA&lt;/td>
-&lt;td style="text-align:left">1111 1101&lt;/td>
-&lt;td style="text-align:left">fd00::/8&lt;/td>
-&lt;td style="text-align:left">本地网络通信&lt;/td>
+&lt;td style="text-align: left">唯一本地地址&lt;/td>
+&lt;td style="text-align: left">Unique local address, ULA&lt;/td>
+&lt;td style="text-align: left">1111 1101&lt;/td>
+&lt;td style="text-align: left">fd00::/8&lt;/td>
+&lt;td style="text-align: left">本地网络通信&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td style="text-align:left">全局单播地址&lt;/td>
-&lt;td style="text-align:left">Global unicast address, GUA&lt;/td>
-&lt;td style="text-align:left">001&lt;/td>
-&lt;td style="text-align:left">2000::/3&lt;/td>
-&lt;td style="text-align:left">互联网通信&lt;/td>
+&lt;td style="text-align: left">全局单播地址&lt;/td>
+&lt;td style="text-align: left">Global unicast address, GUA&lt;/td>
+&lt;td style="text-align: left">001&lt;/td>
+&lt;td style="text-align: left">2000::/3&lt;/td>
+&lt;td style="text-align: left">互联网通信&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td style="text-align:left">组播地址&lt;/td>
-&lt;td style="text-align:left">Multicast address&lt;/td>
-&lt;td style="text-align:left">1111 1111&lt;/td>
-&lt;td style="text-align:left">ff00::/8&lt;/td>
-&lt;td style="text-align:left">&lt;/td>
+&lt;td style="text-align: left">组播地址&lt;/td>
+&lt;td style="text-align: left">Multicast address&lt;/td>
+&lt;td style="text-align: left">1111 1111&lt;/td>
+&lt;td style="text-align: left">ff00::/8&lt;/td>
+&lt;td style="text-align: left">&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -128,8 +161,8 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;ul>
 &lt;li>DHCPv6 的 option 有固定的 option-code 和 option-len 字段, 分别占 2 字节. 对于 &lt;code>IA_PD&lt;/code>, option-code 为 &lt;code>OPTION_IA_PD&lt;/code> (25)&lt;/li>
 &lt;li>IAID: 一个唯一的标识符&lt;/li>
-&lt;li>T1: 在多久之后客户端应该刷新获得的前缀的有效时间&lt;/li>
-&lt;li>T2: 没看懂和 T1 的区别是什么..&lt;/li>
+&lt;li>T1: 在多久之后客户端应该向获取前缀的 delegating router 刷新前缀的有效时间&lt;/li>
+&lt;li>T2: 在多久之后客户端应该向任何可用的 delegating router 刷新前缀的有效时间&lt;/li>
 &lt;li>IA_PD-options: 包含了前缀的具体信息. 请求和响应都会采用同样的 option 格式, 只不过响应会在这个字段中附上前缀信息&lt;/li>
 &lt;/ul>
 &lt;h2 id="pmtu-问题">PMTU 问题&lt;/h2>
@@ -155,9 +188,11 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;/blockquote>
 &lt;p>在仅 IPv4 的情况下访问 &lt;code>g.alicdn.com&lt;/code>, 可以发现服务端发送的几个包发生了分片:&lt;/p>
 &lt;p>&lt;img src="./image-20230416141447823.png" alt="image-20230416141447823">&lt;/p>
-&lt;h2 id="pd-过早失效的问题">PD 过早失效的问题&lt;/h2>
+&lt;h2 id="其他一些问题">其他一些问题&lt;/h2>
+&lt;h3 id="pd-过早失效的问题">PD 过早失效的问题&lt;/h3>
 &lt;p>我现在的移动网是光猫拨号, 用一个软路由装了 OpenWRT 当主路由. 发现 IPv6 会在一天之后停止工作.. 抓 wan 口 DHCPv6 包发现 PD 的有效期写的是两天.. 怀疑和这个有关.. 待调查.&lt;/p>
-&lt;h2 id="ndp-不工作的问题">NDP 不工作的问题&lt;/h2>
+&lt;p>（2024/11/07 更新）把光猫改成桥接模式之后这个问题没有出现了..&lt;/p>
+&lt;h3 id="ndp-不工作的问题">NDP 不工作的问题&lt;/h3>
 &lt;p>某日, 突然发现我的手机在 WiFi 下某些 App 加载非常慢, 而使用移动数据则正常, 直觉告诉我是 IPv6 的锅, 然而检查 OpenWRT 发现已经开启 TCP MSS Clamping, MTU 设置的 1420 也比较小了, 遂在路由器 eth0 接口 (wan 口) 抓包查看.&lt;/p>
 &lt;p>抓包发现手机的 v6 地址不可达.. 图中 &lt;code>103e&lt;/code> 结尾的地址是路由器, &lt;code>edc6&lt;/code> 结尾的地址是手机, 可见手机发起 TCP 握手之后, 对方的 SYN 并没有发到我手机 (因为手机发起了重传), 之后路由器给对方发送了网络不可达报文..&lt;/p>
 &lt;p>&lt;img src="./image-20240311215940125.png" alt="image-20240311215940125">&lt;/p>
@@ -174,6 +209,8 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> failed max number of probes exceeded without success, neighbor validation has ultimately failed.
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后继续观察 Wireshark, 发现手机确实不响应 NDP Neighbor Solicitation, 这种情况闻所未闻..&lt;/p>
 &lt;p>根据重启重装重买定律, 重启手机, 问题解决.. 尚不清楚真正的问题是什么.. (我觉得一加大概率背锅)&lt;/p>
+&lt;h3 id="mavlan-的问题">mavlan 的问题&lt;/h3>
+&lt;p>见 &lt;a href="https://blog.coherence.codes/posts/2024/openwrt_transparent_proxy/">OpenWrt 搭建透明代理&lt;/a>&lt;/p>
 &lt;h2 id="其他">其他&lt;/h2>
 &lt;ul>
 &lt;li>一个典型的 IPv4 路由器会使用 NAT, 因此默认阻止所有入站连接, 其通常使用 UPnP 来开放某一端口. 而 IPv6 不使用 NAT, 因此正确配置防火墙是必要的.&lt;/li>
@@ -457,9 +494,11 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 &lt;p>&lt;img src="./8a7b6609572d402bb2b747b706ef0c62.png" alt="img">(此处附使用截图一张)&lt;/p>
 &lt;p>在使用了近半年之后, 再次感叹, 微软自家的产品在 Linux 上体验真的不好.. 又萌生了换回 Windows 的想法.&lt;/p>
 &lt;p>具体而言, 有以下几个方面. 首先, Connected standby 在 Windows 下工作地很好, 然而在 Linux 下待机的耗电非常显著, 大概一晚上能掉一半电的那种. 于是后来发现了 suspend-then-hibernate 这个策略, 理论上还算可以接受. 然其有个非常严重的 Bug, 有时候其不能够成功地进入休眠状态, 导致第二天早上起来的时候 Surface 直接没电了. 而且这个问题出现频率比较高, 大概十次待机中有两三次, 非常影响使用体验. 在电量不足 10% 内核的频率调度会非常激进, 基本只能维持在 1.5G (即使电源已连接), 这时候系统会非常卡, 进一步导致了开机后仍有十多分钟的不可用状态. 这个 Bug 是我想换回 Windows 的直接原因.&lt;/p>
+&lt;p>(2024/11/01 Update, 查询当时的内核日志发现有类似 &lt;code>Image allocation is xxxx pages short&lt;/code> 的报错, 搜索发现这个可能是 swap 设置得不够大, 存不下当时内存的 snapshot 导致的)&lt;/p>
 &lt;p>&lt;img src="./image-20220226111426078.png" alt="image-20220226111426078">
 (图为在个人 issue tracker 中的记录, 实际和内核更新无关)&lt;/p>
 &lt;p>其次, 由于主线内核的支持有限, 我选择了第三方的 &lt;a href="https://github.com/linux-surface/linux-surface">linux-surface&lt;/a> 内核, 然其支持仍然有限. 最主要为缺乏 Surface Pen 和多点触控的支持. 加之我使用的 KDE 桌面环境对于平板设备的支持几乎为零, 我的 Surface 事实上是当成笔记本电脑来使用的.&lt;/p>
+&lt;p>(2024/11/01 Update, 多点触控和 Surface Pen 的支持已经可用了)&lt;/p>
 &lt;p>另外, 还有 KDE 对于触控板手势缺乏支持 (在 Wayland 中已实现了部分支持); 续航较之 Windows 差了很多; Xorg 不支持多显示器不同缩放; 无法使用摄像头/Windows Hello 等等问题.&lt;/p>
 &lt;p>更换 Windows 之后:&lt;/p>
 &lt;ul>
@@ -575,162 +614,4 @@ ROM 之家这种网站也是时代的眼泪了&lt;/p>
 &lt;p>&lt;img src="./image-20211030165521990.png" alt="image-20211030165521990">&lt;/p>
 &lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/2020summary_2021plan/ -&lt;p>又到了传统艺能&lt;del>年终&lt;/del>年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="2020-总结">2020 总结&lt;/h2>
-&lt;p>一句话总结的话, 知识的广度提升了, 深度还不够, 学习状态仍旧不能让自己满意. 以及这一年我始终在担心有没有学上, 找不找得到工作.&lt;/p>
-&lt;h3 id="学业">学业&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;p>由于疫情的爆发, 导致了 2020 春季学期完全在家上课, 更加方便摸鱼了(&lt;/p>
-&lt;p>一开始港哥在群里说武汉疫情的时候, 我还不觉得这是什么大事, 后来才发现我错得离谱.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>二月底到三月初, 陆续投了几个实习, 被拒了几个, 后来决定考研之后, 又鸽了几个&lt;/p>
-&lt;p>&lt;img src="./image-20210225125307219.png" alt="image-20210225125307219">&lt;/p>
-&lt;p>说实话我对以后能不能找到工作还是有点怀疑的..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>从三月开始, 断断续续地开始准备考研了, 然而实际上还是不够努力吧, 到考试前一天我还没完全搞懂二次型..&lt;/p>
-&lt;p>不过从时间上来说, 暑假之后就全力准备考研了..&lt;/p>
-&lt;p>我很想说考研让我变得更沉得下心来学习了, 但事实上这并不是真的.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>只准备了两三天之后 (因为太晚看到了), 尝试申请了一下 GSoC, 不出意外凉了..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>七月到十月, 参加开源之夏, 也算是赚到了人生的第一桶金吧&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="玩">玩&lt;/h3>
-&lt;ul>
-&lt;li>一月, 去滑雪+攀岩, 还是挺有意思的&lt;/li>
-&lt;li>二月初, 折腾了一下 Windows 10 on Arm for Lumia 1520, 并没有什么用, 于是继续吃灰&lt;/li>
-&lt;li>七月, 乘着沪通铁路的开通, 去上海玩了一次, 居然被我碰到了一次高铁延误..&lt;/li>
-&lt;/ul>
-&lt;h3 id="环境">环境&lt;/h3>
-&lt;ul>
-&lt;li>二月末, 开始搞 Manjaro, 一开始两个系统都用, 逐渐就只用 Linux 了 (特别是我发现了 proton 和 lutris 之后..)&lt;/li>
-&lt;li>三月初, 开始尝试 Typora+第三方云同步&lt;/li>
-&lt;li>七月, 从 Onedrive 转向 Syncthing (是不是有一种 Anything can be self-hosted 的趋势呢..&lt;/li>
-&lt;/ul>
-&lt;h3 id="书">书&lt;/h3>
-&lt;p>本年度仍然没有怎么看书..&lt;/p>
-&lt;ul>
-&lt;li>看完了心理学与生活, 心理学啊, exciting&lt;/li>
-&lt;li>看完了 Dark Forest&lt;/li>
-&lt;/ul>
-&lt;h3 id="代码">代码&lt;/h3>
-&lt;p>总的来说, 感觉自己乱七八糟的项目一堆, 却没什么拿得出手的..&lt;/p>
-&lt;ul>
-&lt;li>zaobot, 基本一整年都在维护 (虽然目前的代码还是挺是💩的, 打算再次重构&lt;/li>
-&lt;li>云盘在年初把后端重构了一下, 后来就鸽了 (事实上我这是重复造轮子, seafile 的体验就很好..)&lt;/li>
-&lt;li>pip, 四五月吧, 修了一些 bug, 做了点微小的贡献, 主要还是 codebase 没太理解..&lt;/li>
-&lt;li>Hackergame, 七到九月, 后端应该基本可用了, 然后答应的前端鸽了.. 当时天天看文档..&lt;/li>
-&lt;li>九十月考研的时候, 稍微学了一点 Anki, 为了自己用得顺手, 写了一个小插件.&lt;/li>
-&lt;li>建了个&lt;a href="https://github.com/cjc7373/my_scripts">仓库&lt;/a>写一些日常使用的脚本, 然而目前觉得可以全扔 Ansible 里..&lt;/li>
-&lt;li>花&lt;del>半个小时&lt;/del>三天写了个课程评价, 然而并没有人用..&lt;/li>
-&lt;/ul>
-&lt;h3 id="学习">学习&lt;/h3>
-&lt;ul>
-&lt;li>年中, 学了下小鹤双拼, 虽然似乎打字速度没快多少..&lt;/li>
-&lt;li>十一月, 终于把 Learning How To Learn 学完了, 然而我学到了什么呢..&lt;/li>
-&lt;/ul>
-&lt;h3 id="剁手">剁手&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;p>一月初, 本来已经买了联想小新 Pro 13, 然而压感触控的体验不是很好, 又碰到了下方向键有概率用不了的问题, 于是退了..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>一月, 购置了网件 R7900p, 终于能在电视上用 smb 看电影不卡了.. 然而 ipv6 是个坑..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>二月, 捡了个洋垃圾 Surface 3, 虽然电池有坑, 但是 Surface 总体还是可以的. 后来出了.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>六月中, 入手了 Surface Pro 7, 除了续航有点差其他都很满意. 18 年开始就种下的草 (指买轻薄本) 终于拔了.&lt;/p>
-&lt;p>附一张合照:&lt;/p>
-&lt;p>&lt;img src="./image-20210225152027832.png" alt="image-20210225152027832">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>十一月, 由于创新 IE3P 的线老是掉, 我终于买了个无线耳机, Galaxy Bud+.&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="财务">财务&lt;/h3>
-&lt;p>基金今年还是没怎么动, 看着大盘涨.. 稍微学了点投资的知识.&lt;/p>
-&lt;p>记账方面, Spendee 在年中放弃了, 因为感觉意义不大. 后来知道了 Plain Text Accounting, 于是学了点 Beancount, 不过还没应用到实践中.&lt;/p>
-&lt;h3 id="其他">其他&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;p>&lt;img src="./image-20210225144517669.png" alt="image-20210225144517669">&lt;/p>
-&lt;p>事实证明这是很好的追踪一个问题的工具..&lt;/p>
-&lt;p>&lt;img src="./image-20210225150738841.png" alt="image-20210225150738841">&lt;/p>
-&lt;p>但是浏览条目还是有些不爽 (比较慢)..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>六月, 开始用 KeePassXC 管理密码.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>暑假里, 看了人类星球, 自然与人文纪录片交汇的佳作&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>2020 秋季学期运动的次数显著增加了, 经常会去打打羽毛球.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>十月, 和 Moo 在北门合租了, 环境比之前在樱花广场好了很多..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>十二月, 用 rsync 删了一波自己的 home 目录, 血的教训.. 没想到我也有删库的一天..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>这一年没怎么管博客, 因为考研, 外加想着迁移 Pelican, 结果又挖了一个大坑&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="2021-计划">2021 计划&lt;/h2>
-&lt;p>还有两天考研出分了.. 说实话挺害怕的.. 考不上就只能找工作了.&lt;/p>
-&lt;ul>
-&lt;li>今年还是想尝试一下 GSoC, 到四月中旬申请结束还有一个半月.. 努力去混混脸熟吧.&lt;/li>
-&lt;li>事实上, 我还有一堆开的坑, 包括但不限于:
-&lt;ul>
-&lt;li>给 Wikipedia 贡献一个优良条目的翻译&lt;/li>
-&lt;li>写个 (或者找找) 各板块指数的 PB 中值温度计.&lt;/li>
-&lt;li>所有 VPS 都使用 Ansible 维护&lt;/li>
-&lt;li>写一个 Pelican 的主题, 类似 &lt;a href="https://github.com/amazingrise/hugo-theme-diary">diary&lt;/a>.&lt;/li>
-&lt;li>学习 CSAPP&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>毕设, 写一个第三方网易云, 毕竟是自己提的项目, 还是要好好写的.. 这又是一大堆不熟悉的技术栈..&lt;/li>
-&lt;li>还是要多看点书..&lt;/li>
-&lt;/ul>
-&lt;p>不管怎么样, 我还是要以更加积极的心态去迎接未来. 冲!&lt;/p>
-- https://blog.coherence.codes/posts/2021/2020summary_2021plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Anki 工作流</title><link>https://blog.coherence.codes/posts/2021/anki_workflow/</link><pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/anki_workflow/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/anki_workflow/ -&lt;p>&lt;a href="https://apps.ankiweb.net/">Anki&lt;/a> 是一个间隔式重复的&amp;quot;闪卡 (flashcard)&amp;ldquo;记忆软件. 下面来谈谈我考研及日常生活中的 Anki 工作流.&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;h2 id="为什么选择-anki">为什么选择 Anki&lt;/h2>
-&lt;p>和市面上其他的记忆软件一样, Anki 也是基于遗忘曲线, 基于间隔式重复这一原理的. 最大的不同在于它是高度自定义的. 自己制作卡组, 设计模板, 甚至编写自己的插件. 还有很多特性例如 Notes 和 Cards 相分离我其实并没有用到.&lt;/p>
-&lt;p>其次 Anki 是一款开源软件, 在我希望所有软件都用自由软件替换的如今, 这无疑是一个重要的理由.&lt;/p>
-&lt;p>最后它在 Windows, Linux, Android 上都有客户端, 并支持同步. 虽然内置的同步服务器是由 Ankiweb 提供的 (我至今不知道 Ankiweb 和 Anki 的关系以及它是如何运作的), 然而也能够用自建的替换.&lt;/p>
-&lt;p>虽然网上能够找到很多已制作好的卡组, 然而这些卡组并不一定适合自己. 以记单词而言, 卡组中的许多卡片都是自己已经熟知的. 况且制卡这个过程本身能够帮助自己记忆. 所以我还是选择了自己构建卡组的方式.&lt;/p>
-&lt;h2 id="基础卡片">基础卡片&lt;/h2>
-&lt;p>对于一般的记忆来说, 基础的 Note type 就够用了.. 比如我一开始用 Anki 来提醒我复习新概念英语, 用的是以下的 Note type:&lt;/p>
-&lt;p>&lt;img src="./image-20210224200941341.png" alt="image-20210224200941341">&lt;/p>
-&lt;p>十分简单.&lt;/p>
-&lt;h2 id="考研">考研&lt;/h2>
-&lt;p>考研的时候打算用 Anki 背单词, 于是我做真题的时候碰到不认识的单词记录下来, 然后用 Anki 制卡.&lt;/p>
-&lt;p>卡片字段设计和工作流受到了&lt;a href="https://ankiweb.net/shared/info/934622764">考研英语真题生词&lt;/a>这个卡组的启发.&lt;/p>
-&lt;p>其中最主要的问题是音标, 发音和释义. 一开始想的办法是发音用 TTS, 于是找到了 Azure 的 API, 然而一个缺点是每次制卡要等很久 (请求 API), 而且 Azure 的 API 很贵.. 我给一个几百张卡的卡组加发音花了我五块钱..&lt;/p>
-&lt;p>于是我就想到了从词典中导入, 我平时主要使用的词典是 OALD8 (很久之前从 &lt;a href="https://www.pdawiki.com/forum/">pdawiki&lt;/a> 下的), 于是我就自己糊了个&lt;a href="https://ankiweb.net/shared/info/738556640">插件&lt;/a>.. 功能很简单, 根据单词字段从词典 mdx 文件里查询音标和发音, 并填充到相应字段中.&lt;/p>
-&lt;p>最后的成品卡片是这样的:&lt;/p>
-&lt;p>&lt;img src="./image-20210224201415659.png" alt="image-20210224201415659">&lt;/p>
-&lt;p>制卡的时候首先手打单词和例句, 然后从词典里选一个释义复制过来就行了. 个人感觉也不是很麻烦..&lt;/p>
-&lt;p>看一下成果:&lt;/p>
-&lt;p>&lt;img src="./image-20210224202958005.png" alt="image-20210224202958005">&lt;/p>
-&lt;p>考研的那一百多天里我总共背了 364 个单词.. 其实挺少的..&lt;/p>
-&lt;p>之后的卡组中我优化了一下 Note 的字段, 于是现在变成了这样:&lt;/p>
-&lt;p>&lt;img src="./image-20210224201845315.png" alt="image-20210224201845315">&lt;/p>
-&lt;h2 id="咕咕咕时间">咕咕咕时间&lt;/h2>
-&lt;ul>
-&lt;li>释义的导入我肯定也想自动化的. 而选择释义势必要做一个弹窗, 那么这就涉及到 Qt 的知识了, 于是目前搁置了&lt;/li>
-&lt;li>有的单词不同的词性有不同的发音, 这个也没有处理..&lt;/li>
-&lt;li>有一个 &lt;a href="https://github.com/ninja33/ODH">chrome 插件&lt;/a>已经基本上把我想做的都实现了, 可以借鉴一下..&lt;/li>
-&lt;/ul>
-- https://blog.coherence.codes/posts/2021/anki_workflow/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
