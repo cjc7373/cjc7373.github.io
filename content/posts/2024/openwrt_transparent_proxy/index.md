@@ -6,7 +6,7 @@ tags:
 - Networking
 ---
 
-openclash、shellclash 之类的方案感觉都太复杂了。我的需求只是给 chromecast 用上代理，所以想找一个简单的方案。
+openclash、shellclash 之类的方案感觉都太复杂了。我的需求只是给 chromecast 用上代理，并且在代理失效时不要影响局域网中的其他设备。所以想找一个简单的方案。
 
 经过一番摸索，发现 Macvlan 很适合我，具体步骤如下：
 
@@ -64,7 +64,7 @@ openclash、shellclash 之类的方案感觉都太复杂了。我的需求只是
    
   stop() {          
           # commands to kill application 
-                  killall clash
+          killall clash
   }
   
   ```

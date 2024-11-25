@@ -43,14 +43,14 @@ cjc         3390  1.5  1.9 3994932 792364 ?      Sl   Oct07  26:10 /usr/lib/zote
 
 ## Page Cache
 
-回到什么是 Page Cache，[Page Cache, the Affair Between Memory and Files](https://web.archive.org/web/20221222014954/https://manybutfinite.com/post/page-cache-the-affair-between-memory-and-files/) 这篇非常精彩的文章讲述了 Page Cache。当操作系统开始处理文件时，会碰到两个问题：
+那我们为什么需要 Page Cache呢？[Page Cache, the Affair Between Memory and Files](https://web.archive.org/web/20221222014954/https://manybutfinite.com/post/page-cache-the-affair-between-memory-and-files/) 这篇非常精彩的文章讲述了 Page Cache。当操作系统开始处理文件时，会碰到两个问题：
 
 - 读写磁盘相比于读写内存慢了好几个数量级
-- 对于一些文件（比如共享库），需要只载入一次，而在多个进程之间共享
+- 对于一些文件（比如代码和共享库），需要只载入一次，而在多个进程之间共享
 
 而这两个问题都能被 page cache 解决。正如其名，page cache 就是内核存储的按页大小分割的文件。操作系统将文件缓存在内存中，解决了第一个问题。对于能够共享的文件，操作系统在内存中只存储一份副本，解决了第二个问题。常规的文件读写都会通过 page cache 进行。
 
-按照上面的分类，文件内存应该都属于 page cache，匿名内存则不是。但是再想一想，当我们读取一个文件时，需要：
+那是不是文件只会存储在 page cache 中呢？当我们读取一个文件时，需要：
 
 - 使用 `malloc()` 分配一块堆内存作为缓冲区，假设为 4K。这块内存是匿名内存。
 - 使用 `open()` 打开一个文件获取文件描述符，使用 `read()` 读取文件到缓冲区。此时内核将读取一个页大小的文件内容存放到 page cache 中，再把 page cache 的内容复制到程序的堆内存上。	
@@ -147,6 +147,51 @@ int main() {
 
 可以看到每个 fork 出来的进程的 RSS 都是 10G，而我的系统并没有 100G 内存。这也从侧面说明了简单将 RSS 相加统计系统的内存用量是不可靠的。
 
+除了 ps/top，有没有办法能够获得更细节的进程内存信息呢？当然是有的。这就是 `/proc/<pid>/maps` 和 `/proc/<pid>/smaps`。smaps 相比比 maps 包含了更详细的信息。通过一个[简单的 Python 脚本](https://github.com/cjc7373/my_scripts/blob/master/active/parse_proc_smaps.py)就可以对 smaps 中的信息进行汇总。
+
+比如看一下 qbittorrent 的：
+
+```bash
+$ python parse_proc_smaps.py /proc/2179/smaps
+========================================================================================================================
+Private_Clean  Private_Dirty  Shared_Clean  Shared_Dirty         Rss         Pss          VSZ      library
+========================================================================================================================
+         0 kB       36360 kB          0 kB          0 kB    36360 kB    36360 kB    2274188 kB [anonymous]
+         0 kB           0 kB          0 kB      39536 kB    39536 kB    19768 kB      39536 kB /memfd:wayland-shm (deleted)
+         0 kB       18464 kB          0 kB          0 kB    18464 kB    18464 kB      18508 kB [heap]
+         0 kB           0 kB          0 kB          0 kB        0 kB        0 kB       4764 kB anon_inode:i915.gem
+         0 kB         128 kB          0 kB          0 kB      128 kB      128 kB        132 kB [stack]
+         0 kB           0 kB          8 kB          0 kB        8 kB        0 kB          8 kB [vdso]
+         0 kB           0 kB          0 kB          0 kB        0 kB        0 kB         16 kB [vvar]
+         0 kB           0 kB          0 kB          0 kB        0 kB        0 kB          4 kB [vsyscall]
+========================================================================================================================
+   2087680 kB           0 kB          0 kB          0 kB  2087680 kB  2087680 kB   60184244 kB /mnt/gloway/TV_Series
+     51900 kB           0 kB          0 kB          0 kB    51900 kB    51900 kB    5558576 kB /mnt/gloway/Documentary
+        52 kB           0 kB          0 kB          0 kB       52 kB       52 kB    5302412 kB /mnt/gloway/Movies
+      2988 kB        7664 kB      62508 kB          0 kB    73160 kB    13477 kB     366556 kB /usr/lib
+         0 kB           0 kB      19636 kB          0 kB    19636 kB      676 kB      20236 kB /usr/share/fonts
+      1440 kB         164 kB          0 kB          0 kB     1604 kB     1604 kB      12584 kB /usr/bin
+         0 kB           0 kB       4096 kB          0 kB     4096 kB       54 kB       6080 kB /usr/lib/locale
+         0 kB           0 kB       1976 kB          0 kB     1976 kB       69 kB       3260 kB /home/cjc/.cache
+        32 kB         248 kB       1308 kB          0 kB     1588 kB      414 kB       2176 kB /usr/lib/qt6
+        52 kB           0 kB        544 kB          0 kB      596 kB      269 kB       1212 kB /usr/share/icons
+         0 kB           0 kB        444 kB          0 kB      444 kB       16 kB        448 kB /var/cache/fontconfig
+         0 kB           0 kB         80 kB          0 kB       80 kB        3 kB        184 kB /usr/share/mime
+         0 kB           8 kB         36 kB          0 kB       44 kB        8 kB         60 kB /usr/lib/libproxy
+         0 kB           0 kB         28 kB          0 kB       28 kB        0 kB         28 kB /usr/lib/gconv
+         0 kB           0 kB         24 kB          0 kB       24 kB        0 kB         24 kB /usr/share/locale
+         0 kB           0 kB         12 kB          0 kB       12 kB        0 kB         12 kB /home/cjc/.local
+         0 kB           0 kB          0 kB          0 kB        0 kB        0 kB         12 kB /usr/share/qt6
+         0 kB           0 kB          0 kB          0 kB        0 kB        0 kB          4 kB /var/lib/flatpak
+   2144144 kB       63036 kB      90700 kB      39536 kB  2337416 kB  2230942 kB   73795264 kB total
+```
+
+这里有一个新概念 PSS（proportional set size），对于每个 RSS 中的页，如果这个页被 n 个进程共享，那么在计算时就把它除以 n。也就是说，如果有一个库 RSS 100k，但是它被 10 个进程共享，那么每个进程的 PSS 就是 10k。
+
+表中的第二部分展示了内存中文件映射的部分。从中可以看到，qb 的 2.3G RSS 有 2.1G 都是做种的文件（`/mnt/gloway`），`/usr/lib` 中的库文件占了 73M，但是由于共享的进程较多，PSS 只有 13M。
+
+第一部分主要是堆栈的内存。`[heap]` 和 `[anonymous]` 实际都是堆内存（也就是通过 malloc 分配的匿名页面）， 
+
 ## free
 
 那么 free 里的内存占用是怎么计算出来的呢？简单查阅 `man free` 可知，其数据来源于 `/proc/meminfo`（[内核文档](https://github.com/torvalds/linux/blob/master/Documentation/filesystems/proc.rst#meminfo)），含义如下：
@@ -173,7 +218,7 @@ int main() {
 ![Image](./640.webp)
 （图源：[Linux内存变低会发生什么问题-腾讯技术工程](https://mp.weixin.qq.com/s?__biz=MjM5ODYwMjI2MA==&mid=2649785631&idx=1&sn=4ff0a18db034174b5dec2455c759e3d8))
 
-内核的内存回收采取 LRU 算法 TODO。当然，有时候程序会比内核有更多的信息，知道哪些页不应该被换出，这时程序可以使用 `mlock` 等系统调用阻止某些页被换出。
+内核的内存回收采取 LRU 算法。当然，有时候程序会比内核有更多的信息，知道哪些页不应该被换出，这时程序可以使用 `mlock` 等系统调用阻止某些页被换出。
 
 实践上，内核的内存水位设定非常保守。我们可以通过 `/proc/zoneinfo` 计算得到。在我的 40G 内存的机器上面：
 
