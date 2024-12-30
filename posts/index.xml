@@ -20,7 +20,7 @@
  option netmask &amp;#39;255.255.255.0&amp;#39;
  option gateway &amp;#39;192.168.2.1&amp;#39;
  option defaultroute &amp;#39;0&amp;#39;
-&lt;/code>&lt;/pre>&lt;p>IP 地址分配一个在局域网段下的，网关填 lan 地址。注意关闭默认路由，否则会把 PPPoE 的路由给删了，导致局域网内设备连不上网，具体原因也不清楚。&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>IP 地址分配一个在局域网段下的，网关填 lan 地址。注意关闭默认路由，否则会把 PPPoE 的路由给删了，导致局域网内设备连不上网，具体原因也不清楚。这个接口不需要任何路由规则。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>把这个接口添加到防火墙的 lan zone 中，否则 lan 发给该接口的包会被丢弃&lt;/p>
