@@ -23,6 +23,9 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/code>&lt;/pre>&lt;p>IP 地址分配一个在局域网段下的，网关填 lan 地址。注意关闭默认路由，否则会把 PPPoE 的路由给删了，导致局域网内设备连不上网，具体原因也不清楚。&lt;/p>
 &lt;/li>
 &lt;li>
+&lt;p>把这个接口添加到防火墙的 lan zone 中，否则 lan 发给该接口的包会被丢弃&lt;/p>
+&lt;/li>
+&lt;li>
 &lt;p>下载 mihomo （原 clash-meta）二进制，配置 tun 绑定到之前的设备上&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">tun&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
@@ -327,6 +330,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;h2 id="ref">ref&lt;/h2>
 &lt;ul>
 &lt;li>fc 老师的两篇关于 &lt;a href="https://farseerfc.me/zhs/in-defence-of-swap.html">swap&lt;/a> 的&lt;a href="https://farseerfc.me/zhs/followup-about-swap.html">文章&lt;/a>是我的内存管理启蒙&lt;/li>
+&lt;li>&lt;a href="https://mp.weixin.qq.com/s?__biz=MjM5ODYwMjI2MA==&amp;amp;mid=2649787834&amp;amp;idx=1&amp;amp;sn=c62c1e183a2663ac5ab369d191e50519">K8s里我的容器到底用了多少内存？&lt;/a>，这篇文章中提到了 k8s 中的几个内存指标&lt;/li>
 &lt;/ul>
 - https://blog.coherence.codes/posts/2024/linux_memory_management/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>日本之旅</title><link>https://blog.coherence.codes/posts/2024/japan_trip/</link><pubDate>Wed, 24 Apr 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/japan_trip/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/japan_trip/ -&lt;h2 id="计划">计划&lt;/h2>
 &lt;p>我和 Moo 一开始说的是去新马泰，后来改为日本，真正开始做攻略已经是三月下旬了。日本只支持旅行社送签，我在 3/26 申请了签证并提交了材料，4/3 出签，花了六个工作日，还是挺快的。&lt;/p>
