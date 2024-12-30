@@ -1,7 +1,7 @@
 ---
 title: Linux 内存管理初探
 date: 2024-09-05
-lastmod: 2024-10-14
+lastmod: 2024-11-26
 tags:
 - Linux
 ---
@@ -327,3 +327,4 @@ Linux 已经讲得够多了，那么 Windows 又是怎样的呢？其实[大差�
 ## ref
 
 - fc 老师的两篇关于 [swap](https://farseerfc.me/zhs/in-defence-of-swap.html) 的[文章](https://farseerfc.me/zhs/followup-about-swap.html)是我的内存管理启蒙
+- [K8s里我的容器到底用了多少内存？](https://mp.weixin.qq.com/s?__biz=MjM5ODYwMjI2MA==&mid=2649787834&idx=1&sn=c62c1e183a2663ac5ab369d191e50519)，这篇文章中提到了 k8s 中的几个内存指标
