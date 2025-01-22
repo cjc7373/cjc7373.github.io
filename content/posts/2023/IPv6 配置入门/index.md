@@ -70,11 +70,11 @@ RFC 4291 定义了 IPv6 中的地址空间以及不同的层级. IPv6 必须支�
 
 RFC 4861 定义了一种网络发现机制 (Neighbor Discovery Protocol, NDP), 等效与 IPv4 中的 ARP.  NDP 定义了五种 ICMPv6 (RFC 4443) 消息类型：
 
-1. 路由器请求 (Router Solicitation，简称 RS)
-2. 路由器通告 (Router Advertisement，简称 RA)
-3. 邻居请求 (Neighbor Solicitation)
-4. 邻居通告 (Neighbor Advertisement)
-5. 重定向 (Redirect)
+1. 路由器请求 (Router Solicitation, 简称 RS), 在一个接口启用后, 主机可以发送 RS 以请求路由器马上发送 RA, 而不是等待下一次计划发送的时间.
+2. 路由器通告 (Router Advertisement, 简称 RA), 路由器广播它们的存在, 同时附带多个配置参数. RA 周期性发送, 或是用于响应 RS. RA 包含了网络的前缀信息, 地址配置, 跳数限制等.
+3. 邻居请求 (Neighbor Solicitation, 简称 NS), 由一个节点发送, 用于确定一个邻居的链路层地址, 或是验证一个邻居仍然能通过一个缓存的链路层地址可达. NS 也被用于重复地址的探测.
+4. 邻居通告 (Neighbor Advertisement, 简称 NA), 对 NS 的响应. 一个节点也可以自发地发送 NS 来宣告链路层地址的变化.
+5. 重定向 (Redirect), 由路由器发送, 用于通知节点一个更好的下一跳地址.
 
 所有 NDP 协议的包实际上是封装在 ICMPv6 协议的包里的. 这里插播一下 ICMPv6 的包结构, 非常简单:
 
@@ -82,7 +82,18 @@ RFC 4861 定义了一种网络发现机制 (Neighbor Discovery Protocol, NDP), �
 
 IPv6 下的 ping 命令和 IPv4 下类似, 也是使用 ICMP 协议实现的. ICMPv6 定义了 Echo Request (Type 128) 和 Echo Reply (Type 129) 类型来给 ping 使用.
 
-下文所述的 SLAAC 即使用 NDP 协议通信.
+下文所述的 SLAAC 即使用 NDP 协议中的 RA 报文进行配置. RA 报文里有啥呢, 可以瞅一眼:
+
+![image-20250122225735217](./image-20250122225735217.png)
+
+核心的信息在几个 Options 里, 包括了:
+
+- 链路的 MTU
+- 路由器的 MAC 地址 (奇怪的是为什么不直接看以太网帧的地址呢)
+- 前缀信息
+- 路由信息, 这是为了在有多个路由器的网络中, 通过发送附带优先级 (high/medium/low) 的路由信息, 指示用户选择路由器. 这个 option 在 [RFC 4191](https://datatracker.ietf.org/doc/html/rfc4191/) 中定义, 很奇怪的一点是, 明明这个 RFC 比 RFC 4861 要早, 这个 option 却没有被包含在 RFC 4861 中.
+- DNS
+- 广播间隔
 
 ## RFC 4862 (IPv6 Stateless Address Autoconfiguration)
 
@@ -200,7 +211,7 @@ fd00:ab:cd:0:9d74:c147:f069:edc6 dev br-lan FAILED
  failed max number of probes exceeded without success, neighbor validation has ultimately failed.
 ```
 
-之后继续观察 Wireshark, 发现手机确实不响应 NDP Neighbor Solicitation, 这种情况闻所未闻..
+之后继续观察 Wireshark, 发现手机确实不响应 NDP Neighbor Solicitation (也就是不发 Neighbor Advertisement), 这种情况闻所未闻..
 
 根据重启重装重买定律, 重启手机, 问题解决.. 尚不清楚真正的问题是什么.. (我觉得一加大概率背锅)
 
