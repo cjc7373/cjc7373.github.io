@@ -17,7 +17,6 @@
 &lt;p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p>
 &lt;p>这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p>
 &lt;p>&lt;img src="./1554536417517.png" alt="1554536417517">&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;p>下面列出笔记本的配置，以供参考。&lt;/p>
 &lt;table>
  &lt;thead>
@@ -59,4 +58,5 @@
 &lt;h2 id="基本安装">基本安装&lt;/h2>
 &lt;p>安装参考了 &lt;a href="https://www.viseator.com/2017/05/17/arch_install/">以官方Wiki的方式安装ArchLinux&lt;/a> 和 官方Wiki的 &lt;a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Installation Guide&lt;/a>。在未安装图形界面前，基本一切顺利。&lt;/p>
 &lt;p>题外话：说起无线网卡，之前装 Ubuntu 的时候，没有驱动，需要手动安装。不过内核从 4.x 某个版本之后，加入了对我这个网卡的驱动，现在无需配置即可使用了。&lt;/p>
-&lt;p>由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。&lt;/p></description></item></channel></rss>
+&lt;p>由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。&lt;/p>
+&lt;p>在配置&lt;code>sudo&lt;/code>时，使用&lt;code>visudo&lt;/code>命令编辑配置文件，然而这个 vi编辑器有毒，许多操作都无法执行，感觉是个 bug。（Update：原来 vi 和 vim 是有挺大的区别的&amp;hellip;）&lt;/p></description></item></channel></rss>

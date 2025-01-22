@@ -254,12 +254,10 @@
 &lt;p>它采用了&amp;quot;极为先进&amp;quot;的 64 位高通 410 SoC (据称是高通首款 64 位), 对, 我又听信了 Android 5.0 优化 (ART, Android Runtime) 和 64 位的鬼话, 买了这个 1G RAM 的手机.
 事实上出厂系统还是 4.4, 32 位. 于是我天天去酷派论坛蹲, 还真蹲到了 64 位的 5.0. 但事实上硬件的局限在那, 提升并没有那么大.
 于是当时整天折腾各种 ROM, 各种优化. 在那个我 root 还靠各种一键 root app 的年代, 很难想象我都在优化什么.&lt;/p></description></item><item><title>我为什么选择在 Surface 上使用 Windows</title><link>https://blog.coherence.codes/posts/2022/surface_on_linux/</link><pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/surface_on_linux/</guid><description>&lt;p>自从购置 Surface Pro 7 以来, 曾数次不满于 Windows 的包管理, 遥测, Windows Defender 等方面. 然更换了 Linux 之后并没有一个太好的使用体验. 本文记录了 Surface Pro 7 在 Archlinux 上的体验.&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;p>在 2021 年七月某日, 手贱尝试了一下 Windows 11 Preview (印象里是公开发布的第一版) 之后, 感叹于 Bug 之多, 奈何回滚需要重新安装 Windows, 于是一气之下装了 Archlinux.&lt;/p>
 &lt;p>&lt;img src="./8a7b6609572d402bb2b747b706ef0c62.png" alt="img">(此处附使用截图一张)&lt;/p>
 &lt;p>在使用了近半年之后, 再次感叹, 微软自家的产品在 Linux 上体验真的不好.. 又萌生了换回 Windows 的想法.&lt;/p>
 &lt;p>具体而言, 有以下几个方面. 首先, Connected standby 在 Windows 下工作地很好, 然而在 Linux 下待机的耗电非常显著, 大概一晚上能掉一半电的那种. 于是后来发现了 suspend-then-hibernate 这个策略, 理论上还算可以接受. 然其有个非常严重的 Bug, 有时候其不能够成功地进入休眠状态, 导致第二天早上起来的时候 Surface 直接没电了. 而且这个问题出现频率比较高, 大概十次待机中有两三次, 非常影响使用体验. 在电量不足 10% 内核的频率调度会非常激进, 基本只能维持在 1.5G (即使电源已连接), 这时候系统会非常卡, 进一步导致了开机后仍有十多分钟的不可用状态. 这个 Bug 是我想换回 Windows 的直接原因.&lt;/p></description></item><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>&lt;p>记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;p>Archwiki 给人的感觉还是有点零碎了.. 与打包相关的条目大概有:&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://wiki.archlinux.org/title/Creating_packages">Creating packages&lt;/a>&lt;/li>
@@ -273,8 +271,9 @@
 &lt;h2 id="概览">概览&lt;/h2>
 &lt;p>ABS 是一个 &lt;a href="https://en.wikipedia.org/wiki/Ports_collection">ports&lt;/a>-like 构建系统, 其打包的主要工具为 makepkg, 根据当前目录下的 PKGBUILD 打包. 据说是比 Debian 系的打包容易不少.&lt;/p>
 &lt;h2 id="打包">打包&lt;/h2>
-&lt;p>首先 makepkg 会下载 source 变量中指定的文件列表, 它们可以是一个 URL, 一个 git 仓库, 或一个在当前目录下的文件. makepkg 会校验文件的哈希并解压到以文件名命名的目录. 可用 &lt;code>-g, --geninteg&lt;/code> 命令来下载文件并生成哈希. 注意 VCS 的 source 是没有哈希的.&lt;/p></description></item><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>&lt;p>记录一下比赛期间踩到的坑.&lt;/p>
-&lt;!-- raw HTML omitted -->
+&lt;p>首先 makepkg 会下载 source 变量中指定的文件列表, 它们可以是一个 URL, 一个 git 仓库, 或一个在当前目录下的文件. makepkg 会校验文件的哈希并解压到以文件名命名的目录. 可用 &lt;code>-g, --geninteg&lt;/code> 命令来下载文件并生成哈希. 注意 VCS 的 source 是没有哈希的.&lt;/p>
+&lt;p>事实上看一看每种语言对应的 guidelines 是非常有用的.&lt;/p>
+&lt;p>&lt;img src="./image-20211208122231668.png" alt="image-20211208122231668">&lt;/p></description></item><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>&lt;p>记录一下比赛期间踩到的坑.&lt;/p>
 &lt;h2 id="签到">签到&lt;/h2>
 &lt;p>开始完全没有读题直接进题目, 然后想了半天没思路并随机测试了一些数.. 直到我读了题..&lt;/p>
 &lt;h2 id="进制十六参上">进制十六——参上&lt;/h2>
@@ -288,8 +287,9 @@
 &lt;h2 id="猫咪问答-pro-max">猫咪问答 Pro Max&lt;/h2>
 &lt;p>没错, 被第二题坑了.. 以为是第四题不对, 于是写了个暴力跑了几万次..&lt;/p>
 &lt;p>&lt;img src="./image-20211030151026284.png" alt="image-20211030151026284">&lt;/p>
-&lt;p>提示: 这是一个提示.&lt;/p></description></item><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>&lt;p>又到了传统艺能&lt;del>年终&lt;/del>年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..&lt;/p>
-&lt;!-- raw HTML omitted -->
+&lt;p>提示: 这是一个提示.&lt;/p>
+&lt;h2 id="卖瓜">卖瓜&lt;/h2>
+&lt;p>已经被同学提示了这是个 PHP 溢出问题.. 甚至都找到了 (同学给的) &lt;a href="https://www.php.net/manual/zh/language.types.integer.php#125251">PHP 文档中的一条评论 (甚至题解也给了这个)&lt;/a>, 但是并不知道怎么做.. 于是用 &lt;code>b1=2**63//6+n&lt;/code> (n 为 -10~10 之间的一个随机数) 瞎试做出来了.&lt;/p></description></item><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>&lt;p>又到了传统艺能&lt;del>年终&lt;/del>年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..&lt;/p>
 &lt;h2 id="2020-总结">2020 总结&lt;/h2>
 &lt;p>一句话总结的话, 知识的广度提升了, 深度还不够, 学习状态仍旧不能让自己满意. 以及这一年我始终在担心有没有学上, 找不找得到工作.&lt;/p>
 &lt;h3 id="学业">学业&lt;/h3>
@@ -329,7 +329,6 @@
 &lt;/ul>
 &lt;h3 id="书">书&lt;/h3>
 &lt;p>本年度仍然没有怎么看书..&lt;/p></description></item><item><title>Anki 工作流</title><link>https://blog.coherence.codes/posts/2021/anki_workflow/</link><pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/anki_workflow/</guid><description>&lt;p>&lt;a href="https://apps.ankiweb.net/">Anki&lt;/a> 是一个间隔式重复的&amp;quot;闪卡 (flashcard)&amp;ldquo;记忆软件. 下面来谈谈我考研及日常生活中的 Anki 工作流.&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="为什么选择-anki">为什么选择 Anki&lt;/h2>
 &lt;p>和市面上其他的记忆软件一样, Anki 也是基于遗忘曲线, 基于间隔式重复这一原理的. 最大的不同在于它是高度自定义的. 自己制作卡组, 设计模板, 甚至编写自己的插件. 还有很多特性例如 Notes 和 Cards 相分离我其实并没有用到.&lt;/p>
 &lt;p>其次 Anki 是一款开源软件, 在我希望所有软件都用自由软件替换的如今, 这无疑是一个重要的理由.&lt;/p>
@@ -340,7 +339,8 @@
 &lt;p>&lt;img src="./image-20210224200941341.png" alt="image-20210224200941341">&lt;/p>
 &lt;p>十分简单.&lt;/p>
 &lt;h2 id="考研">考研&lt;/h2>
-&lt;p>考研的时候打算用 Anki 背单词, 于是我做真题的时候碰到不认识的单词记录下来, 然后用 Anki 制卡.&lt;/p></description></item><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>&lt;h2 id="1335a---candies-and-two-sistershttpscodeforcescomcontest1335problema">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
+&lt;p>考研的时候打算用 Anki 背单词, 于是我做真题的时候碰到不认识的单词记录下来, 然后用 Anki 制卡.&lt;/p>
+&lt;p>卡片字段设计和工作流受到了&lt;a href="https://ankiweb.net/shared/info/934622764">考研英语真题生词&lt;/a>这个卡组的启发.&lt;/p></description></item><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>&lt;h2 id="1335a---candies-and-two-sistershttpscodeforcescomcontest1335problema">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>快乐签到。&lt;/p>
 &lt;h2 id="1335b---construct-the-stringhttpscodeforcescomcontest1335problemb">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
@@ -357,7 +357,6 @@
 &lt;p>想了两分钟，发现将所有的 1 替换为 2 即可。&lt;/p>
 &lt;h2 id="1335e---three-blocks-palindromehttpscodeforcescomcontest1335probleme2">&lt;a href="https://codeforces.com/contest/1335/problem/E2">1335E - Three Blocks Palindrome&lt;/a>&lt;/h2>
 &lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p></description></item><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>&lt;p>快乐划水。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="1328a---divisibility-problemhttpscodeforcescomcontest1328problema">&lt;a href="https://codeforces.com/contest/1328/problem/A">1328A - Divisibility Problem&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>快乐签到。&lt;/p>
@@ -380,13 +379,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print()
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328c---ternary-xorhttpscodeforcescomcontest1328problemc">&lt;a href="https://codeforces.com/contest/1328/problem/C">1328C - Ternary XOR&lt;/a>&lt;/h2>
-&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p></description></item><item><title>博客图片文件夹迁移</title><link>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</link><pubDate>Wed, 01 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</guid><description>&lt;p>我原来的博客文件夹结构是这样的：&lt;/p>
+&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
+&lt;p>给一个三进制数x，求两个数a，b，使这两个数的异或为x，且max(a, b)最小。&lt;/p></description></item><item><title>博客图片文件夹迁移</title><link>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</link><pubDate>Wed, 01 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</guid><description>&lt;p>我原来的博客文件夹结构是这样的：&lt;/p>
 &lt;p>&lt;img src="./image-20200328175914444.png" alt="image-20200328175914444">&lt;/p>
 &lt;p>博文数量少的时候，还挺直观，但是数量一多，看着就很杂乱，因此，萌生了重新归类的想法。&lt;/p>
 &lt;p>思路大概是这样：按年份归类，然后图片统一放到当前目录下的&lt;code>images&lt;/code>文件夹里。&lt;/p>
 &lt;h2 id="实践">实践&lt;/h2>
 &lt;p>脚本的逻辑大概是对每一篇博文，寻找其元数据的 date 字段，将其移动到对应的文件夹下，同时对同名的文件夹也进行递归移动。由于图片都是相对引用的，所以不会出问题。（即使出了咱还有 git）&lt;/p></description></item><item><title>Kickstart 2020 Round A 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</link><pubDate>Thu, 26 Mar 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</guid><description>&lt;p>第一次打Kickstart，体验还是很不错的。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;p>&lt;a href="https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ffc7">比赛链接&lt;/a>&lt;/p>
 &lt;p>迟了几分钟进比赛，发现前十已经两题AC了。&lt;/p>
 &lt;h2 id="allocation">Allocation&lt;/h2>
@@ -512,7 +511,6 @@
 &lt;/ul>
 &lt;p>&lt;img src="./image-20200201203042582.png" alt="image-20200201203042582">&lt;/p>
 &lt;p>图为 AOC 27&amp;rsquo; 4K 某型号。&lt;/p></description></item><item><title>WSL使用体验</title><link>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link><pubDate>Sun, 08 Dec 2019 19:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid><description>&lt;p>首先，WSL真香！&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="开启wsl">开启WSL&lt;/h2>
 &lt;p>最简单的方式是使用管理员权限运行Powershell，然后输入：&lt;/p>
 &lt;p>&lt;code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux&lt;/code>&lt;/p>
@@ -563,11 +561,16 @@
 &lt;blockquote>
 &lt;p>在配置文件 &lt;code>/etc/default/docker&lt;/code> 中的 &lt;code>DOCKER_OPTS&lt;/code> 中配置Hub地址：&lt;/p>
 &lt;pre tabindex="0">&lt;code>DOCKER_OPTS=&amp;#34;--registry-mirror=https://docker.mirrors.ustc.edu.cn/&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>重新启动服务:&lt;/p></description></item><item><title>重新安装 Hexo</title><link>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</link><pubDate>Wed, 07 Aug 2019 16:03:29 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</guid><description>&lt;h2 id="缘由">缘由&lt;/h2>
+&lt;/code>&lt;/pre>&lt;p>重新启动服务:&lt;/p>
+&lt;pre tabindex="0">&lt;code>sudo service docker restart
+&lt;/code>&lt;/pre>&lt;/blockquote>
+&lt;h3 id="坑-1">坑&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>官方宣称在18945之后的版本中Windows访问WSL提供的网络服务只需使用localhost即可（服务需绑定之0.0.0.0而不是127.0.0.1，因为实际上这些连接被认为是局域网中的连接）。&lt;/p></description></item><item><title>重新安装 Hexo</title><link>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</link><pubDate>Wed, 07 Aug 2019 16:03:29 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</guid><description>&lt;h2 id="缘由">缘由&lt;/h2>
 &lt;p>直接原因是 Github 的一个假装很贴心的功能：&lt;/p>
 &lt;p>&lt;img src="./1565183420437.png" alt="1565183420437">&lt;/p>
 &lt;p>由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="过程">过程&lt;/h2>
 &lt;h3 id="环境">环境&lt;/h3>
 &lt;p>node.js 6.4.1&lt;/p>
@@ -591,7 +594,8 @@ npm install
 &lt;p>&lt;code>.travis.yml&lt;/code> 和 &lt;code>deploy.sh&lt;/code> 也直接还原。&lt;/p>
 &lt;p>&lt;a href="https://cjc7373.github.io/2018/10/13/Hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/#Hexo%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%8C%87%E5%BC%95">图片的问题&lt;/a>先不管，有问题再说。&lt;/p>
 &lt;h3 id="主题安装">主题安装&lt;/h3>
-&lt;p>剩下的差异全是主题文件。既然都重新搞了，那就换一个主题吧。在自己的 stars 里找了个主题 &lt;a href="https://github.com/yscoder/hexo-theme-indigo">hexo-theme-indigo&lt;/a>，看了下也支持 Analysis、Disqus，就决定用它了。&lt;/p></description></item><item><title>大二下学期期末复习</title><link>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link><pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</guid><description>&lt;h2 id="软件工程试卷">软件工程试卷&lt;/h2>
+&lt;p>剩下的差异全是主题文件。既然都重新搞了，那就换一个主题吧。在自己的 stars 里找了个主题 &lt;a href="https://github.com/yscoder/hexo-theme-indigo">hexo-theme-indigo&lt;/a>，看了下也支持 Analysis、Disqus，就决定用它了。&lt;/p>
+&lt;p>接下来就开始按照&lt;a href="https://github.com/yscoder/hexo-theme-indigo/wiki">主题文档&lt;/a>来安装。首先 clone 仓库，我选择 card 分支，感觉比较好看（其实也没有对比）。&lt;/p></description></item><item><title>大二下学期期末复习</title><link>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link><pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</guid><description>&lt;h2 id="软件工程试卷">软件工程试卷&lt;/h2>
 &lt;p>来源： &lt;a href="https://tellyouwhat.cn/p/northwest-university-software-engineering-review-materials/">Harbor Zeng&lt;/a>&lt;/p>
 &lt;p>&lt;img src="./bd61005egy1g0cx8lnllsj20rt112adk.jpg" alt="img">&lt;/p>
 &lt;p>&lt;img src="./bd61005egy1g0cx8izobuj22eo37kb29.jpg" alt="img">&lt;/p>
@@ -600,7 +604,6 @@ npm install
 &lt;p>二年级下学期期末，有一个两周的实习，学校给了我们三个选项，其中软通算是知名度最高的一家公司了。
 &lt;img src="./isoftstone.png" alt="“isoftstone”的图片搜索结果">&lt;/p>
 &lt;p>然而网上这家公司的风评很差，不过其他两家似乎更差，于是我们班大概四分之三的人都来了软通。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="经历">经历&lt;/h2>
 &lt;p>实习第一天，上午讲的开发流程，团队角色，每日例行项目好似我们已经接手了一个实际项目，然而到了下午瞬间变成培训班，开始教我们配置环境。看下发的文档是用 Java Spring Boot 框架来开发。第二天又开始复习 Java。然后到了第三天，负责我们的老师（就叫他项目经理好了）突然说，你们想用什么技术就用什么技术吧。终于不用写 Java 了（逃&lt;/p>
 &lt;p>我们大概使用的是 Scrum 敏捷开发方法，最有特色的一点大概就是每日站会了。还有 Story 列表其实也挺不错的，只是没有贴在公告板上感觉失去了灵魂。&lt;/p>
@@ -629,7 +632,6 @@ npm install
 &lt;p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。&lt;/p>
 &lt;p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的&lt;code>ln -s&lt;/code>大法行不通了。&lt;/p>
 &lt;p>于是我想到了 CI。仔细一想其实也不复杂，无非是&lt;code>git push&lt;/code>， &lt;code>git pull&lt;/code>两下罢了。那么，Let&amp;rsquo;s do it!&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="需求">需求&lt;/h2>
 &lt;p>我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。&lt;/p>
 &lt;ul>
@@ -644,14 +646,20 @@ npm install
 &lt;li>master 用于存放构建完成的静态文件&lt;/li>
 &lt;li>source 用于存放 Hexo 生成的博客源文件&lt;/li>
 &lt;/ul>
-&lt;p>对 Hexo 文件夹的操作如下：&lt;/p></description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>&lt;blockquote>
+&lt;p>对 Hexo 文件夹的操作如下：&lt;/p>
+&lt;pre tabindex="0">&lt;code>git init
+git remote add origin git@github.com:cjc7373/cjc7373.github.io.git
+git checkout -b source
+git add .
+git commit -m &amp;#34;To use CI to automated deploy&amp;#34;
+git push origin source:source
+&lt;/code>&lt;/pre>&lt;p>本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带&lt;code>.gitignore&lt;/code>文件，所以实际大小并没有多少。&lt;/p></description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>&lt;blockquote>
 &lt;p>Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="前言">前言&lt;/h2>
 &lt;p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p>
 &lt;p>这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p>
 &lt;p>&lt;img src="./1554536417517.png" alt="1554536417517">&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;p>下面列出笔记本的配置，以供参考。&lt;/p>
 &lt;table>
  &lt;thead>
@@ -693,9 +701,9 @@ npm install
 &lt;h2 id="基本安装">基本安装&lt;/h2>
 &lt;p>安装参考了 &lt;a href="https://www.viseator.com/2017/05/17/arch_install/">以官方Wiki的方式安装ArchLinux&lt;/a> 和 官方Wiki的 &lt;a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Installation Guide&lt;/a>。在未安装图形界面前，基本一切顺利。&lt;/p>
 &lt;p>题外话：说起无线网卡，之前装 Ubuntu 的时候，没有驱动，需要手动安装。不过内核从 4.x 某个版本之后，加入了对我这个网卡的驱动，现在无需配置即可使用了。&lt;/p>
-&lt;p>由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。&lt;/p></description></item><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>&lt;p>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。&lt;/p>
+&lt;p>由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。&lt;/p>
+&lt;p>在配置&lt;code>sudo&lt;/code>时，使用&lt;code>visudo&lt;/code>命令编辑配置文件，然而这个 vi编辑器有毒，许多操作都无法执行，感觉是个 bug。（Update：原来 vi 和 vim 是有挺大的区别的&amp;hellip;）&lt;/p></description></item><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>&lt;p>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。&lt;/p>
 &lt;p>Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板，准备拆机 TTL 破解光猫。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="0x01-拆机">0x01 拆机&lt;/h2>
 &lt;p>拆机后发现 PCB 板上有 TTL 插针，用万用表测得倒数第二根为 GND（接地pin），然后剩余四根随机组合，测得 RX（接收数据pin）和 TX（发送数据pin）。用杜邦线连接 USB转TTL板和 TTL 插针。&lt;/p>
 &lt;p>&lt;img src="./IMG_20190219_113847.jpg" alt="IMG_20190219_113847">&lt;/p>
@@ -710,7 +718,6 @@ npm install
 &lt;h2 id="0x03-参考资料">0x03 参考资料&lt;/h2>
 &lt;p>&lt;a href="https://paper.seebug.org/506/#0x03">如何通过TTL调试光猫&lt;/a>
 &lt;a href="https://m2.zhugh.com:26800/po-jie-dian-xin-guang-mao/">破解电信光猫&lt;/a>&lt;/p></description></item><item><title>2018年终总结&amp;2019展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</link><pubDate>Mon, 11 Feb 2019 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</guid><description>&lt;p>今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="2018-总结">2018 总结&lt;/h2>
 &lt;p>时间及事件依据：印象笔记、Google 相册、我的记忆。&lt;/p>
 &lt;p>事件大致以时间顺序排列。&lt;/p>
@@ -745,7 +752,6 @@ npm install
 &lt;/ul>
 &lt;p>&lt;img src="./1550035065769.png" alt="1550035065769">&lt;/p></description></item><item><title>DOMjudge 配置/踩坑指南</title><link>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</link><pubDate>Wed, 19 Dec 2018 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</guid><description>&lt;p>我校新生赛也能用上 World Final 同款评测系统啦~&lt;/p>
 &lt;p>DOMjudge 提供了详尽的&lt;a href="https://www.domjudge.org/documentation">官方文档&lt;/a>，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="简介">简介&lt;/h2>
 &lt;p>DOMjudge，作为一款开源的 CCS(&lt;a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System">Contest Control System&lt;/a>)，现已被ICPC钦定为官方的比赛评测系统。比 pc^2 这种闭源而含有诸多 Bug 的 CCS 高到不知道哪里去了啊。&lt;/p>
 &lt;p>&lt;img src="./1545218741334.png" alt="1545218741334">&lt;/p>
@@ -822,7 +828,6 @@ npm install
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">mariadb:mariadb&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后运行 &lt;code>docker-compose up -d&lt;/code> 即可完成部署。&lt;/p></description></item><item><title>使用KMS激活Visio</title><link>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</link><pubDate>Sat, 01 Dec 2018 23:11:38 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</guid><description>&lt;h2 id="题记">题记&lt;/h2>
 &lt;p>如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="转换visio版本">转换Visio版本&lt;/h2>
 &lt;p>我在&lt;a href="http://msdn.itellyou.cn/?lang=zh-cn">MSDN我告诉你&lt;/a>和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。&lt;/p>
 &lt;p>复制以下代码，保存为.bat文件并用管理员身份运行：&lt;/p>
@@ -845,7 +850,6 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&amp;#39;
 &lt;/code>&lt;/pre>&lt;p>Project：&lt;/p></description></item><item><title>Markdown简介</title><link>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</link><pubDate>Thu, 08 Nov 2018 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</guid><description>&lt;h2 id="什么是-markdown">&lt;strong>什么是 Markdown?&lt;/strong>&lt;/h2>
 &lt;p>Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。&lt;/p>
 &lt;p>&lt;img src="./Markdown-mark.svg.png" alt="哈哈哈">&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;hr>
 &lt;h3 id="markdown-vs-富文本">Markdown VS 富文本&lt;/h3>
 &lt;p>基于 Markdown 写作，是属于&lt;strong>纯文本&lt;/strong>写作。「纯文本」写作和「富文本」写作是对立的，我们来区分一下：&lt;/p>
@@ -929,7 +933,6 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&amp;#39;
 &lt;p>这就是乱改字体的后果..&lt;/p>
 &lt;/blockquote>
 &lt;p>字体修复，不只是字体修复。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="事由">事由&lt;/h2>
 &lt;p>偶然间看到一篇&lt;a href="http://www.dgtle.com/article-25875-1.html">替换Win10字体来提升字体观感的文章&lt;/a>，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。&lt;/p>
 &lt;p>然而，使用了一段时间后发现，所有的字体似乎都小了一圈，而且在cmd中出现了字体大小错乱的情况。网上找了一圈发现Win10砍掉了调整字体大小的功能，现在只能以整体缩放来调整字体大小。新的字体感觉也没有想象中的那么好。&lt;/p>
@@ -959,7 +962,6 @@ sfc /scannow
 &lt;p>在这纷纭复杂的互联网中，拥有自己的一方小天地，似乎也是极好的。&lt;/p></description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>&lt;blockquote>
 &lt;p>身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p>
 &lt;/blockquote>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="为什么选择hexo">为什么选择Hexo&lt;/h2>
 &lt;p>其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是&lt;del>随手找了几个静态博客生成器，&lt;/del> 随手一查就找到了Hexo。&lt;/p>
 &lt;h2 id="hexo搭建过程">Hexo搭建过程&lt;/h2>

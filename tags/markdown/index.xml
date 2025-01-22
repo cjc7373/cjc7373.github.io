@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Markdown on Coherence's Blog</title><link>https://blog.coherence.codes/tags/markdown/</link><description>Recent content in Markdown on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 22 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/markdown/index.xml" rel="self" type="application/rss+xml"/><item><title>Markdown简介</title><link>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</link><pubDate>Thu, 08 Nov 2018 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</guid><description>&lt;h2 id="什么是-markdown">&lt;strong>什么是 Markdown?&lt;/strong>&lt;/h2>
 &lt;p>Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。&lt;/p>
 &lt;p>&lt;img src="./Markdown-mark.svg.png" alt="哈哈哈">&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;hr>
 &lt;h3 id="markdown-vs-富文本">Markdown VS 富文本&lt;/h3>
 &lt;p>基于 Markdown 写作，是属于&lt;strong>纯文本&lt;/strong>写作。「纯文本」写作和「富文本」写作是对立的，我们来区分一下：&lt;/p>

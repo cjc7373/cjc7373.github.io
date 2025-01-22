@@ -1,5 +1,4 @@
 <?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 24 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/2020summary_2021plan/ -&lt;p>又到了传统艺能&lt;del>年终&lt;/del>年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="2020-总结">2020 总结&lt;/h2>
 &lt;p>一句话总结的话, 知识的广度提升了, 深度还不够, 学习状态仍旧不能让自己满意. 以及这一年我始终在担心有没有学上, 找不找得到工作.&lt;/p>
 &lt;h3 id="学业">学业&lt;/h3>
@@ -127,7 +126,6 @@
 &lt;/ul>
 &lt;p>不管怎么样, 我还是要以更加积极的心态去迎接未来. 冲!&lt;/p>
 - https://blog.coherence.codes/posts/2021/2020summary_2021plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Anki 工作流</title><link>https://blog.coherence.codes/posts/2021/anki_workflow/</link><pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/anki_workflow/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/anki_workflow/ -&lt;p>&lt;a href="https://apps.ankiweb.net/">Anki&lt;/a> 是一个间隔式重复的&amp;quot;闪卡 (flashcard)&amp;ldquo;记忆软件. 下面来谈谈我考研及日常生活中的 Anki 工作流.&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="为什么选择-anki">为什么选择 Anki&lt;/h2>
 &lt;p>和市面上其他的记忆软件一样, Anki 也是基于遗忘曲线, 基于间隔式重复这一原理的. 最大的不同在于它是高度自定义的. 自己制作卡组, 设计模板, 甚至编写自己的插件. 还有很多特性例如 Notes 和 Cards 相分离我其实并没有用到.&lt;/p>
 &lt;p>其次 Anki 是一款开源软件, 在我希望所有软件都用自由软件替换的如今, 这无疑是一个重要的理由.&lt;/p>
@@ -232,7 +230,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(ans)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>700多ms过了。。&lt;/p>
 - https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/ -&lt;p>快乐划水。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="1328a---divisibility-problemhttpscodeforcescomcontest1328problema">&lt;a href="https://codeforces.com/contest/1328/problem/A">1328A - Divisibility Problem&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>快乐签到。&lt;/p>
@@ -429,7 +426,6 @@
 &lt;h2 id="实践">实践&lt;/h2>
 &lt;p>脚本的逻辑大概是对每一篇博文，寻找其元数据的 date 字段，将其移动到对应的文件夹下，同时对同名的文件夹也进行递归移动。由于图片都是相对引用的，所以不会出问题。（即使出了咱还有 git）&lt;/p>
 - https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Kickstart 2020 Round A 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</link><pubDate>Thu, 26 Mar 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/ -&lt;p>第一次打Kickstart，体验还是很不错的。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;p>&lt;a href="https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ffc7">比赛链接&lt;/a>&lt;/p>
 &lt;p>迟了几分钟进比赛，发现前十已经两题AC了。&lt;/p>
 &lt;h2 id="allocation">Allocation&lt;/h2>
@@ -665,7 +661,6 @@
 &lt;li>多写一些博客，输出自己的知识，同时也提高自己的能力。&lt;/li>
 &lt;/ul>
 - https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>WSL使用体验</title><link>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</link><pubDate>Sun, 08 Dec 2019 19:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/ -&lt;p>首先，WSL真香！&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="开启wsl">开启WSL&lt;/h2>
 &lt;p>最简单的方式是使用管理员权限运行Powershell，然后输入：&lt;/p>
 &lt;p>&lt;code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux&lt;/code>&lt;/p>
@@ -755,7 +750,6 @@
 &lt;p>直接原因是 Github 的一个假装很贴心的功能：&lt;/p>
 &lt;p>&lt;img src="./1565183420437.png" alt="1565183420437">&lt;/p>
 &lt;p>由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="过程">过程&lt;/h2>
 &lt;h3 id="环境">环境&lt;/h3>
 &lt;p>node.js 6.4.1&lt;/p>

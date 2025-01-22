@@ -2,7 +2,6 @@
 &lt;p>二年级下学期期末，有一个两周的实习，学校给了我们三个选项，其中软通算是知名度最高的一家公司了。
 &lt;img src="./isoftstone.png" alt="“isoftstone”的图片搜索结果">&lt;/p>
 &lt;p>然而网上这家公司的风评很差，不过其他两家似乎更差，于是我们班大概四分之三的人都来了软通。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="经历">经历&lt;/h2>
 &lt;p>实习第一天，上午讲的开发流程，团队角色，每日例行项目好似我们已经接手了一个实际项目，然而到了下午瞬间变成培训班，开始教我们配置环境。看下发的文档是用 Java Spring Boot 框架来开发。第二天又开始复习 Java。然后到了第三天，负责我们的老师（就叫他项目经理好了）突然说，你们想用什么技术就用什么技术吧。终于不用写 Java 了（逃&lt;/p>
 &lt;p>我们大概使用的是 Scrum 敏捷开发方法，最有特色的一点大概就是每日站会了。还有 Story 列表其实也挺不错的，只是没有贴在公告板上感觉失去了灵魂。&lt;/p>
@@ -106,7 +105,6 @@ client_max_body_size 200M;
 &lt;p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。&lt;/p>
 &lt;p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的&lt;code>ln -s&lt;/code>大法行不通了。&lt;/p>
 &lt;p>于是我想到了 CI。仔细一想其实也不复杂，无非是&lt;code>git push&lt;/code>， &lt;code>git pull&lt;/code>两下罢了。那么，Let&amp;rsquo;s do it!&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="需求">需求&lt;/h2>
 &lt;p>我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。&lt;/p>
 &lt;ul>
@@ -196,7 +194,6 @@ pause
 &lt;p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p>
 &lt;p>这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p>
 &lt;p>&lt;img src="./1554536417517.png" alt="1554536417517">&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;p>下面列出笔记本的配置，以供参考。&lt;/p>
 &lt;table>
 &lt;thead>
@@ -391,7 +388,6 @@ May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&
 &lt;/ul>
 - https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ -&lt;p>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。&lt;/p>
 &lt;p>Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板，准备拆机 TTL 破解光猫。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="0x01-拆机">0x01 拆机&lt;/h2>
 &lt;p>拆机后发现 PCB 板上有 TTL 插针，用万用表测得倒数第二根为 GND（接地pin），然后剩余四根随机组合，测得 RX（接收数据pin）和 TX（发送数据pin）。用杜邦线连接 USB转TTL板和 TTL 插针。&lt;/p>
 &lt;p>&lt;img src="./IMG_20190219_113847.jpg" alt="IMG_20190219_113847">&lt;/p>
@@ -407,7 +403,6 @@ May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&
 &lt;p>&lt;a href="https://paper.seebug.org/506/#0x03">如何通过TTL调试光猫&lt;/a>
 &lt;a href="https://m2.zhugh.com:26800/po-jie-dian-xin-guang-mao/">破解电信光猫&lt;/a>&lt;/p>
 - https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>2018年终总结&amp;2019展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</link><pubDate>Mon, 11 Feb 2019 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ -&lt;p>今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="2018-总结">2018 总结&lt;/h2>
 &lt;p>时间及事件依据：印象笔记、Google 相册、我的记忆。&lt;/p>
 &lt;p>事件大致以时间顺序排列。&lt;/p>
@@ -472,7 +467,6 @@ May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&
 &lt;p>2019年已经快过去了两个月，我才堪堪写完年初计划。这些计划（或者说我未来的目标）虽有个模糊的大方向，却又不甚明了，或许我还需要更深层次的思考吧。&lt;/p>
 - https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>DOMjudge 配置/踩坑指南</title><link>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</link><pubDate>Wed, 19 Dec 2018 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ -&lt;p>我校新生赛也能用上 World Final 同款评测系统啦~&lt;/p>
 &lt;p>DOMjudge 提供了详尽的&lt;a href="https://www.domjudge.org/documentation">官方文档&lt;/a>，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="简介">简介&lt;/h2>
 &lt;p>DOMjudge，作为一款开源的 CCS(&lt;a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System">Contest Control System&lt;/a>)，现已被ICPC钦定为官方的比赛评测系统。比 pc^2 这种闭源而含有诸多 Bug 的 CCS 高到不知道哪里去了啊。&lt;/p>
 &lt;p>&lt;img src="./1545218741334.png" alt="1545218741334">&lt;/p>
@@ -629,7 +623,6 @@ account_type fullname username password
 &lt;p>比赛时还碰到一个bug，在一道题重测后这道题的一血变更了，但是榜单上的一血是错的，重新刷新榜单也未解决。查看数据库表发现有一张叫&lt;code>scorecache&lt;/code>的表，推测该表即为榜单的缓存，于是更改&lt;code>is_first_solved&lt;/code>字段后，成功解决。&lt;/p>
 - https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>使用KMS激活Visio</title><link>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</link><pubDate>Sat, 01 Dec 2018 23:11:38 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ -&lt;h2 id="题记">题记&lt;/h2>
 &lt;p>如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="转换visio版本">转换Visio版本&lt;/h2>
 &lt;p>我在&lt;a href="http://msdn.itellyou.cn/?lang=zh-cn">MSDN我告诉你&lt;/a>和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。&lt;/p>
 &lt;p>复制以下代码，保存为.bat文件并用管理员身份运行：&lt;/p>
@@ -672,7 +665,6 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\project???vl_mak*.xrm-ms&amp;#
 - https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Markdown简介</title><link>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</link><pubDate>Thu, 08 Nov 2018 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ -&lt;h2 id="什么是-markdown">&lt;strong>什么是 Markdown?&lt;/strong>&lt;/h2>
 &lt;p>Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。&lt;/p>
 &lt;p>&lt;img src="./Markdown-mark.svg.png" alt="哈哈哈">&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;hr>
 &lt;h3 id="markdown-vs-富文本">Markdown VS 富文本&lt;/h3>
 &lt;p>基于 Markdown 写作，是属于&lt;strong>纯文本&lt;/strong>写作。「纯文本」写作和「富文本」写作是对立的，我们来区分一下：&lt;/p>
@@ -891,7 +883,6 @@ hello,world
 &lt;p>这就是乱改字体的后果..&lt;/p>
 &lt;/blockquote>
 &lt;p>字体修复，不只是字体修复。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="事由">事由&lt;/h2>
 &lt;p>偶然间看到一篇&lt;a href="http://www.dgtle.com/article-25875-1.html">替换Win10字体来提升字体观感的文章&lt;/a>，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。&lt;/p>
 &lt;p>然而，使用了一段时间后发现，所有的字体似乎都小了一圈，而且在cmd中出现了字体大小错乱的情况。网上找了一圈发现Win10砍掉了调整字体大小的功能，现在只能以整体缩放来调整字体大小。新的字体感觉也没有想象中的那么好。&lt;/p>

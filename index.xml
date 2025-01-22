@@ -525,8 +525,8 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;p>如果只是在本地测试，模块路径可以随便起，比如 &lt;code>example.com/what&lt;/code> 这种。当然如果你未来想要发布它，那就得遵循 Go 的规则，比如 &lt;code>github.com/your-username/your-repo-name&lt;/code>。&lt;/p>
 &lt;p>&lt;em>导入路径&lt;/em>是一个用于导入一个包的字符串。一个包的导入路径是模块路径加上它在模块中的子目录。标准库中的包没有模块路径前缀。例如，模块 &lt;code>github.com/google/go-cmp&lt;/code> 在路径 &lt;code>cmp/&lt;/code> 下包含了一个包，这个包的导入路径为 &lt;code>github.com/google/go-cmp/cmp&lt;/code>。这个规则也适用于项目本身的包，如果 &lt;code>go-cmp&lt;/code> 项目在 &lt;code>foo/&lt;/code> 路径下的代码同样也导入了上述包，导入路径同样为 &lt;code>github.com/google/go-cmp/cmp&lt;/code>。&lt;/p>
 &lt;p>通俗理解一下，导入路径就是文件夹路径。当一个包导入之后，我们就可以用包名来引用它了。一般而言，包名就是文件夹名，但这只是惯例，而非规定，如果确有需要可以不一致。所以下面的写法是合法的：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;example.com/xxx/pkga&amp;#34;&lt;/span> &lt;span style="color:#75715e">// actually it&amp;#39;s package name is pkgb
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> &lt;span style="color:#e6db74">&amp;#34;example.com/xxx/pkga&amp;#34;&lt;/span> &lt;span style="color:#75715e">// actually it&amp;#39;s package name is pkgb&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>() {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">pkgb&lt;/span>.&lt;span style="color:#a6e22e">Func&lt;/span>()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
@@ -993,8 +993,8 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Handle&lt;/span> &lt;span style="color:#66d9ef">int64&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ChunkServers&lt;/span> []&lt;span style="color:#a6e22e">ChuckServer&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">ReplicaNum&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Version&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#75715e">// 为了区分数据是否是最新的
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> &lt;span style="color:#a6e22e">Primary&lt;/span> &lt;span style="color:#a6e22e">ChuckServer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Version&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> &lt;span style="color:#75715e">// 为了区分数据是否是最新的&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">Primary&lt;/span> &lt;span style="color:#a6e22e">ChuckServer&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">LeaseExpiration&lt;/span> &lt;span style="color:#a6e22e">time&lt;/span>.&lt;span style="color:#a6e22e">Time&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">type&lt;/span> &lt;span style="color:#a6e22e">Master&lt;/span> &lt;span style="color:#66d9ef">struct&lt;/span> {

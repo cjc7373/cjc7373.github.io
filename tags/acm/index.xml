@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ACM on Coherence's Blog</title><link>https://blog.coherence.codes/tags/acm/</link><description>Recent content in ACM on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/acm/index.xml" rel="self" type="application/rss+xml"/><item><title>DOMjudge 配置/踩坑指南</title><link>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</link><pubDate>Wed, 19 Dec 2018 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</guid><description>&lt;p>我校新生赛也能用上 World Final 同款评测系统啦~&lt;/p>
 &lt;p>DOMjudge 提供了详尽的&lt;a href="https://www.domjudge.org/documentation">官方文档&lt;/a>，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="简介">简介&lt;/h2>
 &lt;p>DOMjudge，作为一款开源的 CCS(&lt;a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System">Contest Control System&lt;/a>)，现已被ICPC钦定为官方的比赛评测系统。比 pc^2 这种闭源而含有诸多 Bug 的 CCS 高到不知道哪里去了啊。&lt;/p>
 &lt;p>&lt;img src="./1545218741334.png" alt="1545218741334">&lt;/p>

@@ -3,7 +3,6 @@
 &lt;p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。&lt;/p>
 &lt;p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的&lt;code>ln -s&lt;/code>大法行不通了。&lt;/p>
 &lt;p>于是我想到了 CI。仔细一想其实也不复杂，无非是&lt;code>git push&lt;/code>， &lt;code>git pull&lt;/code>两下罢了。那么，Let&amp;rsquo;s do it!&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;h2 id="需求">需求&lt;/h2>
 &lt;p>我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。&lt;/p>
 &lt;ul>
@@ -18,4 +17,11 @@
 &lt;li>master 用于存放构建完成的静态文件&lt;/li>
 &lt;li>source 用于存放 Hexo 生成的博客源文件&lt;/li>
 &lt;/ul>
-&lt;p>对 Hexo 文件夹的操作如下：&lt;/p></description></item></channel></rss>
+&lt;p>对 Hexo 文件夹的操作如下：&lt;/p>
+&lt;pre tabindex="0">&lt;code>git init
+git remote add origin git@github.com:cjc7373/cjc7373.github.io.git
+git checkout -b source
+git add .
+git commit -m &amp;#34;To use CI to automated deploy&amp;#34;
+git push origin source:source
+&lt;/code>&lt;/pre>&lt;p>本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带&lt;code>.gitignore&lt;/code>文件，所以实际大小并没有多少。&lt;/p></description></item></channel></rss>

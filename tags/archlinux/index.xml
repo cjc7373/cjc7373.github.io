@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Archlinux on Coherence's Blog</title><link>https://blog.coherence.codes/tags/archlinux/</link><description>Recent content in Archlinux on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 08 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/archlinux/index.xml" rel="self" type="application/rss+xml"/><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>&lt;p>记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.&lt;/p>
-&lt;!-- raw HTML omitted -->
 &lt;p>Archwiki 给人的感觉还是有点零碎了.. 与打包相关的条目大概有:&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://wiki.archlinux.org/title/Creating_packages">Creating packages&lt;/a>&lt;/li>
@@ -13,4 +12,6 @@
 &lt;h2 id="概览">概览&lt;/h2>
 &lt;p>ABS 是一个 &lt;a href="https://en.wikipedia.org/wiki/Ports_collection">ports&lt;/a>-like 构建系统, 其打包的主要工具为 makepkg, 根据当前目录下的 PKGBUILD 打包. 据说是比 Debian 系的打包容易不少.&lt;/p>
 &lt;h2 id="打包">打包&lt;/h2>
-&lt;p>首先 makepkg 会下载 source 变量中指定的文件列表, 它们可以是一个 URL, 一个 git 仓库, 或一个在当前目录下的文件. makepkg 会校验文件的哈希并解压到以文件名命名的目录. 可用 &lt;code>-g, --geninteg&lt;/code> 命令来下载文件并生成哈希. 注意 VCS 的 source 是没有哈希的.&lt;/p></description></item></channel></rss>
+&lt;p>首先 makepkg 会下载 source 变量中指定的文件列表, 它们可以是一个 URL, 一个 git 仓库, 或一个在当前目录下的文件. makepkg 会校验文件的哈希并解压到以文件名命名的目录. 可用 &lt;code>-g, --geninteg&lt;/code> 命令来下载文件并生成哈希. 注意 VCS 的 source 是没有哈希的.&lt;/p>
+&lt;p>事实上看一看每种语言对应的 guidelines 是非常有用的.&lt;/p>
+&lt;p>&lt;img src="./image-20211208122231668.png" alt="image-20211208122231668">&lt;/p></description></item></channel></rss>
