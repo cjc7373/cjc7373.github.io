@@ -1,24 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>算法 on Coherence's Blog</title><link>https://blog.coherence.codes/tags/%E7%AE%97%E6%B3%95/</link><description>Recent content in 算法 on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 19 Apr 2020 19:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml"/><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>&lt;h2 id="1335a---candies-and-two-sistershttpscodeforcescomcontest1335problema">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>算法 on Coherence's Blog</title><link>https://blog.coherence.codes/tags/%E7%AE%97%E6%B3%95/</link><description>Recent content in 算法 on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 19 Apr 2020 19:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml"/><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>&lt;h2 id="1335a---candies-and-two-sisters">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>快乐签到。&lt;/p>
-&lt;h2 id="1335b---construct-the-stringhttpscodeforcescomcontest1335problemb">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
+&lt;h2 id="1335b---construct-the-string">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>先构造长度为 $a$ 的字符串，然后第 $i+a$ 个字母为第 $i$ 个字母，输出即可。&lt;/p>
-&lt;h2 id="1335c---two-teams-composinghttpscodeforcescomcontest1335problemc">&lt;a href="https://codeforces.com/contest/1335/problem/C">1335C - Two Teams Composing&lt;/a>&lt;/h2>
+&lt;h2 id="1335c---two-teams-composing">&lt;a href="https://codeforces.com/contest/1335/problem/C">1335C - Two Teams Composing&lt;/a>&lt;/h2>
 &lt;p>&lt;code>2/1 Accepted&lt;/code>&lt;/p>
 &lt;p>给 $n$ 个数，每个数有一个值，要求把它们分成数量相同的两组，一组所有的值相等，一组所有的值不等。&lt;/p>
 &lt;p>先统计每个值的数量，得出最大个数 $m$，和不同值的数的个数 $l$，&lt;/p>
 &lt;p>&lt;code>ans = min(l, m) if m &amp;lt; l + 2 else ans = min(l, m) + 1&lt;/code>&lt;/p>
-&lt;h2 id="1335d---anti-sudokuhttpscodeforcescomcontest1335problemd">&lt;a href="https://codeforces.com/contest/1335/problem/D">1335D - Anti-Sudoku&lt;/a>&lt;/h2>
+&lt;h2 id="1335d---anti-sudoku">&lt;a href="https://codeforces.com/contest/1335/problem/D">1335D - Anti-Sudoku&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>给一个求解好的数独，求改动不超过 9 个数，使其每行、列、区块内皆有两个相同的数。&lt;/p>
 &lt;p>想了两分钟，发现将所有的 1 替换为 2 即可。&lt;/p>
-&lt;h2 id="1335e---three-blocks-palindromehttpscodeforcescomcontest1335probleme2">&lt;a href="https://codeforces.com/contest/1335/problem/E2">1335E - Three Blocks Palindrome&lt;/a>&lt;/h2>
+&lt;h2 id="1335e---three-blocks-palindrome">&lt;a href="https://codeforces.com/contest/1335/problem/E2">1335E - Three Blocks Palindrome&lt;/a>&lt;/h2>
 &lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p></description></item><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>&lt;p>快乐划水。&lt;/p>
-&lt;h2 id="1328a---divisibility-problemhttpscodeforcescomcontest1328problema">&lt;a href="https://codeforces.com/contest/1328/problem/A">1328A - Divisibility Problem&lt;/a>&lt;/h2>
+&lt;h2 id="1328a---divisibility-problem">&lt;a href="https://codeforces.com/contest/1328/problem/A">1328A - Divisibility Problem&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>快乐签到。&lt;/p>
-&lt;h2 id="1328b---k-th-beautiful-stringhttpscodeforcescomcontest1328problemb">&lt;a href="https://codeforces.com/contest/1328/problem/B">1328B - K-th Beautiful String&lt;/a>&lt;/h2>
+&lt;h2 id="1328b---k-th-beautiful-string">&lt;a href="https://codeforces.com/contest/1328/problem/B">1328B - K-th Beautiful String&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>给一个数n，要求构造一个字符串，包含n-2个a，2个b，且在这个字符串的按字典序的全排列中排在第k个。&lt;/p>
 &lt;p>找b的位置即可。&lt;/p>
@@ -36,7 +36,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328c---ternary-xorhttpscodeforcescomcontest1328problemc">&lt;a href="https://codeforces.com/contest/1328/problem/C">1328C - Ternary XOR&lt;/a>&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328c---ternary-xor">&lt;a href="https://codeforces.com/contest/1328/problem/C">1328C - Ternary XOR&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>给一个三进制数x，求两个数a，b，使这两个数的异或为x，且max(a, b)最小。&lt;/p></description></item><item><title>Kickstart 2020 Round A 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</link><pubDate>Thu, 26 Mar 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</guid><description>&lt;p>第一次打Kickstart，体验还是很不错的。&lt;/p>
 &lt;p>&lt;a href="https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ffc7">比赛链接&lt;/a>&lt;/p>

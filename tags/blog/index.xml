@@ -10,16 +10,14 @@
 &lt;li>2019-12-24 启用新域名&lt;code>blog.coherence.codes&lt;/code>&lt;/li>
 &lt;li>2019-10-07 升级主题至 Next V7.4.1&lt;/li>
 &lt;li>2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %}&lt;/li>
-&lt;/ul>
-&lt;/blockquote>
+&lt;/ul>&lt;/blockquote>
 &lt;p>Next 就是一个非常大众的主题，有几种变体，我用的是一个叫 &lt;code>pisces&lt;/code> 的变体，长这样（原博客图已经找不到了，只能用官方 Demo 凑数了）：&lt;/p>
 &lt;p>&lt;img src="image-20221002165030564.png" alt="image-20221002165030564">&lt;/p>
 &lt;p>这一时期的博客位于 &lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/source/source">source 分支&lt;/a>，最后更新于 2020-04-16。&lt;/p>
 &lt;p>由于这个主题实在是太大众了，中途（2019-10 左右）我也想过换一个主题（&lt;a href="https://github.com/yscoder/hexo-theme-indigo">hexo-theme-indigo&lt;/a>，一个 Material Design 风格的主题），但是没有配置成功，&lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/theme-indigo">theme-indigo 分支&lt;/a>便是那次尝试。theme-indigo 的效果图长这样：&lt;/p>
 &lt;p>&lt;img src="image-20221002165819783.png" alt="image-20221002165819783">&lt;/p>
 &lt;p>到了 21 年 2 月，我开始重新调研博客生成器，当时看到了一个 Python 写的 Pelican，而我又希望壮大一下 Python 生态，于是就用了。用了之后发现并没有什么合适的主题，恰巧 Pelican 用的模板引擎 Jinja 和 Django Template Engine 很像，我比较熟悉，于是我就想自己写一个主题，然而这一工作从没开始过.. 于是我现在的博客是这样的（&lt;del>极简主义&lt;/del>）：&lt;/p></description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>&lt;blockquote>
-&lt;p>身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p>
-&lt;/blockquote>
+&lt;p>身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p>&lt;/blockquote>
 &lt;h2 id="为什么选择hexo">为什么选择Hexo&lt;/h2>
 &lt;p>其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是&lt;del>随手找了几个静态博客生成器，&lt;/del> 随手一查就找到了Hexo。&lt;/p>
 &lt;h2 id="hexo搭建过程">Hexo搭建过程&lt;/h2>

@@ -154,22 +154,22 @@
 &lt;li>有的单词不同的词性有不同的发音, 这个也没有处理..&lt;/li>
 &lt;li>有一个 &lt;a href="https://github.com/ninja33/ODH">chrome 插件&lt;/a>已经基本上把我想做的都实现了, 可以借鉴一下..&lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2021/anki_workflow/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ -&lt;h2 id="1335a---candies-and-two-sistershttpscodeforcescomcontest1335problema">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
+- https://blog.coherence.codes/posts/2021/anki_workflow/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ -&lt;h2 id="1335a---candies-and-two-sisters">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>快乐签到。&lt;/p>
-&lt;h2 id="1335b---construct-the-stringhttpscodeforcescomcontest1335problemb">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
+&lt;h2 id="1335b---construct-the-string">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>先构造长度为 $a$ 的字符串，然后第 $i+a$ 个字母为第 $i$ 个字母，输出即可。&lt;/p>
-&lt;h2 id="1335c---two-teams-composinghttpscodeforcescomcontest1335problemc">&lt;a href="https://codeforces.com/contest/1335/problem/C">1335C - Two Teams Composing&lt;/a>&lt;/h2>
+&lt;h2 id="1335c---two-teams-composing">&lt;a href="https://codeforces.com/contest/1335/problem/C">1335C - Two Teams Composing&lt;/a>&lt;/h2>
 &lt;p>&lt;code>2/1 Accepted&lt;/code>&lt;/p>
 &lt;p>给 $n$ 个数，每个数有一个值，要求把它们分成数量相同的两组，一组所有的值相等，一组所有的值不等。&lt;/p>
 &lt;p>先统计每个值的数量，得出最大个数 $m$，和不同值的数的个数 $l$，&lt;/p>
 &lt;p>&lt;code>ans = min(l, m) if m &amp;lt; l + 2 else ans = min(l, m) + 1&lt;/code>&lt;/p>
-&lt;h2 id="1335d---anti-sudokuhttpscodeforcescomcontest1335problemd">&lt;a href="https://codeforces.com/contest/1335/problem/D">1335D - Anti-Sudoku&lt;/a>&lt;/h2>
+&lt;h2 id="1335d---anti-sudoku">&lt;a href="https://codeforces.com/contest/1335/problem/D">1335D - Anti-Sudoku&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>给一个求解好的数独，求改动不超过 9 个数，使其每行、列、区块内皆有两个相同的数。&lt;/p>
 &lt;p>想了两分钟，发现将所有的 1 替换为 2 即可。&lt;/p>
-&lt;h2 id="1335e---three-blocks-palindromehttpscodeforcescomcontest1335probleme2">&lt;a href="https://codeforces.com/contest/1335/problem/E2">1335E - Three Blocks Palindrome&lt;/a>&lt;/h2>
+&lt;h2 id="1335e---three-blocks-palindrome">&lt;a href="https://codeforces.com/contest/1335/problem/E2">1335E - Three Blocks Palindrome&lt;/a>&lt;/h2>
 &lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p>
 &lt;p>给一个含有$n$个数的序列，定义三区块的回文数为：$[\underbrace{a, a, \dots, a}&lt;em>{x}, \underbrace{b, b, \dots, b}&lt;/em>{y}, \underbrace{a, a, \dots, a}_{x}]$，$x, y$是大于等于0的整数，a可以等于b。求一个最长子序列使它为三区块的回文数。输出长度。&lt;/p>
 &lt;p>又是一道需要神奇的优化的题。。&lt;/p>
@@ -230,10 +230,10 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(ans)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>700多ms过了。。&lt;/p>
 - https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/ -&lt;p>快乐划水。&lt;/p>
-&lt;h2 id="1328a---divisibility-problemhttpscodeforcescomcontest1328problema">&lt;a href="https://codeforces.com/contest/1328/problem/A">1328A - Divisibility Problem&lt;/a>&lt;/h2>
+&lt;h2 id="1328a---divisibility-problem">&lt;a href="https://codeforces.com/contest/1328/problem/A">1328A - Divisibility Problem&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>快乐签到。&lt;/p>
-&lt;h2 id="1328b---k-th-beautiful-stringhttpscodeforcescomcontest1328problemb">&lt;a href="https://codeforces.com/contest/1328/problem/B">1328B - K-th Beautiful String&lt;/a>&lt;/h2>
+&lt;h2 id="1328b---k-th-beautiful-string">&lt;a href="https://codeforces.com/contest/1328/problem/B">1328B - K-th Beautiful String&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>给一个数n，要求构造一个字符串，包含n-2个a，2个b，且在这个字符串的按字典序的全排列中排在第k个。&lt;/p>
 &lt;p>找b的位置即可。&lt;/p>
@@ -251,7 +251,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328c---ternary-xorhttpscodeforcescomcontest1328problemc">&lt;a href="https://codeforces.com/contest/1328/problem/C">1328C - Ternary XOR&lt;/a>&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328c---ternary-xor">&lt;a href="https://codeforces.com/contest/1328/problem/C">1328C - Ternary XOR&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>给一个三进制数x，求两个数a，b，使这两个数的异或为x，且max(a, b)最小。&lt;/p>
 &lt;p>从左往右对每一位考虑最优解，若是0或2，则平均分配，若为1，则分配到0的那方获得接下来所有的数。&lt;/p>
@@ -273,7 +273,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans2 &lt;span style="color:#f92672">+=&lt;/span> x[j]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(ans1, ans2, sep&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328d---carouselhttpscodeforcescomcontest1328problemd">&lt;a href="https://codeforces.com/contest/1328/problem/D">1328D - Carousel&lt;/a>&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328d---carousel">&lt;a href="https://codeforces.com/contest/1328/problem/D">1328D - Carousel&lt;/a>&lt;/h2>
 &lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p>
 &lt;p>大概是能做的，只是到了十二点太困了。。就睡觉去了。&lt;/p>
 &lt;p>n个动物围成一圈，相邻的不同动物要有不同的颜色，求最少的颜色和对应的颜色序列。&lt;/p>
@@ -309,7 +309,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(i &lt;span style="color:#f92672">%&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39; &amp;#39;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#ae81ff">3&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328e---tree-querieshttpscodeforcescomcontest1328probleme">&lt;a href="https://codeforces.com/contest/1328/problem/E">1328E - Tree Queries&lt;/a>&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328e---tree-queries">&lt;a href="https://codeforces.com/contest/1328/problem/E">1328E - Tree Queries&lt;/a>&lt;/h2>
 &lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p>
 &lt;p>给一棵树，有m个查询，每个查询给出树上的一些节点，若有一条从根节点出发的路径，使这些节点属于这条路径或和这条路径上某个点的距离为一，输出 YES，否则为 NO。&lt;/p>
 &lt;p>补题的时候都是泪。按题解写了个 dfs 序，然后对每个查询去它的父节点，对每个节点检查其是否为最深的那个节点的祖先。&lt;/p>
@@ -376,7 +376,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> flg: print(&lt;span style="color:#e6db74">&amp;#34;NO&amp;#34;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>: print(&lt;span style="color:#e6db74">&amp;#34;YES&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328f---make-k-equalhttpscodeforcescomcontest1328problemf">&lt;a href="https://codeforces.com/contest/1328/problem/F">1328F - Make k Equal&lt;/a>&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328f---make-k-equal">&lt;a href="https://codeforces.com/contest/1328/problem/F">1328F - Make k Equal&lt;/a>&lt;/h2>
 &lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p>
 &lt;p>给 n 个数，给一个数 k &amp;lt;= n，要使得至少 k 个数相等。有两种操作：使一个最小的数 +1，使一个最大的数 -1。求最少的操作数。&lt;/p>
 &lt;p>根据&lt;a href="https://www.cnblogs.com/st1vdy/p/12579249.html">这篇题解&lt;/a>，本题一共三种情况，给最大值 -1，给最小值 +1，同时进行两种操作（此时一定有 $a_1=a_n$ ）。（这个解法感觉比官方的还要好）&lt;/p>
@@ -827,8 +827,7 @@ link: # fontawesome图标，省略前缀，本主题前缀为 icon-，必须
 text: About # 菜单显示的文字，如果省略即默认与图标一致，首字母会转大写
 url: /about # 链接，绝对或相对路径，必须
 target: _blank # 是否跳出，省略则在当前页面打开
-&lt;/code>&lt;/pre>&lt;p>fontawesome 图标已集成到主题中，你可以到 &lt;a href="http://fontawesome.io/icons/">这个页面&lt;/a> 挑选合适的图标。&lt;/p>
-&lt;/blockquote>
+&lt;/code>&lt;/pre>&lt;p>fontawesome 图标已集成到主题中，你可以到 &lt;a href="http://fontawesome.io/icons/">这个页面&lt;/a> 挑选合适的图标。&lt;/p>&lt;/blockquote>
 &lt;p>我修改为如下：&lt;/p>
 &lt;pre tabindex="0">&lt;code>menu:
 home:

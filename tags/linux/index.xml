@@ -11,8 +11,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cjc &lt;span style="color:#ae81ff">2806&lt;/span> 6.6 2.3 &lt;span style="color:#ae81ff">4141220&lt;/span> &lt;span style="color:#ae81ff">941484&lt;/span> ? Sl Oct07 109:17 /usr/bin/kwin_wayland ...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cjc &lt;span style="color:#ae81ff">3390&lt;/span> 1.5 1.9 &lt;span style="color:#ae81ff">3994932&lt;/span> &lt;span style="color:#ae81ff">792364&lt;/span> ? Sl Oct07 26:10 /usr/lib/zotero/zotero-bin ...
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>本文假定读者具有虚拟内存的基础知识，文中的代码将以 C 语言为例。&lt;/p></description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>&lt;blockquote>
-&lt;p>Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p>
-&lt;/blockquote>
+&lt;p>Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p>&lt;/blockquote>
 &lt;h2 id="前言">前言&lt;/h2>
 &lt;p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p>
 &lt;p>这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p>

@@ -8,8 +8,7 @@
 &lt;/ul>
 &lt;p>在这纷纭复杂的互联网中，拥有自己的一方小天地，似乎也是极好的。&lt;/p>
 - https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ -&lt;blockquote>
-&lt;p>身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p>
-&lt;/blockquote>
+&lt;p>身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p>&lt;/blockquote>
 &lt;h2 id="为什么选择hexo">为什么选择Hexo&lt;/h2>
 &lt;p>其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是&lt;del>随手找了几个静态博客生成器，&lt;/del> 随手一查就找到了Hexo。&lt;/p>
 &lt;h2 id="hexo搭建过程">Hexo搭建过程&lt;/h2>

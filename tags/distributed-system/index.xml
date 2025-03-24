@@ -6,8 +6,7 @@
 &lt;pre>&lt;code>你能否实现一个分布式数据库，它能容忍任何进程的故障（可能是所有进程）而不牺牲一致性，并且在超过半数进程恢复之后继续正常工作？
 &lt;/code>&lt;/pre>
 &lt;p>没有人察觉到这个问题和 Paxos 算法之间有任何联系。&lt;/p>
-&lt;p>—— Leslie Lamport &lt;a href="https://lamport.azurewebsites.net/pubs/pubs.html?from=https://research.microsoft.com/users/lamport/pubs/pubs.html&amp;amp;type=path#lamport-paxos">对 The Part-Time Parliament 的评论&lt;/a>&lt;/p>
-&lt;/blockquote>
+&lt;p>—— Leslie Lamport &lt;a href="https://lamport.azurewebsites.net/pubs/pubs.html?from=https://research.microsoft.com/users/lamport/pubs/pubs.html&amp;amp;type=path#lamport-paxos">对 The Part-Time Parliament 的评论&lt;/a>&lt;/p>&lt;/blockquote>
 &lt;p>相较于 Paxos，Raft 的目标是易于理解且符合直觉。为了使 Raft 易于理解，作者采取了解耦 (Raft 将共识问题分解成几个子问题 leader election, log replication, safety, and membership changes) 和缩减状态空间的方式。&lt;/p>
 &lt;p>Raft 和已有的共识算法类似（尤其是 Viewstamped Replication），但它有一些新特性。Raft 采取了强 leader 的设计，例如 log entry 只会从 leader 向其他节点分发。这可能是为了性能考虑（比无 leader 要更快，RPC 也更少）Raft 采用基于随机计时器的 leader 选举, 从而用一种简单的方法来解决冲突。另外还有处理成员变更方面的改进。&lt;/p></description></item><item><title>MIT 6.824 学习笔记(一) GFS</title><link>https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/</link><pubDate>Tue, 05 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/</guid><description>&lt;p>存储系统通常是一个分布式系统的基石，通常应用可以是无状态的，而所有状态便由存储系统来管理。&lt;/p>
 &lt;p>Google 文件系统（The Google File System, GFS）在 2003 年于一篇同名论文中被提出，发表在系统领域顶会 SOSP 上，是 Google 大数据三驾马车之一&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。GFS 是一个成功的系统，在 00 年代早期，人们对于分布式文件系统已经有很好的理解了，但是尚未有一个可以扩展到上千个节点的系统被实现出来。很多 GFS 的设计被 HDFS 等后来的分布式文件系统上。&lt;/p>

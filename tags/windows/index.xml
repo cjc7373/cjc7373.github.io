@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows on Coherence's Blog</title><link>https://blog.coherence.codes/tags/windows/</link><description>Recent content in Windows on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 13 Feb 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>&lt;blockquote>
-&lt;p>这就是乱改字体的后果..&lt;/p>
-&lt;/blockquote>
+&lt;p>这就是乱改字体的后果..&lt;/p>&lt;/blockquote>
 &lt;p>字体修复，不只是字体修复。&lt;/p>
 &lt;h2 id="事由">事由&lt;/h2>
 &lt;p>偶然间看到一篇&lt;a href="http://www.dgtle.com/article-25875-1.html">替换Win10字体来提升字体观感的文章&lt;/a>，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。&lt;/p>

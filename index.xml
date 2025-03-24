@@ -223,8 +223,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;li>
 &lt;blockquote>
 &lt;p>As of the 2.4 kernel, these two caches have been combined. Today, there is only one cache, the Page Cache
-&lt;a href="https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics">https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics&lt;/a>&lt;/p>
-&lt;/blockquote>
+&lt;a href="https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics">https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics&lt;/a>&lt;/p>&lt;/blockquote>
 &lt;/li>
 &lt;/ul>
 &lt;/li>
@@ -604,8 +603,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;p>Go 非常重视向后兼容。&lt;/p>
 &lt;blockquote>
 &lt;p>遵循 Go 1 规范编写的软件应该能够在规范的生命周期之内继续正确地编译和运行，并无需更改。在现在能够工作 Go 程序应该能够在未来的 Go 1 版本中继续工作。&lt;/p>
-&lt;p>— &lt;a href="https://golang.org/doc/go1compat">&lt;em>golang.org/doc/go1compat&lt;/em>&lt;/a>&lt;/p>
-&lt;/blockquote>
+&lt;p>— &lt;a href="https://golang.org/doc/go1compat">&lt;em>golang.org/doc/go1compat&lt;/em>&lt;/a>&lt;/p>&lt;/blockquote>
 &lt;p>Go 的&lt;a href="https://go.dev/blog/publishing-go-modules">一篇博客&lt;/a>中有一个例子，标准库中的 &lt;code>strings&lt;/code> 包有两个函数：&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>Split&lt;/code> 把一个字符串分割成由参数中的分隔符分割的一些子串&lt;/li>
@@ -635,7 +633,8 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;li>&lt;a href="https://go.dev/doc/modules/managing-source">Managing module source&lt;/a> 中说明了一个仓库中管理多个模块的方式&lt;/li>
 &lt;li>&lt;a href="https://stackoverflow.com/questions/57355929/what-does-incompatible-in-go-mod-mean-will-it-cause-harm">What does &amp;lsquo;incompatible&amp;rsquo; in go.mod mean, will it cause harm?&lt;/a> 虽然问的是 incompatible 的含义，但是最高赞答案实际解释了 Go Modules 的大部分概念&lt;/li>
 &lt;/ul>
-- https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>记一次 mpv 异常关闭的调试</title><link>https://blog.coherence.codes/posts/2023/mpv_debug/</link><pubDate>Sun, 10 Dec 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mpv_debug/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mpv_debug/ -&lt;h2 id="查不出的问题">查不出的问题&lt;/h2>
+- https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>记一次 mpv 异常关闭的调试</title><link>https://blog.coherence.codes/posts/2023/mpv_debug/</link><pubDate>Sun, 10 Dec 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mpv_debug/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mpv_debug/ -&lt;p>（EDIT 2025-03-24：这个 Bug 发生的环境是一加 8T+Oxygen OS，在我更换至 LineageOS 之后这个问题没有再出现过了。所以大概率是一加的锅..）&lt;/p>
+&lt;h2 id="查不出的问题">查不出的问题&lt;/h2>
 &lt;p>长久以来我都被 mpv 的一个问题所困扰，那就是在正常播放视频时 mpv 有概率会自动退出（通常是按下暂停键的时候）。通过 &lt;code>-v -v -v&lt;/code> 参数查看详细日志发现 mpv 接收到了 stop 命令：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>cplayer&lt;span style="color:#f92672">]&lt;/span> Run command: stop, flags&lt;span style="color:#f92672">=&lt;/span>64, args&lt;span style="color:#f92672">=[&lt;/span>flags&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是这个命令是谁发的不得而知。一开始怀疑是插件的问题，然而禁用所有插件（&lt;code>~/.config/mpv/scripts&lt;/code> 目录）后问题依旧。后尝试用 &lt;code>--no-config&lt;/code> 参数禁用所有配置，发现问题消失，于是尝试注释掉所有 &lt;code>mpv.conf&lt;/code> 中的配置，发现问题依旧。我还怀疑过是 &lt;code>pipewire&lt;/code>/&lt;code>xorg&lt;/code> 的问题，但是并没有搜索到相关信息。&lt;/p>
@@ -672,8 +671,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;pre>&lt;code>你能否实现一个分布式数据库，它能容忍任何进程的故障（可能是所有进程）而不牺牲一致性，并且在超过半数进程恢复之后继续正常工作？
 &lt;/code>&lt;/pre>
 &lt;p>没有人察觉到这个问题和 Paxos 算法之间有任何联系。&lt;/p>
-&lt;p>—— Leslie Lamport &lt;a href="https://lamport.azurewebsites.net/pubs/pubs.html?from=https://research.microsoft.com/users/lamport/pubs/pubs.html&amp;amp;type=path#lamport-paxos">对 The Part-Time Parliament 的评论&lt;/a>&lt;/p>
-&lt;/blockquote>
+&lt;p>—— Leslie Lamport &lt;a href="https://lamport.azurewebsites.net/pubs/pubs.html?from=https://research.microsoft.com/users/lamport/pubs/pubs.html&amp;amp;type=path#lamport-paxos">对 The Part-Time Parliament 的评论&lt;/a>&lt;/p>&lt;/blockquote>
 &lt;p>相较于 Paxos，Raft 的目标是易于理解且符合直觉。为了使 Raft 易于理解，作者采取了解耦 (Raft 将共识问题分解成几个子问题 leader election, log replication, safety, and membership changes) 和缩减状态空间的方式。&lt;/p>
 &lt;p>Raft 和已有的共识算法类似（尤其是 Viewstamped Replication），但它有一些新特性。Raft 采取了强 leader 的设计，例如 log entry 只会从 leader 向其他节点分发。这可能是为了性能考虑（比无 leader 要更快，RPC 也更少）Raft 采用基于随机计时器的 leader 选举, 从而用一种简单的方法来解决冲突。另外还有处理成员变更方面的改进。&lt;/p>
 &lt;p>为了解决单点故障问题，Raft 采用了 Majority Vote，基本上任何操作都需要得到多数确认才能够执行。为了避免 tie，Raft 的节点数量必须为奇数。因此在一个 2f+1 个节点的系统中，最多允许 f 个节点故障，f+1 即为法定人数（quorum）。&lt;/p>
@@ -784,8 +782,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;p>通过 Linearizability 这样一种一致性模型，我们可以基于一种顺序的规格形式地确定并发操作的正确性。在一个 linearizable 的系统中，每个操作看起来是在调用和回复之间的某个时间点原子、瞬间执行。可线性化可以被视作强一致性的同义词。&lt;/p>
 &lt;blockquote>
 &lt;p>Definition of linearizability:&lt;/p>
-&lt;p>Execution history is linearizable if there exists a total order of the operations in the history that matches real time for non-concurrent requests. Each read sees the value of the most recent write in order.&lt;/p>
-&lt;/blockquote>
+&lt;p>Execution history is linearizable if there exists a total order of the operations in the history that matches real time for non-concurrent requests. Each read sees the value of the most recent write in order.&lt;/p>&lt;/blockquote>
 &lt;p>下图所示的执行历史是可线性化的：&lt;/p>
 &lt;p>&lt;img src="./image-20231001151607479.png" alt="image-20231001151607479">&lt;/p>
 &lt;p>而下图则不是：&lt;/p>
@@ -1056,8 +1053,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;p>查看该 &lt;code>.service&lt;/code> 文件发现其使用 &lt;code>Type=dbus&lt;/code> 的启动类型，并且获得了一个叫 &lt;code>org.kde.Solid.PowerManagement&lt;/code> 的 bus name。用 QBBusViewer 可以看到 powerdevil 还提供了 &lt;code>org.freedesktop.PowerManagement&lt;/code> 这一服务。&lt;/p>
 &lt;p>查阅 powerdevil 源码以 &lt;code>Switch off after&lt;/code> 为关键词进行搜索可发现相关逻辑位于 &lt;code>daemon/actions/bundled/dpms.cpp&lt;/code> 文件下，根据名字猜测 dpms 即 Display Power Management Signaling 的缩写。简单看了一下 dpms，这是一个古老的协议，在 1993 年发布，定义了四种模式，但 &lt;a href="https://wiki.archlinux.org/title/Display_Power_Management_Signaling">archwiki 上&lt;/a>指出：&lt;/p>
 &lt;blockquote>
-&lt;p>Note that DPMS was developed for CRT monitors, and on LCD displays, there is normally no difference between the standby, suspend and off modes.&lt;/p>
-&lt;/blockquote>
+&lt;p>Note that DPMS was developed for CRT monitors, and on LCD displays, there is normally no difference between the standby, suspend and off modes.&lt;/p>&lt;/blockquote>
 &lt;p>顺便插一句，流传甚广的关闭显示器的命令 &lt;code>xset dpms force off&lt;/code> 即强制 dpms 进入 off 模式。&lt;/p>
 &lt;p>在 &lt;a href="https://invent.kde.org/plasma/powerdevil/-/blob/master/daemon/actions/bundled/dpms.cpp#L108">dpms.cpp#L108&lt;/a> 发现在一定条件下空闲超时关闭显示器的函数会直接返回，猜测这个 inhibit 的条件是由上述的两个 dbus 服务来控制的。&lt;/p>
 &lt;p>尝试调用上述 dbus 服务：&lt;/p>
@@ -1071,8 +1067,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;li>
 &lt;p>&lt;code>org.freedesktop.PowerManagement&lt;/code> API 似乎并没有成为标准，虽然似乎主流的桌面环境都实现了。用 Google 搜索只能搜索到&lt;a href="https://www.freedesktop.org/wiki/Specifications/power-management-spec/">这个页面&lt;/a>，提示：&lt;/p>
 &lt;blockquote>
-&lt;p>This spec is considered obsolete.&lt;/p>
-&lt;/blockquote>
+&lt;p>This spec is considered obsolete.&lt;/p>&lt;/blockquote>
 &lt;p>并且页面中 &lt;code>The Spec&lt;/code> 下的链接全都 404 了，另有一个相关的 dbus API &lt;code>org.freedesktop.ScreenSaver&lt;/code>，不知道他们之间的关系是什么。&lt;/p>
 &lt;/li>
 &lt;li>
@@ -1133,8 +1128,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;p>patch 中第一个文件夹的名字，也就是 &lt;code>chromium-114.0.5735.45&lt;/code> 和 &lt;code>new&lt;/code> 并不重要，因为在 PKGBUILD 中我们会使用 &lt;code>-p1&lt;/code> 来忽略第一个文件夹：&lt;/p>
 &lt;blockquote>
 &lt;p>&lt;strong>-p&lt;/strong>num or **&amp;ndash;strip=**num
-Strip the smallest prefix containing num leading slashes from each file name found in the patch file.&lt;/p>
-&lt;/blockquote>
+Strip the smallest prefix containing num leading slashes from each file name found in the patch file.&lt;/p>&lt;/blockquote>
 &lt;p>然后就是编译了，在等待了四个小时之后我终于成功切换回了浅色模式！&lt;/p>
 &lt;p>&lt;img src="./image-20230531125453946.png" alt="image-20230531125453946">&lt;/p>
 &lt;p>最后还是希望 &lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1046660">Issue 1046660&lt;/a> 能够被尽快解决，让我能够在设置中直接切换浅/暗色模式。&lt;/p>

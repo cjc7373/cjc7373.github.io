@@ -61,7 +61,8 @@
 &lt;p>Go 包管理的转折来源于 2018 年 2 月 Go 作者之一 Russ Cox 在其博客上连发数篇文章进行了 Go Modules 的设计：&lt;/p>
 &lt;p>&lt;img src="./image-20231227012240619.png" alt="image-20231227012240619">&lt;/p>
 &lt;p>并最终在 Go 1.11 (2018/8) 中发布。&lt;/p>
-&lt;p>按照 &lt;a href="https://go.dev/wiki/GOPATH">GOPATH wiki&lt;/a> 所述，从 Go 1.16 (2021/2) 开始，&lt;code>GO111MODULE=on&lt;/code> 变量被默认设置，除非显式修改该变量，否则 Go Modules 会默认启用。当使用 Go Modules 时，&lt;code>GOPATH&lt;/code> 将不再用于解析导入路径。但它仍然被用于存储下载的包（&lt;code>$GOPATH/pkg/mod&lt;/code>）和二进制命令（&lt;code>$GOPATH/bin&lt;/code>）。比如 Go 的 language server &lt;code>gopls&lt;/code> 通常会被安装到 &lt;code>$GOPATH/bin&lt;/code> 下，所以这个目录通常会加入到 &lt;code>$PATH&lt;/code> 中。&lt;/p></description></item><item><title>记一次 mpv 异常关闭的调试</title><link>https://blog.coherence.codes/posts/2023/mpv_debug/</link><pubDate>Sun, 10 Dec 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mpv_debug/</guid><description>&lt;h2 id="查不出的问题">查不出的问题&lt;/h2>
+&lt;p>按照 &lt;a href="https://go.dev/wiki/GOPATH">GOPATH wiki&lt;/a> 所述，从 Go 1.16 (2021/2) 开始，&lt;code>GO111MODULE=on&lt;/code> 变量被默认设置，除非显式修改该变量，否则 Go Modules 会默认启用。当使用 Go Modules 时，&lt;code>GOPATH&lt;/code> 将不再用于解析导入路径。但它仍然被用于存储下载的包（&lt;code>$GOPATH/pkg/mod&lt;/code>）和二进制命令（&lt;code>$GOPATH/bin&lt;/code>）。比如 Go 的 language server &lt;code>gopls&lt;/code> 通常会被安装到 &lt;code>$GOPATH/bin&lt;/code> 下，所以这个目录通常会加入到 &lt;code>$PATH&lt;/code> 中。&lt;/p></description></item><item><title>记一次 mpv 异常关闭的调试</title><link>https://blog.coherence.codes/posts/2023/mpv_debug/</link><pubDate>Sun, 10 Dec 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mpv_debug/</guid><description>&lt;p>（EDIT 2025-03-24：这个 Bug 发生的环境是一加 8T+Oxygen OS，在我更换至 LineageOS 之后这个问题没有再出现过了。所以大概率是一加的锅..）&lt;/p>
+&lt;h2 id="查不出的问题">查不出的问题&lt;/h2>
 &lt;p>长久以来我都被 mpv 的一个问题所困扰，那就是在正常播放视频时 mpv 有概率会自动退出（通常是按下暂停键的时候）。通过 &lt;code>-v -v -v&lt;/code> 参数查看详细日志发现 mpv 接收到了 stop 命令：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>cplayer&lt;span style="color:#f92672">]&lt;/span> Run command: stop, flags&lt;span style="color:#f92672">=&lt;/span>64, args&lt;span style="color:#f92672">=[&lt;/span>flags&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是这个命令是谁发的不得而知。一开始怀疑是插件的问题，然而禁用所有插件（&lt;code>~/.config/mpv/scripts&lt;/code> 目录）后问题依旧。后尝试用 &lt;code>--no-config&lt;/code> 参数禁用所有配置，发现问题消失，于是尝试注释掉所有 &lt;code>mpv.conf&lt;/code> 中的配置，发现问题依旧。我还怀疑过是 &lt;code>pipewire&lt;/code>/&lt;code>xorg&lt;/code> 的问题，但是并没有搜索到相关信息。&lt;/p>
@@ -77,8 +78,7 @@
 &lt;pre>&lt;code>你能否实现一个分布式数据库，它能容忍任何进程的故障（可能是所有进程）而不牺牲一致性，并且在超过半数进程恢复之后继续正常工作？
 &lt;/code>&lt;/pre>
 &lt;p>没有人察觉到这个问题和 Paxos 算法之间有任何联系。&lt;/p>
-&lt;p>—— Leslie Lamport &lt;a href="https://lamport.azurewebsites.net/pubs/pubs.html?from=https://research.microsoft.com/users/lamport/pubs/pubs.html&amp;amp;type=path#lamport-paxos">对 The Part-Time Parliament 的评论&lt;/a>&lt;/p>
-&lt;/blockquote>
+&lt;p>—— Leslie Lamport &lt;a href="https://lamport.azurewebsites.net/pubs/pubs.html?from=https://research.microsoft.com/users/lamport/pubs/pubs.html&amp;amp;type=path#lamport-paxos">对 The Part-Time Parliament 的评论&lt;/a>&lt;/p>&lt;/blockquote>
 &lt;p>相较于 Paxos，Raft 的目标是易于理解且符合直觉。为了使 Raft 易于理解，作者采取了解耦 (Raft 将共识问题分解成几个子问题 leader election, log replication, safety, and membership changes) 和缩减状态空间的方式。&lt;/p>
 &lt;p>Raft 和已有的共识算法类似（尤其是 Viewstamped Replication），但它有一些新特性。Raft 采取了强 leader 的设计，例如 log entry 只会从 leader 向其他节点分发。这可能是为了性能考虑（比无 leader 要更快，RPC 也更少）Raft 采用基于随机计时器的 leader 选举, 从而用一种简单的方法来解决冲突。另外还有处理成员变更方面的改进。&lt;/p></description></item><item><title>git 入门</title><link>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</link><pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</guid><description>&lt;p>本文的大部分内容来自于 &lt;a href="https://git-scm.com/book/en/v2">Pro Git&lt;/a> 这本书。&lt;/p>
 &lt;h2 id="objects">Objects&lt;/h2>
@@ -141,8 +141,7 @@
 &lt;p>那 flags 呢？&lt;code>#enable-force-dark&lt;/code> 提供了强制开启深色模式的选项，但是我在 &lt;code>chrome://flags&lt;/code> 中将其设置为 disabled 之后，并没有发生什么。&lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1046660">Issue 1046660: Allow users to force web content light/dark mode independent of system setting&lt;/a> 中同样提到设置 &lt;code>#enable-force-dark&lt;/code> 为 disabled 将会被忽略。这个 Issue 应该是最贴近我的需求的一个 issue，然而目前还是 open 状态，距离实现遥遥无期。&lt;/p>
 &lt;p>另有一个 command line options &lt;code>--disable-features=WebUIDarkMode&lt;/code>，然而遗憾的是这个 option 仅针对 chromium UI, 对 web page 没有作用。&lt;/p>
 &lt;p>就在不久之前，chromium 还不支持随系统的深色模式来切换自己的深色模式（见 &lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=998903">Issue 998903: XDG Desktop Portal &amp;ldquo;Prefer dark appearance&amp;rdquo; does not affect prefers-color-scheme media query&lt;/a>），这一 feature 是在四月份实现的，并在 114 中发布。从相应的 &lt;a href="https://chromium-review.googlesource.com/c/chromium/src/+/4375982">revision&lt;/a> 中，我们可以发现 chromium 首先会通过 dbus 和 xdg-desktop-portal 交互，读取 &lt;code>org.freedesktop.appearance&lt;/code> namespace 下的 &lt;code>color-scheme&lt;/code> 字段。根据 &lt;a href="https://flatpak.github.io/xdg-desktop-portal/#gdbus-org.freedesktop.portal.Settings">portal 的定义&lt;/a> 返回值是 1 则偏好深色外观，返回值是 2 则偏好浅色外观。并且这一 revision 中说：&lt;/p></description></item><item><title>Kubernetes 生态中的航海隐喻</title><link>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</link><pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</guid><description>&lt;blockquote>
-&lt;p>Disclaimer: 本文的结论大多是根据名字推断出来的，并没有得到项目开发者的证实。&lt;/p>
-&lt;/blockquote>
+&lt;p>Disclaimer: 本文的结论大多是根据名字推断出来的，并没有得到项目开发者的证实。&lt;/p>&lt;/blockquote>
 &lt;p>Kubernetes 在 2014 年 9 月发布，在这之前 Docker 已经大行其道了。Docker 发布于 2013 年，意为码头工人，其 logo 是个鲸鱼驮着一些集装箱。&lt;/p>
 &lt;p>&lt;img src="./610px-Docker_(container_engine)_logo.svg.png" alt="File:Docker (container engine) logo.svg">&lt;/p>
 &lt;p>后来这个 Logo 又变得扁平了一点：&lt;/p>
@@ -180,8 +179,7 @@
 &lt;li>2019-12-24 启用新域名&lt;code>blog.coherence.codes&lt;/code>&lt;/li>
 &lt;li>2019-10-07 升级主题至 Next V7.4.1&lt;/li>
 &lt;li>2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %}&lt;/li>
-&lt;/ul>
-&lt;/blockquote>
+&lt;/ul>&lt;/blockquote>
 &lt;p>Next 就是一个非常大众的主题，有几种变体，我用的是一个叫 &lt;code>pisces&lt;/code> 的变体，长这样（原博客图已经找不到了，只能用官方 Demo 凑数了）：&lt;/p>
 &lt;p>&lt;img src="image-20221002165030564.png" alt="image-20221002165030564">&lt;/p>
 &lt;p>这一时期的博客位于 &lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/source/source">source 分支&lt;/a>，最后更新于 2020-04-16。&lt;/p>
@@ -201,8 +199,7 @@
 &lt;hr>
 &lt;blockquote>
 &lt;p>这几年欧美一直在向中国发动舆论战，我见过最离谱的一个理论甚至说什么“中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟”。&lt;/p>
-&lt;p>我本以为这套歪理邪说就是欧美造谣生事的想象力极限，没想到欧美的底线可以永无止尽的被突破。&lt;/p>
-&lt;/blockquote>
+&lt;p>我本以为这套歪理邪说就是欧美造谣生事的想象力极限，没想到欧美的底线可以永无止尽的被突破。&lt;/p>&lt;/blockquote>
 &lt;p>来源: &lt;a href="https://www.nytimes.com/2020/01/07/business/fake-pork-china.html">纽约时报 中国人会购买人造肉吗？&lt;/a>, 另见&lt;a href="https://world.huanqiu.com/article/9CaKrnKoNzC">环球网报道&lt;/a>&lt;/p>
 &lt;p>评论: 虽然文章很有&amp;quot;反华&amp;quot;的倾向性, 但文章主要讲的是人造肉在中国难以推广. 肉类消费对于气候的影响是不争的事实. 所以&amp;quot;中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟&amp;quot;这句话也不能算错, 但应该把主语换成全世界人.
 要求中国牺牲国民营养而减少肉类消费是不合理的, 但是推广人造肉是合理的. 作者在这里显然有断章取义之嫌.&lt;/p>
@@ -215,8 +212,7 @@
 &lt;p>逻辑好像有那么一点点道理哦，但我怎么就觉得那么奇怪和荒谬呢。&lt;/p>
 &lt;p>中国人种树怎么了？&lt;/p>
 &lt;p>种树不是在保护环境吗？&lt;/p>
-&lt;p>怎么拐了一圈之后种树居然成犯罪行为了？&lt;/p>
-&lt;/blockquote>
+&lt;p>怎么拐了一圈之后种树居然成犯罪行为了？&lt;/p>&lt;/blockquote>
 &lt;p>来源: 没有找到来源.&lt;/p>
 &lt;p>评论: 据 &lt;a href="https://checkyourfact.com/2022/04/18/fact-check-washington-post-china-trees-article/">checkyourfact&lt;/a>, 该截图为杜撰, 最初流传于 Facebook 和 Twitter.&lt;/p>
 &lt;hr>
@@ -225,25 +221,19 @@
 &lt;p>首先，一次性筷子不是用森林做出来的，一次性筷子的主要原料是一个月能长3米的竹子，以及速生经济林的边角废木料。&lt;/p>
 &lt;p>用森林里的好木头确实可以做一次性筷子，但没人这么做，因为成本太高商家会亏本，只有速生林边角废料和竹子的低廉价格才能让商家赚到钱。&lt;/p>
 &lt;p>其次，抛开筷子的真实原材料不谈，这家西方媒体的主要立场好像也是森林是宝贵的，森林对人类有益，并以此来指责中国。&lt;/p>
-&lt;p>&lt;strong>既然如此，为什么中国种植森林也能被指责一番。是不是中国人干什么都不行，连呼吸都是错的？&lt;/strong>&lt;/p>
-&lt;/blockquote>
+&lt;p>&lt;strong>既然如此，为什么中国种植森林也能被指责一番。是不是中国人干什么都不行，连呼吸都是错的？&lt;/strong>&lt;/p>&lt;/blockquote>
 &lt;p>来源: &lt;a href="https://www.washingtonpost.com/news/worldviews/wp/2013/03/14/chinas-disposable-chopstick-addiction-is-destroying-its-forests/">华盛顿邮报《中国对一次性筷子的成瘾正在摧毁森林》&lt;/a>&lt;/p>
 &lt;p>评论: 华盛顿邮报 2013 年的报道, 主要援引的是时任吉林森工集团董事长柏广新的一句话: &amp;ldquo;我国每年生产800亿双一次性筷子，相当于要砍伐2000万棵生长20年的大树&amp;rdquo;. &lt;a href="http://www.gov.cn/2013lh/content_2349497.htm">中国政府网&lt;/a>和&lt;a href="http://cpc.people.com.cn/pinglun/n/2013/0312/c78779-20759994.html">光明网&lt;/a>均能找到这句话以及相关对一次性筷子的批评. 报道中均指出了木头和竹子均是一次性筷子的原料.&lt;/p>
 &lt;hr>
 &lt;blockquote>
-&lt;p>几年前，欧美媒体报道说根据科学家的研究，中国人种植水稻会产生更多的温室气体，因此中国人吃大米正在毁灭全球气候，进而导致人类灭亡。&lt;/p>
-&lt;/blockquote>
+&lt;p>几年前，欧美媒体报道说根据科学家的研究，中国人种植水稻会产生更多的温室气体，因此中国人吃大米正在毁灭全球气候，进而导致人类灭亡。&lt;/p>&lt;/blockquote>
 &lt;p>来源: 我都不知道怎么找..&lt;/p>
 &lt;p>评论: 类似的研究肯定有, 但我不觉得哪家媒体会报道吃大米导致人类灭亡&amp;hellip;&lt;/p>
 &lt;hr>
 &lt;blockquote>
 &lt;p>2019年，国际顶级科学期刊《自然》杂志发表了一篇文章，说根据科学家的研究成果，中国政府治理沙漠，大力推进的荒漠绿化工程，种树过多，可能导致人类水资源枯竭，因此会对地球自然生态造成极大影响。&lt;/p>
 &lt;p>《自然》杂志本是人类最顶级的科学杂志，但写这篇文章的“科学家”逻辑推导却很简单，算一算中国政府要消灭荒漠需要种多少棵树，种这些树需要消耗多少水资源，&lt;strong>因此得出结论中国种树会破坏自然环境。&lt;/strong>&lt;/p>
-&lt;p>别笑，这是真事。&lt;/p>
-&lt;p>&lt;strong>中国人花费几代心血把沙漠变成了绿洲，对人类如此巨大的贡献居然招来西方期刊的指责？&lt;/strong>&lt;/p>
-&lt;p>&lt;strong>治理沙漠居然都能成为破坏环境的罪证。&lt;/strong>&lt;/p>
-&lt;/blockquote>
-&lt;p>来源: &lt;a href="https://www.nature.com/articles/d41586-019-02789-w">nature 文章 China&amp;rsquo;s tree-planting drive could falter in a warming world&lt;/a>&lt;/p></description></item><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>&lt;p>本文纯属回忆, 描述可能会有偏差.&lt;/p>
+&lt;p>别笑，这是真事。&lt;/p></description></item><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>&lt;p>本文纯属回忆, 描述可能会有偏差.&lt;/p>
 &lt;p>小学时, 为方便联系, 我爸给了我一个 ZTE 的功能机, 里面只有一个打砖块的小游戏.&lt;/p>
 &lt;p>后来这手机被我在路上掉了, 于是我换成了一个 LG 的功能机. 这个 LG 的神奇之处在于它自带了一个浏览器, 于是我可以用 2G 上网去起点, 纵横看小说. 另外它自带电信的一个应用商店, 里面有一些免费的小游戏可以下 (不知道是啥技术, 估计是 java..), 因为我当时并没有流量套餐, 后来还因为话费异常被我爸查到并追问我在上网干什么, 我记得我用看新闻蒙混过去了. 这个手机陪伴我度过了初中.&lt;/p>
 &lt;p>考上省中后, 爸妈为了奖励我, 给我换了个新手机, 这时我爸被中国电信忽悠买了个酷派 K1 (酷派 5952).&lt;/p>
@@ -340,27 +330,27 @@
 &lt;p>十分简单.&lt;/p>
 &lt;h2 id="考研">考研&lt;/h2>
 &lt;p>考研的时候打算用 Anki 背单词, 于是我做真题的时候碰到不认识的单词记录下来, 然后用 Anki 制卡.&lt;/p>
-&lt;p>卡片字段设计和工作流受到了&lt;a href="https://ankiweb.net/shared/info/934622764">考研英语真题生词&lt;/a>这个卡组的启发.&lt;/p></description></item><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>&lt;h2 id="1335a---candies-and-two-sistershttpscodeforcescomcontest1335problema">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
+&lt;p>卡片字段设计和工作流受到了&lt;a href="https://ankiweb.net/shared/info/934622764">考研英语真题生词&lt;/a>这个卡组的启发.&lt;/p></description></item><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>&lt;h2 id="1335a---candies-and-two-sisters">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>快乐签到。&lt;/p>
-&lt;h2 id="1335b---construct-the-stringhttpscodeforcescomcontest1335problemb">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
+&lt;h2 id="1335b---construct-the-string">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>先构造长度为 $a$ 的字符串，然后第 $i+a$ 个字母为第 $i$ 个字母，输出即可。&lt;/p>
-&lt;h2 id="1335c---two-teams-composinghttpscodeforcescomcontest1335problemc">&lt;a href="https://codeforces.com/contest/1335/problem/C">1335C - Two Teams Composing&lt;/a>&lt;/h2>
+&lt;h2 id="1335c---two-teams-composing">&lt;a href="https://codeforces.com/contest/1335/problem/C">1335C - Two Teams Composing&lt;/a>&lt;/h2>
 &lt;p>&lt;code>2/1 Accepted&lt;/code>&lt;/p>
 &lt;p>给 $n$ 个数，每个数有一个值，要求把它们分成数量相同的两组，一组所有的值相等，一组所有的值不等。&lt;/p>
 &lt;p>先统计每个值的数量，得出最大个数 $m$，和不同值的数的个数 $l$，&lt;/p>
 &lt;p>&lt;code>ans = min(l, m) if m &amp;lt; l + 2 else ans = min(l, m) + 1&lt;/code>&lt;/p>
-&lt;h2 id="1335d---anti-sudokuhttpscodeforcescomcontest1335problemd">&lt;a href="https://codeforces.com/contest/1335/problem/D">1335D - Anti-Sudoku&lt;/a>&lt;/h2>
+&lt;h2 id="1335d---anti-sudoku">&lt;a href="https://codeforces.com/contest/1335/problem/D">1335D - Anti-Sudoku&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>给一个求解好的数独，求改动不超过 9 个数，使其每行、列、区块内皆有两个相同的数。&lt;/p>
 &lt;p>想了两分钟，发现将所有的 1 替换为 2 即可。&lt;/p>
-&lt;h2 id="1335e---three-blocks-palindromehttpscodeforcescomcontest1335probleme2">&lt;a href="https://codeforces.com/contest/1335/problem/E2">1335E - Three Blocks Palindrome&lt;/a>&lt;/h2>
+&lt;h2 id="1335e---three-blocks-palindrome">&lt;a href="https://codeforces.com/contest/1335/problem/E2">1335E - Three Blocks Palindrome&lt;/a>&lt;/h2>
 &lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p></description></item><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>&lt;p>快乐划水。&lt;/p>
-&lt;h2 id="1328a---divisibility-problemhttpscodeforcescomcontest1328problema">&lt;a href="https://codeforces.com/contest/1328/problem/A">1328A - Divisibility Problem&lt;/a>&lt;/h2>
+&lt;h2 id="1328a---divisibility-problem">&lt;a href="https://codeforces.com/contest/1328/problem/A">1328A - Divisibility Problem&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>快乐签到。&lt;/p>
-&lt;h2 id="1328b---k-th-beautiful-stringhttpscodeforcescomcontest1328problemb">&lt;a href="https://codeforces.com/contest/1328/problem/B">1328B - K-th Beautiful String&lt;/a>&lt;/h2>
+&lt;h2 id="1328b---k-th-beautiful-string">&lt;a href="https://codeforces.com/contest/1328/problem/B">1328B - K-th Beautiful String&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>给一个数n，要求构造一个字符串，包含n-2个a，2个b，且在这个字符串的按字典序的全排列中排在第k个。&lt;/p>
 &lt;p>找b的位置即可。&lt;/p>
@@ -378,7 +368,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328c---ternary-xorhttpscodeforcescomcontest1328problemc">&lt;a href="https://codeforces.com/contest/1328/problem/C">1328C - Ternary XOR&lt;/a>&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328c---ternary-xor">&lt;a href="https://codeforces.com/contest/1328/problem/C">1328C - Ternary XOR&lt;/a>&lt;/h2>
 &lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
 &lt;p>给一个三进制数x，求两个数a，b，使这两个数的异或为x，且max(a, b)最小。&lt;/p></description></item><item><title>博客图片文件夹迁移</title><link>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</link><pubDate>Wed, 01 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/write_a_script_to_classify_posts/</guid><description>&lt;p>我原来的博客文件夹结构是这样的：&lt;/p>
 &lt;p>&lt;img src="./image-20200328175914444.png" alt="image-20200328175914444">&lt;/p>
@@ -654,8 +644,7 @@ git add .
 git commit -m &amp;#34;To use CI to automated deploy&amp;#34;
 git push origin source:source
 &lt;/code>&lt;/pre>&lt;p>本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带&lt;code>.gitignore&lt;/code>文件，所以实际大小并没有多少。&lt;/p></description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>&lt;blockquote>
-&lt;p>Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p>
-&lt;/blockquote>
+&lt;p>Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p>&lt;/blockquote>
 &lt;h2 id="前言">前言&lt;/h2>
 &lt;p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p>
 &lt;p>这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p>
@@ -897,8 +886,7 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&amp;#39;
 ### 三级标题
 #### 四级标题
 ##### 五级标题
-###### 六级标题&lt;/p>
-&lt;/blockquote>
+###### 六级标题&lt;/p>&lt;/blockquote>
 &lt;p>效果：&lt;/p>
 &lt;blockquote>
 &lt;h1 id="一级标题">一级标题&lt;/h1>
@@ -906,8 +894,7 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&amp;#39;
 &lt;h3 id="三级标题">三级标题&lt;/h3>
 &lt;h4 id="四级标题">四级标题&lt;/h4>
 &lt;h5 id="五级标题">五级标题&lt;/h5>
-&lt;h6 id="六级标题">六级标题&lt;/h6>
-&lt;/blockquote>
+&lt;h6 id="六级标题">六级标题&lt;/h6>&lt;/blockquote>
 &lt;h4 id="2-段落">2. 段落&lt;/h4>
 &lt;p>段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用&lt;strong>两个以上&lt;/strong>空格加上回车（引用中换行省略回车）。&lt;/p></description></item><item><title>关于我</title><link>https://blog.coherence.codes/posts/2020_and_before/about_me/</link><pubDate>Sat, 03 Nov 2018 16:37:04 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/about_me/</guid><description>&lt;h2 id="关于我">关于我&lt;/h2>
 &lt;p>博主是一名大四学生。&lt;/p>
@@ -930,8 +917,7 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&amp;#39;
 &lt;h2 id="联系我">联系我&lt;/h2>
 &lt;p>Telegram：@Coherence0&lt;/p>
 &lt;p>Email：niuchangcun AT gmail.com&lt;/p></description></item><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>&lt;blockquote>
-&lt;p>这就是乱改字体的后果..&lt;/p>
-&lt;/blockquote>
+&lt;p>这就是乱改字体的后果..&lt;/p>&lt;/blockquote>
 &lt;p>字体修复，不只是字体修复。&lt;/p>
 &lt;h2 id="事由">事由&lt;/h2>
 &lt;p>偶然间看到一篇&lt;a href="http://www.dgtle.com/article-25875-1.html">替换Win10字体来提升字体观感的文章&lt;/a>，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。&lt;/p>
@@ -960,8 +946,7 @@ sfc /scannow
 &lt;li>可控，完全受自己管理。&lt;/li>
 &lt;/ul>
 &lt;p>在这纷纭复杂的互联网中，拥有自己的一方小天地，似乎也是极好的。&lt;/p></description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>&lt;blockquote>
-&lt;p>身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p>
-&lt;/blockquote>
+&lt;p>身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p>&lt;/blockquote>
 &lt;h2 id="为什么选择hexo">为什么选择Hexo&lt;/h2>
 &lt;p>其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是&lt;del>随手找了几个静态博客生成器，&lt;/del> 随手一查就找到了Hexo。&lt;/p>
 &lt;h2 id="hexo搭建过程">Hexo搭建过程&lt;/h2>
