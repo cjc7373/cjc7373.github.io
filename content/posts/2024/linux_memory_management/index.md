@@ -188,6 +188,8 @@ Private_Clean  Private_Dirty  Shared_Clean  Shared_Dirty         Rss         Pss
 
 这里有一个新概念 PSS（proportional set size），对于每个 RSS 中的页，如果这个页被 n 个进程共享，那么在计算时就把它除以 n。也就是说，如果有一个库 RSS 100k，但是它被 10 个进程共享，那么每个进程的 PSS 就是 10k。
 
+PSS 有一个反直觉的地方，当一个（共享了旧进程的一些库的）新进程启动时，旧进程的 PSS 会减少。比如进程 A 加载了一个 1G 大小的库，此时它的 PSS 为 1G。而后进程 B 启动也加载了这个库，那么 A 的 PSS 就变成 500M 了，直接砍半！
+
 表中的第二部分展示了内存中文件映射的部分。从中可以看到，qb 的 2.3G RSS 有 2.1G 都是做种的文件（`/mnt/gloway`），`/usr/lib` 中的库文件占了 73M，但是由于共享的进程较多，PSS 只有 13M。
 
 第一部分主要是堆栈的内存。`[heap]` 和 `[anonymous]` 实际都是堆内存（也就是通过 malloc 分配的匿名页面）， 

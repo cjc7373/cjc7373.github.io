@@ -105,6 +105,8 @@ go: github.com/cjc7373/go-module-test/c@v2.0.0: invalid version: module contains
 
 如果一个模块没有使用 Go Modules（即没有 `go.mod` 文件），并且发布了一个 v2 及以上的版本，那么它作为一个依赖被引入时，我们会看到 `github.com/xx/xxxx v4.1.0+incompatible` 这样的版本号。
 
+虽然这种形式看上去很美好，但是是否遵循全凭开发者本身的意愿。我碰到过好几次某个库的 minor version 更新改了公开 API 的，最终导致编译出错。
+
 模块的发布依赖于 VCS 的 tagging 功能。发布一个包就是打一个 tag。如果一个仓库有多个模块，则需要在 tagging 中加上模块路径的前缀，如果仓库位于 `example.com/mymodules/`，模块路径为 `example.com/mymodules/module1`，则打的 tag 应该为 `module1/v1.2.3` 这种形式。（这里猜测模块路径是和文件夹路径对应的，但我没有实验过）
 
 ## `go.mod`

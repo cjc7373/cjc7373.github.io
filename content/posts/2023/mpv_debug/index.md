@@ -1,6 +1,7 @@
 ---
 title: 记一次 mpv 异常关闭的调试
 date: 2023-12-10
+lastmod: 2025-03-24
 tags:
 - Linux Desktop
 ---
