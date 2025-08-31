@@ -1,7 +1,7 @@
 ---
 title: 我的 NAS 方案
 date: 2025-07-13
-lastmod: 2025-07-13
+lastmod: 2025-08-31
 tags:
 - NAS
 ---
@@ -154,7 +154,6 @@ truenas 的功能还是很全的，我主要用到的有下面几个：
 几个 turenas 导致的问题：
 
 - 一开始我的 app 安装在 backup pool 中，因为我想让 tank pool 在空闲时休眠。但是几天观察下来 tank 并不会休眠，原因未知。休眠本身也没那么重要，于是我就又把 app 迁移到 tank pool 中。这一步需要手动完成, 参考论坛中的[这篇文章](https://forums.truenas.com/t/howto-copy-the-hidden-ix-apps-dataset-from-one-pool-to-another/24434)。
-
 - TrueNAS 的 temporary storage 似乎会在重启容器时清空（[参考](https://github.com/truenas/apps/issues/2026)）。而 immich 的 ml-cache 用的这个类型的 storage，导致重启的时候会重下模型。但模型又很大，浪费流量.. 而且由于 huggingface 的限流策略，下载模型有五分之四的概率是失败的。truenas 页面上限制了把 storage 从 temporary 改成 ixVolume，于是我只能手动建了个 dataset 然后把 storage 改成 hostPath。
 
 ## 备份
@@ -199,5 +198,7 @@ graph LR;
 tank pool 中的数据实现了三份副本，一份异地。VPS 上的数据则实现了两份副本，一份异地。所有备份任务每天执行一次。一开始想的是每周执行一次，但是实验了之后发现，增量备份还是挺快的，所以改成了一天一次。Moo 老师提出了上传各自备份到对方 NAS 的方案，于是我就拥有了一份免费的异地备份。
 
 选型方面，VPS 的备份一开始看了 borg/kopia/restic 三个工具，感觉它们之间的差别不是很大，就随便选了一个。NAS 的备份由于 TrueNAS 自带了工具，就直接用了。TrueNAS 的 cloud sync 实际调用的是 rclone, 严格来说并不是备份而是同步。目前 rclone 跑一次没有修改过文件的同步需要半个小时，不知道瓶颈在哪里，是否有优化的空间。
+
+TrueNAS apps 中的 webdav 应用感觉性能非常差，看了下镜像是 httpd，也就是 apache，不知道是否是配置的问题，但我也不想学习它的配置。于是干脆换成 Caddy。Caddy 本身没有 webdav 的支持，但是社区有，只需自己 [build 一个镜像](https://github.com/cjc7373/ansible/commit/165480157e46a39ae3d2be9d508c0b8357e53875)就可以用了。
 
 所有跨局域网的网络访问均通过 tailscale 进行，以减小攻击面。
