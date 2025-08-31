@@ -1,55 +1,77 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Thu, 27 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>我为什么选择了独立博客</title><link>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</link><pubDate>Sat, 13 Oct 2018 20:13:11 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ -&lt;p>这是一个独立博客式微的时代。&lt;/p>
-&lt;p>独立博客没有博客平台的推荐导流系统，相比之下观之者寥寥。&lt;/p>
-&lt;p>那我为什么还是选择了独立博客呢？&lt;/p>
-&lt;ul>
-&lt;li>自由，不会受外部因素的影响，可以随意添加自己想要的功能。&lt;/li>
-&lt;li>方便，一行命令就能更新博客。&lt;/li>
-&lt;li>可控，完全受自己管理。&lt;/li>
-&lt;/ul>
-&lt;p>在这纷纭复杂的互联网中，拥有自己的一方小天地，似乎也是极好的。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ -&lt;blockquote>
-&lt;p>身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p>&lt;/blockquote>
-&lt;h2 id="为什么选择hexo">为什么选择Hexo&lt;/h2>
-&lt;p>其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是&lt;del>随手找了几个静态博客生成器，&lt;/del> 随手一查就找到了Hexo。&lt;/p>
-&lt;h2 id="hexo搭建过程">Hexo搭建过程&lt;/h2>
-&lt;p>Hexo的官方文档有中文，这点很赞。虽然官方文档讲的不是很清楚..然而搭建还是比较简单的，加上Google了几篇教程，很快就把Hexo搭起来了。&lt;/p>
-&lt;p>身为一个博客生成器，当然不能让我们接触到代码了。所以Hexo的基本配置均在&lt;code>_config.yml&lt;/code>这个配置文件中。配置采用YAML语法，看看官方文档也就差不多了解了。基本上无需过多配置就搭建完成了。&lt;/p>
-&lt;h2 id="hexo主题">Hexo主题&lt;/h2>
-&lt;p>Hexo有许多主题，个人采用了官方推荐的 &lt;a href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces&lt;/a>主题，整体风格还是比较简洁的（然而用这个主题的实在是太多了&amp;hellip;随便一个Hexo博客就是Next主题）。&lt;/p>
-&lt;p>同时主题内已集成了许多第三方服务，如Google Analysis、DISQUS等，只要改改配置文件就能配置完成，还是相当简单的。&lt;/p>
-&lt;h2 id="hexo图片插入指引">Hexo图片插入指引&lt;/h2>
-&lt;p>直接用Markdown语法引用图片会导致图片在首页无法显示，官网给出了一个解决方案，就是利用内置的插件，形式如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code>{% asset_path slug %}
-&lt;/code>&lt;/pre>&lt;p>然而这个方法会破环原生Markdown语法，对编辑者的预览等造成不便。&lt;/p>
-&lt;p>很奇怪官方为什么要采用这种方法。&lt;/p>
-&lt;p>更好的解决方案是安装&lt;a href="https://github.com/CodeFalling/hexo-asset-image">&lt;strong>hexo-asset-image&lt;/strong>&lt;/a>这个插件。进入博客目录，使用如下命令安装插件：&lt;/p>
-&lt;pre tabindex="0">&lt;code>npm install https://github.com/CodeFalling/hexo-asset-image --save
-&lt;/code>&lt;/pre>&lt;p>安装完成后，即可使用原生Markdown语法插入图片。&lt;/p>
-&lt;h2 id="to-do">To Do&lt;/h2>
-&lt;h5 id="已实现功能">已实现功能&lt;/h5>
-&lt;ul>
-&lt;li>评论，采用DISQUS&lt;/li>
-&lt;li>数据统计，采用Google Analytics&lt;/li>
-&lt;li>图片显示在首页&lt;/li>
-&lt;li>搜索引擎收录，Google Search Console&lt;/li>
-&lt;li>首页文章不显示全部&lt;/li>
-&lt;li>git配置，&lt;code>hexo g -d&lt;/code>一条命令部署&lt;/li>
-&lt;li>&lt;a href="use-ci-auto-deploy-blog.md">使用Travis CI自动生成及部署&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h5 id="待实现功能">待实现功能&lt;/h5>
-&lt;ul>
-&lt;li>更多的自定义操作&lt;/li>
-&lt;li>文章访问量统计&lt;/li>
-&lt;li>在自己的服务器也部署博客，然后用 CI 实现自动部署&lt;/li>
-&lt;li>使用 CDN 加速 Github Pages 的访问&lt;/li>
-&lt;li>评论点击加载&lt;/li>
-&lt;/ul>
-&lt;h2 id="参考文章">参考文章&lt;/h2>
-&lt;p>&lt;a href="http://etrd.org/2017/01/23/hexo%E4%B8%AD%E5%AE%8C%E7%BE%8E%E6%8F%92%E5%85%A5%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/">hexo中完美插入本地图片&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://gaodaxiu0406.github.io/2017/08/21/%E4%B8%BAHEXO%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%AF%8F%E7%AF%87%E6%96%87%E7%AB%A0%E7%9A%84%E6%B5%8F%E8%A7%88%E9%87%8F%E7%BB%9F%E8%AE%A1/">为HEXO博客中每篇文章的浏览量统计&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://hexo.io/zh-cn/docs/">Hexo官方文档&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://theme-next.iissnan.com/">NexT使用文档&lt;/a>&lt;/p>
-&lt;p>&lt;a href="http://moweide.com/2017/08/27/hexo_next_started/">theme-next!Hexo网站的一次华丽升级&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hello,World!</title><link>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</link><pubDate>Mon, 24 Sep 2018 11:28:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hello-world-0/ -&lt;h3 id="helloworld">Hello,World!&lt;/h3>
-&lt;p>&lt;img src="./hello.jpeg" alt="Hello,World">&lt;/p>
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ -&lt;blockquote&gt;
+&lt;p&gt;这就是乱改字体的后果..&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;字体修复，不只是字体修复。&lt;/p&gt;
+&lt;h2 id="事由"&gt;事由&lt;/h2&gt;
+&lt;p&gt;偶然间看到一篇&lt;a href="http://www.dgtle.com/article-25875-1.html"&gt;替换Win10字体来提升字体观感的文章&lt;/a&gt;，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。&lt;/p&gt;
+&lt;p&gt;然而，使用了一段时间后发现，所有的字体似乎都小了一圈，而且在cmd中出现了字体大小错乱的情况。网上找了一圈发现Win10砍掉了调整字体大小的功能，现在只能以整体缩放来调整字体大小。新的字体感觉也没有想象中的那么好。&lt;/p&gt;
+&lt;p&gt;于是我把备份的默认字体又恢复了回去，按道理不会出事，然而我的电脑出锅了。一些软件的中文字体成了方框，cmd的字体也变得很奇怪。&lt;/p&gt;
+&lt;h2 id="解决方法"&gt;解决方法&lt;/h2&gt;
+&lt;p&gt;一番操作之后，发现设置里的新宋体是乱码，感觉可能是字体文件崩了。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1541154864085.png" alt="1541154864085"&gt;&lt;/p&gt;
+&lt;p&gt;但是&lt;code&gt;simsunb.ttf&lt;/code&gt;这个文件我分明备份过。。&lt;/p&gt;
+&lt;p&gt;没办法，继续面向Google解决问题，这时候找到了一个&lt;a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-ime/%E5%9C%A8windows/d575f11c-1f2e-454c-9fcd-432809f7fd76"&gt;微软社区页面&lt;/a&gt;，里面给出了三条命令：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;DISM.exe /Online /Cleanup-image /Scanhealth
+DISM.exe /Online /Cleanup-image /Restorehealth
+sfc /scannow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;根据&lt;a href="https://support.microsoft.com/zh-cn/help/947821/fix-windows-update-errors-by-using-the-dism-or-system-update-readiness"&gt;微软官方支持页面&lt;/a&gt;的描述，这三个命令是检查系统文件的完整性并自动通过 Windows 更新来修复。&lt;/p&gt;
+&lt;p&gt;用管理员身份打开cmd，依次执行完重启，一切都恢复了原状。&lt;/p&gt;
+&lt;h2 id="后记"&gt;后记&lt;/h2&gt;
+&lt;p&gt;看了一些&lt;a href="https://www.zhihu.com/question/274344133"&gt;知乎回答&lt;/a&gt;，感觉Win10的字体也并没有那么糟糕。事实上我一直以来用着默认的字体也没有感到不舒服。&lt;del&gt;可能是我眼瞎吧。&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;另外，上述的三个命令理论上能解决Windows的许多问题，碰到问题可以尝试。&lt;/p&gt;
+&lt;h4 id="2019213-更新"&gt;2019/2/13 更新&lt;/h4&gt;
+&lt;p&gt;目前家里入了 4K 显示器，200% 缩放，观感上没有任何问题。&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我为什么选择了独立博客</title><link>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</link><pubDate>Sat, 13 Oct 2018 20:13:11 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ -&lt;p&gt;这是一个独立博客式微的时代。&lt;/p&gt;
+&lt;p&gt;独立博客没有博客平台的推荐导流系统，相比之下观之者寥寥。&lt;/p&gt;
+&lt;p&gt;那我为什么还是选择了独立博客呢？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自由，不会受外部因素的影响，可以随意添加自己想要的功能。&lt;/li&gt;
+&lt;li&gt;方便，一行命令就能更新博客。&lt;/li&gt;
+&lt;li&gt;可控，完全受自己管理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在这纷纭复杂的互联网中，拥有自己的一方小天地，似乎也是极好的。&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ -&lt;blockquote&gt;
+&lt;p&gt;身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id="为什么选择hexo"&gt;为什么选择Hexo&lt;/h2&gt;
+&lt;p&gt;其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是&lt;del&gt;随手找了几个静态博客生成器，&lt;/del&gt; 随手一查就找到了Hexo。&lt;/p&gt;
+&lt;h2 id="hexo搭建过程"&gt;Hexo搭建过程&lt;/h2&gt;
+&lt;p&gt;Hexo的官方文档有中文，这点很赞。虽然官方文档讲的不是很清楚..然而搭建还是比较简单的，加上Google了几篇教程，很快就把Hexo搭起来了。&lt;/p&gt;
+&lt;p&gt;身为一个博客生成器，当然不能让我们接触到代码了。所以Hexo的基本配置均在&lt;code&gt;_config.yml&lt;/code&gt;这个配置文件中。配置采用YAML语法，看看官方文档也就差不多了解了。基本上无需过多配置就搭建完成了。&lt;/p&gt;
+&lt;h2 id="hexo主题"&gt;Hexo主题&lt;/h2&gt;
+&lt;p&gt;Hexo有许多主题，个人采用了官方推荐的 &lt;a href="https://github.com/iissnan/hexo-theme-next"&gt;NexT.Pisces&lt;/a&gt;主题，整体风格还是比较简洁的（然而用这个主题的实在是太多了&amp;hellip;随便一个Hexo博客就是Next主题）。&lt;/p&gt;
+&lt;p&gt;同时主题内已集成了许多第三方服务，如Google Analysis、DISQUS等，只要改改配置文件就能配置完成，还是相当简单的。&lt;/p&gt;
+&lt;h2 id="hexo图片插入指引"&gt;Hexo图片插入指引&lt;/h2&gt;
+&lt;p&gt;直接用Markdown语法引用图片会导致图片在首页无法显示，官网给出了一个解决方案，就是利用内置的插件，形式如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;{% asset_path slug %}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然而这个方法会破环原生Markdown语法，对编辑者的预览等造成不便。&lt;/p&gt;
+&lt;p&gt;很奇怪官方为什么要采用这种方法。&lt;/p&gt;
+&lt;p&gt;更好的解决方案是安装&lt;a href="https://github.com/CodeFalling/hexo-asset-image"&gt;&lt;strong&gt;hexo-asset-image&lt;/strong&gt;&lt;/a&gt;这个插件。进入博客目录，使用如下命令安装插件：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;npm install https://github.com/CodeFalling/hexo-asset-image --save
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装完成后，即可使用原生Markdown语法插入图片。&lt;/p&gt;
+&lt;h2 id="to-do"&gt;To Do&lt;/h2&gt;
+&lt;h5 id="已实现功能"&gt;已实现功能&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;评论，采用DISQUS&lt;/li&gt;
+&lt;li&gt;数据统计，采用Google Analytics&lt;/li&gt;
+&lt;li&gt;图片显示在首页&lt;/li&gt;
+&lt;li&gt;搜索引擎收录，Google Search Console&lt;/li&gt;
+&lt;li&gt;首页文章不显示全部&lt;/li&gt;
+&lt;li&gt;git配置，&lt;code&gt;hexo g -d&lt;/code&gt;一条命令部署&lt;/li&gt;
+&lt;li&gt;&lt;a href="use-ci-auto-deploy-blog.md"&gt;使用Travis CI自动生成及部署&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id="待实现功能"&gt;待实现功能&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;更多的自定义操作&lt;/li&gt;
+&lt;li&gt;文章访问量统计&lt;/li&gt;
+&lt;li&gt;在自己的服务器也部署博客，然后用 CI 实现自动部署&lt;/li&gt;
+&lt;li&gt;使用 CDN 加速 Github Pages 的访问&lt;/li&gt;
+&lt;li&gt;评论点击加载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="参考文章"&gt;参考文章&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://etrd.org/2017/01/23/hexo%E4%B8%AD%E5%AE%8C%E7%BE%8E%E6%8F%92%E5%85%A5%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/"&gt;hexo中完美插入本地图片&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://gaodaxiu0406.github.io/2017/08/21/%E4%B8%BAHEXO%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%AF%8F%E7%AF%87%E6%96%87%E7%AB%A0%E7%9A%84%E6%B5%8F%E8%A7%88%E9%87%8F%E7%BB%9F%E8%AE%A1/"&gt;为HEXO博客中每篇文章的浏览量统计&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://hexo.io/zh-cn/docs/"&gt;Hexo官方文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://theme-next.iissnan.com/"&gt;NexT使用文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://moweide.com/2017/08/27/hexo_next_started/"&gt;theme-next!Hexo网站的一次华丽升级&lt;/a&gt;&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hello,World!</title><link>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</link><pubDate>Mon, 24 Sep 2018 11:28:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hello-world-0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hello-world-0/ -&lt;h3 id="helloworld"&gt;Hello,World!&lt;/h3&gt;
+&lt;p&gt;&lt;img src="./hello.jpeg" alt="Hello,World"&gt;&lt;/p&gt;
 - https://blog.coherence.codes/posts/2020_and_before/hello-world-0/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

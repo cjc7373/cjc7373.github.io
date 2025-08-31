@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CTF on Coherence's Blog</title><link>https://blog.coherence.codes/tags/ctf/</link><description>Recent content in CTF on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/ctf/index.xml" rel="self" type="application/rss+xml"/><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>&lt;p>记录一下比赛期间踩到的坑.&lt;/p>
-&lt;h2 id="签到">签到&lt;/h2>
-&lt;p>开始完全没有读题直接进题目, 然后想了半天没思路并随机测试了一些数.. 直到我读了题..&lt;/p>
-&lt;h2 id="进制十六参上">进制十六——参上&lt;/h2>
-&lt;p>显然, 大家都知道怎么编辑十六进制, 然而我并不想手输这么多文本, 于是 Google 在线 OCR, 结果 OCR 的内容有部分是错的.. 被迫找同学要了一份 OCR 结果.&lt;/p>
-&lt;h2 id="去吧追寻自由的电波">去吧！追寻自由的电波&lt;/h2>
-&lt;p>直接 Google ffmepg 音频速度. 然而很多结果给的一个过滤器是不改变音调的方案, 后来发现直接改采样率就行了..&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>cjc@coherence hackergame_2021&lt;span style="color:#f92672">]&lt;/span>$ file radio.mp3 
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>radio.mp3: Audio file with ID3 version 2.4.0, contains: MPEG ADTS, layer III, v1, &lt;span style="color:#ae81ff">128&lt;/span> kbps, &lt;span style="color:#ae81ff">48&lt;/span> kHz, Stereo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>cjc@coherence hackergame_2021&lt;span style="color:#f92672">]&lt;/span>$ ffmpeg -i radio.mp3 -af &lt;span style="color:#e6db74">&amp;#34;asetrate=16000&amp;#34;&lt;/span> radio_output.mp3
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>命令来自&lt;a href="http://johnriselvato.com/ffmpeg-how-to-change-the-pitch-sample-rate-of-an-audio-track-mp3/">这里&lt;/a>, 虽然我根本没有看这篇文章..&lt;/p>
-&lt;h2 id="猫咪问答-pro-max">猫咪问答 Pro Max&lt;/h2>
-&lt;p>没错, 被第二题坑了.. 以为是第四题不对, 于是写了个暴力跑了几万次..&lt;/p>
-&lt;p>&lt;img src="./image-20211030151026284.png" alt="image-20211030151026284">&lt;/p>
-&lt;p>提示: 这是一个提示.&lt;/p>
-&lt;h2 id="卖瓜">卖瓜&lt;/h2>
-&lt;p>已经被同学提示了这是个 PHP 溢出问题.. 甚至都找到了 (同学给的) &lt;a href="https://www.php.net/manual/zh/language.types.integer.php#125251">PHP 文档中的一条评论 (甚至题解也给了这个)&lt;/a>, 但是并不知道怎么做.. 于是用 &lt;code>b1=2**63//6+n&lt;/code> (n 为 -10~10 之间的一个随机数) 瞎试做出来了.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CTF on Coherence's Blog</title><link>https://blog.coherence.codes/tags/ctf/</link><description>Recent content in CTF on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/ctf/index.xml" rel="self" type="application/rss+xml"/><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>&lt;p&gt;记录一下比赛期间踩到的坑.&lt;/p&gt;
+&lt;h2 id="签到"&gt;签到&lt;/h2&gt;
+&lt;p&gt;开始完全没有读题直接进题目, 然后想了半天没思路并随机测试了一些数.. 直到我读了题..&lt;/p&gt;
+&lt;h2 id="进制十六参上"&gt;进制十六——参上&lt;/h2&gt;
+&lt;p&gt;显然, 大家都知道怎么编辑十六进制, 然而我并不想手输这么多文本, 于是 Google 在线 OCR, 结果 OCR 的内容有部分是错的.. 被迫找同学要了一份 OCR 结果.&lt;/p&gt;
+&lt;h2 id="去吧追寻自由的电波"&gt;去吧！追寻自由的电波&lt;/h2&gt;
+&lt;p&gt;直接 Google ffmepg 音频速度. 然而很多结果给的一个过滤器是不改变音调的方案, 后来发现直接改采样率就行了..&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;cjc@coherence hackergame_2021&lt;span style="color:#f92672"&gt;]&lt;/span&gt;$ file radio.mp3 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;radio.mp3: Audio file with ID3 version 2.4.0, contains: MPEG ADTS, layer III, v1, &lt;span style="color:#ae81ff"&gt;128&lt;/span&gt; kbps, &lt;span style="color:#ae81ff"&gt;48&lt;/span&gt; kHz, Stereo
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;cjc@coherence hackergame_2021&lt;span style="color:#f92672"&gt;]&lt;/span&gt;$ ffmpeg -i radio.mp3 -af &lt;span style="color:#e6db74"&gt;&amp;#34;asetrate=16000&amp;#34;&lt;/span&gt; radio_output.mp3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;命令来自&lt;a href="http://johnriselvato.com/ffmpeg-how-to-change-the-pitch-sample-rate-of-an-audio-track-mp3/"&gt;这里&lt;/a&gt;, 虽然我根本没有看这篇文章..&lt;/p&gt;
+&lt;h2 id="猫咪问答-pro-max"&gt;猫咪问答 Pro Max&lt;/h2&gt;
+&lt;p&gt;没错, 被第二题坑了.. 以为是第四题不对, 于是写了个暴力跑了几万次..&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20211030151026284.png" alt="image-20211030151026284"&gt;&lt;/p&gt;
+&lt;p&gt;提示: 这是一个提示.&lt;/p&gt;
+&lt;h2 id="卖瓜"&gt;卖瓜&lt;/h2&gt;
+&lt;p&gt;已经被同学提示了这是个 PHP 溢出问题.. 甚至都找到了 (同学给的) &lt;a href="https://www.php.net/manual/zh/language.types.integer.php#125251"&gt;PHP 文档中的一条评论 (甚至题解也给了这个)&lt;/a&gt;, 但是并不知道怎么做.. 于是用 &lt;code&gt;b1=2**63//6+n&lt;/code&gt; (n 为 -10~10 之间的一个随机数) 瞎试做出来了.&lt;/p&gt;</description></item></channel></rss>

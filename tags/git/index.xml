@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on Coherence's Blog</title><link>https://blog.coherence.codes/tags/git/</link><description>Recent content in Git on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 18 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>git 入门</title><link>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</link><pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</guid><description>&lt;p>本文的大部分内容来自于 &lt;a href="https://git-scm.com/book/en/v2">Pro Git&lt;/a> 这本书。&lt;/p>
-&lt;h2 id="objects">Objects&lt;/h2>
-&lt;p>git 中最基础的元素是 object，每个 object 由一个 object ID (OID) 唯一标识，OID 是一个 160 bits （用 hex 字符串表示为四十个字符） 的 SHA-1 哈希。具体而言，git 中主要存在三种 objects：&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>&lt;code>blobs&lt;/code>: 存储文件内容，OID 即为文件内容的哈希&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>trees&lt;/code>: 一个文件名（path entries）的有序列表，OID 为这个列表的哈希。列表的每一行如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code>100644 blob 1fc4aa8f76027dd0fb8f9b533810770236d5c234 .gitignore
-&lt;/code>&lt;/pre>&lt;p>容易推测这几个字段分别为权限、object 类型、哈希、文件名。子目录同样是 trees。项目的根目录即为 root tree。所有的 trees 构成了一棵 Merkle tree，&lt;del>所以 git 就是区块链（即答&lt;/del>。下图中三角代表 trees，方块为 blobs&lt;/p>
-&lt;p>&lt;img src="./image-20230918111328708.png" alt="image-20230918111328708">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>commits&lt;/code>: 一个&lt;strong>快照&lt;/strong>（snapshot），每个 commit 包含了一个到根 tree 的引用，和一个（或多个）到 parent 的引用。parent 就是上一个 commit 的 OID。在一个 merge commit 中会包含多个 parents。由于 Commit 存储的是快照而不是 diff，所以 Git checkout（切换分支）的速度很快。下图中圆形代表 commits&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on Coherence's Blog</title><link>https://blog.coherence.codes/tags/git/</link><description>Recent content in Git on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 18 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>git 入门</title><link>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</link><pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</guid><description>&lt;p&gt;本文的大部分内容来自于 &lt;a href="https://git-scm.com/book/en/v2"&gt;Pro Git&lt;/a&gt; 这本书。&lt;/p&gt;
+&lt;h2 id="objects"&gt;Objects&lt;/h2&gt;
+&lt;p&gt;git 中最基础的元素是 object，每个 object 由一个 object ID (OID) 唯一标识，OID 是一个 160 bits （用 hex 字符串表示为四十个字符） 的 SHA-1 哈希。具体而言，git 中主要存在三种 objects：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;blobs&lt;/code&gt;: 存储文件内容，OID 即为文件内容的哈希&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;trees&lt;/code&gt;: 一个文件名（path entries）的有序列表，OID 为这个列表的哈希。列表的每一行如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;100644 blob 1fc4aa8f76027dd0fb8f9b533810770236d5c234 .gitignore
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;容易推测这几个字段分别为权限、object 类型、哈希、文件名。子目录同样是 trees。项目的根目录即为 root tree。所有的 trees 构成了一棵 Merkle tree，&lt;del&gt;所以 git 就是区块链（即答&lt;/del&gt;。下图中三角代表 trees，方块为 blobs&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20230918111328708.png" alt="image-20230918111328708"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;commits&lt;/code&gt;: 一个&lt;strong&gt;快照&lt;/strong&gt;（snapshot），每个 commit 包含了一个到根 tree 的引用，和一个（或多个）到 parent 的引用。parent 就是上一个 commit 的 OID。在一个 merge commit 中会包含多个 parents。由于 Commit 存储的是快照而不是 diff，所以 Git checkout（切换分支）的速度很快。下图中圆形代表 commits&lt;/p&gt;</description></item></channel></rss>

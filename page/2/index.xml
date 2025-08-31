@@ -1,607 +1,576 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Thu, 27 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes 生态中的航海隐喻</title><link>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</link><pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ -&lt;blockquote>
-&lt;p>Disclaimer: 本文的结论大多是根据名字推断出来的，并没有得到项目开发者的证实。&lt;/p>&lt;/blockquote>
-&lt;p>Kubernetes 在 2014 年 9 月发布，在这之前 Docker 已经大行其道了。Docker 发布于 2013 年，意为码头工人，其 logo 是个鲸鱼驮着一些集装箱。&lt;/p>
-&lt;p>&lt;img src="./610px-Docker_(container_engine)_logo.svg.png" alt="File:Docker (container engine) logo.svg">&lt;/p>
-&lt;p>后来这个 Logo 又变得扁平了一点：&lt;/p>
-&lt;p>&lt;img src="./512px-Docker_logo.svg.png" alt="File:Docker logo.svg">&lt;/p>
-&lt;p>很显然这个名字和和 Logo 都与集装箱（container，即容器）有关。&lt;/p>
-&lt;p>Kubernetes 这个名字来源于古希腊语 κυβερνήτης，意为舵手（steersman）/领航员（pilot）/船长（captain）。其 logo 是一个舵轮的形状。身为一个容器编排系统，Kubernetes 负责着一艘船的航向，倒也合理。&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/617px-Kubernetes_logo_without_workmark.svg.png" width="200px">
-&lt;/figure>
-&lt;p>值得一提是和 Kubernetes 共享词源 κυβερνήτης 的还有 governor（州长/统治者/主管）和 cybernetics（控制论）。&lt;/p>
-&lt;p>Helm 官方的 slogan 是 Kubernetes 的包管理器，helm 意为舵轮，logo 和 Kubernetes 类似，也是一个舵轮的形状。&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/helm.svg" width="200px">
-&lt;/figure>
-&lt;p>在 Helm 2 时代，helm 还需要一个部署在集群内的组件 tiller 才能工作。tiller 似乎是舵柄的意思，它和舵直接相连。下图展示了一个舵柄和舵轮的区别：&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/1280px-Tiller_and_helm_orders.svg.png" width="300px">
-&lt;/figure>
-&lt;p>Argo 项目包含了 CD/Workflows/Rollouts 等一系列项目，总体是和应用交付、CI/CD 相关。在希腊神话中，Argo （阿尔戈号）是一艘船，由伊阿宋等希腊英雄在雅典娜帮助下建成，众英雄乘该船取得金羊毛。此后阿尔戈号作为进献雅典娜的祭品被焚毁，南船座（Argo Navis, or simply Argo）由此而来。Navis 词源为古希腊语，意为船（ship）。但是 Argo 的 logo （应该？）是一只章鱼，很奇怪的联系..&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/argo.svg" width="200px">
-&lt;/figure>
-&lt;p>cert-manager，虽然名字和航海没什么关系，但它的 logo 是一个锚..&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/cert-manager.svg" width="200px">
-&lt;/figure>
-&lt;p>上面说到 Argo 就是南船座，南船座本来是天空中最大的星座，但在十八世纪被拆分为四个单独的星座，其中之一为船帆座（Vela），所以 Kubevela 的 logo 是一艘帆船。Kubevela 同样属于负责应用交付的组件，和 ArgoCD 在功能上有重叠和互补的地方。&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/kube-vela.svg" width="200px">
-&lt;/figure>
-&lt;p>最后要说的是 Harbor，非常直白，就是港口，作为一个 container registry 也很合理，其 logo 是一个灯塔的形状。&lt;/p>
-&lt;figure>&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/harbor.svg" width="200px">
-&lt;/figure>
-- https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>博客里应该写什么</title><link>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</link><pubDate>Mon, 24 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ -&lt;p>我的 Chrome 有一个插件叫 &lt;a href="https://www.one-tab.com/">Onetab&lt;/a>，本意是用来放一些稍后阅读的标签页。但是稍后阅读这种东西，最终都会转变成垃圾桶，标签越积越多。随着我的几次设备/系统更替（比如从我的老暗影精灵到 deskmini），迁移来迁移去很多上古标签页居然没丢.&lt;/p>
-&lt;p>今天在 Onetab 里翻找找到了&lt;a href="https://pureage.info/2014/08/25/hiding-302-using-proxy-pass.html">用 proxy_intercept_errors 和 recursive_error_pages 代理多次 302&lt;/a> 这样一篇文章。文章本身讲的是 nginx 用于反代时如何 follow 上游的 302 的问题，这是一篇普通的技术博客。但是翻看他的博客，却有很多生活随想，日记游记之类的内容。篇幅也长短不一，最短的寥寥一两句话。而翻看我自己的博客，合计三十一篇博文，其中（质量很低的）技术博文占了绝大多数。我不禁有些感慨，写博客究竟是为了什么。是为了在面试时多一个展现自己的方面，还是仅仅是作为一个写作的平台，无所约束地抒发自己的心情？&lt;/p>
-&lt;p>还记得我的博客刚搭起来的时候，我写过一篇&lt;a href="https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/">我为什么选择了独立博客&lt;/a>，内容是瞎扯的，但是最后一句话「庞大的互联网中的一方天地」我倒是现在也很认同。&lt;/p>
-- https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>IPv6 配置入门</title><link>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</link><pubDate>Sun, 16 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ -&lt;h2 id="背景知识">背景知识&lt;/h2>
-&lt;p>&lt;a href="https://datatracker.ietf.org/doc/html/rfc8200">RFC 8200 (Internet Protocol, Version 6 (IPv6) Specification)&lt;/a> 为最新的 IPv6 标准. 主要描述了头部 (Header) 定义, 拓展头部和选项定义等.&lt;/p>
-&lt;p>&lt;a href="https://datatracker.ietf.org/doc/html/rfc7084">RFC 7084 (IPv6 CE Router Requirements)&lt;/a> 定义了家用或小型办公室路由器 (IPv6 Customer Edge Routers) 配置的基本要求. OpenWrt 的配置文档遵循了这一 RFC.&lt;/p>
-&lt;p>RFC 4861 (IPv6 Neighbor Discovery) 定义了一种网络发现机制, 等效与 IPv4 中的 ARP. 下述的两种机制均依赖于 ND.&lt;/p>
-&lt;p>&lt;a href="https://datatracker.ietf.org/doc/html/rfc4862">RFC 4862 (IPv6 Stateless Address Autoconfiguration, SLAAC)&lt;/a> 定义了一种无状态配置地址的机制. &lt;a href="https://datatracker.ietf.org/doc/html/rfc8415">RFC 8415 (Dynamic Host Configuration Protocol for IPv6 (DHCPv6))&lt;/a> 定义了一种配置 IP 地址和前缀的机制. DHCPv6 可以替代 SLAAC 或和 SLAAC 一起工作.&lt;/p>
-&lt;p>本文并不是一篇针对 IPv6 的详尽介绍, 而只是对家用 IPv6 配置过程中的一些机制作了阐述. 在最后分享了几个 IPv6 问题排查的例子.&lt;/p>
-&lt;h2 id="术语">术语&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>节点 (node): 一个实现了 IP 协议的设备&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>路由器 (router): 一个转发 (不是显式地发给它自己的) IP 包的设备&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>主机 (host): 不是路由器的节点&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>链路 (link): 一种通信介质, 使节点能够在链路层进行通信. 对于一个 link-only scope 的地址 (即下文中 link-local address), 其只能与在相同链路上的设备通信, 即所谓的在同一个子网内的设备. 这个地址也被称为工作在单链路 (single link) 上. 路由器无法路由这个地址.&lt;/p>
-&lt;p>IPv6 CE 路由器是两个网络之间的分割点, 是一个组播域的边界.&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="rfc-8200-internet-protocol-version-6-ipv6-specification">RFC 8200 (Internet Protocol, Version 6 (IPv6) Specification)&lt;/h2>
-&lt;p>关于分片: 我之前一直以为 IPv6 不能够分片, 然而实际上是 IPv6 包在途中无法分片 (也就是说路由器只能够丢弃过大的包), 分片只发生在主机上.&lt;/p>
-&lt;h2 id="rfc-4291-ip-version-6-addressing-architecture">RFC 4291 (IP Version 6 Addressing Architecture)&lt;/h2>
-&lt;p>RFC 4291 定义了 IPv6 中的地址空间以及不同的层级. IPv6 必须支持组播, 这样做的好处是主机可以使用一个众所周知的组播地址来和 DHCP 服务器通信. 同时, 在 IPv6 中不存在广播, IPv4 中广播的功能都能够由组播实现.&lt;/p>
-&lt;p>一个典型的 IPv6 地址:&lt;/p>
-&lt;p>&lt;img src="./ipv6-addr-format-1675603805738-5.png" alt="ipv6-addr-format">&lt;/p>
-&lt;p>对于单播和组播地址，它们之间可由不同的网络前缀所辨认:&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th style="text-align: left">地址类型&lt;/th>
-&lt;th style="text-align: left">英文名称&lt;/th>
-&lt;th style="text-align: left">二进制&lt;/th>
-&lt;th style="text-align: left">16进制&lt;/th>
-&lt;th style="text-align: left">备注&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td style="text-align: left">链路本地地址&lt;/td>
-&lt;td style="text-align: left">Link-local address&lt;/td>
-&lt;td style="text-align: left">1111 1110 10&lt;/td>
-&lt;td style="text-align: left">fe80::/10&lt;/td>
-&lt;td style="text-align: left">单链路通信, 中间 54 bits 为 0, 末尾 64 bits 为 interface ID.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">唯一本地地址&lt;/td>
-&lt;td style="text-align: left">Unique local address, ULA&lt;/td>
-&lt;td style="text-align: left">1111 1101&lt;/td>
-&lt;td style="text-align: left">fd00::/8&lt;/td>
-&lt;td style="text-align: left">本地网络通信&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">全局单播地址&lt;/td>
-&lt;td style="text-align: left">Global unicast address, GUA&lt;/td>
-&lt;td style="text-align: left">001&lt;/td>
-&lt;td style="text-align: left">2000::/3&lt;/td>
-&lt;td style="text-align: left">互联网通信&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td style="text-align: left">组播地址&lt;/td>
-&lt;td style="text-align: left">Multicast address&lt;/td>
-&lt;td style="text-align: left">1111 1111&lt;/td>
-&lt;td style="text-align: left">ff00::/8&lt;/td>
-&lt;td style="text-align: left">&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;blockquote>
-&lt;p>tips: ULA 在 &lt;a href="https://datatracker.ietf.org/doc/html/rfc4193">RFC 4193 (Unique Local IPv6 Unicast Addresses)&lt;/a> 中有详细描述, 其与 link-local address 的主要区别在于 link-local 用于无路由器情况下的链路配置, 以及同一链路下的通信.
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>强制 chromium 使用浅色模式</title><link>https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/</link><pubDate>Tue, 30 May 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/ -&lt;h2 id="问题"&gt;问题&lt;/h2&gt;
+&lt;p&gt;从前两年开始深色模式大行其道，以至于现在几乎找不到一个不支持深色模式的网站了。各大主流浏览器几乎都在两三年前就支持了 CSS 的 &lt;code&gt;prefers-color-scheme&lt;/code&gt; 媒体查询，从而根据系统/浏览器的主题来自动切换浅/深色模式。在浏览器控制台中使用 &lt;code&gt;window.matchMedia('(prefers-color-scheme: dark)').matches&lt;/code&gt; 即可测试这一 feature。&lt;/p&gt;
+&lt;p&gt;我在系统中（KDE, Archlinux）使用深色模式，但我又并不喜欢大多数网站的深色模式，但是许多网站都使用了上述媒体查询来自动切换，导致很多情况下我进入一个网站后第一件事就是把浅色模式给切回来。在 Firefox/Edge 中浏览器设置便提供了深/浅色主题的切换选项，这一选项也是和上述媒体查询绑定的，然而不幸的是，chromium 并没有提供这一选项。&lt;/p&gt;
+&lt;h2 id="尝试"&gt;尝试&lt;/h2&gt;
+&lt;p&gt;根据&lt;a href="https://superuser.com/questions/1430098/force-light-mode-in-google-chrome"&gt;这个问题&lt;/a&gt;，我尝试安装了一个浅色主题，或者把 theme color 改成浅色，都没有作用。&lt;/p&gt;
+&lt;p&gt;那 flags 呢？&lt;code&gt;#enable-force-dark&lt;/code&gt; 提供了强制开启深色模式的选项，但是我在 &lt;code&gt;chrome://flags&lt;/code&gt; 中将其设置为 disabled 之后，并没有发生什么。&lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1046660"&gt;Issue 1046660: Allow users to force web content light/dark mode independent of system setting&lt;/a&gt; 中同样提到设置 &lt;code&gt;#enable-force-dark&lt;/code&gt; 为 disabled 将会被忽略。这个 Issue 应该是最贴近我的需求的一个 issue，然而目前还是 open 状态，距离实现遥遥无期。&lt;/p&gt;
+&lt;p&gt;另有一个 command line options &lt;code&gt;--disable-features=WebUIDarkMode&lt;/code&gt;，然而遗憾的是这个 option 仅针对 chromium UI, 对 web page 没有作用。&lt;/p&gt;
+&lt;p&gt;就在不久之前，chromium 还不支持随系统的深色模式来切换自己的深色模式（见 &lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=998903"&gt;Issue 998903: XDG Desktop Portal &amp;ldquo;Prefer dark appearance&amp;rdquo; does not affect prefers-color-scheme media query&lt;/a&gt;），这一 feature 是在四月份实现的，并在 114 中发布。从相应的 &lt;a href="https://chromium-review.googlesource.com/c/chromium/src/+/4375982"&gt;revision&lt;/a&gt; 中，我们可以发现 chromium 首先会通过 dbus 和 xdg-desktop-portal 交互，读取 &lt;code&gt;org.freedesktop.appearance&lt;/code&gt; namespace 下的 &lt;code&gt;color-scheme&lt;/code&gt; 字段。根据 &lt;a href="https://flatpak.github.io/xdg-desktop-portal/#gdbus-org.freedesktop.portal.Settings"&gt;portal 的定义&lt;/a&gt; 返回值是 1 则偏好深色外观，返回值是 2 则偏好浅色外观。并且这一 revision 中说：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;* The portal preference takes precedence over the toolkit preference
+&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;p&gt;我并没有找到这里的 toolkit 指的是什么，但我猜测是 chromium 自身的主题。这可能就是主题设置无效的原因。KDE 的 portal 由 xdg-desktop-portal-kde 这个包实现，&lt;a href="https://invent.kde.org/plasma/xdg-desktop-portal-kde/-/blob/863d369156c85c67f96a23d87564f196532372ce/src/settings.cpp#L216"&gt;搜索源码发现&lt;/a&gt;它只是简单的判断了窗口背景颜色的灰度：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-c++" data-lang="c++"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; windowBackgroundGray &lt;span style="color:#f92672"&gt;=&lt;/span&gt; qGray(palette.window().color().rgb());
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uint result &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// no preference
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (windowBackgroundGray &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;192&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; result &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// prefer dark
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;} &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; result &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// prefer light
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;就感觉很随意&amp;hellip; 所以我在 KDE 设置中更改 Colors 选项中主题的 Window Background 到一个比较浅的背景，就能更改 portal 中的这个值了，试了一下确实是有效的，但是我的其他应用也会变成浅色背景了，这显然不是我想要的。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20230530230144145.png" alt="image-20230530230144145"&gt;&lt;/p&gt;
+&lt;p&gt;我想到了以下几种办法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;hook dbus 请求，给 chromium 返回另一个值，Google 了下没找到什么方法&lt;/li&gt;
+&lt;li&gt;让 chromium 的 dbus 请求失败，这样它就会 fallback 到自身的主题设置，同样我并没有找到针对特定应用禁用 dbus 的方法&lt;/li&gt;
+&lt;li&gt;patch chromium 源码，这应该是最简单的（显然正确的做法并不简单，只是 hack 的做法简单）&lt;/li&gt;
+&lt;li&gt;写一个油猴脚本，在每个网站加载时修改 &lt;code&gt;prefers-color-scheme&lt;/code&gt; 这个媒体查询的返回值，但我没有找到能够在 JS 中修改媒体查询的办法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最可行的看起来是第三条路了。代价就是长达四个小时的编译时间，以及每次 chromium 更新后都需要重新编译。&lt;/p&gt;
+&lt;h2 id="如何-patch"&gt;如何 patch&lt;/h2&gt;
+&lt;p&gt;如果只是改一个版本的话，直接修改源文件后使用 &lt;code&gt;makepkg -e&lt;/code&gt; 在不重新解压源码的情况下 rebuild 即可。但是版本更新后源码会重新下载，所以还是需要一个 patch 的。我遵循了&lt;a href="https://wiki.archlinux.org/title/Patching_packages"&gt;这个 ArchWiki&lt;/a&gt; 来创建一个 patch，但是把源码复制一份实在是太大了，所以我使用 &lt;code&gt;cp --parent&lt;/code&gt; 单独复制了一个文件，然后再 diff：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-patch" data-lang="patch"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;--- chromium-114.0.5735.45/chrome/browser/ui/views/dark_mode_manager_linux.cc 2023-05-25 08:41:45.780152800 +0800
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;+++ new/chrome/browser/ui/views/dark_mode_manager_linux.cc 2023-05-31 12:40:12.308506988 +0800
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;@@ -25,7 +25,7 @@
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; constexpr char kReadMethod[] = &amp;#34;Read&amp;#34;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; constexpr char kSettingsNamespace[] = &amp;#34;org.freedesktop.appearance&amp;#34;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; constexpr char kColorSchemeKey[] = &amp;#34;color-scheme&amp;#34;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;-constexpr int kFreedesktopColorSchemeDark = 1;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;+constexpr int kFreedesktopColorSchemeDark = 2;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; scoped_refptr&amp;lt;dbus::Bus&amp;gt; CreateBus() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; dbus::Bus::Options options;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里改动的是 chromium 从 xdg-desktop-portal 获取到 &lt;code&gt;color-scheme&lt;/code&gt; 之后，判断是否为深色模式的常量，这一改动即可反转 chromium 对于浅/深色模式的判断。&lt;/p&gt;
+&lt;p&gt;patch 中第一个文件夹的名字，也就是 &lt;code&gt;chromium-114.0.5735.45&lt;/code&gt; 和 &lt;code&gt;new&lt;/code&gt; 并不重要，因为在 PKGBUILD 中我们会使用 &lt;code&gt;-p1&lt;/code&gt; 来忽略第一个文件夹：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;-p&lt;/strong&gt;num or **&amp;ndash;strip=**num
+Strip the smallest prefix containing num leading slashes from each file name found in the patch file.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;然后就是编译了，在等待了四个小时之后我终于成功切换回了浅色模式！&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20230531125453946.png" alt="image-20230531125453946"&gt;&lt;/p&gt;
+&lt;p&gt;最后还是希望 &lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1046660"&gt;Issue 1046660&lt;/a&gt; 能够被尽快解决，让我能够在设置中直接切换浅/暗色模式。&lt;/p&gt;
+- https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Kubernetes 生态中的航海隐喻</title><link>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</link><pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ -&lt;blockquote&gt;
+&lt;p&gt;Disclaimer: 本文的结论大多是根据名字推断出来的，并没有得到项目开发者的证实。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Kubernetes 在 2014 年 9 月发布，在这之前 Docker 已经大行其道了。Docker 发布于 2013 年，意为码头工人，其 logo 是个鲸鱼驮着一些集装箱。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./610px-Docker_(container_engine)_logo.svg.png" alt="File:Docker (container engine) logo.svg"&gt;&lt;/p&gt;
+&lt;p&gt;后来这个 Logo 又变得扁平了一点：&lt;/p&gt;
+&lt;p&gt;&lt;img src="./512px-Docker_logo.svg.png" alt="File:Docker logo.svg"&gt;&lt;/p&gt;
+&lt;p&gt;很显然这个名字和和 Logo 都与集装箱（container，即容器）有关。&lt;/p&gt;
+&lt;p&gt;Kubernetes 这个名字来源于古希腊语 κυβερνήτης，意为舵手（steersman）/领航员（pilot）/船长（captain）。其 logo 是一个舵轮的形状。身为一个容器编排系统，Kubernetes 负责着一艘船的航向，倒也合理。&lt;/p&gt;
+&lt;figure&gt;&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/617px-Kubernetes_logo_without_workmark.svg.png" width="200px"&gt;
+&lt;/figure&gt;
+&lt;p&gt;值得一提是和 Kubernetes 共享词源 κυβερνήτης 的还有 governor（州长/统治者/主管）和 cybernetics（控制论）。&lt;/p&gt;
+&lt;p&gt;Helm 官方的 slogan 是 Kubernetes 的包管理器，helm 意为舵轮，logo 和 Kubernetes 类似，也是一个舵轮的形状。&lt;/p&gt;
+&lt;figure&gt;&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/helm.svg" width="200px"&gt;
+&lt;/figure&gt;
+&lt;p&gt;在 Helm 2 时代，helm 还需要一个部署在集群内的组件 tiller 才能工作。tiller 似乎是舵柄的意思，它和舵直接相连。下图展示了一个舵柄和舵轮的区别：&lt;/p&gt;
+&lt;figure&gt;&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/1280px-Tiller_and_helm_orders.svg.png" width="300px"&gt;
+&lt;/figure&gt;
+&lt;p&gt;Argo 项目包含了 CD/Workflows/Rollouts 等一系列项目，总体是和应用交付、CI/CD 相关。在希腊神话中，Argo （阿尔戈号）是一艘船，由伊阿宋等希腊英雄在雅典娜帮助下建成，众英雄乘该船取得金羊毛。此后阿尔戈号作为进献雅典娜的祭品被焚毁，南船座（Argo Navis, or simply Argo）由此而来。Navis 词源为古希腊语，意为船（ship）。但是 Argo 的 logo （应该？）是一只章鱼，很奇怪的联系..&lt;/p&gt;
+&lt;figure&gt;&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/argo.svg" width="200px"&gt;
+&lt;/figure&gt;
+&lt;p&gt;cert-manager，虽然名字和航海没什么关系，但它的 logo 是一个锚..&lt;/p&gt;
+&lt;figure&gt;&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/cert-manager.svg" width="200px"&gt;
+&lt;/figure&gt;
+&lt;p&gt;上面说到 Argo 就是南船座，南船座本来是天空中最大的星座，但在十八世纪被拆分为四个单独的星座，其中之一为船帆座（Vela），所以 Kubevela 的 logo 是一艘帆船。Kubevela 同样属于负责应用交付的组件，和 ArgoCD 在功能上有重叠和互补的地方。&lt;/p&gt;
+&lt;figure&gt;&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/kube-vela.svg" width="200px"&gt;
+&lt;/figure&gt;
+&lt;p&gt;最后要说的是 Harbor，非常直白，就是港口，作为一个 container registry 也很合理，其 logo 是一个灯塔的形状。&lt;/p&gt;
+&lt;figure&gt;&lt;img src="https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/harbor.svg" width="200px"&gt;
+&lt;/figure&gt;
+- https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>博客里应该写什么</title><link>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</link><pubDate>Mon, 24 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ -&lt;p&gt;我的 Chrome 有一个插件叫 &lt;a href="https://www.one-tab.com/"&gt;Onetab&lt;/a&gt;，本意是用来放一些稍后阅读的标签页。但是稍后阅读这种东西，最终都会转变成垃圾桶，标签越积越多。随着我的几次设备/系统更替（比如从我的老暗影精灵到 deskmini），迁移来迁移去很多上古标签页居然没丢.&lt;/p&gt;
+&lt;p&gt;今天在 Onetab 里翻找找到了&lt;a href="https://pureage.info/2014/08/25/hiding-302-using-proxy-pass.html"&gt;用 proxy_intercept_errors 和 recursive_error_pages 代理多次 302&lt;/a&gt; 这样一篇文章。文章本身讲的是 nginx 用于反代时如何 follow 上游的 302 的问题，这是一篇普通的技术博客。但是翻看他的博客，却有很多生活随想，日记游记之类的内容。篇幅也长短不一，最短的寥寥一两句话。而翻看我自己的博客，合计三十一篇博文，其中（质量很低的）技术博文占了绝大多数。我不禁有些感慨，写博客究竟是为了什么。是为了在面试时多一个展现自己的方面，还是仅仅是作为一个写作的平台，无所约束地抒发自己的心情？&lt;/p&gt;
+&lt;p&gt;还记得我的博客刚搭起来的时候，我写过一篇&lt;a href="https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/"&gt;我为什么选择了独立博客&lt;/a&gt;，内容是瞎扯的，但是最后一句话「庞大的互联网中的一方天地」我倒是现在也很认同。&lt;/p&gt;
+- https://blog.coherence.codes/posts/2023/%E5%8D%9A%E5%AE%A2%E9%87%8C%E5%BA%94%E8%AF%A5%E5%86%99%E4%BB%80%E4%B9%88/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>IPv6 配置入门</title><link>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</link><pubDate>Sun, 16 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ -&lt;h2 id="背景知识"&gt;背景知识&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://datatracker.ietf.org/doc/html/rfc8200"&gt;RFC 8200 (Internet Protocol, Version 6 (IPv6) Specification)&lt;/a&gt; 为最新的 IPv6 标准. 主要描述了头部 (Header) 定义, 拓展头部和选项定义等.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://datatracker.ietf.org/doc/html/rfc7084"&gt;RFC 7084 (IPv6 CE Router Requirements)&lt;/a&gt; 定义了家用或小型办公室路由器 (IPv6 Customer Edge Routers) 配置的基本要求. OpenWrt 的配置文档遵循了这一 RFC.&lt;/p&gt;
+&lt;p&gt;RFC 4861 (IPv6 Neighbor Discovery) 定义了一种网络发现机制, 等效与 IPv4 中的 ARP. 下述的两种机制均依赖于 ND.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://datatracker.ietf.org/doc/html/rfc4862"&gt;RFC 4862 (IPv6 Stateless Address Autoconfiguration, SLAAC)&lt;/a&gt; 定义了一种无状态配置地址的机制. &lt;a href="https://datatracker.ietf.org/doc/html/rfc8415"&gt;RFC 8415 (Dynamic Host Configuration Protocol for IPv6 (DHCPv6))&lt;/a&gt; 定义了一种配置 IP 地址和前缀的机制. DHCPv6 可以替代 SLAAC 或和 SLAAC 一起工作.&lt;/p&gt;
+&lt;p&gt;本文并不是一篇针对 IPv6 的详尽介绍, 而只是对家用 IPv6 配置过程中的一些机制作了阐述. 在最后分享了几个 IPv6 问题排查的例子.&lt;/p&gt;
+&lt;h2 id="术语"&gt;术语&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;节点 (node): 一个实现了 IP 协议的设备&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;路由器 (router): 一个转发 (不是显式地发给它自己的) IP 包的设备&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;主机 (host): 不是路由器的节点&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;链路 (link): 一种通信介质, 使节点能够在链路层进行通信. 对于一个 link-only scope 的地址 (即下文中 link-local address), 其只能与在相同链路上的设备通信, 即所谓的在同一个子网内的设备. 这个地址也被称为工作在单链路 (single link) 上. 路由器无法路由这个地址.&lt;/p&gt;
+&lt;p&gt;IPv6 CE 路由器是两个网络之间的分割点, 是一个组播域的边界.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="rfc-8200-internet-protocol-version-6-ipv6-specification"&gt;RFC 8200 (Internet Protocol, Version 6 (IPv6) Specification)&lt;/h2&gt;
+&lt;p&gt;关于分片: 我之前一直以为 IPv6 不能够分片, 然而实际上是 IPv6 包在途中无法分片 (也就是说路由器只能够丢弃过大的包), 分片只发生在主机上.&lt;/p&gt;
+&lt;h2 id="rfc-4291-ip-version-6-addressing-architecture"&gt;RFC 4291 (IP Version 6 Addressing Architecture)&lt;/h2&gt;
+&lt;p&gt;RFC 4291 定义了 IPv6 中的地址空间以及不同的层级. IPv6 必须支持组播, 这样做的好处是主机可以使用一个众所周知的组播地址来和 DHCP 服务器通信. 同时, 在 IPv6 中不存在广播, IPv4 中广播的功能都能够由组播实现.&lt;/p&gt;
+&lt;p&gt;一个典型的 IPv6 地址:&lt;/p&gt;
+&lt;p&gt;&lt;img src="./ipv6-addr-format-1675603805738-5.png" alt="ipv6-addr-format"&gt;&lt;/p&gt;
+&lt;p&gt;对于单播和组播地址，它们之间可由不同的网络前缀所辨认:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: left"&gt;地址类型&lt;/th&gt;
+&lt;th style="text-align: left"&gt;英文名称&lt;/th&gt;
+&lt;th style="text-align: left"&gt;二进制&lt;/th&gt;
+&lt;th style="text-align: left"&gt;16进制&lt;/th&gt;
+&lt;th style="text-align: left"&gt;备注&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;链路本地地址&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Link-local address&lt;/td&gt;
+&lt;td style="text-align: left"&gt;1111 1110 10&lt;/td&gt;
+&lt;td style="text-align: left"&gt;fe80::/10&lt;/td&gt;
+&lt;td style="text-align: left"&gt;单链路通信, 中间 54 bits 为 0, 末尾 64 bits 为 interface ID.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;唯一本地地址&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Unique local address, ULA&lt;/td&gt;
+&lt;td style="text-align: left"&gt;1111 1101&lt;/td&gt;
+&lt;td style="text-align: left"&gt;fd00::/8&lt;/td&gt;
+&lt;td style="text-align: left"&gt;本地网络通信&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;全局单播地址&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Global unicast address, GUA&lt;/td&gt;
+&lt;td style="text-align: left"&gt;001&lt;/td&gt;
+&lt;td style="text-align: left"&gt;2000::/3&lt;/td&gt;
+&lt;td style="text-align: left"&gt;互联网通信&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;组播地址&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Multicast address&lt;/td&gt;
+&lt;td style="text-align: left"&gt;1111 1111&lt;/td&gt;
+&lt;td style="text-align: left"&gt;ff00::/8&lt;/td&gt;
+&lt;td style="text-align: left"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tips: ULA 在 &lt;a href="https://datatracker.ietf.org/doc/html/rfc4193"&gt;RFC 4193 (Unique Local IPv6 Unicast Addresses)&lt;/a&gt; 中有详细描述, 其与 link-local address 的主要区别在于 link-local 用于无路由器情况下的链路配置, 以及同一链路下的通信.
 ULA 的作用与 IPv4 时代的 10.0.0.0/8 等私有地址类似, 可以用于内网中的服务访问, 其能够被路由, 只是不存在于互联网上,
-ULA 用于替代已经 deprecated 的 site-local address.&lt;/p>&lt;/blockquote>
-&lt;blockquote>
-&lt;p>Note: RFC 4291 似乎规定了一种 Interface Identifiers 的生成方式 Modified EUI-64, 但是我没有细看&lt;/p>&lt;/blockquote>
-&lt;p>一个典型的全局单播地址结构:&lt;/p>
-&lt;p>&lt;img src="./ipv6-addr-alloc-1675603832146-7.png" alt="ipv6-addr-alloc">&lt;/p>
-&lt;p>一些预定义的 IPv6 组播地址:&lt;/p>
-&lt;ul>
-&lt;li>本地网段所有节点 (All Nodes Addresses) — ff02::1&lt;/li>
-&lt;li>本地网段所有路由器 (All Routers Addresses) — ff02::2
-&lt;blockquote>
-&lt;p>tips: 这两个地址均为 link-local, interface-local 和 site-local 在这里不作讨论&lt;/p>&lt;/blockquote>
-&lt;/li>
-&lt;li>本地请求节点地址 (Solicited-Node Address) — ff02::1:ffxx:xxxx
-这个地址由接口的低 24 bits 地址计算得到, 设备必须加入接口相关联的请求节点地址 (无论是自动或手动配置的地址)&lt;/li>
-&lt;/ul>
-&lt;h2 id="rfc-4861-ipv6-neighbor-discovery">RFC 4861 (IPv6 Neighbor Discovery)&lt;/h2>
-&lt;p>RFC 4861 定义了一种网络发现机制 (Neighbor Discovery Protocol, NDP), 等效与 IPv4 中的 ARP. NDP 定义了五种 ICMPv6 (RFC 4443) 消息类型：&lt;/p>
-&lt;ol>
-&lt;li>路由器请求 (Router Solicitation, 简称 RS), 在一个接口启用后, 主机可以发送 RS 以请求路由器马上发送 RA, 而不是等待下一次计划发送的时间.&lt;/li>
-&lt;li>路由器通告 (Router Advertisement, 简称 RA), 路由器广播它们的存在, 同时附带多个配置参数. RA 周期性发送, 或是用于响应 RS. RA 包含了网络的前缀信息, 地址配置, 跳数限制等.&lt;/li>
-&lt;li>邻居请求 (Neighbor Solicitation, 简称 NS), 由一个节点发送, 用于确定一个邻居的链路层地址, 或是验证一个邻居仍然能通过一个缓存的链路层地址可达. NS 也被用于重复地址的探测.&lt;/li>
-&lt;li>邻居通告 (Neighbor Advertisement, 简称 NA), 对 NS 的响应. 一个节点也可以自发地发送 NS 来宣告链路层地址的变化.&lt;/li>
-&lt;li>重定向 (Redirect), 由路由器发送, 用于通知节点一个更好的下一跳地址.&lt;/li>
-&lt;/ol>
-&lt;p>所有 NDP 协议的包实际上是封装在 ICMPv6 协议的包里的. 这里插播一下 ICMPv6 的包结构, 非常简单:&lt;/p>
-&lt;p>&lt;img src="./image-20240311214614781.png" alt="image-20240311214614781">&lt;/p>
-&lt;p>IPv6 下的 ping 命令和 IPv4 下类似, 也是使用 ICMP 协议实现的. ICMPv6 定义了 Echo Request (Type 128) 和 Echo Reply (Type 129) 类型来给 ping 使用.&lt;/p>
-&lt;p>下文所述的 SLAAC 即使用 NDP 协议中的 RA 报文进行配置. RA 报文里有啥呢, 可以瞅一眼:&lt;/p>
-&lt;p>&lt;img src="./image-20250122225735217.png" alt="image-20250122225735217">&lt;/p>
-&lt;p>核心的信息在几个 Options 里, 包括了:&lt;/p>
-&lt;ul>
-&lt;li>链路的 MTU&lt;/li>
-&lt;li>路由器的 MAC 地址 (奇怪的是为什么不直接看以太网帧的地址呢)&lt;/li>
-&lt;li>前缀信息&lt;/li>
-&lt;li>路由信息, 这是为了在有多个路由器的网络中, 通过发送附带优先级 (high/medium/low) 的路由信息, 指示用户选择路由器. 这个 option 在 &lt;a href="https://datatracker.ietf.org/doc/html/rfc4191/">RFC 4191&lt;/a> 中定义, 很奇怪的一点是, 明明这个 RFC 比 RFC 4861 要早, 这个 option 却没有被包含在 RFC 4861 中.&lt;/li>
-&lt;li>DNS&lt;/li>
-&lt;li>广播间隔&lt;/li>
-&lt;/ul>
-&lt;h2 id="rfc-4862-ipv6-stateless-address-autoconfiguration">RFC 4862 (IPv6 Stateless Address Autoconfiguration)&lt;/h2>
-&lt;p>RFC 4862 定义了一种 IPv6 接口的自动配置机制 (即 SLAAC), 包括生成一个链路本地地址和全局地址, 和一种重复地址检测 (Duplicate address detection) 机制来验证一条链路上地址的唯一性.&lt;/p>
-&lt;p>自动配置过程将首先生成链路本地地址. 其由一个链路本地前缀 (RFC 4291 中定义的)+一个接口的标识符 (interface identifier), 当这个地址被分配到一个接口之前, 它是一个暂定地址 (tentative address). 一个节点必须验证它在链路上的唯一性. 具体来说, 节点会发送一个邻居请求报文, 将这个暂定地址作为目标地址. 如果另一个节点正在使用这个地址, 它会返回一个邻居通告来拒绝这个请求. 在验证成功后, 这个地址会成为首选地址 (preferred address).&lt;/p>
-&lt;p>接下来主机会广播路由器请求 (RS), 以便敦促路由器发送路由器通告 (RA). 主机根据路由器通告中的的前缀信息 (Prefix-Infromation) 选项来构造全局地址.&lt;/p>
-&lt;blockquote>
-&lt;p>Note: 由于 RA 总是会广播给所有主机, 所以 SLAAC 无法做到不给某些主机分配 IP 地址&lt;/p>&lt;/blockquote>
-&lt;p>一个地址的生命周期: 首选地址在首选期限 (preferred lifetime) 过期之后会成为不推荐地址 (deprecated address). 不推荐地址能够继续被用于已经建立的连接中, 但不应该被用于建立新连接. 一个地址在有效期限 (valid lifetime) 过期之后会变为无效地址 (invalid address). 无效地址不能够被用作向外连接的源地址.&lt;/p>
-&lt;p>RFC 4862 中并没有规定 interface identifier 是如何产生的, 只说了很多情况下其由接口的链路层地址 (即 MAC 地址) 产生. 这种生成方式会带来一些隐私上的顾虑, 因而在 SLAAC 隐私扩展 (RFC 4941) 中, 主机会生成一个临时地址 (temporary address) 来负责对外通信. 另一种方式是生成一个不变的, 与 MAC 地址无关的 interface identifier, 这种方式在 RFC 7217 中定义.&lt;/p>
-&lt;h2 id="rfc-8415-dynamic-host-configuration-protocol-for-ipv6">RFC 8415 (Dynamic Host Configuration Protocol for IPv6)&lt;/h2>
-&lt;p>RFC 8415 定义了一个 C/S 协议 DHCPv6, 其功能包括向一个设备提供地址或其他配置, 自动委派 IPv6 前缀等. 当 DHCP 只被用于提供除地址和前缀之外的其他配置 (如 DNS) 时, 它不必维护任何状态, 因此, 这种模式被称为无状态 DHCPv6 (stateless DHCPv6). 与之相对的是有状态 DHCPv6 (stateful DHCPv6). RFC 8415 是一个庞大的 RFC, 废弃了许多之前的 DHCPv6 标准, 如 RFC 3315 (原始的 DHCPv6 标准), RFC 3633 (prefix delegation), RFC 3736 (Stateless Dynamic Host Configuration Protocol (DHCP) Service for IPv6) 等.&lt;/p>
-&lt;p>DHCP 消息类型 (部分):&lt;/p>
-&lt;ul>
-&lt;li>Solicit: 客户端发送, 用于定位服务器&lt;/li>
-&lt;li>Advertise: 服务器发送, 对于 solicit 的回复&lt;/li>
-&lt;li>Request: 客户端发送: 用于请求配置&lt;/li>
-&lt;li>Reply: 服务器发送, 包含租约和其他配置, 是对于 Solicit, Request, Renew, 或 Rebind 的回复&lt;/li>
-&lt;/ul>
-&lt;h3 id="ipv6-pd">IPV6-PD&lt;/h3>
-&lt;p>前缀委派 (Prefix Delegation) 用于一个委派路由器 (delegating router) (作为 DHCP 服务器) 向一个请求路由器 (requesting routers) (作为 DHCP 客户端) 委派前缀. 这一机制通常被用于 ISP 向用户委派 (delegate) 一个前缀, 这个前缀将被用于用户网络中的设备. 比如用于 SLAAC 中路由器通告的前缀部分.&lt;/p>
-&lt;p>&lt;img src="./image-20230410222528623.png" alt="image-20230410222528623">&lt;/p>
-&lt;p>PD 是通过 DHCPv6 中的 &lt;code>IA_PD&lt;/code> 选项来工作的. 为了方便抓包分析, 这里描述一下这个选项的字段.&lt;/p>
-&lt;p>&lt;img src="./image-20240224202640142.png" alt="image-20240224202640142">&lt;/p>
-&lt;ul>
-&lt;li>DHCPv6 的 option 有固定的 option-code 和 option-len 字段, 分别占 2 字节. 对于 &lt;code>IA_PD&lt;/code>, option-code 为 &lt;code>OPTION_IA_PD&lt;/code> (25)&lt;/li>
-&lt;li>IAID: 一个唯一的标识符&lt;/li>
-&lt;li>T1: 在多久之后客户端应该向获取前缀的 delegating router 刷新前缀的有效时间&lt;/li>
-&lt;li>T2: 在多久之后客户端应该向任何可用的 delegating router 刷新前缀的有效时间&lt;/li>
-&lt;li>IA_PD-options: 包含了前缀的具体信息. 请求和响应都会采用同样的 option 格式, 只不过响应会在这个字段中附上前缀信息&lt;/li>
-&lt;/ul>
-&lt;h2 id="pmtu-问题">PMTU 问题&lt;/h2>
-&lt;p>在配置 IPv6 的过程中一个常见的问题是 PMTU 问题. Path MTU Discovery (PMTUD) 是确定 MTU 的一种标准方式, 在 &lt;a href="https://datatracker.ietf.org/doc/html/rfc8201">RFC 8201 (Path MTU Discovery for IP version 6)&lt;/a> 中定义. RFC 中这样描述:&lt;/p>
-&lt;blockquote>
-&lt;p>Nodes not implementing Path MTU Discovery must use the IPv6 minimum link MTU defined in [RFC8200] as the maximum packet size.&lt;/p>&lt;/blockquote>
-&lt;p>从中我们可以推测 PMTUD 在 (几乎) 所有节点上无需配置默认启用.&lt;/p>
-&lt;p>PMTUD 工作方式为源节点首先选择下一跳的 MTU (已知) 作为 PMTU. 如果传输路径上的某个节点因为包过大而无法转发一个包, 它就会丢弃这个包并返回一条 ICMPv6 Packet Too Big 消息.&lt;/p>
-&lt;p>&lt;img src="./image-20230416142554039.png" alt="image-20230416142554039">&lt;/p>
-&lt;p>(图源 &lt;a href="https://datatracker.ietf.org/doc/html/rfc4443#section-3.2">RFC 4443&lt;/a>, 最小的 IPv6 MTU 即 1280 字节)&lt;/p>
-&lt;p>收到消息后源节点根据 ICMPv6 消息中的 MTU 字段减少 PMTU. 这一过程会重复直到源节点估计的 PMTU 小于真正的 PMTU.&lt;/p>
-&lt;p>这一机制带来的问题是, 如果某个路由器没有发送 ICMPv6 消息或是 ICMPv6 消息被路由器的防火墙 block 了, 那么实现了 PMTUD 的节点可能会遇到连接问题. 比如 TCP 的三次握手成功, 但在数据传输的时候 hang 住了. 这种情况被称为黑洞连接.&lt;/p>
-&lt;p>一个 PMTUD 的扩展在 &lt;a href="https://datatracker.ietf.org/doc/html/rfc4821">RFC 4821 (Packetization Layer Path MTU Discovery)&lt;/a> 中定义, 其不依赖 ICMPv6 消息.&lt;/p>
-&lt;p>个人猜测在 IPv4 下这个问题比较少见的原因是 IPv4 支持在路由器上进行分片.&lt;/p>
-&lt;h3 id="一个例子">一个例子&lt;/h3>
-&lt;p>在访问淘宝时, 淘宝会访问 &lt;code>g.alicdn.com&lt;/code> 这一域名, 即 &lt;code>2408:8670:af0:9:3::3e3&lt;/code> 这个 IP. 在 TCP 握手的时候 MSS Option 被设置成了 1440 Bytes, 即 MTU 为以太网的 MTU 1500 (1440 + TCP Header 20 + IPv6 Header 40). 可以看到在第 1353 个包的时候 Wireshark 指示了 &amp;ldquo;TCP Previous Segment Not Captured&amp;rdquo;, 猜测序号 1352 和 1353 之间的某些服务器发送的包被丢了.&lt;/p>
-&lt;p>&lt;img src="./image-20230412235736591.png" alt="image-20230412235736591">&lt;/p>
-&lt;p>下面来看正确处理的情况, 访问 &lt;a href="https://test-ipv6.com/">Test IPv6&lt;/a> 时, 有一项测试为 &amp;ldquo;Test IPv6 large packet&amp;rdquo;, 测试内容为访问一个 MTU 为 1280 的服务器. 通过抓包发现 TCP 握手时的 MSS 仍为 1440, 但在第 862 个包的时候我发送了一个过大的包, 于是在第 864 个包我的路由器 (由于运行了 PPPOE, MTU 为 1492) 返回了一个 ICMPv6 报文, 于是在第 865 个包我重传了这个包, 把 MTU 减少到了 1492, 这一过程不断重复直到 MTU 被设置为 1280.&lt;/p>
-&lt;p>&lt;img src="./image-20230417221041457.png" alt="image-20230417221041457">&lt;/p>
-&lt;blockquote>
-&lt;p>Note: 这里需要&lt;a href="https://wiki.wireshark.org/CaptureSetup/Offloading">关闭 TCP Segmentation Offload&lt;/a>, 否则包长度会显示为超过 MTU, 这是因为 TCP 包的分片被 Offload 到了网卡以减轻主机 CPU 的负担.&lt;/p>&lt;/blockquote>
-&lt;p>在仅 IPv4 的情况下访问 &lt;code>g.alicdn.com&lt;/code>, 可以发现服务端发送的几个包发生了分片:&lt;/p>
-&lt;p>&lt;img src="./image-20230416141447823.png" alt="image-20230416141447823">&lt;/p>
-&lt;h2 id="其他一些问题">其他一些问题&lt;/h2>
-&lt;h3 id="pd-过早失效的问题">PD 过早失效的问题&lt;/h3>
-&lt;p>我现在的移动网是光猫拨号, 用一个软路由装了 OpenWRT 当主路由. 发现 IPv6 会在一天之后停止工作.. 抓 wan 口 DHCPv6 包发现 PD 的有效期写的是两天.. 怀疑和这个有关.. 待调查.&lt;/p>
-&lt;p>（2024/11/07 更新）把光猫改成桥接模式之后这个问题没有出现了..&lt;/p>
-&lt;h3 id="ndp-不工作的问题">NDP 不工作的问题&lt;/h3>
-&lt;p>某日, 突然发现我的手机在 WiFi 下某些 App 加载非常慢, 而使用移动数据则正常, 直觉告诉我是 IPv6 的锅, 然而检查 OpenWRT 发现已经开启 TCP MSS Clamping, MTU 设置的 1420 也比较小了, 遂在路由器 eth0 接口 (wan 口) 抓包查看.&lt;/p>
-&lt;p>抓包发现手机的 v6 地址不可达.. 图中 &lt;code>103e&lt;/code> 结尾的地址是路由器, &lt;code>edc6&lt;/code> 结尾的地址是手机, 可见手机发起 TCP 握手之后, 对方的 SYN 并没有发到我手机 (因为手机发起了重传), 之后路由器给对方发送了网络不可达报文..&lt;/p>
-&lt;p>&lt;img src="./image-20240311215940125.png" alt="image-20240311215940125">&lt;/p>
-&lt;p>在路由器上用 &lt;code>ip neighbour&lt;/code> 检查发现:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>root@FriendlyWrt:~# ip neighbour
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fd00:ab:cd:0:9d74:c147:f069:edc6 dev br-lan FAILED
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2409:8a28:ed8:1e51:9d74:c147:f069:edc6 dev br-lan INCOMPLETE
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查询 man 可知这是 NDP 发现未能成功:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span> incomplete
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> the neighbour entry has not &lt;span style="color:#f92672">(&lt;/span>yet&lt;span style="color:#f92672">)&lt;/span> been validated/resolved.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> failed max number of probes exceeded without success, neighbor validation has ultimately failed.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后继续观察 Wireshark, 发现手机确实不响应 NDP Neighbor Solicitation (也就是不发 Neighbor Advertisement), 这种情况闻所未闻..&lt;/p>
-&lt;p>根据重启重装重买定律, 重启手机, 问题解决.. 尚不清楚真正的问题是什么.. (我觉得一加大概率背锅)&lt;/p>
-&lt;h3 id="mavlan-的问题">mavlan 的问题&lt;/h3>
-&lt;p>见 &lt;a href="https://blog.coherence.codes/posts/2024/openwrt_transparent_proxy/">OpenWrt 搭建透明代理&lt;/a>&lt;/p>
-&lt;h2 id="其他">其他&lt;/h2>
-&lt;ul>
-&lt;li>一个典型的 IPv4 路由器会使用 NAT, 因此默认阻止所有入站连接, 其通常使用 UPnP 来开放某一端口. 而 IPv6 不使用 NAT, 因此正确配置防火墙是必要的.&lt;/li>
-&lt;li>&lt;a href="https://datatracker.ietf.org/doc/html/rfc4389">RFC 4389 (Neighbor Discovery Proxies (ND Proxy))&lt;/a>, 可以作为一种在 ISP 不支持 DHCPv6-PD 情况下使用 IPv6 的一种方式. 虽然该 RFC 的分类是 experimental, 但其已经被广泛实现了.&lt;/li>
-&lt;/ul>
-&lt;h2 id="参见">参见&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://openwrt.org/docs/guide-user/network/ipv6/configuration">OpenWrt IPv6 configuration&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.packetmania.net/2020/12/01/IPv6-Addressing/">IPv6动态地址分配机制详解&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://wiki.archlinux.org/title/IPv6">ArchWiki IPv6&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://blog.apnic.net/2016/05/19/fragmenting-ipv6/">Fragmenting IPv6&lt;/a> 讨论了和分片有关的问题, 包括 UDP 下的处理&lt;/li>
-&lt;li>&lt;a href="https://www.v2ex.com/t/800024">开启 IPv6 后网速变得很慢？可能是 PMTU 黑洞的问题 - V2EX&lt;/a>&lt;/li>
-&lt;/ul>
-- https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hello, Hugo!</title><link>https://blog.coherence.codes/posts/2022/hello_hugo/</link><pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/hello_hugo/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/hello_hugo/ -&lt;p>这是一个船新的博客！&lt;/p>
-&lt;h2 id="历史">历史&lt;/h2>
-&lt;p>在大二（2018）的时候，我萌生了搭建一个自己的独立博客的想法，于是就有了 &lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/">hexo搭建小记&lt;/a>，当时我随手一找找到的基本都是 Hexo，于是我就用了。引用一段当时写的关于页面：&lt;/p>
-&lt;blockquote>
-&lt;h2 id="关于博客">关于博客&lt;/h2>
-&lt;ul>
-&lt;li>2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑&lt;/li>
-&lt;li>2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件&lt;/li>
-&lt;li>2020-02-22 更改评论为 &lt;code>disqusjs&lt;/code>，详见作者的&lt;a href="https://blog.skk.moe/post/disqusjs/">博文&lt;/a>；启用 &lt;a href="https://github.com/theme-next/theme-next-pjax">pjax&lt;/a>&lt;/li>
-&lt;li>2019-12-24 启用新域名&lt;code>blog.coherence.codes&lt;/code>&lt;/li>
-&lt;li>2019-10-07 升级主题至 Next V7.4.1&lt;/li>
-&lt;li>2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %}&lt;/li>
-&lt;/ul>&lt;/blockquote>
-&lt;p>Next 就是一个非常大众的主题，有几种变体，我用的是一个叫 &lt;code>pisces&lt;/code> 的变体，长这样（原博客图已经找不到了，只能用官方 Demo 凑数了）：&lt;/p>
-&lt;p>&lt;img src="image-20221002165030564.png" alt="image-20221002165030564">&lt;/p>
-&lt;p>这一时期的博客位于 &lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/source/source">source 分支&lt;/a>，最后更新于 2020-04-16。&lt;/p>
-&lt;p>由于这个主题实在是太大众了，中途（2019-10 左右）我也想过换一个主题（&lt;a href="https://github.com/yscoder/hexo-theme-indigo">hexo-theme-indigo&lt;/a>，一个 Material Design 风格的主题），但是没有配置成功，&lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/theme-indigo">theme-indigo 分支&lt;/a>便是那次尝试。theme-indigo 的效果图长这样：&lt;/p>
-&lt;p>&lt;img src="image-20221002165819783.png" alt="image-20221002165819783">&lt;/p>
-&lt;p>到了 21 年 2 月，我开始重新调研博客生成器，当时看到了一个 Python 写的 Pelican，而我又希望壮大一下 Python 生态，于是就用了。用了之后发现并没有什么合适的主题，恰巧 Pelican 用的模板引擎 Jinja 和 Django Template Engine 很像，我比较熟悉，于是我就想自己写一个主题，然而这一工作从没开始过.. 于是我现在的博客是这样的（&lt;del>极简主义&lt;/del>）：&lt;/p>
-&lt;p>&lt;img src="image-20221002171314620.png" alt="image-20221002171314620">&lt;/p>
-&lt;p>这段时间里我还写过一个&lt;a href="https://github.com/cjc7373/pelican-markdown-image">处理图片的 Pelican 插件&lt;/a>，虽然现在看起来挺蠢的..&lt;/p>
-&lt;p>再后来，我又对 Rust 产生了兴趣，于是又发现了 Zola，这时候我找到了 &lt;a href="https://github.com/AmazingRise/hugo-theme-diary">hugo-theme-diary&lt;/a> 这个主题，感觉非常不错。这个主题是从 &lt;a href="https://byvoid.com/zhs/">BYVoid&lt;/a> 那看来的，好看，有响应式，也有文章内目录。于是就想把它移植到 zola，在 port 了一个 head 之后，这个计划就被无限期搁置了。&lt;/p>
-&lt;p>终于，我感觉还是有必要有一个好看的博客的，于是我最终选择了 Hugo+hugo-theme-diary，加上一点点自己的魔改。&lt;/p>
-&lt;h2 id="迁移">迁移&lt;/h2>
-&lt;p>Hugo 对于资源文件的处理有&lt;a href="https://gohugo.io/content-management/image-processing/">自己的一套规则&lt;/a>，即博客文章位于 &lt;code>posts/post_name/index.md&lt;/code>，这篇文章资源文件放在 &lt;code>posts/post_name/&lt;/code> 这个路径下面。而我原来的文件结构为文章位于 &lt;code>posts/post_name.md&lt;/code>，资源文件位于 &lt;code>posts/post_name/&lt;/code>。所以我不得不写了一个脚本来迁移图片：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> pathlib &lt;span style="color:#f92672">import&lt;/span> Path
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> re
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>md_image &lt;span style="color:#f92672">=&lt;/span> re&lt;span style="color:#f92672">.&lt;/span>compile(&lt;span style="color:#e6db74">r&lt;/span>&lt;span style="color:#e6db74">&amp;#34;!\[(.*)\]\((.*)\)&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">replace_image_reference_in_a_md_file&lt;/span>(md, dry_run&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#66d9ef">False&lt;/span>):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(md, &lt;span style="color:#e6db74">&amp;#34;r&amp;#34;&lt;/span>, encoding&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;utf8&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content &lt;span style="color:#f92672">=&lt;/span> f&lt;span style="color:#f92672">.&lt;/span>read()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">replace&lt;/span>(&lt;span style="color:#66d9ef">match&lt;/span>):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> match[0]: all matched string
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> match[1]: name
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> match[2]: image path
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rep &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;![&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>match[&lt;span style="color:#ae81ff">1&lt;/span>]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">](./&lt;/span>&lt;span style="color:#e6db74">{&lt;/span>match[&lt;span style="color:#ae81ff">2&lt;/span>]&lt;span style="color:#f92672">.&lt;/span>split(&lt;span style="color:#e6db74">&amp;#39;/&amp;#39;&lt;/span>)[&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">)&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">f&lt;/span>&lt;span style="color:#e6db74">&amp;#34;Replacing &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>match[&lt;span style="color:#ae81ff">0&lt;/span>]&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74"> with &lt;/span>&lt;span style="color:#e6db74">{&lt;/span>rep&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> rep
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> content &lt;span style="color:#f92672">=&lt;/span> md_image&lt;span style="color:#f92672">.&lt;/span>sub(replace, content)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">not&lt;/span> dry_run:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">with&lt;/span> open(md, &lt;span style="color:#e6db74">&amp;#34;w&amp;#34;&lt;/span>, encoding&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;utf8&amp;#34;&lt;/span>) &lt;span style="color:#66d9ef">as&lt;/span> f:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>write(content)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>to_mig: list[Path] &lt;span style="color:#f92672">=&lt;/span> []
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>working_dir &lt;span style="color:#f92672">=&lt;/span> Path(&lt;span style="color:#e6db74">&amp;#34;./2022&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> f &lt;span style="color:#f92672">in&lt;/span> working_dir&lt;span style="color:#f92672">.&lt;/span>iterdir():
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> f&lt;span style="color:#f92672">.&lt;/span>suffix &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;.md&amp;#34;&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> to_mig&lt;span style="color:#f92672">.&lt;/span>append(f)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>print(to_mig)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> f &lt;span style="color:#f92672">in&lt;/span> to_mig:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> replace_image_reference_in_a_md_file(f)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#f92672">.&lt;/span>rename(working_dir &lt;span style="color:#f92672">/&lt;/span> Path(f&lt;span style="color:#f92672">.&lt;/span>stem) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#e6db74">&amp;#34;index.md&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># print(f&amp;#34;Move {f} to {Path(f.stem) / &amp;#39;index.md&amp;#39;}&amp;#34;)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugo 用的模板引擎是 Go 标准库里的，这点好评，Helm 用的同样是这个模板引擎。&lt;/p>
-&lt;h2 id="部署">部署&lt;/h2>
-&lt;p>现在的部署简单好多啊，只需一个配置文件，Github Actions 因为是自家产品的缘故连 token 都不需要了，自定义域名 CNAME 也只需在配置文件中增加一行，相比于三年之前的部署体验真的是天差地别..&lt;/p>
-&lt;h2 id="一些问题">一些问题&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>Hugo 处理页面之间链接也有&lt;a href="https://gohugo.io/content-management/cross-references/">自己的规则&lt;/a>，需要转换，不过我好像也没什么跨页面链接&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>代码高亮的配色非常诡异..&lt;/p>
-&lt;p>&lt;img src="image-20221003005014257.png" alt="image-20221003005014257">&lt;/p>
-&lt;p>发现在本地的配色是正常的，检查发现本地是 Hugo extended version，于是在 actions 中也启用了 extended 后恢复正常，挺奇怪的..&lt;/p>
-&lt;/li>
-&lt;/ul>
-- https://blog.coherence.codes/posts/2022/hello_hugo/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>The 2022 Python Language Summit</title><link>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</link><pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ -&lt;p>每年, 在 PyCon US 的前夕, 30 多位 Python 的核心开发者将会聚集起来召开 Python 语言峰会. 今年的会议在 5/11 召开, 让我们来看看今年讨论了什么吧. 有关会议的详情可在 &lt;a href="https://pyfound.blogspot.com/2022/05/the-2022-python-language-summit_01678898482.html">PSF Blog&lt;/a> 中找到.&lt;/p>
-&lt;h2 id="cpython-的-issue-和-pr-积压">CPython 的 issue 和 PR 积压&lt;/h2>
-&lt;p>首先祝贺一下前不久 &lt;a href="https://bugs.python.org">bpo&lt;/a> 正式退休了, Python 的 issue tracker 迁移到了 Github, 无论是易用性还是审美上来说都是一件好事.&lt;/p>
-&lt;p>随着 Python 的流行, issues 和 PRs 也开始累积起来了, 在 2022/05/07 时, CPython 有着 7,027 个 open issues 和 1,471 个 PRs. Python 开发者们向来对关闭一个 issue 持谨慎态度. 以低质量的功能请求 (feature requests) 为例, 我们可以粗略地把它们分为三类:&lt;/p>
-&lt;ul>
-&lt;li>没有任何意义的, 或显然有不利影响的, 它们能被轻易地关闭&lt;/li>
-&lt;li>会增加维护成本, 但似乎有点好处的, 对于它们的意见通常会很摇摆&lt;/li>
-&lt;li>每个人都觉得是好的, 但没人愿意真正去实现它.. 这些 issues 通常会存在很久, 如 &lt;a href="https://github.com/python/cpython/issues/36387">BPO-539907&lt;/a>, 一个存在了二十年的 issue.&lt;/li>
-&lt;/ul>
-&lt;p>开发者 Katriel 认为, 把这些 issues 留在 issue tracker 上是有害的, 增加了整个项目的维护成本. 有关这一论断, 一种极端的做法是关闭所有不活跃的 issues, 当然这是不可取的, 可以参看 &lt;a href="https://drewdevault.com/2021/10/26/stalebot.html">GitHub stale bot considered harmful&lt;/a>.&lt;/p>
-&lt;p>与会者们认为这一问题没有简单的答案, 但增加 triage 的人力显然是一种办法, CPython triage 团队目前在逐渐壮大, 这是好事. PEP 594 计划移除一些年久失修的标准库, 这也能缓解一些问题.&lt;/p>
-&lt;h2 id="没有-gil-的-python">没有 GIL 的 Python&lt;/h2>
-&lt;p>GIL 是 CPython 中一个臭名昭著的特性, 它也被开发者们翻来覆去地讨论了. 今年, 这一传统得到延续, 开发者 Sam Gross 讨论了 &lt;a href="https://github.com/colesbury/nogil">nogil&lt;/a>, 一个移除 GIL 的 Proof of Concept.&lt;/p>
-&lt;p>移除 GIL 意味着为了保证线程安全, 需要加入许多 locks, 这非常困难, 而且会影响单线程性能.&lt;/p>
-&lt;p>Gross 希望能在 Python 3.12 中加入一个编译选项来禁用 GIL. 与会者对其表示了支持, 但许多问题还有待考虑, 如这一巨大的更改如何合并入主线, 其对第三方库的影响, 对于 CPython 开发的影响等.&lt;/p>
-&lt;p>我个人感觉移除 GIL 还是不太现实的..&lt;/p>
-&lt;h2 id="每个解释器一个-gil">每个解释器一个 GIL&lt;/h2>
-&lt;p>在 1997 年, CPython 加入了 &lt;code>PyInterpreterState&lt;/code> 结构体, 这使得多个解释器能运行在一个进程中.&lt;/p>
-&lt;p>然而, 多个解释器之间并不是完全隔离的, 许多共享的全局变量通过 GIL 来实现互斥访问. 开发者 Eric Snow 希望每个解释器能有一个自己的 GIL 来解决这一问题, 这同样能够使子解释器之间实现真正的并行. 到目前为止, 仍然存在着约 1200 个全局变量.
-Snow 认为这一工作和 Gross 的移除 GIL 不是互斥的, &amp;ldquo;这些工作不管在哪里都是一个好主意&amp;rdquo;, 他说.&lt;/p>
-&lt;p>目前子解释器只能通过 C-API 使用, &lt;a href="https://peps.python.org/pep-0554/">PEP 554&lt;/a> 提出了在 Python 中使用子解释器, 然而该 PEP 仍处于草案状态.&lt;/p>
-&lt;p>我表示并不是很懂子解释器的意义所在&amp;hellip; 或许是方便共享数据? 多进程之间通信是要求一个对象可序列化的..&lt;/p>
-&lt;h2 id="faster-python">Faster Python&lt;/h2>
-&lt;p>好消息! 好消息! Python 3.11 相比于 3.10 会有平均 25% 的性能提升!&lt;/p>
-&lt;p>一年之前, 微软出钱, 组建了 Faster CPython 团队, 由开发者 Mark Shannon 和 Python 之父&lt;del>廖雪峰&lt;/del> Guido van Rossum 领导来做性能优化. Shannon 分享了他们接下来的计划.
-第一个问题是测量. 我们首先要知道 Python 在哪些地方慢, 为什么慢, 才能做针对性的性能优化. 为此, 我们需要更多的&lt;del>跑分&lt;/del>基准测试 (benchmarks), Shannon 希望更多人能去贡献 &lt;a href="https://github.com/python/pyperformance">pyperformance&lt;/a> 项目.&lt;/p>
-&lt;p>3.11 的很大一部分改进来自于 PEP 659, &amp;ldquo;专门化的自适应解释器&amp;rdquo;, 简而言之是在执行时用更快的字节码去替代原有的字节码. PEP 659 仍有待继续推进.&lt;/p>
-&lt;p>Shannon 也谈到了 JIT, &amp;ldquo;每个人都想要一个 JIT 编译器, 即使这毫无意义&amp;rdquo;, 像 &lt;a href="https://github.com/tonybaloney/Pyjion">pyjion&lt;/a> 这样的项目用第三方库的形式把 JIT 带到了 CPython 中, 然而在 CPython 中本身集成 JIT 可能要等到 3.13 之后了.&lt;/p>
-&lt;h2 id="python-和浏览器">Python 和浏览器&lt;/h2>
-&lt;p>在过去两年间, 60 多个和 WebAssembly 相关的 PR 合入了主线. 如今, &lt;code>main&lt;/code> 分支已经能够成功交叉编译成 wasm 了.
-WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码相近的性能. 而 wasm 是机器无关的.&lt;/p>
-&lt;p>这一 feature 仍然是高度实验性的, 许多模块在 wasm 下是不可用的.
-除了 CPython 之外, 一众第三方项目如 PyScript, Pyodide 已经能更好地支持 wasm 了.&lt;/p>
-&lt;h2 id="在语法中应用-f-strings">在语法中应用 f-strings&lt;/h2>
-&lt;p>在 Python 3.6 中引入的 f-strings 迅速成为了大家最喜爱的新 features 之一.&lt;/p>
-&lt;p>&lt;code>f&amp;quot;Interpolating an arbitrary expression into a string: {1 + 1}.&amp;quot;&lt;/code>&lt;/p>
-&lt;p>在运行时, 大括号中的表达式会被执行, 然后 &lt;code>str()&lt;/code> 会被调用, 最后的结果会被插入合适的位置.&lt;/p>
-&lt;p>然而, f-strings 目前的实现是 1,400 行 C 代码, 和其他 Python 代码的 Parsing 逻辑完全分离. 这带来了可维护性上的问题和许多隐藏的 bug.&lt;/p>
-&lt;p>Python 3.9 带来了全新的 PEG parser, 能够实现许多复杂的 parsing. 开发者 Pablo Galindo Salgado 希望能把 f-strings 的 parsing 结合到 CPython 的语法中.&lt;/p>
-&lt;p>比如以下问题:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&amp;gt;&amp;gt;&amp;gt; my_list_of_strings &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;b&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;c&amp;#39;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;gt;&amp;gt;&amp;gt; f&lt;span style="color:#e6db74">&amp;#39;Here is a list: {&amp;#34;\n&amp;#34;.join(my_list_of_strings)}&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> File &lt;span style="color:#e6db74">&amp;#34;&amp;lt;stdin&amp;gt;&amp;#34;&lt;/span>, line &lt;span style="color:#ae81ff">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#e6db74">&amp;#39;Here is a list: {&amp;#34;\n&amp;#34;.join(my_list_of_strings)}&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ^
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SyntaxError: f-string expression part cannot include a backslash
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在新方案下将会不存在.&lt;/p>
-&lt;h2 id="从-cinder-合并回上游">从 Cinder 合并回上游&lt;/h2>
-&lt;p>在 2021 年 5 月, Instagram 团队开源了 Cinder, 这是 CPython 的一个以性能为目标的 fork. Cinder 包括了 &amp;ldquo;协程的及早求值&amp;rdquo;, 一个 JIT 编译器, 利用了 type hints 的&amp;quot;实验性的字节码编译器&amp;quot;等 features. (我一直以为 type hints 完全是静态检查, 翻了翻 PEP 发现运行时类型检查以及可能的利用类型进行性能优化是可以接受的)&lt;/p>
-&lt;p>Instagram 的工程师 Itamar Ostricher 分享了 async 和协程相关的更改, 并希望这些更改能合并回上游.
-一个例子:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">import&lt;/span> asyncio
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">IO_bound_function&lt;/span>():
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&amp;#34;This function could finish immediately... or not!&amp;#34;&amp;#34;&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#75715e"># Body of this function here&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">important_other_task&lt;/span>():
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> asyncio&lt;span style="color:#f92672">.&lt;/span>sleep(&lt;span style="color:#ae81ff">5&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;Task done!&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">async&lt;/span> &lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>():
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> asyncio&lt;span style="color:#f92672">.&lt;/span>gather(
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IO_bound_function(),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> important_other_task()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#34;All done!&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__ &lt;span style="color:#f92672">==&lt;/span> &lt;span style="color:#e6db74">&amp;#34;__main__&amp;#34;&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> asyncio&lt;span style="color:#f92672">.&lt;/span>run(main)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果 &lt;code>IO_bound_function&lt;/code> 能立即返回的话, 创建一个协程就毫无意义了. Ostricher 的团队扩展了 &lt;a href="https://docs.python.org/3/c-api/call.html#the-vectorcall-protocol">vectorcall&lt;/a> 协议, 使得被调用者能够知道这次调用是否被调用者 &lt;code>await&lt;/code> 了. 这意味着 &lt;code>awaitables&lt;/code> (可被 &lt;code>await&lt;/code> 的对象) 能够被&lt;em>及早求值&lt;/em>, 多余的协程不会被创建了. Ostricher 的团队在重度使用 &lt;code>async&lt;/code> 的场景下观察到了 ~5% 的性能提升.&lt;/p>
-&lt;p>这个改动能否被合入主线呢? 一个重要的问题是公平性. 如果某些 &lt;code>awaitables&lt;/code> 能被及早求值, 那么可能会使事件循环中的优先级发生改变, 可能会造成不向后兼容的更改. 同时, 其对于 3.11 中 asyncio &lt;em>task groups&lt;/em> 的影响也尚不明确.&lt;/p>
-&lt;h2 id="达到永恒">达到永恒&lt;/h2>
-&lt;p>在 Python 中, 任何东西是一个对象. 所有对象都维护了自己的引用计数, 以便进行垃圾回收. 这就意味着不可变对象在 C 的层次上是可变的, 这会影响 CPU 和内存性能. 例如 &lt;code>None&lt;/code> 对象经常被使用, 对其引用计数的更改也非常多.&lt;/p>
-&lt;p>&lt;a href="https://peps.python.org/pep-0683/">PEP 683&lt;/a> 提出了 &amp;ldquo;永恒的对象 (Immortal objects)&amp;rdquo;, 它们的运行时状态不会改变, 即引用计数不会到达 0, 也不会被垃圾回收.&lt;/p>
-&lt;p>这是一个 CPython 内部的 feature, 即公开 API 不会改变.
-与会者们提出了一些怀疑, 比如它的好处是否只是潜在的, 以及改变引用计数的语义会带来第三方库的兼容性问题. 目前该 PEP 仍处于草案状态.&lt;/p>
-&lt;p>我并没有理解这个 PEP 的好处在哪.. 目前的实现在回归测试中导致了 ~2% 的性能损失..&lt;/p>
-&lt;h2 id="尾巴">尾巴&lt;/h2>
-&lt;p>本次会议很大程度上讨论了 Python 的性能改善, 然而大多数变化是琐碎且渐进的, 想要看到某个改动带来的性能飞跃似乎不太可能 &lt;del>(除了 GIL)&lt;/del>. 我们希望去年 Language Summit 上 Guido 吹下的牛── 4 年里将 CPython 的性能提升 5 倍──能够实现吧.&lt;/p>
-- https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>民族主义自媒体是如何消费我们的</title><link>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ -&lt;p>目前的中文互联网上存在着大量的鼓吹民族主义, 制造中西方对立的自媒体, 令人震惊的是, 他们中大部分不但充斥着情绪输出, 甚至连大部分事实都是错误的. 我偶然间读到了这样的一篇文章, 并对其中列出的事实进行了查证, 然后感觉我的智商受到了侮辱..&lt;/p>
-&lt;p>原文: &lt;a href="https://www.zhihu.com/question/428451991/answer/2431916538">西方媒体是怎样给西方人洗脑的？ - 远方青木的回答 - 知乎&lt;/a>, &lt;a href="http://web.archive.org/web/20220429053052/https://www.zhihu.com/question/428451991/answer/2431916538">archive&lt;/a>&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>这几年欧美一直在向中国发动舆论战，我见过最离谱的一个理论甚至说什么“中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟”。&lt;/p>
-&lt;p>我本以为这套歪理邪说就是欧美造谣生事的想象力极限，没想到欧美的底线可以永无止尽的被突破。&lt;/p>&lt;/blockquote>
-&lt;p>来源: &lt;a href="https://www.nytimes.com/2020/01/07/business/fake-pork-china.html">纽约时报 中国人会购买人造肉吗？&lt;/a>, 另见&lt;a href="https://world.huanqiu.com/article/9CaKrnKoNzC">环球网报道&lt;/a>&lt;/p>
-&lt;p>评论: 虽然文章很有&amp;quot;反华&amp;quot;的倾向性, 但文章主要讲的是人造肉在中国难以推广. 肉类消费对于气候的影响是不争的事实. 所以&amp;quot;中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟&amp;quot;这句话也不能算错, 但应该把主语换成全世界人.
-要求中国牺牲国民营养而减少肉类消费是不合理的, 但是推广人造肉是合理的. 作者在这里显然有断章取义之嫌.&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>《&lt;a href="https://web.archive.org/web/20220429053052mp_/https://www.zhihu.com/search?q=%E5%8D%8E%E7%9B%9B%E9%A1%BF%E9%82%AE%E6%8A%A5&amp;amp;search_source=Entity&amp;amp;hybrid_search_source=Entity&amp;amp;hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A2431916538%7D">华盛顿邮报&lt;/a>》在报道中声称**“中国每年强迫种植数亿棵新树”，这简直是在“犯罪”！**&lt;/p>
-&lt;p>&lt;img src="./e577e26ef47585f1faae27fb45123efd.png" alt="e577e26ef47585f1faae27fb45123efd.png">&lt;/p>
-&lt;p>我捋一捋他们的思路，&lt;strong>大概意思就是说中国每年种数亿棵新树，但把这些新树种下去之前并没有征求这些树的同意，这数亿棵树是“不一定同意自己被种植”的，但全部被中国强迫种在地里了。&lt;/strong>&lt;/p>
-&lt;p>&lt;strong>因此，中国侵犯了树“自由被种植”的权力，强迫树木劳动，这属于犯罪，因此中国需要反思自己这种野蛮的行为。&lt;/strong>&lt;/p>
-&lt;p>逻辑好像有那么一点点道理哦，但我怎么就觉得那么奇怪和荒谬呢。&lt;/p>
-&lt;p>中国人种树怎么了？&lt;/p>
-&lt;p>种树不是在保护环境吗？&lt;/p>
-&lt;p>怎么拐了一圈之后种树居然成犯罪行为了？&lt;/p>&lt;/blockquote>
-&lt;p>来源: 没有找到来源.&lt;/p>
-&lt;p>评论: 据 &lt;a href="https://checkyourfact.com/2022/04/18/fact-check-washington-post-china-trees-article/">checkyourfact&lt;/a>, 该截图为杜撰, 最初流传于 Facebook 和 Twitter.&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>更荒谬的是，同一家西方媒体，前几年报道中国的标题是**《中国对一次性筷子的成瘾正在摧毁森林》。**&lt;/p>
-&lt;p>首先，一次性筷子不是用森林做出来的，一次性筷子的主要原料是一个月能长3米的竹子，以及速生经济林的边角废木料。&lt;/p>
-&lt;p>用森林里的好木头确实可以做一次性筷子，但没人这么做，因为成本太高商家会亏本，只有速生林边角废料和竹子的低廉价格才能让商家赚到钱。&lt;/p>
-&lt;p>其次，抛开筷子的真实原材料不谈，这家西方媒体的主要立场好像也是森林是宝贵的，森林对人类有益，并以此来指责中国。&lt;/p>
-&lt;p>&lt;strong>既然如此，为什么中国种植森林也能被指责一番。是不是中国人干什么都不行，连呼吸都是错的？&lt;/strong>&lt;/p>&lt;/blockquote>
-&lt;p>来源: &lt;a href="https://www.washingtonpost.com/news/worldviews/wp/2013/03/14/chinas-disposable-chopstick-addiction-is-destroying-its-forests/">华盛顿邮报《中国对一次性筷子的成瘾正在摧毁森林》&lt;/a>&lt;/p>
-&lt;p>评论: 华盛顿邮报 2013 年的报道, 主要援引的是时任吉林森工集团董事长柏广新的一句话: &amp;ldquo;我国每年生产800亿双一次性筷子，相当于要砍伐2000万棵生长20年的大树&amp;rdquo;. &lt;a href="http://www.gov.cn/2013lh/content_2349497.htm">中国政府网&lt;/a>和&lt;a href="http://cpc.people.com.cn/pinglun/n/2013/0312/c78779-20759994.html">光明网&lt;/a>均能找到这句话以及相关对一次性筷子的批评. 报道中均指出了木头和竹子均是一次性筷子的原料.&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>几年前，欧美媒体报道说根据科学家的研究，中国人种植水稻会产生更多的温室气体，因此中国人吃大米正在毁灭全球气候，进而导致人类灭亡。&lt;/p>&lt;/blockquote>
-&lt;p>来源: 我都不知道怎么找..&lt;/p>
-&lt;p>评论: 类似的研究肯定有, 但我不觉得哪家媒体会报道吃大米导致人类灭亡&amp;hellip;&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>2019年，国际顶级科学期刊《自然》杂志发表了一篇文章，说根据科学家的研究成果，中国政府治理沙漠，大力推进的荒漠绿化工程，种树过多，可能导致人类水资源枯竭，因此会对地球自然生态造成极大影响。&lt;/p>
-&lt;p>《自然》杂志本是人类最顶级的科学杂志，但写这篇文章的“科学家”逻辑推导却很简单，算一算中国政府要消灭荒漠需要种多少棵树，种这些树需要消耗多少水资源，&lt;strong>因此得出结论中国种树会破坏自然环境。&lt;/strong>&lt;/p>
-&lt;p>别笑，这是真事。&lt;/p>
-&lt;p>&lt;strong>中国人花费几代心血把沙漠变成了绿洲，对人类如此巨大的贡献居然招来西方期刊的指责？&lt;/strong>&lt;/p>
-&lt;p>&lt;strong>治理沙漠居然都能成为破坏环境的罪证。&lt;/strong>&lt;/p>&lt;/blockquote>
-&lt;p>来源: &lt;a href="https://www.nature.com/articles/d41586-019-02789-w">nature 文章 China&amp;rsquo;s tree-planting drive could falter in a warming world&lt;/a>&lt;/p>
-&lt;p>评论: 但凡看一下文章就会觉得文章的中立性是没问题的. 文章警告了非原产地树木对当地水资源的大量消耗, 可能会导致干旱地区的扩散. 也引用了多位中国科学家的意见.&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>巴西烧毁森林种地的时候，西方批判，说这样会造成水土流失，土地荒漠化，从而破坏人类环境。&lt;/p>
-&lt;p>中国种树消灭荒漠的时候，西方又批判，说这是在破坏人类环境，还不如让土地继续荒漠化。&lt;/p>
-&lt;p>澳大利亚和美国森林大火，烧毁无数森林，漫天黑烟，西方说这都是很正常的行为，对人类环境没有丝毫损害。&lt;/p>&lt;/blockquote>
-&lt;p>来源: 不知道怎么找.&lt;/p>
-&lt;p>评论: 因果倒置, 是气候变化导致了森林火灾的可能性增加&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>但没有西方人说那群在荒漠里植树造林的中国人有功劳，反而把一个从来不种树的嘴炮少女捧为“环保公主”。&lt;/p>&lt;/blockquote>
-&lt;p>评论: 讽刺 Greta Thunberg 也是传统艺能了, 不过我个人对她的评价还是比较积极的, 她组织了贯穿整个欧洲的学生罢课, 多次在 COP 上演讲. 她的&lt;a href="https://en.wikipedia.org/wiki/Greta_Thunberg">维基百科页面&lt;/a>也是比较正面的. 她频繁提到过 IPCC 的 &lt;a href="https://www.ipcc.ch/site/assets/uploads/sites/2/2019/09/IPCC-Special-Report-1.5-SPM_zh.pdf">全球升温 1.5°C&lt;/a>, 我也推荐大家去读一读, 这算是为什么要应对气候变化的科学基础.&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>欧美人种一点点树就是天大的功劳，但中国不是，不仅无功，反而有罪。&lt;/p>
-&lt;p>类似的双标相当常见，当初意大利封城，那就是**“冒着经济风险保欧洲”&lt;strong>，而中国封城则是&lt;/strong>“以牺牲人民自由为代价”**，两篇文章不仅在同一家媒体《纽约时报》发布，而且时间居然只差了20分钟。&lt;/p>
-&lt;p>&lt;img src="./9d2d417242ceec2596a90beaaebb71a8.png" alt="9d2d417242ceec2596a90beaaebb71a8.png">&lt;/p>&lt;/blockquote>
-&lt;p>来源: &lt;a href="https://twitter.com/nytimes/status/1236479276586807296">https://twitter.com/nytimes/status/1236479276586807296&lt;/a>, &lt;a href="https://twitter.com/nytimes/status/1236484352965521408">https://twitter.com/nytimes/status/1236484352965521408&lt;/a>&lt;/p>
-&lt;p>评论: 单看这两条推特确实是西方媒体的偏见..&lt;/p>
-&lt;hr>
-&lt;blockquote>
-&lt;p>另一招，就是在报道中国正面的同时，再加上一句，就是鼎鼎大名的**“但代价是什么”。**&lt;/p>
-&lt;p>组合起来的效果给大家展示一下，比如说**“中国也许有效控制了疫情，但代价惨重”。**&lt;/p>
-&lt;p>比如说，&lt;strong>中国正在变得智能，但代价是什么？&lt;/strong>&lt;/p>
-&lt;p>&lt;img src="./246b296018db3460d935bb2e9d121731.png" alt="246b296018db3460d935bb2e9d121731.png">&lt;/p>
-&lt;p>这，就是欧美媒体对中国报道的常规格式。&lt;/p>
-&lt;p>把中国的好事变坏简直太简单了，&lt;strong>你这个好事似乎存在，但代价是什么？&lt;/strong>&lt;/p>&lt;/blockquote>
-&lt;p>评论: 虚空打靶.. 别只看个标题啊, 你倒是具体说说西方媒体说了啥啊.&lt;/p>
-&lt;hr>
-&lt;p>总结: 看这种自媒体真的降智商.. 以后要少看..&lt;/p>
-- https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ -&lt;p>本文纯属回忆, 描述可能会有偏差.&lt;/p>
-&lt;p>小学时, 为方便联系, 我爸给了我一个 ZTE 的功能机, 里面只有一个打砖块的小游戏.&lt;/p>
-&lt;p>后来这手机被我在路上掉了, 于是我换成了一个 LG 的功能机. 这个 LG 的神奇之处在于它自带了一个浏览器, 于是我可以用 2G 上网去起点, 纵横看小说. 另外它自带电信的一个应用商店, 里面有一些免费的小游戏可以下 (不知道是啥技术, 估计是 java..), 因为我当时并没有流量套餐, 后来还因为话费异常被我爸查到并追问我在上网干什么, 我记得我用看新闻蒙混过去了. 这个手机陪伴我度过了初中.&lt;/p>
-&lt;p>考上省中后, 爸妈为了奖励我, 给我换了个新手机, 这时我爸被中国电信忽悠买了个酷派 K1 (酷派 5952).&lt;/p>
-&lt;p>&lt;img src="./eaf7170a1d32cc48175600e65db56628.png" alt="eaf7170a1d32cc48175600e65db56628.png">&lt;/p>
-&lt;p>这也算是当时第一批 4G 手机了, 进网贴纸贴的还是进网试用. 但是 1G 的内存根本比不过同期的小米 2S.&lt;/p>
-&lt;p>后来因为我忘了什么原因了我又买了个手机, 这个给我爸用. 听信了当时中华酷联的鬼话我又入了酷派的坑 (加之当时电信手机确实不好买), 买了酷派大神 F1 电信版 (酷派 8297-C00).&lt;/p>
-&lt;p>&lt;img src="image-20221002163705814.png" alt="image-20221002163705814">&lt;/p>
-&lt;p>它采用了&amp;quot;极为先进&amp;quot;的 64 位高通 410 SoC (据称是高通首款 64 位), 对, 我又听信了 Android 5.0 优化 (ART, Android Runtime) 和 64 位的鬼话, 买了这个 1G RAM 的手机.
+ULA 用于替代已经 deprecated 的 site-local address.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: RFC 4291 似乎规定了一种 Interface Identifiers 的生成方式 Modified EUI-64, 但是我没有细看&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;一个典型的全局单播地址结构:&lt;/p&gt;
+&lt;p&gt;&lt;img src="./ipv6-addr-alloc-1675603832146-7.png" alt="ipv6-addr-alloc"&gt;&lt;/p&gt;
+&lt;p&gt;一些预定义的 IPv6 组播地址:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;本地网段所有节点 (All Nodes Addresses) — ff02::1&lt;/li&gt;
+&lt;li&gt;本地网段所有路由器 (All Routers Addresses) — ff02::2
+&lt;blockquote&gt;
+&lt;p&gt;tips: 这两个地址均为 link-local, interface-local 和 site-local 在这里不作讨论&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;本地请求节点地址 (Solicited-Node Address) — ff02::1:ffxx:xxxx
+这个地址由接口的低 24 bits 地址计算得到, 设备必须加入接口相关联的请求节点地址 (无论是自动或手动配置的地址)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="rfc-4861-ipv6-neighbor-discovery"&gt;RFC 4861 (IPv6 Neighbor Discovery)&lt;/h2&gt;
+&lt;p&gt;RFC 4861 定义了一种网络发现机制 (Neighbor Discovery Protocol, NDP), 等效与 IPv4 中的 ARP. NDP 定义了五种 ICMPv6 (RFC 4443) 消息类型：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;路由器请求 (Router Solicitation, 简称 RS), 在一个接口启用后, 主机可以发送 RS 以请求路由器马上发送 RA, 而不是等待下一次计划发送的时间.&lt;/li&gt;
+&lt;li&gt;路由器通告 (Router Advertisement, 简称 RA), 路由器广播它们的存在, 同时附带多个配置参数. RA 周期性发送, 或是用于响应 RS. RA 包含了网络的前缀信息, 地址配置, 跳数限制等.&lt;/li&gt;
+&lt;li&gt;邻居请求 (Neighbor Solicitation, 简称 NS), 由一个节点发送, 用于确定一个邻居的链路层地址, 或是验证一个邻居仍然能通过一个缓存的链路层地址可达. NS 也被用于重复地址的探测.&lt;/li&gt;
+&lt;li&gt;邻居通告 (Neighbor Advertisement, 简称 NA), 对 NS 的响应. 一个节点也可以自发地发送 NS 来宣告链路层地址的变化.&lt;/li&gt;
+&lt;li&gt;重定向 (Redirect), 由路由器发送, 用于通知节点一个更好的下一跳地址.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;所有 NDP 协议的包实际上是封装在 ICMPv6 协议的包里的. 这里插播一下 ICMPv6 的包结构, 非常简单:&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20240311214614781.png" alt="image-20240311214614781"&gt;&lt;/p&gt;
+&lt;p&gt;IPv6 下的 ping 命令和 IPv4 下类似, 也是使用 ICMP 协议实现的. ICMPv6 定义了 Echo Request (Type 128) 和 Echo Reply (Type 129) 类型来给 ping 使用.&lt;/p&gt;
+&lt;p&gt;下文所述的 SLAAC 即使用 NDP 协议中的 RA 报文进行配置. RA 报文里有啥呢, 可以瞅一眼:&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20250122225735217.png" alt="image-20250122225735217"&gt;&lt;/p&gt;
+&lt;p&gt;核心的信息在几个 Options 里, 包括了:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;链路的 MTU&lt;/li&gt;
+&lt;li&gt;路由器的 MAC 地址 (奇怪的是为什么不直接看以太网帧的地址呢)&lt;/li&gt;
+&lt;li&gt;前缀信息&lt;/li&gt;
+&lt;li&gt;路由信息, 这是为了在有多个路由器的网络中, 通过发送附带优先级 (high/medium/low) 的路由信息, 指示用户选择路由器. 这个 option 在 &lt;a href="https://datatracker.ietf.org/doc/html/rfc4191/"&gt;RFC 4191&lt;/a&gt; 中定义, 很奇怪的一点是, 明明这个 RFC 比 RFC 4861 要早, 这个 option 却没有被包含在 RFC 4861 中.&lt;/li&gt;
+&lt;li&gt;DNS&lt;/li&gt;
+&lt;li&gt;广播间隔&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="rfc-4862-ipv6-stateless-address-autoconfiguration"&gt;RFC 4862 (IPv6 Stateless Address Autoconfiguration)&lt;/h2&gt;
+&lt;p&gt;RFC 4862 定义了一种 IPv6 接口的自动配置机制 (即 SLAAC), 包括生成一个链路本地地址和全局地址, 和一种重复地址检测 (Duplicate address detection) 机制来验证一条链路上地址的唯一性.&lt;/p&gt;
+&lt;p&gt;自动配置过程将首先生成链路本地地址. 其由一个链路本地前缀 (RFC 4291 中定义的)+一个接口的标识符 (interface identifier), 当这个地址被分配到一个接口之前, 它是一个暂定地址 (tentative address). 一个节点必须验证它在链路上的唯一性. 具体来说, 节点会发送一个邻居请求报文, 将这个暂定地址作为目标地址. 如果另一个节点正在使用这个地址, 它会返回一个邻居通告来拒绝这个请求. 在验证成功后, 这个地址会成为首选地址 (preferred address).&lt;/p&gt;
+&lt;p&gt;接下来主机会广播路由器请求 (RS), 以便敦促路由器发送路由器通告 (RA). 主机根据路由器通告中的的前缀信息 (Prefix-Infromation) 选项来构造全局地址.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: 由于 RA 总是会广播给所有主机, 所以 SLAAC 无法做到不给某些主机分配 IP 地址&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;一个地址的生命周期: 首选地址在首选期限 (preferred lifetime) 过期之后会成为不推荐地址 (deprecated address). 不推荐地址能够继续被用于已经建立的连接中, 但不应该被用于建立新连接. 一个地址在有效期限 (valid lifetime) 过期之后会变为无效地址 (invalid address). 无效地址不能够被用作向外连接的源地址.&lt;/p&gt;
+&lt;p&gt;RFC 4862 中并没有规定 interface identifier 是如何产生的, 只说了很多情况下其由接口的链路层地址 (即 MAC 地址) 产生. 这种生成方式会带来一些隐私上的顾虑, 因而在 SLAAC 隐私扩展 (RFC 4941) 中, 主机会生成一个临时地址 (temporary address) 来负责对外通信. 另一种方式是生成一个不变的, 与 MAC 地址无关的 interface identifier, 这种方式在 RFC 7217 中定义.&lt;/p&gt;
+&lt;h2 id="rfc-8415-dynamic-host-configuration-protocol-for-ipv6"&gt;RFC 8415 (Dynamic Host Configuration Protocol for IPv6)&lt;/h2&gt;
+&lt;p&gt;RFC 8415 定义了一个 C/S 协议 DHCPv6, 其功能包括向一个设备提供地址或其他配置, 自动委派 IPv6 前缀等. 当 DHCP 只被用于提供除地址和前缀之外的其他配置 (如 DNS) 时, 它不必维护任何状态, 因此, 这种模式被称为无状态 DHCPv6 (stateless DHCPv6). 与之相对的是有状态 DHCPv6 (stateful DHCPv6). RFC 8415 是一个庞大的 RFC, 废弃了许多之前的 DHCPv6 标准, 如 RFC 3315 (原始的 DHCPv6 标准), RFC 3633 (prefix delegation), RFC 3736 (Stateless Dynamic Host Configuration Protocol (DHCP) Service for IPv6) 等.&lt;/p&gt;
+&lt;p&gt;DHCP 消息类型 (部分):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Solicit: 客户端发送, 用于定位服务器&lt;/li&gt;
+&lt;li&gt;Advertise: 服务器发送, 对于 solicit 的回复&lt;/li&gt;
+&lt;li&gt;Request: 客户端发送: 用于请求配置&lt;/li&gt;
+&lt;li&gt;Reply: 服务器发送, 包含租约和其他配置, 是对于 Solicit, Request, Renew, 或 Rebind 的回复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="ipv6-pd"&gt;IPV6-PD&lt;/h3&gt;
+&lt;p&gt;前缀委派 (Prefix Delegation) 用于一个委派路由器 (delegating router) (作为 DHCP 服务器) 向一个请求路由器 (requesting routers) (作为 DHCP 客户端) 委派前缀. 这一机制通常被用于 ISP 向用户委派 (delegate) 一个前缀, 这个前缀将被用于用户网络中的设备. 比如用于 SLAAC 中路由器通告的前缀部分.&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20230410222528623.png" alt="image-20230410222528623"&gt;&lt;/p&gt;
+&lt;p&gt;PD 是通过 DHCPv6 中的 &lt;code&gt;IA_PD&lt;/code&gt; 选项来工作的. 为了方便抓包分析, 这里描述一下这个选项的字段.&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20240224202640142.png" alt="image-20240224202640142"&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DHCPv6 的 option 有固定的 option-code 和 option-len 字段, 分别占 2 字节. 对于 &lt;code&gt;IA_PD&lt;/code&gt;, option-code 为 &lt;code&gt;OPTION_IA_PD&lt;/code&gt; (25)&lt;/li&gt;
+&lt;li&gt;IAID: 一个唯一的标识符&lt;/li&gt;
+&lt;li&gt;T1: 在多久之后客户端应该向获取前缀的 delegating router 刷新前缀的有效时间&lt;/li&gt;
+&lt;li&gt;T2: 在多久之后客户端应该向任何可用的 delegating router 刷新前缀的有效时间&lt;/li&gt;
+&lt;li&gt;IA_PD-options: 包含了前缀的具体信息. 请求和响应都会采用同样的 option 格式, 只不过响应会在这个字段中附上前缀信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="pmtu-问题"&gt;PMTU 问题&lt;/h2&gt;
+&lt;p&gt;在配置 IPv6 的过程中一个常见的问题是 PMTU 问题. Path MTU Discovery (PMTUD) 是确定 MTU 的一种标准方式, 在 &lt;a href="https://datatracker.ietf.org/doc/html/rfc8201"&gt;RFC 8201 (Path MTU Discovery for IP version 6)&lt;/a&gt; 中定义. RFC 中这样描述:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Nodes not implementing Path MTU Discovery must use the IPv6 minimum link MTU defined in [RFC8200] as the maximum packet size.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;从中我们可以推测 PMTUD 在 (几乎) 所有节点上无需配置默认启用.&lt;/p&gt;
+&lt;p&gt;PMTUD 工作方式为源节点首先选择下一跳的 MTU (已知) 作为 PMTU. 如果传输路径上的某个节点因为包过大而无法转发一个包, 它就会丢弃这个包并返回一条 ICMPv6 Packet Too Big 消息.&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20230416142554039.png" alt="image-20230416142554039"&gt;&lt;/p&gt;
+&lt;p&gt;(图源 &lt;a href="https://datatracker.ietf.org/doc/html/rfc4443#section-3.2"&gt;RFC 4443&lt;/a&gt;, 最小的 IPv6 MTU 即 1280 字节)&lt;/p&gt;
+&lt;p&gt;收到消息后源节点根据 ICMPv6 消息中的 MTU 字段减少 PMTU. 这一过程会重复直到源节点估计的 PMTU 小于真正的 PMTU.&lt;/p&gt;
+&lt;p&gt;这一机制带来的问题是, 如果某个路由器没有发送 ICMPv6 消息或是 ICMPv6 消息被路由器的防火墙 block 了, 那么实现了 PMTUD 的节点可能会遇到连接问题. 比如 TCP 的三次握手成功, 但在数据传输的时候 hang 住了. 这种情况被称为黑洞连接.&lt;/p&gt;
+&lt;p&gt;一个 PMTUD 的扩展在 &lt;a href="https://datatracker.ietf.org/doc/html/rfc4821"&gt;RFC 4821 (Packetization Layer Path MTU Discovery)&lt;/a&gt; 中定义, 其不依赖 ICMPv6 消息.&lt;/p&gt;
+&lt;p&gt;个人猜测在 IPv4 下这个问题比较少见的原因是 IPv4 支持在路由器上进行分片.&lt;/p&gt;
+&lt;h3 id="一个例子"&gt;一个例子&lt;/h3&gt;
+&lt;p&gt;在访问淘宝时, 淘宝会访问 &lt;code&gt;g.alicdn.com&lt;/code&gt; 这一域名, 即 &lt;code&gt;2408:8670:af0:9:3::3e3&lt;/code&gt; 这个 IP. 在 TCP 握手的时候 MSS Option 被设置成了 1440 Bytes, 即 MTU 为以太网的 MTU 1500 (1440 + TCP Header 20 + IPv6 Header 40). 可以看到在第 1353 个包的时候 Wireshark 指示了 &amp;ldquo;TCP Previous Segment Not Captured&amp;rdquo;, 猜测序号 1352 和 1353 之间的某些服务器发送的包被丢了.&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20230412235736591.png" alt="image-20230412235736591"&gt;&lt;/p&gt;
+&lt;p&gt;下面来看正确处理的情况, 访问 &lt;a href="https://test-ipv6.com/"&gt;Test IPv6&lt;/a&gt; 时, 有一项测试为 &amp;ldquo;Test IPv6 large packet&amp;rdquo;, 测试内容为访问一个 MTU 为 1280 的服务器. 通过抓包发现 TCP 握手时的 MSS 仍为 1440, 但在第 862 个包的时候我发送了一个过大的包, 于是在第 864 个包我的路由器 (由于运行了 PPPOE, MTU 为 1492) 返回了一个 ICMPv6 报文, 于是在第 865 个包我重传了这个包, 把 MTU 减少到了 1492, 这一过程不断重复直到 MTU 被设置为 1280.&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20230417221041457.png" alt="image-20230417221041457"&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Note: 这里需要&lt;a href="https://wiki.wireshark.org/CaptureSetup/Offloading"&gt;关闭 TCP Segmentation Offload&lt;/a&gt;, 否则包长度会显示为超过 MTU, 这是因为 TCP 包的分片被 Offload 到了网卡以减轻主机 CPU 的负担.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在仅 IPv4 的情况下访问 &lt;code&gt;g.alicdn.com&lt;/code&gt;, 可以发现服务端发送的几个包发生了分片:&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20230416141447823.png" alt="image-20230416141447823"&gt;&lt;/p&gt;
+&lt;h2 id="其他一些问题"&gt;其他一些问题&lt;/h2&gt;
+&lt;h3 id="pd-过早失效的问题"&gt;PD 过早失效的问题&lt;/h3&gt;
+&lt;p&gt;我现在的移动网是光猫拨号, 用一个软路由装了 OpenWRT 当主路由. 发现 IPv6 会在一天之后停止工作.. 抓 wan 口 DHCPv6 包发现 PD 的有效期写的是两天.. 怀疑和这个有关.. 待调查.&lt;/p&gt;
+&lt;p&gt;（2024/11/07 更新）把光猫改成桥接模式之后这个问题没有出现了..&lt;/p&gt;
+&lt;h3 id="ndp-不工作的问题"&gt;NDP 不工作的问题&lt;/h3&gt;
+&lt;p&gt;某日, 突然发现我的手机在 WiFi 下某些 App 加载非常慢, 而使用移动数据则正常, 直觉告诉我是 IPv6 的锅, 然而检查 OpenWRT 发现已经开启 TCP MSS Clamping, MTU 设置的 1420 也比较小了, 遂在路由器 eth0 接口 (wan 口) 抓包查看.&lt;/p&gt;
+&lt;p&gt;抓包发现手机的 v6 地址不可达.. 图中 &lt;code&gt;103e&lt;/code&gt; 结尾的地址是路由器, &lt;code&gt;edc6&lt;/code&gt; 结尾的地址是手机, 可见手机发起 TCP 握手之后, 对方的 SYN 并没有发到我手机 (因为手机发起了重传), 之后路由器给对方发送了网络不可达报文..&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20240311215940125.png" alt="image-20240311215940125"&gt;&lt;/p&gt;
+&lt;p&gt;在路由器上用 &lt;code&gt;ip neighbour&lt;/code&gt; 检查发现:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;root@FriendlyWrt:~# ip neighbour
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fd00:ab:cd:0:9d74:c147:f069:edc6 dev br-lan FAILED
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;2409:8a28:ed8:1e51:9d74:c147:f069:edc6 dev br-lan INCOMPLETE
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;查询 man 可知这是 NDP 发现未能成功:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; incomplete
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; the neighbour entry has not &lt;span style="color:#f92672"&gt;(&lt;/span&gt;yet&lt;span style="color:#f92672"&gt;)&lt;/span&gt; been validated/resolved.
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; failed max number of probes exceeded without success, neighbor validation has ultimately failed.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之后继续观察 Wireshark, 发现手机确实不响应 NDP Neighbor Solicitation (也就是不发 Neighbor Advertisement), 这种情况闻所未闻..&lt;/p&gt;
+&lt;p&gt;根据重启重装重买定律, 重启手机, 问题解决.. 尚不清楚真正的问题是什么.. (我觉得一加大概率背锅)&lt;/p&gt;
+&lt;h3 id="mavlan-的问题"&gt;mavlan 的问题&lt;/h3&gt;
+&lt;p&gt;见 &lt;a href="https://blog.coherence.codes/posts/2024/openwrt_transparent_proxy/"&gt;OpenWrt 搭建透明代理&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="其他"&gt;其他&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;一个典型的 IPv4 路由器会使用 NAT, 因此默认阻止所有入站连接, 其通常使用 UPnP 来开放某一端口. 而 IPv6 不使用 NAT, 因此正确配置防火墙是必要的.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://datatracker.ietf.org/doc/html/rfc4389"&gt;RFC 4389 (Neighbor Discovery Proxies (ND Proxy))&lt;/a&gt;, 可以作为一种在 ISP 不支持 DHCPv6-PD 情况下使用 IPv6 的一种方式. 虽然该 RFC 的分类是 experimental, 但其已经被广泛实现了.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="参见"&gt;参见&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://openwrt.org/docs/guide-user/network/ipv6/configuration"&gt;OpenWrt IPv6 configuration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.packetmania.net/2020/12/01/IPv6-Addressing/"&gt;IPv6动态地址分配机制详解&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/IPv6"&gt;ArchWiki IPv6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://blog.apnic.net/2016/05/19/fragmenting-ipv6/"&gt;Fragmenting IPv6&lt;/a&gt; 讨论了和分片有关的问题, 包括 UDP 下的处理&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.v2ex.com/t/800024"&gt;开启 IPv6 后网速变得很慢？可能是 PMTU 黑洞的问题 - V2EX&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+- https://blog.coherence.codes/posts/2023/ipv6-%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hello, Hugo!</title><link>https://blog.coherence.codes/posts/2022/hello_hugo/</link><pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/hello_hugo/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/hello_hugo/ -&lt;p&gt;这是一个船新的博客！&lt;/p&gt;
+&lt;h2 id="历史"&gt;历史&lt;/h2&gt;
+&lt;p&gt;在大二（2018）的时候，我萌生了搭建一个自己的独立博客的想法，于是就有了 &lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/"&gt;hexo搭建小记&lt;/a&gt;，当时我随手一找找到的基本都是 Hexo，于是我就用了。引用一段当时写的关于页面：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h2 id="关于博客"&gt;关于博客&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑&lt;/li&gt;
+&lt;li&gt;2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件&lt;/li&gt;
+&lt;li&gt;2020-02-22 更改评论为 &lt;code&gt;disqusjs&lt;/code&gt;，详见作者的&lt;a href="https://blog.skk.moe/post/disqusjs/"&gt;博文&lt;/a&gt;；启用 &lt;a href="https://github.com/theme-next/theme-next-pjax"&gt;pjax&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2019-12-24 启用新域名&lt;code&gt;blog.coherence.codes&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;2019-10-07 升级主题至 Next V7.4.1&lt;/li&gt;
+&lt;li&gt;2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %}&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;p&gt;Next 就是一个非常大众的主题，有几种变体，我用的是一个叫 &lt;code&gt;pisces&lt;/code&gt; 的变体，长这样（原博客图已经找不到了，只能用官方 Demo 凑数了）：&lt;/p&gt;
+&lt;p&gt;&lt;img src="image-20221002165030564.png" alt="image-20221002165030564"&gt;&lt;/p&gt;
+&lt;p&gt;这一时期的博客位于 &lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/source/source"&gt;source 分支&lt;/a&gt;，最后更新于 2020-04-16。&lt;/p&gt;
+&lt;p&gt;由于这个主题实在是太大众了，中途（2019-10 左右）我也想过换一个主题（&lt;a href="https://github.com/yscoder/hexo-theme-indigo"&gt;hexo-theme-indigo&lt;/a&gt;，一个 Material Design 风格的主题），但是没有配置成功，&lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/theme-indigo"&gt;theme-indigo 分支&lt;/a&gt;便是那次尝试。theme-indigo 的效果图长这样：&lt;/p&gt;
+&lt;p&gt;&lt;img src="image-20221002165819783.png" alt="image-20221002165819783"&gt;&lt;/p&gt;
+&lt;p&gt;到了 21 年 2 月，我开始重新调研博客生成器，当时看到了一个 Python 写的 Pelican，而我又希望壮大一下 Python 生态，于是就用了。用了之后发现并没有什么合适的主题，恰巧 Pelican 用的模板引擎 Jinja 和 Django Template Engine 很像，我比较熟悉，于是我就想自己写一个主题，然而这一工作从没开始过.. 于是我现在的博客是这样的（&lt;del&gt;极简主义&lt;/del&gt;）：&lt;/p&gt;
+&lt;p&gt;&lt;img src="image-20221002171314620.png" alt="image-20221002171314620"&gt;&lt;/p&gt;
+&lt;p&gt;这段时间里我还写过一个&lt;a href="https://github.com/cjc7373/pelican-markdown-image"&gt;处理图片的 Pelican 插件&lt;/a&gt;，虽然现在看起来挺蠢的..&lt;/p&gt;
+&lt;p&gt;再后来，我又对 Rust 产生了兴趣，于是又发现了 Zola，这时候我找到了 &lt;a href="https://github.com/AmazingRise/hugo-theme-diary"&gt;hugo-theme-diary&lt;/a&gt; 这个主题，感觉非常不错。这个主题是从 &lt;a href="https://byvoid.com/zhs/"&gt;BYVoid&lt;/a&gt; 那看来的，好看，有响应式，也有文章内目录。于是就想把它移植到 zola，在 port 了一个 head 之后，这个计划就被无限期搁置了。&lt;/p&gt;
+&lt;p&gt;终于，我感觉还是有必要有一个好看的博客的，于是我最终选择了 Hugo+hugo-theme-diary，加上一点点自己的魔改。&lt;/p&gt;
+&lt;h2 id="迁移"&gt;迁移&lt;/h2&gt;
+&lt;p&gt;Hugo 对于资源文件的处理有&lt;a href="https://gohugo.io/content-management/image-processing/"&gt;自己的一套规则&lt;/a&gt;，即博客文章位于 &lt;code&gt;posts/post_name/index.md&lt;/code&gt;，这篇文章资源文件放在 &lt;code&gt;posts/post_name/&lt;/code&gt; 这个路径下面。而我原来的文件结构为文章位于 &lt;code&gt;posts/post_name.md&lt;/code&gt;，资源文件位于 &lt;code&gt;posts/post_name/&lt;/code&gt;。所以我不得不写了一个脚本来迁移图片：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;from&lt;/span&gt; pathlib &lt;span style="color:#f92672"&gt;import&lt;/span&gt; Path
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; re
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;md_image &lt;span style="color:#f92672"&gt;=&lt;/span&gt; re&lt;span style="color:#f92672"&gt;.&lt;/span&gt;compile(&lt;span style="color:#e6db74"&gt;r&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;!\[(.*)\]\((.*)\)&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;replace_image_reference_in_a_md_file&lt;/span&gt;(md, dry_run&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#66d9ef"&gt;False&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;with&lt;/span&gt; open(md, &lt;span style="color:#e6db74"&gt;&amp;#34;r&amp;#34;&lt;/span&gt;, encoding&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;utf8&amp;#34;&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; f:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; content &lt;span style="color:#f92672"&gt;=&lt;/span&gt; f&lt;span style="color:#f92672"&gt;.&lt;/span&gt;read()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;replace&lt;/span&gt;(&lt;span style="color:#66d9ef"&gt;match&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; match[0]: all matched string
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; match[1]: name
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; match[2]: image path
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#e6db74"&gt; &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; rep &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;![&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;match[&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;]&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;](./&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;match[&lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;split(&lt;span style="color:#e6db74"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;)[&lt;span style="color:#f92672"&gt;-&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;]&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;)&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;f&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;Replacing &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;match[&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;]&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt; with &lt;/span&gt;&lt;span style="color:#e6db74"&gt;{&lt;/span&gt;rep&lt;span style="color:#e6db74"&gt;}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; rep
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; content &lt;span style="color:#f92672"&gt;=&lt;/span&gt; md_image&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sub(replace, content)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#f92672"&gt;not&lt;/span&gt; dry_run:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;with&lt;/span&gt; open(md, &lt;span style="color:#e6db74"&gt;&amp;#34;w&amp;#34;&lt;/span&gt;, encoding&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;utf8&amp;#34;&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;as&lt;/span&gt; f:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; f&lt;span style="color:#f92672"&gt;.&lt;/span&gt;write(content)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;to_mig: list[Path] &lt;span style="color:#f92672"&gt;=&lt;/span&gt; []
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;working_dir &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Path(&lt;span style="color:#e6db74"&gt;&amp;#34;./2022&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; f &lt;span style="color:#f92672"&gt;in&lt;/span&gt; working_dir&lt;span style="color:#f92672"&gt;.&lt;/span&gt;iterdir():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; f&lt;span style="color:#f92672"&gt;.&lt;/span&gt;suffix &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;.md&amp;#34;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; to_mig&lt;span style="color:#f92672"&gt;.&lt;/span&gt;append(f)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;print(to_mig)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; f &lt;span style="color:#f92672"&gt;in&lt;/span&gt; to_mig:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; replace_image_reference_in_a_md_file(f)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; f&lt;span style="color:#f92672"&gt;.&lt;/span&gt;rename(working_dir &lt;span style="color:#f92672"&gt;/&lt;/span&gt; Path(f&lt;span style="color:#f92672"&gt;.&lt;/span&gt;stem) &lt;span style="color:#f92672"&gt;/&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;index.md&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# print(f&amp;#34;Move {f} to {Path(f.stem) / &amp;#39;index.md&amp;#39;}&amp;#34;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Hugo 用的模板引擎是 Go 标准库里的，这点好评，Helm 用的同样是这个模板引擎。&lt;/p&gt;
+&lt;h2 id="部署"&gt;部署&lt;/h2&gt;
+&lt;p&gt;现在的部署简单好多啊，只需一个配置文件，Github Actions 因为是自家产品的缘故连 token 都不需要了，自定义域名 CNAME 也只需在配置文件中增加一行，相比于三年之前的部署体验真的是天差地别..&lt;/p&gt;
+&lt;h2 id="一些问题"&gt;一些问题&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Hugo 处理页面之间链接也有&lt;a href="https://gohugo.io/content-management/cross-references/"&gt;自己的规则&lt;/a&gt;，需要转换，不过我好像也没什么跨页面链接&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;代码高亮的配色非常诡异..&lt;/p&gt;
+&lt;p&gt;&lt;img src="image-20221003005014257.png" alt="image-20221003005014257"&gt;&lt;/p&gt;
+&lt;p&gt;发现在本地的配色是正常的，检查发现本地是 Hugo extended version，于是在 actions 中也启用了 extended 后恢复正常，挺奇怪的..&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+- https://blog.coherence.codes/posts/2022/hello_hugo/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>The 2022 Python Language Summit</title><link>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</link><pubDate>Mon, 23 May 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ -&lt;p&gt;每年, 在 PyCon US 的前夕, 30 多位 Python 的核心开发者将会聚集起来召开 Python 语言峰会. 今年的会议在 5/11 召开, 让我们来看看今年讨论了什么吧. 有关会议的详情可在 &lt;a href="https://pyfound.blogspot.com/2022/05/the-2022-python-language-summit_01678898482.html"&gt;PSF Blog&lt;/a&gt; 中找到.&lt;/p&gt;
+&lt;h2 id="cpython-的-issue-和-pr-积压"&gt;CPython 的 issue 和 PR 积压&lt;/h2&gt;
+&lt;p&gt;首先祝贺一下前不久 &lt;a href="https://bugs.python.org"&gt;bpo&lt;/a&gt; 正式退休了, Python 的 issue tracker 迁移到了 Github, 无论是易用性还是审美上来说都是一件好事.&lt;/p&gt;
+&lt;p&gt;随着 Python 的流行, issues 和 PRs 也开始累积起来了, 在 2022/05/07 时, CPython 有着 7,027 个 open issues 和 1,471 个 PRs. Python 开发者们向来对关闭一个 issue 持谨慎态度. 以低质量的功能请求 (feature requests) 为例, 我们可以粗略地把它们分为三类:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;没有任何意义的, 或显然有不利影响的, 它们能被轻易地关闭&lt;/li&gt;
+&lt;li&gt;会增加维护成本, 但似乎有点好处的, 对于它们的意见通常会很摇摆&lt;/li&gt;
+&lt;li&gt;每个人都觉得是好的, 但没人愿意真正去实现它.. 这些 issues 通常会存在很久, 如 &lt;a href="https://github.com/python/cpython/issues/36387"&gt;BPO-539907&lt;/a&gt;, 一个存在了二十年的 issue.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;开发者 Katriel 认为, 把这些 issues 留在 issue tracker 上是有害的, 增加了整个项目的维护成本. 有关这一论断, 一种极端的做法是关闭所有不活跃的 issues, 当然这是不可取的, 可以参看 &lt;a href="https://drewdevault.com/2021/10/26/stalebot.html"&gt;GitHub stale bot considered harmful&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;与会者们认为这一问题没有简单的答案, 但增加 triage 的人力显然是一种办法, CPython triage 团队目前在逐渐壮大, 这是好事. PEP 594 计划移除一些年久失修的标准库, 这也能缓解一些问题.&lt;/p&gt;
+&lt;h2 id="没有-gil-的-python"&gt;没有 GIL 的 Python&lt;/h2&gt;
+&lt;p&gt;GIL 是 CPython 中一个臭名昭著的特性, 它也被开发者们翻来覆去地讨论了. 今年, 这一传统得到延续, 开发者 Sam Gross 讨论了 &lt;a href="https://github.com/colesbury/nogil"&gt;nogil&lt;/a&gt;, 一个移除 GIL 的 Proof of Concept.&lt;/p&gt;
+&lt;p&gt;移除 GIL 意味着为了保证线程安全, 需要加入许多 locks, 这非常困难, 而且会影响单线程性能.&lt;/p&gt;
+&lt;p&gt;Gross 希望能在 Python 3.12 中加入一个编译选项来禁用 GIL. 与会者对其表示了支持, 但许多问题还有待考虑, 如这一巨大的更改如何合并入主线, 其对第三方库的影响, 对于 CPython 开发的影响等.&lt;/p&gt;
+&lt;p&gt;我个人感觉移除 GIL 还是不太现实的..&lt;/p&gt;
+&lt;h2 id="每个解释器一个-gil"&gt;每个解释器一个 GIL&lt;/h2&gt;
+&lt;p&gt;在 1997 年, CPython 加入了 &lt;code&gt;PyInterpreterState&lt;/code&gt; 结构体, 这使得多个解释器能运行在一个进程中.&lt;/p&gt;
+&lt;p&gt;然而, 多个解释器之间并不是完全隔离的, 许多共享的全局变量通过 GIL 来实现互斥访问. 开发者 Eric Snow 希望每个解释器能有一个自己的 GIL 来解决这一问题, 这同样能够使子解释器之间实现真正的并行. 到目前为止, 仍然存在着约 1200 个全局变量.
+Snow 认为这一工作和 Gross 的移除 GIL 不是互斥的, &amp;ldquo;这些工作不管在哪里都是一个好主意&amp;rdquo;, 他说.&lt;/p&gt;
+&lt;p&gt;目前子解释器只能通过 C-API 使用, &lt;a href="https://peps.python.org/pep-0554/"&gt;PEP 554&lt;/a&gt; 提出了在 Python 中使用子解释器, 然而该 PEP 仍处于草案状态.&lt;/p&gt;
+&lt;p&gt;我表示并不是很懂子解释器的意义所在&amp;hellip; 或许是方便共享数据? 多进程之间通信是要求一个对象可序列化的..&lt;/p&gt;
+&lt;h2 id="faster-python"&gt;Faster Python&lt;/h2&gt;
+&lt;p&gt;好消息! 好消息! Python 3.11 相比于 3.10 会有平均 25% 的性能提升!&lt;/p&gt;
+&lt;p&gt;一年之前, 微软出钱, 组建了 Faster CPython 团队, 由开发者 Mark Shannon 和 Python 之父&lt;del&gt;廖雪峰&lt;/del&gt; Guido van Rossum 领导来做性能优化. Shannon 分享了他们接下来的计划.
+第一个问题是测量. 我们首先要知道 Python 在哪些地方慢, 为什么慢, 才能做针对性的性能优化. 为此, 我们需要更多的&lt;del&gt;跑分&lt;/del&gt;基准测试 (benchmarks), Shannon 希望更多人能去贡献 &lt;a href="https://github.com/python/pyperformance"&gt;pyperformance&lt;/a&gt; 项目.&lt;/p&gt;
+&lt;p&gt;3.11 的很大一部分改进来自于 PEP 659, &amp;ldquo;专门化的自适应解释器&amp;rdquo;, 简而言之是在执行时用更快的字节码去替代原有的字节码. PEP 659 仍有待继续推进.&lt;/p&gt;
+&lt;p&gt;Shannon 也谈到了 JIT, &amp;ldquo;每个人都想要一个 JIT 编译器, 即使这毫无意义&amp;rdquo;, 像 &lt;a href="https://github.com/tonybaloney/Pyjion"&gt;pyjion&lt;/a&gt; 这样的项目用第三方库的形式把 JIT 带到了 CPython 中, 然而在 CPython 中本身集成 JIT 可能要等到 3.13 之后了.&lt;/p&gt;
+&lt;h2 id="python-和浏览器"&gt;Python 和浏览器&lt;/h2&gt;
+&lt;p&gt;在过去两年间, 60 多个和 WebAssembly 相关的 PR 合入了主线. 如今, &lt;code&gt;main&lt;/code&gt; 分支已经能够成功交叉编译成 wasm 了.
+WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码相近的性能. 而 wasm 是机器无关的.&lt;/p&gt;
+&lt;p&gt;这一 feature 仍然是高度实验性的, 许多模块在 wasm 下是不可用的.
+除了 CPython 之外, 一众第三方项目如 PyScript, Pyodide 已经能更好地支持 wasm 了.&lt;/p&gt;
+&lt;h2 id="在语法中应用-f-strings"&gt;在语法中应用 f-strings&lt;/h2&gt;
+&lt;p&gt;在 Python 3.6 中引入的 f-strings 迅速成为了大家最喜爱的新 features 之一.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;f&amp;quot;Interpolating an arbitrary expression into a string: {1 + 1}.&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在运行时, 大括号中的表达式会被执行, 然后 &lt;code&gt;str()&lt;/code&gt; 会被调用, 最后的结果会被插入合适的位置.&lt;/p&gt;
+&lt;p&gt;然而, f-strings 目前的实现是 1,400 行 C 代码, 和其他 Python 代码的 Parsing 逻辑完全分离. 这带来了可维护性上的问题和许多隐藏的 bug.&lt;/p&gt;
+&lt;p&gt;Python 3.9 带来了全新的 PEG parser, 能够实现许多复杂的 parsing. 开发者 Pablo Galindo Salgado 希望能把 f-strings 的 parsing 结合到 CPython 的语法中.&lt;/p&gt;
+&lt;p&gt;比如以下问题:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt;&amp;gt;&amp;gt; my_list_of_strings &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#f92672"&gt;[&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;gt;&amp;gt;&amp;gt; f&lt;span style="color:#e6db74"&gt;&amp;#39;Here is a list: {&amp;#34;\n&amp;#34;.join(my_list_of_strings)}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; File &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;lt;stdin&amp;gt;&amp;#34;&lt;/span&gt;, line &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; f&lt;span style="color:#e6db74"&gt;&amp;#39;Here is a list: {&amp;#34;\n&amp;#34;.join(my_list_of_strings)}&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ^
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;SyntaxError: f-string expression part cannot include a backslash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在新方案下将会不存在.&lt;/p&gt;
+&lt;h2 id="从-cinder-合并回上游"&gt;从 Cinder 合并回上游&lt;/h2&gt;
+&lt;p&gt;在 2021 年 5 月, Instagram 团队开源了 Cinder, 这是 CPython 的一个以性能为目标的 fork. Cinder 包括了 &amp;ldquo;协程的及早求值&amp;rdquo;, 一个 JIT 编译器, 利用了 type hints 的&amp;quot;实验性的字节码编译器&amp;quot;等 features. (我一直以为 type hints 完全是静态检查, 翻了翻 PEP 发现运行时类型检查以及可能的利用类型进行性能优化是可以接受的)&lt;/p&gt;
+&lt;p&gt;Instagram 的工程师 Itamar Ostricher 分享了 async 和协程相关的更改, 并希望这些更改能合并回上游.
+一个例子:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; asyncio
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;async&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;IO_bound_function&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&amp;#34;This function could finish immediately... or not!&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;# Body of this function here&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;async&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;important_other_task&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;await&lt;/span&gt; asyncio&lt;span style="color:#f92672"&gt;.&lt;/span&gt;sleep(&lt;span style="color:#ae81ff"&gt;5&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;&amp;#39;Task done!&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;async&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;def&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;main&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;await&lt;/span&gt; asyncio&lt;span style="color:#f92672"&gt;.&lt;/span&gt;gather(
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; IO_bound_function(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; important_other_task()
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; )
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;&amp;#34;All done!&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__ &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; asyncio&lt;span style="color:#f92672"&gt;.&lt;/span&gt;run(main)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果 &lt;code&gt;IO_bound_function&lt;/code&gt; 能立即返回的话, 创建一个协程就毫无意义了. Ostricher 的团队扩展了 &lt;a href="https://docs.python.org/3/c-api/call.html#the-vectorcall-protocol"&gt;vectorcall&lt;/a&gt; 协议, 使得被调用者能够知道这次调用是否被调用者 &lt;code&gt;await&lt;/code&gt; 了. 这意味着 &lt;code&gt;awaitables&lt;/code&gt; (可被 &lt;code&gt;await&lt;/code&gt; 的对象) 能够被&lt;em&gt;及早求值&lt;/em&gt;, 多余的协程不会被创建了. Ostricher 的团队在重度使用 &lt;code&gt;async&lt;/code&gt; 的场景下观察到了 ~5% 的性能提升.&lt;/p&gt;
+&lt;p&gt;这个改动能否被合入主线呢? 一个重要的问题是公平性. 如果某些 &lt;code&gt;awaitables&lt;/code&gt; 能被及早求值, 那么可能会使事件循环中的优先级发生改变, 可能会造成不向后兼容的更改. 同时, 其对于 3.11 中 asyncio &lt;em&gt;task groups&lt;/em&gt; 的影响也尚不明确.&lt;/p&gt;
+&lt;h2 id="达到永恒"&gt;达到永恒&lt;/h2&gt;
+&lt;p&gt;在 Python 中, 任何东西是一个对象. 所有对象都维护了自己的引用计数, 以便进行垃圾回收. 这就意味着不可变对象在 C 的层次上是可变的, 这会影响 CPU 和内存性能. 例如 &lt;code&gt;None&lt;/code&gt; 对象经常被使用, 对其引用计数的更改也非常多.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://peps.python.org/pep-0683/"&gt;PEP 683&lt;/a&gt; 提出了 &amp;ldquo;永恒的对象 (Immortal objects)&amp;rdquo;, 它们的运行时状态不会改变, 即引用计数不会到达 0, 也不会被垃圾回收.&lt;/p&gt;
+&lt;p&gt;这是一个 CPython 内部的 feature, 即公开 API 不会改变.
+与会者们提出了一些怀疑, 比如它的好处是否只是潜在的, 以及改变引用计数的语义会带来第三方库的兼容性问题. 目前该 PEP 仍处于草案状态.&lt;/p&gt;
+&lt;p&gt;我并没有理解这个 PEP 的好处在哪.. 目前的实现在回归测试中导致了 ~2% 的性能损失..&lt;/p&gt;
+&lt;h2 id="尾巴"&gt;尾巴&lt;/h2&gt;
+&lt;p&gt;本次会议很大程度上讨论了 Python 的性能改善, 然而大多数变化是琐碎且渐进的, 想要看到某个改动带来的性能飞跃似乎不太可能 &lt;del&gt;(除了 GIL)&lt;/del&gt;. 我们希望去年 Language Summit 上 Guido 吹下的牛── 4 年里将 CPython 的性能提升 5 倍──能够实现吧.&lt;/p&gt;
+- https://blog.coherence.codes/posts/2022/the-2022-python-language-summit/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>民族主义自媒体是如何消费我们的</title><link>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ -&lt;p&gt;目前的中文互联网上存在着大量的鼓吹民族主义, 制造中西方对立的自媒体, 令人震惊的是, 他们中大部分不但充斥着情绪输出, 甚至连大部分事实都是错误的. 我偶然间读到了这样的一篇文章, 并对其中列出的事实进行了查证, 然后感觉我的智商受到了侮辱..&lt;/p&gt;
+&lt;p&gt;原文: &lt;a href="https://www.zhihu.com/question/428451991/answer/2431916538"&gt;西方媒体是怎样给西方人洗脑的？ - 远方青木的回答 - 知乎&lt;/a&gt;, &lt;a href="http://web.archive.org/web/20220429053052/https://www.zhihu.com/question/428451991/answer/2431916538"&gt;archive&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这几年欧美一直在向中国发动舆论战，我见过最离谱的一个理论甚至说什么“中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟”。&lt;/p&gt;
+&lt;p&gt;我本以为这套歪理邪说就是欧美造谣生事的想象力极限，没想到欧美的底线可以永无止尽的被突破。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;来源: &lt;a href="https://www.nytimes.com/2020/01/07/business/fake-pork-china.html"&gt;纽约时报 中国人会购买人造肉吗？&lt;/a&gt;, 另见&lt;a href="https://world.huanqiu.com/article/9CaKrnKoNzC"&gt;环球网报道&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;评论: 虽然文章很有&amp;quot;反华&amp;quot;的倾向性, 但文章主要讲的是人造肉在中国难以推广. 肉类消费对于气候的影响是不争的事实. 所以&amp;quot;中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟&amp;quot;这句话也不能算错, 但应该把主语换成全世界人.
+要求中国牺牲国民营养而减少肉类消费是不合理的, 但是推广人造肉是合理的. 作者在这里显然有断章取义之嫌.&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;《&lt;a href="https://web.archive.org/web/20220429053052mp_/https://www.zhihu.com/search?q=%E5%8D%8E%E7%9B%9B%E9%A1%BF%E9%82%AE%E6%8A%A5&amp;amp;search_source=Entity&amp;amp;hybrid_search_source=Entity&amp;amp;hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A2431916538%7D"&gt;华盛顿邮报&lt;/a&gt;》在报道中声称**“中国每年强迫种植数亿棵新树”，这简直是在“犯罪”！**&lt;/p&gt;
+&lt;p&gt;&lt;img src="./e577e26ef47585f1faae27fb45123efd.png" alt="e577e26ef47585f1faae27fb45123efd.png"&gt;&lt;/p&gt;
+&lt;p&gt;我捋一捋他们的思路，&lt;strong&gt;大概意思就是说中国每年种数亿棵新树，但把这些新树种下去之前并没有征求这些树的同意，这数亿棵树是“不一定同意自己被种植”的，但全部被中国强迫种在地里了。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;因此，中国侵犯了树“自由被种植”的权力，强迫树木劳动，这属于犯罪，因此中国需要反思自己这种野蛮的行为。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;逻辑好像有那么一点点道理哦，但我怎么就觉得那么奇怪和荒谬呢。&lt;/p&gt;
+&lt;p&gt;中国人种树怎么了？&lt;/p&gt;
+&lt;p&gt;种树不是在保护环境吗？&lt;/p&gt;
+&lt;p&gt;怎么拐了一圈之后种树居然成犯罪行为了？&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;来源: 没有找到来源.&lt;/p&gt;
+&lt;p&gt;评论: 据 &lt;a href="https://checkyourfact.com/2022/04/18/fact-check-washington-post-china-trees-article/"&gt;checkyourfact&lt;/a&gt;, 该截图为杜撰, 最初流传于 Facebook 和 Twitter.&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;更荒谬的是，同一家西方媒体，前几年报道中国的标题是**《中国对一次性筷子的成瘾正在摧毁森林》。**&lt;/p&gt;
+&lt;p&gt;首先，一次性筷子不是用森林做出来的，一次性筷子的主要原料是一个月能长3米的竹子，以及速生经济林的边角废木料。&lt;/p&gt;
+&lt;p&gt;用森林里的好木头确实可以做一次性筷子，但没人这么做，因为成本太高商家会亏本，只有速生林边角废料和竹子的低廉价格才能让商家赚到钱。&lt;/p&gt;
+&lt;p&gt;其次，抛开筷子的真实原材料不谈，这家西方媒体的主要立场好像也是森林是宝贵的，森林对人类有益，并以此来指责中国。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;既然如此，为什么中国种植森林也能被指责一番。是不是中国人干什么都不行，连呼吸都是错的？&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;来源: &lt;a href="https://www.washingtonpost.com/news/worldviews/wp/2013/03/14/chinas-disposable-chopstick-addiction-is-destroying-its-forests/"&gt;华盛顿邮报《中国对一次性筷子的成瘾正在摧毁森林》&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;评论: 华盛顿邮报 2013 年的报道, 主要援引的是时任吉林森工集团董事长柏广新的一句话: &amp;ldquo;我国每年生产800亿双一次性筷子，相当于要砍伐2000万棵生长20年的大树&amp;rdquo;. &lt;a href="http://www.gov.cn/2013lh/content_2349497.htm"&gt;中国政府网&lt;/a&gt;和&lt;a href="http://cpc.people.com.cn/pinglun/n/2013/0312/c78779-20759994.html"&gt;光明网&lt;/a&gt;均能找到这句话以及相关对一次性筷子的批评. 报道中均指出了木头和竹子均是一次性筷子的原料.&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;几年前，欧美媒体报道说根据科学家的研究，中国人种植水稻会产生更多的温室气体，因此中国人吃大米正在毁灭全球气候，进而导致人类灭亡。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;来源: 我都不知道怎么找..&lt;/p&gt;
+&lt;p&gt;评论: 类似的研究肯定有, 但我不觉得哪家媒体会报道吃大米导致人类灭亡&amp;hellip;&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;2019年，国际顶级科学期刊《自然》杂志发表了一篇文章，说根据科学家的研究成果，中国政府治理沙漠，大力推进的荒漠绿化工程，种树过多，可能导致人类水资源枯竭，因此会对地球自然生态造成极大影响。&lt;/p&gt;
+&lt;p&gt;《自然》杂志本是人类最顶级的科学杂志，但写这篇文章的“科学家”逻辑推导却很简单，算一算中国政府要消灭荒漠需要种多少棵树，种这些树需要消耗多少水资源，&lt;strong&gt;因此得出结论中国种树会破坏自然环境。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;别笑，这是真事。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;中国人花费几代心血把沙漠变成了绿洲，对人类如此巨大的贡献居然招来西方期刊的指责？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;治理沙漠居然都能成为破坏环境的罪证。&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;来源: &lt;a href="https://www.nature.com/articles/d41586-019-02789-w"&gt;nature 文章 China&amp;rsquo;s tree-planting drive could falter in a warming world&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;评论: 但凡看一下文章就会觉得文章的中立性是没问题的. 文章警告了非原产地树木对当地水资源的大量消耗, 可能会导致干旱地区的扩散. 也引用了多位中国科学家的意见.&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;巴西烧毁森林种地的时候，西方批判，说这样会造成水土流失，土地荒漠化，从而破坏人类环境。&lt;/p&gt;
+&lt;p&gt;中国种树消灭荒漠的时候，西方又批判，说这是在破坏人类环境，还不如让土地继续荒漠化。&lt;/p&gt;
+&lt;p&gt;澳大利亚和美国森林大火，烧毁无数森林，漫天黑烟，西方说这都是很正常的行为，对人类环境没有丝毫损害。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;来源: 不知道怎么找.&lt;/p&gt;
+&lt;p&gt;评论: 因果倒置, 是气候变化导致了森林火灾的可能性增加&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;但没有西方人说那群在荒漠里植树造林的中国人有功劳，反而把一个从来不种树的嘴炮少女捧为“环保公主”。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;评论: 讽刺 Greta Thunberg 也是传统艺能了, 不过我个人对她的评价还是比较积极的, 她组织了贯穿整个欧洲的学生罢课, 多次在 COP 上演讲. 她的&lt;a href="https://en.wikipedia.org/wiki/Greta_Thunberg"&gt;维基百科页面&lt;/a&gt;也是比较正面的. 她频繁提到过 IPCC 的 &lt;a href="https://www.ipcc.ch/site/assets/uploads/sites/2/2019/09/IPCC-Special-Report-1.5-SPM_zh.pdf"&gt;全球升温 1.5°C&lt;/a&gt;, 我也推荐大家去读一读, 这算是为什么要应对气候变化的科学基础.&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;欧美人种一点点树就是天大的功劳，但中国不是，不仅无功，反而有罪。&lt;/p&gt;
+&lt;p&gt;类似的双标相当常见，当初意大利封城，那就是**“冒着经济风险保欧洲”&lt;strong&gt;，而中国封城则是&lt;/strong&gt;“以牺牲人民自由为代价”**，两篇文章不仅在同一家媒体《纽约时报》发布，而且时间居然只差了20分钟。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./9d2d417242ceec2596a90beaaebb71a8.png" alt="9d2d417242ceec2596a90beaaebb71a8.png"&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;来源: &lt;a href="https://twitter.com/nytimes/status/1236479276586807296"&gt;https://twitter.com/nytimes/status/1236479276586807296&lt;/a&gt;, &lt;a href="https://twitter.com/nytimes/status/1236484352965521408"&gt;https://twitter.com/nytimes/status/1236484352965521408&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;评论: 单看这两条推特确实是西方媒体的偏见..&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;另一招，就是在报道中国正面的同时，再加上一句，就是鼎鼎大名的**“但代价是什么”。**&lt;/p&gt;
+&lt;p&gt;组合起来的效果给大家展示一下，比如说**“中国也许有效控制了疫情，但代价惨重”。**&lt;/p&gt;
+&lt;p&gt;比如说，&lt;strong&gt;中国正在变得智能，但代价是什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./246b296018db3460d935bb2e9d121731.png" alt="246b296018db3460d935bb2e9d121731.png"&gt;&lt;/p&gt;
+&lt;p&gt;这，就是欧美媒体对中国报道的常规格式。&lt;/p&gt;
+&lt;p&gt;把中国的好事变坏简直太简单了，&lt;strong&gt;你这个好事似乎存在，但代价是什么？&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;评论: 虚空打靶.. 别只看个标题啊, 你倒是具体说说西方媒体说了啥啊.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;总结: 看这种自媒体真的降智商.. 以后要少看..&lt;/p&gt;
+- https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ -&lt;p&gt;本文纯属回忆, 描述可能会有偏差.&lt;/p&gt;
+&lt;p&gt;小学时, 为方便联系, 我爸给了我一个 ZTE 的功能机, 里面只有一个打砖块的小游戏.&lt;/p&gt;
+&lt;p&gt;后来这手机被我在路上掉了, 于是我换成了一个 LG 的功能机. 这个 LG 的神奇之处在于它自带了一个浏览器, 于是我可以用 2G 上网去起点, 纵横看小说. 另外它自带电信的一个应用商店, 里面有一些免费的小游戏可以下 (不知道是啥技术, 估计是 java..), 因为我当时并没有流量套餐, 后来还因为话费异常被我爸查到并追问我在上网干什么, 我记得我用看新闻蒙混过去了. 这个手机陪伴我度过了初中.&lt;/p&gt;
+&lt;p&gt;考上省中后, 爸妈为了奖励我, 给我换了个新手机, 这时我爸被中国电信忽悠买了个酷派 K1 (酷派 5952).&lt;/p&gt;
+&lt;p&gt;&lt;img src="./eaf7170a1d32cc48175600e65db56628.png" alt="eaf7170a1d32cc48175600e65db56628.png"&gt;&lt;/p&gt;
+&lt;p&gt;这也算是当时第一批 4G 手机了, 进网贴纸贴的还是进网试用. 但是 1G 的内存根本比不过同期的小米 2S.&lt;/p&gt;
+&lt;p&gt;后来因为我忘了什么原因了我又买了个手机, 这个给我爸用. 听信了当时中华酷联的鬼话我又入了酷派的坑 (加之当时电信手机确实不好买), 买了酷派大神 F1 电信版 (酷派 8297-C00).&lt;/p&gt;
+&lt;p&gt;&lt;img src="image-20221002163705814.png" alt="image-20221002163705814"&gt;&lt;/p&gt;
+&lt;p&gt;它采用了&amp;quot;极为先进&amp;quot;的 64 位高通 410 SoC (据称是高通首款 64 位), 对, 我又听信了 Android 5.0 优化 (ART, Android Runtime) 和 64 位的鬼话, 买了这个 1G RAM 的手机.
 事实上出厂系统还是 4.4, 32 位. 于是我天天去酷派论坛蹲, 还真蹲到了 64 位的 5.0. 但事实上硬件的局限在那, 提升并没有那么大.
-于是当时整天折腾各种 ROM, 各种优化. 在那个我 root 还靠各种一键 root app 的年代, 很难想象我都在优化什么.&lt;/p>
-&lt;p>这里提一件我印象很深的事. 酷派自带的系统有个安全 app, 叫酷管家, 显然我并不想用它, 但是一旦你删了它或者想动它什么组件, 手机就会弹一个正在优化系统的弹窗 (实际上是软重启), 然后一切归零.
-另外还值得一提的是刚拿到手机的那几个月里系统更新还是很频繁的, 而且似乎确实解决了一些问题, 这点还是好评.&lt;/p>
-&lt;p>&lt;img src="./c64f78b386179a872744127b8ef9a0b6.png" alt="c64f78b386179a872744127b8ef9a0b6.png">
-ROM 之家这种网站也是时代的眼泪了&lt;/p>
-&lt;p>后来由于学习的原因手机被迫上交. 但没过多久我偷偷搞到了我爸之前用的一个安卓 2.3 的小手机. 型号已经忘了, 大概是 htc, 性能非常差, 大概只有单核, 200 多 MB 内存, 触摸屏中间一部分还是坏的, 但用来看小说完全够了.&lt;/p>
-&lt;p>到了高三娱乐活动更加匮乏, 于是我托同学在闲鱼上买了个 iPhone 5s, 顿时感到苹果是多么好看, 多么精致, 还有极为先进的 Touch ID, 当时用它打炉石感到难以想象地流畅 (毕竟之前的垃圾酷派实在是卡). 唯一的问题是被卖家坑了, 电池雪崩, 有时一半电直接关机. 但是其和温度有很大关系, 有时候你把它捂一会捂热它就又能开机了. 后来不得已花了一百多换了块电池.&lt;/p>
-&lt;p>用了一段时间我顿感苹果索然无味, 于是卖了买了 Nexus 6. 在 16, 17 年高通 805 + 3G RAM + 5.95&amp;rsquo; 2k 屏说不上顶配, 但也足够优秀了, 很难想象这是 14 年发布的手机. Google 亲儿子无成本解锁 BL 的特性让刷机和 root 变得非常方便.
-而且它那个屏幕的手感非常不错, 在现在看来滑动也是丝般顺滑, 可惜后来屏幕被我摔碎了.&lt;/p>
-&lt;p>高中毕业后, 虽然 Nexus 6 性能还够用, 但这不能给我爸妈看到呀, 于是直接买新手机. 一开始抢小米 6 没抢到, 然后买了一加 5. (还好没抢到!) 以我现在的眼光自然是觉得 Oxygen OS 这种类原生是要比 MIUI 好很多的.&lt;/p>
-&lt;p>这一加 5 钉子户一当就当了四年. 到大学毕业实在感到 835 性能不够用了. 我当时是想挑一个小屏旗舰, 挑来挑去也没挑出来, 要么太贵, 要么不能解锁 BL, 于是又买了一加, 一加 8T.&lt;/p>
-- https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我为什么选择在 Surface 上使用 Windows</title><link>https://blog.coherence.codes/posts/2022/surface_on_linux/</link><pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/surface_on_linux/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/surface_on_linux/ -&lt;p>自从购置 Surface Pro 7 以来, 曾数次不满于 Windows 的包管理, 遥测, Windows Defender 等方面. 然更换了 Linux 之后并没有一个太好的使用体验. 本文记录了 Surface Pro 7 在 Archlinux 上的体验.&lt;/p>
-&lt;p>在 2021 年七月某日, 手贱尝试了一下 Windows 11 Preview (印象里是公开发布的第一版) 之后, 感叹于 Bug 之多, 奈何回滚需要重新安装 Windows, 于是一气之下装了 Archlinux.&lt;/p>
-&lt;p>&lt;img src="./8a7b6609572d402bb2b747b706ef0c62.png" alt="img">(此处附使用截图一张)&lt;/p>
-&lt;p>在使用了近半年之后, 再次感叹, 微软自家的产品在 Linux 上体验真的不好.. 又萌生了换回 Windows 的想法.&lt;/p>
-&lt;p>具体而言, 有以下几个方面. 首先, Connected standby 在 Windows 下工作地很好, 然而在 Linux 下待机的耗电非常显著, 大概一晚上能掉一半电的那种. 于是后来发现了 suspend-then-hibernate 这个策略, 理论上还算可以接受. 然其有个非常严重的 Bug, 有时候其不能够成功地进入休眠状态, 导致第二天早上起来的时候 Surface 直接没电了. 而且这个问题出现频率比较高, 大概十次待机中有两三次, 非常影响使用体验. 在电量不足 10% 内核的频率调度会非常激进, 基本只能维持在 1.5G (即使电源已连接), 这时候系统会非常卡, 进一步导致了开机后仍有十多分钟的不可用状态. 这个 Bug 是我想换回 Windows 的直接原因.&lt;/p>
-&lt;p>(2024/11/01 Update, 查询当时的内核日志发现有类似 &lt;code>Image allocation is xxxx pages short&lt;/code> 的报错, 搜索发现这个可能是 swap 设置得不够大, 存不下当时内存的 snapshot 导致的)&lt;/p>
-&lt;p>&lt;img src="./image-20220226111426078.png" alt="image-20220226111426078">
-(图为在个人 issue tracker 中的记录, 实际和内核更新无关)&lt;/p>
-&lt;p>其次, 由于主线内核的支持有限, 我选择了第三方的 &lt;a href="https://github.com/linux-surface/linux-surface">linux-surface&lt;/a> 内核, 然其支持仍然有限. 最主要为缺乏 Surface Pen 和多点触控的支持. 加之我使用的 KDE 桌面环境对于平板设备的支持几乎为零, 我的 Surface 事实上是当成笔记本电脑来使用的.&lt;/p>
-&lt;p>(2024/11/01 Update, 多点触控和 Surface Pen 的支持已经可用了)&lt;/p>
-&lt;p>另外, 还有 KDE 对于触控板手势缺乏支持 (在 Wayland 中已实现了部分支持); 续航较之 Windows 差了很多; Xorg 不支持多显示器不同缩放; 无法使用摄像头/Windows Hello 等等问题.&lt;/p>
-&lt;p>更换 Windows 之后:&lt;/p>
-&lt;ul>
-&lt;li>需要重新配置环境, 然包管理器选用 winget, dotfiles 使用 chezmoi 管理, 应该不会有太多麻烦&lt;/li>
-&lt;li>Windows defender, 遥测等占用资源, 然应该可用组策略解决&lt;/li>
-&lt;li>失去了 krunner, 可以用其他软件替代, 或者开始菜单将就用..&lt;/li>
-&lt;li>还可以使用腾讯会议等 Windows 专有软件 (Linux 版的体验很不好)&lt;/li>
-&lt;/ul>
-&lt;p>综上, 我又反复横跳回来了..&lt;/p>
-- https://blog.coherence.codes/posts/2022/surface_on_linux/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ -&lt;p>记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.&lt;/p>
-&lt;p>Archwiki 给人的感觉还是有点零碎了.. 与打包相关的条目大概有:&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="https://wiki.archlinux.org/title/Creating_packages">Creating packages&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://wiki.archlinux.org/title/Arch_package_guidelines">Arch package guidelines&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://wiki.archlinux.org/title/Makepkg">makepkg&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://wiki.archlinux.org/title/PKGBUILD">PKGBUILD&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://wiki.archlinux.org/title/AUR_submission_guidelines">AUR submission guidelines&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://wiki.archlinux.org/title/Arch_Build_System">Arch Build System&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>好吧, 这可能就是 Wiki 的组织形式, 但对新手来说确实不友好. 另外 makepkg 和 PKGBUILD 的 man 文档也是很有用的.&lt;/p>
-&lt;h2 id="概览">概览&lt;/h2>
-&lt;p>ABS 是一个 &lt;a href="https://en.wikipedia.org/wiki/Ports_collection">ports&lt;/a>-like 构建系统, 其打包的主要工具为 makepkg, 根据当前目录下的 PKGBUILD 打包. 据说是比 Debian 系的打包容易不少.&lt;/p>
-&lt;h2 id="打包">打包&lt;/h2>
-&lt;p>首先 makepkg 会下载 source 变量中指定的文件列表, 它们可以是一个 URL, 一个 git 仓库, 或一个在当前目录下的文件. makepkg 会校验文件的哈希并解压到以文件名命名的目录. 可用 &lt;code>-g, --geninteg&lt;/code> 命令来下载文件并生成哈希. 注意 VCS 的 source 是没有哈希的.&lt;/p>
-&lt;p>事实上看一看每种语言对应的 guidelines 是非常有用的.&lt;/p>
-&lt;p>&lt;img src="./image-20211208122231668.png" alt="image-20211208122231668">&lt;/p>
-&lt;p>我在打这个 go 包的时候, makepkg 有个警告: &lt;code>==&amp;gt; WARNING: Package contains reference to $srcdir&lt;/code>, 而 Go package guideline 里就给了解决办法.&lt;/p>
-&lt;h2 id="上传-aur">上传 AUR&lt;/h2>
-&lt;p>AUR 还挺有意思的, 它是个 git 仓库, 我们只要 push 一个仓库到 &lt;code>ssh://aur@aur.archlinux.org/pkgbase.git&lt;/code> 就能创建一个 pkgbase 包. 当然, 除了创建新包外,应该是只有 maintainer 有权限了. 所以首先我们需要去 AUR 的网页里添加公钥. 顺便吐槽一下 SSO 什么时候才能被应用到所有 Arch 的网站中.&lt;/p>
-&lt;p>每次修改 PKGBUILD 上传 AUR 之前, 我们都必须运行 &lt;code>makepkg --printsrcinfo &amp;gt; .SRCINFO&lt;/code> 来生成 &lt;code>.SRCINFO&lt;/code>, 这是 AUR 显示在网页上的元数据.&lt;/p>
-- https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ -&lt;p>记录一下比赛期间踩到的坑.&lt;/p>
-&lt;h2 id="签到">签到&lt;/h2>
-&lt;p>开始完全没有读题直接进题目, 然后想了半天没思路并随机测试了一些数.. 直到我读了题..&lt;/p>
-&lt;h2 id="进制十六参上">进制十六——参上&lt;/h2>
-&lt;p>显然, 大家都知道怎么编辑十六进制, 然而我并不想手输这么多文本, 于是 Google 在线 OCR, 结果 OCR 的内容有部分是错的.. 被迫找同学要了一份 OCR 结果.&lt;/p>
-&lt;h2 id="去吧追寻自由的电波">去吧！追寻自由的电波&lt;/h2>
-&lt;p>直接 Google ffmepg 音频速度. 然而很多结果给的一个过滤器是不改变音调的方案, 后来发现直接改采样率就行了..&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>cjc@coherence hackergame_2021&lt;span style="color:#f92672">]&lt;/span>$ file radio.mp3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>radio.mp3: Audio file with ID3 version 2.4.0, contains: MPEG ADTS, layer III, v1, &lt;span style="color:#ae81ff">128&lt;/span> kbps, &lt;span style="color:#ae81ff">48&lt;/span> kHz, Stereo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>cjc@coherence hackergame_2021&lt;span style="color:#f92672">]&lt;/span>$ ffmpeg -i radio.mp3 -af &lt;span style="color:#e6db74">&amp;#34;asetrate=16000&amp;#34;&lt;/span> radio_output.mp3
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>命令来自&lt;a href="http://johnriselvato.com/ffmpeg-how-to-change-the-pitch-sample-rate-of-an-audio-track-mp3/">这里&lt;/a>, 虽然我根本没有看这篇文章..&lt;/p>
-&lt;h2 id="猫咪问答-pro-max">猫咪问答 Pro Max&lt;/h2>
-&lt;p>没错, 被第二题坑了.. 以为是第四题不对, 于是写了个暴力跑了几万次..&lt;/p>
-&lt;p>&lt;img src="./image-20211030151026284.png" alt="image-20211030151026284">&lt;/p>
-&lt;p>提示: 这是一个提示.&lt;/p>
-&lt;h2 id="卖瓜">卖瓜&lt;/h2>
-&lt;p>已经被同学提示了这是个 PHP 溢出问题.. 甚至都找到了 (同学给的) &lt;a href="https://www.php.net/manual/zh/language.types.integer.php#125251">PHP 文档中的一条评论 (甚至题解也给了这个)&lt;/a>, 但是并不知道怎么做.. 于是用 &lt;code>b1=2**63//6+n&lt;/code> (n 为 -10~10 之间的一个随机数) 瞎试做出来了.&lt;/p>
-&lt;h2 id="透明的文件">透明的文件&lt;/h2>
-&lt;p>看&lt;a href="https://learnku.com/articles/26231">这篇文章&lt;/a>学到了一些 ANSI 转义序列的知识. 题解上说只需简单地在 &lt;code>[&lt;/code> 前加上 &lt;code>\x1b&lt;/code> 就行, 然而并不行.. 我的终端并不能解析这些转义序列..&lt;/p>
-&lt;p>&lt;img src="./image-20211030153759137.png" alt="image-20211030153759137">&lt;/p>
-&lt;p>于是在进行了一些我也忘记了是什么的操作之后终于成功了:&lt;/p>
-&lt;p>&lt;img src="./image-20211030154033261.png" alt="image-20211030154033261">&lt;/p>
-&lt;p>只记得 Python 从文件读然后 print 和直接 print 一个字符串的结果还不一样.. (也可能是是否在 REPL 下的区别.. 不管了)&lt;/p>
-&lt;p>找个时间可以好好学一学这方面的内容..&lt;/p>
-&lt;p>PS: 直接使用 &lt;code>cat transparent.txt | sed 's/\[/\x1b[/g' | sed 's/ /#/g'&lt;/code> 是可以的.. 那看来是 VSCode 的替换的锅了.. 在 VSCode 中我直接用字符串 &lt;code>\x1b&lt;/code> 替换的.. 而 sed 替换出来的是一个字节 &lt;code>\x1b&lt;/code>..&lt;/p>
-&lt;h2 id="旅行照片">旅行照片&lt;/h2>
-&lt;p>纯社工题. 第五题题解中说的百度街景里并没有找到.. 小红书发挥了重要作用..&lt;/p>
-&lt;h2 id="flag-助力大红包">FLAG 助力大红包&lt;/h2>
-&lt;p>居然真的有人在求助力..&lt;/p>
-&lt;p>&lt;img src="./image-20211030154537778.png" alt="image-20211030154537778">&lt;/p>
-&lt;p>第一时间就想到了 &lt;code>X-Forwarded-For&lt;/code>. 我以为并不会这么简单, 没想到恰恰是这么简单..&lt;/p>
-&lt;p>这题因为题目的请求并发限制还被坑了一会..&lt;/p>
-&lt;h2 id="amnesia">Amnesia&lt;/h2>
-&lt;p>没想到题解这么简单, &lt;code>putchar&lt;/code> 一个 char 字符会被分配到栈上, 我还用了一个很魔法的方法..&lt;/p>
-&lt;p>&lt;img src="./image-20211030164358742.png" alt="image-20211030164358742">&lt;/p>
-&lt;p>这样似乎能强制把 b 数组放到 .text 段上..&lt;/p>
-&lt;p>第二问显然我不会..&lt;/p>
-&lt;h2 id="图之上的信息">图之上的信息&lt;/h2>
-&lt;p>基本没遇到什么障碍, Google 到 &lt;a href="https://stackoverflow.com/questions/34199982/how-to-query-all-the-graphql-type-fields-without-writing-a-long-query">How to query all the GraphQL type fields without writing a long query?&lt;/a> 之后试了几分钟就试出来了.&lt;/p>
-&lt;h2 id="easy-rsa">Easy RSA&lt;/h2>
-&lt;p>get_p 用一下 &lt;a href="https://en.wikipedia.org/wiki/Wilson%27s_theorem">Wilson&amp;rsquo;s theorem&lt;/a> 就行, 但 get_q 直到比赛结束还没想出来.. 还是数理基础不够扎实(&lt;/p>
-&lt;p>原来 get_q 也是一次 RSA 的加密过程! 我还一直在试图解 $value_q = q^e mod\ n$ 这个方程.. (能解出来就有鬼了)&lt;/p>
-&lt;p>那么现在虽然我还不懂 RSA 的正确性, &lt;del>我已经完全掌握 RSA 了&lt;/del>.&lt;/p>
-&lt;h2 id="加密的-u-盘">加密的 U 盘&lt;/h2>
-&lt;p>一开始各种 Google &lt;code>luks exploit&lt;/code>, &lt;code>luks attack&lt;/code>, 但是总感觉这么一个应用广泛的标准有明显的漏洞不太可能.. 直到我读了一下 &lt;code>man cryptsetup&lt;/code>..&lt;/p>
-&lt;p>&lt;img src="./image-20211030160044184.png" alt="image-20211030160044184">&lt;/p>
-&lt;p>从题解中我得知了 LUKS 使用 passphrase 用来加密 master key, master key 加密全盘文件, 这是为了避免改 passphrase 时重新加密全盘的开销.&lt;/p>
-&lt;h2 id="赛博厨房">赛博厨房&lt;/h2>
-&lt;p>Level 0 和 1 很简单.&lt;/p>
-&lt;p>从同学处得到的提示每日菜谱是根据哈希来的, 于是写了个暴力, 然而跑了几个小时都没跑出结果..&lt;/p>
-&lt;p>&lt;img src="./image-20211030175312389.png" alt="image-20211030175312389">&lt;/p>
-&lt;p>题解确实是暴力.. 但是我这样枚举是不对的, 因为菜谱是哈希, 所以只要稍微改一点点程序就能得到一个不一样的菜谱, 然后赌哈希的结果.. (相当于工作量证明了..)&lt;/p>
-&lt;p>Level 3 显然看都没看..&lt;/p>
-&lt;h2 id="阵列恢复大师">阵列恢复大师&lt;/h2>
-&lt;p>尝试暴力了一下磁盘顺序, 看了题解发现离正确答案还有很远.. 比如 chunk 的大小, 文件系统类型 (这两个我想到了, 但不知道怎么获得), &lt;code>mdadm --build&lt;/code> 和 &lt;code>mdadm --create&lt;/code> 的区别..&lt;/p>
-&lt;p>&lt;img src="./image-20211030175155176.png" alt="image-20211030175155176">&lt;/p>
-&lt;h2 id="马赛克">马赛克&lt;/h2>
-&lt;p>尝试了一下最后只把定位点给恢复出来了.. 题解的思路是暴力枚举, 思路确实很简单, 难的是实现..&lt;/p>
-&lt;h2 id="minecraft">minecRaft&lt;/h2>
-&lt;p>扫了一遍源码发现核心逻辑应该是在 flag.js 中. 打开一看经典混淆了.. 操作了一番 (指替换变量名) 后尝试把 &lt;code>gyflagh&lt;/code> 函数的返回改成 &lt;code>true&lt;/code>, 发现并没有用. 那看来是要解密那个字符串了..&lt;/p>
-&lt;p>&lt;img src="./image-20211030161245519.png" alt="image-20211030161245519">&lt;/p>
-&lt;p>核心逻辑在 code 函数里:&lt;/p>
-&lt;p>&lt;img src="./image-20211030161353309.png" alt="image-20211030161353309">&lt;/p>
-&lt;p>本以为这个过程是不可逆的, 但最后一天仔细看了一下后发现第 68 行 array_a[0] 的操作中只涉及了 array_a[1], 第 71 行也是同理, 于是只要简单地减一下就行了.&lt;/p>
-&lt;p>&lt;img src="./image-20211030161717407.png" alt="image-20211030161717407">&lt;/p>
-&lt;p>还好几个辅助函数比如 &lt;code>LongToBase16&lt;/code>, &lt;code>Base16ToLong&lt;/code> 没有混淆.. 不然肯定做不出了..&lt;/p>
-&lt;h2 id="其他">其他&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>震惊! 排行榜上有选手公然发题解!&lt;/p>
-&lt;p>&lt;img src="./image-20211030145149135.png" alt="image-20211030145149135">&lt;/p>
-&lt;p>嗯.. 看昵称就知道是什么了..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>最后校内排名 29, 总排名推测一下应该在 100~200 之间&lt;/p>
-&lt;p>&lt;img src="./image-20211030165413748.png" alt="image-20211030165413748">&lt;/p>
-&lt;p>全靠 web 和 general 拿分..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>不过在第一天甚至短暂地冲到过第一, 人生巅峰.jpg&lt;/p>
-&lt;p>&lt;img src="./image-20211030165521990.png" alt="image-20211030165521990">&lt;/p>
-&lt;/li>
-&lt;/ul>
-- https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+于是当时整天折腾各种 ROM, 各种优化. 在那个我 root 还靠各种一键 root app 的年代, 很难想象我都在优化什么.&lt;/p&gt;
+&lt;p&gt;这里提一件我印象很深的事. 酷派自带的系统有个安全 app, 叫酷管家, 显然我并不想用它, 但是一旦你删了它或者想动它什么组件, 手机就会弹一个正在优化系统的弹窗 (实际上是软重启), 然后一切归零.
+另外还值得一提的是刚拿到手机的那几个月里系统更新还是很频繁的, 而且似乎确实解决了一些问题, 这点还是好评.&lt;/p&gt;
+&lt;p&gt;&lt;img src="./c64f78b386179a872744127b8ef9a0b6.png" alt="c64f78b386179a872744127b8ef9a0b6.png"&gt;
+ROM 之家这种网站也是时代的眼泪了&lt;/p&gt;
+&lt;p&gt;后来由于学习的原因手机被迫上交. 但没过多久我偷偷搞到了我爸之前用的一个安卓 2.3 的小手机. 型号已经忘了, 大概是 htc, 性能非常差, 大概只有单核, 200 多 MB 内存, 触摸屏中间一部分还是坏的, 但用来看小说完全够了.&lt;/p&gt;
+&lt;p&gt;到了高三娱乐活动更加匮乏, 于是我托同学在闲鱼上买了个 iPhone 5s, 顿时感到苹果是多么好看, 多么精致, 还有极为先进的 Touch ID, 当时用它打炉石感到难以想象地流畅 (毕竟之前的垃圾酷派实在是卡). 唯一的问题是被卖家坑了, 电池雪崩, 有时一半电直接关机. 但是其和温度有很大关系, 有时候你把它捂一会捂热它就又能开机了. 后来不得已花了一百多换了块电池.&lt;/p&gt;
+&lt;p&gt;用了一段时间我顿感苹果索然无味, 于是卖了买了 Nexus 6. 在 16, 17 年高通 805 + 3G RAM + 5.95&amp;rsquo; 2k 屏说不上顶配, 但也足够优秀了, 很难想象这是 14 年发布的手机. Google 亲儿子无成本解锁 BL 的特性让刷机和 root 变得非常方便.
+而且它那个屏幕的手感非常不错, 在现在看来滑动也是丝般顺滑, 可惜后来屏幕被我摔碎了.&lt;/p&gt;
+&lt;p&gt;高中毕业后, 虽然 Nexus 6 性能还够用, 但这不能给我爸妈看到呀, 于是直接买新手机. 一开始抢小米 6 没抢到, 然后买了一加 5. (还好没抢到!) 以我现在的眼光自然是觉得 Oxygen OS 这种类原生是要比 MIUI 好很多的.&lt;/p&gt;
+&lt;p&gt;这一加 5 钉子户一当就当了四年. 到大学毕业实在感到 835 性能不够用了. 我当时是想挑一个小屏旗舰, 挑来挑去也没挑出来, 要么太贵, 要么不能解锁 BL, 于是又买了一加, 一加 8T.&lt;/p&gt;
+- https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我为什么选择在 Surface 上使用 Windows</title><link>https://blog.coherence.codes/posts/2022/surface_on_linux/</link><pubDate>Sat, 26 Feb 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/surface_on_linux/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2022/surface_on_linux/ -&lt;p&gt;自从购置 Surface Pro 7 以来, 曾数次不满于 Windows 的包管理, 遥测, Windows Defender 等方面. 然更换了 Linux 之后并没有一个太好的使用体验. 本文记录了 Surface Pro 7 在 Archlinux 上的体验.&lt;/p&gt;
+&lt;p&gt;在 2021 年七月某日, 手贱尝试了一下 Windows 11 Preview (印象里是公开发布的第一版) 之后, 感叹于 Bug 之多, 奈何回滚需要重新安装 Windows, 于是一气之下装了 Archlinux.&lt;/p&gt;
+&lt;p&gt;&lt;img src="./8a7b6609572d402bb2b747b706ef0c62.png" alt="img"&gt;(此处附使用截图一张)&lt;/p&gt;
+&lt;p&gt;在使用了近半年之后, 再次感叹, 微软自家的产品在 Linux 上体验真的不好.. 又萌生了换回 Windows 的想法.&lt;/p&gt;
+&lt;p&gt;具体而言, 有以下几个方面. 首先, Connected standby 在 Windows 下工作地很好, 然而在 Linux 下待机的耗电非常显著, 大概一晚上能掉一半电的那种. 于是后来发现了 suspend-then-hibernate 这个策略, 理论上还算可以接受. 然其有个非常严重的 Bug, 有时候其不能够成功地进入休眠状态, 导致第二天早上起来的时候 Surface 直接没电了. 而且这个问题出现频率比较高, 大概十次待机中有两三次, 非常影响使用体验. 在电量不足 10% 内核的频率调度会非常激进, 基本只能维持在 1.5G (即使电源已连接), 这时候系统会非常卡, 进一步导致了开机后仍有十多分钟的不可用状态. 这个 Bug 是我想换回 Windows 的直接原因.&lt;/p&gt;
+&lt;p&gt;(2024/11/01 Update, 查询当时的内核日志发现有类似 &lt;code&gt;Image allocation is xxxx pages short&lt;/code&gt; 的报错, 搜索发现这个可能是 swap 设置得不够大, 存不下当时内存的 snapshot 导致的)&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20220226111426078.png" alt="image-20220226111426078"&gt;
+(图为在个人 issue tracker 中的记录, 实际和内核更新无关)&lt;/p&gt;
+&lt;p&gt;其次, 由于主线内核的支持有限, 我选择了第三方的 &lt;a href="https://github.com/linux-surface/linux-surface"&gt;linux-surface&lt;/a&gt; 内核, 然其支持仍然有限. 最主要为缺乏 Surface Pen 和多点触控的支持. 加之我使用的 KDE 桌面环境对于平板设备的支持几乎为零, 我的 Surface 事实上是当成笔记本电脑来使用的.&lt;/p&gt;
+&lt;p&gt;(2024/11/01 Update, 多点触控和 Surface Pen 的支持已经可用了)&lt;/p&gt;
+&lt;p&gt;另外, 还有 KDE 对于触控板手势缺乏支持 (在 Wayland 中已实现了部分支持); 续航较之 Windows 差了很多; Xorg 不支持多显示器不同缩放; 无法使用摄像头/Windows Hello 等等问题.&lt;/p&gt;
+&lt;p&gt;更换 Windows 之后:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需要重新配置环境, 然包管理器选用 winget, dotfiles 使用 chezmoi 管理, 应该不会有太多麻烦&lt;/li&gt;
+&lt;li&gt;Windows defender, 遥测等占用资源, 然应该可用组策略解决&lt;/li&gt;
+&lt;li&gt;失去了 krunner, 可以用其他软件替代, 或者开始菜单将就用..&lt;/li&gt;
+&lt;li&gt;还可以使用腾讯会议等 Windows 专有软件 (Linux 版的体验很不好)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;综上, 我又反复横跳回来了..&lt;/p&gt;
+- https://blog.coherence.codes/posts/2022/surface_on_linux/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ -&lt;p&gt;记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.&lt;/p&gt;
+&lt;p&gt;Archwiki 给人的感觉还是有点零碎了.. 与打包相关的条目大概有:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/Creating_packages"&gt;Creating packages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/Arch_package_guidelines"&gt;Arch package guidelines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/Makepkg"&gt;makepkg&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/PKGBUILD"&gt;PKGBUILD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/AUR_submission_guidelines"&gt;AUR submission guidelines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/Arch_Build_System"&gt;Arch Build System&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;好吧, 这可能就是 Wiki 的组织形式, 但对新手来说确实不友好. 另外 makepkg 和 PKGBUILD 的 man 文档也是很有用的.&lt;/p&gt;
+&lt;h2 id="概览"&gt;概览&lt;/h2&gt;
+&lt;p&gt;ABS 是一个 &lt;a href="https://en.wikipedia.org/wiki/Ports_collection"&gt;ports&lt;/a&gt;-like 构建系统, 其打包的主要工具为 makepkg, 根据当前目录下的 PKGBUILD 打包. 据说是比 Debian 系的打包容易不少.&lt;/p&gt;
+&lt;h2 id="打包"&gt;打包&lt;/h2&gt;
+&lt;p&gt;首先 makepkg 会下载 source 变量中指定的文件列表, 它们可以是一个 URL, 一个 git 仓库, 或一个在当前目录下的文件. makepkg 会校验文件的哈希并解压到以文件名命名的目录. 可用 &lt;code&gt;-g, --geninteg&lt;/code&gt; 命令来下载文件并生成哈希. 注意 VCS 的 source 是没有哈希的.&lt;/p&gt;
+&lt;p&gt;事实上看一看每种语言对应的 guidelines 是非常有用的.&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20211208122231668.png" alt="image-20211208122231668"&gt;&lt;/p&gt;
+&lt;p&gt;我在打这个 go 包的时候, makepkg 有个警告: &lt;code&gt;==&amp;gt; WARNING: Package contains reference to $srcdir&lt;/code&gt;, 而 Go package guideline 里就给了解决办法.&lt;/p&gt;
+&lt;h2 id="上传-aur"&gt;上传 AUR&lt;/h2&gt;
+&lt;p&gt;AUR 还挺有意思的, 它是个 git 仓库, 我们只要 push 一个仓库到 &lt;code&gt;ssh://aur@aur.archlinux.org/pkgbase.git&lt;/code&gt; 就能创建一个 pkgbase 包. 当然, 除了创建新包外,应该是只有 maintainer 有权限了. 所以首先我们需要去 AUR 的网页里添加公钥. 顺便吐槽一下 SSO 什么时候才能被应用到所有 Arch 的网站中.&lt;/p&gt;
+&lt;p&gt;每次修改 PKGBUILD 上传 AUR 之前, 我们都必须运行 &lt;code&gt;makepkg --printsrcinfo &amp;gt; .SRCINFO&lt;/code&gt; 来生成 &lt;code&gt;.SRCINFO&lt;/code&gt;, 这是 AUR 显示在网页上的元数据.&lt;/p&gt;
+- https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

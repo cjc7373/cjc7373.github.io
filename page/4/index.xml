@@ -1,140 +1,146 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Thu, 27 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>软通实习</title><link>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</link><pubDate>Wed, 17 Jul 2019 15:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/ -&lt;h2 id="序">序&lt;/h2>
-&lt;p>二年级下学期期末，有一个两周的实习，学校给了我们三个选项，其中软通算是知名度最高的一家公司了。
-&lt;img src="./isoftstone.png" alt="“isoftstone”的图片搜索结果">&lt;/p>
-&lt;p>然而网上这家公司的风评很差，不过其他两家似乎更差，于是我们班大概四分之三的人都来了软通。&lt;/p>
-&lt;h2 id="经历">经历&lt;/h2>
-&lt;p>实习第一天，上午讲的开发流程，团队角色，每日例行项目好似我们已经接手了一个实际项目，然而到了下午瞬间变成培训班，开始教我们配置环境。看下发的文档是用 Java Spring Boot 框架来开发。第二天又开始复习 Java。然后到了第三天，负责我们的老师（就叫他项目经理好了）突然说，你们想用什么技术就用什么技术吧。终于不用写 Java 了（逃&lt;/p>
-&lt;p>我们大概使用的是 Scrum 敏捷开发方法，最有特色的一点大概就是每日站会了。还有 Story 列表其实也挺不错的，只是没有贴在公告板上感觉失去了灵魂。&lt;/p>
-&lt;p>可能是时间短的原因，从一开始需求包括 Story 列表就已经确定了，我认为如果只是说做一个什么系统而不说具体需求会让大家的产品更有差异化，亮点也会更多。&lt;/p>
-&lt;h2 id="技术栈">技术栈&lt;/h2>
-&lt;p>由于我很倾向 Python，加上青岛大学的开源 OJ 采用的就是 Django+Vue 前后端分离的开发模式，于是我便也想采用这个模式。&lt;/p>
-&lt;p>最终我们决定采用前后端完全分离，前后端之间使用 HTTP 协议通信。前端采用：HTML+CSS+JavaScript（JQuery+AJAX），后端采用：Django，数据库采用：PostgreSQL&lt;/p>
-&lt;h2 id="版本管理">版本管理&lt;/h2>
-&lt;p>我有一些 Git 的知识，然而软通提供的版本管理工具是 SVN。用了一段时间后发现，两个工具没有本质的区别，最大的大概是 SVN 需要中心服务器，权限控制似乎也比较强大，所以像在公司内部比较好用，而 Git 分布式，分支创建极为方便，在开源社区中被广泛使用。&lt;/p>
-&lt;p>&lt;img src="./1563352303687.png" alt="1563352303687">&lt;/p>
-&lt;p>然而我们甚至没有用到分支这个功能，总体上还是没有利用好版本管理。&lt;/p>
-&lt;h2 id="前端三剑客">前端：三剑客&lt;/h2>
-&lt;p>zpc 第一天就不知道在哪找了个模板网站，然后冲了十块钱下了个模板。接下来就开始改改改。&lt;/p>
-&lt;h3 id="调试">调试&lt;/h3>
-&lt;p>一个问题是，后端的代码如何给前端调试。我们选择：&lt;/p>
-&lt;ol>
-&lt;li>后端首先使用 Django 的本地服务器，用 Postman 进行测试，测试通过后上传代码。&lt;/li>
-&lt;li>不定期部署至服务器上&lt;/li>
-&lt;li>前端从服务器调用接口调试&lt;/li>
-&lt;/ol>
-&lt;p>然而，在其他组答辩的时候，我们才知道有个东西叫 &lt;a href="http://mockjs.com/">mock&lt;/a>，能够简化调试难度。&lt;/p>
-&lt;h2 id="后端django">后端：Django&lt;/h2>
-&lt;p>很早就听说了 Python Web 一些有名的框架，后来又知道了青岛大学的开源 OJ 后端使用的就是 Django，所以很想尝试一下。曾经看过几节慕课，也看了一些官方文档（一开始是真的看不懂）。在做微信小程序的时候，我就想用 Django，奈何技术不够，放弃了。&lt;/p>
-&lt;p>实习前，我去找 zjb 两小时速成了一下 Django，发现 Django 虽然是 MTV（Model——Template——View）三级结构，但是前后端分离的话就没有模板了，同时我们用了 REST Framework，在函数名中直接声明要调用的方法，大大简化了开发。REST Framework 也提供了&lt;a href="https://q1mi.github.io/Django-REST-framework-documentation/">官方中文文档&lt;/a>，不过感觉写得不是很好。&lt;/p>
-&lt;p>后端代码非常简单，我们先用&lt;code>token = request.COOKIES.get(&amp;quot;token&amp;quot;)&lt;/code>获取token，查询&lt;code>user = User.objects.get(userToken=token)&lt;/code>，若 token 无效则会抛出&lt;code>User.DoesNotExist&lt;/code>错误，查询操作之后调用一个序列化方法&lt;code>users = serializers.serialize(&amp;quot;json&amp;quot;, allMessage, fields=(&amp;quot;userID&amp;quot;))&lt;/code>，但是如果直接这样返回会有问题，所以需要把它转化成字典类型&lt;code>rtn['data']=json.loads(users)&lt;/code>，然后调用&lt;code>JsonResponse&lt;/code>返回。&lt;/p>
-&lt;p>Django 查询数据库返回的是一个 &lt;a href="https://docs.djangoproject.com/zh-hans/2.2/ref/models/querysets/">QuerySet&lt;/a> 对象，我们能对它进行很多操作，但是其实我们都没用到..&lt;/p>
-&lt;h3 id="cookies">Cookies&lt;/h3>
-&lt;p>我一开始以为 Cookies 是前端负责维护的，后来发现这只是浏览器的工作。所以实际上 Cookies 是后端维护的。在登陆时设置 Cookie，调用 API 时获取 Cookie，退出时删除 Cookie 即可。&lt;/p>
-&lt;h3 id="测试">测试&lt;/h3>
-&lt;p>我们用了 Postman 模拟 HTTP 请求进行测试，很可惜的是没有用到 Django 的自动化测试。&lt;/p>
-&lt;h3 id="几个坑">几个坑&lt;/h3>
-&lt;p>Django 的文档宣称：&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;strong>会自动重新加载的服务器 &lt;a href="https://docs.djangoproject.com/zh-hans/2.2/ref/django-admin/#django-admin-runserver">&lt;code>runserver&lt;/code>&lt;/a>&lt;/strong>&lt;/p>
-&lt;p>用于开发的服务器在需要的情况下会对每一次的访问请求重新载入一遍 Python 代码。所以你不需要为了让修改的代码生效而频繁的重新启动服务器。然而，一些动作，比如添加新文件，将不会触发自动重新加载，这时你得自己手动重启服务器。&lt;/p>&lt;/blockquote>
-&lt;p>然而有时候重新载入并不会生效（可能是 PyCharm 的问题？），这种时候就很烦..&lt;/p>
-&lt;p>数据库中的&lt;code>DateTimeField&lt;/code>字段存储的时间总是 UTC 时间，在&lt;code>settings.py&lt;/code>中设置：&lt;/p>
-&lt;pre tabindex="0">&lt;code>TIME_ZONE = &amp;#39;Asia/Shanghai&amp;#39;
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>大二下学期期末复习</title><link>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link><pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/ -&lt;h2 id="软件工程试卷"&gt;软件工程试卷&lt;/h2&gt;
+&lt;p&gt;来源： &lt;a href="https://tellyouwhat.cn/p/northwest-university-software-engineering-review-materials/"&gt;Harbor Zeng&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./bd61005egy1g0cx8lnllsj20rt112adk.jpg" alt="img"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./bd61005egy1g0cx8izobuj22eo37kb29.jpg" alt="img"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./bd61005egy1g0cx8p7mccj20rt112adg.jpg" alt="img"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./bd61005egy1g0cx8t4qtvj20rt11241p.jpg" alt="img"&gt;&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>软通实习</title><link>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</link><pubDate>Wed, 17 Jul 2019 15:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/ -&lt;h2 id="序"&gt;序&lt;/h2&gt;
+&lt;p&gt;二年级下学期期末，有一个两周的实习，学校给了我们三个选项，其中软通算是知名度最高的一家公司了。
+&lt;img src="./isoftstone.png" alt="“isoftstone”的图片搜索结果"&gt;&lt;/p&gt;
+&lt;p&gt;然而网上这家公司的风评很差，不过其他两家似乎更差，于是我们班大概四分之三的人都来了软通。&lt;/p&gt;
+&lt;h2 id="经历"&gt;经历&lt;/h2&gt;
+&lt;p&gt;实习第一天，上午讲的开发流程，团队角色，每日例行项目好似我们已经接手了一个实际项目，然而到了下午瞬间变成培训班，开始教我们配置环境。看下发的文档是用 Java Spring Boot 框架来开发。第二天又开始复习 Java。然后到了第三天，负责我们的老师（就叫他项目经理好了）突然说，你们想用什么技术就用什么技术吧。终于不用写 Java 了（逃&lt;/p&gt;
+&lt;p&gt;我们大概使用的是 Scrum 敏捷开发方法，最有特色的一点大概就是每日站会了。还有 Story 列表其实也挺不错的，只是没有贴在公告板上感觉失去了灵魂。&lt;/p&gt;
+&lt;p&gt;可能是时间短的原因，从一开始需求包括 Story 列表就已经确定了，我认为如果只是说做一个什么系统而不说具体需求会让大家的产品更有差异化，亮点也会更多。&lt;/p&gt;
+&lt;h2 id="技术栈"&gt;技术栈&lt;/h2&gt;
+&lt;p&gt;由于我很倾向 Python，加上青岛大学的开源 OJ 采用的就是 Django+Vue 前后端分离的开发模式，于是我便也想采用这个模式。&lt;/p&gt;
+&lt;p&gt;最终我们决定采用前后端完全分离，前后端之间使用 HTTP 协议通信。前端采用：HTML+CSS+JavaScript（JQuery+AJAX），后端采用：Django，数据库采用：PostgreSQL&lt;/p&gt;
+&lt;h2 id="版本管理"&gt;版本管理&lt;/h2&gt;
+&lt;p&gt;我有一些 Git 的知识，然而软通提供的版本管理工具是 SVN。用了一段时间后发现，两个工具没有本质的区别，最大的大概是 SVN 需要中心服务器，权限控制似乎也比较强大，所以像在公司内部比较好用，而 Git 分布式，分支创建极为方便，在开源社区中被广泛使用。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1563352303687.png" alt="1563352303687"&gt;&lt;/p&gt;
+&lt;p&gt;然而我们甚至没有用到分支这个功能，总体上还是没有利用好版本管理。&lt;/p&gt;
+&lt;h2 id="前端三剑客"&gt;前端：三剑客&lt;/h2&gt;
+&lt;p&gt;zpc 第一天就不知道在哪找了个模板网站，然后冲了十块钱下了个模板。接下来就开始改改改。&lt;/p&gt;
+&lt;h3 id="调试"&gt;调试&lt;/h3&gt;
+&lt;p&gt;一个问题是，后端的代码如何给前端调试。我们选择：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;后端首先使用 Django 的本地服务器，用 Postman 进行测试，测试通过后上传代码。&lt;/li&gt;
+&lt;li&gt;不定期部署至服务器上&lt;/li&gt;
+&lt;li&gt;前端从服务器调用接口调试&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;然而，在其他组答辩的时候，我们才知道有个东西叫 &lt;a href="http://mockjs.com/"&gt;mock&lt;/a&gt;，能够简化调试难度。&lt;/p&gt;
+&lt;h2 id="后端django"&gt;后端：Django&lt;/h2&gt;
+&lt;p&gt;很早就听说了 Python Web 一些有名的框架，后来又知道了青岛大学的开源 OJ 后端使用的就是 Django，所以很想尝试一下。曾经看过几节慕课，也看了一些官方文档（一开始是真的看不懂）。在做微信小程序的时候，我就想用 Django，奈何技术不够，放弃了。&lt;/p&gt;
+&lt;p&gt;实习前，我去找 zjb 两小时速成了一下 Django，发现 Django 虽然是 MTV（Model——Template——View）三级结构，但是前后端分离的话就没有模板了，同时我们用了 REST Framework，在函数名中直接声明要调用的方法，大大简化了开发。REST Framework 也提供了&lt;a href="https://q1mi.github.io/Django-REST-framework-documentation/"&gt;官方中文文档&lt;/a&gt;，不过感觉写得不是很好。&lt;/p&gt;
+&lt;p&gt;后端代码非常简单，我们先用&lt;code&gt;token = request.COOKIES.get(&amp;quot;token&amp;quot;)&lt;/code&gt;获取token，查询&lt;code&gt;user = User.objects.get(userToken=token)&lt;/code&gt;，若 token 无效则会抛出&lt;code&gt;User.DoesNotExist&lt;/code&gt;错误，查询操作之后调用一个序列化方法&lt;code&gt;users = serializers.serialize(&amp;quot;json&amp;quot;, allMessage, fields=(&amp;quot;userID&amp;quot;))&lt;/code&gt;，但是如果直接这样返回会有问题，所以需要把它转化成字典类型&lt;code&gt;rtn['data']=json.loads(users)&lt;/code&gt;，然后调用&lt;code&gt;JsonResponse&lt;/code&gt;返回。&lt;/p&gt;
+&lt;p&gt;Django 查询数据库返回的是一个 &lt;a href="https://docs.djangoproject.com/zh-hans/2.2/ref/models/querysets/"&gt;QuerySet&lt;/a&gt; 对象，我们能对它进行很多操作，但是其实我们都没用到..&lt;/p&gt;
+&lt;h3 id="cookies"&gt;Cookies&lt;/h3&gt;
+&lt;p&gt;我一开始以为 Cookies 是前端负责维护的，后来发现这只是浏览器的工作。所以实际上 Cookies 是后端维护的。在登陆时设置 Cookie，调用 API 时获取 Cookie，退出时删除 Cookie 即可。&lt;/p&gt;
+&lt;h3 id="测试"&gt;测试&lt;/h3&gt;
+&lt;p&gt;我们用了 Postman 模拟 HTTP 请求进行测试，很可惜的是没有用到 Django 的自动化测试。&lt;/p&gt;
+&lt;h3 id="几个坑"&gt;几个坑&lt;/h3&gt;
+&lt;p&gt;Django 的文档宣称：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;会自动重新加载的服务器 &lt;a href="https://docs.djangoproject.com/zh-hans/2.2/ref/django-admin/#django-admin-runserver"&gt;&lt;code&gt;runserver&lt;/code&gt;&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;用于开发的服务器在需要的情况下会对每一次的访问请求重新载入一遍 Python 代码。所以你不需要为了让修改的代码生效而频繁的重新启动服务器。然而，一些动作，比如添加新文件，将不会触发自动重新加载，这时你得自己手动重启服务器。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;然而有时候重新载入并不会生效（可能是 PyCharm 的问题？），这种时候就很烦..&lt;/p&gt;
+&lt;p&gt;数据库中的&lt;code&gt;DateTimeField&lt;/code&gt;字段存储的时间总是 UTC 时间，在&lt;code&gt;settings.py&lt;/code&gt;中设置：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;TIME_ZONE = &amp;#39;Asia/Shanghai&amp;#39;
 USE_TZ = False
-&lt;/code>&lt;/pre>&lt;p>这样返回的时间是正常的，虽然数据库里的时间还是 UTC 时间，不过不影响了。&lt;/p>
-&lt;h2 id="数据库postgresql">数据库：&lt;strong>PostgreSQL&lt;/strong>&lt;/h2>
-&lt;p>据说 PostgreSQL 和 MySQL 的区别是..&lt;/p>
-&lt;p>&lt;img src="./1563367521827.png" alt="1563367521827">&lt;/p>
-&lt;p>&lt;img src="./1563367537890.png" alt="1563367537890">&lt;/p>
-&lt;p>虽说 Django 官方支持 PostgreSQL，而且我们的数据库部署在服务器上，但是本地还是要一个中间件&lt;code>psycopg2 &lt;/code>，在 Windows 下安装无问题，在 Linux 下需要一个额外的包 &lt;code>libpq-dev&lt;/code>，而在 Mac 下需要先安装 PostgreSQL。这也是一个坑点。&lt;/p>
-&lt;p>图形化管理界面方面，我使用了 pgadmin，一开始我以为这是个客户端，还奇怪为什么它提供 Docker 镜像，下完才发现它是网页端。果断卸载然后 docker pull..&lt;/p>
-&lt;p>数据库由于我们的设计问题，改了一万次。&lt;/p>
-&lt;p>&lt;img src="./1563368286617.png" alt="1563368286617">&lt;/p>
-&lt;p>七次其实还是我们重置过一次数据库的结果，真实改动可能有十一二次吧。虽然 Django 提供了方便的 migrate 功能，但是这功能锅很多，能不改还是尽量不改。&lt;/p>
-&lt;ul>
-&lt;li>在自己设置主键然后又取消使用自动主键时，Django 会报没有默认值的错。？？？AutoField 你要什么默认值。网上也有同样的情况，应该是 Django 的 Bug。&lt;/li>
-&lt;li>在改某张表的时候一直碰到报错一个不存在的列不存在，这张表就似乎坏了。我们的解决方案是重建一张新的表2333&lt;/li>
-&lt;/ul>
-&lt;h2 id="接口">接口&lt;/h2>
-&lt;h3 id="文档">文档&lt;/h3>
-&lt;p>我们的接口文档直接写在 Story 列表后面。主要写明了接口地址，方法（GET，POST，PUT，DELETE，我是想 RESTful 的，可是其他人基本随缘了），请求字段，响应字段，以及相应的解释和示例。&lt;/p>
-&lt;h3 id="跨域">跨域&lt;/h3>
-&lt;p>前端调试接口的时候产生了跨域的问题。Cookie，Ajax 请求都会遭到浏览器&lt;a href="https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">同源策略&lt;/a>的限制。临时的解决方案是，在 Django 上装一个插件 &lt;a href="https://github.com/ottoyiu/django-cors-headers">&lt;code>django-cors-headers&lt;/code>&lt;/a>，并且修改&lt;code>settings.py&lt;/code>，在&lt;code>INSTALLED_APPS&lt;/code>中加入&lt;code>corsheaders&lt;/code>，在&lt;code>MIDDLEWARE&lt;/code>中加入&lt;code>corsheaders.middleware.CorsMiddleware&lt;/code>（位置尽量靠前），并设置字段：&lt;/p>
-&lt;pre tabindex="0">&lt;code>CORS_ORIGIN_ALLOW_ALL = True
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这样返回的时间是正常的，虽然数据库里的时间还是 UTC 时间，不过不影响了。&lt;/p&gt;
+&lt;h2 id="数据库postgresql"&gt;数据库：&lt;strong&gt;PostgreSQL&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;据说 PostgreSQL 和 MySQL 的区别是..&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1563367521827.png" alt="1563367521827"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1563367537890.png" alt="1563367537890"&gt;&lt;/p&gt;
+&lt;p&gt;虽说 Django 官方支持 PostgreSQL，而且我们的数据库部署在服务器上，但是本地还是要一个中间件&lt;code&gt;psycopg2 &lt;/code&gt;，在 Windows 下安装无问题，在 Linux 下需要一个额外的包 &lt;code&gt;libpq-dev&lt;/code&gt;，而在 Mac 下需要先安装 PostgreSQL。这也是一个坑点。&lt;/p&gt;
+&lt;p&gt;图形化管理界面方面，我使用了 pgadmin，一开始我以为这是个客户端，还奇怪为什么它提供 Docker 镜像，下完才发现它是网页端。果断卸载然后 docker pull..&lt;/p&gt;
+&lt;p&gt;数据库由于我们的设计问题，改了一万次。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1563368286617.png" alt="1563368286617"&gt;&lt;/p&gt;
+&lt;p&gt;七次其实还是我们重置过一次数据库的结果，真实改动可能有十一二次吧。虽然 Django 提供了方便的 migrate 功能，但是这功能锅很多，能不改还是尽量不改。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在自己设置主键然后又取消使用自动主键时，Django 会报没有默认值的错。？？？AutoField 你要什么默认值。网上也有同样的情况，应该是 Django 的 Bug。&lt;/li&gt;
+&lt;li&gt;在改某张表的时候一直碰到报错一个不存在的列不存在，这张表就似乎坏了。我们的解决方案是重建一张新的表2333&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="接口"&gt;接口&lt;/h2&gt;
+&lt;h3 id="文档"&gt;文档&lt;/h3&gt;
+&lt;p&gt;我们的接口文档直接写在 Story 列表后面。主要写明了接口地址，方法（GET，POST，PUT，DELETE，我是想 RESTful 的，可是其他人基本随缘了），请求字段，响应字段，以及相应的解释和示例。&lt;/p&gt;
+&lt;h3 id="跨域"&gt;跨域&lt;/h3&gt;
+&lt;p&gt;前端调试接口的时候产生了跨域的问题。Cookie，Ajax 请求都会遭到浏览器&lt;a href="https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html"&gt;同源策略&lt;/a&gt;的限制。临时的解决方案是，在 Django 上装一个插件 &lt;a href="https://github.com/ottoyiu/django-cors-headers"&gt;&lt;code&gt;django-cors-headers&lt;/code&gt;&lt;/a&gt;，并且修改&lt;code&gt;settings.py&lt;/code&gt;，在&lt;code&gt;INSTALLED_APPS&lt;/code&gt;中加入&lt;code&gt;corsheaders&lt;/code&gt;，在&lt;code&gt;MIDDLEWARE&lt;/code&gt;中加入&lt;code&gt;corsheaders.middleware.CorsMiddleware&lt;/code&gt;（位置尽量靠前），并设置字段：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-&lt;/code>&lt;/pre>&lt;p>而在前端每个 Ajax 请求中加上：&lt;/p>
-&lt;p>&lt;img src="./1563353270812.png" alt="1563353270812">&lt;/p>
-&lt;p>而在生产环境中由于同源，所以不存在跨域的问题。&lt;/p>
-&lt;p>然而，一个新的问题是，本地浏览器并不能够成功地存储 Cookie，当时的解决办法是，每改动一个页面就部署至服务器上进行调试，然而这个方法效率极低。后来我发现其实这只是 Chrome 浏览器的问题，其他浏览器则没有这个问题。&lt;/p>
-&lt;h2 id="部署">部署&lt;/h2>
-&lt;p>在开发中，采取的方案是前端静态网页由 Nginx 部署，而后端 Django 代码则使用 Django 自带的服务器部署，而显然，这绝不能用于生产环境。&lt;/p>
-&lt;blockquote>
-&lt;p>DO NOT USE THIS SERVER IN A PRODUCTION SETTING. It has not gone through security audits or performance tests.&lt;/p>&lt;/blockquote>
-&lt;p>（不过我还是用了，甚至都没关 DEBUG 选项）&lt;/p>
-&lt;p>因为 Django 服务器使用 &lt;code>python3 manage.py runserver&lt;/code>运行的， SSH 断开后进程就被中断了，所以需要让它能够后台运行，尝试了 nohup，子 shell 等方法后（都不好用），最终选择了 screen。主要命令有：&lt;/p>
-&lt;pre tabindex="0">&lt;code>screen -S [NAME] 创建一个新 shell
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;而在前端每个 Ajax 请求中加上：&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1563353270812.png" alt="1563353270812"&gt;&lt;/p&gt;
+&lt;p&gt;而在生产环境中由于同源，所以不存在跨域的问题。&lt;/p&gt;
+&lt;p&gt;然而，一个新的问题是，本地浏览器并不能够成功地存储 Cookie，当时的解决办法是，每改动一个页面就部署至服务器上进行调试，然而这个方法效率极低。后来我发现其实这只是 Chrome 浏览器的问题，其他浏览器则没有这个问题。&lt;/p&gt;
+&lt;h2 id="部署"&gt;部署&lt;/h2&gt;
+&lt;p&gt;在开发中，采取的方案是前端静态网页由 Nginx 部署，而后端 Django 代码则使用 Django 自带的服务器部署，而显然，这绝不能用于生产环境。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;DO NOT USE THIS SERVER IN A PRODUCTION SETTING. It has not gone through security audits or performance tests.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;（不过我还是用了，甚至都没关 DEBUG 选项）&lt;/p&gt;
+&lt;p&gt;因为 Django 服务器使用 &lt;code&gt;python3 manage.py runserver&lt;/code&gt;运行的， SSH 断开后进程就被中断了，所以需要让它能够后台运行，尝试了 nohup，子 shell 等方法后（都不好用），最终选择了 screen。主要命令有：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;screen -S [NAME] 创建一个新 shell
 screen -ls 查看后台 shell
 screen -r [ID] 进入某个 shell
 Ctrl+A,D 把当前 shell 切换至后台
-&lt;/code>&lt;/pre>&lt;p>Nginx 配置我就直接改默认配置了，路径在&lt;code>/etc/nginx/sites-enabled/default&lt;/code>下。除了静态页面外，还需配置后端请求转发：&lt;/p>
-&lt;pre tabindex="0">&lt;code>location /api {
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Nginx 配置我就直接改默认配置了，路径在&lt;code&gt;/etc/nginx/sites-enabled/default&lt;/code&gt;下。除了静态页面外，还需配置后端请求转发：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;location /api {
 proxy_pass http://127.0.0.1:8000;
 proxy_set_header X-Real-IP $remote_addr;
 proxy_set_header Host $http_host;
 client_max_body_size 200M;
 }
-&lt;/code>&lt;/pre>&lt;p>（这个配置我是抄青岛大学 OJ 的）&lt;/p>
-&lt;h3 id="https">HTTPS&lt;/h3>
-&lt;p>尝试把域名解析至阿里云的服务器，发现不管是 HTTP 还是 HTTPS 请求都会被拦截，并被劫持到一个备案页面。&lt;/p>
-&lt;p>&lt;img src="./1563512996274.png" alt="1563512996274">&lt;/p>
-&lt;p>于是换用 GCP，一切顺利。使用 Let&amp;rsquo;s Encrypt 的证书以及官方推荐的 &lt;a href="https://certbot.eff.org/">certbot&lt;/a> 工具。简单几步即可签发证书并自动配置 Nginx。&lt;/p>
-&lt;p>&lt;img src="./1563513130043.png" alt="1563513130043">&lt;/p>
-&lt;h2 id="参考资料">参考资料&lt;/h2>
-&lt;p>&lt;a href="https://blog.csdn.net/summer2day/article/details/81358815">前后端分离的django项目服务器跨域&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://harttle.land/2016/12/28/cors-with-cookie.html">CORS 跨域发送 Cookie&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/tutorials/Django_and_nginx.html">使用uWSGI和nginx来设置Django和你的web服务器&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://www.cnblogs.com/lhj588/archive/2011/10/27/2226976.html">django web Cookie 和 Sessions 应用&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://www.jianshu.com/p/15af33d2c2c4">从零开始建立单元测试-以Django项目为例&lt;/a>&lt;/p>
-&lt;p>&lt;a href="http://www.liujiangblog.com/course/django/129">查询操作&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://www.runoob.com/django/django-model.html">Django 模型&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://blog.csdn.net/zhu_free/article/details/48176779">django DateTimeField 时区问题解决&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>使用 Travis CI 自动部署 Hexo 博客</title><link>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</link><pubDate>Sun, 21 Apr 2019 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ -&lt;p>&lt;img src="./bg2017121901.png" alt="bg2017121901">&lt;/p>
-&lt;h2 id="缘由">缘由&lt;/h2>
-&lt;p>其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。&lt;/p>
-&lt;p>前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的&lt;code>ln -s&lt;/code>大法行不通了。&lt;/p>
-&lt;p>于是我想到了 CI。仔细一想其实也不复杂，无非是&lt;code>git push&lt;/code>， &lt;code>git pull&lt;/code>两下罢了。那么，Let&amp;rsquo;s do it!&lt;/p>
-&lt;h2 id="需求">需求&lt;/h2>
-&lt;p>我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。&lt;/p>
-&lt;ul>
-&lt;li>我更新博客之后，commit 然后 push 至 Github repo&lt;/li>
-&lt;li>CI 自动构建博客&lt;/li>
-&lt;li>CI 将构建完成的静态文件 push 至 Github repo&lt;/li>
-&lt;/ul>
-&lt;p>我原先使用的是&lt;code>hexo-deployer-git&lt;/code>插件，通过&lt;code>hexo g -d&lt;/code>部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。&lt;/p>
-&lt;h2 id="配置-github-repo">配置 Github Repo&lt;/h2>
-&lt;p>在这个 Repo 中需要两个分支：&lt;/p>
-&lt;ul>
-&lt;li>master 用于存放构建完成的静态文件&lt;/li>
-&lt;li>source 用于存放 Hexo 生成的博客源文件&lt;/li>
-&lt;/ul>
-&lt;p>对 Hexo 文件夹的操作如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code>git init
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;（这个配置我是抄青岛大学 OJ 的）&lt;/p&gt;
+&lt;h3 id="https"&gt;HTTPS&lt;/h3&gt;
+&lt;p&gt;尝试把域名解析至阿里云的服务器，发现不管是 HTTP 还是 HTTPS 请求都会被拦截，并被劫持到一个备案页面。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1563512996274.png" alt="1563512996274"&gt;&lt;/p&gt;
+&lt;p&gt;于是换用 GCP，一切顺利。使用 Let&amp;rsquo;s Encrypt 的证书以及官方推荐的 &lt;a href="https://certbot.eff.org/"&gt;certbot&lt;/a&gt; 工具。简单几步即可签发证书并自动配置 Nginx。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1563513130043.png" alt="1563513130043"&gt;&lt;/p&gt;
+&lt;h2 id="参考资料"&gt;参考资料&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/summer2day/article/details/81358815"&gt;前后端分离的django项目服务器跨域&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://harttle.land/2016/12/28/cors-with-cookie.html"&gt;CORS 跨域发送 Cookie&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/tutorials/Django_and_nginx.html"&gt;使用uWSGI和nginx来设置Django和你的web服务器&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.cnblogs.com/lhj588/archive/2011/10/27/2226976.html"&gt;django web Cookie 和 Sessions 应用&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.jianshu.com/p/15af33d2c2c4"&gt;从零开始建立单元测试-以Django项目为例&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.liujiangblog.com/course/django/129"&gt;查询操作&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.runoob.com/django/django-model.html"&gt;Django 模型&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/zhu_free/article/details/48176779"&gt;django DateTimeField 时区问题解决&lt;/a&gt;&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/isoftstone-practice/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>使用 Travis CI 自动部署 Hexo 博客</title><link>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</link><pubDate>Sun, 21 Apr 2019 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ -&lt;p&gt;&lt;img src="./bg2017121901.png" alt="bg2017121901"&gt;&lt;/p&gt;
+&lt;h2 id="缘由"&gt;缘由&lt;/h2&gt;
+&lt;p&gt;其实我想用 CI 来自动化部署博客很久了，只是因为懒，CI 又有很多新知识，担心自己的知识储备不够，于是一直咕咕咕。&lt;/p&gt;
+&lt;p&gt;前段时间装了 Arch 之后，我很想在两个系统之间同步写作进度，但是 Windows 的休眠和快速启动会导致在 Arch 下我只能以只读方式挂载 Windows 分区（我日常关机用休眠，所以拒绝关休眠）。原来设想的&lt;code&gt;ln -s&lt;/code&gt;大法行不通了。&lt;/p&gt;
+&lt;p&gt;于是我想到了 CI。仔细一想其实也不复杂，无非是&lt;code&gt;git push&lt;/code&gt;， &lt;code&gt;git pull&lt;/code&gt;两下罢了。那么，Let&amp;rsquo;s do it!&lt;/p&gt;
+&lt;h2 id="需求"&gt;需求&lt;/h2&gt;
+&lt;p&gt;我原来设想是博客同时部署在 Github Pages 和我的 VPS 上，而由于某些不可抗力~~（懒）~~后者并没有实现。所以需求就变得十分简单，commit 博客内容，CI 自动构建然后部署。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;我更新博客之后，commit 然后 push 至 Github repo&lt;/li&gt;
+&lt;li&gt;CI 自动构建博客&lt;/li&gt;
+&lt;li&gt;CI 将构建完成的静态文件 push 至 Github repo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我原先使用的是&lt;code&gt;hexo-deployer-git&lt;/code&gt;插件，通过&lt;code&gt;hexo g -d&lt;/code&gt;部署，现在这个插件可以丢弃了。同时我的 Hexo 的很多配置都被我瞎改了，同时还有许多奇奇怪怪的模块可能需要清理（不如重新来一遍（大雾）），这些先不谈。&lt;/p&gt;
+&lt;h2 id="配置-github-repo"&gt;配置 Github Repo&lt;/h2&gt;
+&lt;p&gt;在这个 Repo 中需要两个分支：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;master 用于存放构建完成的静态文件&lt;/li&gt;
+&lt;li&gt;source 用于存放 Hexo 生成的博客源文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对 Hexo 文件夹的操作如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;git init
 git remote add origin git@github.com:cjc7373/cjc7373.github.io.git
 git checkout -b source
 git add .
 git commit -m &amp;#34;To use CI to automated deploy&amp;#34;
 git push origin source:source
-&lt;/code>&lt;/pre>&lt;p>本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带&lt;code>.gitignore&lt;/code>文件，所以实际大小并没有多少。&lt;/p>
-&lt;p>&lt;img src="./1555835090941.png" alt="1555835090941">&lt;/p>
-&lt;p>然后在 Github 上将主分支切换为&lt;code>source&lt;/code>分支。&lt;/p>
-&lt;h2 id="配置-travis-ci">配置 Travis CI&lt;/h2>
-&lt;p>CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key，后者似乎有些麻烦，我选择了前者。当前需求应该只需要 repo 权限，然后在 Travis CI 的 Environment Variables 中加入这个 Token，注意不要勾选 Display value in build log。&lt;/p>
-&lt;p>然后就是编写&lt;code>.travis.yml&lt;/code>了。 &lt;del>正当我准备抄大佬们的配置的时候，忽然看到 Travis CI 官方提供了&lt;a href="https://docs.travis-ci.com/user/deployment/pages/">轮子&lt;/a>，那就用吧QAQ（其实也没简单多少）&lt;/del>，然后翻车了。&lt;/p>
-&lt;p>&lt;img src="./1555837683039.png" alt="1555837683039">&lt;/p>
-&lt;p>看了下文档，我也没搞懂每个字段的意思。所以还是自己来吧。&lt;/p>
-&lt;p>为了在 commit 记录中显示更新日期，我把 push 部分单独写成了 sh脚本。&lt;/p>
-&lt;p>&lt;code>.travis.yml&lt;/code>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>language: node_js
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带&lt;code&gt;.gitignore&lt;/code&gt;文件，所以实际大小并没有多少。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1555835090941.png" alt="1555835090941"&gt;&lt;/p&gt;
+&lt;p&gt;然后在 Github 上将主分支切换为&lt;code&gt;source&lt;/code&gt;分支。&lt;/p&gt;
+&lt;h2 id="配置-travis-ci"&gt;配置 Travis CI&lt;/h2&gt;
+&lt;p&gt;CI 访问仓库需要权限，可选择 Access Token 或者单独的 Deploy key，后者似乎有些麻烦，我选择了前者。当前需求应该只需要 repo 权限，然后在 Travis CI 的 Environment Variables 中加入这个 Token，注意不要勾选 Display value in build log。&lt;/p&gt;
+&lt;p&gt;然后就是编写&lt;code&gt;.travis.yml&lt;/code&gt;了。 &lt;del&gt;正当我准备抄大佬们的配置的时候，忽然看到 Travis CI 官方提供了&lt;a href="https://docs.travis-ci.com/user/deployment/pages/"&gt;轮子&lt;/a&gt;，那就用吧QAQ（其实也没简单多少）&lt;/del&gt;，然后翻车了。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1555837683039.png" alt="1555837683039"&gt;&lt;/p&gt;
+&lt;p&gt;看了下文档，我也没搞懂每个字段的意思。所以还是自己来吧。&lt;/p&gt;
+&lt;p&gt;为了在 commit 记录中显示更新日期，我把 push 部分单独写成了 sh脚本。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.travis.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;language: node_js
 node_js: stable
 # 只监听 source 分支的改动
 branches:
@@ -152,8 +158,8 @@ script:
 after_script:
 - chmod +x ./deploy.sh # 添加可执行权限
 - ./deploy.sh
-&lt;/code>&lt;/pre>&lt;p>&lt;code>deploy.sh&lt;/code>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>#!/bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;deploy.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;#!/bin/bash
 set -ev
 export TZ=&amp;#39;Asia/Shanghai&amp;#39;
 git config --global user.name &amp;#34;cjc7373&amp;#34;
@@ -168,395 +174,395 @@ git add .
 git commit -m &amp;#34;Site updated: `date +&amp;#34;%Y-%m-%d %H:%M:%S&amp;#34;`&amp;#34;
 # 我也不知道 token 怎么用。。抄大佬的代码
 git push &amp;#34;https://${token}@github.com/cjc7373/cjc7373.github.io.git&amp;#34; master:master --quiet
-&lt;/code>&lt;/pre>&lt;p>一开始忘了给&lt;code>deploy.sh&lt;/code>可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。&lt;/p>
-&lt;p>&lt;img src="./1555840082905.png" alt="1555840082905">&lt;/p>
-&lt;p>（看着都是成功其实都是失败。。）&lt;/p>
-&lt;p>同时本地配合一下批处理，真正一键发布（滑稽&lt;/p>
-&lt;pre tabindex="0">&lt;code>cd C:\Users\niuch\Documents\GitHub\blog\
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;一开始忘了给&lt;code&gt;deploy.sh&lt;/code&gt;可执行权限，CI 啥都没报错就退出了。。后来 token 又忘了写。。反正出了好多锅。。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1555840082905.png" alt="1555840082905"&gt;&lt;/p&gt;
+&lt;p&gt;（看着都是成功其实都是失败。。）&lt;/p&gt;
+&lt;p&gt;同时本地配合一下批处理，真正一键发布（滑稽&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;cd C:\Users\niuch\Documents\GitHub\blog\
 git add .
 git commit
 git push
 pause
-&lt;/code>&lt;/pre>&lt;h2 id="后记">后记&lt;/h2>
-&lt;p>历经两个多小时，终于把 CI 弄好了。虽然对 CI 还是一知半解，不过总算开了个头，也基本实现了需求。&lt;/p>
-&lt;p>Travis CI 官方的文档很全，但是以我的英文水平看得很吃力（懒得看），中文资料的质量又参差不齐。所以还是要锻炼自己的英语水平啊。&lt;/p>
-&lt;h2 id="参考资料">参考资料&lt;/h2>
-&lt;p>&lt;a href="https://docs.travis-ci.com">https://docs.travis-ci.com&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html">https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/">https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ -&lt;blockquote>
-&lt;p>Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p>&lt;/blockquote>
-&lt;h2 id="前言">前言&lt;/h2>
-&lt;p>以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p>
-&lt;p>这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p>
-&lt;p>&lt;img src="./1554536417517.png" alt="1554536417517">&lt;/p>
-&lt;p>下面列出笔记本的配置，以供参考。&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>部件&lt;/th>
-&lt;th>型号&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>CPU&lt;/td>
-&lt;td>Intel i5-7300HQ&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>内存&lt;/td>
-&lt;td>16G&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>硬盘&lt;/td>
-&lt;td>128G NVME SSD + 1T 机械&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>显卡&lt;/td>
-&lt;td>GeForce GTX 1050 Ti + Intel HD Graphics 630&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>无线网卡&lt;/td>
-&lt;td>Reltek RTL8822BE&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>触摸板&lt;/td>
-&lt;td>Synaptics&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h2 id="为什么选择-arch">为什么选择 Arch&lt;/h2>
-&lt;p>滚动更新天下第一！（误&lt;/p>
-&lt;p>听说社区非常友好（然而我还没感受到&lt;/p>
-&lt;h2 id="基本安装">基本安装&lt;/h2>
-&lt;p>安装参考了 &lt;a href="https://www.viseator.com/2017/05/17/arch_install/">以官方Wiki的方式安装ArchLinux&lt;/a> 和 官方Wiki的 &lt;a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Installation Guide&lt;/a>。在未安装图形界面前，基本一切顺利。&lt;/p>
-&lt;p>题外话：说起无线网卡，之前装 Ubuntu 的时候，没有驱动，需要手动安装。不过内核从 4.x 某个版本之后，加入了对我这个网卡的驱动，现在无需配置即可使用了。&lt;/p>
-&lt;p>由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。&lt;/p>
-&lt;p>在配置&lt;code>sudo&lt;/code>时，使用&lt;code>visudo&lt;/code>命令编辑配置文件，然而这个 vi编辑器有毒，许多操作都无法执行，感觉是个 bug。（Update：原来 vi 和 vim 是有挺大的区别的&amp;hellip;）&lt;/p>
-&lt;h2 id="图形界面">图形界面&lt;/h2>
-&lt;p>&lt;del>众所周知&lt;/del>，Linux社区似乎对于 Nvidia+Intel 双显卡不怎么友好，在我安装过的数个发行版中（包括 Ubuntu, Debian, Manjaro, Deepin），基本都出现了启动黑屏/在Logo处冻结的情况，本次安装 Arch Linux，同样遇到了此问题。&lt;/p>
-&lt;p>由于我准备使用双系统，所以并不准备安装 Nvidia 驱动，仅安装了 Intel 的显卡驱动。&lt;/p>
-&lt;p>在装完 Xorg，KDE，sddm 之后，我尝试启动图形界面，成功卡在了 KDE 加载的地方。在随后的尝试中，我发现连 &lt;code>screenfetch&lt;/code>, &lt;code>lspci&lt;/code> 这样的命令都会导致系统/虚拟控制台（tty）无响应。一开始觉得是内核的问题，因为 Arch 默认安装了 5.0 内核，遂降级至 4.20，问题依旧。&lt;/p>
-&lt;p>搜索发现问题可能与N卡的开源驱动 &lt;code>Nouveau&lt;/code>有关，（我寻思我也没装nouveau啊），于是创建 &lt;code>/etc/modprobe.d/blacklist.conf&lt;/code>，并在文件中写入&lt;code>blacklist nouveau&lt;/code>，执行 &lt;code>update-initramfs -u&lt;/code>（大概是更新内核配置？）。顺便安装&lt;code>bbswitch&lt;/code>把N卡给禁了，具体配置按照&lt;a href="https://coolrc.me/2016/11/28/28115748/">这篇文章&lt;/a>。&lt;/p>
-&lt;p>重启问题解决，于是又把内核升到 5.0.2，重启卡在命令行界面（甚至没有见到 sddm）。于是进 live cd，回滚 4.20，重启问题解决。&lt;/p>
-&lt;p>话说以后可以试试 Wayland？&lt;/p>
-&lt;h3 id="问题解决">问题解决&lt;/h3>
-&lt;p>发现开机时有一行报错，&lt;code>Failed to load Linux Kernel Modules&lt;/code>，用&lt;code>systemctl status systemd-modules-load.service&lt;/code>查看发现是&lt;code>bbswitch&lt;/code>加载失败了。所有东西似乎有着千丝万缕的联系&amp;hellip;&lt;/p>
-&lt;p>对比发现 5.x 内核启动时并没有报错，于是删除 &lt;code>bbswtich&lt;/code>，再升级 5.0 内核，成功启动&lt;code>sddm&lt;/code>，问题解决（终于可以愉快地滚系统啦）。&lt;/p>
-&lt;p>&lt;img src="./1554535852814.png" alt="1554535852814">&lt;/p>
-&lt;p>原因可能是 &lt;code>bbswitch&lt;/code> 配置不当，具体原因不明。此时开始仍然会报&lt;code>Failed to load Linux Kernel Modules&lt;/code>，需要手动将&lt;code>/etc/modprobe.d/bbswitch.conf&lt;/code>及&lt;code>/etc/modprobe.d/&lt;/code>中某个文件中（我忘了）的&lt;code>bbswitch&lt;/code>删除。&lt;/p>
-&lt;h2 id="必要软件">必要软件&lt;/h2>
-&lt;ul>
-&lt;li>Arch Linux CN 源，包含了许多 AUR 中的软件。第一次加入源的时候不知道要安装 keyring，导致安装包时卡在了 GPG 签名校验那一步。我还寻思为什么 Arch 的签名老出锅。。（BTW：为什么需要 keyring？）&lt;/li>
-&lt;li>Shadowsocks，装完命令行版的 Shadowsocks，根据 Wiki 描述，应用 &lt;code>ss-local&lt;/code>启动，然而&lt;code>commend not found&lt;/code>，未能解决，于是又装了 Shadowsocks-qt5。&lt;/li>
-&lt;li>&lt;del>Chrome，ArchCN 源中有（话说什么时候试试 Chromium）。&lt;/del> Chrome 不支持硬件加速，现已更换 Chromium。同步等功能一切正常。&lt;/li>
-&lt;li>字体，不安装中文字体许多中文字是框框（然而为什么不是所有呢），我选择了&lt;code>wqy-microhei&lt;/code>，然而系统自带的英文字体也很丑。按照&lt;a href="https://wiki.archlinux.org/index.php/Microsoft_fonts_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">官方Wiki&lt;/a>把Windows中的字体复制了过来，然而发现英文字体的间距变得非常小。中文字体看着挺舒服（应该是雅黑？）。&lt;/li>
-&lt;li>中文输入法，装了谷歌拼音发现打出来的字是繁体，还找不到相关选项（Update：把简繁转换关了就好了）。现在在用 Rime。&lt;/li>
-&lt;li>印象笔记，在 Linux 有开源的客户端 Tusk。然而 Tusk 不支持 Markdown&amp;hellip;.&lt;/li>
-&lt;li>Tim/QQ，ArchCN 源包含。本质上是魔改过配置的 Wine 容器。&lt;/li>
-&lt;/ul>
-&lt;h2 id="省电">省电&lt;/h2>
-&lt;p>在用 Linux 之前，我一直认为 Linux 会比 Windows 更加省电，没想到刚好相反。所以为了省电，我不得不做许多额外的配置。&lt;/p>
-&lt;p>首先，耗电的大头还是在 CPU，我们请出&lt;code>cpupower&lt;/code>，启用&lt;code>powersave&lt;/code>调度，风扇安静了，掉电也少了不少。&lt;/p>
-&lt;p>除了 CPU，其他部件也耗电呐。好在有个包能够统一地管理电源消耗，那就是&lt;code>laptop-mode-tools&lt;/code>，然而这玩意似乎用处不大。。&lt;/p>
-&lt;h2 id="折腾">折腾&lt;/h2>
-&lt;h3 id="瞎改配置">瞎改配置&lt;/h3>
-&lt;p>Linux Mode Setting 可以提前启动？虽然不知道有什么用。&lt;/p>
-&lt;p>编辑&lt;code>/etc/mkinitcpio.conf&lt;/code>，修改&lt;code>MODULES&lt;/code>一行，改为&lt;code>MODULES=(i915)&lt;/code>（Intel 显卡）。&lt;/p>
-&lt;h3 id="目前遇到的问题">目前遇到的问题&lt;/h3>
-&lt;ul>
-&lt;li>为什么任务栏有两个音量图标？（一个是 Audio Volume，一个是 KMix，然而这不都是 KDE 自带的么..）&lt;/li>
-&lt;li>触摸板无法使用手势&lt;/li>
-&lt;li>还是想禁用独显，参考资料&lt;a href="https://xuchen.wang/archives/archbbswitch.html">https://xuchen.wang/archives/archbbswitch.html&lt;/a>&lt;/li>
-&lt;li>Tim 字体发虚，&lt;a href="https://github.com/countstarlight/deepin-wine-tim-arch">官方仓库&lt;/a>似乎给出了解决方案。&lt;/li>
-&lt;li>风扇调度误我，只要CPU占用率高个那么几秒，风扇就像起飞了一样&lt;/li>
-&lt;li>Typora 打开时不能恢复上次打开的文件夹&lt;/li>
-&lt;/ul>
-&lt;h2 id="实用技巧">实用技巧&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>显示桌面：在 Panel Option 中添加 Show Desktop 小工具，然后设置快捷键为 Win+D。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Clipboard 能够生成二维码。（方便多设备发送网址什么的？然而我有 Chrome 同步了..）&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>开机时打开 Num Lock：根据 Wiki，KDE 自带了这个选项，在&lt;code>Hardware/Input Devices/Keyboard&lt;/code>中。不过我转念一想，不是先启动&lt;code>sddm&lt;/code>么？试了一下果然在&lt;code>sddm&lt;/code>界面小键盘是关着的。于是在&lt;code>/etc/sddm.conf&lt;/code>加入&lt;/p>
-&lt;pre tabindex="0">&lt;code>[General]
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="后记"&gt;后记&lt;/h2&gt;
+&lt;p&gt;历经两个多小时，终于把 CI 弄好了。虽然对 CI 还是一知半解，不过总算开了个头，也基本实现了需求。&lt;/p&gt;
+&lt;p&gt;Travis CI 官方的文档很全，但是以我的英文水平看得很吃力（懒得看），中文资料的质量又参差不齐。所以还是要锻炼自己的英语水平啊。&lt;/p&gt;
+&lt;h2 id="参考资料"&gt;参考资料&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://docs.travis-ci.com"&gt;https://docs.travis-ci.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html"&gt;https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/"&gt;https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/"&gt;https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a&gt;&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ -&lt;blockquote&gt;
+&lt;p&gt;Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id="前言"&gt;前言&lt;/h2&gt;
+&lt;p&gt;以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p&gt;
+&lt;p&gt;这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1554536417517.png" alt="1554536417517"&gt;&lt;/p&gt;
+&lt;p&gt;下面列出笔记本的配置，以供参考。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;部件&lt;/th&gt;
+&lt;th&gt;型号&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;CPU&lt;/td&gt;
+&lt;td&gt;Intel i5-7300HQ&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;内存&lt;/td&gt;
+&lt;td&gt;16G&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;硬盘&lt;/td&gt;
+&lt;td&gt;128G NVME SSD + 1T 机械&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;显卡&lt;/td&gt;
+&lt;td&gt;GeForce GTX 1050 Ti + Intel HD Graphics 630&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;无线网卡&lt;/td&gt;
+&lt;td&gt;Reltek RTL8822BE&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;触摸板&lt;/td&gt;
+&lt;td&gt;Synaptics&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="为什么选择-arch"&gt;为什么选择 Arch&lt;/h2&gt;
+&lt;p&gt;滚动更新天下第一！（误&lt;/p&gt;
+&lt;p&gt;听说社区非常友好（然而我还没感受到&lt;/p&gt;
+&lt;h2 id="基本安装"&gt;基本安装&lt;/h2&gt;
+&lt;p&gt;安装参考了 &lt;a href="https://www.viseator.com/2017/05/17/arch_install/"&gt;以官方Wiki的方式安装ArchLinux&lt;/a&gt; 和 官方Wiki的 &lt;a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)"&gt;Installation Guide&lt;/a&gt;。在未安装图形界面前，基本一切顺利。&lt;/p&gt;
+&lt;p&gt;题外话：说起无线网卡，之前装 Ubuntu 的时候，没有驱动，需要手动安装。不过内核从 4.x 某个版本之后，加入了对我这个网卡的驱动，现在无需配置即可使用了。&lt;/p&gt;
+&lt;p&gt;由于固态的空间不足，故没有分配交换文件（感觉也用不掉 16G 内存）。&lt;/p&gt;
+&lt;p&gt;在配置&lt;code&gt;sudo&lt;/code&gt;时，使用&lt;code&gt;visudo&lt;/code&gt;命令编辑配置文件，然而这个 vi编辑器有毒，许多操作都无法执行，感觉是个 bug。（Update：原来 vi 和 vim 是有挺大的区别的&amp;hellip;）&lt;/p&gt;
+&lt;h2 id="图形界面"&gt;图形界面&lt;/h2&gt;
+&lt;p&gt;&lt;del&gt;众所周知&lt;/del&gt;，Linux社区似乎对于 Nvidia+Intel 双显卡不怎么友好，在我安装过的数个发行版中（包括 Ubuntu, Debian, Manjaro, Deepin），基本都出现了启动黑屏/在Logo处冻结的情况，本次安装 Arch Linux，同样遇到了此问题。&lt;/p&gt;
+&lt;p&gt;由于我准备使用双系统，所以并不准备安装 Nvidia 驱动，仅安装了 Intel 的显卡驱动。&lt;/p&gt;
+&lt;p&gt;在装完 Xorg，KDE，sddm 之后，我尝试启动图形界面，成功卡在了 KDE 加载的地方。在随后的尝试中，我发现连 &lt;code&gt;screenfetch&lt;/code&gt;, &lt;code&gt;lspci&lt;/code&gt; 这样的命令都会导致系统/虚拟控制台（tty）无响应。一开始觉得是内核的问题，因为 Arch 默认安装了 5.0 内核，遂降级至 4.20，问题依旧。&lt;/p&gt;
+&lt;p&gt;搜索发现问题可能与N卡的开源驱动 &lt;code&gt;Nouveau&lt;/code&gt;有关，（我寻思我也没装nouveau啊），于是创建 &lt;code&gt;/etc/modprobe.d/blacklist.conf&lt;/code&gt;，并在文件中写入&lt;code&gt;blacklist nouveau&lt;/code&gt;，执行 &lt;code&gt;update-initramfs -u&lt;/code&gt;（大概是更新内核配置？）。顺便安装&lt;code&gt;bbswitch&lt;/code&gt;把N卡给禁了，具体配置按照&lt;a href="https://coolrc.me/2016/11/28/28115748/"&gt;这篇文章&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;重启问题解决，于是又把内核升到 5.0.2，重启卡在命令行界面（甚至没有见到 sddm）。于是进 live cd，回滚 4.20，重启问题解决。&lt;/p&gt;
+&lt;p&gt;话说以后可以试试 Wayland？&lt;/p&gt;
+&lt;h3 id="问题解决"&gt;问题解决&lt;/h3&gt;
+&lt;p&gt;发现开机时有一行报错，&lt;code&gt;Failed to load Linux Kernel Modules&lt;/code&gt;，用&lt;code&gt;systemctl status systemd-modules-load.service&lt;/code&gt;查看发现是&lt;code&gt;bbswitch&lt;/code&gt;加载失败了。所有东西似乎有着千丝万缕的联系&amp;hellip;&lt;/p&gt;
+&lt;p&gt;对比发现 5.x 内核启动时并没有报错，于是删除 &lt;code&gt;bbswtich&lt;/code&gt;，再升级 5.0 内核，成功启动&lt;code&gt;sddm&lt;/code&gt;，问题解决（终于可以愉快地滚系统啦）。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1554535852814.png" alt="1554535852814"&gt;&lt;/p&gt;
+&lt;p&gt;原因可能是 &lt;code&gt;bbswitch&lt;/code&gt; 配置不当，具体原因不明。此时开始仍然会报&lt;code&gt;Failed to load Linux Kernel Modules&lt;/code&gt;，需要手动将&lt;code&gt;/etc/modprobe.d/bbswitch.conf&lt;/code&gt;及&lt;code&gt;/etc/modprobe.d/&lt;/code&gt;中某个文件中（我忘了）的&lt;code&gt;bbswitch&lt;/code&gt;删除。&lt;/p&gt;
+&lt;h2 id="必要软件"&gt;必要软件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Arch Linux CN 源，包含了许多 AUR 中的软件。第一次加入源的时候不知道要安装 keyring，导致安装包时卡在了 GPG 签名校验那一步。我还寻思为什么 Arch 的签名老出锅。。（BTW：为什么需要 keyring？）&lt;/li&gt;
+&lt;li&gt;Shadowsocks，装完命令行版的 Shadowsocks，根据 Wiki 描述，应用 &lt;code&gt;ss-local&lt;/code&gt;启动，然而&lt;code&gt;commend not found&lt;/code&gt;，未能解决，于是又装了 Shadowsocks-qt5。&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;Chrome，ArchCN 源中有（话说什么时候试试 Chromium）。&lt;/del&gt; Chrome 不支持硬件加速，现已更换 Chromium。同步等功能一切正常。&lt;/li&gt;
+&lt;li&gt;字体，不安装中文字体许多中文字是框框（然而为什么不是所有呢），我选择了&lt;code&gt;wqy-microhei&lt;/code&gt;，然而系统自带的英文字体也很丑。按照&lt;a href="https://wiki.archlinux.org/index.php/Microsoft_fonts_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)"&gt;官方Wiki&lt;/a&gt;把Windows中的字体复制了过来，然而发现英文字体的间距变得非常小。中文字体看着挺舒服（应该是雅黑？）。&lt;/li&gt;
+&lt;li&gt;中文输入法，装了谷歌拼音发现打出来的字是繁体，还找不到相关选项（Update：把简繁转换关了就好了）。现在在用 Rime。&lt;/li&gt;
+&lt;li&gt;印象笔记，在 Linux 有开源的客户端 Tusk。然而 Tusk 不支持 Markdown&amp;hellip;.&lt;/li&gt;
+&lt;li&gt;Tim/QQ，ArchCN 源包含。本质上是魔改过配置的 Wine 容器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="省电"&gt;省电&lt;/h2&gt;
+&lt;p&gt;在用 Linux 之前，我一直认为 Linux 会比 Windows 更加省电，没想到刚好相反。所以为了省电，我不得不做许多额外的配置。&lt;/p&gt;
+&lt;p&gt;首先，耗电的大头还是在 CPU，我们请出&lt;code&gt;cpupower&lt;/code&gt;，启用&lt;code&gt;powersave&lt;/code&gt;调度，风扇安静了，掉电也少了不少。&lt;/p&gt;
+&lt;p&gt;除了 CPU，其他部件也耗电呐。好在有个包能够统一地管理电源消耗，那就是&lt;code&gt;laptop-mode-tools&lt;/code&gt;，然而这玩意似乎用处不大。。&lt;/p&gt;
+&lt;h2 id="折腾"&gt;折腾&lt;/h2&gt;
+&lt;h3 id="瞎改配置"&gt;瞎改配置&lt;/h3&gt;
+&lt;p&gt;Linux Mode Setting 可以提前启动？虽然不知道有什么用。&lt;/p&gt;
+&lt;p&gt;编辑&lt;code&gt;/etc/mkinitcpio.conf&lt;/code&gt;，修改&lt;code&gt;MODULES&lt;/code&gt;一行，改为&lt;code&gt;MODULES=(i915)&lt;/code&gt;（Intel 显卡）。&lt;/p&gt;
+&lt;h3 id="目前遇到的问题"&gt;目前遇到的问题&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;为什么任务栏有两个音量图标？（一个是 Audio Volume，一个是 KMix，然而这不都是 KDE 自带的么..）&lt;/li&gt;
+&lt;li&gt;触摸板无法使用手势&lt;/li&gt;
+&lt;li&gt;还是想禁用独显，参考资料&lt;a href="https://xuchen.wang/archives/archbbswitch.html"&gt;https://xuchen.wang/archives/archbbswitch.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Tim 字体发虚，&lt;a href="https://github.com/countstarlight/deepin-wine-tim-arch"&gt;官方仓库&lt;/a&gt;似乎给出了解决方案。&lt;/li&gt;
+&lt;li&gt;风扇调度误我，只要CPU占用率高个那么几秒，风扇就像起飞了一样&lt;/li&gt;
+&lt;li&gt;Typora 打开时不能恢复上次打开的文件夹&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="实用技巧"&gt;实用技巧&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;显示桌面：在 Panel Option 中添加 Show Desktop 小工具，然后设置快捷键为 Win+D。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Clipboard 能够生成二维码。（方便多设备发送网址什么的？然而我有 Chrome 同步了..）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;开机时打开 Num Lock：根据 Wiki，KDE 自带了这个选项，在&lt;code&gt;Hardware/Input Devices/Keyboard&lt;/code&gt;中。不过我转念一想，不是先启动&lt;code&gt;sddm&lt;/code&gt;么？试了一下果然在&lt;code&gt;sddm&lt;/code&gt;界面小键盘是关着的。于是在&lt;code&gt;/etc/sddm.conf&lt;/code&gt;加入&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[General]
 Numlock=on
-&lt;/code>&lt;/pre>&lt;/li>
-&lt;li>
-&lt;p>pacman 能够在升级前对比版本信息，对于我这种强迫症非常有用。&lt;/p>
-&lt;p>&lt;img src="./1555419677545.png" alt="1555419677545">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>修改 &lt;code>/etc/fstab&lt;/code>，加入以下内容，使得开机时能够自动以只读模式挂载 Windows 分区。&lt;/p>
-&lt;p>&lt;img src="./1556519535880.png" alt="1556519535880">&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>日志相关。由于&lt;code>systemd&lt;/code>这个神奇的存在，似乎所有日志都可以通过&lt;code>systemd&lt;/code>带的&lt;code>journalctl&lt;/code>查看。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>查看启动时&lt;code>tty1&lt;/code>的滚过去的那一大堆日志：&lt;code>journalctl /usr/lib/systemd/systemd -b&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>查看加载失败的 unit：&lt;code>systemctl --failed&lt;/code>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>查看某个 unit 的日志：&lt;code>journalctl -u nginx.service --since today&lt;/code>&lt;/p>
-&lt;p>（另外&lt;code>systemctl status&lt;/code>也能显示最新的大概十行日志）&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>增强 Bash 的自动补全：&lt;code>pacman -S bash-completion&lt;/code>，重启终端即可。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="trouble-shooting">Trouble Shooting&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>今天打开tusk发现闪退。。用终端运行报&lt;code>tusk: error while loading shared libraries: libnode.so: cannot open shared object file: No such file or directory&lt;/code>，我干什么了我？我啥都没干啊。。重新安装未解决问题。重启同样未解决。&lt;/p>
-&lt;p>于是 Google，StackOverflow 上有一个帖子建议我先找找有没有这个库。&lt;/p>
-&lt;p>&lt;img src="./1555419245819.png" alt="1555419245819">&lt;/p>
-&lt;p>发现是有的，ls 看下。&lt;/p>
-&lt;p>&lt;img src="./1555419316125.png" alt="1555419316125">&lt;/p>
-&lt;p>然而链接到了另一个文件，一看，果然那个文件没了。。（推测和包更新了有关？）但是 Typora 有这个库呀，于是尝试链接到 Typora 带的那个库，然后问题解决了。。。我被我这波操作惊呆了。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>觉得字体不好看，然后似乎改崩了&amp;hellip;目前把 Windows 的字体扔了，重新安装的字体列表有：&lt;/p>
-&lt;ul>
-&lt;li>wqy-zenhei&lt;/li>
-&lt;li>wqy-microhei&lt;/li>
-&lt;li>adobe-source-han-sans-cn-fonts&lt;/li>
-&lt;li>adobe-source-han-serif-cn-fonts&lt;/li>
-&lt;/ul>
-&lt;p>然后把终端的字体改成了 Consolas（AUR），感觉还是这个字体好看，不过中文字体好像变丑了。。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>尝试安装 Tim。&lt;/p>
-&lt;p>&lt;img src="./1555420630345.png" alt="1555420630345">&lt;/p>
-&lt;p>？？？说好的自动解决依赖关系呢？&lt;/p>
-&lt;p>直接构建发现会报一堆依赖的错，查看 Github 项目发现：&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;code>deepin-wine-tim&lt;/code>依赖&lt;code>Multilib&lt;/code>仓库中的&lt;code>wine&lt;/code>，&lt;code>wine_gecko&lt;/code>和&lt;code>wine-mono&lt;/code>，Archlinux默认没有开启&lt;code>Multilib&lt;/code>仓库，需要编辑&lt;code>/etc/pacman.conf&lt;/code>，取消对应行前面的注释(&lt;a href="https://wiki.archlinux.org/index.php/Official_repositories#multilib">Archlinux wiki&lt;/a>)&lt;/p>&lt;/blockquote>
-&lt;p>懂了，我以后一定先 RTFM（&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Windows 分区在 Windows 启用了快速启动或者处于休眠状态时只能以只读方式挂载。什么傻吊设计。（因为我想把博客文件夹 &lt;code>ln&lt;/code> 到 Arch 下，使得双系统能够同步写作）&lt;/p>
-&lt;p>解决方案：使用 Travis CI 自动部署 Hexo。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>输入法在终端和 Telegram，Kate 下（以及更多）不能使用。&lt;/p>
-&lt;p>根据&lt;a href="http://www.towdium.me/2017/04/11/manjaro-config-diary/">某大佬的博客&lt;/a>：&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>安装完输入法，你需要把输入法添加到环境变量里才能让他生效。我目前的配置是在 &lt;code>~/.xprofile&lt;/code>这个文件里加上下面几行：&lt;/p>
-&lt;pre tabindex="0">&lt;code>export GTK_IM_MODULE=fcitx
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;pacman 能够在升级前对比版本信息，对于我这种强迫症非常有用。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1555419677545.png" alt="1555419677545"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改 &lt;code&gt;/etc/fstab&lt;/code&gt;，加入以下内容，使得开机时能够自动以只读模式挂载 Windows 分区。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1556519535880.png" alt="1556519535880"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;日志相关。由于&lt;code&gt;systemd&lt;/code&gt;这个神奇的存在，似乎所有日志都可以通过&lt;code&gt;systemd&lt;/code&gt;带的&lt;code&gt;journalctl&lt;/code&gt;查看。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;查看启动时&lt;code&gt;tty1&lt;/code&gt;的滚过去的那一大堆日志：&lt;code&gt;journalctl /usr/lib/systemd/systemd -b&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看加载失败的 unit：&lt;code&gt;systemctl --failed&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看某个 unit 的日志：&lt;code&gt;journalctl -u nginx.service --since today&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;（另外&lt;code&gt;systemctl status&lt;/code&gt;也能显示最新的大概十行日志）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;增强 Bash 的自动补全：&lt;code&gt;pacman -S bash-completion&lt;/code&gt;，重启终端即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="trouble-shooting"&gt;Trouble Shooting&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;今天打开tusk发现闪退。。用终端运行报&lt;code&gt;tusk: error while loading shared libraries: libnode.so: cannot open shared object file: No such file or directory&lt;/code&gt;，我干什么了我？我啥都没干啊。。重新安装未解决问题。重启同样未解决。&lt;/p&gt;
+&lt;p&gt;于是 Google，StackOverflow 上有一个帖子建议我先找找有没有这个库。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1555419245819.png" alt="1555419245819"&gt;&lt;/p&gt;
+&lt;p&gt;发现是有的，ls 看下。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1555419316125.png" alt="1555419316125"&gt;&lt;/p&gt;
+&lt;p&gt;然而链接到了另一个文件，一看，果然那个文件没了。。（推测和包更新了有关？）但是 Typora 有这个库呀，于是尝试链接到 Typora 带的那个库，然后问题解决了。。。我被我这波操作惊呆了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;觉得字体不好看，然后似乎改崩了&amp;hellip;目前把 Windows 的字体扔了，重新安装的字体列表有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;wqy-zenhei&lt;/li&gt;
+&lt;li&gt;wqy-microhei&lt;/li&gt;
+&lt;li&gt;adobe-source-han-sans-cn-fonts&lt;/li&gt;
+&lt;li&gt;adobe-source-han-serif-cn-fonts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然后把终端的字体改成了 Consolas（AUR），感觉还是这个字体好看，不过中文字体好像变丑了。。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;尝试安装 Tim。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1555420630345.png" alt="1555420630345"&gt;&lt;/p&gt;
+&lt;p&gt;？？？说好的自动解决依赖关系呢？&lt;/p&gt;
+&lt;p&gt;直接构建发现会报一堆依赖的错，查看 Github 项目发现：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;deepin-wine-tim&lt;/code&gt;依赖&lt;code&gt;Multilib&lt;/code&gt;仓库中的&lt;code&gt;wine&lt;/code&gt;，&lt;code&gt;wine_gecko&lt;/code&gt;和&lt;code&gt;wine-mono&lt;/code&gt;，Archlinux默认没有开启&lt;code&gt;Multilib&lt;/code&gt;仓库，需要编辑&lt;code&gt;/etc/pacman.conf&lt;/code&gt;，取消对应行前面的注释(&lt;a href="https://wiki.archlinux.org/index.php/Official_repositories#multilib"&gt;Archlinux wiki&lt;/a&gt;)&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;懂了，我以后一定先 RTFM（&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Windows 分区在 Windows 启用了快速启动或者处于休眠状态时只能以只读方式挂载。什么傻吊设计。（因为我想把博客文件夹 &lt;code&gt;ln&lt;/code&gt; 到 Arch 下，使得双系统能够同步写作）&lt;/p&gt;
+&lt;p&gt;解决方案：使用 Travis CI 自动部署 Hexo。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;输入法在终端和 Telegram，Kate 下（以及更多）不能使用。&lt;/p&gt;
+&lt;p&gt;根据&lt;a href="http://www.towdium.me/2017/04/11/manjaro-config-diary/"&gt;某大佬的博客&lt;/a&gt;：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;安装完输入法，你需要把输入法添加到环境变量里才能让他生效。我目前的配置是在 &lt;code&gt;~/.xprofile&lt;/code&gt;这个文件里加上下面几行：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
-&lt;/code>&lt;/pre>&lt;/blockquote>
-&lt;p>​ 成功解决。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>改完&lt;code>fstab&lt;/code>之后，开机发现闪过一行[FAILED]，查看日志发现&lt;code>sys-fs-fuse-connections.mount&lt;/code>这个服务（mount）失败了。日志为：&lt;/p>
-&lt;blockquote>
-&lt;p>May 02 14:19:10 Coherence systemd[1]: Condition check resulted in FUSE Control File System being skipped.
+&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;p&gt;​ 成功解决。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;改完&lt;code&gt;fstab&lt;/code&gt;之后，开机发现闪过一行[FAILED]，查看日志发现&lt;code&gt;sys-fs-fuse-connections.mount&lt;/code&gt;这个服务（mount）失败了。日志为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;May 02 14:19:10 Coherence systemd[1]: Condition check resulted in FUSE Control File System being skipped.
 May 02 14:19:11 Coherence systemd[1]: sys-fs-fuse-connections.mount: Start request repeated too quickly.
 May 02 14:19:11 Coherence systemd[1]: sys-fs-fuse-connections.mount: Failed with result &amp;lsquo;start-limit-hit&amp;rsquo;.
-May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&lt;/p>&lt;/blockquote>
-&lt;p>Google 了下，没找到原因，尝试 restart，成功了。&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;strong>active (mounted)&lt;/strong>&lt;/p>&lt;/blockquote>
-&lt;p>有待进一步观察。。（未复现&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="to-do">TO DO&lt;/h2>
-&lt;ul>
-&lt;li>zsh&lt;/li>
-&lt;/ul>
-&lt;h2 id="吐槽">吐槽&lt;/h2>
-&lt;ul>
-&lt;li>在 Linux 下，什么东西装好不用折腾就能用我反而觉得不正常&amp;hellip;&lt;/li>
-&lt;/ul>
-- https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ -&lt;p>寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。&lt;/p>
-&lt;p>Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板，准备拆机 TTL 破解光猫。&lt;/p>
-&lt;h2 id="0x01-拆机">0x01 拆机&lt;/h2>
-&lt;p>拆机后发现 PCB 板上有 TTL 插针，用万用表测得倒数第二根为 GND（接地pin），然后剩余四根随机组合，测得 RX（接收数据pin）和 TX（发送数据pin）。用杜邦线连接 USB转TTL板和 TTL 插针。&lt;/p>
-&lt;p>&lt;img src="./IMG_20190219_113847.jpg" alt="IMG_20190219_113847">&lt;/p>
-&lt;h2 id="0x02-串口调试">0x02 串口调试&lt;/h2>
-&lt;p>电脑安装好 USB转TTL板的驱动，USB端连接上电脑。网上的教程一般使用 SecureCRT， 然而我后来发现 Xshell 也能连接串口，遂用 Xshell 进行调试。&lt;/p>
-&lt;p>&lt;img src="./1550548463370.png" alt="1550548463370">&lt;/p>
-&lt;p>如图设置参数，port 按照自己的情况设置。&lt;/p>
-&lt;p>然后连接。接通电源后等待。大概等待两分钟后，按回车，出现 &lt;code>Login:&lt;/code> 字样，用 &lt;code>root/hg2x0&lt;/code> 登陆。&lt;/p>
-&lt;p>用 &lt;code>cat /proc/cpuinfo&lt;/code> 看一下 CPU 信息，居然是 MIPS&amp;hellip;&lt;/p>
-&lt;p>&lt;img src="./1550306022384.png" alt="1550306022384">&lt;/p>
-&lt;p>超级密码在&lt;code>/flash/cfg/agentconf/factory.conf &lt;/code>文件中。文件前两行即为管理员账户和密码。至此，光猫破解完成。&lt;/p>
-&lt;h2 id="0x03-参考资料">0x03 参考资料&lt;/h2>
-&lt;p>&lt;a href="https://paper.seebug.org/506/#0x03">如何通过TTL调试光猫&lt;/a>
-&lt;a href="https://m2.zhugh.com:26800/po-jie-dian-xin-guang-mao/">破解电信光猫&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>2018年终总结&amp;2019展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</link><pubDate>Mon, 11 Feb 2019 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ -&lt;p>今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。&lt;/p>
-&lt;h2 id="2018-总结">2018 总结&lt;/h2>
-&lt;p>时间及事件依据：印象笔记、Google 相册、我的记忆。&lt;/p>
-&lt;p>事件大致以时间顺序排列。&lt;/p>
-&lt;ul>
-&lt;li>一月初，经历了在西安的第一场雪。&lt;/li>
-&lt;li>（时间未知）使用了 Windows 运行来快速启动程序，&lt;del>（感觉上）大大提高了效率&lt;/del>（不（感觉装逼才是真的&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="./1549962279010.png" alt="1549962279010">&lt;/p>
-&lt;ul>
-&lt;li>从 1.13 开始寒假训练， 3.24 校赛，3.31 天梯赛，5.17 左右 ACM省赛，7.19 开始暑假多校训练，10.26 徐州区域赛， 11.23 深圳 CCPC 总决赛，整个一年我算是比较积极地参与 ACM-ICPC 竞赛（虽然下半年逐渐开始划水&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="./1550032126921.png" alt="1550032126921">
-（六张照片依次为 CCPC、寒假训练、省赛、校赛、天梯赛、徐州区域赛）&lt;/p>
-&lt;ul>
-&lt;li>一月末，开始种草轻薄本，并寻求把游戏本卖了，未果。&lt;/li>
-&lt;li>从年初开始，用空闲资金进行投资，并开始学习相关知识。一月末我第一次买入了一个基金，入坑。一开始赚了点钱很高兴，后来贸易战开始就亏了。七月初买了一本金融方面的书然而并没有看多少。八月开始跟投某大V的投资计划，九月末把主要账户转移到且慢。回想起一开始什么都不懂就冲着某个行业买基金，现在慢慢有些了解但知识仍然很浅薄。时刻要提醒自己：不要盲从。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="./1550032359691.png" alt="1550032359691">&lt;/p>
-&lt;ul>
-&lt;li>定下（并践行）了在美（英）剧中学英语的目标，然后每当我看剧时总是自我安慰同时我也在&lt;del>学习&lt;/del>（并没有）。&lt;/li>
-&lt;/ul>
-&lt;p>到目前为止看过的剧有（不限于18年）：Friends，Sherlock，Black Mirror 一季， The IT Crowd 两季，Monday Mornings，Greys Anatomy 一季， Person of Interest 三季，Modern Family 半季多&lt;/p>
-&lt;ul>
-&lt;li>从3月份开始，我开始撸 DigitalOcean 的 Github 学生优惠，到现在为止服务器运维的相关知识增长地挺快&amp;hellip;应该是从大学开始吧，我开始用VPS自建SS，一开始是 Cloudcone 还是 Vultr 后来撸到了 DO，再后来19年年初的时候知道了一个超便宜的深港专线，后来又撸了阿里云的学生机。&lt;/li>
-&lt;li>四月中旬看了死亡诗社，Seize the day 成了我的座右铭，虽然我一直没有做到这一点。&lt;/li>
-&lt;li>整个一年我总有一种感觉，学习不在状态，有时候一直陷入一种昏昏沉沉的状态，那种状态下，犯困，没有学习的心思，干其他事也提不起兴趣。仿佛就在虚度光阴。从那个寒假开始我就（似乎）养成了不良的生活习惯。&lt;/li>
-&lt;li>四五月份入了创新IE3P 和 iPad 2018，拔草成功，却没有对我的学习质量有多大的改善。后来又开始种草蓝牙降噪耳机&amp;hellip;&lt;/li>
-&lt;li>六月末，转专业考试。一年中最重要的一件事，从环境科学与工程转到了软件工程专业，进入了理想的专业。&lt;/li>
-&lt;li>然而同时打算换宿舍的（非常不喜欢我们宿舍的氛围和作息），最终没有成功。后来也尝试过 Bose Sleepbuds 这个方案，效果不佳。遂产生了租房的想法。&lt;/li>
-&lt;li>尝试读英文原著，从大一上开始读星际穿越的剧本，读到18年年中读完了。然后开始看三体的英文版，到现在看了一半多。&lt;/li>
-&lt;li>九月中旬开始用 Excel 记账，对日常消费进行记录和管理，持续至今。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="./1550035065769.png" alt="1550035065769">&lt;/p>
-&lt;ul>
-&lt;li>九月中旬，在学校有了一辆自己的自行车。&lt;/li>
-&lt;li>大二上是忙碌的一学期。首先课就很多，粗略统计之下每周有38个学时，作为对比，大一上是27学时，大一下是33学时。然后学期初的时候偶然间看到网络中心招学生助理，于是去了。（&lt;del>并没有学什么东西&lt;/del>好歹还是学了点的）然后是计协（主要）和其他社团的活动。&lt;/li>
-&lt;li>学习成绩仍然不尽如人意，而且有着每学期逐步下滑的趋势&amp;hellip;&lt;/li>
-&lt;li>记不清某个时间了，折腾过Ubuntu，碰到了N+I卡驱动的问题，卡启动Logo，最后也没解决。后来就弃疗了，平时就瞎搞搞虚拟机和 WSL 了。&lt;/li>
-&lt;li>十二月下旬，我校ACM新生赛，我负责了评测环境的搭建，这大概是我一年来做过的最有意义的一件事。&lt;/li>
-&lt;li>好多书都只读到一半，然后处于半弃坑状态，比如未来简史，值得反思&amp;hellip;&lt;/li>
-&lt;li>下半年的印象笔记笔记数量似乎少了很多&amp;hellip;&lt;/li>
-&lt;li>更加怀念高中时候的生活了&amp;hellip;或许到了工作之后我也会更加怀念大学的生活吧。&lt;/li>
-&lt;/ul>
-&lt;h2 id="2019-年初计划">2019 年初计划&lt;/h2>
-&lt;ul>
-&lt;li>学习 Linux，参考书目《Linux&amp;amp;Unix 大学教程》&lt;/li>
-&lt;li>学习 Git，参考书目 《Pro Git》&lt;/li>
-&lt;li>学习计算机网络，参考书目《Computer Networking:A Top-down Approach》（这本书TM还是去年七月下旬借的）&lt;/li>
-&lt;li>学习使用 Anki （去年九月初就知道了这个软件并一直想学 emmm..)&lt;/li>
-&lt;li>写一篇关于 Lumia 的博客（同样是去年鸽到现在了&amp;hellip;）&lt;/li>
-&lt;li>用 AutoHotkey 把 Markdown 编辑器打造地更顺手一点&lt;/li>
-&lt;li>在豆瓣建立起我的书单，并写书评&lt;/li>
-&lt;li>买轻薄本（从去年年初我就开始有这个想法了QAQ），目前种草 LG Gram，等一个19款&lt;/li>
-&lt;li>多运动，多出去骑车&lt;/li>
-&lt;li>实现本博客的 Todo（虽然大半都是在瞎搞&lt;/li>
-&lt;li>搬出去！&lt;/li>
-&lt;li>做好未来的打算，考研 OR 出国，是否找个实验室去做项目，未来的方向等等&lt;/li>
-&lt;li>记录生活&lt;/li>
-&lt;/ul>
-&lt;h2 id="后记">后记&lt;/h2>
-&lt;p>这篇文章写了三天才写完，写的也比较杂乱。事实上在一开始我就没有一个整体的构思。&lt;/p>
-&lt;p>2019年已经快过去了两个月，我才堪堪写完年初计划。这些计划（或者说我未来的目标）虽有个模糊的大方向，却又不甚明了，或许我还需要更深层次的思考吧。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>DOMjudge 配置/踩坑指南</title><link>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</link><pubDate>Wed, 19 Dec 2018 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ -&lt;p>我校新生赛也能用上 World Final 同款评测系统啦~&lt;/p>
-&lt;p>DOMjudge 提供了详尽的&lt;a href="https://www.domjudge.org/documentation">官方文档&lt;/a>，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。&lt;/p>
-&lt;h2 id="简介">简介&lt;/h2>
-&lt;p>DOMjudge，作为一款开源的 CCS(&lt;a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System">Contest Control System&lt;/a>)，现已被ICPC钦定为官方的比赛评测系统。比 pc^2 这种闭源而含有诸多 Bug 的 CCS 高到不知道哪里去了啊。&lt;/p>
-&lt;p>&lt;img src="./1545218741334.png" alt="1545218741334">&lt;/p>
-&lt;p>根据官方文档的描述，DOMjudge 的主要特性有：&lt;/p>
-&lt;ul>
-&lt;li>分布式且自动评测的 judge host&lt;/li>
-&lt;li>Web 用户界面&lt;/li>
-&lt;li>模块化的系统，方面添加不同的语言/编译器&lt;/li>
-&lt;/ul>
-&lt;p>整个 DOMjudge 主要分为两个部分，Domserver 和 Judgehost，据其名字即可得出它们的功能。需要注意的是，DOMjudge 使用数据库来存放几乎一切数据，所以我们还需配置 MySQL 或者 MariaDB。&lt;/p>
-&lt;h2 id="安装">安装&lt;/h2>
-&lt;p>DOMjudge 只能运行在 Linux 环境下。博主的运行环境是 Ubuntu Server 18.04 LTS，以及 DOMjudge 7.1.1。&lt;/p>
-&lt;p>除了传统的安装方式外，DOMjudge 还提供了 Docker 镜像以供安装，这样就大大简化了安装的困难程度。&lt;/p>
-&lt;p>关于 Docker 的使用这里不作详细描述。（其实是博主也一知半解）&lt;/p>
-&lt;p>然而&lt;a href="https://hub.docker.com/r/domjudge/domserver">官方的 Docker 文档中&lt;/a>仅使用了命令来启动容器，为了进一步简化安装，也为了方便修改配置，我决定采用 Docker Compose 。以下是 &lt;code>docker-compose.yml &lt;/code>文件：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">version&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;3&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">services&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">mariadb&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">dj-mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_ROOT_PASSWORD=rootpw&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_USER=domjudge&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_PASSWORD=djpw&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_DATABASE=domjudge&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">$PWD/data:/var/lib/mysql&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">13306&lt;/span>:&lt;span style="color:#ae81ff">3306&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">command&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - --&lt;span style="color:#ae81ff">max-connections=1000&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - --&lt;span style="color:#ae81ff">innodb-log-file-size=480M&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">domserver&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">domjudge/domserver:latest&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">domserver&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_HOST=mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_USER=domjudge&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_DATABASE=domjudge&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_PASSWORD=djpw&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">MYSQL_ROOT_PASSWORD=rootpw&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">CONTAINER_TIMEZONE=Asia/Shanghai&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">always&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">depends_on&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">phpmyadmin&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">80&lt;/span>:&lt;span style="color:#ae81ff">80&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">links&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">judgehost&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">domjudge/judgehost:latest&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">judgedaemon-0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">privileged&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">CONTAINER_TIMEZONE=Asia/Shanghai&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">DAEMON_ID=0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">JUDGEDAEMON_PASSWORD=whatthehell&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">depends_on&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">domserver&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">links&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">domserver&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">restart&lt;/span>: &lt;span style="color:#ae81ff">always&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">volumes&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">/sys/fs/cgroup:/sys/fs/cgroup:ro&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">phpmyadmin&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">phpmyadmin/phpmyadmin&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">container_name&lt;/span>: &lt;span style="color:#ae81ff">myadmin&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ports&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">8080&lt;/span>:&lt;span style="color:#ae81ff">80&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">PMA_HOST=mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">links&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">mariadb:mariadb&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后运行 &lt;code>docker-compose up -d&lt;/code> 即可完成部署。&lt;/p>
-&lt;p>Judgehost 利用了 Linux 内核的 Cgroup 特性，所以需进行一步额外设置（似乎部分内核较新的系统不需要）。编辑 &lt;code>/etc/default/grub&lt;/code> 文件，将默认的命令改为：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>GRUB_CMDLINE_LINUX_DEFAULT&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;quiet cgroup_enable=memory swapaccount=1&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GRUB_CMDLINE_LINUX&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;quiet cgroup_enable=memory swapaccount=1&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后运行 &lt;code>update-grub&lt;/code> 并重启。&lt;/p>
-&lt;p>需要多核判题的话创建多个 Judgehost 容器并修改 DAEMON_ID 为不同的值即可。&lt;/p>
-&lt;p>目前存在的问题：&lt;/p>
-&lt;ul>
-&lt;li>judgehost 用户的初始密码不定，需要手动去 web 端更改并添加 &lt;code>JUDGEDAEMON_PASSWORD&lt;/code> 的环境变量。（默认环境变量的密码是 &lt;code>password&lt;/code>）&lt;/li>
-&lt;li>整个系统对我来说是个黑盒&amp;hellip;&lt;/li>
-&lt;/ul>
-&lt;p>除了 MariaDB , DOMserver , Judgehost 这三个必要的容器外，我还使用了 phpMyAdmin 来进行图形化的数据库管理（备份)。数据库（即 &lt;code>mariadb&lt;/code> 容器的数据卷）创建在了当前目录的&lt;code>data&lt;/code>文件夹下，方便备份。&lt;/p>
-&lt;p>其中，Domserver 映射到了主机的 80 端口， phpMyAdmin 映射到了 8080 端口。由于是内网环境，故不准备采用 HTTPS 加密。&lt;/p>
-&lt;p>需要注意的是，DOMjudge 提供的 Judgehost 镜像中仅包含 C, C++, Java 三种语言的运行环境。&lt;/p>
-&lt;h2 id="配置">配置&lt;/h2>
-&lt;p>Domserver 部署成功后，即可通过 Web 端来访问了。默认的管理员账号用户名 &lt;code>admin&lt;/code> ，默认密码被打印在domserver启动时的日志中，同时也可以用&lt;code>docker exec -it domserver cat /opt/domjudge/domserver/etc/initial_admin_password.secret&lt;/code>来获取 。&lt;/p>
-&lt;p>可以在 Config Checker 中进行配置检查。&lt;/p>
-&lt;p>C++ 的默认编译选项没有 C++11， 需手动添加。&lt;/p>
-&lt;h3 id="题目导入">题目导入&lt;/h3>
-&lt;p>DOMjudge 支持用 zip 格式的压缩包导入/导出题目。&lt;/p>
-&lt;p>具体的文件结构是：&lt;/p>
-&lt;pre tabindex="0">&lt;code>│ domjudge-problem.ini
+May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Google 了下，没找到原因，尝试 restart，成功了。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;active (mounted)&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;有待进一步观察。。（未复现&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="to-do"&gt;TO DO&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;zsh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="吐槽"&gt;吐槽&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;在 Linux 下，什么东西装好不用折腾就能用我反而觉得不正常&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+- https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>中国电信 HG2543C1 光猫获取超级管理员密码</title><link>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</link><pubDate>Sat, 16 Feb 2019 16:32:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ -&lt;p&gt;寒假回家，欣闻家中宽带升级成了 200M，然而坑爹的是一直以来的桥接模式被改成路由模式。由于想公网访问本地的 NAS，且想看看 IPV6 是否已在我家区域部署，所以想破解光猫获取管理员密码。&lt;/p&gt;
+&lt;p&gt;Google 该设备的型号，发现网上并没有相关的教程，可能是型号比较新的缘故。致电中国电信，被告知无法透露管理员密码，派人上门调试则需额外花费。本着自己折腾的原则，遂在某宝购入 CH340G USB转TTL板，准备拆机 TTL 破解光猫。&lt;/p&gt;
+&lt;h2 id="0x01-拆机"&gt;0x01 拆机&lt;/h2&gt;
+&lt;p&gt;拆机后发现 PCB 板上有 TTL 插针，用万用表测得倒数第二根为 GND（接地pin），然后剩余四根随机组合，测得 RX（接收数据pin）和 TX（发送数据pin）。用杜邦线连接 USB转TTL板和 TTL 插针。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./IMG_20190219_113847.jpg" alt="IMG_20190219_113847"&gt;&lt;/p&gt;
+&lt;h2 id="0x02-串口调试"&gt;0x02 串口调试&lt;/h2&gt;
+&lt;p&gt;电脑安装好 USB转TTL板的驱动，USB端连接上电脑。网上的教程一般使用 SecureCRT， 然而我后来发现 Xshell 也能连接串口，遂用 Xshell 进行调试。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1550548463370.png" alt="1550548463370"&gt;&lt;/p&gt;
+&lt;p&gt;如图设置参数，port 按照自己的情况设置。&lt;/p&gt;
+&lt;p&gt;然后连接。接通电源后等待。大概等待两分钟后，按回车，出现 &lt;code&gt;Login:&lt;/code&gt; 字样，用 &lt;code&gt;root/hg2x0&lt;/code&gt; 登陆。&lt;/p&gt;
+&lt;p&gt;用 &lt;code&gt;cat /proc/cpuinfo&lt;/code&gt; 看一下 CPU 信息，居然是 MIPS&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1550306022384.png" alt="1550306022384"&gt;&lt;/p&gt;
+&lt;p&gt;超级密码在&lt;code&gt;/flash/cfg/agentconf/factory.conf &lt;/code&gt;文件中。文件前两行即为管理员账户和密码。至此，光猫破解完成。&lt;/p&gt;
+&lt;h2 id="0x03-参考资料"&gt;0x03 参考资料&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://paper.seebug.org/506/#0x03"&gt;如何通过TTL调试光猫&lt;/a&gt;
+&lt;a href="https://m2.zhugh.com:26800/po-jie-dian-xin-guang-mao/"&gt;破解电信光猫&lt;/a&gt;&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/fiber-modem-crack/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>2018年终总结&amp;2019展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</link><pubDate>Mon, 11 Feb 2019 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ -&lt;p&gt;今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。&lt;/p&gt;
+&lt;h2 id="2018-总结"&gt;2018 总结&lt;/h2&gt;
+&lt;p&gt;时间及事件依据：印象笔记、Google 相册、我的记忆。&lt;/p&gt;
+&lt;p&gt;事件大致以时间顺序排列。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一月初，经历了在西安的第一场雪。&lt;/li&gt;
+&lt;li&gt;（时间未知）使用了 Windows 运行来快速启动程序，&lt;del&gt;（感觉上）大大提高了效率&lt;/del&gt;（不（感觉装逼才是真的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="./1549962279010.png" alt="1549962279010"&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从 1.13 开始寒假训练， 3.24 校赛，3.31 天梯赛，5.17 左右 ACM省赛，7.19 开始暑假多校训练，10.26 徐州区域赛， 11.23 深圳 CCPC 总决赛，整个一年我算是比较积极地参与 ACM-ICPC 竞赛（虽然下半年逐渐开始划水&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="./1550032126921.png" alt="1550032126921"&gt;
+（六张照片依次为 CCPC、寒假训练、省赛、校赛、天梯赛、徐州区域赛）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一月末，开始种草轻薄本，并寻求把游戏本卖了，未果。&lt;/li&gt;
+&lt;li&gt;从年初开始，用空闲资金进行投资，并开始学习相关知识。一月末我第一次买入了一个基金，入坑。一开始赚了点钱很高兴，后来贸易战开始就亏了。七月初买了一本金融方面的书然而并没有看多少。八月开始跟投某大V的投资计划，九月末把主要账户转移到且慢。回想起一开始什么都不懂就冲着某个行业买基金，现在慢慢有些了解但知识仍然很浅薄。时刻要提醒自己：不要盲从。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="./1550032359691.png" alt="1550032359691"&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定下（并践行）了在美（英）剧中学英语的目标，然后每当我看剧时总是自我安慰同时我也在&lt;del&gt;学习&lt;/del&gt;（并没有）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;到目前为止看过的剧有（不限于18年）：Friends，Sherlock，Black Mirror 一季， The IT Crowd 两季，Monday Mornings，Greys Anatomy 一季， Person of Interest 三季，Modern Family 半季多&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从3月份开始，我开始撸 DigitalOcean 的 Github 学生优惠，到现在为止服务器运维的相关知识增长地挺快&amp;hellip;应该是从大学开始吧，我开始用VPS自建SS，一开始是 Cloudcone 还是 Vultr 后来撸到了 DO，再后来19年年初的时候知道了一个超便宜的深港专线，后来又撸了阿里云的学生机。&lt;/li&gt;
+&lt;li&gt;四月中旬看了死亡诗社，Seize the day 成了我的座右铭，虽然我一直没有做到这一点。&lt;/li&gt;
+&lt;li&gt;整个一年我总有一种感觉，学习不在状态，有时候一直陷入一种昏昏沉沉的状态，那种状态下，犯困，没有学习的心思，干其他事也提不起兴趣。仿佛就在虚度光阴。从那个寒假开始我就（似乎）养成了不良的生活习惯。&lt;/li&gt;
+&lt;li&gt;四五月份入了创新IE3P 和 iPad 2018，拔草成功，却没有对我的学习质量有多大的改善。后来又开始种草蓝牙降噪耳机&amp;hellip;&lt;/li&gt;
+&lt;li&gt;六月末，转专业考试。一年中最重要的一件事，从环境科学与工程转到了软件工程专业，进入了理想的专业。&lt;/li&gt;
+&lt;li&gt;然而同时打算换宿舍的（非常不喜欢我们宿舍的氛围和作息），最终没有成功。后来也尝试过 Bose Sleepbuds 这个方案，效果不佳。遂产生了租房的想法。&lt;/li&gt;
+&lt;li&gt;尝试读英文原著，从大一上开始读星际穿越的剧本，读到18年年中读完了。然后开始看三体的英文版，到现在看了一半多。&lt;/li&gt;
+&lt;li&gt;九月中旬开始用 Excel 记账，对日常消费进行记录和管理，持续至今。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="./1550035065769.png" alt="1550035065769"&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;九月中旬，在学校有了一辆自己的自行车。&lt;/li&gt;
+&lt;li&gt;大二上是忙碌的一学期。首先课就很多，粗略统计之下每周有38个学时，作为对比，大一上是27学时，大一下是33学时。然后学期初的时候偶然间看到网络中心招学生助理，于是去了。（&lt;del&gt;并没有学什么东西&lt;/del&gt;好歹还是学了点的）然后是计协（主要）和其他社团的活动。&lt;/li&gt;
+&lt;li&gt;学习成绩仍然不尽如人意，而且有着每学期逐步下滑的趋势&amp;hellip;&lt;/li&gt;
+&lt;li&gt;记不清某个时间了，折腾过Ubuntu，碰到了N+I卡驱动的问题，卡启动Logo，最后也没解决。后来就弃疗了，平时就瞎搞搞虚拟机和 WSL 了。&lt;/li&gt;
+&lt;li&gt;十二月下旬，我校ACM新生赛，我负责了评测环境的搭建，这大概是我一年来做过的最有意义的一件事。&lt;/li&gt;
+&lt;li&gt;好多书都只读到一半，然后处于半弃坑状态，比如未来简史，值得反思&amp;hellip;&lt;/li&gt;
+&lt;li&gt;下半年的印象笔记笔记数量似乎少了很多&amp;hellip;&lt;/li&gt;
+&lt;li&gt;更加怀念高中时候的生活了&amp;hellip;或许到了工作之后我也会更加怀念大学的生活吧。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="2019-年初计划"&gt;2019 年初计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;学习 Linux，参考书目《Linux&amp;amp;Unix 大学教程》&lt;/li&gt;
+&lt;li&gt;学习 Git，参考书目 《Pro Git》&lt;/li&gt;
+&lt;li&gt;学习计算机网络，参考书目《Computer Networking:A Top-down Approach》（这本书TM还是去年七月下旬借的）&lt;/li&gt;
+&lt;li&gt;学习使用 Anki （去年九月初就知道了这个软件并一直想学 emmm..)&lt;/li&gt;
+&lt;li&gt;写一篇关于 Lumia 的博客（同样是去年鸽到现在了&amp;hellip;）&lt;/li&gt;
+&lt;li&gt;用 AutoHotkey 把 Markdown 编辑器打造地更顺手一点&lt;/li&gt;
+&lt;li&gt;在豆瓣建立起我的书单，并写书评&lt;/li&gt;
+&lt;li&gt;买轻薄本（从去年年初我就开始有这个想法了QAQ），目前种草 LG Gram，等一个19款&lt;/li&gt;
+&lt;li&gt;多运动，多出去骑车&lt;/li&gt;
+&lt;li&gt;实现本博客的 Todo（虽然大半都是在瞎搞&lt;/li&gt;
+&lt;li&gt;搬出去！&lt;/li&gt;
+&lt;li&gt;做好未来的打算，考研 OR 出国，是否找个实验室去做项目，未来的方向等等&lt;/li&gt;
+&lt;li&gt;记录生活&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="后记"&gt;后记&lt;/h2&gt;
+&lt;p&gt;这篇文章写了三天才写完，写的也比较杂乱。事实上在一开始我就没有一个整体的构思。&lt;/p&gt;
+&lt;p&gt;2019年已经快过去了两个月，我才堪堪写完年初计划。这些计划（或者说我未来的目标）虽有个模糊的大方向，却又不甚明了，或许我还需要更深层次的思考吧。&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>DOMjudge 配置/踩坑指南</title><link>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</link><pubDate>Wed, 19 Dec 2018 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/domjudge-config/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ -&lt;p&gt;我校新生赛也能用上 World Final 同款评测系统啦~&lt;/p&gt;
+&lt;p&gt;DOMjudge 提供了详尽的&lt;a href="https://www.domjudge.org/documentation"&gt;官方文档&lt;/a&gt;，然而对于博主这种英文弱鸡来说读的很痛苦。前前后后折腾了有两个星期吧，以此文作为避（踩）坑指南。&lt;/p&gt;
+&lt;h2 id="简介"&gt;简介&lt;/h2&gt;
+&lt;p&gt;DOMjudge，作为一款开源的 CCS(&lt;a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System"&gt;Contest Control System&lt;/a&gt;)，现已被ICPC钦定为官方的比赛评测系统。比 pc^2 这种闭源而含有诸多 Bug 的 CCS 高到不知道哪里去了啊。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1545218741334.png" alt="1545218741334"&gt;&lt;/p&gt;
+&lt;p&gt;根据官方文档的描述，DOMjudge 的主要特性有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分布式且自动评测的 judge host&lt;/li&gt;
+&lt;li&gt;Web 用户界面&lt;/li&gt;
+&lt;li&gt;模块化的系统，方面添加不同的语言/编译器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;整个 DOMjudge 主要分为两个部分，Domserver 和 Judgehost，据其名字即可得出它们的功能。需要注意的是，DOMjudge 使用数据库来存放几乎一切数据，所以我们还需配置 MySQL 或者 MariaDB。&lt;/p&gt;
+&lt;h2 id="安装"&gt;安装&lt;/h2&gt;
+&lt;p&gt;DOMjudge 只能运行在 Linux 环境下。博主的运行环境是 Ubuntu Server 18.04 LTS，以及 DOMjudge 7.1.1。&lt;/p&gt;
+&lt;p&gt;除了传统的安装方式外，DOMjudge 还提供了 Docker 镜像以供安装，这样就大大简化了安装的困难程度。&lt;/p&gt;
+&lt;p&gt;关于 Docker 的使用这里不作详细描述。（其实是博主也一知半解）&lt;/p&gt;
+&lt;p&gt;然而&lt;a href="https://hub.docker.com/r/domjudge/domserver"&gt;官方的 Docker 文档中&lt;/a&gt;仅使用了命令来启动容器，为了进一步简化安装，也为了方便修改配置，我决定采用 Docker Compose 。以下是 &lt;code&gt;docker-compose.yml &lt;/code&gt;文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;version&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;3&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;services&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;mariadb&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;image&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;mariadb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;container_name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;dj-mariadb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;MYSQL_ROOT_PASSWORD=rootpw&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;MYSQL_USER=domjudge&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;MYSQL_PASSWORD=djpw&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;MYSQL_DATABASE=domjudge&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;$PWD/data:/var/lib/mysql&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;13306&lt;/span&gt;:&lt;span style="color:#ae81ff"&gt;3306&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;command&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - --&lt;span style="color:#ae81ff"&gt;max-connections=1000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - --&lt;span style="color:#ae81ff"&gt;innodb-log-file-size=480M&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;domserver&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;image&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;domjudge/domserver:latest&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;container_name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;domserver&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;MYSQL_HOST=mariadb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;MYSQL_USER=domjudge&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;MYSQL_DATABASE=domjudge&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;MYSQL_PASSWORD=djpw&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;MYSQL_ROOT_PASSWORD=rootpw&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;CONTAINER_TIMEZONE=Asia/Shanghai&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;restart&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;always&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;depends_on&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;phpmyadmin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;mariadb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;80&lt;/span&gt;:&lt;span style="color:#ae81ff"&gt;80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;links&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;mariadb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;judgehost&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;image&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;domjudge/judgehost:latest&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;container_name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;judgedaemon-0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;privileged&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;CONTAINER_TIMEZONE=Asia/Shanghai&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;DAEMON_ID=0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;JUDGEDAEMON_PASSWORD=whatthehell&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;depends_on&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;domserver&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;links&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;domserver&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;restart&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;always&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;/sys/fs/cgroup:/sys/fs/cgroup:ro&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;phpmyadmin&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;image&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;phpmyadmin/phpmyadmin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;container_name&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;myadmin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;8080&lt;/span&gt;:&lt;span style="color:#ae81ff"&gt;80&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;PMA_HOST=mariadb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;links&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;mariadb:mariadb&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后运行 &lt;code&gt;docker-compose up -d&lt;/code&gt; 即可完成部署。&lt;/p&gt;
+&lt;p&gt;Judgehost 利用了 Linux 内核的 Cgroup 特性，所以需进行一步额外设置（似乎部分内核较新的系统不需要）。编辑 &lt;code&gt;/etc/default/grub&lt;/code&gt; 文件，将默认的命令改为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;quiet cgroup_enable=memory swapaccount=1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GRUB_CMDLINE_LINUX&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;quiet cgroup_enable=memory swapaccount=1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后运行 &lt;code&gt;update-grub&lt;/code&gt; 并重启。&lt;/p&gt;
+&lt;p&gt;需要多核判题的话创建多个 Judgehost 容器并修改 DAEMON_ID 为不同的值即可。&lt;/p&gt;
+&lt;p&gt;目前存在的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;judgehost 用户的初始密码不定，需要手动去 web 端更改并添加 &lt;code&gt;JUDGEDAEMON_PASSWORD&lt;/code&gt; 的环境变量。（默认环境变量的密码是 &lt;code&gt;password&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;整个系统对我来说是个黑盒&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;除了 MariaDB , DOMserver , Judgehost 这三个必要的容器外，我还使用了 phpMyAdmin 来进行图形化的数据库管理（备份)。数据库（即 &lt;code&gt;mariadb&lt;/code&gt; 容器的数据卷）创建在了当前目录的&lt;code&gt;data&lt;/code&gt;文件夹下，方便备份。&lt;/p&gt;
+&lt;p&gt;其中，Domserver 映射到了主机的 80 端口， phpMyAdmin 映射到了 8080 端口。由于是内网环境，故不准备采用 HTTPS 加密。&lt;/p&gt;
+&lt;p&gt;需要注意的是，DOMjudge 提供的 Judgehost 镜像中仅包含 C, C++, Java 三种语言的运行环境。&lt;/p&gt;
+&lt;h2 id="配置"&gt;配置&lt;/h2&gt;
+&lt;p&gt;Domserver 部署成功后，即可通过 Web 端来访问了。默认的管理员账号用户名 &lt;code&gt;admin&lt;/code&gt; ，默认密码被打印在domserver启动时的日志中，同时也可以用&lt;code&gt;docker exec -it domserver cat /opt/domjudge/domserver/etc/initial_admin_password.secret&lt;/code&gt;来获取 。&lt;/p&gt;
+&lt;p&gt;可以在 Config Checker 中进行配置检查。&lt;/p&gt;
+&lt;p&gt;C++ 的默认编译选项没有 C++11， 需手动添加。&lt;/p&gt;
+&lt;h3 id="题目导入"&gt;题目导入&lt;/h3&gt;
+&lt;p&gt;DOMjudge 支持用 zip 格式的压缩包导入/导出题目。&lt;/p&gt;
+&lt;p&gt;具体的文件结构是：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;│ domjudge-problem.ini
 │
 ├─data
 │ ├─sample
@@ -564,316 +570,294 @@ May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&
 │
 └─problem_statement
 problem.{pdf,html,txt}
-&lt;/code>&lt;/pre>&lt;p>在 &lt;code>domjudge-problem.ini&lt;/code> 中定义了如下信息：&lt;/p>
-&lt;p>&lt;img src="./1545219324330.png" alt="1545219324330">&lt;/p>
-&lt;p>（懒得翻译了，有时间再补）&lt;/p>
-&lt;p>在 secret 文件夹中存放测试数据，在 sample 文件夹中存放样例数据， 在 problem_statement 存放题面。&lt;/p>
-&lt;p>（不知道为什么博主在压缩包内上传题面没有成功过，只能通过 Web 端来上传）&lt;/p>
-&lt;p>测试数据的扩展名为 &lt;code>.in&lt;/code> 和 &lt;code>.ans&lt;/code>。&lt;/p>
-&lt;h3 id="队伍导入">队伍导入&lt;/h3>
-&lt;p>队伍及用户导入采用 tsv(&lt;em>tab-separated values&lt;/em>) 格式，即信息之间采用制表符（TAB）分隔。事实上，文件的扩展名并不需要采用&lt;code>.tsv&lt;/code>。我们可以直接在Excel中创建一个表格然后将其后复制至一个文本文件中。&lt;/p>
-&lt;p>格式由&lt;a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System_Requirements#Appendix:_File_formats"> ICPC 官方定义&lt;/a>。&lt;/p>
-&lt;p>teams 格式：&lt;/p>
-&lt;pre tabindex="0">&lt;code>teams 1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在 &lt;code&gt;domjudge-problem.ini&lt;/code&gt; 中定义了如下信息：&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1545219324330.png" alt="1545219324330"&gt;&lt;/p&gt;
+&lt;p&gt;（懒得翻译了，有时间再补）&lt;/p&gt;
+&lt;p&gt;在 secret 文件夹中存放测试数据，在 sample 文件夹中存放样例数据， 在 problem_statement 存放题面。&lt;/p&gt;
+&lt;p&gt;（不知道为什么博主在压缩包内上传题面没有成功过，只能通过 Web 端来上传）&lt;/p&gt;
+&lt;p&gt;测试数据的扩展名为 &lt;code&gt;.in&lt;/code&gt; 和 &lt;code&gt;.ans&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id="队伍导入"&gt;队伍导入&lt;/h3&gt;
+&lt;p&gt;队伍及用户导入采用 tsv(&lt;em&gt;tab-separated values&lt;/em&gt;) 格式，即信息之间采用制表符（TAB）分隔。事实上，文件的扩展名并不需要采用&lt;code&gt;.tsv&lt;/code&gt;。我们可以直接在Excel中创建一个表格然后将其后复制至一个文本文件中。&lt;/p&gt;
+&lt;p&gt;格式由&lt;a href="https://clics.ecs.baylor.edu/index.php?title=Contest_Control_System_Requirements#Appendix:_File_formats"&gt; ICPC 官方定义&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;teams 格式：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;teams 1
 team_id external_ID group_id team_name institution_name institution_short_name country_code
-&lt;/code>&lt;/pre>&lt;p>参考&lt;a href="https://cubercsl.cn/notes/DOMjudge-Note.html">CSL的博客&lt;/a>发现：&lt;/p>
-&lt;blockquote>
-&lt;p>在导入teams表的时候，在&lt;code>Country Code&lt;/code>后追加一列，填写&lt;code>Institution External ID&lt;/code>。
-这步是阅读&lt;a href="https://github.com/DOMjudge/domjudge/blob/master/lib/lib.impexp.php#L108">源代码&lt;/a>后猜测的，当时的实际操作是直接在数据库中的&lt;code>team_affiliation&lt;/code>用SQL语句更新&lt;code>ExternalID&lt;/code>的。&lt;/p>&lt;/blockquote>
-&lt;p>博主采用了这种方式，并在导入队伍后通过 Web 界面手动添加 Affiliation 信息。&lt;/p>
-&lt;p>事实上，institution_name institution_short_name country_code这三个字段都不是必要的，只需要有External ID就可以。而如果没有External ID的话，会创建和队伍数量一样多的Affiliation。&lt;/p>
-&lt;p>accounts 格式：&lt;/p>
-&lt;pre tabindex="0">&lt;code>accounts 1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;参考&lt;a href="https://cubercsl.cn/notes/DOMjudge-Note.html"&gt;CSL的博客&lt;/a&gt;发现：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在导入teams表的时候，在&lt;code&gt;Country Code&lt;/code&gt;后追加一列，填写&lt;code&gt;Institution External ID&lt;/code&gt;。
+这步是阅读&lt;a href="https://github.com/DOMjudge/domjudge/blob/master/lib/lib.impexp.php#L108"&gt;源代码&lt;/a&gt;后猜测的，当时的实际操作是直接在数据库中的&lt;code&gt;team_affiliation&lt;/code&gt;用SQL语句更新&lt;code&gt;ExternalID&lt;/code&gt;的。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;博主采用了这种方式，并在导入队伍后通过 Web 界面手动添加 Affiliation 信息。&lt;/p&gt;
+&lt;p&gt;事实上，institution_name institution_short_name country_code这三个字段都不是必要的，只需要有External ID就可以。而如果没有External ID的话，会创建和队伍数量一样多的Affiliation。&lt;/p&gt;
+&lt;p&gt;accounts 格式：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;accounts 1
 account_type fullname username password
-&lt;/code>&lt;/pre>&lt;p>一种（可能）简单的方式是先导入队伍再导入用户，并且用户 username 的后缀数字与 team_id 相同。不需要的字段可以直接留空。（不能缺少分隔符）&lt;/p>
-&lt;p>tsv 文件可以采用 Excel 生成。在 Excel 中输入完数据后选择另存为文本文件（制表符分隔）即可。&lt;/p>
-&lt;p>如需使用&lt;code>institution_name institution_short_name country_code&lt;/code> 三项需在 Team Affiliations 中提前创建相应的条目。&lt;/p>
-&lt;h3 id="api">API&lt;/h3>
-&lt;p>参考官方的 API 说明，DOMjudge 包含&lt;a href="https://clics.ecs.baylor.edu/index.php/Contest_API"> ICPC 定义的 API &lt;/a>和&lt;a href="https://www.domjudge.org/demoweb/api/doc">自有的 API&lt;/a>。&lt;/p>
-&lt;p>&lt;img src="./1545220336183.png" alt="1545220336183">&lt;/p>
-&lt;h3 id="滚榜">滚榜&lt;/h3>
-&lt;p>尝试使用官方的 &lt;a href="https://icpc.baylor.edu/icpctools/">ICPC tools&lt;/a>，发现总是提示比赛未结束，查阅日志认为是 DOMjudge 的 event feed 格式与 ICPC tools 提供的 resolver 工具的格式不兼容。&lt;/p>
-&lt;p>尝试 DOMjura 发现同样不能正确读取 event-feed 。&lt;/p>
-&lt;hr>
-&lt;p>2019年校赛补充：滚榜采用了 Github 上的&lt;a href="https://github.com/hex539/scoreboard">这个项目&lt;/a>。这比官方的滚榜工具好用多了，但是也有坑。&lt;/p>
-&lt;p>首先它使用bazel作为构建工具，但是bazel对于Windows很不友好（至少对于这个项目而言），会有奇怪的报错。所以我使用了Ubuntu。其次，由于构建过程中大部分源都在国外，对于国内的网络环境来说很不友好。我的解决办法是使用proxychains代理bazel，实测无需任何配置即可支持Domjudge 7.1.1（2019/12/7）。&lt;/p>
-&lt;h2 id="2018冬季新生赛概况">2018冬季新生赛概况&lt;/h2>
-&lt;p>闲扯几句。&lt;/p>
-&lt;p>热身赛一切良好。出题人数据出锅，被批判了一个多小时2333。&lt;/p>
-&lt;p>正式赛赛前比赛账号导入的时候，有个人是后来添加的，和之前的版本没有对应上，导致部分队伍登录到了后一个队伍的账号，重新导入 team 后发现无法登录，还需导入 accounts。这导致比赛推迟了 5 分钟。&lt;/p>
-&lt;p>由于 Submission 的输出数据是保留的，而赛前我的服务器硬盘空间本来就不多了，比赛时当服务器的硬盘占用达到 90% 时，所有 judgehost 就都被关了。我只能胡乱删几个软件包腾出空间。还好没有造成大的影响。&lt;/p>
-&lt;p>然后直到最后还是没有搞出滚榜。&lt;/p>
-&lt;p>GG。总体来说还是挺顺利的，服务器没有崩，甚至平均 CPU load 只有 1.0 左右，就是感觉比较吃 I/O，还好我用的是固态（&lt;del>先见之明&lt;/del>）。&lt;/p>
-&lt;p>总结一下，DOMjudge 体验极佳，可以在校赛再推广一波。&lt;/p>
-&lt;h2 id="2019冬季新生赛概况">2019冬季新生赛概况&lt;/h2>
-&lt;p>由于今年懒得去嫖学校的服务器了，所以打算用公网服务器。本来在GCP和阿里云之间纠结用哪个，给我恰好滑稽给我提供了他在镇江的独服，于是建了一个16C，16G内存的虚拟机用作评测服务器（顺带送了个域名）。&lt;/p>
-&lt;p>这台服务器的网络结构比较复杂，首先，他是Windows Server，通过一个软件把某些端口的流量转发至一台Debian虚拟机中（为了方便管理证书等），然后由Debian上的Nginx反代至Domjudge的虚拟机中。这样我自己就不用配置证书也能有HTTPS。&lt;/p>
-&lt;p>但是Windows有一个老生常谈的坑：时间问题。Windows的硬件时钟是本地时间，而Linux为UTC时间，这导致了一开始Domjudge里的时间是假的，需要手动设置。&lt;/p>
-&lt;p>本次Domjudge的配置基本与之前相同，用Docker-compose一键部署。&lt;/p>
-&lt;p>之前一直没有做过压力测试一直是我的遗憾，这次在研究了Domjudge的&lt;a href="https://www.domjudge.org/demoweb/api/doc">API文档&lt;/a>之后，写了一个&lt;a href="./submit.py">自动交题的脚本&lt;/a>，并且用Locust辅助做压力测试，然后评测机不负众望炸了。。&lt;/p>
-&lt;p>&lt;img src="./image-20191208184458561.png" alt="image-20191208184458561">&lt;/p>
-&lt;p>其实还不止这个错，还有各种奇怪的错误。幸好在正式比赛中评测机表现得很稳健，并没有出锅，应该是压力还不够大。。&lt;/p>
-&lt;p>比赛时还碰到一个bug，在一道题重测后这道题的一血变更了，但是榜单上的一血是错的，重新刷新榜单也未解决。查看数据库表发现有一张叫&lt;code>scorecache&lt;/code>的表，推测该表即为榜单的缓存，于是更改&lt;code>is_first_solved&lt;/code>字段后，成功解决。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>使用KMS激活Visio</title><link>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</link><pubDate>Sat, 01 Dec 2018 23:11:38 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ -&lt;h2 id="题记">题记&lt;/h2>
-&lt;p>如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。&lt;/p>
-&lt;h2 id="转换visio版本">转换Visio版本&lt;/h2>
-&lt;p>我在&lt;a href="http://msdn.itellyou.cn/?lang=zh-cn">MSDN我告诉你&lt;/a>和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。&lt;/p>
-&lt;p>复制以下代码，保存为.bat文件并用管理员身份运行：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> exist &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span> cd /d &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles%\Microsoft Office\Office16&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> exist &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span> cd /d &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cscript ospp.vbs /rearm
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> /f %%x in &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;dir /b ..\root\Licenses16\visio???vl_kms*.xrm-ms&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> cscript ospp.vbs /inslic:&lt;span style="color:#e6db74">&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span> &amp;gt;nul
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> /f %%x in &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;dir /b ..\root\Licenses16\visio???vl_mak*.xrm-ms&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> cscript ospp.vbs /inslic:&lt;span style="color:#e6db74">&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span> &amp;gt;nul
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上命令的作用分别为：&lt;/p>
-&lt;ul>
-&lt;li>打开Office的安装目录（Visio也属于Office的一部分）&lt;/li>
-&lt;li>重置零售激活&lt;/li>
-&lt;li>安装KMS和MAK许可证（转换版本）&lt;/li>
-&lt;/ul>
-&lt;p>题外话：转换Office和Project版本同理。&lt;/p>
-&lt;p>Office：&lt;/p>
-&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /rearm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;一种（可能）简单的方式是先导入队伍再导入用户，并且用户 username 的后缀数字与 team_id 相同。不需要的字段可以直接留空。（不能缺少分隔符）&lt;/p&gt;
+&lt;p&gt;tsv 文件可以采用 Excel 生成。在 Excel 中输入完数据后选择另存为文本文件（制表符分隔）即可。&lt;/p&gt;
+&lt;p&gt;如需使用&lt;code&gt;institution_name institution_short_name country_code&lt;/code&gt; 三项需在 Team Affiliations 中提前创建相应的条目。&lt;/p&gt;
+&lt;h3 id="api"&gt;API&lt;/h3&gt;
+&lt;p&gt;参考官方的 API 说明，DOMjudge 包含&lt;a href="https://clics.ecs.baylor.edu/index.php/Contest_API"&gt; ICPC 定义的 API &lt;/a&gt;和&lt;a href="https://www.domjudge.org/demoweb/api/doc"&gt;自有的 API&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1545220336183.png" alt="1545220336183"&gt;&lt;/p&gt;
+&lt;h3 id="滚榜"&gt;滚榜&lt;/h3&gt;
+&lt;p&gt;尝试使用官方的 &lt;a href="https://icpc.baylor.edu/icpctools/"&gt;ICPC tools&lt;/a&gt;，发现总是提示比赛未结束，查阅日志认为是 DOMjudge 的 event feed 格式与 ICPC tools 提供的 resolver 工具的格式不兼容。&lt;/p&gt;
+&lt;p&gt;尝试 DOMjura 发现同样不能正确读取 event-feed 。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;2019年校赛补充：滚榜采用了 Github 上的&lt;a href="https://github.com/hex539/scoreboard"&gt;这个项目&lt;/a&gt;。这比官方的滚榜工具好用多了，但是也有坑。&lt;/p&gt;
+&lt;p&gt;首先它使用bazel作为构建工具，但是bazel对于Windows很不友好（至少对于这个项目而言），会有奇怪的报错。所以我使用了Ubuntu。其次，由于构建过程中大部分源都在国外，对于国内的网络环境来说很不友好。我的解决办法是使用proxychains代理bazel，实测无需任何配置即可支持Domjudge 7.1.1（2019/12/7）。&lt;/p&gt;
+&lt;h2 id="2018冬季新生赛概况"&gt;2018冬季新生赛概况&lt;/h2&gt;
+&lt;p&gt;闲扯几句。&lt;/p&gt;
+&lt;p&gt;热身赛一切良好。出题人数据出锅，被批判了一个多小时2333。&lt;/p&gt;
+&lt;p&gt;正式赛赛前比赛账号导入的时候，有个人是后来添加的，和之前的版本没有对应上，导致部分队伍登录到了后一个队伍的账号，重新导入 team 后发现无法登录，还需导入 accounts。这导致比赛推迟了 5 分钟。&lt;/p&gt;
+&lt;p&gt;由于 Submission 的输出数据是保留的，而赛前我的服务器硬盘空间本来就不多了，比赛时当服务器的硬盘占用达到 90% 时，所有 judgehost 就都被关了。我只能胡乱删几个软件包腾出空间。还好没有造成大的影响。&lt;/p&gt;
+&lt;p&gt;然后直到最后还是没有搞出滚榜。&lt;/p&gt;
+&lt;p&gt;GG。总体来说还是挺顺利的，服务器没有崩，甚至平均 CPU load 只有 1.0 左右，就是感觉比较吃 I/O，还好我用的是固态（&lt;del&gt;先见之明&lt;/del&gt;）。&lt;/p&gt;
+&lt;p&gt;总结一下，DOMjudge 体验极佳，可以在校赛再推广一波。&lt;/p&gt;
+&lt;h2 id="2019冬季新生赛概况"&gt;2019冬季新生赛概况&lt;/h2&gt;
+&lt;p&gt;由于今年懒得去嫖学校的服务器了，所以打算用公网服务器。本来在GCP和阿里云之间纠结用哪个，给我恰好滑稽给我提供了他在镇江的独服，于是建了一个16C，16G内存的虚拟机用作评测服务器（顺带送了个域名）。&lt;/p&gt;
+&lt;p&gt;这台服务器的网络结构比较复杂，首先，他是Windows Server，通过一个软件把某些端口的流量转发至一台Debian虚拟机中（为了方便管理证书等），然后由Debian上的Nginx反代至Domjudge的虚拟机中。这样我自己就不用配置证书也能有HTTPS。&lt;/p&gt;
+&lt;p&gt;但是Windows有一个老生常谈的坑：时间问题。Windows的硬件时钟是本地时间，而Linux为UTC时间，这导致了一开始Domjudge里的时间是假的，需要手动设置。&lt;/p&gt;
+&lt;p&gt;本次Domjudge的配置基本与之前相同，用Docker-compose一键部署。&lt;/p&gt;
+&lt;p&gt;之前一直没有做过压力测试一直是我的遗憾，这次在研究了Domjudge的&lt;a href="https://www.domjudge.org/demoweb/api/doc"&gt;API文档&lt;/a&gt;之后，写了一个&lt;a href="./submit.py"&gt;自动交题的脚本&lt;/a&gt;，并且用Locust辅助做压力测试，然后评测机不负众望炸了。。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20191208184458561.png" alt="image-20191208184458561"&gt;&lt;/p&gt;
+&lt;p&gt;其实还不止这个错，还有各种奇怪的错误。幸好在正式比赛中评测机表现得很稳健，并没有出锅，应该是压力还不够大。。&lt;/p&gt;
+&lt;p&gt;比赛时还碰到一个bug，在一道题重测后这道题的一血变更了，但是榜单上的一血是错的，重新刷新榜单也未解决。查看数据库表发现有一张叫&lt;code&gt;scorecache&lt;/code&gt;的表，推测该表即为榜单的缓存，于是更改&lt;code&gt;is_first_solved&lt;/code&gt;字段后，成功解决。&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/domjudge-config/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>使用KMS激活Visio</title><link>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</link><pubDate>Sat, 01 Dec 2018 23:11:38 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ -&lt;h2 id="题记"&gt;题记&lt;/h2&gt;
+&lt;p&gt;如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。&lt;/p&gt;
+&lt;h2 id="转换visio版本"&gt;转换Visio版本&lt;/h2&gt;
+&lt;p&gt;我在&lt;a href="http://msdn.itellyou.cn/?lang=zh-cn"&gt;MSDN我告诉你&lt;/a&gt;和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。&lt;/p&gt;
+&lt;p&gt;复制以下代码，保存为.bat文件并用管理员身份运行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; exist &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span&gt; cd /d &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles%\Microsoft Office\Office16&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; exist &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span&gt; cd /d &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cscript ospp.vbs /rearm
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; /f %%x in &lt;span style="color:#f92672"&gt;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;dir /b ..\root\Licenses16\visio???vl_kms*.xrm-ms&amp;#39;&lt;/span&gt;&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt; cscript ospp.vbs /inslic:&lt;span style="color:#e6db74"&gt;&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span&gt; &amp;gt;nul
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; /f %%x in &lt;span style="color:#f92672"&gt;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;dir /b ..\root\Licenses16\visio???vl_mak*.xrm-ms&amp;#39;&lt;/span&gt;&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt; cscript ospp.vbs /inslic:&lt;span style="color:#e6db74"&gt;&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span&gt; &amp;gt;nul
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以上命令的作用分别为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;打开Office的安装目录（Visio也属于Office的一部分）&lt;/li&gt;
+&lt;li&gt;重置零售激活&lt;/li&gt;
+&lt;li&gt;安装KMS和MAK许可证（转换版本）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;题外话：转换Office和Project版本同理。&lt;/p&gt;
+&lt;p&gt;Office：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;cscript ospp.vbs /rearm
 for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
 for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
-&lt;/code>&lt;/pre>&lt;p>Project：&lt;/p>
-&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /rearm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Project：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;cscript ospp.vbs /rearm
 for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\project???vl_kms*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
 for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\project???vl_mak*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
-&lt;/code>&lt;/pre>&lt;p>再跑下题，为什么要用批处理呢，因为这段命令直接在cmd里执行会出错，博主没学过Shell无法理解。（留下了没有知识的泪水）&lt;/p>
-&lt;h2 id="设置kms密钥及服务器">设置KMS密钥及服务器&lt;/h2>
-&lt;p>打开Office的安装目录，也就是代码里的&lt;code>%ProgramFiles%\Microsoft Office\Office16\&lt;/code>（64位）或者&lt;code>%ProgramFiles(x86)%\Microsoft Office\Office16\&lt;/code>（32位）。&lt;/p>
-&lt;p>按住Shift+右键，选择在此处打开PowerShell，输入：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-powershell" data-lang="powershell">&lt;span style="display:flex;">&lt;span>cscript ospp.vbs /inpkey&lt;span style="color:#960050;background-color:#1e0010">:&lt;/span>PD3PC-RHNGV-FXJ29-8JK7D-RJRJK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>来安装KMS密钥。注意以上命令中的KMS密钥只适用与Visio2016，其他版本可到&lt;a href="https://docs.microsoft.com/zh-cn/DeployOffice/vlactivation/gvlks">微软官方文档&lt;/a>中查询。&lt;/p>
-&lt;p>然后设置KMS服务器，博主用的是网上找的，以后尝试一下自己搭一个：&lt;/p>
-&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /sethst:xxx.xxx
-&lt;/code>&lt;/pre>&lt;p>由于不保证可用性，服务器名称已略去。&lt;/p>
-&lt;p>指令Office立即连接KMS服务器进行激活：&lt;/p>
-&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /act
-&lt;/code>&lt;/pre>&lt;p>完成！&lt;/p>
-&lt;h2 id="参考资料">参考资料&lt;/h2>
-&lt;p>&lt;a href="https://03k.org/kms.html">https://03k.org/kms.htm&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://segmentfault.com/a/1190000015697457">https://segmentfault.com/a/1190000015697457&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://blog.csdn.net/ywd1992/article/details/79412991">https://blog.csdn.net/ywd1992/article/details/79412991&lt;/a>&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Markdown简介</title><link>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</link><pubDate>Thu, 08 Nov 2018 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ -&lt;h2 id="什么是-markdown">&lt;strong>什么是 Markdown?&lt;/strong>&lt;/h2>
-&lt;p>Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。&lt;/p>
-&lt;p>&lt;img src="./Markdown-mark.svg.png" alt="哈哈哈">&lt;/p>
-&lt;hr>
-&lt;h3 id="markdown-vs-富文本">Markdown VS 富文本&lt;/h3>
-&lt;p>基于 Markdown 写作，是属于&lt;strong>纯文本&lt;/strong>写作。「纯文本」写作和「富文本」写作是对立的，我们来区分一下：&lt;/p>
-&lt;h4 id="富文本写作-">**「富文本」写作 **&lt;/h4>
-&lt;p>你平时在&lt;strong>Word&lt;/strong>上写作，就属于富文本写作。修改文字的大小、修改文字颜色、调整各种格式只需要点一下鼠标就行。富文本写作最大的特点是：&lt;strong>所见即所得&lt;/strong>，你把格式调整成什么样子，就会直接显示出什么样的效果。&lt;/p>
-&lt;p>然而，富文本的格式排版过于繁杂，以致于你不得不花费大量时间在这上面，而忽略了写作本身。&lt;/p>
-&lt;p>同时，富文本存在着&lt;strong>多平台转换不方便&lt;/strong>的问题，假如你在 Word 上写好了文档，格式也调好了，复制粘贴到其他写作平台的时候发现：&lt;strong>格式全乱啦&lt;/strong>；即使是转发给其他人也可能因为 Word 版本的不同而导致显示的差别很大。（如果你有过去打印店打印文档的经历的话，相信体会很深吧）富文本一般需要使用专用软件打开（如Word）。&lt;/p>
-&lt;h4 id="markdown写作">&lt;strong>「Markdown」写作&lt;/strong>&lt;/h4>
-&lt;p>基于 &lt;strong>Markdown&lt;/strong> 写作，就是纯文本写作。它允许人们使用纯文本格式来编写文档。如果你想设置某段文字的格式，只需要使用一些简单的符号来代表即可。所以&lt;strong>文字和格式都是纯文本&lt;/strong>。能够用普通的文本编辑器打开。&lt;/p>
-&lt;p>Markdown正好处在富文本的对立面，由于其简洁的特性，导致其格式只有寥寥几种，功能上也远不如富文本编辑器。&lt;/p>
-&lt;hr>
-&lt;p>&lt;strong>Markdown 的优点&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>纯文本所以&lt;strong>兼容性&lt;/strong>极强，可以用所有文本编辑器打开&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>让你更&lt;strong>专注于文字&lt;/strong>而不是排版&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>格式&lt;strong>转换方便&lt;/strong>，Markdown 文本你可以轻松转换为 html、电子书等&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Markdown 的标记语法有&lt;strong>极好的可读性&lt;/strong>&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;hr>
-&lt;p>&lt;strong>Markdown的主要用途&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>博客（自建、简书、CSDN等等）&lt;/li>
-&lt;li>笔记，随笔等&lt;/li>
-&lt;li>Github&lt;/li>
-&lt;/ul>
-&lt;h2 id="编辑器推荐">编辑器推荐&lt;/h2>
-&lt;ul>
-&lt;li>&lt;strong>Typora&lt;/strong> Markdown也能所见即所得！&lt;/li>
-&lt;/ul>
-&lt;h2 id="基本语法">基本语法&lt;/h2>
-&lt;p>Markdown语法主要分为如下几大部分： &lt;strong>标题&lt;/strong>，&lt;strong>段落&lt;/strong>，&lt;strong>区块引用&lt;/strong>，&lt;strong>代码区块&lt;/strong>，&lt;strong>强调&lt;/strong>，&lt;strong>列表&lt;/strong>，&lt;strong>分割线&lt;/strong>，&lt;strong>链接&lt;/strong>，&lt;strong>图片&lt;/strong>，&lt;strong>反斜杠 \&lt;/strong>，&lt;strong>行内引用&lt;/strong>。&lt;/p>
-&lt;h4 id="1-标题">1. 标题&lt;/h4>
-&lt;p>使用&lt;code>#&lt;/code>，可表示1-6级标题。&lt;/p>
-&lt;blockquote>
-&lt;p># 一级标题
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;再跑下题，为什么要用批处理呢，因为这段命令直接在cmd里执行会出错，博主没学过Shell无法理解。（留下了没有知识的泪水）&lt;/p&gt;
+&lt;h2 id="设置kms密钥及服务器"&gt;设置KMS密钥及服务器&lt;/h2&gt;
+&lt;p&gt;打开Office的安装目录，也就是代码里的&lt;code&gt;%ProgramFiles%\Microsoft Office\Office16\&lt;/code&gt;（64位）或者&lt;code&gt;%ProgramFiles(x86)%\Microsoft Office\Office16\&lt;/code&gt;（32位）。&lt;/p&gt;
+&lt;p&gt;按住Shift+右键，选择在此处打开PowerShell，输入：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cscript ospp.vbs /inpkey&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt;PD3PC-RHNGV-FXJ29-8JK7D-RJRJK
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;来安装KMS密钥。注意以上命令中的KMS密钥只适用与Visio2016，其他版本可到&lt;a href="https://docs.microsoft.com/zh-cn/DeployOffice/vlactivation/gvlks"&gt;微软官方文档&lt;/a&gt;中查询。&lt;/p&gt;
+&lt;p&gt;然后设置KMS服务器，博主用的是网上找的，以后尝试一下自己搭一个：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;cscript ospp.vbs /sethst:xxx.xxx
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;由于不保证可用性，服务器名称已略去。&lt;/p&gt;
+&lt;p&gt;指令Office立即连接KMS服务器进行激活：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;cscript ospp.vbs /act
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;完成！&lt;/p&gt;
+&lt;h2 id="参考资料"&gt;参考资料&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://03k.org/kms.html"&gt;https://03k.org/kms.htm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://segmentfault.com/a/1190000015697457"&gt;https://segmentfault.com/a/1190000015697457&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://blog.csdn.net/ywd1992/article/details/79412991"&gt;https://blog.csdn.net/ywd1992/article/details/79412991&lt;/a&gt;&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Markdown简介</title><link>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</link><pubDate>Thu, 08 Nov 2018 20:16:56 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ -&lt;h2 id="什么是-markdown"&gt;&lt;strong&gt;什么是 Markdown?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Markdown 是一种轻量级且易使用的标记语言，通过对标题、正文、加粗、链接等主要文本格式的预设编码，帮用户在写作中有效避免频繁的格式调整，获得更加流畅沉浸的写作体验。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./Markdown-mark.svg.png" alt="哈哈哈"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="markdown-vs-富文本"&gt;Markdown VS 富文本&lt;/h3&gt;
+&lt;p&gt;基于 Markdown 写作，是属于&lt;strong&gt;纯文本&lt;/strong&gt;写作。「纯文本」写作和「富文本」写作是对立的，我们来区分一下：&lt;/p&gt;
+&lt;h4 id="富文本写作-"&gt;**「富文本」写作 **&lt;/h4&gt;
+&lt;p&gt;你平时在&lt;strong&gt;Word&lt;/strong&gt;上写作，就属于富文本写作。修改文字的大小、修改文字颜色、调整各种格式只需要点一下鼠标就行。富文本写作最大的特点是：&lt;strong&gt;所见即所得&lt;/strong&gt;，你把格式调整成什么样子，就会直接显示出什么样的效果。&lt;/p&gt;
+&lt;p&gt;然而，富文本的格式排版过于繁杂，以致于你不得不花费大量时间在这上面，而忽略了写作本身。&lt;/p&gt;
+&lt;p&gt;同时，富文本存在着&lt;strong&gt;多平台转换不方便&lt;/strong&gt;的问题，假如你在 Word 上写好了文档，格式也调好了，复制粘贴到其他写作平台的时候发现：&lt;strong&gt;格式全乱啦&lt;/strong&gt;；即使是转发给其他人也可能因为 Word 版本的不同而导致显示的差别很大。（如果你有过去打印店打印文档的经历的话，相信体会很深吧）富文本一般需要使用专用软件打开（如Word）。&lt;/p&gt;
+&lt;h4 id="markdown写作"&gt;&lt;strong&gt;「Markdown」写作&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;基于 &lt;strong&gt;Markdown&lt;/strong&gt; 写作，就是纯文本写作。它允许人们使用纯文本格式来编写文档。如果你想设置某段文字的格式，只需要使用一些简单的符号来代表即可。所以&lt;strong&gt;文字和格式都是纯文本&lt;/strong&gt;。能够用普通的文本编辑器打开。&lt;/p&gt;
+&lt;p&gt;Markdown正好处在富文本的对立面，由于其简洁的特性，导致其格式只有寥寥几种，功能上也远不如富文本编辑器。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Markdown 的优点&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;纯文本所以&lt;strong&gt;兼容性&lt;/strong&gt;极强，可以用所有文本编辑器打开&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;让你更&lt;strong&gt;专注于文字&lt;/strong&gt;而不是排版&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;格式&lt;strong&gt;转换方便&lt;/strong&gt;，Markdown 文本你可以轻松转换为 html、电子书等&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Markdown 的标记语法有&lt;strong&gt;极好的可读性&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Markdown的主要用途&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;博客（自建、简书、CSDN等等）&lt;/li&gt;
+&lt;li&gt;笔记，随笔等&lt;/li&gt;
+&lt;li&gt;Github&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="编辑器推荐"&gt;编辑器推荐&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Typora&lt;/strong&gt; Markdown也能所见即所得！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="基本语法"&gt;基本语法&lt;/h2&gt;
+&lt;p&gt;Markdown语法主要分为如下几大部分： &lt;strong&gt;标题&lt;/strong&gt;，&lt;strong&gt;段落&lt;/strong&gt;，&lt;strong&gt;区块引用&lt;/strong&gt;，&lt;strong&gt;代码区块&lt;/strong&gt;，&lt;strong&gt;强调&lt;/strong&gt;，&lt;strong&gt;列表&lt;/strong&gt;，&lt;strong&gt;分割线&lt;/strong&gt;，&lt;strong&gt;链接&lt;/strong&gt;，&lt;strong&gt;图片&lt;/strong&gt;，&lt;strong&gt;反斜杠 \&lt;/strong&gt;，&lt;strong&gt;行内引用&lt;/strong&gt;。&lt;/p&gt;
+&lt;h4 id="1-标题"&gt;1. 标题&lt;/h4&gt;
+&lt;p&gt;使用&lt;code&gt;#&lt;/code&gt;，可表示1-6级标题。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;# 一级标题
 ## 二级标题
 ### 三级标题
 #### 四级标题
 ##### 五级标题
-###### 六级标题&lt;/p>&lt;/blockquote>
-&lt;p>效果：&lt;/p>
-&lt;blockquote>
-&lt;h1 id="一级标题">一级标题&lt;/h1>
-&lt;h2 id="二级标题">二级标题&lt;/h2>
-&lt;h3 id="三级标题">三级标题&lt;/h3>
-&lt;h4 id="四级标题">四级标题&lt;/h4>
-&lt;h5 id="五级标题">五级标题&lt;/h5>
-&lt;h6 id="六级标题">六级标题&lt;/h6>&lt;/blockquote>
-&lt;h4 id="2-段落">2. 段落&lt;/h4>
-&lt;p>段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用&lt;strong>两个以上&lt;/strong>空格加上回车（引用中换行省略回车）。&lt;/p>
-&lt;h4 id="3-区块引用">3. 区块引用&lt;/h4>
-&lt;p>在段落的每行或者只在第一行使用符号&lt;code>&amp;gt;&lt;/code>,还可使用多个嵌套引用，如：&lt;/p>
-&lt;blockquote>
-&lt;p>&amp;gt; 区块引用
-&amp;gt;&amp;gt; 嵌套引用&lt;/p>&lt;/blockquote>
-&lt;p>效果：&lt;/p>
-&lt;blockquote>
-&lt;p>区块引用&lt;/p>
-&lt;blockquote>
-&lt;p>嵌套引用&lt;/p>&lt;/blockquote>&lt;/blockquote>
-&lt;h4 id="4-代码区块">4. 代码区块&lt;/h4>
-&lt;p>1）代码区块的建立是在每行加上4个空格或者一个制表符（如同写代码一样）。如
-普通段落：&lt;/p>
-&lt;p>int main()
+###### 六级标题&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;效果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h1 id="一级标题"&gt;一级标题&lt;/h1&gt;
+&lt;h2 id="二级标题"&gt;二级标题&lt;/h2&gt;
+&lt;h3 id="三级标题"&gt;三级标题&lt;/h3&gt;
+&lt;h4 id="四级标题"&gt;四级标题&lt;/h4&gt;
+&lt;h5 id="五级标题"&gt;五级标题&lt;/h5&gt;
+&lt;h6 id="六级标题"&gt;六级标题&lt;/h6&gt;&lt;/blockquote&gt;
+&lt;h4 id="2-段落"&gt;2. 段落&lt;/h4&gt;
+&lt;p&gt;段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用&lt;strong&gt;两个以上&lt;/strong&gt;空格加上回车（引用中换行省略回车）。&lt;/p&gt;
+&lt;h4 id="3-区块引用"&gt;3. 区块引用&lt;/h4&gt;
+&lt;p&gt;在段落的每行或者只在第一行使用符号&lt;code&gt;&amp;gt;&lt;/code&gt;,还可使用多个嵌套引用，如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;gt; 区块引用
+&amp;gt;&amp;gt; 嵌套引用&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;效果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;区块引用&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;嵌套引用&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;h4 id="4-代码区块"&gt;4. 代码区块&lt;/h4&gt;
+&lt;p&gt;1）代码区块的建立是在每行加上4个空格或者一个制表符（如同写代码一样）。如
+普通段落：&lt;/p&gt;
+&lt;p&gt;int main()
 {
 printf(&amp;ldquo;Hello, Markdown.&amp;rdquo;);
-}&lt;/p>
-&lt;p>代码区块：&lt;/p>
-&lt;pre>&lt;code>int main()
+}&lt;/p&gt;
+&lt;p&gt;代码区块：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int main()
 {
 printf(&amp;quot;Hello, Markdown.&amp;quot;);
 }
-&lt;/code>&lt;/pre>
-&lt;p>&lt;strong>注意&lt;/strong>:需要和普通段落之间存在空行。&lt;/p>
-&lt;p>2）在代码区块的前后加上 ```&lt;/p>
-&lt;blockquote>
-&lt;p>```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;:需要和普通段落之间存在空行。&lt;/p&gt;
+&lt;p&gt;2）在代码区块的前后加上 ```&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;```
 hello,world
-```&lt;/p>&lt;/blockquote>
-&lt;p>效果为：&lt;/p>
-&lt;pre tabindex="0">&lt;code>hello，world
-&lt;/code>&lt;/pre>&lt;h4 id="5-强调">5. 强调&lt;/h4>
-&lt;p>在强调内容两侧分别加上&lt;code>*&lt;/code>或者&lt;code>_&lt;/code>，如：&lt;/p>
-&lt;blockquote>
-&lt;p>*斜体*，_斜体_
-*&lt;em>粗体*&lt;/em>，_&lt;em>粗体_&lt;/em>&lt;/p>&lt;/blockquote>
-&lt;p>效果：&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;em>斜体&lt;/em>，&lt;em>斜体&lt;/em>
-&lt;strong>粗体&lt;/strong>，&lt;strong>粗体&lt;/strong>&lt;/p>&lt;/blockquote>
-&lt;h4 id="6-列表">6. 列表&lt;/h4>
-&lt;p>使用&lt;code>·&lt;/code>、&lt;code>+&lt;/code>、或&lt;code>-&lt;/code>标记无序列表，如：&lt;/p>
-&lt;blockquote>
-&lt;p>-（+&lt;em>） 第一项 -（+&lt;/em>） 第二项 - （+*）第三项&lt;/p>&lt;/blockquote>
-&lt;p>&lt;strong>注意&lt;/strong>：标记后面最少有一个_空格_或_制表符_。若不在引用区块中，必须和前方段落之间存在空行。&lt;/p>
-&lt;p>效果：&lt;/p>
-&lt;blockquote>
-&lt;ul>
-&lt;li>第一项&lt;/li>
-&lt;li>第二项&lt;/li>
-&lt;li>第三项&lt;/li>
-&lt;/ul>&lt;/blockquote>
-&lt;p>有序列表的标记方式是将上述的符号换成数字,并辅以&lt;code>.&lt;/code>，如：&lt;/p>
-&lt;blockquote>
-&lt;p>1 . 第一项
+```&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;效果为：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;hello，world
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="5-强调"&gt;5. 强调&lt;/h4&gt;
+&lt;p&gt;在强调内容两侧分别加上&lt;code&gt;*&lt;/code&gt;或者&lt;code&gt;_&lt;/code&gt;，如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;*斜体*，_斜体_
+*&lt;em&gt;粗体*&lt;/em&gt;，_&lt;em&gt;粗体_&lt;/em&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;效果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;斜体&lt;/em&gt;，&lt;em&gt;斜体&lt;/em&gt;
+&lt;strong&gt;粗体&lt;/strong&gt;，&lt;strong&gt;粗体&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h4 id="6-列表"&gt;6. 列表&lt;/h4&gt;
+&lt;p&gt;使用&lt;code&gt;·&lt;/code&gt;、&lt;code&gt;+&lt;/code&gt;、或&lt;code&gt;-&lt;/code&gt;标记无序列表，如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;-（+&lt;em&gt;） 第一项 -（+&lt;/em&gt;） 第二项 - （+*）第三项&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：标记后面最少有一个_空格_或_制表符_。若不在引用区块中，必须和前方段落之间存在空行。&lt;/p&gt;
+&lt;p&gt;效果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;第一项&lt;/li&gt;
+&lt;li&gt;第二项&lt;/li&gt;
+&lt;li&gt;第三项&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;p&gt;有序列表的标记方式是将上述的符号换成数字,并辅以&lt;code&gt;.&lt;/code&gt;，如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1 . 第一项
 2 . 第二项
-3 . 第三项&lt;/p>&lt;/blockquote>
-&lt;p>效果：&lt;/p>
-&lt;blockquote>
-&lt;ol>
-&lt;li>第一项&lt;/li>
-&lt;li>第二项&lt;/li>
-&lt;li>第三项&lt;/li>
-&lt;/ol>&lt;/blockquote>
-&lt;h4 id="7-分割线">7. 分割线&lt;/h4>
-&lt;p>分割线最常使用就是三个或以上&lt;code>*&lt;/code>，还可以使用&lt;code>-&lt;/code>和&lt;code>_&lt;/code>。&lt;/p>
-&lt;blockquote>
-&lt;p>***&lt;/p>&lt;/blockquote>
-&lt;p>效果：&lt;/p>
-&lt;blockquote>
-&lt;hr>&lt;/blockquote>
-&lt;h4 id="8-链接">8. 链接&lt;/h4>
-&lt;p>使用 &lt;strong>[]()&lt;/strong> 在[]内输入链接的名称，()内输入链接的地址。&lt;/p>
-&lt;blockquote>
-&lt;p>[我的博客](&lt;a href="https://cjc7373.github.io">https://cjc7373.github.io&lt;/a>)&lt;/p>&lt;/blockquote>
-&lt;p>效果：&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;a href="https://cjc7373.github.io">我的博客&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;h4 id="9-图片">9. 图片&lt;/h4>
-&lt;p>添加图片的形式和链接相似，只需在链接的基础上前方加一个&lt;code>！&lt;/code>。&lt;/p>
-&lt;h4 id="10-反斜杠">10. 反斜杠&lt;code>\&lt;/code>&lt;/h4>
-&lt;p>相当于&lt;strong>反转义&lt;/strong>作用。使符号成为普通符号。&lt;/p>
-&lt;h4 id="11-行内引用">11. 行内引用&lt;/h4>
-&lt;p>在字符之间加上`，起到标记作用，相当于行内引用。如：&lt;/p>
-&lt;blockquote>
-&lt;p>`Too young`&lt;/p>&lt;/blockquote>
-&lt;p>效果：&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;code>Too young&lt;/code>&lt;/p>&lt;/blockquote>
-&lt;h2 id="拓展语法">拓展语法&lt;/h2>
-&lt;h4 id="1表格">1.表格&lt;/h4>
-&lt;pre tabindex="0">&lt;code>| 一个普通标题 | 一个普通标题 | 一个普通标题 |
+3 . 第三项&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;效果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;第一项&lt;/li&gt;
+&lt;li&gt;第二项&lt;/li&gt;
+&lt;li&gt;第三项&lt;/li&gt;
+&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;h4 id="7-分割线"&gt;7. 分割线&lt;/h4&gt;
+&lt;p&gt;分割线最常使用就是三个或以上&lt;code&gt;*&lt;/code&gt;，还可以使用&lt;code&gt;-&lt;/code&gt;和&lt;code&gt;_&lt;/code&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;***&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;效果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;hr&gt;&lt;/blockquote&gt;
+&lt;h4 id="8-链接"&gt;8. 链接&lt;/h4&gt;
+&lt;p&gt;使用 &lt;strong&gt;[]()&lt;/strong&gt; 在[]内输入链接的名称，()内输入链接的地址。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[我的博客](&lt;a href="https://cjc7373.github.io"&gt;https://cjc7373.github.io&lt;/a&gt;)&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;效果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://cjc7373.github.io"&gt;我的博客&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h4 id="9-图片"&gt;9. 图片&lt;/h4&gt;
+&lt;p&gt;添加图片的形式和链接相似，只需在链接的基础上前方加一个&lt;code&gt;！&lt;/code&gt;。&lt;/p&gt;
+&lt;h4 id="10-反斜杠"&gt;10. 反斜杠&lt;code&gt;\&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;相当于&lt;strong&gt;反转义&lt;/strong&gt;作用。使符号成为普通符号。&lt;/p&gt;
+&lt;h4 id="11-行内引用"&gt;11. 行内引用&lt;/h4&gt;
+&lt;p&gt;在字符之间加上`，起到标记作用，相当于行内引用。如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;`Too young`&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;效果：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Too young&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id="拓展语法"&gt;拓展语法&lt;/h2&gt;
+&lt;h4 id="1表格"&gt;1.表格&lt;/h4&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;| 一个普通标题 | 一个普通标题 | 一个普通标题 |
 | ------ | :------: | ------: |
 | 短文本 | 中等文本 | 稍微长一点的文本 |
 | 稍微长一点的文本 | 短文本 | 中等文本 |
-&lt;/code>&lt;/pre>&lt;p>&lt;code>------&lt;/code>用作标题和内容的分隔符，&lt;code>:&lt;/code>用来控制对齐方式，上述表格的效果如下：&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>一个普通标题&lt;/th>
-&lt;th style="text-align: center">一个普通标题&lt;/th>
-&lt;th style="text-align: right">一个普通标题&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>短文本&lt;/td>
-&lt;td style="text-align: center">中等文本&lt;/td>
-&lt;td style="text-align: right">稍微长一点的文本&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>稍微长一点的文本&lt;/td>
-&lt;td style="text-align: center">短文本&lt;/td>
-&lt;td style="text-align: right">中等文本&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-- https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>关于我</title><link>https://blog.coherence.codes/posts/2020_and_before/about_me/</link><pubDate>Sat, 03 Nov 2018 16:37:04 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/about_me/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/about_me/ -&lt;h2 id="关于我">关于我&lt;/h2>
-&lt;p>博主是一名大四学生。&lt;/p>
-&lt;ul>
-&lt;li>爱好一切数码产品&lt;/li>
-&lt;li>安卓（伪）瞎折腾党&lt;/li>
-&lt;li>ACM 打铁选手&lt;/li>
-&lt;li>Linux 初学者&lt;/li>
-&lt;li>科幻爱好者&lt;/li>
-&lt;/ul>
-&lt;h2 id="关于博客">关于博客&lt;/h2>
-&lt;ul>
-&lt;li>2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑&lt;/li>
-&lt;li>2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件&lt;/li>
-&lt;li>2020-02-22 更改评论为 &lt;code>disqusjs&lt;/code>，详见作者的&lt;a href="https://blog.skk.moe/post/disqusjs/">博文&lt;/a>；启用 &lt;a href="https://github.com/theme-next/theme-next-pjax">pjax&lt;/a>&lt;/li>
-&lt;li>2019-12-24 启用新域名&lt;code>blog.coherence.codes&lt;/code>&lt;/li>
-&lt;li>2019-10-07 升级主题至 Next V7.4.1&lt;/li>
-&lt;li>2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见&lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/">Hexo搭建小记&lt;/a>这篇文章&lt;/li>
-&lt;/ul>
-&lt;h2 id="联系我">联系我&lt;/h2>
-&lt;p>Telegram：@Coherence0&lt;/p>
-&lt;p>Email：niuchangcun AT gmail.com&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/about_me/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ -&lt;blockquote>
-&lt;p>这就是乱改字体的后果..&lt;/p>&lt;/blockquote>
-&lt;p>字体修复，不只是字体修复。&lt;/p>
-&lt;h2 id="事由">事由&lt;/h2>
-&lt;p>偶然间看到一篇&lt;a href="http://www.dgtle.com/article-25875-1.html">替换Win10字体来提升字体观感的文章&lt;/a>，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。&lt;/p>
-&lt;p>然而，使用了一段时间后发现，所有的字体似乎都小了一圈，而且在cmd中出现了字体大小错乱的情况。网上找了一圈发现Win10砍掉了调整字体大小的功能，现在只能以整体缩放来调整字体大小。新的字体感觉也没有想象中的那么好。&lt;/p>
-&lt;p>于是我把备份的默认字体又恢复了回去，按道理不会出事，然而我的电脑出锅了。一些软件的中文字体成了方框，cmd的字体也变得很奇怪。&lt;/p>
-&lt;h2 id="解决方法">解决方法&lt;/h2>
-&lt;p>一番操作之后，发现设置里的新宋体是乱码，感觉可能是字体文件崩了。&lt;/p>
-&lt;p>&lt;img src="./1541154864085.png" alt="1541154864085">&lt;/p>
-&lt;p>但是&lt;code>simsunb.ttf&lt;/code>这个文件我分明备份过。。&lt;/p>
-&lt;p>没办法，继续面向Google解决问题，这时候找到了一个&lt;a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-ime/%E5%9C%A8windows/d575f11c-1f2e-454c-9fcd-432809f7fd76">微软社区页面&lt;/a>，里面给出了三条命令：&lt;/p>
-&lt;pre tabindex="0">&lt;code>DISM.exe /Online /Cleanup-image /Scanhealth
-DISM.exe /Online /Cleanup-image /Restorehealth
-sfc /scannow
-&lt;/code>&lt;/pre>&lt;p>根据&lt;a href="https://support.microsoft.com/zh-cn/help/947821/fix-windows-update-errors-by-using-the-dism-or-system-update-readiness">微软官方支持页面&lt;/a>的描述，这三个命令是检查系统文件的完整性并自动通过 Windows 更新来修复。&lt;/p>
-&lt;p>用管理员身份打开cmd，依次执行完重启，一切都恢复了原状。&lt;/p>
-&lt;h2 id="后记">后记&lt;/h2>
-&lt;p>看了一些&lt;a href="https://www.zhihu.com/question/274344133">知乎回答&lt;/a>，感觉Win10的字体也并没有那么糟糕。事实上我一直以来用着默认的字体也没有感到不舒服。&lt;del>可能是我眼瞎吧。&lt;/del>&lt;/p>
-&lt;p>另外，上述的三个命令理论上能解决Windows的许多问题，碰到问题可以尝试。&lt;/p>
-&lt;h4 id="2019213-更新">2019/2/13 更新&lt;/h4>
-&lt;p>目前家里入了 4K 显示器，200% 缩放，观感上没有任何问题。&lt;/p>
-- https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;------&lt;/code&gt;用作标题和内容的分隔符，&lt;code&gt;:&lt;/code&gt;用来控制对齐方式，上述表格的效果如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;一个普通标题&lt;/th&gt;
+&lt;th style="text-align: center"&gt;一个普通标题&lt;/th&gt;
+&lt;th style="text-align: right"&gt;一个普通标题&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;短文本&lt;/td&gt;
+&lt;td style="text-align: center"&gt;中等文本&lt;/td&gt;
+&lt;td style="text-align: right"&gt;稍微长一点的文本&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;稍微长一点的文本&lt;/td&gt;
+&lt;td style="text-align: center"&gt;短文本&lt;/td&gt;
+&lt;td style="text-align: right"&gt;中等文本&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+- https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>关于我</title><link>https://blog.coherence.codes/posts/2020_and_before/about_me/</link><pubDate>Sat, 03 Nov 2018 16:37:04 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/about_me/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/about_me/ -&lt;h2 id="关于我"&gt;关于我&lt;/h2&gt;
+&lt;p&gt;博主是一名大四学生。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;爱好一切数码产品&lt;/li&gt;
+&lt;li&gt;安卓（伪）瞎折腾党&lt;/li&gt;
+&lt;li&gt;ACM 打铁选手&lt;/li&gt;
+&lt;li&gt;Linux 初学者&lt;/li&gt;
+&lt;li&gt;科幻爱好者&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="关于博客"&gt;关于博客&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑&lt;/li&gt;
+&lt;li&gt;2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件&lt;/li&gt;
+&lt;li&gt;2020-02-22 更改评论为 &lt;code&gt;disqusjs&lt;/code&gt;，详见作者的&lt;a href="https://blog.skk.moe/post/disqusjs/"&gt;博文&lt;/a&gt;；启用 &lt;a href="https://github.com/theme-next/theme-next-pjax"&gt;pjax&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2019-12-24 启用新域名&lt;code&gt;blog.coherence.codes&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;2019-10-07 升级主题至 Next V7.4.1&lt;/li&gt;
+&lt;li&gt;2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见&lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/"&gt;Hexo搭建小记&lt;/a&gt;这篇文章&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="联系我"&gt;联系我&lt;/h2&gt;
+&lt;p&gt;Telegram：@Coherence0&lt;/p&gt;
+&lt;p&gt;Email：niuchangcun AT gmail.com&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/about_me/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

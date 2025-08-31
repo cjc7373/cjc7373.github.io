@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NAS on Coherence's Blog</title><link>https://blog.coherence.codes/tags/nas/</link><description>Recent content in NAS on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/nas/index.xml" rel="self" type="application/rss+xml"/><item><title>我的 NAS 方案</title><link>https://blog.coherence.codes/posts/2025/my_nas_plan/</link><pubDate>Sun, 13 Jul 2025 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2025/my_nas_plan/</guid><description>&lt;p&gt;很久之前，我就有组一个 NAS 的想法，直到今年才得以实现。&lt;/p&gt;
+&lt;h2 id="选型"&gt;选型&lt;/h2&gt;
+&lt;p&gt;首先就是选择成品 NAS 还是 DIY。我并没有 NAS 的刚需，只是想在折腾中学习，所以自然是选择 DIY。基于战未来的考虑，直接选了个八盘位的机箱，而 CPU 方面目前看来没什么吃性能的应用，所以选了 n100。最终的配置如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;板U 云星 n100 550&lt;/li&gt;
+&lt;li&gt;m2 转 sata 拓展卡 75&lt;/li&gt;
+&lt;li&gt;机箱 乔思伯 n3 740&lt;/li&gt;
+&lt;li&gt;内存 拆机 8G 0&lt;/li&gt;
+&lt;li&gt;电源 Thermaltake 450W 钢影 SFX 420&lt;/li&gt;
+&lt;li&gt;系统盘 宏碁 128g 70&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;合计 1850。这其中电源感觉严重冗余了，因为后面实测待机功率才 30w 左右。但是机箱只支持 SFX 电源，而低功率的 SFX 电源似乎比较少，350w 的 SFX 都挺垃圾的。说句题外话，在很久之前我的 nas 配置单上选的还是 i3-10100，那时候 12 代还没出..&lt;/p&gt;
+&lt;p&gt;软件同样有成品 NAS 系统和 DIY 可选，DIY 系统（比如装一个普通的 Linux 发行版）太费时费力了，所以还是选择成品的 NAS 系统。网上流行的 NAS 系统大概有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;unraid，正如其名字所说的，没有 raid。整体是 JBOD（Just a Bunch of Disks）的思路，有单独的 parity disk。由于 data disk 的容量并不要求一致，所以 parity disk 要求大于等于最大的 data disk 容量。parity 用的也是奇偶校验。非开源，需付费购买授权，当然也有学习版。&lt;/li&gt;
+&lt;li&gt;黑群晖，优势是能使用群晖生态系统中的软件，但是由于是逆向出来的，难免有各种兼容性问题。使用 btrfs 作为文件系统，mdadm 管理阵列。&lt;/li&gt;
+&lt;li&gt;TrueNAS，基于 zfs，开源。开发商 ixsystems 本身也赞助了一些 zfs feature 的开发。卖企业版，也卖类似一体机的硬件。&lt;/li&gt;
+&lt;li&gt;飞牛，国产的 NAS 系统。非开源，免费使用。面向小白用户，基本能够开箱即用。似乎也是 btrfs+mdadm 的组合。后面应该会卖硬件。&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;（混沌邪恶）&lt;/del&gt; Windows Server&lt;/li&gt;
+&lt;li&gt;OpenMediaVault，相对知名度没那么高的 NAS 系统，是从 FreeNAS（TrueNAS 的前身）fork 出来的。据维基百科介绍，这是因为 OMV 的开发者想要基于 Linux 来开发 FreeNAS。略显讽刺的是，truenas 在 2023 年宣布将全面转向 Linux，原先的 FreeBSD 版本（TrueNAS Core）将只会收到安全更新并被逐渐取代。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在这之上，还可以先安装 PVE 作为虚拟化平台，然后在虚拟机里安装 NAS 系统。由于我很早的时候就看到过很多“鼓吹” zfs 的文章，所以文件系统的选型在一开始就定下了：zfs。并且我比较偏好开源系统，所以最终选择了 truenas。&lt;/p&gt;</description></item></channel></rss>

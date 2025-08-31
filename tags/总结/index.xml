@@ -1,159 +1,159 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>总结 on Coherence's Blog</title><link>https://blog.coherence.codes/tags/%E6%80%BB%E7%BB%93/</link><description>Recent content in 总结 on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml"/><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>&lt;p>又到了传统艺能&lt;del>年终&lt;/del>年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..&lt;/p>
-&lt;h2 id="2020-总结">2020 总结&lt;/h2>
-&lt;p>一句话总结的话, 知识的广度提升了, 深度还不够, 学习状态仍旧不能让自己满意. 以及这一年我始终在担心有没有学上, 找不找得到工作.&lt;/p>
-&lt;h3 id="学业">学业&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;p>由于疫情的爆发, 导致了 2020 春季学期完全在家上课, 更加方便摸鱼了(&lt;/p>
-&lt;p>一开始港哥在群里说武汉疫情的时候, 我还不觉得这是什么大事, 后来才发现我错得离谱.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>二月底到三月初, 陆续投了几个实习, 被拒了几个, 后来决定考研之后, 又鸽了几个&lt;/p>
-&lt;p>&lt;img src="./image-20210225125307219.png" alt="image-20210225125307219">&lt;/p>
-&lt;p>说实话我对以后能不能找到工作还是有点怀疑的..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>从三月开始, 断断续续地开始准备考研了, 然而实际上还是不够努力吧, 到考试前一天我还没完全搞懂二次型..&lt;/p>
-&lt;p>不过从时间上来说, 暑假之后就全力准备考研了..&lt;/p>
-&lt;p>我很想说考研让我变得更沉得下心来学习了, 但事实上这并不是真的.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>只准备了两三天之后 (因为太晚看到了), 尝试申请了一下 GSoC, 不出意外凉了..&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>七月到十月, 参加开源之夏, 也算是赚到了人生的第一桶金吧&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="玩">玩&lt;/h3>
-&lt;ul>
-&lt;li>一月, 去滑雪+攀岩, 还是挺有意思的&lt;/li>
-&lt;li>二月初, 折腾了一下 Windows 10 on Arm for Lumia 1520, 并没有什么用, 于是继续吃灰&lt;/li>
-&lt;li>七月, 乘着沪通铁路的开通, 去上海玩了一次, 居然被我碰到了一次高铁延误..&lt;/li>
-&lt;/ul>
-&lt;h3 id="环境">环境&lt;/h3>
-&lt;ul>
-&lt;li>二月末, 开始搞 Manjaro, 一开始两个系统都用, 逐渐就只用 Linux 了 (特别是我发现了 proton 和 lutris 之后..)&lt;/li>
-&lt;li>三月初, 开始尝试 Typora+第三方云同步&lt;/li>
-&lt;li>七月, 从 Onedrive 转向 Syncthing (是不是有一种 Anything can be self-hosted 的趋势呢..&lt;/li>
-&lt;/ul>
-&lt;h3 id="书">书&lt;/h3>
-&lt;p>本年度仍然没有怎么看书..&lt;/p></description></item><item><title>2019年终总结&amp;2020展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</link><pubDate>Sat, 01 Feb 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</guid><description>&lt;p>又是一年一度的年终总结时间了，进入二十一世纪的第二个十年，我的心情十分激动……&lt;/p>
-&lt;!-- raw HTML omitted -->
-&lt;p>好吧，激动是假的。时空是连续的，进入2020和平常的一天没有任何区别。转眼间已经来到了庚子鼠年的大年初八，我恍然记得我的年终总结还没有写，于是准备把这个传统艺能发扬下去，也看一看2019定的目标完成了多少。&lt;/p>
-&lt;h2 id="2019-总结">2019 总结&lt;/h2>
-&lt;p>时间及事件依据：印象笔记、Google 相册、我的记忆、Telegram。&lt;/p>
-&lt;p>事件尽量归类，未归类的大致以时间顺序排列。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>找到了一个&lt;del>记录生活&lt;/del>吐槽的平台。&lt;/p>
-&lt;p>&lt;img src="./image-20200201201451074.png" alt="image-20200201201451074">&lt;/p>
-&lt;p>这个channel的内容输入延续至今。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>一月，金工实习和数学建模美赛，虽然没学到什么，还是挺有意思的。&lt;/p>
-&lt;p>&lt;img src="./image-20200201202345974.png" alt="image-20200201202345974">&lt;/p>
-&lt;p>图为某数控机床。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>三月上旬，重新开始在印象笔记写日记。三月末更换至纸质方式。&lt;/p>
-&lt;p>之后觉得日记意义不大，更换为每日计划，但是没有坚持。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>三月，在外租房居住。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>三月和十二月，分别安排了我校ACM的校赛和新生赛。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;img src="./image-20200201215603263.png" alt="image-20200201215603263">&lt;/p>
-&lt;p>请记住我这句话，都是泪。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>寒假里把N1刷了一遍OMV，但存储只有一个U盘。暑假刷回了无灯的固件，买了个硬盘盒+320G机械，勉强能当NAS来用。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Ingress，从入坑到弃坑，大概是二月到五月的事。&lt;del>（其实以前玩过&lt;/del>&lt;/p>
-&lt;p>因为这个游戏还出去玩了挺多次的。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>三月末，开始入坑Arch Linux。&lt;/p>
-&lt;p>然后发现这是个巨坑。（折腾万岁&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>投资方面。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>和去年没多大变化吧。看的还是那两个人，还是没有系统地学经济学。只不过跟着大盘走盈利了一些罢了。&lt;/p>
-&lt;p>&lt;img src="./image-20200222105649825.png" alt="image-20200222105649825">&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>英语方面。自我感觉英语能力有了较大提升。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>年度英美刷剧（和去年总结对比了一下）：Friends二刷，The Newsroom，Person of Interest 两季，The IT Crowd一季多。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>十月份想去考一考托福，大概也学了一段时间，后来无限期搁置了。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>用Kindle读原著方面，把三体一看完了，又开了个哈利波特的坑，也看完了第一部。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>我看了多少书？&lt;/p>
-&lt;ul>
-&lt;li>买了好多书。&lt;del>（然而都没有看&lt;/del>&lt;/li>
-&lt;li>Linux&amp;amp;Unix大学教程基本看完了。后来又买了本鸟哥的，还没看。&lt;/li>
-&lt;li>Head First with HTML&amp;amp;CSS 还剩最后两章没看。&lt;/li>
-&lt;li>Computer Networking: A Top-down Approach，18年7月在图书馆里借了第五版影印版，一年基本没看，大三上由于要学计算机网络，好歹看了点，后又从淘宝打印了第七版英文版，看了三分之二左右。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>四月初，启用了Digital Wellbeing，但是并没有起到限制玩手机时间的作用。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>四月末，参加了一次西安GDG活动。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>剁手记录。&lt;/p>
-&lt;ul>
-&lt;li>二月初，给家中置换了一个新的显示器，淘汰了老AOC 21&amp;rsquo; 1680*1050 服役十二年的历史。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="./image-20200201203042582.png" alt="image-20200201203042582">&lt;/p>
-&lt;p>图为 AOC 27&amp;rsquo; 4K 某型号。&lt;/p></description></item><item><title>2018年终总结&amp;2019展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</link><pubDate>Mon, 11 Feb 2019 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</guid><description>&lt;p>今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。&lt;/p>
-&lt;h2 id="2018-总结">2018 总结&lt;/h2>
-&lt;p>时间及事件依据：印象笔记、Google 相册、我的记忆。&lt;/p>
-&lt;p>事件大致以时间顺序排列。&lt;/p>
-&lt;ul>
-&lt;li>一月初，经历了在西安的第一场雪。&lt;/li>
-&lt;li>（时间未知）使用了 Windows 运行来快速启动程序，&lt;del>（感觉上）大大提高了效率&lt;/del>（不（感觉装逼才是真的&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="./1549962279010.png" alt="1549962279010">&lt;/p>
-&lt;ul>
-&lt;li>从 1.13 开始寒假训练， 3.24 校赛，3.31 天梯赛，5.17 左右 ACM省赛，7.19 开始暑假多校训练，10.26 徐州区域赛， 11.23 深圳 CCPC 总决赛，整个一年我算是比较积极地参与 ACM-ICPC 竞赛（虽然下半年逐渐开始划水&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="./1550032126921.png" alt="1550032126921">
-（六张照片依次为 CCPC、寒假训练、省赛、校赛、天梯赛、徐州区域赛）&lt;/p>
-&lt;ul>
-&lt;li>一月末，开始种草轻薄本，并寻求把游戏本卖了，未果。&lt;/li>
-&lt;li>从年初开始，用空闲资金进行投资，并开始学习相关知识。一月末我第一次买入了一个基金，入坑。一开始赚了点钱很高兴，后来贸易战开始就亏了。七月初买了一本金融方面的书然而并没有看多少。八月开始跟投某大V的投资计划，九月末把主要账户转移到且慢。回想起一开始什么都不懂就冲着某个行业买基金，现在慢慢有些了解但知识仍然很浅薄。时刻要提醒自己：不要盲从。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="./1550032359691.png" alt="1550032359691">&lt;/p>
-&lt;ul>
-&lt;li>定下（并践行）了在美（英）剧中学英语的目标，然后每当我看剧时总是自我安慰同时我也在&lt;del>学习&lt;/del>（并没有）。&lt;/li>
-&lt;/ul>
-&lt;p>到目前为止看过的剧有（不限于18年）：Friends，Sherlock，Black Mirror 一季， The IT Crowd 两季，Monday Mornings，Greys Anatomy 一季， Person of Interest 三季，Modern Family 半季多&lt;/p>
-&lt;ul>
-&lt;li>从3月份开始，我开始撸 DigitalOcean 的 Github 学生优惠，到现在为止服务器运维的相关知识增长地挺快&amp;hellip;应该是从大学开始吧，我开始用VPS自建SS，一开始是 Cloudcone 还是 Vultr 后来撸到了 DO，再后来19年年初的时候知道了一个超便宜的深港专线，后来又撸了阿里云的学生机。&lt;/li>
-&lt;li>四月中旬看了死亡诗社，Seize the day 成了我的座右铭，虽然我一直没有做到这一点。&lt;/li>
-&lt;li>整个一年我总有一种感觉，学习不在状态，有时候一直陷入一种昏昏沉沉的状态，那种状态下，犯困，没有学习的心思，干其他事也提不起兴趣。仿佛就在虚度光阴。从那个寒假开始我就（似乎）养成了不良的生活习惯。&lt;/li>
-&lt;li>四五月份入了创新IE3P 和 iPad 2018，拔草成功，却没有对我的学习质量有多大的改善。后来又开始种草蓝牙降噪耳机&amp;hellip;&lt;/li>
-&lt;li>六月末，转专业考试。一年中最重要的一件事，从环境科学与工程转到了软件工程专业，进入了理想的专业。&lt;/li>
-&lt;li>然而同时打算换宿舍的（非常不喜欢我们宿舍的氛围和作息），最终没有成功。后来也尝试过 Bose Sleepbuds 这个方案，效果不佳。遂产生了租房的想法。&lt;/li>
-&lt;li>尝试读英文原著，从大一上开始读星际穿越的剧本，读到18年年中读完了。然后开始看三体的英文版，到现在看了一半多。&lt;/li>
-&lt;li>九月中旬开始用 Excel 记账，对日常消费进行记录和管理，持续至今。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="./1550035065769.png" alt="1550035065769">&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>总结 on Coherence's Blog</title><link>https://blog.coherence.codes/tags/%E6%80%BB%E7%BB%93/</link><description>Recent content in 总结 on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/%E6%80%BB%E7%BB%93/index.xml" rel="self" type="application/rss+xml"/><item><title>2020年终总结&amp;2021展望</title><link>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</link><pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/2020summary_2021plan/</guid><description>&lt;p&gt;又到了传统艺能&lt;del&gt;年终&lt;/del&gt;年初总结时间, 在一天鸽一天的情况之下, 今天已经是正月十四了..&lt;/p&gt;
+&lt;h2 id="2020-总结"&gt;2020 总结&lt;/h2&gt;
+&lt;p&gt;一句话总结的话, 知识的广度提升了, 深度还不够, 学习状态仍旧不能让自己满意. 以及这一年我始终在担心有没有学上, 找不找得到工作.&lt;/p&gt;
+&lt;h3 id="学业"&gt;学业&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;由于疫情的爆发, 导致了 2020 春季学期完全在家上课, 更加方便摸鱼了(&lt;/p&gt;
+&lt;p&gt;一开始港哥在群里说武汉疫情的时候, 我还不觉得这是什么大事, 后来才发现我错得离谱.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;二月底到三月初, 陆续投了几个实习, 被拒了几个, 后来决定考研之后, 又鸽了几个&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20210225125307219.png" alt="image-20210225125307219"&gt;&lt;/p&gt;
+&lt;p&gt;说实话我对以后能不能找到工作还是有点怀疑的..&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从三月开始, 断断续续地开始准备考研了, 然而实际上还是不够努力吧, 到考试前一天我还没完全搞懂二次型..&lt;/p&gt;
+&lt;p&gt;不过从时间上来说, 暑假之后就全力准备考研了..&lt;/p&gt;
+&lt;p&gt;我很想说考研让我变得更沉得下心来学习了, 但事实上这并不是真的.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;只准备了两三天之后 (因为太晚看到了), 尝试申请了一下 GSoC, 不出意外凉了..&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;七月到十月, 参加开源之夏, 也算是赚到了人生的第一桶金吧&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="玩"&gt;玩&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;一月, 去滑雪+攀岩, 还是挺有意思的&lt;/li&gt;
+&lt;li&gt;二月初, 折腾了一下 Windows 10 on Arm for Lumia 1520, 并没有什么用, 于是继续吃灰&lt;/li&gt;
+&lt;li&gt;七月, 乘着沪通铁路的开通, 去上海玩了一次, 居然被我碰到了一次高铁延误..&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="环境"&gt;环境&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;二月末, 开始搞 Manjaro, 一开始两个系统都用, 逐渐就只用 Linux 了 (特别是我发现了 proton 和 lutris 之后..)&lt;/li&gt;
+&lt;li&gt;三月初, 开始尝试 Typora+第三方云同步&lt;/li&gt;
+&lt;li&gt;七月, 从 Onedrive 转向 Syncthing (是不是有一种 Anything can be self-hosted 的趋势呢..&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="书"&gt;书&lt;/h3&gt;
+&lt;p&gt;本年度仍然没有怎么看书..&lt;/p&gt;</description></item><item><title>2019年终总结&amp;2020展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</link><pubDate>Sat, 01 Feb 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2019summary_2020plan/</guid><description>&lt;p&gt;又是一年一度的年终总结时间了，进入二十一世纪的第二个十年，我的心情十分激动……&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;好吧，激动是假的。时空是连续的，进入2020和平常的一天没有任何区别。转眼间已经来到了庚子鼠年的大年初八，我恍然记得我的年终总结还没有写，于是准备把这个传统艺能发扬下去，也看一看2019定的目标完成了多少。&lt;/p&gt;
+&lt;h2 id="2019-总结"&gt;2019 总结&lt;/h2&gt;
+&lt;p&gt;时间及事件依据：印象笔记、Google 相册、我的记忆、Telegram。&lt;/p&gt;
+&lt;p&gt;事件尽量归类，未归类的大致以时间顺序排列。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;找到了一个&lt;del&gt;记录生活&lt;/del&gt;吐槽的平台。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20200201201451074.png" alt="image-20200201201451074"&gt;&lt;/p&gt;
+&lt;p&gt;这个channel的内容输入延续至今。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一月，金工实习和数学建模美赛，虽然没学到什么，还是挺有意思的。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20200201202345974.png" alt="image-20200201202345974"&gt;&lt;/p&gt;
+&lt;p&gt;图为某数控机床。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;三月上旬，重新开始在印象笔记写日记。三月末更换至纸质方式。&lt;/p&gt;
+&lt;p&gt;之后觉得日记意义不大，更换为每日计划，但是没有坚持。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;三月，在外租房居住。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;三月和十二月，分别安排了我校ACM的校赛和新生赛。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;img src="./image-20200201215603263.png" alt="image-20200201215603263"&gt;&lt;/p&gt;
+&lt;p&gt;请记住我这句话，都是泪。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;寒假里把N1刷了一遍OMV，但存储只有一个U盘。暑假刷回了无灯的固件，买了个硬盘盒+320G机械，勉强能当NAS来用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ingress，从入坑到弃坑，大概是二月到五月的事。&lt;del&gt;（其实以前玩过&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;因为这个游戏还出去玩了挺多次的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;三月末，开始入坑Arch Linux。&lt;/p&gt;
+&lt;p&gt;然后发现这是个巨坑。（折腾万岁&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;投资方面。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;和去年没多大变化吧。看的还是那两个人，还是没有系统地学经济学。只不过跟着大盘走盈利了一些罢了。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20200222105649825.png" alt="image-20200222105649825"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;英语方面。自我感觉英语能力有了较大提升。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;年度英美刷剧（和去年总结对比了一下）：Friends二刷，The Newsroom，Person of Interest 两季，The IT Crowd一季多。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;十月份想去考一考托福，大概也学了一段时间，后来无限期搁置了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;用Kindle读原著方面，把三体一看完了，又开了个哈利波特的坑，也看完了第一部。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;我看了多少书？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;买了好多书。&lt;del&gt;（然而都没有看&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;Linux&amp;amp;Unix大学教程基本看完了。后来又买了本鸟哥的，还没看。&lt;/li&gt;
+&lt;li&gt;Head First with HTML&amp;amp;CSS 还剩最后两章没看。&lt;/li&gt;
+&lt;li&gt;Computer Networking: A Top-down Approach，18年7月在图书馆里借了第五版影印版，一年基本没看，大三上由于要学计算机网络，好歹看了点，后又从淘宝打印了第七版英文版，看了三分之二左右。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;四月初，启用了Digital Wellbeing，但是并没有起到限制玩手机时间的作用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;四月末，参加了一次西安GDG活动。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;剁手记录。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;二月初，给家中置换了一个新的显示器，淘汰了老AOC 21&amp;rsquo; 1680*1050 服役十二年的历史。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="./image-20200201203042582.png" alt="image-20200201203042582"&gt;&lt;/p&gt;
+&lt;p&gt;图为 AOC 27&amp;rsquo; 4K 某型号。&lt;/p&gt;</description></item><item><title>2018年终总结&amp;2019展望</title><link>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</link><pubDate>Mon, 11 Feb 2019 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/2018summary_2019plan/</guid><description>&lt;p&gt;今天是己亥猪年的大年初七，很惭愧到今天我才想起寒假前就想写的年终总结还没有写。&lt;/p&gt;
+&lt;h2 id="2018-总结"&gt;2018 总结&lt;/h2&gt;
+&lt;p&gt;时间及事件依据：印象笔记、Google 相册、我的记忆。&lt;/p&gt;
+&lt;p&gt;事件大致以时间顺序排列。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一月初，经历了在西安的第一场雪。&lt;/li&gt;
+&lt;li&gt;（时间未知）使用了 Windows 运行来快速启动程序，&lt;del&gt;（感觉上）大大提高了效率&lt;/del&gt;（不（感觉装逼才是真的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="./1549962279010.png" alt="1549962279010"&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从 1.13 开始寒假训练， 3.24 校赛，3.31 天梯赛，5.17 左右 ACM省赛，7.19 开始暑假多校训练，10.26 徐州区域赛， 11.23 深圳 CCPC 总决赛，整个一年我算是比较积极地参与 ACM-ICPC 竞赛（虽然下半年逐渐开始划水&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="./1550032126921.png" alt="1550032126921"&gt;
+（六张照片依次为 CCPC、寒假训练、省赛、校赛、天梯赛、徐州区域赛）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一月末，开始种草轻薄本，并寻求把游戏本卖了，未果。&lt;/li&gt;
+&lt;li&gt;从年初开始，用空闲资金进行投资，并开始学习相关知识。一月末我第一次买入了一个基金，入坑。一开始赚了点钱很高兴，后来贸易战开始就亏了。七月初买了一本金融方面的书然而并没有看多少。八月开始跟投某大V的投资计划，九月末把主要账户转移到且慢。回想起一开始什么都不懂就冲着某个行业买基金，现在慢慢有些了解但知识仍然很浅薄。时刻要提醒自己：不要盲从。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="./1550032359691.png" alt="1550032359691"&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定下（并践行）了在美（英）剧中学英语的目标，然后每当我看剧时总是自我安慰同时我也在&lt;del&gt;学习&lt;/del&gt;（并没有）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;到目前为止看过的剧有（不限于18年）：Friends，Sherlock，Black Mirror 一季， The IT Crowd 两季，Monday Mornings，Greys Anatomy 一季， Person of Interest 三季，Modern Family 半季多&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从3月份开始，我开始撸 DigitalOcean 的 Github 学生优惠，到现在为止服务器运维的相关知识增长地挺快&amp;hellip;应该是从大学开始吧，我开始用VPS自建SS，一开始是 Cloudcone 还是 Vultr 后来撸到了 DO，再后来19年年初的时候知道了一个超便宜的深港专线，后来又撸了阿里云的学生机。&lt;/li&gt;
+&lt;li&gt;四月中旬看了死亡诗社，Seize the day 成了我的座右铭，虽然我一直没有做到这一点。&lt;/li&gt;
+&lt;li&gt;整个一年我总有一种感觉，学习不在状态，有时候一直陷入一种昏昏沉沉的状态，那种状态下，犯困，没有学习的心思，干其他事也提不起兴趣。仿佛就在虚度光阴。从那个寒假开始我就（似乎）养成了不良的生活习惯。&lt;/li&gt;
+&lt;li&gt;四五月份入了创新IE3P 和 iPad 2018，拔草成功，却没有对我的学习质量有多大的改善。后来又开始种草蓝牙降噪耳机&amp;hellip;&lt;/li&gt;
+&lt;li&gt;六月末，转专业考试。一年中最重要的一件事，从环境科学与工程转到了软件工程专业，进入了理想的专业。&lt;/li&gt;
+&lt;li&gt;然而同时打算换宿舍的（非常不喜欢我们宿舍的氛围和作息），最终没有成功。后来也尝试过 Bose Sleepbuds 这个方案，效果不佳。遂产生了租房的想法。&lt;/li&gt;
+&lt;li&gt;尝试读英文原著，从大一上开始读星际穿越的剧本，读到18年年中读完了。然后开始看三体的英文版，到现在看了一半多。&lt;/li&gt;
+&lt;li&gt;九月中旬开始用 Excel 记账，对日常消费进行记录和管理，持续至今。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="./1550035065769.png" alt="1550035065769"&gt;&lt;/p&gt;</description></item></channel></rss>

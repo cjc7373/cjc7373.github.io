@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Office on Coherence's Blog</title><link>https://blog.coherence.codes/tags/office/</link><description>Recent content in Office on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sat, 01 Dec 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/office/index.xml" rel="self" type="application/rss+xml"/><item><title>使用KMS激活Visio</title><link>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</link><pubDate>Sat, 01 Dec 2018 23:11:38 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</guid><description>&lt;h2 id="题记">题记&lt;/h2>
-&lt;p>如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。&lt;/p>
-&lt;h2 id="转换visio版本">转换Visio版本&lt;/h2>
-&lt;p>我在&lt;a href="http://msdn.itellyou.cn/?lang=zh-cn">MSDN我告诉你&lt;/a>和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。&lt;/p>
-&lt;p>复制以下代码，保存为.bat文件并用管理员身份运行：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> exist &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span> cd /d &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles%\Microsoft Office\Office16&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> exist &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span> cd /d &lt;span style="color:#e6db74">&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cscript ospp.vbs /rearm
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> /f %%x in &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;dir /b ..\root\Licenses16\visio???vl_kms*.xrm-ms&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> cscript ospp.vbs /inslic:&lt;span style="color:#e6db74">&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span> &amp;gt;nul
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> /f %%x in &lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;dir /b ..\root\Licenses16\visio???vl_mak*.xrm-ms&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#66d9ef">do&lt;/span> cscript ospp.vbs /inslic:&lt;span style="color:#e6db74">&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span> &amp;gt;nul
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上命令的作用分别为：&lt;/p>
-&lt;ul>
-&lt;li>打开Office的安装目录（Visio也属于Office的一部分）&lt;/li>
-&lt;li>重置零售激活&lt;/li>
-&lt;li>安装KMS和MAK许可证（转换版本）&lt;/li>
-&lt;/ul>
-&lt;p>题外话：转换Office和Project版本同理。&lt;/p>
-&lt;p>Office：&lt;/p>
-&lt;pre tabindex="0">&lt;code>cscript ospp.vbs /rearm
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Office on Coherence's Blog</title><link>https://blog.coherence.codes/tags/office/</link><description>Recent content in Office on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sat, 01 Dec 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/office/index.xml" rel="self" type="application/rss+xml"/><item><title>使用KMS激活Visio</title><link>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</link><pubDate>Sat, 01 Dec 2018 23:11:38 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/visio-kms-activate/</guid><description>&lt;h2 id="题记"&gt;题记&lt;/h2&gt;
+&lt;p&gt;如果你懒的话当然可以用KMSpico等工具一键激活，但博主不想电脑里多个启动项，并且博主的电脑预装了Office2013家庭与学生版，用此类工具可能出现不可预知的后果，所以打算自己动手激活Visio。&lt;/p&gt;
+&lt;h2 id="转换visio版本"&gt;转换Visio版本&lt;/h2&gt;
+&lt;p&gt;我在&lt;a href="http://msdn.itellyou.cn/?lang=zh-cn"&gt;MSDN我告诉你&lt;/a&gt;和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。&lt;/p&gt;
+&lt;p&gt;复制以下代码，保存为.bat文件并用管理员身份运行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; exist &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span&gt; cd /d &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles%\Microsoft Office\Office16&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; exist &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span&gt; cd /d &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cscript ospp.vbs /rearm
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; /f %%x in &lt;span style="color:#f92672"&gt;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;dir /b ..\root\Licenses16\visio???vl_kms*.xrm-ms&amp;#39;&lt;/span&gt;&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt; cscript ospp.vbs /inslic:&lt;span style="color:#e6db74"&gt;&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span&gt; &amp;gt;nul
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; /f %%x in &lt;span style="color:#f92672"&gt;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;dir /b ..\root\Licenses16\visio???vl_mak*.xrm-ms&amp;#39;&lt;/span&gt;&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt; cscript ospp.vbs /inslic:&lt;span style="color:#e6db74"&gt;&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span&gt; &amp;gt;nul
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以上命令的作用分别为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;打开Office的安装目录（Visio也属于Office的一部分）&lt;/li&gt;
+&lt;li&gt;重置零售激活&lt;/li&gt;
+&lt;li&gt;安装KMS和MAK许可证（转换版本）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;题外话：转换Office和Project版本同理。&lt;/p&gt;
+&lt;p&gt;Office：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;cscript ospp.vbs /rearm
 for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_kms*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
 for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&amp;#39;) do cscript ospp.vbs /inslic:&amp;#34;..\root\Licenses16\%%x&amp;#34; &amp;gt;nul
-&lt;/code>&lt;/pre>&lt;p>Project：&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Project：&lt;/p&gt;</description></item></channel></rss>

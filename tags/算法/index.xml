@@ -1,80 +1,80 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>算法 on Coherence's Blog</title><link>https://blog.coherence.codes/tags/%E7%AE%97%E6%B3%95/</link><description>Recent content in 算法 on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 19 Apr 2020 19:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml"/><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>&lt;h2 id="1335a---candies-and-two-sisters">&lt;a href="https://codeforces.com/contest/1335/problem/A">1335A - Candies and Two Sisters&lt;/a>&lt;/h2>
-&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
-&lt;p>快乐签到。&lt;/p>
-&lt;h2 id="1335b---construct-the-string">&lt;a href="https://codeforces.com/contest/1335/problem/B">1335B - Construct the String&lt;/a>&lt;/h2>
-&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
-&lt;p>先构造长度为 $a$ 的字符串，然后第 $i+a$ 个字母为第 $i$ 个字母，输出即可。&lt;/p>
-&lt;h2 id="1335c---two-teams-composing">&lt;a href="https://codeforces.com/contest/1335/problem/C">1335C - Two Teams Composing&lt;/a>&lt;/h2>
-&lt;p>&lt;code>2/1 Accepted&lt;/code>&lt;/p>
-&lt;p>给 $n$ 个数，每个数有一个值，要求把它们分成数量相同的两组，一组所有的值相等，一组所有的值不等。&lt;/p>
-&lt;p>先统计每个值的数量，得出最大个数 $m$，和不同值的数的个数 $l$，&lt;/p>
-&lt;p>&lt;code>ans = min(l, m) if m &amp;lt; l + 2 else ans = min(l, m) + 1&lt;/code>&lt;/p>
-&lt;h2 id="1335d---anti-sudoku">&lt;a href="https://codeforces.com/contest/1335/problem/D">1335D - Anti-Sudoku&lt;/a>&lt;/h2>
-&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
-&lt;p>给一个求解好的数独，求改动不超过 9 个数，使其每行、列、区块内皆有两个相同的数。&lt;/p>
-&lt;p>想了两分钟，发现将所有的 1 替换为 2 即可。&lt;/p>
-&lt;h2 id="1335e---three-blocks-palindrome">&lt;a href="https://codeforces.com/contest/1335/problem/E2">1335E - Three Blocks Palindrome&lt;/a>&lt;/h2>
-&lt;p>&lt;code>Not Attempted&lt;/code>&lt;/p></description></item><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>&lt;p>快乐划水。&lt;/p>
-&lt;h2 id="1328a---divisibility-problem">&lt;a href="https://codeforces.com/contest/1328/problem/A">1328A - Divisibility Problem&lt;/a>&lt;/h2>
-&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
-&lt;p>快乐签到。&lt;/p>
-&lt;h2 id="1328b---k-th-beautiful-string">&lt;a href="https://codeforces.com/contest/1328/problem/B">1328B - K-th Beautiful String&lt;/a>&lt;/h2>
-&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
-&lt;p>给一个数n，要求构造一个字符串，包含n-2个a，2个b，且在这个字符串的按字典序的全排列中排在第k个。&lt;/p>
-&lt;p>找b的位置即可。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>t &lt;span style="color:#f92672">=&lt;/span> int(input())
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> _ &lt;span style="color:#f92672">in&lt;/span> range(t):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n, k &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> p &lt;span style="color:#f92672">in&lt;/span> range(max(n&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>,k&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (p &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">*&lt;/span> p &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span> &lt;span style="color:#f92672">&amp;gt;=&lt;/span> k:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">break&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos1 &lt;span style="color:#f92672">=&lt;/span> n &lt;span style="color:#f92672">-&lt;/span> p
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pos2 &lt;span style="color:#f92672">=&lt;/span> n &lt;span style="color:#f92672">-&lt;/span> (k &lt;span style="color:#f92672">-&lt;/span> int(((p &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#f92672">*&lt;/span> (p &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>) &lt;span style="color:#f92672">/&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>)))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> i &lt;span style="color:#f92672">==&lt;/span> pos1 &lt;span style="color:#f92672">or&lt;/span> i &lt;span style="color:#f92672">==&lt;/span> pos2:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;b&amp;#39;&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(&lt;span style="color:#e6db74">&amp;#39;a&amp;#39;&lt;/span>, end&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#39;&amp;#39;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="1328c---ternary-xor">&lt;a href="https://codeforces.com/contest/1328/problem/C">1328C - Ternary XOR&lt;/a>&lt;/h2>
-&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
-&lt;p>给一个三进制数x，求两个数a，b，使这两个数的异或为x，且max(a, b)最小。&lt;/p></description></item><item><title>Kickstart 2020 Round A 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</link><pubDate>Thu, 26 Mar 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</guid><description>&lt;p>第一次打Kickstart，体验还是很不错的。&lt;/p>
-&lt;p>&lt;a href="https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ffc7">比赛链接&lt;/a>&lt;/p>
-&lt;p>迟了几分钟进比赛，发现前十已经两题AC了。&lt;/p>
-&lt;h2 id="allocation">Allocation&lt;/h2>
-&lt;p>&lt;code>1/0 Accepted&lt;/code>&lt;/p>
-&lt;p>签到题，排序后从大到小输出即可。&lt;/p>
-&lt;h2 id="plates">Plates&lt;/h2>
-&lt;p>&lt;code>2/0 TLE, WA&lt;/code>&lt;/p>
-&lt;p>N叠盘子，每叠K个，每个盘子有一个beauty值，从中取P个，但对于每叠只能从上到下取，求beauty值最大为多少。&lt;/p>
-&lt;p>先写了一个每次取最大的，WA，发现不对，然后去做第三题了。后又写了个dfs，TLE了。当时心态有点崩，因为TOP 10基本是两分钟AC，想到DP，但没有深入想。&lt;/p>
-&lt;p>官方题解是对于每一叠盘子，先预处理前n个的beauty值和sum，然后对于每一个状态&lt;code>dp[i][j]&lt;/code>，即在前i叠盘子和取j个盘子时能取到的最大值，有状态转移方程&lt;code>dp[i][j] = max(dp[i][j], sum[i][x]+dp[i-1][j-x])&lt;/code>。循环求dp即可。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">if&lt;/span> __name__&lt;span style="color:#f92672">==&lt;/span>&lt;span style="color:#e6db74">&amp;#39;__main__&amp;#39;&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t &lt;span style="color:#f92672">=&lt;/span> int(input())
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, t&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;Case #&lt;/span>&lt;span style="color:#e6db74">{}&lt;/span>&lt;span style="color:#e6db74">: &amp;#34;&lt;/span>&lt;span style="color:#f92672">.&lt;/span>format(i)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> n, k, p &lt;span style="color:#f92672">=&lt;/span> [int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a &lt;span style="color:#f92672">=&lt;/span> []
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum &lt;span style="color:#f92672">=&lt;/span> []
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a&lt;span style="color:#f92672">.&lt;/span>append([int(i) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> input()&lt;span style="color:#f92672">.&lt;/span>split()])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum&lt;span style="color:#f92672">.&lt;/span>append([&lt;span style="color:#ae81ff">0&lt;/span>])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> a[i]:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> s &lt;span style="color:#f92672">+=&lt;/span> j
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sum[i]&lt;span style="color:#f92672">.&lt;/span>append(s)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur &lt;span style="color:#f92672">=&lt;/span> [&lt;span style="color:#ae81ff">0&lt;/span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n)]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dp &lt;span style="color:#f92672">=&lt;/span> [[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> (p&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>) &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n)]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dp[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">=&lt;/span> sum[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">+&lt;/span> [&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">*&lt;/span> (p&lt;span style="color:#f92672">-&lt;/span>k)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, n):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(&lt;span style="color:#ae81ff">1&lt;/span>, p&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> x &lt;span style="color:#f92672">in&lt;/span> range(min(j&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>, k&lt;span style="color:#f92672">+&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>)):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dp[i][j] &lt;span style="color:#f92672">=&lt;/span> max(dp[i][j], sum[i][x] &lt;span style="color:#f92672">+&lt;/span> dp[i&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>][j&lt;span style="color:#f92672">-&lt;/span>x])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> i &lt;span style="color:#f92672">in&lt;/span> range(n):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans &lt;span style="color:#f92672">=&lt;/span> max(ans, dp[i][p])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out &lt;span style="color:#f92672">+=&lt;/span> str(ans)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> print(out)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="workout">Workout&lt;/h2>
-&lt;p>&lt;code>2/1 Accepted&lt;/code>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>算法 on Coherence's Blog</title><link>https://blog.coherence.codes/tags/%E7%AE%97%E6%B3%95/</link><description>Recent content in 算法 on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 19 Apr 2020 19:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml"/><item><title>Codeforces Round 634 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</link><pubDate>Sun, 19 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_634_div3/</guid><description>&lt;h2 id="1335a---candies-and-two-sisters"&gt;&lt;a href="https://codeforces.com/contest/1335/problem/A"&gt;1335A - Candies and Two Sisters&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;1/0 Accepted&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;快乐签到。&lt;/p&gt;
+&lt;h2 id="1335b---construct-the-string"&gt;&lt;a href="https://codeforces.com/contest/1335/problem/B"&gt;1335B - Construct the String&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;1/0 Accepted&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;先构造长度为 $a$ 的字符串，然后第 $i+a$ 个字母为第 $i$ 个字母，输出即可。&lt;/p&gt;
+&lt;h2 id="1335c---two-teams-composing"&gt;&lt;a href="https://codeforces.com/contest/1335/problem/C"&gt;1335C - Two Teams Composing&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;2/1 Accepted&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;给 $n$ 个数，每个数有一个值，要求把它们分成数量相同的两组，一组所有的值相等，一组所有的值不等。&lt;/p&gt;
+&lt;p&gt;先统计每个值的数量，得出最大个数 $m$，和不同值的数的个数 $l$，&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ans = min(l, m) if m &amp;lt; l + 2 else ans = min(l, m) + 1&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id="1335d---anti-sudoku"&gt;&lt;a href="https://codeforces.com/contest/1335/problem/D"&gt;1335D - Anti-Sudoku&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;1/0 Accepted&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;给一个求解好的数独，求改动不超过 9 个数，使其每行、列、区块内皆有两个相同的数。&lt;/p&gt;
+&lt;p&gt;想了两分钟，发现将所有的 1 替换为 2 即可。&lt;/p&gt;
+&lt;h2 id="1335e---three-blocks-palindrome"&gt;&lt;a href="https://codeforces.com/contest/1335/problem/E2"&gt;1335E - Three Blocks Palindrome&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Not Attempted&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Codeforces Round 629 (Div. 3) 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</link><pubDate>Sun, 12 Apr 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/codeforces_629_div3/</guid><description>&lt;p&gt;快乐划水。&lt;/p&gt;
+&lt;h2 id="1328a---divisibility-problem"&gt;&lt;a href="https://codeforces.com/contest/1328/problem/A"&gt;1328A - Divisibility Problem&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;1/0 Accepted&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;快乐签到。&lt;/p&gt;
+&lt;h2 id="1328b---k-th-beautiful-string"&gt;&lt;a href="https://codeforces.com/contest/1328/problem/B"&gt;1328B - K-th Beautiful String&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;1/0 Accepted&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;给一个数n，要求构造一个字符串，包含n-2个a，2个b，且在这个字符串的按字典序的全排列中排在第k个。&lt;/p&gt;
+&lt;p&gt;找b的位置即可。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; _ &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(t):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; n, k &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [int(i) &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; input()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;split()]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; p &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(max(n&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;,k&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (p &lt;span style="color:#f92672"&gt;-&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;) &lt;span style="color:#f92672"&gt;*&lt;/span&gt; p &lt;span style="color:#f92672"&gt;/&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; &lt;span style="color:#f92672"&gt;&amp;gt;=&lt;/span&gt; k:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; pos1 &lt;span style="color:#f92672"&gt;=&lt;/span&gt; n &lt;span style="color:#f92672"&gt;-&lt;/span&gt; p
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; pos2 &lt;span style="color:#f92672"&gt;=&lt;/span&gt; n &lt;span style="color:#f92672"&gt;-&lt;/span&gt; (k &lt;span style="color:#f92672"&gt;-&lt;/span&gt; int(((p &lt;span style="color:#f92672"&gt;-&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;) &lt;span style="color:#f92672"&gt;*&lt;/span&gt; (p &lt;span style="color:#f92672"&gt;-&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;) &lt;span style="color:#f92672"&gt;/&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(n):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; i &lt;span style="color:#f92672"&gt;==&lt;/span&gt; pos1 &lt;span style="color:#f92672"&gt;or&lt;/span&gt; i &lt;span style="color:#f92672"&gt;==&lt;/span&gt; pos2:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;, end&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(&lt;span style="color:#e6db74"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;, end&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="1328c---ternary-xor"&gt;&lt;a href="https://codeforces.com/contest/1328/problem/C"&gt;1328C - Ternary XOR&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;1/0 Accepted&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;给一个三进制数x，求两个数a，b，使这两个数的异或为x，且max(a, b)最小。&lt;/p&gt;</description></item><item><title>Kickstart 2020 Round A 题解</title><link>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</link><pubDate>Thu, 26 Mar 2020 19:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/kickstart_2020_round_a/</guid><description>&lt;p&gt;第一次打Kickstart，体验还是很不错的。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ffc7"&gt;比赛链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;迟了几分钟进比赛，发现前十已经两题AC了。&lt;/p&gt;
+&lt;h2 id="allocation"&gt;Allocation&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;1/0 Accepted&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;签到题，排序后从大到小输出即可。&lt;/p&gt;
+&lt;h2 id="plates"&gt;Plates&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;2/0 TLE, WA&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;N叠盘子，每叠K个，每个盘子有一个beauty值，从中取P个，但对于每叠只能从上到下取，求beauty值最大为多少。&lt;/p&gt;
+&lt;p&gt;先写了一个每次取最大的，WA，发现不对，然后去做第三题了。后又写了个dfs，TLE了。当时心态有点崩，因为TOP 10基本是两分钟AC，想到DP，但没有深入想。&lt;/p&gt;
+&lt;p&gt;官方题解是对于每一叠盘子，先预处理前n个的beauty值和sum，然后对于每一个状态&lt;code&gt;dp[i][j]&lt;/code&gt;，即在前i叠盘子和取j个盘子时能取到的最大值，有状态转移方程&lt;code&gt;dp[i][j] = max(dp[i][j], sum[i][x]+dp[i-1][j-x])&lt;/code&gt;。循环求dp即可。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__&lt;span style="color:#f92672"&gt;==&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, t&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; out &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;Case #&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;: &amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;.&lt;/span&gt;format(i)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; n, k, p &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [int(i) &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; input()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;split()]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; a &lt;span style="color:#f92672"&gt;=&lt;/span&gt; []
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sum &lt;span style="color:#f92672"&gt;=&lt;/span&gt; []
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(n):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; a&lt;span style="color:#f92672"&gt;.&lt;/span&gt;append([int(i) &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; input()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;split()])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sum&lt;span style="color:#f92672"&gt;.&lt;/span&gt;append([&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; s &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; j &lt;span style="color:#f92672"&gt;in&lt;/span&gt; a[i]:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; s &lt;span style="color:#f92672"&gt;+=&lt;/span&gt; j
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; sum[i]&lt;span style="color:#f92672"&gt;.&lt;/span&gt;append(s)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; cur &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(n)]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; dp &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [[&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;] &lt;span style="color:#f92672"&gt;*&lt;/span&gt; (p&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;) &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(n)]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; dp[&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;] &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sum[&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;] &lt;span style="color:#f92672"&gt;+&lt;/span&gt; [&lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;] &lt;span style="color:#f92672"&gt;*&lt;/span&gt; (p&lt;span style="color:#f92672"&gt;-&lt;/span&gt;k)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, n):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; j &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, p&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; x &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(min(j&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, k&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; dp[i][j] &lt;span style="color:#f92672"&gt;=&lt;/span&gt; max(dp[i][j], sum[i][x] &lt;span style="color:#f92672"&gt;+&lt;/span&gt; dp[i&lt;span style="color:#f92672"&gt;-&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;][j&lt;span style="color:#f92672"&gt;-&lt;/span&gt;x])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ans &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(n):
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ans &lt;span style="color:#f92672"&gt;=&lt;/span&gt; max(ans, dp[i][p])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; out &lt;span style="color:#f92672"&gt;+=&lt;/span&gt; str(ans)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(out)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="workout"&gt;Workout&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;2/1 Accepted&lt;/code&gt;&lt;/p&gt;</description></item></channel></rss>

@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Fonts on Coherence's Blog</title><link>https://blog.coherence.codes/tags/fonts/</link><description>Recent content in Fonts on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 13 Feb 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/fonts/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>&lt;blockquote>
-&lt;p>这就是乱改字体的后果..&lt;/p>&lt;/blockquote>
-&lt;p>字体修复，不只是字体修复。&lt;/p>
-&lt;h2 id="事由">事由&lt;/h2>
-&lt;p>偶然间看到一篇&lt;a href="http://www.dgtle.com/article-25875-1.html">替换Win10字体来提升字体观感的文章&lt;/a>，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。&lt;/p>
-&lt;p>然而，使用了一段时间后发现，所有的字体似乎都小了一圈，而且在cmd中出现了字体大小错乱的情况。网上找了一圈发现Win10砍掉了调整字体大小的功能，现在只能以整体缩放来调整字体大小。新的字体感觉也没有想象中的那么好。&lt;/p>
-&lt;p>于是我把备份的默认字体又恢复了回去，按道理不会出事，然而我的电脑出锅了。一些软件的中文字体成了方框，cmd的字体也变得很奇怪。&lt;/p>
-&lt;h2 id="解决方法">解决方法&lt;/h2>
-&lt;p>一番操作之后，发现设置里的新宋体是乱码，感觉可能是字体文件崩了。&lt;/p>
-&lt;p>&lt;img src="./1541154864085.png" alt="1541154864085">&lt;/p>
-&lt;p>但是&lt;code>simsunb.ttf&lt;/code>这个文件我分明备份过。。&lt;/p>
-&lt;p>没办法，继续面向Google解决问题，这时候找到了一个&lt;a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-ime/%E5%9C%A8windows/d575f11c-1f2e-454c-9fcd-432809f7fd76">微软社区页面&lt;/a>，里面给出了三条命令：&lt;/p>
-&lt;pre tabindex="0">&lt;code>DISM.exe /Online /Cleanup-image /Scanhealth
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Fonts on Coherence's Blog</title><link>https://blog.coherence.codes/tags/fonts/</link><description>Recent content in Fonts on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 13 Feb 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/fonts/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;这就是乱改字体的后果..&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;字体修复，不只是字体修复。&lt;/p&gt;
+&lt;h2 id="事由"&gt;事由&lt;/h2&gt;
+&lt;p&gt;偶然间看到一篇&lt;a href="http://www.dgtle.com/article-25875-1.html"&gt;替换Win10字体来提升字体观感的文章&lt;/a&gt;，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。&lt;/p&gt;
+&lt;p&gt;然而，使用了一段时间后发现，所有的字体似乎都小了一圈，而且在cmd中出现了字体大小错乱的情况。网上找了一圈发现Win10砍掉了调整字体大小的功能，现在只能以整体缩放来调整字体大小。新的字体感觉也没有想象中的那么好。&lt;/p&gt;
+&lt;p&gt;于是我把备份的默认字体又恢复了回去，按道理不会出事，然而我的电脑出锅了。一些软件的中文字体成了方框，cmd的字体也变得很奇怪。&lt;/p&gt;
+&lt;h2 id="解决方法"&gt;解决方法&lt;/h2&gt;
+&lt;p&gt;一番操作之后，发现设置里的新宋体是乱码，感觉可能是字体文件崩了。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1541154864085.png" alt="1541154864085"&gt;&lt;/p&gt;
+&lt;p&gt;但是&lt;code&gt;simsunb.ttf&lt;/code&gt;这个文件我分明备份过。。&lt;/p&gt;
+&lt;p&gt;没办法，继续面向Google解决问题，这时候找到了一个&lt;a href="https://answers.microsoft.com/zh-hans/windows/forum/windows_10-ime/%E5%9C%A8windows/d575f11c-1f2e-454c-9fcd-432809f7fd76"&gt;微软社区页面&lt;/a&gt;，里面给出了三条命令：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;DISM.exe /Online /Cleanup-image /Scanhealth
 DISM.exe /Online /Cleanup-image /Restorehealth
 sfc /scannow
-&lt;/code>&lt;/pre>&lt;p>根据&lt;a href="https://support.microsoft.com/zh-cn/help/947821/fix-windows-update-errors-by-using-the-dism-or-system-update-readiness">微软官方支持页面&lt;/a>的描述，这三个命令是检查系统文件的完整性并自动通过 Windows 更新来修复。&lt;/p>
-&lt;p>用管理员身份打开cmd，依次执行完重启，一切都恢复了原状。&lt;/p>
-&lt;h2 id="后记">后记&lt;/h2>
-&lt;p>看了一些&lt;a href="https://www.zhihu.com/question/274344133">知乎回答&lt;/a>，感觉Win10的字体也并没有那么糟糕。事实上我一直以来用着默认的字体也没有感到不舒服。&lt;del>可能是我眼瞎吧。&lt;/del>&lt;/p>
-&lt;p>另外，上述的三个命令理论上能解决Windows的许多问题，碰到问题可以尝试。&lt;/p>
-&lt;h4 id="2019213-更新">2019/2/13 更新&lt;/h4>
-&lt;p>目前家里入了 4K 显示器，200% 缩放，观感上没有任何问题。&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;根据&lt;a href="https://support.microsoft.com/zh-cn/help/947821/fix-windows-update-errors-by-using-the-dism-or-system-update-readiness"&gt;微软官方支持页面&lt;/a&gt;的描述，这三个命令是检查系统文件的完整性并自动通过 Windows 更新来修复。&lt;/p&gt;
+&lt;p&gt;用管理员身份打开cmd，依次执行完重启，一切都恢复了原状。&lt;/p&gt;
+&lt;h2 id="后记"&gt;后记&lt;/h2&gt;
+&lt;p&gt;看了一些&lt;a href="https://www.zhihu.com/question/274344133"&gt;知乎回答&lt;/a&gt;，感觉Win10的字体也并没有那么糟糕。事实上我一直以来用着默认的字体也没有感到不舒服。&lt;del&gt;可能是我眼瞎吧。&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;另外，上述的三个命令理论上能解决Windows的许多问题，碰到问题可以尝试。&lt;/p&gt;
+&lt;h4 id="2019213-更新"&gt;2019/2/13 更新&lt;/h4&gt;
+&lt;p&gt;目前家里入了 4K 显示器，200% 缩放，观感上没有任何问题。&lt;/p&gt;</description></item></channel></rss>
