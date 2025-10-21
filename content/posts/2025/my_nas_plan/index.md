@@ -202,3 +202,7 @@ tank pool 中的数据实现了三份副本，一份异地。VPS 上的数据则
 TrueNAS apps 中的 webdav 应用感觉性能非常差，看了下镜像是 httpd，也就是 apache，不知道是否是配置的问题，但我也不想学习它的配置。于是干脆换成 Caddy。Caddy 本身没有 webdav 的支持，但是社区有，只需自己 [build 一个镜像](https://github.com/cjc7373/ansible/commit/165480157e46a39ae3d2be9d508c0b8357e53875)就可以用了。
 
 所有跨局域网的网络访问均通过 tailscale 进行，以减小攻击面。
+
+## 总结
+
+总体上我对我的 NAS 还是非常满意的，计划中的功能都实现了，在搭建 Immich 之后我甚至把我的 Google One 订阅取消了（每年省了 $20，这下电费出来了）。
