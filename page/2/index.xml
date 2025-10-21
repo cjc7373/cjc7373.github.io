@@ -1,4 +1,4 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>强制 chromium 使用浅色模式</title><link>https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/</link><pubDate>Tue, 30 May 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/ -&lt;h2 id="问题"&gt;问题&lt;/h2&gt;
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 21 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>强制 chromium 使用浅色模式</title><link>https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/</link><pubDate>Tue, 30 May 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/ -&lt;h2 id="问题"&gt;问题&lt;/h2&gt;
 &lt;p&gt;从前两年开始深色模式大行其道，以至于现在几乎找不到一个不支持深色模式的网站了。各大主流浏览器几乎都在两三年前就支持了 CSS 的 &lt;code&gt;prefers-color-scheme&lt;/code&gt; 媒体查询，从而根据系统/浏览器的主题来自动切换浅/深色模式。在浏览器控制台中使用 &lt;code&gt;window.matchMedia('(prefers-color-scheme: dark)').matches&lt;/code&gt; 即可测试这一 feature。&lt;/p&gt;
 &lt;p&gt;我在系统中（KDE, Archlinux）使用深色模式，但我又并不喜欢大多数网站的深色模式，但是许多网站都使用了上述媒体查询来自动切换，导致很多情况下我进入一个网站后第一件事就是把浅色模式给切回来。在 Firefox/Edge 中浏览器设置便提供了深/浅色主题的切换选项，这一选项也是和上述媒体查询绑定的，然而不幸的是，chromium 并没有提供这一选项。&lt;/p&gt;
 &lt;h2 id="尝试"&gt;尝试&lt;/h2&gt;
@@ -8,7 +8,8 @@
 &lt;p&gt;就在不久之前，chromium 还不支持随系统的深色模式来切换自己的深色模式（见 &lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=998903"&gt;Issue 998903: XDG Desktop Portal &amp;ldquo;Prefer dark appearance&amp;rdquo; does not affect prefers-color-scheme media query&lt;/a&gt;），这一 feature 是在四月份实现的，并在 114 中发布。从相应的 &lt;a href="https://chromium-review.googlesource.com/c/chromium/src/+/4375982"&gt;revision&lt;/a&gt; 中，我们可以发现 chromium 首先会通过 dbus 和 xdg-desktop-portal 交互，读取 &lt;code&gt;org.freedesktop.appearance&lt;/code&gt; namespace 下的 &lt;code&gt;color-scheme&lt;/code&gt; 字段。根据 &lt;a href="https://flatpak.github.io/xdg-desktop-portal/#gdbus-org.freedesktop.portal.Settings"&gt;portal 的定义&lt;/a&gt; 返回值是 1 则偏好深色外观，返回值是 2 则偏好浅色外观。并且这一 revision 中说：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;* The portal preference takes precedence over the toolkit preference
-&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;我并没有找到这里的 toolkit 指的是什么，但我猜测是 chromium 自身的主题。这可能就是主题设置无效的原因。KDE 的 portal 由 xdg-desktop-portal-kde 这个包实现，&lt;a href="https://invent.kde.org/plasma/xdg-desktop-portal-kde/-/blob/863d369156c85c67f96a23d87564f196532372ce/src/settings.cpp#L216"&gt;搜索源码发现&lt;/a&gt;它只是简单的判断了窗口背景颜色的灰度：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-c++" data-lang="c++"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;const&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; windowBackgroundGray &lt;span style="color:#f92672"&gt;=&lt;/span&gt; qGray(palette.window().color().rgb());
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -46,12 +47,15 @@
 &lt;p&gt;patch 中第一个文件夹的名字，也就是 &lt;code&gt;chromium-114.0.5735.45&lt;/code&gt; 和 &lt;code&gt;new&lt;/code&gt; 并不重要，因为在 PKGBUILD 中我们会使用 &lt;code&gt;-p1&lt;/code&gt; 来忽略第一个文件夹：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;-p&lt;/strong&gt;num or **&amp;ndash;strip=**num
-Strip the smallest prefix containing num leading slashes from each file name found in the patch file.&lt;/p&gt;&lt;/blockquote&gt;
+Strip the smallest prefix containing num leading slashes from each file name found in the patch file.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;然后就是编译了，在等待了四个小时之后我终于成功切换回了浅色模式！&lt;/p&gt;
 &lt;p&gt;&lt;img src="./image-20230531125453946.png" alt="image-20230531125453946"&gt;&lt;/p&gt;
 &lt;p&gt;最后还是希望 &lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1046660"&gt;Issue 1046660&lt;/a&gt; 能够被尽快解决，让我能够在设置中直接切换浅/暗色模式。&lt;/p&gt;
-- https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Kubernetes 生态中的航海隐喻</title><link>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</link><pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ -&lt;blockquote&gt;
-&lt;p&gt;Disclaimer: 本文的结论大多是根据名字推断出来的，并没有得到项目开发者的证实。&lt;/p&gt;&lt;/blockquote&gt;
+- https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Kubernetes 生态中的航海隐喻</title><link>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</link><pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/ -
+&lt;blockquote&gt;
+&lt;p&gt;Disclaimer: 本文的结论大多是根据名字推断出来的，并没有得到项目开发者的证实。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Kubernetes 在 2014 年 9 月发布，在这之前 Docker 已经大行其道了。Docker 发布于 2013 年，意为码头工人，其 logo 是个鲸鱼驮着一些集装箱。&lt;/p&gt;
 &lt;p&gt;&lt;img src="./610px-Docker_(container_engine)_logo.svg.png" alt="File:Docker (container engine) logo.svg"&gt;&lt;/p&gt;
 &lt;p&gt;后来这个 Logo 又变得扁平了一点：&lt;/p&gt;
@@ -155,9 +159,11 @@ Strip the smallest prefix containing num leading slashes from each file name fou
 &lt;blockquote&gt;
 &lt;p&gt;tips: ULA 在 &lt;a href="https://datatracker.ietf.org/doc/html/rfc4193"&gt;RFC 4193 (Unique Local IPv6 Unicast Addresses)&lt;/a&gt; 中有详细描述, 其与 link-local address 的主要区别在于 link-local 用于无路由器情况下的链路配置, 以及同一链路下的通信.
 ULA 的作用与 IPv4 时代的 10.0.0.0/8 等私有地址类似, 可以用于内网中的服务访问, 其能够被路由, 只是不存在于互联网上,
-ULA 用于替代已经 deprecated 的 site-local address.&lt;/p&gt;&lt;/blockquote&gt;
+ULA 用于替代已经 deprecated 的 site-local address.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Note: RFC 4291 似乎规定了一种 Interface Identifiers 的生成方式 Modified EUI-64, 但是我没有细看&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Note: RFC 4291 似乎规定了一种 Interface Identifiers 的生成方式 Modified EUI-64, 但是我没有细看&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;一个典型的全局单播地址结构:&lt;/p&gt;
 &lt;p&gt;&lt;img src="./ipv6-addr-alloc-1675603832146-7.png" alt="ipv6-addr-alloc"&gt;&lt;/p&gt;
 &lt;p&gt;一些预定义的 IPv6 组播地址:&lt;/p&gt;
@@ -165,7 +171,8 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p&gt;&lt;/blockquo
 &lt;li&gt;本地网段所有节点 (All Nodes Addresses) — ff02::1&lt;/li&gt;
 &lt;li&gt;本地网段所有路由器 (All Routers Addresses) — ff02::2
 &lt;blockquote&gt;
-&lt;p&gt;tips: 这两个地址均为 link-local, interface-local 和 site-local 在这里不作讨论&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;tips: 这两个地址均为 link-local, interface-local 和 site-local 在这里不作讨论&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;本地请求节点地址 (Solicited-Node Address) — ff02::1:ffxx:xxxx
 这个地址由接口的低 24 bits 地址计算得到, 设备必须加入接口相关联的请求节点地址 (无论是自动或手动配置的地址)&lt;/li&gt;
@@ -198,7 +205,8 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p&gt;&lt;/blockquo
 &lt;p&gt;自动配置过程将首先生成链路本地地址. 其由一个链路本地前缀 (RFC 4291 中定义的)+一个接口的标识符 (interface identifier), 当这个地址被分配到一个接口之前, 它是一个暂定地址 (tentative address). 一个节点必须验证它在链路上的唯一性. 具体来说, 节点会发送一个邻居请求报文, 将这个暂定地址作为目标地址. 如果另一个节点正在使用这个地址, 它会返回一个邻居通告来拒绝这个请求. 在验证成功后, 这个地址会成为首选地址 (preferred address).&lt;/p&gt;
 &lt;p&gt;接下来主机会广播路由器请求 (RS), 以便敦促路由器发送路由器通告 (RA). 主机根据路由器通告中的的前缀信息 (Prefix-Infromation) 选项来构造全局地址.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Note: 由于 RA 总是会广播给所有主机, 所以 SLAAC 无法做到不给某些主机分配 IP 地址&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Note: 由于 RA 总是会广播给所有主机, 所以 SLAAC 无法做到不给某些主机分配 IP 地址&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;一个地址的生命周期: 首选地址在首选期限 (preferred lifetime) 过期之后会成为不推荐地址 (deprecated address). 不推荐地址能够继续被用于已经建立的连接中, 但不应该被用于建立新连接. 一个地址在有效期限 (valid lifetime) 过期之后会变为无效地址 (invalid address). 无效地址不能够被用作向外连接的源地址.&lt;/p&gt;
 &lt;p&gt;RFC 4862 中并没有规定 interface identifier 是如何产生的, 只说了很多情况下其由接口的链路层地址 (即 MAC 地址) 产生. 这种生成方式会带来一些隐私上的顾虑, 因而在 SLAAC 隐私扩展 (RFC 4941) 中, 主机会生成一个临时地址 (temporary address) 来负责对外通信. 另一种方式是生成一个不变的, 与 MAC 地址无关的 interface identifier, 这种方式在 RFC 7217 中定义.&lt;/p&gt;
 &lt;h2 id="rfc-8415-dynamic-host-configuration-protocol-for-ipv6"&gt;RFC 8415 (Dynamic Host Configuration Protocol for IPv6)&lt;/h2&gt;
@@ -225,7 +233,8 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p&gt;&lt;/blockquo
 &lt;h2 id="pmtu-问题"&gt;PMTU 问题&lt;/h2&gt;
 &lt;p&gt;在配置 IPv6 的过程中一个常见的问题是 PMTU 问题. Path MTU Discovery (PMTUD) 是确定 MTU 的一种标准方式, 在 &lt;a href="https://datatracker.ietf.org/doc/html/rfc8201"&gt;RFC 8201 (Path MTU Discovery for IP version 6)&lt;/a&gt; 中定义. RFC 中这样描述:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Nodes not implementing Path MTU Discovery must use the IPv6 minimum link MTU defined in [RFC8200] as the maximum packet size.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Nodes not implementing Path MTU Discovery must use the IPv6 minimum link MTU defined in [RFC8200] as the maximum packet size.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;从中我们可以推测 PMTUD 在 (几乎) 所有节点上无需配置默认启用.&lt;/p&gt;
 &lt;p&gt;PMTUD 工作方式为源节点首先选择下一跳的 MTU (已知) 作为 PMTU. 如果传输路径上的某个节点因为包过大而无法转发一个包, 它就会丢弃这个包并返回一条 ICMPv6 Packet Too Big 消息.&lt;/p&gt;
 &lt;p&gt;&lt;img src="./image-20230416142554039.png" alt="image-20230416142554039"&gt;&lt;/p&gt;
@@ -240,7 +249,8 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p&gt;&lt;/blockquo
 &lt;p&gt;下面来看正确处理的情况, 访问 &lt;a href="https://test-ipv6.com/"&gt;Test IPv6&lt;/a&gt; 时, 有一项测试为 &amp;ldquo;Test IPv6 large packet&amp;rdquo;, 测试内容为访问一个 MTU 为 1280 的服务器. 通过抓包发现 TCP 握手时的 MSS 仍为 1440, 但在第 862 个包的时候我发送了一个过大的包, 于是在第 864 个包我的路由器 (由于运行了 PPPOE, MTU 为 1492) 返回了一个 ICMPv6 报文, 于是在第 865 个包我重传了这个包, 把 MTU 减少到了 1492, 这一过程不断重复直到 MTU 被设置为 1280.&lt;/p&gt;
 &lt;p&gt;&lt;img src="./image-20230417221041457.png" alt="image-20230417221041457"&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Note: 这里需要&lt;a href="https://wiki.wireshark.org/CaptureSetup/Offloading"&gt;关闭 TCP Segmentation Offload&lt;/a&gt;, 否则包长度会显示为超过 MTU, 这是因为 TCP 包的分片被 Offload 到了网卡以减轻主机 CPU 的负担.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Note: 这里需要&lt;a href="https://wiki.wireshark.org/CaptureSetup/Offloading"&gt;关闭 TCP Segmentation Offload&lt;/a&gt;, 否则包长度会显示为超过 MTU, 这是因为 TCP 包的分片被 Offload 到了网卡以减轻主机 CPU 的负担.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;在仅 IPv4 的情况下访问 &lt;code&gt;g.alicdn.com&lt;/code&gt;, 可以发现服务端发送的几个包发生了分片:&lt;/p&gt;
 &lt;p&gt;&lt;img src="./image-20230416141447823.png" alt="image-20230416141447823"&gt;&lt;/p&gt;
 &lt;h2 id="其他一些问题"&gt;其他一些问题&lt;/h2&gt;
@@ -291,7 +301,8 @@ ULA 用于替代已经 deprecated 的 site-local address.&lt;/p&gt;&lt;/blockquo
 &lt;li&gt;2019-12-24 启用新域名&lt;code&gt;blog.coherence.codes&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;2019-10-07 升级主题至 Next V7.4.1&lt;/li&gt;
 &lt;li&gt;2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %}&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Next 就是一个非常大众的主题，有几种变体，我用的是一个叫 &lt;code&gt;pisces&lt;/code&gt; 的变体，长这样（原博客图已经找不到了，只能用官方 Demo 凑数了）：&lt;/p&gt;
 &lt;p&gt;&lt;img src="image-20221002165030564.png" alt="image-20221002165030564"&gt;&lt;/p&gt;
 &lt;p&gt;这一时期的博客位于 &lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/source/source"&gt;source 分支&lt;/a&gt;，最后更新于 2020-04-16。&lt;/p&gt;
@@ -444,7 +455,8 @@ WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码
 &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这几年欧美一直在向中国发动舆论战，我见过最离谱的一个理论甚至说什么“中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟”。&lt;/p&gt;
-&lt;p&gt;我本以为这套歪理邪说就是欧美造谣生事的想象力极限，没想到欧美的底线可以永无止尽的被突破。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;我本以为这套歪理邪说就是欧美造谣生事的想象力极限，没想到欧美的底线可以永无止尽的被突破。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;来源: &lt;a href="https://www.nytimes.com/2020/01/07/business/fake-pork-china.html"&gt;纽约时报 中国人会购买人造肉吗？&lt;/a&gt;, 另见&lt;a href="https://world.huanqiu.com/article/9CaKrnKoNzC"&gt;环球网报道&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;评论: 虽然文章很有&amp;quot;反华&amp;quot;的倾向性, 但文章主要讲的是人造肉在中国难以推广. 肉类消费对于气候的影响是不争的事实. 所以&amp;quot;中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟&amp;quot;这句话也不能算错, 但应该把主语换成全世界人.
 要求中国牺牲国民营养而减少肉类消费是不合理的, 但是推广人造肉是合理的. 作者在这里显然有断章取义之嫌.&lt;/p&gt;
@@ -457,7 +469,8 @@ WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码
 &lt;p&gt;逻辑好像有那么一点点道理哦，但我怎么就觉得那么奇怪和荒谬呢。&lt;/p&gt;
 &lt;p&gt;中国人种树怎么了？&lt;/p&gt;
 &lt;p&gt;种树不是在保护环境吗？&lt;/p&gt;
-&lt;p&gt;怎么拐了一圈之后种树居然成犯罪行为了？&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;怎么拐了一圈之后种树居然成犯罪行为了？&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;来源: 没有找到来源.&lt;/p&gt;
 &lt;p&gt;评论: 据 &lt;a href="https://checkyourfact.com/2022/04/18/fact-check-washington-post-china-trees-article/"&gt;checkyourfact&lt;/a&gt;, 该截图为杜撰, 最初流传于 Facebook 和 Twitter.&lt;/p&gt;
 &lt;hr&gt;
@@ -466,12 +479,14 @@ WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码
 &lt;p&gt;首先，一次性筷子不是用森林做出来的，一次性筷子的主要原料是一个月能长3米的竹子，以及速生经济林的边角废木料。&lt;/p&gt;
 &lt;p&gt;用森林里的好木头确实可以做一次性筷子，但没人这么做，因为成本太高商家会亏本，只有速生林边角废料和竹子的低廉价格才能让商家赚到钱。&lt;/p&gt;
 &lt;p&gt;其次，抛开筷子的真实原材料不谈，这家西方媒体的主要立场好像也是森林是宝贵的，森林对人类有益，并以此来指责中国。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;既然如此，为什么中国种植森林也能被指责一番。是不是中国人干什么都不行，连呼吸都是错的？&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;既然如此，为什么中国种植森林也能被指责一番。是不是中国人干什么都不行，连呼吸都是错的？&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;来源: &lt;a href="https://www.washingtonpost.com/news/worldviews/wp/2013/03/14/chinas-disposable-chopstick-addiction-is-destroying-its-forests/"&gt;华盛顿邮报《中国对一次性筷子的成瘾正在摧毁森林》&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;评论: 华盛顿邮报 2013 年的报道, 主要援引的是时任吉林森工集团董事长柏广新的一句话: &amp;ldquo;我国每年生产800亿双一次性筷子，相当于要砍伐2000万棵生长20年的大树&amp;rdquo;. &lt;a href="http://www.gov.cn/2013lh/content_2349497.htm"&gt;中国政府网&lt;/a&gt;和&lt;a href="http://cpc.people.com.cn/pinglun/n/2013/0312/c78779-20759994.html"&gt;光明网&lt;/a&gt;均能找到这句话以及相关对一次性筷子的批评. 报道中均指出了木头和竹子均是一次性筷子的原料.&lt;/p&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
-&lt;p&gt;几年前，欧美媒体报道说根据科学家的研究，中国人种植水稻会产生更多的温室气体，因此中国人吃大米正在毁灭全球气候，进而导致人类灭亡。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;几年前，欧美媒体报道说根据科学家的研究，中国人种植水稻会产生更多的温室气体，因此中国人吃大米正在毁灭全球气候，进而导致人类灭亡。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;来源: 我都不知道怎么找..&lt;/p&gt;
 &lt;p&gt;评论: 类似的研究肯定有, 但我不觉得哪家媒体会报道吃大米导致人类灭亡&amp;hellip;&lt;/p&gt;
 &lt;hr&gt;
@@ -480,25 +495,29 @@ WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码
 &lt;p&gt;《自然》杂志本是人类最顶级的科学杂志，但写这篇文章的“科学家”逻辑推导却很简单，算一算中国政府要消灭荒漠需要种多少棵树，种这些树需要消耗多少水资源，&lt;strong&gt;因此得出结论中国种树会破坏自然环境。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;别笑，这是真事。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;中国人花费几代心血把沙漠变成了绿洲，对人类如此巨大的贡献居然招来西方期刊的指责？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;治理沙漠居然都能成为破坏环境的罪证。&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;治理沙漠居然都能成为破坏环境的罪证。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;来源: &lt;a href="https://www.nature.com/articles/d41586-019-02789-w"&gt;nature 文章 China&amp;rsquo;s tree-planting drive could falter in a warming world&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;评论: 但凡看一下文章就会觉得文章的中立性是没问题的. 文章警告了非原产地树木对当地水资源的大量消耗, 可能会导致干旱地区的扩散. 也引用了多位中国科学家的意见.&lt;/p&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;巴西烧毁森林种地的时候，西方批判，说这样会造成水土流失，土地荒漠化，从而破坏人类环境。&lt;/p&gt;
 &lt;p&gt;中国种树消灭荒漠的时候，西方又批判，说这是在破坏人类环境，还不如让土地继续荒漠化。&lt;/p&gt;
-&lt;p&gt;澳大利亚和美国森林大火，烧毁无数森林，漫天黑烟，西方说这都是很正常的行为，对人类环境没有丝毫损害。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;澳大利亚和美国森林大火，烧毁无数森林，漫天黑烟，西方说这都是很正常的行为，对人类环境没有丝毫损害。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;来源: 不知道怎么找.&lt;/p&gt;
 &lt;p&gt;评论: 因果倒置, 是气候变化导致了森林火灾的可能性增加&lt;/p&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
-&lt;p&gt;但没有西方人说那群在荒漠里植树造林的中国人有功劳，反而把一个从来不种树的嘴炮少女捧为“环保公主”。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;但没有西方人说那群在荒漠里植树造林的中国人有功劳，反而把一个从来不种树的嘴炮少女捧为“环保公主”。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;评论: 讽刺 Greta Thunberg 也是传统艺能了, 不过我个人对她的评价还是比较积极的, 她组织了贯穿整个欧洲的学生罢课, 多次在 COP 上演讲. 她的&lt;a href="https://en.wikipedia.org/wiki/Greta_Thunberg"&gt;维基百科页面&lt;/a&gt;也是比较正面的. 她频繁提到过 IPCC 的 &lt;a href="https://www.ipcc.ch/site/assets/uploads/sites/2/2019/09/IPCC-Special-Report-1.5-SPM_zh.pdf"&gt;全球升温 1.5°C&lt;/a&gt;, 我也推荐大家去读一读, 这算是为什么要应对气候变化的科学基础.&lt;/p&gt;
 &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;欧美人种一点点树就是天大的功劳，但中国不是，不仅无功，反而有罪。&lt;/p&gt;
 &lt;p&gt;类似的双标相当常见，当初意大利封城，那就是**“冒着经济风险保欧洲”&lt;strong&gt;，而中国封城则是&lt;/strong&gt;“以牺牲人民自由为代价”**，两篇文章不仅在同一家媒体《纽约时报》发布，而且时间居然只差了20分钟。&lt;/p&gt;
-&lt;p&gt;&lt;img src="./9d2d417242ceec2596a90beaaebb71a8.png" alt="9d2d417242ceec2596a90beaaebb71a8.png"&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="./9d2d417242ceec2596a90beaaebb71a8.png" alt="9d2d417242ceec2596a90beaaebb71a8.png"&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;来源: &lt;a href="https://twitter.com/nytimes/status/1236479276586807296"&gt;https://twitter.com/nytimes/status/1236479276586807296&lt;/a&gt;, &lt;a href="https://twitter.com/nytimes/status/1236484352965521408"&gt;https://twitter.com/nytimes/status/1236484352965521408&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;评论: 单看这两条推特确实是西方媒体的偏见..&lt;/p&gt;
 &lt;hr&gt;
@@ -508,7 +527,8 @@ WebAssembly 是一种低级的类汇编语言, 能够达到和原生机器代码
 &lt;p&gt;比如说，&lt;strong&gt;中国正在变得智能，但代价是什么？&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="./246b296018db3460d935bb2e9d121731.png" alt="246b296018db3460d935bb2e9d121731.png"&gt;&lt;/p&gt;
 &lt;p&gt;这，就是欧美媒体对中国报道的常规格式。&lt;/p&gt;
-&lt;p&gt;把中国的好事变坏简直太简单了，&lt;strong&gt;你这个好事似乎存在，但代价是什么？&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;把中国的好事变坏简直太简单了，&lt;strong&gt;你这个好事似乎存在，但代价是什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;评论: 虚空打靶.. 别只看个标题啊, 你倒是具体说说西方媒体说了啥啊.&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;总结: 看这种自媒体真的降智商.. 以后要少看..&lt;/p&gt;

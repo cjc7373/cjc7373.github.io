@@ -25,7 +25,9 @@ git add .
 git commit -m &amp;#34;To use CI to automated deploy&amp;#34;
 git push origin source:source
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带&lt;code&gt;.gitignore&lt;/code&gt;文件，所以实际大小并没有多少。&lt;/p&gt;</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p&gt;&lt;/blockquote&gt;
+ &lt;p&gt;身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;h2 id="为什么选择hexo"&gt;为什么选择Hexo&lt;/h2&gt;
 &lt;p&gt;其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是&lt;del&gt;随手找了几个静态博客生成器，&lt;/del&gt; 随手一查就找到了Hexo。&lt;/p&gt;
 &lt;h2 id="hexo搭建过程"&gt;Hexo搭建过程&lt;/h2&gt;

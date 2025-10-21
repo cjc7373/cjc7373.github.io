@@ -94,12 +94,17 @@
 &lt;p&gt;从&lt;a href="https://github.com/hoyon/mpv-mpris/blob/16fee38988bb0f4a0865b6e8c3b332df2d6d8f14/mpris.c#L602C26-L602C26"&gt;这里&lt;/a&gt;可以看到，它在收到 mpris 的 &lt;code&gt;Stop()&lt;/code&gt; 方法后，会向 mpv 发送 stop 命令，因此我准备加一行日志看看到底是不是 &lt;code&gt;mpv-mpris&lt;/code&gt; 导致了上述问题。询问了 ChatGPT 之后发现其对于如何在 mpv C 扩展中打印日志完全是在瞎扯.. 后来发现直接用 &lt;code&gt;printf&lt;/code&gt; 就行.. 从函数签名可以看到其包含了 sender 的信息，于是将其打印。这里我并没有 clone 仓库进行构建，而是直接复制 archlinux 中的 PKGBUILD，先用 &lt;code&gt;makepkg -o&lt;/code&gt; 下载解压源码，修改后再用 &lt;code&gt;makepkg -e&lt;/code&gt; 进行构建，这样做的好处是无需关心具体的构建流程以及如何应用构建后的插件，build 完直接装就行。&lt;/p&gt;</description></item><item><title>MIT 6.824 学习笔记(二) Raft</title><link>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</link><pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mit_6.824_2_raft/</guid><description>&lt;p&gt;本文主要是对 Raft 论文的翻译，为了保持准确性，我会尽量使用英文术语。&lt;/p&gt;
 &lt;h2 id="introduction"&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;在过去十年，Leslie Lamport 的 Paxos 协议几乎成为了共识的同义词。Paxos 首先定义了一种协议来对单个决定达成共识, 比如一条单个的 log entry, 这被称为 single-decree Paxos。 其支持多个决定的版本 (比如 log) 被称为 muti-Paxos。然而，Paxos 的缺点是难以理解，并且没有提供一个良好的基础来构建可行的实现。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;试图为这个主题增添一点幽默的尝试以惨淡的失败告终。……这个希腊寓言显然使阅读论文的人们分心了，以致于他们无法理解这个算法。我把论文发给了一些人，其中包括 Nancy Lynch, Vassos Hadzilacos 和 Phil Bernstein，他们声称读过了论文。几个月后我发邮件给他们问了如下问题：&lt;/p&gt;
+
+
+
+ &lt;blockquote&gt;
+ &lt;p&gt;试图为这个主题增添一点幽默的尝试以惨淡的失败告终。……这个希腊寓言显然使阅读论文的人们分心了，以致于他们无法理解这个算法。我把论文发给了一些人，其中包括 Nancy Lynch, Vassos Hadzilacos 和 Phil Bernstein，他们声称读过了论文。几个月后我发邮件给他们问了如下问题：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;你能否实现一个分布式数据库，它能容忍任何进程的故障（可能是所有进程）而不牺牲一致性，并且在超过半数进程恢复之后继续正常工作？
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;没有人察觉到这个问题和 Paxos 算法之间有任何联系。&lt;/p&gt;
-&lt;p&gt;—— Leslie Lamport &lt;a href="https://lamport.azurewebsites.net/pubs/pubs.html?from=https://research.microsoft.com/users/lamport/pubs/pubs.html&amp;amp;type=path#lamport-paxos"&gt;对 The Part-Time Parliament 的评论&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;—— Leslie Lamport &lt;a href="https://lamport.azurewebsites.net/pubs/pubs.html?from=https://research.microsoft.com/users/lamport/pubs/pubs.html&amp;amp;type=path#lamport-paxos"&gt;对 The Part-Time Parliament 的评论&lt;/a&gt;&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;p&gt;相较于 Paxos，Raft 的目标是易于理解且符合直觉。为了使 Raft 易于理解，作者采取了解耦 (Raft 将共识问题分解成几个子问题 leader election, log replication, safety, and membership changes) 和缩减状态空间的方式。&lt;/p&gt;
 &lt;p&gt;Raft 和已有的共识算法类似（尤其是 Viewstamped Replication），但它有一些新特性。Raft 采取了强 leader 的设计，例如 log entry 只会从 leader 向其他节点分发。这可能是为了性能考虑（比无 leader 要更快，RPC 也更少）Raft 采用基于随机计时器的 leader 选举, 从而用一种简单的方法来解决冲突。另外还有处理成员变更方面的改进。&lt;/p&gt;</description></item><item><title>git 入门</title><link>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</link><pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/git_%E5%85%A5%E9%97%A8/</guid><description>&lt;p&gt;本文的大部分内容来自于 &lt;a href="https://git-scm.com/book/en/v2"&gt;Pro Git&lt;/a&gt; 这本书。&lt;/p&gt;
 &lt;h2 id="objects"&gt;Objects&lt;/h2&gt;
@@ -153,8 +158,11 @@
 &lt;p&gt;KDE 的电源管理由 powerdevil 控制，其作为 &lt;code&gt;plasma-powerdevil.service&lt;/code&gt; 用户服务运行，查询日志发现有一些神秘的 &lt;code&gt;org_kde_powerdevil[1310]: QObject::disconnect: Unexpected nullptr parameter&lt;/code&gt; 报错，之后证实该报错与本问题无关。&lt;/p&gt;
 &lt;p&gt;查看该 &lt;code&gt;.service&lt;/code&gt; 文件发现其使用 &lt;code&gt;Type=dbus&lt;/code&gt; 的启动类型，并且获得了一个叫 &lt;code&gt;org.kde.Solid.PowerManagement&lt;/code&gt; 的 bus name。用 QBBusViewer 可以看到 powerdevil 还提供了 &lt;code&gt;org.freedesktop.PowerManagement&lt;/code&gt; 这一服务。&lt;/p&gt;
 &lt;p&gt;查阅 powerdevil 源码以 &lt;code&gt;Switch off after&lt;/code&gt; 为关键词进行搜索可发现相关逻辑位于 &lt;code&gt;daemon/actions/bundled/dpms.cpp&lt;/code&gt; 文件下，根据名字猜测 dpms 即 Display Power Management Signaling 的缩写。简单看了一下 dpms，这是一个古老的协议，在 1993 年发布，定义了四种模式，但 &lt;a href="https://wiki.archlinux.org/title/Display_Power_Management_Signaling"&gt;archwiki 上&lt;/a&gt;指出：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note that DPMS was developed for CRT monitors, and on LCD displays, there is normally no difference between the standby, suspend and off modes.&lt;/p&gt;</description></item><item><title>强制 chromium 使用浅色模式</title><link>https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/</link><pubDate>Tue, 30 May 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/</guid><description>&lt;h2 id="问题"&gt;问题&lt;/h2&gt;
+
+
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Note that DPMS was developed for CRT monitors, and on LCD displays, there is normally no difference between the standby, suspend and off modes.&lt;/p&gt;</description></item><item><title>强制 chromium 使用浅色模式</title><link>https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/</link><pubDate>Tue, 30 May 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E5%BC%BA%E5%88%B6-chromium-%E4%BD%BF%E7%94%A8%E6%B5%85%E8%89%B2%E6%A8%A1%E5%BC%8F/</guid><description>&lt;h2 id="问题"&gt;问题&lt;/h2&gt;
 &lt;p&gt;从前两年开始深色模式大行其道，以至于现在几乎找不到一个不支持深色模式的网站了。各大主流浏览器几乎都在两三年前就支持了 CSS 的 &lt;code&gt;prefers-color-scheme&lt;/code&gt; 媒体查询，从而根据系统/浏览器的主题来自动切换浅/深色模式。在浏览器控制台中使用 &lt;code&gt;window.matchMedia('(prefers-color-scheme: dark)').matches&lt;/code&gt; 即可测试这一 feature。&lt;/p&gt;
 &lt;p&gt;我在系统中（KDE, Archlinux）使用深色模式，但我又并不喜欢大多数网站的深色模式，但是许多网站都使用了上述媒体查询来自动切换，导致很多情况下我进入一个网站后第一件事就是把浅色模式给切回来。在 Firefox/Edge 中浏览器设置便提供了深/浅色主题的切换选项，这一选项也是和上述媒体查询绑定的，然而不幸的是，chromium 并没有提供这一选项。&lt;/p&gt;
 &lt;h2 id="尝试"&gt;尝试&lt;/h2&gt;
@@ -162,7 +170,9 @@
 &lt;p&gt;那 flags 呢？&lt;code&gt;#enable-force-dark&lt;/code&gt; 提供了强制开启深色模式的选项，但是我在 &lt;code&gt;chrome://flags&lt;/code&gt; 中将其设置为 disabled 之后，并没有发生什么。&lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1046660"&gt;Issue 1046660: Allow users to force web content light/dark mode independent of system setting&lt;/a&gt; 中同样提到设置 &lt;code&gt;#enable-force-dark&lt;/code&gt; 为 disabled 将会被忽略。这个 Issue 应该是最贴近我的需求的一个 issue，然而目前还是 open 状态，距离实现遥遥无期。&lt;/p&gt;
 &lt;p&gt;另有一个 command line options &lt;code&gt;--disable-features=WebUIDarkMode&lt;/code&gt;，然而遗憾的是这个 option 仅针对 chromium UI, 对 web page 没有作用。&lt;/p&gt;
 &lt;p&gt;就在不久之前，chromium 还不支持随系统的深色模式来切换自己的深色模式（见 &lt;a href="https://bugs.chromium.org/p/chromium/issues/detail?id=998903"&gt;Issue 998903: XDG Desktop Portal &amp;ldquo;Prefer dark appearance&amp;rdquo; does not affect prefers-color-scheme media query&lt;/a&gt;），这一 feature 是在四月份实现的，并在 114 中发布。从相应的 &lt;a href="https://chromium-review.googlesource.com/c/chromium/src/+/4375982"&gt;revision&lt;/a&gt; 中，我们可以发现 chromium 首先会通过 dbus 和 xdg-desktop-portal 交互，读取 &lt;code&gt;org.freedesktop.appearance&lt;/code&gt; namespace 下的 &lt;code&gt;color-scheme&lt;/code&gt; 字段。根据 &lt;a href="https://flatpak.github.io/xdg-desktop-portal/#gdbus-org.freedesktop.portal.Settings"&gt;portal 的定义&lt;/a&gt; 返回值是 1 则偏好深色外观，返回值是 2 则偏好浅色外观。并且这一 revision 中说：&lt;/p&gt;</description></item><item><title>Kubernetes 生态中的航海隐喻</title><link>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</link><pubDate>Sun, 30 Apr 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/kubernetes-%E7%94%9F%E6%80%81%E4%B8%AD%E7%9A%84%E8%88%AA%E6%B5%B7%E9%9A%90%E5%96%BB/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;Disclaimer: 本文的结论大多是根据名字推断出来的，并没有得到项目开发者的证实。&lt;/p&gt;&lt;/blockquote&gt;
+ &lt;p&gt;Disclaimer: 本文的结论大多是根据名字推断出来的，并没有得到项目开发者的证实。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;p&gt;Kubernetes 在 2014 年 9 月发布，在这之前 Docker 已经大行其道了。Docker 发布于 2013 年，意为码头工人，其 logo 是个鲸鱼驮着一些集装箱。&lt;/p&gt;
 &lt;p&gt;&lt;img src="./610px-Docker_(container_engine)_logo.svg.png" alt="File:Docker (container engine) logo.svg"&gt;&lt;/p&gt;
 &lt;p&gt;后来这个 Logo 又变得扁平了一点：&lt;/p&gt;
@@ -191,8 +201,11 @@
 &lt;p&gt;本文并不是一篇针对 IPv6 的详尽介绍, 而只是对家用 IPv6 配置过程中的一些机制作了阐述. 在最后分享了几个 IPv6 问题排查的例子.&lt;/p&gt;</description></item><item><title>Hello, Hugo!</title><link>https://blog.coherence.codes/posts/2022/hello_hugo/</link><pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/hello_hugo/</guid><description>&lt;p&gt;这是一个船新的博客！&lt;/p&gt;
 &lt;h2 id="历史"&gt;历史&lt;/h2&gt;
 &lt;p&gt;在大二（2018）的时候，我萌生了搭建一个自己的独立博客的想法，于是就有了 &lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/"&gt;hexo搭建小记&lt;/a&gt;，当时我随手一找找到的基本都是 Hexo，于是我就用了。引用一段当时写的关于页面：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h2 id="关于博客"&gt;关于博客&lt;/h2&gt;
+
+
+
+ &lt;blockquote&gt;
+ &lt;h2 id="关于博客"&gt;关于博客&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑&lt;/li&gt;
 &lt;li&gt;2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件&lt;/li&gt;
@@ -200,7 +213,9 @@
 &lt;li&gt;2019-12-24 启用新域名&lt;code&gt;blog.coherence.codes&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;2019-10-07 升级主题至 Next V7.4.1&lt;/li&gt;
 &lt;li&gt;2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %}&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+
+ &lt;/blockquote&gt;
 &lt;p&gt;Next 就是一个非常大众的主题，有几种变体，我用的是一个叫 &lt;code&gt;pisces&lt;/code&gt; 的变体，长这样（原博客图已经找不到了，只能用官方 Demo 凑数了）：&lt;/p&gt;
 &lt;p&gt;&lt;img src="image-20221002165030564.png" alt="image-20221002165030564"&gt;&lt;/p&gt;
 &lt;p&gt;这一时期的博客位于 &lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/source/source"&gt;source 分支&lt;/a&gt;，最后更新于 2020-04-16。&lt;/p&gt;
@@ -218,43 +233,71 @@
 &lt;p&gt;开发者 Katriel 认为, 把这些 issues 留在 issue tracker 上是有害的, 增加了整个项目的维护成本. 有关这一论断, 一种极端的做法是关闭所有不活跃的 issues, 当然这是不可取的, 可以参看 &lt;a href="https://drewdevault.com/2021/10/26/stalebot.html"&gt;GitHub stale bot considered harmful&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>民族主义自媒体是如何消费我们的</title><link>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%B0%91%E6%97%8F%E4%B8%BB%E4%B9%89%E8%87%AA%E5%AA%92%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E6%B6%88%E8%B4%B9%E6%88%91%E4%BB%AC%E7%9A%84/</guid><description>&lt;p&gt;目前的中文互联网上存在着大量的鼓吹民族主义, 制造中西方对立的自媒体, 令人震惊的是, 他们中大部分不但充斥着情绪输出, 甚至连大部分事实都是错误的. 我偶然间读到了这样的一篇文章, 并对其中列出的事实进行了查证, 然后感觉我的智商受到了侮辱..&lt;/p&gt;
 &lt;p&gt;原文: &lt;a href="https://www.zhihu.com/question/428451991/answer/2431916538"&gt;西方媒体是怎样给西方人洗脑的？ - 远方青木的回答 - 知乎&lt;/a&gt;, &lt;a href="http://web.archive.org/web/20220429053052/https://www.zhihu.com/question/428451991/answer/2431916538"&gt;archive&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;这几年欧美一直在向中国发动舆论战，我见过最离谱的一个理论甚至说什么“中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟”。&lt;/p&gt;
-&lt;p&gt;我本以为这套歪理邪说就是欧美造谣生事的想象力极限，没想到欧美的底线可以永无止尽的被突破。&lt;/p&gt;&lt;/blockquote&gt;
+
+
+
+ &lt;blockquote&gt;
+ &lt;p&gt;这几年欧美一直在向中国发动舆论战，我见过最离谱的一个理论甚至说什么“中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟”。&lt;/p&gt;
+&lt;p&gt;我本以为这套歪理邪说就是欧美造谣生事的想象力极限，没想到欧美的底线可以永无止尽的被突破。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;p&gt;来源: &lt;a href="https://www.nytimes.com/2020/01/07/business/fake-pork-china.html"&gt;纽约时报 中国人会购买人造肉吗？&lt;/a&gt;, 另见&lt;a href="https://world.huanqiu.com/article/9CaKrnKoNzC"&gt;环球网报道&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;评论: 虽然文章很有&amp;quot;反华&amp;quot;的倾向性, 但文章主要讲的是人造肉在中国难以推广. 肉类消费对于气候的影响是不争的事实. 所以&amp;quot;中国人每吃一口肉，亚马逊热带雨林就会冒出一缕白烟&amp;quot;这句话也不能算错, 但应该把主语换成全世界人.
 要求中国牺牲国民营养而减少肉类消费是不合理的, 但是推广人造肉是合理的. 作者在这里显然有断章取义之嫌.&lt;/p&gt;
 &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;《&lt;a href="https://web.archive.org/web/20220429053052mp_/https://www.zhihu.com/search?q=%E5%8D%8E%E7%9B%9B%E9%A1%BF%E9%82%AE%E6%8A%A5&amp;amp;search_source=Entity&amp;amp;hybrid_search_source=Entity&amp;amp;hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A2431916538%7D"&gt;华盛顿邮报&lt;/a&gt;》在报道中声称**“中国每年强迫种植数亿棵新树”，这简直是在“犯罪”！**&lt;/p&gt;
+
+
+
+ &lt;blockquote&gt;
+ &lt;p&gt;《&lt;a href="https://web.archive.org/web/20220429053052mp_/https://www.zhihu.com/search?q=%E5%8D%8E%E7%9B%9B%E9%A1%BF%E9%82%AE%E6%8A%A5&amp;amp;search_source=Entity&amp;amp;hybrid_search_source=Entity&amp;amp;hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A2431916538%7D"&gt;华盛顿邮报&lt;/a&gt;》在报道中声称**“中国每年强迫种植数亿棵新树”，这简直是在“犯罪”！**&lt;/p&gt;
 &lt;p&gt;&lt;img src="./e577e26ef47585f1faae27fb45123efd.png" alt="e577e26ef47585f1faae27fb45123efd.png"&gt;&lt;/p&gt;
 &lt;p&gt;我捋一捋他们的思路，&lt;strong&gt;大概意思就是说中国每年种数亿棵新树，但把这些新树种下去之前并没有征求这些树的同意，这数亿棵树是“不一定同意自己被种植”的，但全部被中国强迫种在地里了。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;因此，中国侵犯了树“自由被种植”的权力，强迫树木劳动，这属于犯罪，因此中国需要反思自己这种野蛮的行为。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;逻辑好像有那么一点点道理哦，但我怎么就觉得那么奇怪和荒谬呢。&lt;/p&gt;
 &lt;p&gt;中国人种树怎么了？&lt;/p&gt;
 &lt;p&gt;种树不是在保护环境吗？&lt;/p&gt;
-&lt;p&gt;怎么拐了一圈之后种树居然成犯罪行为了？&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;怎么拐了一圈之后种树居然成犯罪行为了？&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;p&gt;来源: 没有找到来源.&lt;/p&gt;
 &lt;p&gt;评论: 据 &lt;a href="https://checkyourfact.com/2022/04/18/fact-check-washington-post-china-trees-article/"&gt;checkyourfact&lt;/a&gt;, 该截图为杜撰, 最初流传于 Facebook 和 Twitter.&lt;/p&gt;
 &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;更荒谬的是，同一家西方媒体，前几年报道中国的标题是**《中国对一次性筷子的成瘾正在摧毁森林》。**&lt;/p&gt;
+
+
+
+ &lt;blockquote&gt;
+ &lt;p&gt;更荒谬的是，同一家西方媒体，前几年报道中国的标题是**《中国对一次性筷子的成瘾正在摧毁森林》。**&lt;/p&gt;
 &lt;p&gt;首先，一次性筷子不是用森林做出来的，一次性筷子的主要原料是一个月能长3米的竹子，以及速生经济林的边角废木料。&lt;/p&gt;
 &lt;p&gt;用森林里的好木头确实可以做一次性筷子，但没人这么做，因为成本太高商家会亏本，只有速生林边角废料和竹子的低廉价格才能让商家赚到钱。&lt;/p&gt;
 &lt;p&gt;其次，抛开筷子的真实原材料不谈，这家西方媒体的主要立场好像也是森林是宝贵的，森林对人类有益，并以此来指责中国。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;既然如此，为什么中国种植森林也能被指责一番。是不是中国人干什么都不行，连呼吸都是错的？&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;既然如此，为什么中国种植森林也能被指责一番。是不是中国人干什么都不行，连呼吸都是错的？&lt;/strong&gt;&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;p&gt;来源: &lt;a href="https://www.washingtonpost.com/news/worldviews/wp/2013/03/14/chinas-disposable-chopstick-addiction-is-destroying-its-forests/"&gt;华盛顿邮报《中国对一次性筷子的成瘾正在摧毁森林》&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;评论: 华盛顿邮报 2013 年的报道, 主要援引的是时任吉林森工集团董事长柏广新的一句话: &amp;ldquo;我国每年生产800亿双一次性筷子，相当于要砍伐2000万棵生长20年的大树&amp;rdquo;. &lt;a href="http://www.gov.cn/2013lh/content_2349497.htm"&gt;中国政府网&lt;/a&gt;和&lt;a href="http://cpc.people.com.cn/pinglun/n/2013/0312/c78779-20759994.html"&gt;光明网&lt;/a&gt;均能找到这句话以及相关对一次性筷子的批评. 报道中均指出了木头和竹子均是一次性筷子的原料.&lt;/p&gt;
 &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;几年前，欧美媒体报道说根据科学家的研究，中国人种植水稻会产生更多的温室气体，因此中国人吃大米正在毁灭全球气候，进而导致人类灭亡。&lt;/p&gt;&lt;/blockquote&gt;
+
+
+
+ &lt;blockquote&gt;
+ &lt;p&gt;几年前，欧美媒体报道说根据科学家的研究，中国人种植水稻会产生更多的温室气体，因此中国人吃大米正在毁灭全球气候，进而导致人类灭亡。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;p&gt;来源: 我都不知道怎么找..&lt;/p&gt;
 &lt;p&gt;评论: 类似的研究肯定有, 但我不觉得哪家媒体会报道吃大米导致人类灭亡&amp;hellip;&lt;/p&gt;
 &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;2019年，国际顶级科学期刊《自然》杂志发表了一篇文章，说根据科学家的研究成果，中国政府治理沙漠，大力推进的荒漠绿化工程，种树过多，可能导致人类水资源枯竭，因此会对地球自然生态造成极大影响。&lt;/p&gt;
+
+
+
+ &lt;blockquote&gt;
+ &lt;p&gt;2019年，国际顶级科学期刊《自然》杂志发表了一篇文章，说根据科学家的研究成果，中国政府治理沙漠，大力推进的荒漠绿化工程，种树过多，可能导致人类水资源枯竭，因此会对地球自然生态造成极大影响。&lt;/p&gt;
 &lt;p&gt;《自然》杂志本是人类最顶级的科学杂志，但写这篇文章的“科学家”逻辑推导却很简单，算一算中国政府要消灭荒漠需要种多少棵树，种这些树需要消耗多少水资源，&lt;strong&gt;因此得出结论中国种树会破坏自然环境。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;别笑，这是真事。&lt;/p&gt;</description></item><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>&lt;p&gt;本文纯属回忆, 描述可能会有偏差.&lt;/p&gt;
+&lt;p&gt;别笑，这是真事。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;中国人花费几代心血把沙漠变成了绿洲，对人类如此巨大的贡献居然招来西方期刊的指责？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;治理沙漠居然都能成为破坏环境的罪证。&lt;/strong&gt;&lt;/p&gt;
+
+ &lt;/blockquote&gt;
+&lt;p&gt;来源: &lt;a href="https://www.nature.com/articles/d41586-019-02789-w"&gt;nature 文章 China&amp;rsquo;s tree-planting drive could falter in a warming world&lt;/a&gt;&lt;/p&gt;</description></item><item><title>我的手机变迁史</title><link>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/%E6%88%91%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%98%E8%BF%81%E5%8F%B2/</guid><description>&lt;p&gt;本文纯属回忆, 描述可能会有偏差.&lt;/p&gt;
 &lt;p&gt;小学时, 为方便联系, 我爸给了我一个 ZTE 的功能机, 里面只有一个打砖块的小游戏.&lt;/p&gt;
 &lt;p&gt;后来这手机被我在路上掉了, 于是我换成了一个 LG 的功能机. 这个 LG 的神奇之处在于它自带了一个浏览器, 于是我可以用 2G 上网去起点, 纵横看小说. 另外它自带电信的一个应用商店, 里面有一些免费的小游戏可以下 (不知道是啥技术, 估计是 java..), 因为我当时并没有流量套餐, 后来还因为话费异常被我爸查到并追问我在上网干什么, 我记得我用看新闻蒙混过去了. 这个手机陪伴我度过了初中.&lt;/p&gt;
 &lt;p&gt;考上省中后, 爸妈为了奖励我, 给我换了个新手机, 这时我爸被中国电信忽悠买了个酷派 K1 (酷派 5952).&lt;/p&gt;
@@ -569,12 +612,16 @@
 &lt;h3 id="docker"&gt;Docker&lt;/h3&gt;
 &lt;p&gt;可喜可贺，WSL终于能用Docker了。&lt;/p&gt;
 &lt;p&gt;配置镜像源（无systemd）：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在配置文件 &lt;code&gt;/etc/default/docker&lt;/code&gt; 中的 &lt;code&gt;DOCKER_OPTS&lt;/code&gt; 中配置Hub地址：&lt;/p&gt;
+
+
+
+ &lt;blockquote&gt;
+ &lt;p&gt;在配置文件 &lt;code&gt;/etc/default/docker&lt;/code&gt; 中的 &lt;code&gt;DOCKER_OPTS&lt;/code&gt; 中配置Hub地址：&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;DOCKER_OPTS=&amp;#34;--registry-mirror=https://docker.mirrors.ustc.edu.cn/&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重新启动服务:&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;sudo service docker restart
-&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;/code&gt;&lt;/pre&gt;
+ &lt;/blockquote&gt;
 &lt;h3 id="坑-1"&gt;坑&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -665,7 +712,9 @@ git add .
 git commit -m &amp;#34;To use CI to automated deploy&amp;#34;
 git push origin source:source
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;本来以为这个仓库会很大（整个文件夹大概 100M），突然发现它自带&lt;code&gt;.gitignore&lt;/code&gt;文件，所以实际大小并没有多少。&lt;/p&gt;</description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p&gt;&lt;/blockquote&gt;
+ &lt;p&gt;Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;h2 id="前言"&gt;前言&lt;/h2&gt;
 &lt;p&gt;以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p&gt;
 &lt;p&gt;这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p&gt;
@@ -901,21 +950,31 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&amp;#39;
 &lt;p&gt;Markdown语法主要分为如下几大部分： &lt;strong&gt;标题&lt;/strong&gt;，&lt;strong&gt;段落&lt;/strong&gt;，&lt;strong&gt;区块引用&lt;/strong&gt;，&lt;strong&gt;代码区块&lt;/strong&gt;，&lt;strong&gt;强调&lt;/strong&gt;，&lt;strong&gt;列表&lt;/strong&gt;，&lt;strong&gt;分割线&lt;/strong&gt;，&lt;strong&gt;链接&lt;/strong&gt;，&lt;strong&gt;图片&lt;/strong&gt;，&lt;strong&gt;反斜杠 \&lt;/strong&gt;，&lt;strong&gt;行内引用&lt;/strong&gt;。&lt;/p&gt;
 &lt;h4 id="1-标题"&gt;1. 标题&lt;/h4&gt;
 &lt;p&gt;使用&lt;code&gt;#&lt;/code&gt;，可表示1-6级标题。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;# 一级标题
+
+
+
+ &lt;blockquote&gt;
+ &lt;p&gt;# 一级标题
 ## 二级标题
 ### 三级标题
 #### 四级标题
 ##### 五级标题
-###### 六级标题&lt;/p&gt;&lt;/blockquote&gt;
+###### 六级标题&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;p&gt;效果：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h1 id="一级标题"&gt;一级标题&lt;/h1&gt;
+
+
+
+ &lt;blockquote&gt;
+ &lt;h1 id="一级标题"&gt;一级标题&lt;/h1&gt;
 &lt;h2 id="二级标题"&gt;二级标题&lt;/h2&gt;
 &lt;h3 id="三级标题"&gt;三级标题&lt;/h3&gt;
 &lt;h4 id="四级标题"&gt;四级标题&lt;/h4&gt;
 &lt;h5 id="五级标题"&gt;五级标题&lt;/h5&gt;
-&lt;h6 id="六级标题"&gt;六级标题&lt;/h6&gt;&lt;/blockquote&gt;
+&lt;h6 id="六级标题"&gt;六级标题&lt;/h6&gt;
+
+ &lt;/blockquote&gt;
 &lt;h4 id="2-段落"&gt;2. 段落&lt;/h4&gt;
 &lt;p&gt;段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用&lt;strong&gt;两个以上&lt;/strong&gt;空格加上回车（引用中换行省略回车）。&lt;/p&gt;</description></item><item><title>关于我</title><link>https://blog.coherence.codes/posts/2020_and_before/about_me/</link><pubDate>Sat, 03 Nov 2018 16:37:04 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/about_me/</guid><description>&lt;h2 id="关于我"&gt;关于我&lt;/h2&gt;
 &lt;p&gt;博主是一名大四学生。&lt;/p&gt;
@@ -938,7 +997,9 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\proplusvl_mak*.xrm-ms&amp;#39;
 &lt;h2 id="联系我"&gt;联系我&lt;/h2&gt;
 &lt;p&gt;Telegram：@Coherence0&lt;/p&gt;
 &lt;p&gt;Email：niuchangcun AT gmail.com&lt;/p&gt;</description></item><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;这就是乱改字体的后果..&lt;/p&gt;&lt;/blockquote&gt;
+ &lt;p&gt;这就是乱改字体的后果..&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;p&gt;字体修复，不只是字体修复。&lt;/p&gt;
 &lt;h2 id="事由"&gt;事由&lt;/h2&gt;
 &lt;p&gt;偶然间看到一篇&lt;a href="http://www.dgtle.com/article-25875-1.html"&gt;替换Win10字体来提升字体观感的文章&lt;/a&gt;，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。&lt;/p&gt;
@@ -967,7 +1028,9 @@ sfc /scannow
 &lt;li&gt;可控，完全受自己管理。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;在这纷纭复杂的互联网中，拥有自己的一方小天地，似乎也是极好的。&lt;/p&gt;</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p&gt;&lt;/blockquote&gt;
+ &lt;p&gt;身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;h2 id="为什么选择hexo"&gt;为什么选择Hexo&lt;/h2&gt;
 &lt;p&gt;其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是&lt;del&gt;随手找了几个静态博客生成器，&lt;/del&gt; 随手一查就找到了Hexo。&lt;/p&gt;
 &lt;h2 id="hexo搭建过程"&gt;Hexo搭建过程&lt;/h2&gt;

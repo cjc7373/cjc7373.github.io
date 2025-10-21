@@ -11,7 +11,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cjc &lt;span style="color:#ae81ff"&gt;2806&lt;/span&gt; 6.6 2.3 &lt;span style="color:#ae81ff"&gt;4141220&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;941484&lt;/span&gt; ? Sl Oct07 109:17 /usr/bin/kwin_wayland ...
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cjc &lt;span style="color:#ae81ff"&gt;3390&lt;/span&gt; 1.5 1.9 &lt;span style="color:#ae81ff"&gt;3994932&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;792364&lt;/span&gt; ? Sl Oct07 26:10 /usr/lib/zotero/zotero-bin ...
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;本文假定读者具有虚拟内存的基础知识，文中的代码将以 C 语言为例。&lt;/p&gt;</description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p&gt;&lt;/blockquote&gt;
+ &lt;p&gt;Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;h2 id="前言"&gt;前言&lt;/h2&gt;
 &lt;p&gt;以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p&gt;
 &lt;p&gt;这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p&gt;

@@ -13,5 +13,8 @@
 &lt;p&gt;KDE 的电源管理由 powerdevil 控制，其作为 &lt;code&gt;plasma-powerdevil.service&lt;/code&gt; 用户服务运行，查询日志发现有一些神秘的 &lt;code&gt;org_kde_powerdevil[1310]: QObject::disconnect: Unexpected nullptr parameter&lt;/code&gt; 报错，之后证实该报错与本问题无关。&lt;/p&gt;
 &lt;p&gt;查看该 &lt;code&gt;.service&lt;/code&gt; 文件发现其使用 &lt;code&gt;Type=dbus&lt;/code&gt; 的启动类型，并且获得了一个叫 &lt;code&gt;org.kde.Solid.PowerManagement&lt;/code&gt; 的 bus name。用 QBBusViewer 可以看到 powerdevil 还提供了 &lt;code&gt;org.freedesktop.PowerManagement&lt;/code&gt; 这一服务。&lt;/p&gt;
 &lt;p&gt;查阅 powerdevil 源码以 &lt;code&gt;Switch off after&lt;/code&gt; 为关键词进行搜索可发现相关逻辑位于 &lt;code&gt;daemon/actions/bundled/dpms.cpp&lt;/code&gt; 文件下，根据名字猜测 dpms 即 Display Power Management Signaling 的缩写。简单看了一下 dpms，这是一个古老的协议，在 1993 年发布，定义了四种模式，但 &lt;a href="https://wiki.archlinux.org/title/Display_Power_Management_Signaling"&gt;archwiki 上&lt;/a&gt;指出：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note that DPMS was developed for CRT monitors, and on LCD displays, there is normally no difference between the standby, suspend and off modes.&lt;/p&gt;</description></item></channel></rss>
+
+
+
+ &lt;blockquote&gt;
+ &lt;p&gt;Note that DPMS was developed for CRT monitors, and on LCD displays, there is normally no difference between the standby, suspend and off modes.&lt;/p&gt;</description></item></channel></rss>

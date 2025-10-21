@@ -1,5 +1,7 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ -&lt;blockquote&gt;
-&lt;p&gt;这就是乱改字体的后果..&lt;/p&gt;&lt;/blockquote&gt;
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 21 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows10字体崩溃修复</title><link>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</link><pubDate>Fri, 02 Nov 2018 18:23:47 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/windows10%E5%AD%97%E4%BD%93%E5%B4%A9%E6%BA%83%E4%BF%AE%E5%A4%8D/ -
+&lt;blockquote&gt;
+&lt;p&gt;这就是乱改字体的后果..&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;字体修复，不只是字体修复。&lt;/p&gt;
 &lt;h2 id="事由"&gt;事由&lt;/h2&gt;
 &lt;p&gt;偶然间看到一篇&lt;a href="http://www.dgtle.com/article-25875-1.html"&gt;替换Win10字体来提升字体观感的文章&lt;/a&gt;，加上一直听说Win10的字体渲染很垃圾，于是就按照文中的步骤，把默认的微软雅黑字体替换成了苹果的苹方字体。&lt;/p&gt;
@@ -29,8 +31,10 @@ sfc /scannow
 &lt;li&gt;可控，完全受自己管理。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;在这纷纭复杂的互联网中，拥有自己的一方小天地，似乎也是极好的。&lt;/p&gt;
-- https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ -&lt;blockquote&gt;
-&lt;p&gt;身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p&gt;&lt;/blockquote&gt;
+- https://blog.coherence.codes/posts/2020_and_before/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E4%BA%86%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/ -
+&lt;blockquote&gt;
+&lt;p&gt;身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id="为什么选择hexo"&gt;为什么选择Hexo&lt;/h2&gt;
 &lt;p&gt;其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是&lt;del&gt;随手找了几个静态博客生成器，&lt;/del&gt; 随手一查就找到了Hexo。&lt;/p&gt;
 &lt;h2 id="hexo搭建过程"&gt;Hexo搭建过程&lt;/h2&gt;

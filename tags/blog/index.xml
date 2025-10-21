@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog on Coherence's Blog</title><link>https://blog.coherence.codes/tags/blog/</link><description>Recent content in Blog on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 24 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello, Hugo!</title><link>https://blog.coherence.codes/posts/2022/hello_hugo/</link><pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2022/hello_hugo/</guid><description>&lt;p&gt;这是一个船新的博客！&lt;/p&gt;
 &lt;h2 id="历史"&gt;历史&lt;/h2&gt;
 &lt;p&gt;在大二（2018）的时候，我萌生了搭建一个自己的独立博客的想法，于是就有了 &lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/"&gt;hexo搭建小记&lt;/a&gt;，当时我随手一找找到的基本都是 Hexo，于是我就用了。引用一段当时写的关于页面：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h2 id="关于博客"&gt;关于博客&lt;/h2&gt;
+
+
+
+ &lt;blockquote&gt;
+ &lt;h2 id="关于博客"&gt;关于博客&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑&lt;/li&gt;
 &lt;li&gt;2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件&lt;/li&gt;
@@ -10,14 +13,18 @@
 &lt;li&gt;2019-12-24 启用新域名&lt;code&gt;blog.coherence.codes&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;2019-10-07 升级主题至 Next V7.4.1&lt;/li&gt;
 &lt;li&gt;2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见{% post_link Hexo搭建小记 这篇文章 %}&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+
+ &lt;/blockquote&gt;
 &lt;p&gt;Next 就是一个非常大众的主题，有几种变体，我用的是一个叫 &lt;code&gt;pisces&lt;/code&gt; 的变体，长这样（原博客图已经找不到了，只能用官方 Demo 凑数了）：&lt;/p&gt;
 &lt;p&gt;&lt;img src="image-20221002165030564.png" alt="image-20221002165030564"&gt;&lt;/p&gt;
 &lt;p&gt;这一时期的博客位于 &lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/source/source"&gt;source 分支&lt;/a&gt;，最后更新于 2020-04-16。&lt;/p&gt;
 &lt;p&gt;由于这个主题实在是太大众了，中途（2019-10 左右）我也想过换一个主题（&lt;a href="https://github.com/yscoder/hexo-theme-indigo"&gt;hexo-theme-indigo&lt;/a&gt;，一个 Material Design 风格的主题），但是没有配置成功，&lt;a href="https://github.com/cjc7373/cjc7373.github.io/tree/theme-indigo"&gt;theme-indigo 分支&lt;/a&gt;便是那次尝试。theme-indigo 的效果图长这样：&lt;/p&gt;
 &lt;p&gt;&lt;img src="image-20221002165819783.png" alt="image-20221002165819783"&gt;&lt;/p&gt;
 &lt;p&gt;到了 21 年 2 月，我开始重新调研博客生成器，当时看到了一个 Python 写的 Pelican，而我又希望壮大一下 Python 生态，于是就用了。用了之后发现并没有什么合适的主题，恰巧 Pelican 用的模板引擎 Jinja 和 Django Template Engine 很像，我比较熟悉，于是我就想自己写一个主题，然而这一工作从没开始过.. 于是我现在的博客是这样的（&lt;del&gt;极简主义&lt;/del&gt;）：&lt;/p&gt;</description></item><item><title>Hexo搭建小记</title><link>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</link><pubDate>Sat, 13 Oct 2018 20:10:18 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/</guid><description>&lt;blockquote&gt;
-&lt;p&gt;身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p&gt;&lt;/blockquote&gt;
+ &lt;p&gt;身为一个懒人，又不会写网页，也只能用用博客生成器了。&lt;/p&gt;
+
+ &lt;/blockquote&gt;
 &lt;h2 id="为什么选择hexo"&gt;为什么选择Hexo&lt;/h2&gt;
 &lt;p&gt;其实也没啥特别的理由。一开始想把博客搭在自己的服务器上，然而感觉维护太麻烦了，正好觉得Github Pages很不错，就决定用了。Github Pages只支持静态页面，WordPress之类的就不能用了，于是&lt;del&gt;随手找了几个静态博客生成器，&lt;/del&gt; 随手一查就找到了Hexo。&lt;/p&gt;
 &lt;h2 id="hexo搭建过程"&gt;Hexo搭建过程&lt;/h2&gt;

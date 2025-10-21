@@ -1,4 +1,4 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ -&lt;p&gt;记录一下比赛期间踩到的坑.&lt;/p&gt;
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 21 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ -&lt;p&gt;记录一下比赛期间踩到的坑.&lt;/p&gt;
 &lt;h2 id="签到"&gt;签到&lt;/h2&gt;
 &lt;p&gt;开始完全没有读题直接进题目, 然后想了半天没思路并随机测试了一些数.. 直到我读了题..&lt;/p&gt;
 &lt;h2 id="进制十六参上"&gt;进制十六——参上&lt;/h2&gt;
@@ -796,7 +796,8 @@
 &lt;pre tabindex="0"&gt;&lt;code&gt;DOCKER_OPTS=&amp;#34;--registry-mirror=https://docker.mirrors.ustc.edu.cn/&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重新启动服务:&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;sudo service docker restart
-&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
 &lt;h3 id="坑-1"&gt;坑&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -873,7 +874,8 @@ comments: false
 &lt;pre tabindex="0"&gt;&lt;code&gt;layout: categories
 comments: false
 ---
-&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;话说用 Github Desktop commit 的时候因为主题文件夹也是一个 git 仓库，所以报错了，在命令行中 add，提示&lt;/p&gt;
 &lt;p&gt;&lt;img src="./1565227855897.png" alt="1565227855897"&gt;&lt;/p&gt;
 &lt;p&gt;于是我去 Google 了下&lt;a href="%5Bhttps://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97%5D(https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)"&gt;子模块&lt;/a&gt;，感觉这会让问题变复杂，同时这个主题已经很久没更新过了，干脆把主题的版本库删了吧。删除 &lt;code&gt;.git&lt;/code&gt;文件夹后，提交成功。&lt;/p&gt;
@@ -900,7 +902,8 @@ permalink: false
 excerpt: false
 categories: false
 tags: true
-&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;编辑主题配置文件，&lt;code&gt;themes/indigo/_config.yml&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;左侧菜单：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -910,7 +913,8 @@ link: # fontawesome图标，省略前缀，本主题前缀为 icon-，必须
 text: About # 菜单显示的文字，如果省略即默认与图标一致，首字母会转大写
 url: /about # 链接，绝对或相对路径，必须
 target: _blank # 是否跳出，省略则在当前页面打开
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;fontawesome 图标已集成到主题中，你可以到 &lt;a href="http://fontawesome.io/icons/"&gt;这个页面&lt;/a&gt; 挑选合适的图标。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;fontawesome 图标已集成到主题中，你可以到 &lt;a href="http://fontawesome.io/icons/"&gt;这个页面&lt;/a&gt; 挑选合适的图标。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;我修改为如下：&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;menu:
 home:

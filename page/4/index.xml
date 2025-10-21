@@ -1,4 +1,4 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>大二下学期期末复习</title><link>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link><pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/ -&lt;h2 id="软件工程试卷"&gt;软件工程试卷&lt;/h2&gt;
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 21 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>大二下学期期末复习</title><link>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link><pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/ -&lt;h2 id="软件工程试卷"&gt;软件工程试卷&lt;/h2&gt;
 &lt;p&gt;来源： &lt;a href="https://tellyouwhat.cn/p/northwest-university-software-engineering-review-materials/"&gt;Harbor Zeng&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="./bd61005egy1g0cx8lnllsj20rt112adk.jpg" alt="img"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="./bd61005egy1g0cx8izobuj22eo37kb29.jpg" alt="img"&gt;&lt;/p&gt;
@@ -42,7 +42,8 @@
 &lt;p&gt;Django 的文档宣称：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;会自动重新加载的服务器 &lt;a href="https://docs.djangoproject.com/zh-hans/2.2/ref/django-admin/#django-admin-runserver"&gt;&lt;code&gt;runserver&lt;/code&gt;&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;用于开发的服务器在需要的情况下会对每一次的访问请求重新载入一遍 Python 代码。所以你不需要为了让修改的代码生效而频繁的重新启动服务器。然而，一些动作，比如添加新文件，将不会触发自动重新加载，这时你得自己手动重启服务器。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;用于开发的服务器在需要的情况下会对每一次的访问请求重新载入一遍 Python 代码。所以你不需要为了让修改的代码生效而频繁的重新启动服务器。然而，一些动作，比如添加新文件，将不会触发自动重新加载，这时你得自己手动重启服务器。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;然而有时候重新载入并不会生效（可能是 PyCharm 的问题？），这种时候就很烦..&lt;/p&gt;
 &lt;p&gt;数据库中的&lt;code&gt;DateTimeField&lt;/code&gt;字段存储的时间总是 UTC 时间，在&lt;code&gt;settings.py&lt;/code&gt;中设置：&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;TIME_ZONE = &amp;#39;Asia/Shanghai&amp;#39;
@@ -75,7 +76,8 @@ CORS_ALLOW_CREDENTIALS = True
 &lt;h2 id="部署"&gt;部署&lt;/h2&gt;
 &lt;p&gt;在开发中，采取的方案是前端静态网页由 Nginx 部署，而后端 Django 代码则使用 Django 自带的服务器部署，而显然，这绝不能用于生产环境。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;DO NOT USE THIS SERVER IN A PRODUCTION SETTING. It has not gone through security audits or performance tests.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;DO NOT USE THIS SERVER IN A PRODUCTION SETTING. It has not gone through security audits or performance tests.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;（不过我还是用了，甚至都没关 DEBUG 选项）&lt;/p&gt;
 &lt;p&gt;因为 Django 服务器使用 &lt;code&gt;python3 manage.py runserver&lt;/code&gt;运行的， SSH 断开后进程就被中断了，所以需要让它能够后台运行，尝试了 nohup，子 shell 等方法后（都不好用），最终选择了 screen。主要命令有：&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;screen -S [NAME] 创建一个新 shell
@@ -191,8 +193,10 @@ pause
 &lt;p&gt;&lt;a href="https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html"&gt;https://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/"&gt;https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/"&gt;https://blessing.studio/deploy-hexo-blog-automatically-with-travis-ci/&lt;/a&gt;&lt;/p&gt;
-- https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ -&lt;blockquote&gt;
-&lt;p&gt;Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p&gt;&lt;/blockquote&gt;
+- https://blog.coherence.codes/posts/2020_and_before/use-ci-auto-deploy-blog/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Arch Linux 安装&amp;配置全过程</title><link>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</link><pubDate>Sun, 24 Mar 2019 20:12:51 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/arch-linux-install/ -
+&lt;blockquote&gt;
+&lt;p&gt;Note from 2024/06/10：本文所记载很多内容已经过时，要获取最新的信息还是要善用 ArchWiki 和 Google。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id="前言"&gt;前言&lt;/h2&gt;
 &lt;p&gt;以前我也装过双系统，很遗憾，可能是知识水平不够的缘故，也有笔记本坑爹的原因，装过 Ubuntu，Manjaro，Deepin，Fedora 等众多发行版，要么启动时候卡死，要么根本无法引导，于是作罢。如今开始学习 Linux，便有了重拾双系统的念头。&lt;/p&gt;
 &lt;p&gt;这篇博客将记录 Arch 安装与配置全过程。最终目标是 Arch 能成为我的主力系统替代 Windows。&lt;/p&gt;
@@ -345,7 +349,8 @@ Numlock=on
 &lt;p&gt;？？？说好的自动解决依赖关系呢？&lt;/p&gt;
 &lt;p&gt;直接构建发现会报一堆依赖的错，查看 Github 项目发现：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;deepin-wine-tim&lt;/code&gt;依赖&lt;code&gt;Multilib&lt;/code&gt;仓库中的&lt;code&gt;wine&lt;/code&gt;，&lt;code&gt;wine_gecko&lt;/code&gt;和&lt;code&gt;wine-mono&lt;/code&gt;，Archlinux默认没有开启&lt;code&gt;Multilib&lt;/code&gt;仓库，需要编辑&lt;code&gt;/etc/pacman.conf&lt;/code&gt;，取消对应行前面的注释(&lt;a href="https://wiki.archlinux.org/index.php/Official_repositories#multilib"&gt;Archlinux wiki&lt;/a&gt;)&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;deepin-wine-tim&lt;/code&gt;依赖&lt;code&gt;Multilib&lt;/code&gt;仓库中的&lt;code&gt;wine&lt;/code&gt;，&lt;code&gt;wine_gecko&lt;/code&gt;和&lt;code&gt;wine-mono&lt;/code&gt;，Archlinux默认没有开启&lt;code&gt;Multilib&lt;/code&gt;仓库，需要编辑&lt;code&gt;/etc/pacman.conf&lt;/code&gt;，取消对应行前面的注释(&lt;a href="https://wiki.archlinux.org/index.php/Official_repositories#multilib"&gt;Archlinux wiki&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;懂了，我以后一定先 RTFM（&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -362,7 +367,8 @@ Numlock=on
 &lt;pre tabindex="0"&gt;&lt;code&gt;export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
-&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;​ 成功解决。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -371,10 +377,12 @@ export XMODIFIERS=@im=fcitx
 &lt;p&gt;May 02 14:19:10 Coherence systemd[1]: Condition check resulted in FUSE Control File System being skipped.
 May 02 14:19:11 Coherence systemd[1]: sys-fs-fuse-connections.mount: Start request repeated too quickly.
 May 02 14:19:11 Coherence systemd[1]: sys-fs-fuse-connections.mount: Failed with result &amp;lsquo;start-limit-hit&amp;rsquo;.
-May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&lt;/p&gt;&lt;/blockquote&gt;
+May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Google 了下，没找到原因，尝试 restart，成功了。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;active (mounted)&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;active (mounted)&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;有待进一步观察。。（未复现&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -585,7 +593,8 @@ team_id external_ID group_id team_name institution_name institution_short_name c
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;参考&lt;a href="https://cubercsl.cn/notes/DOMjudge-Note.html"&gt;CSL的博客&lt;/a&gt;发现：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;在导入teams表的时候，在&lt;code&gt;Country Code&lt;/code&gt;后追加一列，填写&lt;code&gt;Institution External ID&lt;/code&gt;。
-这步是阅读&lt;a href="https://github.com/DOMjudge/domjudge/blob/master/lib/lib.impexp.php#L108"&gt;源代码&lt;/a&gt;后猜测的，当时的实际操作是直接在数据库中的&lt;code&gt;team_affiliation&lt;/code&gt;用SQL语句更新&lt;code&gt;ExternalID&lt;/code&gt;的。&lt;/p&gt;&lt;/blockquote&gt;
+这步是阅读&lt;a href="https://github.com/DOMjudge/domjudge/blob/master/lib/lib.impexp.php#L108"&gt;源代码&lt;/a&gt;后猜测的，当时的实际操作是直接在数据库中的&lt;code&gt;team_affiliation&lt;/code&gt;用SQL语句更新&lt;code&gt;ExternalID&lt;/code&gt;的。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;博主采用了这种方式，并在导入队伍后通过 Web 界面手动添加 Affiliation 信息。&lt;/p&gt;
 &lt;p&gt;事实上，institution_name institution_short_name country_code这三个字段都不是必要的，只需要有External ID就可以。而如果没有External ID的话，会创建和队伍数量一样多的Affiliation。&lt;/p&gt;
 &lt;p&gt;accounts 格式：&lt;/p&gt;
@@ -711,7 +720,8 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\project???vl_mak*.xrm-ms&amp;#
 ### 三级标题
 #### 四级标题
 ##### 五级标题
-###### 六级标题&lt;/p&gt;&lt;/blockquote&gt;
+###### 六级标题&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;效果：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;h1 id="一级标题"&gt;一级标题&lt;/h1&gt;
@@ -719,19 +729,23 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\project???vl_mak*.xrm-ms&amp;#
 &lt;h3 id="三级标题"&gt;三级标题&lt;/h3&gt;
 &lt;h4 id="四级标题"&gt;四级标题&lt;/h4&gt;
 &lt;h5 id="五级标题"&gt;五级标题&lt;/h5&gt;
-&lt;h6 id="六级标题"&gt;六级标题&lt;/h6&gt;&lt;/blockquote&gt;
+&lt;h6 id="六级标题"&gt;六级标题&lt;/h6&gt;
+&lt;/blockquote&gt;
 &lt;h4 id="2-段落"&gt;2. 段落&lt;/h4&gt;
 &lt;p&gt;段落的前后要有空行，所谓的空行是指没有文字内容。若想在段内强制换行的方式是使用&lt;strong&gt;两个以上&lt;/strong&gt;空格加上回车（引用中换行省略回车）。&lt;/p&gt;
 &lt;h4 id="3-区块引用"&gt;3. 区块引用&lt;/h4&gt;
 &lt;p&gt;在段落的每行或者只在第一行使用符号&lt;code&gt;&amp;gt;&lt;/code&gt;,还可使用多个嵌套引用，如：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&amp;gt; 区块引用
-&amp;gt;&amp;gt; 嵌套引用&lt;/p&gt;&lt;/blockquote&gt;
+&amp;gt;&amp;gt; 嵌套引用&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;效果：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;区块引用&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;嵌套引用&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;
+&lt;p&gt;嵌套引用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 &lt;h4 id="4-代码区块"&gt;4. 代码区块&lt;/h4&gt;
 &lt;p&gt;1）代码区块的建立是在每行加上4个空格或者一个制表符（如同写代码一样）。如
 普通段落：&lt;/p&gt;
@@ -750,22 +764,26 @@ printf(&amp;quot;Hello, Markdown.&amp;quot;);
 &lt;blockquote&gt;
 &lt;p&gt;```
 hello,world
-```&lt;/p&gt;&lt;/blockquote&gt;
+```&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;效果为：&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;hello，world
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id="5-强调"&gt;5. 强调&lt;/h4&gt;
 &lt;p&gt;在强调内容两侧分别加上&lt;code&gt;*&lt;/code&gt;或者&lt;code&gt;_&lt;/code&gt;，如：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;*斜体*，_斜体_
-*&lt;em&gt;粗体*&lt;/em&gt;，_&lt;em&gt;粗体_&lt;/em&gt;&lt;/p&gt;&lt;/blockquote&gt;
+*&lt;em&gt;粗体*&lt;/em&gt;，_&lt;em&gt;粗体_&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;效果：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;斜体&lt;/em&gt;，&lt;em&gt;斜体&lt;/em&gt;
-&lt;strong&gt;粗体&lt;/strong&gt;，&lt;strong&gt;粗体&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;strong&gt;粗体&lt;/strong&gt;，&lt;strong&gt;粗体&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id="6-列表"&gt;6. 列表&lt;/h4&gt;
 &lt;p&gt;使用&lt;code&gt;·&lt;/code&gt;、&lt;code&gt;+&lt;/code&gt;、或&lt;code&gt;-&lt;/code&gt;标记无序列表，如：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;-（+&lt;em&gt;） 第一项 -（+&lt;/em&gt;） 第二项 - （+*）第三项&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;-（+&lt;em&gt;） 第一项 -（+&lt;/em&gt;） 第二项 - （+*）第三项&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：标记后面最少有一个_空格_或_制表符_。若不在引用区块中，必须和前方段落之间存在空行。&lt;/p&gt;
 &lt;p&gt;效果：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -773,33 +791,40 @@ hello,world
 &lt;li&gt;第一项&lt;/li&gt;
 &lt;li&gt;第二项&lt;/li&gt;
 &lt;li&gt;第三项&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;有序列表的标记方式是将上述的符号换成数字,并辅以&lt;code&gt;.&lt;/code&gt;，如：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;1 . 第一项
 2 . 第二项
-3 . 第三项&lt;/p&gt;&lt;/blockquote&gt;
+3 . 第三项&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;效果：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;第一项&lt;/li&gt;
 &lt;li&gt;第二项&lt;/li&gt;
 &lt;li&gt;第三项&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h4 id="7-分割线"&gt;7. 分割线&lt;/h4&gt;
 &lt;p&gt;分割线最常使用就是三个或以上&lt;code&gt;*&lt;/code&gt;，还可以使用&lt;code&gt;-&lt;/code&gt;和&lt;code&gt;_&lt;/code&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;***&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;***&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;效果：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;hr&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;/blockquote&gt;
 &lt;h4 id="8-链接"&gt;8. 链接&lt;/h4&gt;
 &lt;p&gt;使用 &lt;strong&gt;[]()&lt;/strong&gt; 在[]内输入链接的名称，()内输入链接的地址。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;[我的博客](&lt;a href="https://cjc7373.github.io"&gt;https://cjc7373.github.io&lt;/a&gt;)&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;[我的博客](&lt;a href="https://cjc7373.github.io"&gt;https://cjc7373.github.io&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;效果：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;a href="https://cjc7373.github.io"&gt;我的博客&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="https://cjc7373.github.io"&gt;我的博客&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id="9-图片"&gt;9. 图片&lt;/h4&gt;
 &lt;p&gt;添加图片的形式和链接相似，只需在链接的基础上前方加一个&lt;code&gt;！&lt;/code&gt;。&lt;/p&gt;
 &lt;h4 id="10-反斜杠"&gt;10. 反斜杠&lt;code&gt;\&lt;/code&gt;&lt;/h4&gt;
@@ -807,10 +832,12 @@ hello,world
 &lt;h4 id="11-行内引用"&gt;11. 行内引用&lt;/h4&gt;
 &lt;p&gt;在字符之间加上`，起到标记作用，相当于行内引用。如：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;`Too young`&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;`Too young`&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;效果：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;Too young&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;Too young&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id="拓展语法"&gt;拓展语法&lt;/h2&gt;
 &lt;h4 id="1表格"&gt;1.表格&lt;/h4&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;| 一个普通标题 | 一个普通标题 | 一个普通标题 |
