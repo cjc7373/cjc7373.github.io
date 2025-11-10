@@ -20,3 +20,18 @@ tags:
 4. 两个不同版本的包不能被同时安装
 
 上述假设构成了版本选择问题，这是一个 NPC 问题。为了简化这一问题，我们可以改变假设 1，只能声明一个依赖的最小版本；
+
+
+
+
+
+## 其他编程语言的解决方案
+
+- 区分"内部"依赖和"共享"依赖
+  - 只要一个依赖没有被导出到公开接口，那么它就是内部的
+  - 内部依赖允许不同版本存在
+  - https://www.thefeedbackloop.xyz/thoughts-on-dependency-hell-is-np-complete/ （这里也讲了一些 npm 的方式）
+
+- https://stephencoakley.com/2019/04/24/how-rust-solved-dependency-hell
+  - 介绍了 rust 的 semver 
+  - 以及用 name managing 来允许不同版本的依赖

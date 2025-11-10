@@ -36,11 +36,55 @@ k8s 原生提供了一些控制调度行为的方法，文档见[这里](https:/
   - required/preferred 和 nodeSelector 类似, 但格式更灵活
   - tricky! 当用于普通的 affinity 时, 使用 nodeAffinity 字段, matchExpressions 匹配的是 node. 当用于 Inter-pod affinity/anti-affinity 时, 使用 podAffinity/podAntiAffinity 字段, matchExpressions 匹配的是 pod
 
-- Inter-pod affinity and anti-affinity
-  - 有性能问题
-  - topologyKey 用来指定 topology domain
+### Inter-pod affinity and anti-affinity
 
-- topologySpreadConstraints
+这两个字段会根据 node 上的**已有** pod 进行调度。具体而言，调度规则是如果 X 上已经有一个或多个 Pod 满足 Y，那么这个 Pod 应该（在 anti-affinity 的情况下，是不应该）调度到 X 上。
+
+- X 是 topology domain（拓扑域），使用 topologyKey 字段指定，它也是一个 node label。Topology domain 可以是机架、可用区、地域等。
+- Y 是一组 label selector，可以带或不带 namespace 约束
+
+注意，这两个字段不但会影响设置了 affinity 的 pod 的调度，还会影响没有设置 affinity、但是满足 Y 的 pod 调度。例如，pod A 的部分定义如下：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: A
+  labels:
+  	security: S1
+spec:
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: security
+            operator: In
+            values:
+            - S1
+        topologyKey: topology.kubernetes.io/zone
+```
+
+也就是说，在同一个 topology.kubernetes.io/zone 中，只能存在一个 label 为 `security: S1` 的 pod。假设 pod A 调度到了一个带有 `topology.kubernetes.io/zone: shanghai-1` label 的 node 上， 此时新创建一个 pod B：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: B
+  labels:
+  	security: S1
+spec:
+	... # no affinity defined
+```
+
+B 将无法调度到带有 `topology.kubernetes.io/zone: shanghai-1` label 的 node 上。
+
+另外根据文档所述，这两个字段有性能问题，不建议在上千个 node 的集群上开启。
+
+### topologySpreadConstraints
+
+控制 pod 在集群中的分布。
 
 ## Scheduling Framework
 
