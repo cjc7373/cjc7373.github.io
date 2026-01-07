@@ -1,4 +1,4 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Tue, 21 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>我的 NAS 方案</title><link>https://blog.coherence.codes/posts/2025/my_nas_plan/</link><pubDate>Sun, 13 Jul 2025 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2025/my_nas_plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2025/my_nas_plan/ -&lt;p&gt;很久之前，我就有组一个 NAS 的想法，直到今年才得以实现。&lt;/p&gt;
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>我的 NAS 方案</title><link>https://blog.coherence.codes/posts/2025/my_nas_plan/</link><pubDate>Sun, 13 Jul 2025 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2025/my_nas_plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2025/my_nas_plan/ -&lt;p&gt;很久之前，我就有组一个 NAS 的想法，直到今年才得以实现。&lt;/p&gt;
 &lt;h2 id="选型"&gt;选型&lt;/h2&gt;
 &lt;p&gt;首先就是选择成品 NAS 还是 DIY。我并没有 NAS 的刚需，只是想在折腾中学习，所以自然是选择 DIY。基于战未来的考虑，直接选了个八盘位的机箱，而 CPU 方面目前看来没什么吃性能的应用，所以选了 n100。最终的配置如下：&lt;/p&gt;
 &lt;ul&gt;
@@ -208,7 +208,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;li&gt;
 &lt;p&gt;写入 init 脚本到 &lt;code&gt;/etc/init.d/clash&lt;/code&gt;，以便开机自启&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/sh /etc/rc.common
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;START&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;99&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;start&lt;span style="color:#f92672"&gt;()&lt;/span&gt; &lt;span style="color:#f92672"&gt;{&lt;/span&gt;
@@ -314,24 +314,32 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;p&gt;这是因为内核使用了惰性分配（lazy allocation），也就是程序请求内存分配的时候，只分配虚拟地址。程序第一次访问虚拟地址的时候，才分配物理内存。这种做法进一步提高了系统的内存利用率。&lt;/p&gt;
 &lt;p&gt;更进一步，Linux 采取了超额分配（overcommit）的方式，也就是程序申请的内存可以大于物理内存+swap 的总数。与之相对，Windows 则并不允许 overcommit，所有程序申请的总内存必须小于物理内存+swap 的总数。&lt;/p&gt;
 &lt;p&gt;需要注意的是，RSS 并不能代表程序“需要”的内存，RSS 很大可能仅仅是系统的内存水位不高，不需要的页尚未被回收。比如设想一下一个程序 mmap 了一个 40G 大小的文件，全部读取并进行了一些操作。由于程序之后可能还会用到这个文件，这段内存并没有被 munmap。此时程序的 RSS 为 40G，但是程序可能很久都不会用到这 40G。&lt;/p&gt;
+&lt;blockquote class="alert-diary alert-diary-note"&gt;
+&lt;p class="alert-heading"&gt;
+&lt;span class="material-icons"&gt;info_outline&lt;/span&gt;
+笔记
+&lt;/p&gt;
+&lt;p&gt;2026-01-06 补充&lt;/p&gt;
+&lt;p&gt;测试发现 mmap 的 page cache 会计算入 RSS，但是普通 IO 所占用的 page cache 却不会，很神奇。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;另一个能够反映程序内存占用的指标是 WSS（working set size，工作集大小），也就是一段时间内（比如 10min）程序使用的内存大小。Linux 并没有提供一个很简单的方式读取进程的 WSS，但是使用一些工具能做到这一点，参照&lt;a href="https://www.brendangregg.com/blog/2018-01-17/measure-working-set-size.html"&gt;这篇文章&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;上面说到 fork 时内核使用了 CoW，我们可以做一个小实验观察这一点：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#include&lt;/span&gt; &lt;span style="color:#75715e"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#include&lt;/span&gt; &lt;span style="color:#75715e"&gt;&amp;lt;stdlib.h&amp;gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#include&lt;/span&gt; &lt;span style="color:#75715e"&gt;&amp;lt;unistd.h&amp;gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#include&lt;/span&gt; &lt;span style="color:#75715e"&gt;&amp;lt;string.h&amp;gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;main&lt;/span&gt;() {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;void&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt;ptr;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;size_t&lt;/span&gt; size &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;10&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1024&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;1024&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;size_t&lt;/span&gt;)&lt;span style="color:#ae81ff"&gt;1024&lt;/span&gt;; &lt;span style="color:#75715e"&gt;// 10G
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; ptr &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;malloc&lt;/span&gt;(size);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ptr &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;malloc&lt;/span&gt;(size);
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// use 10G memory
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;memset&lt;/span&gt;(ptr, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;, size);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;memset&lt;/span&gt;(ptr, &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;, size);
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; (&lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; i &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;; i &lt;span style="color:#f92672"&gt;&amp;lt;&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;; i&lt;span style="color:#f92672"&gt;++&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt; pid &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;fork&lt;/span&gt;();
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; (pid &lt;span style="color:#f92672"&gt;==&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#75715e"&gt;// do not fork again
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;break&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; }
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;sleep&lt;/span&gt;(&lt;span style="color:#ae81ff"&gt;100&lt;/span&gt;);
@@ -452,7 +460,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;struct&lt;/span&gt; zone &lt;span style="color:#f92672"&gt;*&lt;/span&gt;zone;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 这里就是上文的计算
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;&lt;span style="color:#a6e22e"&gt;for_each_zone&lt;/span&gt;(zone)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a6e22e"&gt;for_each_zone&lt;/span&gt;(zone)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; wmark_low &lt;span style="color:#f92672"&gt;+=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;low_wmark_pages&lt;/span&gt;(zone);
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/*
@@ -460,7 +468,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt; * without causing swapping or OOM.
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt; */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 空闲的页
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;available &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;global_zone_page_state&lt;/span&gt;(NR_FREE_PAGES) &lt;span style="color:#f92672"&gt;-&lt;/span&gt; totalreserve_pages;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;available &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;global_zone_page_state&lt;/span&gt;(NR_FREE_PAGES) &lt;span style="color:#f92672"&gt;-&lt;/span&gt; totalreserve_pages;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/*
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt; * Not all the page cache can be freed, otherwise the system will
@@ -470,7 +478,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pagecache &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;global_node_page_state&lt;/span&gt;(NR_ACTIVE_FILE) &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;global_node_page_state&lt;/span&gt;(NR_INACTIVE_FILE);
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 加上 page cache, 减去 low 水位的预留
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;pagecache &lt;span style="color:#f92672"&gt;-=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;min&lt;/span&gt;(pagecache &lt;span style="color:#f92672"&gt;/&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;, wmark_low);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;pagecache &lt;span style="color:#f92672"&gt;-=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;min&lt;/span&gt;(pagecache &lt;span style="color:#f92672"&gt;/&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;, wmark_low);
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;available &lt;span style="color:#f92672"&gt;+=&lt;/span&gt; pagecache;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;/*
@@ -479,7 +487,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt; * low watermark.
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt; */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;// 再加上内核中的可回收页
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;&lt;/span&gt;reclaimable &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;global_node_page_state_pages&lt;/span&gt;(NR_SLAB_RECLAIMABLE_B) &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;reclaimable &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;global_node_page_state_pages&lt;/span&gt;(NR_SLAB_RECLAIMABLE_B) &lt;span style="color:#f92672"&gt;+&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;global_node_page_state&lt;/span&gt;(NR_KERNEL_MISC_RECLAIMABLE);
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;reclaimable &lt;span style="color:#f92672"&gt;-=&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;min&lt;/span&gt;(reclaimable &lt;span style="color:#f92672"&gt;/&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;, wmark_low);
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;available &lt;span style="color:#f92672"&gt;+=&lt;/span&gt; reclaimable;
