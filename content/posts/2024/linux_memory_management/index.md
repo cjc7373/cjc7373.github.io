@@ -1,7 +1,7 @@
 ---
 title: Linux 内存管理初探
 date: 2024-09-05
-lastmod: 2024-11-26
+lastmod: 2026-01-07
 tags:
 - Linux
 ---
@@ -115,6 +115,12 @@ Dirty:               364 kB
 更进一步，Linux 采取了超额分配（overcommit）的方式，也就是程序申请的内存可以大于物理内存+swap 的总数。与之相对，Windows 则并不允许 overcommit，所有程序申请的总内存必须小于物理内存+swap 的总数。
 
 需要注意的是，RSS 并不能代表程序“需要”的内存，RSS 很大可能仅仅是系统的内存水位不高，不需要的页尚未被回收。比如设想一下一个程序 mmap 了一个 40G 大小的文件，全部读取并进行了一些操作。由于程序之后可能还会用到这个文件，这段内存并没有被 munmap。此时程序的 RSS 为 40G，但是程序可能很久都不会用到这 40G。
+
+> [!NOTE]
+>
+> 2026-01-06 补充
+>
+> 测试发现 mmap 的 page cache 会计算入 RSS，但是普通 IO 所占用的 page cache 却不会，很神奇。 
 
 另一个能够反映程序内存占用的指标是 WSS（working set size，工作集大小），也就是一段时间内（比如 10min）程序使用的内存大小。Linux 并没有提供一个很简单的方式读取进程的 WSS，但是使用一些工具能做到这一点，参照[这篇文章](https://www.brendangregg.com/blog/2018-01-17/measure-working-set-size.html)。
 
