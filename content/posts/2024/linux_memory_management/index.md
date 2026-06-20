@@ -221,6 +221,8 @@ PSS 有一个反直觉的地方，当一个（共享了旧进程的一些库的�
 
 在深究之前我们先来说一说内存的水位（watermark）和[回收](https://docs.kernel.org/admin-guide/mm/concepts.html#reclaim)。内核把物理内存空间分成多个 Zone，Zone 之间的区别在这里并不重要，可以简单理解为物理内存是所有 Zone 相加。一个 Zone 内的页面除了已用内存页，剩下的就是空闲页（free pages）。空闲页范围中有三个水位线（watermark ）评估当前内存压力情况，分别是高位（high）、低位（low）、最小位（min）。
 
+NOTE: 这里的 high/low/min 和 cgroup v2 中的 memory.high, memory.low, memory.min 语义并不一致。
+
 如果空闲页面在 low 水位之上，内核什么也不会干。当空闲页低于 low 水位后，内核会唤醒 `kswapd` 线程。它会异步扫描内存页进行内存回收，直到水位达到 high。如果内存用量进一步升高，空闲页面低于 min 水位，此时内存分配将进入直接回收（direct reclaim）。回收操作将变为同步的，内存分配操作将阻塞直到足够多的页面被回收。
 
 ![Image](./640.webp)
