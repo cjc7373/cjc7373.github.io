@@ -1,4 +1,150 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>大二下学期期末复习</title><link>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link><pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/ -&lt;h2 id="软件工程试卷"&gt;软件工程试卷&lt;/h2&gt;
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sat, 20 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>重新安装 Hexo</title><link>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</link><pubDate>Wed, 07 Aug 2019 16:03:29 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/ -&lt;h2 id="缘由"&gt;缘由&lt;/h2&gt;
+&lt;p&gt;直接原因是 Github 的一个假装很贴心的功能：&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1565183420437.png" alt="1565183420437"&gt;&lt;/p&gt;
+&lt;p&gt;由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。&lt;/p&gt;
+&lt;h2 id="过程"&gt;过程&lt;/h2&gt;
+&lt;h3 id="环境"&gt;环境&lt;/h3&gt;
+&lt;p&gt;node.js 6.4.1&lt;/p&gt;
+&lt;p&gt;hexo 3.9.0&lt;/p&gt;
+&lt;p&gt;hexo-cli 2.0.0&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1565186395227.png" alt="1565186395227"&gt;&lt;/p&gt;
+&lt;p&gt;官方文档上写需要 node.js 6.9+，然而我是 6.4，不知道会不会锅。&lt;/p&gt;
+&lt;h3 id="hexo-安装"&gt;Hexo 安装&lt;/h3&gt;
+&lt;p&gt;首先，把仓库 clone 下来后，备份一份源文件。然后找一个空文件夹，按照官方文档的指引，执行：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;hexo init
+npm install
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;（我发现现在 &lt;code&gt;hexo init&lt;/code&gt; 会同时自动执行 &lt;code&gt;npm install&lt;/code&gt;命令了）&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1565185528852.png" alt="1565185528852"&gt;&lt;/p&gt;
+&lt;p&gt;然而还是有一个漏洞，不管了。&lt;/p&gt;
+&lt;p&gt;然后删除原文件夹中文件（保留.git），把新的文件复制过去。同时把备份文件夹中的&lt;code&gt;source&lt;/code&gt;文件夹覆盖过去。（自动创建 .gitignore 好评）&lt;/p&gt;
+&lt;p&gt;这时候基本的安装就完成了，接下来打开 Github Desktop 开始对比差异。&lt;/p&gt;
+&lt;p&gt;在全局配置&lt;code&gt;_config.yml&lt;/code&gt;中，&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1565184499949.png" alt="1565184499949"&gt;&lt;/p&gt;
+&lt;p&gt;这个配置是为每篇博文创建一个单独的资源文件夹。&lt;/p&gt;
+&lt;p&gt;基本不用变，直接 discard changes 即可。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;.travis.yml&lt;/code&gt; 和 &lt;code&gt;deploy.sh&lt;/code&gt; 也直接还原。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://cjc7373.github.io/2018/10/13/Hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/#Hexo%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%8C%87%E5%BC%95"&gt;图片的问题&lt;/a&gt;先不管，有问题再说。&lt;/p&gt;
+&lt;h3 id="主题安装"&gt;主题安装&lt;/h3&gt;
+&lt;p&gt;剩下的差异全是主题文件。既然都重新搞了，那就换一个主题吧。在自己的 stars 里找了个主题 &lt;a href="https://github.com/yscoder/hexo-theme-indigo"&gt;hexo-theme-indigo&lt;/a&gt;，看了下也支持 Analysis、Disqus，就决定用它了。&lt;/p&gt;
+&lt;p&gt;接下来就开始按照&lt;a href="https://github.com/yscoder/hexo-theme-indigo/wiki"&gt;主题文档&lt;/a&gt;来安装。首先 clone 仓库，我选择 card 分支，感觉比较好看（其实也没有对比）。&lt;/p&gt;
+&lt;p&gt;在 hexo 根目录执行&lt;code&gt;git clone -b card https://github.com/yscoder/hexo-theme-indigo.git themes/indigo&lt;/code&gt;，下载主题文件。安装插件&lt;code&gt;hexo-renderer-less hexo-generator-feed hexo-generator-json-content hexo-helper-qrcode&lt;/code&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h2 id="开启标签页"&gt;开启标签页&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;hexo new page tags
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;修改 &lt;code&gt;hexo/source/tags/index.md&lt;/code&gt; 的元数据&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;layout: tags
+comments: false
+---
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="开启分类页"&gt;开启分类页&lt;/h2&gt;
+&lt;p&gt;仅 card theme 支持。&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;hexo new page categories
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;修改 &lt;code&gt;hexo/source/categories/index.md&lt;/code&gt; 的元数据&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;layout: categories
+comments: false
+---
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;话说用 Github Desktop commit 的时候因为主题文件夹也是一个 git 仓库，所以报错了，在命令行中 add，提示&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1565227855897.png" alt="1565227855897"&gt;&lt;/p&gt;
+&lt;p&gt;于是我去 Google 了下&lt;a href="%5Bhttps://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97%5D(https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)"&gt;子模块&lt;/a&gt;，感觉这会让问题变复杂，同时这个主题已经很久没更新过了，干脆把主题的版本库删了吧。删除 &lt;code&gt;.git&lt;/code&gt;文件夹后，提交成功。&lt;/p&gt;
+&lt;h3 id="主题配置"&gt;主题配置&lt;/h3&gt;
+&lt;p&gt;编辑站点配置文件。启用主题&lt;code&gt;theme: indigo&lt;/code&gt;。feed 是用来 rss 的，不管。jsonContent 用来搜索，如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h3 id="jsoncontent配置"&gt;jsonContent配置&lt;/h3&gt;
+&lt;p&gt;为了节约资源，可以对 jsonContent 插件生成的数据字段进行配置，减少数据文件大小。参考 &lt;a href="https://github.com/alexbruno/hexo-generator-json-content"&gt;hexo-generator-json-content&lt;/a&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;jsonContent:
+meta: false
+pages: false
+posts:
+title: true
+date: true
+path: true
+text: true
+raw: false
+content: false
+slug: false
+updated: false
+comments: false
+link: false
+permalink: false
+excerpt: false
+categories: false
+tags: true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;编辑主题配置文件，&lt;code&gt;themes/indigo/_config.yml&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;左侧菜单：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;添加新菜单项时，在 menu 下增加子属性即可。属性说明如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;menu:
+link: # fontawesome图标，省略前缀，本主题前缀为 icon-，必须
+text: About # 菜单显示的文字，如果省略即默认与图标一致，首字母会转大写
+url: /about # 链接，绝对或相对路径，必须
+target: _blank # 是否跳出，省略则在当前页面打开
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;fontawesome 图标已集成到主题中，你可以到 &lt;a href="http://fontawesome.io/icons/"&gt;这个页面&lt;/a&gt; 挑选合适的图标。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我修改为如下：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;menu:
+home:
+text: 主页
+url: /
+archives:
+url: /archives
+tags:
+url: /tags
+th-list:
+text: Categories
+url: /categories
+github:
+url: https://github.com/cjc7373
+target: _blank
+user:
+text: 关于
+url: /about
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其余改动略。&lt;/p&gt;
+&lt;p&gt;由于这个主题为国人制作，配置文件都带有中文注释，还是很友好的。&lt;/p&gt;
+&lt;h2 id="修锅"&gt;修锅&lt;/h2&gt;
+&lt;p&gt;图片不出意外地崩了。。而且不止首页图片，是所有。。装插件试试。&lt;code&gt;npm install hexo-asset-image --save&lt;/code&gt;。装完又多了两个漏洞，这插件是有多久没更新了。。自动修复试试。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1565232540544.png" alt="1565232540544"&gt;&lt;/p&gt;
+&lt;p&gt;GG。&lt;/p&gt;
+&lt;p&gt;语言是错的。hexo 配置文件改成 zh-cn 试试。&lt;/p&gt;
+&lt;p&gt;头像好丑。改成猫头鹰了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;坑爹啊，img不说清楚在哪里。。我在根目录下创建了img，结果找了一下发现是在&lt;code&gt;themes\indigo\source\img&lt;/code&gt;下，图片还是炸。待修。暂时回滚至以前的版本。&lt;/p&gt;
+&lt;h2 id="回滚"&gt;回滚&lt;/h2&gt;
+&lt;p&gt;Updated in 2019/10/7&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1570428603861.png" alt="1570428603861"&gt;&lt;/p&gt;
+&lt;p&gt;时隔两个月,重新拾回了我的博客..&lt;/p&gt;
+&lt;p&gt;这个主题的锅不想修了..&lt;/p&gt;
+&lt;p&gt;又看了几个主题之后,看看似乎原主题也挺好的..&lt;/p&gt;
+&lt;p&gt;所以我又用回了 Next..&lt;/p&gt;
+&lt;p&gt;看了一下 Next 换维护者了..&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1570429427612.png" alt="1570429427612"&gt;&lt;/p&gt;
+&lt;p&gt;仓库地址从&lt;a href="https://github.com/iissnan/hexo-theme-next"&gt;这个&lt;/a&gt;变为&lt;a href="https://github.com/theme-next/hexo-theme-next"&gt;这个&lt;/a&gt;(话说居然不是 fork 过去的)&lt;/p&gt;
+&lt;p&gt;大致过程是&lt;del&gt;重来一遍上述过程&lt;/del&gt;回退到某一个提交即可.&lt;/p&gt;
+&lt;p&gt;不过我把 node.js 的版本更新到了 v12.11.1&lt;/p&gt;
+&lt;p&gt;首先这四个 commit 记录不需要了,我建了个新的分支 theme-indigo 扔着..&lt;/p&gt;
+&lt;p&gt;然后,先fetch一下,因为我在远程仓库上回滚了之前的更改..然后发现记错了,回滚的是 master 分支..&lt;/p&gt;
+&lt;p&gt;然后看一下 log, 回退到 2939aa 这个 commit.&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1570429889982.png" alt="1570429889982"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git reset --hard 2939aa&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;此时本地分支已经落后于远程分支了,需要强制推送一遍.&lt;code&gt;git push --force&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1570430098775.png" alt="1570430098775"&gt;&lt;/p&gt;
+&lt;p&gt;看了一下这个提交是 [Hexo 安装](#Hexo 安装) 完成之后.&lt;/p&gt;
+&lt;p&gt;接下来安装主题, 先从 Github 下载一个 release. 目前是 v7.4.1&lt;/p&gt;
+&lt;p&gt;看了一眼&lt;a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/UPDATE-FROM-5.1.X.md"&gt;从5.x升级&lt;/a&gt;文档, 全局配置中 language 要从 zh-Hans 变为 zh-CN&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;然后并没有发现其他配置文档&lt;/del&gt; 是有的, 只不过是英文, 在&lt;a href="https://theme-next.org/docs/getting-started/"&gt;这里&lt;/a&gt;, 只能一行一行看 &lt;code&gt;_config.yml&lt;/code&gt; 了.&lt;/p&gt;
+&lt;p&gt;用 sublimerge 对比一下新旧配置文件的差异..&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1570431870938.png" alt="1570431870938"&gt;&lt;/p&gt;
+&lt;p&gt;瞎改了一点.&lt;/p&gt;
+&lt;p&gt;ok. 测试一下, 果然图片又崩了. 原因引用的图片地址多了一级. 把多余的地址删掉是能够正常显示的.&lt;/p&gt;
+&lt;p&gt;&lt;img src="./1570432899620.png" alt="1570432899620"&gt;&lt;/p&gt;
+&lt;p&gt;然而原来那个插件 &lt;code&gt;hexo-asset-image&lt;/code&gt; 没用了. 无奈继续 Google, 找到了一篇&lt;a href="https://liolok.github.io/en/How-to-Add-Image-to-Hexo-Blog-Post/"&gt;英文博文&lt;/a&gt;, 指出了另一个插件&lt;a href="https://github.com/liolok/hexo-asset-link"&gt;hexo-asset-link&lt;/a&gt;, 尝试之, 发现能完美在首页及内容页显示图片.&lt;/p&gt;
+&lt;p&gt;至此, 我的博客算是修好了. (这篇博客写得不成样子,大雾,希望没人看到吧&lt;/p&gt;
+&lt;h2 id="结语"&gt;结语&lt;/h2&gt;
+&lt;p&gt;两次修锅的过程, 让我看到了 Hexo 的插入图片的巨坑. 用图床能够避免这个问题, 然而图床也有缺点, 我还是更喜欢直接插入图片. 感觉上这部分是由 Hexo 来处理的, 与主题无关, 所以还是可以换个主题玩玩的, 目前来说, 还是先专注于内容吧.&lt;/p&gt;
+&lt;p&gt;有时间也可以试试 Typecho, Jekyll, Pelican, Hugo 等其他博客生成器.&lt;/p&gt;
+- https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>大二下学期期末复习</title><link>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link><pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/%E5%A4%A7%E4%BA%8C%E4%B8%8B%E5%AD%A6%E6%9C%9F%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/ -&lt;h2 id="软件工程试卷"&gt;软件工程试卷&lt;/h2&gt;
 &lt;p&gt;来源： &lt;a href="https://tellyouwhat.cn/p/northwest-university-software-engineering-review-materials/"&gt;Harbor Zeng&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="./bd61005egy1g0cx8lnllsj20rt112adk.jpg" alt="img"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="./bd61005egy1g0cx8izobuj22eo37kb29.jpg" alt="img"&gt;&lt;/p&gt;
@@ -490,7 +636,7 @@ May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&
 &lt;p&gt;除了传统的安装方式外，DOMjudge 还提供了 Docker 镜像以供安装，这样就大大简化了安装的困难程度。&lt;/p&gt;
 &lt;p&gt;关于 Docker 的使用这里不作详细描述。（其实是博主也一知半解）&lt;/p&gt;
 &lt;p&gt;然而&lt;a href="https://hub.docker.com/r/domjudge/domserver"&gt;官方的 Docker 文档中&lt;/a&gt;仅使用了命令来启动容器，为了进一步简化安装，也为了方便修改配置，我决定采用 Docker Compose 。以下是 &lt;code&gt;docker-compose.yml &lt;/code&gt;文件：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;version&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;3&amp;#34;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;version&lt;/span&gt;: &lt;span style="color:#e6db74"&gt;&amp;#34;3&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;services&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;mariadb&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;image&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;mariadb&lt;/span&gt;
@@ -551,7 +697,7 @@ May 02 14:19:11 Coherence systemd[1]: Failed to mount FUSE Control File System.&
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; - &lt;span style="color:#ae81ff"&gt;mariadb:mariadb&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后运行 &lt;code&gt;docker-compose up -d&lt;/code&gt; 即可完成部署。&lt;/p&gt;
 &lt;p&gt;Judgehost 利用了 Linux 内核的 Cgroup 特性，所以需进行一步额外设置（似乎部分内核较新的系统不需要）。编辑 &lt;code&gt;/etc/default/grub&lt;/code&gt; 文件，将默认的命令改为：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;quiet cgroup_enable=memory swapaccount=1&amp;#34;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;quiet cgroup_enable=memory swapaccount=1&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;GRUB_CMDLINE_LINUX&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;quiet cgroup_enable=memory swapaccount=1&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后运行 &lt;code&gt;update-grub&lt;/code&gt; 并重启。&lt;/p&gt;
 &lt;p&gt;需要多核判题的话创建多个 Judgehost 容器并修改 DAEMON_ID 为不同的值即可。&lt;/p&gt;
@@ -634,7 +780,7 @@ account_type fullname username password
 &lt;h2 id="转换visio版本"&gt;转换Visio版本&lt;/h2&gt;
 &lt;p&gt;我在&lt;a href="http://msdn.itellyou.cn/?lang=zh-cn"&gt;MSDN我告诉你&lt;/a&gt;和某非著名PT站上并没有找到Visio的VL（批量授权）版本，然而KMS激活需要VL版，所以第一步是转换Visio的版本。&lt;/p&gt;
 &lt;p&gt;复制以下代码，保存为.bat文件并用管理员身份运行：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; exist &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span&gt; cd /d &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles%\Microsoft Office\Office16&amp;#34;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; exist &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span&gt; cd /d &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles%\Microsoft Office\Office16&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; exist &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16\ospp.vbs&amp;#34;&lt;/span&gt; cd /d &lt;span style="color:#e6db74"&gt;&amp;#34;%ProgramFiles(x86)%\Microsoft Office\Office16&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cscript ospp.vbs /rearm
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; /f %%x in &lt;span style="color:#f92672"&gt;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;dir /b ..\root\Licenses16\visio???vl_kms*.xrm-ms&amp;#39;&lt;/span&gt;&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;do&lt;/span&gt; cscript ospp.vbs /inslic:&lt;span style="color:#e6db74"&gt;&amp;#34;..\root\Licenses16\%%x&amp;#34;&lt;/span&gt; &amp;gt;nul
@@ -658,7 +804,7 @@ for /f %%x in (&amp;#39;dir /b ..\root\Licenses16\project???vl_mak*.xrm-ms&amp;#
 &lt;h2 id="设置kms密钥及服务器"&gt;设置KMS密钥及服务器&lt;/h2&gt;
 &lt;p&gt;打开Office的安装目录，也就是代码里的&lt;code&gt;%ProgramFiles%\Microsoft Office\Office16\&lt;/code&gt;（64位）或者&lt;code&gt;%ProgramFiles(x86)%\Microsoft Office\Office16\&lt;/code&gt;（32位）。&lt;/p&gt;
 &lt;p&gt;按住Shift+右键，选择在此处打开PowerShell，输入：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cscript ospp.vbs /inpkey&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt;PD3PC-RHNGV-FXJ29-8JK7D-RJRJK
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cscript ospp.vbs /inpkey&lt;span style="color:#960050;background-color:#1e0010"&gt;:&lt;/span&gt;PD3PC-RHNGV-FXJ29-8JK7D-RJRJK
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;来安装KMS密钥。注意以上命令中的KMS密钥只适用与Visio2016，其他版本可到&lt;a href="https://docs.microsoft.com/zh-cn/DeployOffice/vlactivation/gvlks"&gt;微软官方文档&lt;/a&gt;中查询。&lt;/p&gt;
 &lt;p&gt;然后设置KMS服务器，博主用的是网上找的，以后尝试一下自己搭一个：&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;cscript ospp.vbs /sethst:xxx.xxx
@@ -866,25 +1012,4 @@ hello,world
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-- https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>关于我</title><link>https://blog.coherence.codes/posts/2020_and_before/about_me/</link><pubDate>Sat, 03 Nov 2018 16:37:04 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/about_me/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/about_me/ -&lt;h2 id="关于我"&gt;关于我&lt;/h2&gt;
-&lt;p&gt;博主是一名大四学生。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;爱好一切数码产品&lt;/li&gt;
-&lt;li&gt;安卓（伪）瞎折腾党&lt;/li&gt;
-&lt;li&gt;ACM 打铁选手&lt;/li&gt;
-&lt;li&gt;Linux 初学者&lt;/li&gt;
-&lt;li&gt;科幻爱好者&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="关于博客"&gt;关于博客&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;2021-02-08 迁移到 pelican, 打算自己写个主题, 待填坑&lt;/li&gt;
-&lt;li&gt;2020-03-26 更新 Hexo 至 4.2.0，启用 hexo-generator-sitemap 插件&lt;/li&gt;
-&lt;li&gt;2020-02-22 更改评论为 &lt;code&gt;disqusjs&lt;/code&gt;，详见作者的&lt;a href="https://blog.skk.moe/post/disqusjs/"&gt;博文&lt;/a&gt;；启用 &lt;a href="https://github.com/theme-next/theme-next-pjax"&gt;pjax&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;2019-12-24 启用新域名&lt;code&gt;blog.coherence.codes&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;2019-10-07 升级主题至 Next V7.4.1&lt;/li&gt;
-&lt;li&gt;2018-09-24 第一篇博文。采用 Hexo + NexT 主题， 部署于 Github Pages。搭建过程见&lt;a href="https://blog.coherence.codes/posts/2020_and_before/hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/"&gt;Hexo搭建小记&lt;/a&gt;这篇文章&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="联系我"&gt;联系我&lt;/h2&gt;
-&lt;p&gt;Telegram：@Coherence0&lt;/p&gt;
-&lt;p&gt;Email：niuchangcun AT gmail.com&lt;/p&gt;
-- https://blog.coherence.codes/posts/2020_and_before/about_me/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2020_and_before/all-about-markdown/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

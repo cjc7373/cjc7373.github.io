@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hardware on Coherence's Blog</title><link>https://blog.coherence.codes/tags/hardware/</link><description>Recent content in Hardware on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 22 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/hardware/index.xml" rel="self" type="application/rss+xml"/><item><title>维简 K2 与 PD 杂记</title><link>https://blog.coherence.codes/posts/2026/witrn_k2_pd/</link><pubDate>Sat, 20 Jun 2026 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2026/witrn_k2_pd/</guid><description>&lt;p&gt;前段时间斥“巨资” 99 购入了一个 USB 功率计维简 K2，在使用过程中发现了不少奇妙的地方。&lt;/p&gt;
+&lt;h2 id="一些发现和吐槽"&gt;一些发现和吐槽&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;我的酷态科 10 号给一加 15t 充电，总是只有二十几瓦的功率，原来是用的线没有 e-marker 芯片，撞到了 3A 的电流上限。换了一条线之后，成功达到了 40w+。&lt;/p&gt;
+&lt;p&gt;&lt;img src="image-20260620191854179.png" alt="image-20260620191854179"&gt;&lt;/p&gt;
+&lt;p&gt;酷态科 10 号输出的功率比 K2 多了 3W，可能是充电头本身的损耗。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;15t 附带的充电器（A 口）不支持 PD 协议，随后查到 PD 2.0 往上需要 C 口的 CC 引脚通信。PD 1.0 倒是基于 USB-A 的，只是不知道现在还有多少设备还支持 PD 1.0。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;神奇的是五年前 8T 的充电器却是 C 口的，也支持 PD，这么看 15t 反而是一种倒退。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不是很懂国内为什么要搞一个 UFCS 协议，PD 不够用吗？据说在一些手机上 UFCS 的功率会小于 PD，但是手机又会优先使用 UFCS，导致不能发挥充电头最大的性能。这可能也是为什么酷态科 10 号会做一个单独关闭某个协议的功能。&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;figure&gt;&lt;img src="https://blog.coherence.codes/posts/2026/witrn_k2_pd/image-20260622152037077.png" width="300px"&gt;
+ &lt;/figure&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;维简的&lt;a href="https://www.witrn.com/?p=2105"&gt;官方说明书&lt;/a&gt;写得和💩一样，搜到了一个&lt;a href="https://github.com/JohnScotttt/WITRN-K2-Quick-Reference-Manual"&gt;民间版本&lt;/a&gt;，比官方的清晰多了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;K2 似乎有个 bug（V5.2 固件），它会显示 RDO 的 Maximum Operating Current 而非 Operating Current。于是在我的一个 30W 充电头上能看到 RDO 为 20V 3.6A (72W)，而实际 Operating Current 请求的是 1.5A。&lt;/p&gt;</description></item></channel></rss>

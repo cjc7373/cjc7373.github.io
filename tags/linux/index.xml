@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on Coherence's Blog</title><link>https://blog.coherence.codes/tags/linux/</link><description>Recent content in Linux on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Wed, 07 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Linux 内存管理初探</title><link>https://blog.coherence.codes/posts/2024/linux_memory_management/</link><pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/linux_memory_management/</guid><description>&lt;p&gt;本文试图解释两个简单的问题：&lt;code&gt;free&lt;/code&gt; 命令中的 used/free/available 等字段究竟代表了什么？而 &lt;code&gt;ps&lt;/code&gt; 命令中的 VSZ/RSS 又代表了什么？&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ free -h
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ free -h
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; total used free shared buff/cache available
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Mem: 38Gi 15Gi 834Mi 3.3Gi 25Gi 22Gi
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Swap: 19Gi 5.3Gi 14Gi
@@ -20,38 +20,38 @@
 &lt;p&gt;&lt;img src="./1554536417517.png" alt="1554536417517"&gt;&lt;/p&gt;
 &lt;p&gt;下面列出笔记本的配置，以供参考。&lt;/p&gt;
 &lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;部件&lt;/th&gt;
- &lt;th&gt;型号&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- &lt;tr&gt;
- &lt;td&gt;CPU&lt;/td&gt;
- &lt;td&gt;Intel i5-7300HQ&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;内存&lt;/td&gt;
- &lt;td&gt;16G&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;硬盘&lt;/td&gt;
- &lt;td&gt;128G NVME SSD + 1T 机械&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;显卡&lt;/td&gt;
- &lt;td&gt;GeForce GTX 1050 Ti + Intel HD Graphics 630&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;无线网卡&lt;/td&gt;
- &lt;td&gt;Reltek RTL8822BE&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;触摸板&lt;/td&gt;
- &lt;td&gt;Synaptics&lt;/td&gt;
- &lt;/tr&gt;
- &lt;/tbody&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;部件&lt;/th&gt;
+					&lt;th&gt;型号&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;CPU&lt;/td&gt;
+					&lt;td&gt;Intel i5-7300HQ&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;内存&lt;/td&gt;
+					&lt;td&gt;16G&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;硬盘&lt;/td&gt;
+					&lt;td&gt;128G NVME SSD + 1T 机械&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;显卡&lt;/td&gt;
+					&lt;td&gt;GeForce GTX 1050 Ti + Intel HD Graphics 630&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;无线网卡&lt;/td&gt;
+					&lt;td&gt;Reltek RTL8822BE&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;触摸板&lt;/td&gt;
+					&lt;td&gt;Synaptics&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id="为什么选择-arch"&gt;为什么选择 Arch&lt;/h2&gt;
 &lt;p&gt;滚动更新天下第一！（误&lt;/p&gt;

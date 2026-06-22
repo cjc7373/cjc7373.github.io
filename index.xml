@@ -1,4 +1,176 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>我的 NAS 方案</title><link>https://blog.coherence.codes/posts/2025/my_nas_plan/</link><pubDate>Sun, 13 Jul 2025 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2025/my_nas_plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2025/my_nas_plan/ -&lt;p&gt;很久之前，我就有组一个 NAS 的想法，直到今年才得以实现。&lt;/p&gt;
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sat, 20 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>维简 K2 与 PD 杂记</title><link>https://blog.coherence.codes/posts/2026/witrn_k2_pd/</link><pubDate>Sat, 20 Jun 2026 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2026/witrn_k2_pd/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2026/witrn_k2_pd/ -&lt;p&gt;前段时间斥“巨资” 99 购入了一个 USB 功率计维简 K2，在使用过程中发现了不少奇妙的地方。&lt;/p&gt;
+&lt;h2 id="一些发现和吐槽"&gt;一些发现和吐槽&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;我的酷态科 10 号给一加 15t 充电，总是只有二十几瓦的功率，原来是用的线没有 e-marker 芯片，撞到了 3A 的电流上限。换了一条线之后，成功达到了 40w+。&lt;/p&gt;
+&lt;p&gt;&lt;img src="image-20260620191854179.png" alt="image-20260620191854179"&gt;&lt;/p&gt;
+&lt;p&gt;酷态科 10 号输出的功率比 K2 多了 3W，可能是充电头本身的损耗。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;15t 附带的充电器（A 口）不支持 PD 协议，随后查到 PD 2.0 往上需要 C 口的 CC 引脚通信。PD 1.0 倒是基于 USB-A 的，只是不知道现在还有多少设备还支持 PD 1.0。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;神奇的是五年前 8T 的充电器却是 C 口的，也支持 PD，这么看 15t 反而是一种倒退。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不是很懂国内为什么要搞一个 UFCS 协议，PD 不够用吗？据说在一些手机上 UFCS 的功率会小于 PD，但是手机又会优先使用 UFCS，导致不能发挥充电头最大的性能。这可能也是为什么酷态科 10 号会做一个单独关闭某个协议的功能。&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;figure&gt;&lt;img src="https://blog.coherence.codes/posts/2026/witrn_k2_pd/image-20260622152037077.png" width="300px"&gt;
+&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;维简的&lt;a href="https://www.witrn.com/?p=2105"&gt;官方说明书&lt;/a&gt;写得和💩一样，搜到了一个&lt;a href="https://github.com/JohnScotttt/WITRN-K2-Quick-Reference-Manual"&gt;民间版本&lt;/a&gt;，比官方的清晰多了&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;K2 似乎有个 bug（V5.2 固件），它会显示 RDO 的 Maximum Operating Current 而非 Operating Current。于是在我的一个 30W 充电头上能看到 RDO 为 20V 3.6A (72W)，而实际 Operating Current 请求的是 1.5A。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;阅读 PD 规范的时候发现了一个错别字&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20260622172457313.png" alt="image-20260622172457313"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="pd-相关"&gt;PD 相关&lt;/h2&gt;
+&lt;p&gt;看说明书时发现了 &lt;a href="https://github.com/JohnScotttt/witrn_pd_sniffer"&gt;witrn_pd_sniffer&lt;/a&gt; 这个项目，原来除了官方的上位机之外，还有其他工具能读取 K2 的数据。于是下下来测试，这个项目只打包了 exe，但是 K2 本身通过 HID 协议通信，应该在 Linux 下也行得通。在这期间碰到了两个问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;第一个是连接设备失败。一开始在我的 asahilinux 下就找不到 hid 设备，然后换了个 C 口就好了.. 可能是 asahi 的限制？&lt;/p&gt;
+&lt;p&gt;手动用 hidapi 库测试，报了下面的错：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import hid
+&amp;gt;&amp;gt;&amp;gt; hd = hid.device()
+&amp;gt;&amp;gt;&amp;gt; hd.open(1814, 20576) # 这是 K2 的 vendor_id 和 product_id
+Traceback (most recent call last):
+File &amp;#34;&amp;lt;python-input-5&amp;gt;&amp;#34;, line 1, in &amp;lt;module&amp;gt;
+hd.open(1814, 20576)
+~~~~~~~^^^^^^^^^^^^^
+File &amp;#34;hid.pyx&amp;#34;, line 143, in hid.device.open
+OSError: open failed
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;询问 GPT 后发现给 &lt;code&gt;/dev/bus/usb/00x/00y&lt;/code&gt; （x/y 为 lsusb 输出的 &lt;code&gt;Bus 00x Device 00y&lt;/code&gt;）加上所有用户的 rw 权限后可以 open 了。只是每次连接都需要这样加一下权限。似乎还能通过添加 udev 规则来“持久化”这个配置，不过我也用不到了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第二个是 K2 会发送 general 和 pd 两种类型的消息，general 是当前的电压、电流等数据，pd 是 pd 报文，但是只能收到 general 消息。debug 了半天后发现文档中写了需要“菜单开启PD联机开关”&amp;hellip;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;解决了之后顺利抓到了 PD 报文。目前 PD 的规范（r3.2 v1.2）足足有 416 页！只能让 GPT 老师来看了，不过其中基础的部分也不算复杂。下面我们就以以一次充电的 PD 协商为例，来入门一下 PD 协议。&lt;/p&gt;
+&lt;h3 id="历史"&gt;历史&lt;/h3&gt;
+&lt;p&gt;在 PD 之前，USB Battery Charging (BC) 最高支持 5V 1.5A（7.5W）的充电。PD（Power Delivery）1.0 在 2012 年发布，这比 USB-C（2014）要更早，这时候的 PD 已经支持六个 profile，最高 100W 的充电了。受限于 USB-A 接口，这时候的 PD 是用 VBUS 引脚通信的。PD 2.0 添加了 USB-C 的支持。3.0 加入了 Programmable Power Supply (PPS) 的支持，能够以 20 mV 的步进调节电压，50 mA 的步进调节电流。目前 PD 最高支持 48V 5A （240W）的充电。&lt;/p&gt;
+&lt;h3 id="开始协商"&gt;开始协商&lt;/h3&gt;
+&lt;p&gt;首先明确两个术语：&lt;/p&gt;
+&lt;blockquote class="alert-diary alert-diary-note"&gt;
+&lt;p class="alert-heading"&gt;
+&lt;span class="material-icons"&gt;info_outline&lt;/span&gt;
+笔记
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Source/Sink，供电方/受电方，这两个是 Power roles，Source 通常也是 DFP&lt;/li&gt;
+&lt;li&gt;DFP (Downstream Facing Port)/UFP (Upstream Facing Port)，下行/上行端口，这两个是 Data roles。DFP 是数据角色协商的 Initiator，UFP 是 Responder。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在一开始，充电头就会作为 Source 和 DFP 发起协商。在第一条 PD 报文之前还有个初始连接的过程，不过那是 USB-C 标准定义的，不在 PD 的范畴之内。&lt;/p&gt;
+&lt;h3 id="物理层"&gt;物理层&lt;/h3&gt;
+&lt;p&gt;PD 采用 USB-C 中的 CC (Configuration Channel) 引脚进行通信，根据接口正反插的情况，会挑选 CC1 和 CC2 中的一个进行通信。数据的比特流先经过 &lt;a href="https://en.wikipedia.org/wiki/4B5B"&gt;4b5b 编码&lt;/a&gt;，把每 4 bit 原始数据，编码成 5 bit 码组。然后再通过 &lt;a href="https://en.wikipedia.org/wiki/Differential_Manchester_encoding"&gt;BMC&lt;/a&gt; 编码输出成电压波形。&lt;/p&gt;
+&lt;p&gt;&lt;img src="3840px-USB_Type-C_Receptacle_Pinout.svg.png" alt="img"&gt;
+图源：https://en.wikipedia.org/wiki/USB-C&lt;/p&gt;
+&lt;p&gt;在协商完成后，Source 将电压输出到 USB-C 的 VBUS 引脚，进行供电。&lt;/p&gt;
+&lt;p&gt;PD 包的格式如下图所示。&lt;/p&gt;
+&lt;p&gt;&lt;img src="image-20260620235930614.png" alt="image-20260620235930614"&gt;
+图源：PD 规范&lt;/p&gt;
+&lt;p&gt;其中 Preamble、&lt;code&gt;SOP*&lt;/code&gt;、CRC、EOP 是物理层加入的。Preamble 用于通知接收方开始接收消息，以太网帧中也有类似的东西。&lt;code&gt;SOP*&lt;/code&gt; 为 SOP / SOP′ / SOP″ 三类 SOP (Start of Packet) 的统称，它们的区别是发给对端 Port Partner，也就是 Source/Sink 本体，还是发给线缆一端/另一端的 Cable Plug。&lt;/p&gt;
+&lt;blockquote class="alert-diary alert-diary-note"&gt;
+&lt;p class="alert-heading"&gt;
+&lt;span class="material-icons"&gt;info_outline&lt;/span&gt;
+笔记
+&lt;/p&gt;
+&lt;p&gt;Cable Plug，线缆或插头里的 PD 通信能力电路，常见就是 e-marker。它可以告诉主机这根线支持多少电流、什么速率、是否支持 EPR 等。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;CRC 字段是用 CRC-32 计算的校验值，用以校验消息的完整性。只有 Message header 和 payload 会被用于 CRC 计算。最后是 EOP (End-Of-Packet)。&lt;/p&gt;
+&lt;h3 id="消息头"&gt;消息头&lt;/h3&gt;
+&lt;p&gt;每个 PD 报文首先会带一个 16 bits 的 header。header 中包含了消息的类型（Control Message, Data Message, Extended Message）、发送方的 Data Role、Specification Revision（协议版本）、发送方的 Power Role、MessageID、Data Objects 数量等信息。&lt;/p&gt;
+&lt;p&gt;Control Message 只有 header，没有 payload。Data Message 和 Extended Message 都带有 payload。前者是 word-oriented，也就是按 32-bit Data Object 组织；后者是 byte-oriented，按字节数据块组织。&lt;/p&gt;
+&lt;p&gt;Specification Revision 是一个 2 bits 的字段，只能够表达 1.0/2.0/3.x 这三种版本信息，剩下一个 Reserved，让我好奇如果又出了两个新版本那应该怎么新增 revision&amp;hellip; 版本协商由 Source/Sink 最初的两条消息（Source_Capabilities/Request）决定，选出双方都支持的最高版本。如果要区分 3.x 的小版本，则需要后续的 Get_Revision 等消息来实现。&lt;/p&gt;
+&lt;h3 id="协商过程"&gt;协商过程&lt;/h3&gt;
+&lt;p&gt;下面终于进入到了我们的第一条报文：Source_Capabilities 报文，由 Source 广播它的 PDO。&lt;/p&gt;
+&lt;blockquote class="alert-diary alert-diary-note"&gt;
+&lt;p class="alert-heading"&gt;
+&lt;span class="material-icons"&gt;info_outline&lt;/span&gt;
+笔记
+&lt;/p&gt;
+&lt;p&gt;PDO (Power Data Object)，电源数据对象，通常用来声明充电头的电压/电流档位&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;一个 PDO 由 32 bits 组成，以下面这个 PDO 为例：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[b128-b159] PDO 5: F 20.0V@1.5A (0x00064096)
+[b31-b30] Supply Type: FPDO (00b)
+[b29-b22] Reserved
+[b21-b20] Peak Current: 00 (00b)
+[b19-b10] Voltage: 20.0V (0110010000b)
+[b9-b0] Maximum Current: 1.5A (0010010110b)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;它的类型是 Fixed Supply，Peak Current 指示了不支持短时间过载，声明的电压/电流为 20V/1.5A。PPS 的情况下加入了最大/最小电压，其他类似。PPS 的最小电压只有 5V 一个档位，最大电压有 11V/16V/21V 三个档位，其余的档位都是 Invalid 的。&lt;/p&gt;
+&lt;p&gt;神秘的是在我的酷态科 10 号上，出现了下面的 PDO：&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[b192-b223] PDO 7: P 5.0-20.0V@5.0A (0xC9903264)
+[b31-b30] Supply Type: APDO (11b)
+[b29-b28] APDO Type: SPR PPS (00b)
+[b27] PPS Power Limited: True (1b)
+[b26-b17] Maximum Voltage: 20.0V (0011001000b)
+[b16-b8] Minimum Voltage: 5.0V (000110010b)
+[b7-b0] Maximum Current: 5.0A (01100100b)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;但是规范中并没有 20V 这个档位..&lt;/p&gt;
+&lt;p&gt;在每一个包被发送后，对端都需要返回一条 GoodCRC Control Message 来 ACK 消息已收到并且校验准确，其中的 MessageID 字段设置为 ACK 的那个消息的 MessageID。&lt;/p&gt;
+&lt;p&gt;接下来，Sink 发送 Request 报文，申请改变 VBUS 电压。报文中只能带有一个 RDO。&lt;/p&gt;
+&lt;blockquote class="alert-diary alert-diary-note"&gt;
+&lt;p class="alert-heading"&gt;
+&lt;span class="material-icons"&gt;info_outline&lt;/span&gt;
+笔记
+&lt;/p&gt;
+&lt;p&gt;RDO (Request Data Object)，请求数据对象，标识 Sink 在申请哪一个 PDO&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[b0-b31] RDO: [1] F 5.0V@3.0A (0x1304B12C)
+[b31-b28] Object Position: 1 (0001b)
+[b27] Giveback: False (0b) (Deprecated)
+[b26] Capability Mismatch: False (0b)
+[b25] USB Communications Capable: True (1b)
+[b24] No USB Suspend: True (1b)
+[b23] Unchunked Extended Messages Supported: False (0b)
+[b22] EPR Capable: False (0b)
+[b21-b20] Reserved: None (00b)
+[b19-b10] Operating Current: 3.0A (0100101100b)
+[b9-b0] Maximum Operating Current: 3.0A (0100101100b) (Deprecated)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Object Position 指示了相应 PDO 的位置（居然不是从 0 开始的？）下面的字段都不是很重要，最关键的是 Operating Current，指示了 Sink 请求的最高电流。&lt;/p&gt;
+&lt;p&gt;然后，Source 发送 Accept Control Message，表示接受 Sink 的 RDO。&lt;/p&gt;
+&lt;p&gt;接着，Source 发送 PS_RDY（Power Supply Ready）Control Message，指示电源已经达到了期望状态，也就是说 VBUS 上的电压已经切换完成了。至此，PD 的协商完成。&lt;/p&gt;
+&lt;h3 id="其他报文"&gt;其他报文&lt;/h3&gt;
+&lt;p&gt;在一加 15t 上，PD 的协商到 PS_RDY 就结束了。但是在 Macbook Air M2 上，却还有更多消息。&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20260622165123193.png" alt="image-20260622165123193"&gt;&lt;/p&gt;
+&lt;p&gt;这里可以看到在 DR_Swap（交换 data role）之后，Sink 发了很多请求。Source_Capabilities_Extended 好像没什么东西。Revision 里能看到酷态科 10 号的协议版本，居然还不支持 PD 3.2。&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[b0-b31] RMDO: (0x31180000)
+[b31-b28] Revision.major: 3 (0011b)
+[b27-b24] Revision.minor: 1 (0001b)
+[b23-b20] Version.major: 1 (0001b)
+[b19-b16] Version.minor: 8 (1000b)
+[b15-b0] Reserved: None (0000000000000000b)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Source Info 里包含了功率信息。&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[b0-b31] SIDO: (0x80787878)
+[b31] Port Type: Guaranteed Capability Port (1b)
+[b30-b24] Reserved: None (0000000b)
+[b23-b16] Port Maximum PDP: 120W (01111000b)
+[b15-b8] Port Present PDP: 120W (01111000b)
+[b7-b0] Port Reported PDP: 120W (01111000b)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote class="alert-diary alert-diary-note"&gt;
+&lt;p class="alert-heading"&gt;
+&lt;span class="material-icons"&gt;info_outline&lt;/span&gt;
+笔记
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PD Power (PDP)，Source 输出的功率&lt;/li&gt;
+&lt;li&gt;Port Maximum PDP，该 Port 最大会提供的功率&lt;/li&gt;
+&lt;li&gt;Port Present PDP，当前能供应的功率，受线缆能力、温度、输入电压等影响&lt;/li&gt;
+&lt;li&gt;Port Reported PDP，当前在 &lt;code&gt;Source_Capabilities&lt;/code&gt; 中汇报的最大功率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;不过酷态科 10 号的实现似乎不太对，在我用一条没有 e-marker 的线时，Source_Capabilities 汇报的最高功率为 60W，但是 Port Present PDP 和 Port Reported PDP 还是 120W..&lt;/p&gt;
+&lt;p&gt;还会通过 Vendor_Defined 报文查询 Source Vendor 的信息。之后在 VCONN_Swap 之后还会去查线缆的信息。&lt;/p&gt;
+&lt;h2 id="尾巴"&gt;尾巴&lt;/h2&gt;
+&lt;p&gt;PD 确实是一个很复杂的协议啊.. 接下来 K2 就该开始吃灰了！&lt;/p&gt;
+- https://blog.coherence.codes/posts/2026/witrn_k2_pd/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>我的 NAS 方案</title><link>https://blog.coherence.codes/posts/2025/my_nas_plan/</link><pubDate>Sun, 13 Jul 2025 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2025/my_nas_plan/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2025/my_nas_plan/ -&lt;p&gt;很久之前，我就有组一个 NAS 的想法，直到今年才得以实现。&lt;/p&gt;
 &lt;h2 id="选型"&gt;选型&lt;/h2&gt;
 &lt;p&gt;首先就是选择成品 NAS 还是 DIY。我并没有 NAS 的刚需，只是想在折腾中学习，所以自然是选择 DIY。基于战未来的考虑，直接选了个八盘位的机箱，而 CPU 方面目前看来没什么吃性能的应用，所以选了 n100。最终的配置如下：&lt;/p&gt;
 &lt;ul&gt;
@@ -197,7 +369,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;下载 mihomo （原 clash-meta）二进制，配置 tun 绑定到之前的设备上&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;tun&lt;/span&gt;:
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;tun&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;enable&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;stack&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;system&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;auto-route&lt;/span&gt;: &lt;span style="color:#66d9ef"&gt;true&lt;/span&gt;
@@ -207,7 +379,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;写入 init 脚本到 &lt;code&gt;/etc/init.d/clash&lt;/code&gt;，以便开机自启&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/sh /etc/rc.common
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#!/bin/sh /etc/rc.common
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;START&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;99&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
@@ -229,7 +401,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/ul&gt;
 &lt;p&gt;然后，就没有然后了。它工作！具体为什么能工作呢，咱也不知道&amp;hellip;&lt;/p&gt;
 - https://blog.coherence.codes/posts/2024/openwrt_transparent_proxy/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Linux 内存管理初探</title><link>https://blog.coherence.codes/posts/2024/linux_memory_management/</link><pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2024/linux_memory_management/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2024/linux_memory_management/ -&lt;p&gt;本文试图解释两个简单的问题：&lt;code&gt;free&lt;/code&gt; 命令中的 used/free/available 等字段究竟代表了什么？而 &lt;code&gt;ps&lt;/code&gt; 命令中的 VSZ/RSS 又代表了什么？&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ free -h
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ free -h
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; total used free shared buff/cache available
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Mem: 38Gi 15Gi 834Mi 3.3Gi 25Gi 22Gi
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Swap: 19Gi 5.3Gi 14Gi
@@ -281,7 +453,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;li&gt;Write back（写回）：对文件的写入暂存在内存。系统中存在定期任务（表现形式为内核线程），周期性地同步文件系统中文件脏数据块。这是 Linux 的默认行为。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;我们能做个小实验验证这个行为：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat /proc/meminfo | grep Dirty &lt;span style="color:#75715e"&gt;# 查看当前脏页大小&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat /proc/meminfo | grep Dirty &lt;span style="color:#75715e"&gt;# 查看当前脏页大小&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Dirty: &lt;span style="color:#ae81ff"&gt;828&lt;/span&gt; kB
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ dd &lt;span style="color:#66d9ef"&gt;if&lt;/span&gt;&lt;span style="color:#f92672"&gt;=&lt;/span&gt;/dev/zero of&lt;span style="color:#f92672"&gt;=&lt;/span&gt;testfile.txt bs&lt;span style="color:#f92672"&gt;=&lt;/span&gt;1M count&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;10&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;10+0 records in
@@ -324,7 +496,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/blockquote&gt;
 &lt;p&gt;另一个能够反映程序内存占用的指标是 WSS（working set size，工作集大小），也就是一段时间内（比如 10min）程序使用的内存大小。Linux 并没有提供一个很简单的方式读取进程的 WSS，但是使用一些工具能做到这一点，参照&lt;a href="https://www.brendangregg.com/blog/2018-01-17/measure-working-set-size.html"&gt;这篇文章&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;上面说到 fork 时内核使用了 CoW，我们可以做一个小实验观察这一点：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#include&lt;/span&gt; &lt;span style="color:#75715e"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#include&lt;/span&gt; &lt;span style="color:#75715e"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#include&lt;/span&gt; &lt;span style="color:#75715e"&gt;&amp;lt;stdlib.h&amp;gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#include&lt;/span&gt; &lt;span style="color:#75715e"&gt;&amp;lt;unistd.h&amp;gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;#include&lt;/span&gt; &lt;span style="color:#75715e"&gt;&amp;lt;string.h&amp;gt;&lt;/span&gt;&lt;span style="color:#75715e"&gt;
@@ -348,7 +520,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;p&gt;可以看到每个 fork 出来的进程的 RSS 都是 10G，而我的系统并没有 100G 内存。这也从侧面说明了简单将 RSS 相加统计系统的内存用量是不可靠的。&lt;/p&gt;
 &lt;p&gt;除了 ps/top，有没有办法能够获得更细节的进程内存信息呢？当然是有的。这就是 &lt;code&gt;/proc/&amp;lt;pid&amp;gt;/maps&lt;/code&gt; 和 &lt;code&gt;/proc/&amp;lt;pid&amp;gt;/smaps&lt;/code&gt;。smaps 相比比 maps 包含了更详细的信息。通过一个&lt;a href="https://github.com/cjc7373/my_scripts/blob/master/active/parse_proc_smaps.py"&gt;简单的 Python 脚本&lt;/a&gt;就可以对 smaps 中的信息进行汇总。&lt;/p&gt;
 &lt;p&gt;比如看一下 qbittorrent 的：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ python parse_proc_smaps.py /proc/2179/smaps
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ python parse_proc_smaps.py /proc/2179/smaps
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;========================================================================================================================&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Private_Clean Private_Dirty Shared_Clean Shared_Dirty Rss Pss VSZ library
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;========================================================================================================================&lt;/span&gt;
@@ -413,12 +585,13 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/ul&gt;
 &lt;p&gt;这里就是一个反直觉的地方了。内核对可用内存的计算仅仅是一个&lt;strong&gt;估计&lt;/strong&gt;，内核并不知道确切的“可用”内存的数量。&lt;/p&gt;
 &lt;p&gt;在深究之前我们先来说一说内存的水位（watermark）和&lt;a href="https://docs.kernel.org/admin-guide/mm/concepts.html#reclaim"&gt;回收&lt;/a&gt;。内核把物理内存空间分成多个 Zone，Zone 之间的区别在这里并不重要，可以简单理解为物理内存是所有 Zone 相加。一个 Zone 内的页面除了已用内存页，剩下的就是空闲页（free pages）。空闲页范围中有三个水位线（watermark ）评估当前内存压力情况，分别是高位（high）、低位（low）、最小位（min）。&lt;/p&gt;
+&lt;p&gt;NOTE: 这里的 high/low/min 和 cgroup v2 中的 memory.high, memory.low, memory.min 语义并不一致。&lt;/p&gt;
 &lt;p&gt;如果空闲页面在 low 水位之上，内核什么也不会干。当空闲页低于 low 水位后，内核会唤醒 &lt;code&gt;kswapd&lt;/code&gt; 线程。它会异步扫描内存页进行内存回收，直到水位达到 high。如果内存用量进一步升高，空闲页面低于 min 水位，此时内存分配将进入直接回收（direct reclaim）。回收操作将变为同步的，内存分配操作将阻塞直到足够多的页面被回收。&lt;/p&gt;
 &lt;p&gt;&lt;img src="./640.webp" alt="Image"&gt;
 （图源：&lt;a href="https://mp.weixin.qq.com/s?__biz=MjM5ODYwMjI2MA==&amp;amp;mid=2649785631&amp;amp;idx=1&amp;amp;sn=4ff0a18db034174b5dec2455c759e3d8"&gt;Linux内存变低会发生什么问题-腾讯技术工程&lt;/a&gt;)&lt;/p&gt;
 &lt;p&gt;内核的内存回收采取 LRU 算法。当然，有时候程序会比内核有更多的信息，知道哪些页不应该被换出，这时程序可以使用 &lt;code&gt;mlock&lt;/code&gt; 等系统调用阻止某些页被换出。&lt;/p&gt;
 &lt;p&gt;实践上，内核的内存水位设定非常保守。我们可以通过 &lt;code&gt;/proc/zoneinfo&lt;/code&gt; 计算得到。在我的 40G 内存的机器上面：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat /proc/zoneinfo
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat /proc/zoneinfo
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Node 0, zone DMA
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; pages free &lt;span style="color:#ae81ff"&gt;262&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; boost &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;
@@ -453,7 +626,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;li&gt;high = 12+1371+35911 = 145 MB&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;可以看到相比于内存总数几乎可以忽略不计。回到可用内存，我们来看一眼&lt;a href="https://elixir.bootlin.com/linux/v6.11.3/source/mm/show_mem.c#L32"&gt;计算 available 的代码&lt;/a&gt;：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;long&lt;/span&gt; available;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-c" data-lang="c"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;long&lt;/span&gt; available;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;unsigned&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;long&lt;/span&gt; pagecache;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;unsigned&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;long&lt;/span&gt; wmark_low &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;0&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;unsigned&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;long&lt;/span&gt; reclaimable;
@@ -704,7 +877,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;p&gt;如果只是在本地测试，模块路径可以随便起，比如 &lt;code&gt;example.com/what&lt;/code&gt; 这种。当然如果你未来想要发布它，那就得遵循 Go 的规则，比如 &lt;code&gt;github.com/your-username/your-repo-name&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;导入路径&lt;/em&gt;是一个用于导入一个包的字符串。一个包的导入路径是模块路径加上它在模块中的子目录。标准库中的包没有模块路径前缀。例如，模块 &lt;code&gt;github.com/google/go-cmp&lt;/code&gt; 在路径 &lt;code&gt;cmp/&lt;/code&gt; 下包含了一个包，这个包的导入路径为 &lt;code&gt;github.com/google/go-cmp/cmp&lt;/code&gt;。这个规则也适用于项目本身的包，如果 &lt;code&gt;go-cmp&lt;/code&gt; 项目在 &lt;code&gt;foo/&lt;/code&gt; 路径下的代码同样也导入了上述包，导入路径同样为 &lt;code&gt;github.com/google/go-cmp/cmp&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;通俗理解一下，导入路径就是文件夹路径。当一个包导入之后，我们就可以用包名来引用它了。一般而言，包名就是文件夹名，但这只是惯例，而非规定，如果确有需要可以不一致。所以下面的写法是合法的：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;example.com/xxx/pkga&amp;#34;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// actually it&amp;#39;s package name is pkgb&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;example.com/xxx/pkga&amp;#34;&lt;/span&gt; &lt;span style="color:#75715e"&gt;// actually it&amp;#39;s package name is pkgb&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;func&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;main&lt;/span&gt;() {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;pkgb&lt;/span&gt;.&lt;span style="color:#a6e22e"&gt;Func&lt;/span&gt;()
@@ -723,7 +896,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;一个典型的项目结构如下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── cmd
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── cmd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│   └── bc_node
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;│      └── main.go
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;├── docs
@@ -750,7 +923,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="包管理"&gt;包管理&lt;/h2&gt;
 &lt;p&gt;Go 模块的版本采用&lt;a href="https://semver.org/"&gt;语义化版本&lt;/a&gt;（semantic versioning, semver），想必大家都很熟悉了。&lt;/p&gt;
 &lt;p&gt;大版本的更新会导致导入路径的变化，v0/v1 版本的模块名没有版本后缀，如 &lt;code&gt;github.com/xx/xxxx&lt;/code&gt;。从 v2 开始需要版本后缀，如 &lt;code&gt;github.com/xx/xxxx/v2&lt;/code&gt;，这个后缀需要在 &lt;code&gt;go.mod&lt;/code&gt; 中声明。如果一个模块发布了 v2，但是没有在 &lt;code&gt;go.mod&lt;/code&gt; 中加入 &lt;code&gt;/v2&lt;/code&gt; 的后缀，其他包将无法 import v2 版本：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ go get -u github.com/cjc7373/go-module-test/c@v2.0.0
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ go get -u github.com/cjc7373/go-module-test/c@v2.0.0
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go: github.com/cjc7373/go-module-test/c@v2.0.0: invalid version: module contains a go.mod file, so module path must match major version &lt;span style="color:#f92672"&gt;(&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;github.com/cjc7373/go-module-test/c/v2&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果一个模块没有使用 Go Modules（即没有 &lt;code&gt;go.mod&lt;/code&gt; 文件），并且发布了一个 v2 及以上的版本，那么它作为一个依赖被引入时，我们会看到 &lt;code&gt;github.com/xx/xxxx v4.1.0+incompatible&lt;/code&gt; 这样的版本号。&lt;/p&gt;
 &lt;p&gt;虽然这种形式看上去很美好，但是是否遵循全凭开发者本身的意愿。我碰到过好几次某个库的 minor version 更新改了公开 API 的，最终导致编译出错。&lt;/p&gt;
@@ -763,9 +936,9 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;replace&lt;/code&gt;，用于替换一个模块指定版本（或是所有版本）的内容，替换的路径可以是模块的另一个版本，另一个模块，或是一个相对路径。例如：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go.mod" data-lang="go.mod"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;replace (
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; golang.org&lt;span style="color:#f92672"&gt;/&lt;/span&gt;x&lt;span style="color:#f92672"&gt;/&lt;/span&gt;net v1.&lt;span style="color:#ae81ff"&gt;2.3&lt;/span&gt; &lt;span style="color:#f92672"&gt;=&amp;gt;&lt;/span&gt; example.com&lt;span style="color:#f92672"&gt;/&lt;/span&gt;fork&lt;span style="color:#f92672"&gt;/&lt;/span&gt;net v1.&lt;span style="color:#ae81ff"&gt;4.5&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; golang.org&lt;span style="color:#f92672"&gt;/&lt;/span&gt;x&lt;span style="color:#f92672"&gt;/&lt;/span&gt;net &lt;span style="color:#f92672"&gt;=&amp;gt;&lt;/span&gt; example.com&lt;span style="color:#f92672"&gt;/&lt;/span&gt;fork&lt;span style="color:#f92672"&gt;/&lt;/span&gt;net v1.&lt;span style="color:#ae81ff"&gt;4.5&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go.mod" data-lang="go.mod"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;replace (
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; golang.org&lt;span style="color:#f92672"&gt;/&lt;/span&gt;x&lt;span style="color:#f92672"&gt;/&lt;/span&gt;net v1.2.3 &lt;span style="color:#f92672"&gt;=&amp;gt;&lt;/span&gt; example.com&lt;span style="color:#f92672"&gt;/&lt;/span&gt;fork&lt;span style="color:#f92672"&gt;/&lt;/span&gt;net v1.4.5
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; golang.org&lt;span style="color:#f92672"&gt;/&lt;/span&gt;x&lt;span style="color:#f92672"&gt;/&lt;/span&gt;net &lt;span style="color:#f92672"&gt;=&amp;gt;&lt;/span&gt; example.com&lt;span style="color:#f92672"&gt;/&lt;/span&gt;fork&lt;span style="color:#f92672"&gt;/&lt;/span&gt;net v1.4.5
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; golang.org&lt;span style="color:#f92672"&gt;/&lt;/span&gt;x&lt;span style="color:#f92672"&gt;/&lt;/span&gt;net &lt;span style="color:#f92672"&gt;=&amp;gt;&lt;/span&gt; .&lt;span style="color:#f92672"&gt;/&lt;/span&gt;fork&lt;span style="color:#f92672"&gt;/&lt;/span&gt;net
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这一指令同样仅对当前的 main 模块生效。&lt;/p&gt;
@@ -815,7 +988,7 @@ option defaultroute &amp;#39;0&amp;#39;
 - https://blog.coherence.codes/posts/2024/go_pkg_mgmt_1_toturial/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>记一次 mpv 异常关闭的调试</title><link>https://blog.coherence.codes/posts/2023/mpv_debug/</link><pubDate>Sun, 10 Dec 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/mpv_debug/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/mpv_debug/ -&lt;p&gt;（EDIT 2025-03-24：这个 Bug 发生的环境是一加 8T+Oxygen OS，在我更换至 LineageOS 之后这个问题没有再出现过了。所以大概率是一加的锅..）&lt;/p&gt;
 &lt;h2 id="查不出的问题"&gt;查不出的问题&lt;/h2&gt;
 &lt;p&gt;长久以来我都被 mpv 的一个问题所困扰，那就是在正常播放视频时 mpv 有概率会自动退出（通常是按下暂停键的时候）。通过 &lt;code&gt;-v -v -v&lt;/code&gt; 参数查看详细日志发现 mpv 接收到了 stop 命令：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;cplayer&lt;span style="color:#f92672"&gt;]&lt;/span&gt; Run command: stop, flags&lt;span style="color:#f92672"&gt;=&lt;/span&gt;64, args&lt;span style="color:#f92672"&gt;=[&lt;/span&gt;flags&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;cplayer&lt;span style="color:#f92672"&gt;]&lt;/span&gt; Run command: stop, flags&lt;span style="color:#f92672"&gt;=&lt;/span&gt;64, args&lt;span style="color:#f92672"&gt;=[&lt;/span&gt;flags&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是这个命令是谁发的不得而知。一开始怀疑是插件的问题，然而禁用所有插件（&lt;code&gt;~/.config/mpv/scripts&lt;/code&gt; 目录）后问题依旧。后尝试用 &lt;code&gt;--no-config&lt;/code&gt; 参数禁用所有配置，发现问题消失，于是尝试注释掉所有 &lt;code&gt;mpv.conf&lt;/code&gt; 中的配置，发现问题依旧。我还怀疑过是 &lt;code&gt;pipewire&lt;/code&gt;/&lt;code&gt;xorg&lt;/code&gt; 的问题，但是并没有搜索到相关信息。&lt;/p&gt;
 &lt;p&gt;我还观察到 vlc 是不是也会出现播放时自动停止的现象，另外 youtube/bilibili 播放视频时会经常自动跳转到开头。后来证实这其实都是同一个问题导致的..&lt;/p&gt;
 &lt;h2 id="线索"&gt;线索&lt;/h2&gt;
@@ -823,14 +996,14 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;p&gt;&lt;a href="https://wiki.archlinux.org/title/MPRIS"&gt;MPRIS&lt;/a&gt; 是一个 dbus 接口，提供了控制媒体播放器的相应 API，绝大多数应用，包括上述提到的几个，都支持这一接口。mpv 的 mpris 支持通过 &lt;code&gt;mpv-mpris&lt;/code&gt; 包提供。看到这个名字我恍然大悟，&lt;code&gt;mpv-mpris&lt;/code&gt; 由系统包管理器安装，因此并没有出现在用户的插件目录下。当即我查看了 &lt;code&gt;mpv-mpris&lt;/code&gt; 的源码，发现其为 mpv C 拓展，而不是常见的 Lua 拓展。&lt;/p&gt;
 &lt;p&gt;从&lt;a href="https://github.com/hoyon/mpv-mpris/blob/16fee38988bb0f4a0865b6e8c3b332df2d6d8f14/mpris.c#L602C26-L602C26"&gt;这里&lt;/a&gt;可以看到，它在收到 mpris 的 &lt;code&gt;Stop()&lt;/code&gt; 方法后，会向 mpv 发送 stop 命令，因此我准备加一行日志看看到底是不是 &lt;code&gt;mpv-mpris&lt;/code&gt; 导致了上述问题。询问了 ChatGPT 之后发现其对于如何在 mpv C 扩展中打印日志完全是在瞎扯.. 后来发现直接用 &lt;code&gt;printf&lt;/code&gt; 就行.. 从函数签名可以看到其包含了 sender 的信息，于是将其打印。这里我并没有 clone 仓库进行构建，而是直接复制 archlinux 中的 PKGBUILD，先用 &lt;code&gt;makepkg -o&lt;/code&gt; 下载解压源码，修改后再用 &lt;code&gt;makepkg -e&lt;/code&gt; 进行构建，这样做的好处是无需关心具体的构建流程以及如何应用构建后的插件，build 完直接装就行。&lt;/p&gt;
 &lt;p&gt;在复现问题之后发现果然是 &lt;code&gt;mpv-mpris&lt;/code&gt; 调用了 stop 命令，日志为：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mpris: sender: :1.41, _object_path: /org/mpris/MediaPlayer2, interface_name: org.mpris.MediaPlayer2.Player, method_name: Stop, parameters: &lt;span style="color:#f92672"&gt;()&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mpris: sender: :1.41, _object_path: /org/mpris/MediaPlayer2, interface_name: org.mpris.MediaPlayer2.Player, method_name: Stop, parameters: &lt;span style="color:#f92672"&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;继续询问 ChatGPT 如何从 &lt;code&gt;:1.41&lt;/code&gt; 这个标识符得到发送者的进程，这次它倒没有瞎扯，告诉我 dbus 包含一个内省方法：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ dbus-send --session --dest&lt;span style="color:#f92672"&gt;=&lt;/span&gt;org.freedesktop.DBus --type&lt;span style="color:#f92672"&gt;=&lt;/span&gt;method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.GetConnectionUnixProcessID string:&lt;span style="color:#e6db74"&gt;&amp;#34;:1.41&amp;#34;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ dbus-send --session --dest&lt;span style="color:#f92672"&gt;=&lt;/span&gt;org.freedesktop.DBus --type&lt;span style="color:#f92672"&gt;=&lt;/span&gt;method_call --print-reply /org/freedesktop/DBus org.freedesktop.DBus.GetConnectionUnixProcessID string:&lt;span style="color:#e6db74"&gt;&amp;#34;:1.41&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;method &lt;span style="color:#66d9ef"&gt;return&lt;/span&gt; time&lt;span style="color:#f92672"&gt;=&lt;/span&gt;1702192468.323155 sender&lt;span style="color:#f92672"&gt;=&lt;/span&gt;org.freedesktop.DBus -&amp;gt; destination&lt;span style="color:#f92672"&gt;=&lt;/span&gt;:1.2850 serial&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;3&lt;/span&gt; reply_serial&lt;span style="color:#f92672"&gt;=&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; uint32 &lt;span style="color:#ae81ff"&gt;1688&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;再用 ps 等命令查看，发现该进程为 kdeconnect。直接上 bugs.kde.org 搜索得到一个类似的 &lt;a href="https://bugs.kde.org/show_bug.cgi?id=476123"&gt;bug report&lt;/a&gt;，不过除了作者没有人回应。&lt;/p&gt;
 &lt;p&gt;翻找源码发现大概是在 &lt;a href="https://invent.kde.org/network/kdeconnect-kde/-/blob/master/plugins/mpriscontrol/mpriscontrolplugin.cpp#L284"&gt;mpriscontrolplugin.cpp#L284&lt;/a&gt; 调用的 mpris Stop 方法，去掉注释重新编译后查看日志发现如下条目：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kdeconnect.core: TCP connection done (i&amp;#39;m the existing device)
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kdeconnect.core: TCP connection done (i&amp;#39;m the existing device)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kdeconnect.core: Starting server ssl (I&amp;#39;m the client TCP socket)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kdeconnect.core: Socket successfully established an SSL connection
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;kdeconnect.core: It is a known device &amp;#34;xxxx&amp;#34;
@@ -994,7 +1167,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/ul&gt;
 &lt;p&gt;objects 的特性决定了它们是不可变的，一旦修改了某个 object 中的内容，哈希将会改变，因而会生成一个新的 object.&lt;/p&gt;
 &lt;p&gt;可以使用 &lt;code&gt;git cat-file -t&lt;/code&gt; 来检查一个 object 的类型，用 &lt;code&gt;git cat-file -p&lt;/code&gt; 来打印其内容，以本博客的 git 仓库为例：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git log
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git log
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;...
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;commit 10142e0fb1f636288c7f5a6a164e67c1efc13ef4
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Author: Harold Cheng &amp;lt;niuchangcun@gmail.com&amp;gt;
@@ -1023,7 +1196,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;040000&lt;/span&gt; tree 81200165da89a43766f03762e4a8d8443357f1ed content
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;040000&lt;/span&gt; tree 336e0cfa73193fc3f76ba2b2de182e82b010f599 themes
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这些 objects 都被存在项目的 &lt;code&gt;.git/objects&lt;/code&gt; 目录下，由 SHA-1 的前两个字符作为子目录的文件名，后 38 个字符为 object 的文件名。这些 objects 使用 zlib 压缩，根据 &lt;a href="https://unix.stackexchange.com/questions/22834/how-to-uncompress-zlib-data-in-unix"&gt;stackoverflow 上的魔法&lt;/a&gt;，可以用 gzip 来解压这些文件：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ll .git/objects/10/142e0fb1f636288c7f5a6a164e67c1efc13ef4
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ ll .git/objects/10/142e0fb1f636288c7f5a6a164e67c1efc13ef4
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;-r--r--r-- &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; cjc cjc &lt;span style="color:#ae81ff"&gt;833&lt;/span&gt; Sep &lt;span style="color:#ae81ff"&gt;5&lt;/span&gt; 17:30 .git/objects/10/142e0fb1f636288c7f5a6a164e67c1efc13ef4
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ printf &lt;span style="color:#e6db74"&gt;&amp;#34;\x1f\x8b\x08\x00\x00\x00\x00\x00&amp;#34;&lt;/span&gt; | cat - .git/objects/10/142e0fb1f636288c7f5a6a164e67c1efc13ef4 | gzip -dc
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;commit 1098tree f1f161d92d0c7341ed35e76a66855383334005ab
@@ -1046,10 +1219,10 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;h2 id="references"&gt;References&lt;/h2&gt;
 &lt;p&gt;objects 虽然简洁明了，但是它的名字太不好记了。所以 git 引入了 references (或 refs) 作为对某个 object 的引用，它们被存储在 &lt;code&gt;.git/refs&lt;/code&gt; 中，这就是分支。我们可以通过 &lt;code&gt;git update-ref refs/heads/xxxx hash&lt;/code&gt; 来更新/新建一个 ref，&lt;code&gt;git branch&lt;/code&gt; 命令基本等同于使用 &lt;code&gt;update-ref&lt;/code&gt; 创建一个指向当前分支最后一个 commit 的 ref。&lt;/p&gt;
 &lt;p&gt;git 通过一个特殊的 HEAD 文件来获得当前分支最后一个 commit 的信息，通常情况下 HEAD 是对某个 ref 的引用：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat .git/HEAD
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat .git/HEAD
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ref: refs/heads/source_hugo
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是当我们 checkout 一个 tag/commit/远程分支时，我们就会进入到所谓的 &amp;ldquo;detached HEAD&amp;rdquo; 状态：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git checkout f25ea89160baa34af6587ebc4399cba9b82152ab
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git checkout f25ea89160baa34af6587ebc4399cba9b82152ab
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Note: switching to &lt;span style="color:#e6db74"&gt;&amp;#39;f25ea89160baa34af6587ebc4399cba9b82152ab&amp;#39;&lt;/span&gt;.
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;You are in &lt;span style="color:#e6db74"&gt;&amp;#39;detached HEAD&amp;#39;&lt;/span&gt; state. You can look around, make experimental
@@ -1076,7 +1249,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;annotated tag: 使用 &lt;code&gt;git tag -a&lt;/code&gt; 创建，需要像 commit 一样写一段 tag message，其 ref 指向 git 中的第四种 object 类型，tag。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git tag -a v1.2.3
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git tag -a v1.2.3
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat .git/refs/tags/v1.2.3
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;295e429586c0dc7764077b7ec3b15402b9299532
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git cat-file -t 295e429586c0dc7764077b7ec3b15402b9299532
@@ -1092,7 +1265,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git cat-file -t 0996cddadea886287fd606b4102304814eb3785c
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;commit
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是 tag 并不是必须指向一个 commit，tag 任何 object 都是可以的。虽然在实践中好像 tag 非 commit 并没有什么用..&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git tag -a tree-tag 9ff1e32671b9ac918dd665020c8da93c44787e33
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git tag -a tree-tag 9ff1e32671b9ac918dd665020c8da93c44787e33
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ cat .git/refs/tags/tree-tag
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;3b94c91c60f92b16336050aa445c7a293e61ec2e
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git cat-file -p 3b94c91c60f92b16336050aa445c7a293e61ec2e
@@ -1115,14 +1288,14 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;li&gt;如果三者都不相等，则发生 merge 冲突，需要手动处理&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;如果我们不寻找 C2，只比较 C4、C5，这就是所谓的 two-way merge，由于失去了祖先的信息，我们无法处理第二种情况。实际进行 merge 时，我们可能会看到如下信息：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git merge b1
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git merge b1
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Auto-merging 1.txt
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Merge made by the &lt;span style="color:#e6db74"&gt;&amp;#39;ort&amp;#39;&lt;/span&gt; strategy.
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; 1.txt | &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; +
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; file changed, &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; insertion&lt;span style="color:#f92672"&gt;(&lt;/span&gt;+&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个过程中，git 会创建一棵新 tree，把两个分支作为 parent 创建一个新的 commit，这就是 merge commit。&lt;/p&gt;
 &lt;p&gt;rabase 则是完全不同的方式。如果 cherry-pick 一个 commit：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git cherry-pick 2f6c412
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ git cherry-pick 2f6c412
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;master 2aa02d0&lt;span style="color:#f92672"&gt;]&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Date: Tue Sep &lt;span style="color:#ae81ff"&gt;19&lt;/span&gt; 16:32:32 &lt;span style="color:#ae81ff"&gt;2023&lt;/span&gt; +0800
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; file changed, &lt;span style="color:#ae81ff"&gt;1&lt;/span&gt; insertion&lt;span style="color:#f92672"&gt;(&lt;/span&gt;+&lt;span style="color:#f92672"&gt;)&lt;/span&gt;
@@ -1167,7 +1340,7 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;li&gt;为了可靠性，每个 chunk 会被复制到多个 chunkservers 上 （通常为三个）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;master 管理了所有的元数据，用 Go 代码大概表示为：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ChunkHandle&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;struct&lt;/span&gt; {
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;type&lt;/span&gt; &lt;span style="color:#a6e22e"&gt;ChunkHandle&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;struct&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;Handle&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int64&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;ChunkServers&lt;/span&gt; []&lt;span style="color:#a6e22e"&gt;ChuckServer&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#a6e22e"&gt;ReplicaNum&lt;/span&gt; &lt;span style="color:#66d9ef"&gt;int&lt;/span&gt;
@@ -1227,40 +1400,4 @@ option defaultroute &amp;#39;0&amp;#39;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-- https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>神秘的自动关闭显示器失效问题</title><link>https://blog.coherence.codes/posts/2023/%E7%A5%9E%E7%A7%98%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD%E6%98%BE%E7%A4%BA%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/</link><pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2023/%E7%A5%9E%E7%A7%98%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD%E6%98%BE%E7%A4%BA%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2023/%E7%A5%9E%E7%A7%98%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD%E6%98%BE%E7%A4%BA%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/ -&lt;h2 id="问题"&gt;问题&lt;/h2&gt;
-&lt;p&gt;我的桌面环境为 KDE/X11，我在 KDE 的 Power Management 设置中设置了 &lt;code&gt;Screen Energy Saving: Switch off after 5 min&lt;/code&gt;，这个选项时不时地出问题，表现为刚开机时能够正常工作，在闲置五分钟后关闭显示器，但在一段时间过后就不行了，这个一段时间可长可短。重启电脑又能重新工作，而锁屏后也能够正常工作。这个问题从我用 KDE 开始就一直困扰着我，时至今日。&lt;/p&gt;
-&lt;h2 id="排查"&gt;排查&lt;/h2&gt;
-&lt;p&gt;KDE 的电源管理由 powerdevil 控制，其作为 &lt;code&gt;plasma-powerdevil.service&lt;/code&gt; 用户服务运行，查询日志发现有一些神秘的 &lt;code&gt;org_kde_powerdevil[1310]: QObject::disconnect: Unexpected nullptr parameter&lt;/code&gt; 报错，之后证实该报错与本问题无关。&lt;/p&gt;
-&lt;p&gt;查看该 &lt;code&gt;.service&lt;/code&gt; 文件发现其使用 &lt;code&gt;Type=dbus&lt;/code&gt; 的启动类型，并且获得了一个叫 &lt;code&gt;org.kde.Solid.PowerManagement&lt;/code&gt; 的 bus name。用 QBBusViewer 可以看到 powerdevil 还提供了 &lt;code&gt;org.freedesktop.PowerManagement&lt;/code&gt; 这一服务。&lt;/p&gt;
-&lt;p&gt;查阅 powerdevil 源码以 &lt;code&gt;Switch off after&lt;/code&gt; 为关键词进行搜索可发现相关逻辑位于 &lt;code&gt;daemon/actions/bundled/dpms.cpp&lt;/code&gt; 文件下，根据名字猜测 dpms 即 Display Power Management Signaling 的缩写。简单看了一下 dpms，这是一个古老的协议，在 1993 年发布，定义了四种模式，但 &lt;a href="https://wiki.archlinux.org/title/Display_Power_Management_Signaling"&gt;archwiki 上&lt;/a&gt;指出：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Note that DPMS was developed for CRT monitors, and on LCD displays, there is normally no difference between the standby, suspend and off modes.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;顺便插一句，流传甚广的关闭显示器的命令 &lt;code&gt;xset dpms force off&lt;/code&gt; 即强制 dpms 进入 off 模式。&lt;/p&gt;
-&lt;p&gt;在 &lt;a href="https://invent.kde.org/plasma/powerdevil/-/blob/master/daemon/actions/bundled/dpms.cpp#L108"&gt;dpms.cpp#L108&lt;/a&gt; 发现在一定条件下空闲超时关闭显示器的函数会直接返回，猜测这个 inhibit 的条件是由上述的两个 dbus 服务来控制的。&lt;/p&gt;
-&lt;p&gt;尝试调用上述 dbus 服务：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ qdbus --literal org.kde.Solid.PowerManagement /org/kde/Solid/PowerManagement/PolicyAgent org.kde.Solid.PowerManagement.PolicyAgent.ListInhibitions
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;Argument: a&lt;span style="color:#f92672"&gt;(&lt;/span&gt;ss&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#f92672"&gt;{[&lt;/span&gt;Argument: &lt;span style="color:#f92672"&gt;(&lt;/span&gt;ss&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;/usr/lib/chromium/chromium&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;Capturing&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;]&lt;/span&gt;, &lt;span style="color:#f92672"&gt;[&lt;/span&gt;Argument: &lt;span style="color:#f92672"&gt;(&lt;/span&gt;ss&lt;span style="color:#f92672"&gt;)&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;/usr/lib/chromium/chromium&amp;#34;&lt;/span&gt;, &lt;span style="color:#e6db74"&gt;&amp;#34;Capturing&amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;]}]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;$ qdbus --literal org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement org.freedesktop.PowerManagement.Inhibit.HasInhibit
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;true
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;发现疑似是 chromium 在 Inhibit，结合阻止理由，很容易想到是我用的&lt;a href="https://chrome.google.com/webstore/detail/imhcgcnjkibjikdbdgnhclihigkooeaf"&gt;音量插件&lt;/a&gt;导致的，其原理就是 Capture 当前页面而获得一个相关的音频 API。在关闭了相应标签页之后问题解决。&lt;/p&gt;
-&lt;h2 id="疑问"&gt;疑问&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;org.freedesktop.PowerManagement&lt;/code&gt; API 似乎并没有成为标准，虽然似乎主流的桌面环境都实现了。用 Google 搜索只能搜索到&lt;a href="https://www.freedesktop.org/wiki/Specifications/power-management-spec/"&gt;这个页面&lt;/a&gt;，提示：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;This spec is considered obsolete.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;并且页面中 &lt;code&gt;The Spec&lt;/code&gt; 下的链接全都 404 了，另有一个相关的 dbus API &lt;code&gt;org.freedesktop.ScreenSaver&lt;/code&gt;，不知道他们之间的关系是什么。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;通常在任务栏的 Power Management 选项卡下会提示哪个应用程序在阻止锁屏，如图所示：&lt;/p&gt;
-&lt;p&gt;&lt;img src="./image-20230903202406468.png" alt="image-20230903202406468"&gt;&lt;/p&gt;
-&lt;p&gt;但是这个提示有时候会不工作&amp;hellip;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="workaround"&gt;Workaround&lt;/h2&gt;
-&lt;p&gt;根据上述描述，这根本不是 bug 而是 feature，但我又时常会使用 chromium 的音量插件，有没有办法绕过呢？&lt;/p&gt;
-&lt;p&gt;我尝试手动设置 &lt;code&gt;xset dpms 20 20 20&lt;/code&gt; 并禁用 &lt;code&gt;plasma-powerdevil.service&lt;/code&gt;, 发现在 chromium 没有进行 capture 时 20s 后显示器关闭，而进行 capture 时则不行，怀疑 chromium 除了 &lt;code&gt;org.freedesktop.PowerManagement&lt;/code&gt; dbus API 之外还有其他手段来控制电源管理。&lt;/p&gt;
-&lt;p&gt;目前就先不管这个问题了&amp;hellip;&lt;/p&gt;
-- https://blog.coherence.codes/posts/2023/%E7%A5%9E%E7%A7%98%E7%9A%84%E8%87%AA%E5%8A%A8%E5%85%B3%E9%97%AD%E6%98%BE%E7%A4%BA%E5%99%A8%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2023/mit_6.824_1_gfs/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>

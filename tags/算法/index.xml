@@ -22,7 +22,7 @@
 &lt;p&gt;&lt;code&gt;1/0 Accepted&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;给一个数n，要求构造一个字符串，包含n-2个a，2个b，且在这个字符串的按字典序的全排列中排在第k个。&lt;/p&gt;
 &lt;p&gt;找b的位置即可。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; _ &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(t):
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; n, k &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [int(i) &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; input()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;split()]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; p &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(max(n&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;,k&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)):
@@ -49,7 +49,7 @@
 &lt;p&gt;N叠盘子，每叠K个，每个盘子有一个beauty值，从中取P个，但对于每叠只能从上到下取，求beauty值最大为多少。&lt;/p&gt;
 &lt;p&gt;先写了一个每次取最大的，WA，发现不对，然后去做第三题了。后又写了个dfs，TLE了。当时心态有点崩，因为TOP 10基本是两分钟AC，想到DP，但没有深入想。&lt;/p&gt;
 &lt;p&gt;官方题解是对于每一叠盘子，先预处理前n个的beauty值和sum，然后对于每一个状态&lt;code&gt;dp[i][j]&lt;/code&gt;，即在前i叠盘子和取j个盘子时能取到的最大值，有状态转移方程&lt;code&gt;dp[i][j] = max(dp[i][j], sum[i][x]+dp[i-1][j-x])&lt;/code&gt;。循环求dp即可。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__&lt;span style="color:#f92672"&gt;==&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, t&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;):

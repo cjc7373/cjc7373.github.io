@@ -1,11 +1,32 @@
-<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 13 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ -&lt;p&gt;记录一下比赛期间踩到的坑.&lt;/p&gt;
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Coherence's Blog</title><link>https://blog.coherence.codes/</link><description>Recent content on Coherence's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sat, 20 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/index.xml" rel="self" type="application/rss+xml"/><item><title>我的第一个 Archlinux 包</title><link>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</link><pubDate>Wed, 08 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/my_first_archlinux_package/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ -&lt;p&gt;记录一下打包过程. 本文为一篇本成品博文, 笔者写了一半鸽了.&lt;/p&gt;
+&lt;p&gt;Archwiki 给人的感觉还是有点零碎了.. 与打包相关的条目大概有:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/Creating_packages"&gt;Creating packages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/Arch_package_guidelines"&gt;Arch package guidelines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/Makepkg"&gt;makepkg&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/PKGBUILD"&gt;PKGBUILD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/AUR_submission_guidelines"&gt;AUR submission guidelines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.archlinux.org/title/Arch_Build_System"&gt;Arch Build System&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;好吧, 这可能就是 Wiki 的组织形式, 但对新手来说确实不友好. 另外 makepkg 和 PKGBUILD 的 man 文档也是很有用的.&lt;/p&gt;
+&lt;h2 id="概览"&gt;概览&lt;/h2&gt;
+&lt;p&gt;ABS 是一个 &lt;a href="https://en.wikipedia.org/wiki/Ports_collection"&gt;ports&lt;/a&gt;-like 构建系统, 其打包的主要工具为 makepkg, 根据当前目录下的 PKGBUILD 打包. 据说是比 Debian 系的打包容易不少.&lt;/p&gt;
+&lt;h2 id="打包"&gt;打包&lt;/h2&gt;
+&lt;p&gt;首先 makepkg 会下载 source 变量中指定的文件列表, 它们可以是一个 URL, 一个 git 仓库, 或一个在当前目录下的文件. makepkg 会校验文件的哈希并解压到以文件名命名的目录. 可用 &lt;code&gt;-g, --geninteg&lt;/code&gt; 命令来下载文件并生成哈希. 注意 VCS 的 source 是没有哈希的.&lt;/p&gt;
+&lt;p&gt;事实上看一看每种语言对应的 guidelines 是非常有用的.&lt;/p&gt;
+&lt;p&gt;&lt;img src="./image-20211208122231668.png" alt="image-20211208122231668"&gt;&lt;/p&gt;
+&lt;p&gt;我在打这个 go 包的时候, makepkg 有个警告: &lt;code&gt;==&amp;gt; WARNING: Package contains reference to $srcdir&lt;/code&gt;, 而 Go package guideline 里就给了解决办法.&lt;/p&gt;
+&lt;h2 id="上传-aur"&gt;上传 AUR&lt;/h2&gt;
+&lt;p&gt;AUR 还挺有意思的, 它是个 git 仓库, 我们只要 push 一个仓库到 &lt;code&gt;ssh://aur@aur.archlinux.org/pkgbase.git&lt;/code&gt; 就能创建一个 pkgbase 包. 当然, 除了创建新包外,应该是只有 maintainer 有权限了. 所以首先我们需要去 AUR 的网页里添加公钥. 顺便吐槽一下 SSO 什么时候才能被应用到所有 Arch 的网站中.&lt;/p&gt;
+&lt;p&gt;每次修改 PKGBUILD 上传 AUR 之前, 我们都必须运行 &lt;code&gt;makepkg --printsrcinfo &amp;gt; .SRCINFO&lt;/code&gt; 来生成 &lt;code&gt;.SRCINFO&lt;/code&gt;, 这是 AUR 显示在网页上的元数据.&lt;/p&gt;
+- https://blog.coherence.codes/posts/2021/my_first_archlinux_package/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>Hackergame 2021 write-up</title><link>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</link><pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2021/hackergame_2021_writeup/ -&lt;p&gt;记录一下比赛期间踩到的坑.&lt;/p&gt;
 &lt;h2 id="签到"&gt;签到&lt;/h2&gt;
 &lt;p&gt;开始完全没有读题直接进题目, 然后想了半天没思路并随机测试了一些数.. 直到我读了题..&lt;/p&gt;
 &lt;h2 id="进制十六参上"&gt;进制十六——参上&lt;/h2&gt;
 &lt;p&gt;显然, 大家都知道怎么编辑十六进制, 然而我并不想手输这么多文本, 于是 Google 在线 OCR, 结果 OCR 的内容有部分是错的.. 被迫找同学要了一份 OCR 结果.&lt;/p&gt;
 &lt;h2 id="去吧追寻自由的电波"&gt;去吧！追寻自由的电波&lt;/h2&gt;
 &lt;p&gt;直接 Google ffmepg 音频速度. 然而很多结果给的一个过滤器是不改变音调的方案, 后来发现直接改采样率就行了..&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;cjc@coherence hackergame_2021&lt;span style="color:#f92672"&gt;]&lt;/span&gt;$ file radio.mp3
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;cjc@coherence hackergame_2021&lt;span style="color:#f92672"&gt;]&lt;/span&gt;$ file radio.mp3
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;radio.mp3: Audio file with ID3 version 2.4.0, contains: MPEG ADTS, layer III, v1, &lt;span style="color:#ae81ff"&gt;128&lt;/span&gt; kbps, &lt;span style="color:#ae81ff"&gt;48&lt;/span&gt; kHz, Stereo
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;[&lt;/span&gt;cjc@coherence hackergame_2021&lt;span style="color:#f92672"&gt;]&lt;/span&gt;$ ffmpeg -i radio.mp3 -af &lt;span style="color:#e6db74"&gt;&amp;#34;asetrate=16000&amp;#34;&lt;/span&gt; radio_output.mp3
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;命令来自&lt;a href="http://johnriselvato.com/ffmpeg-how-to-change-the-pitch-sample-rate-of-an-audio-track-mp3/"&gt;这里&lt;/a&gt;, 虽然我根本没有看这篇文章..&lt;/p&gt;
@@ -258,7 +279,7 @@
 &lt;p&gt;又是一道需要神奇的优化的题。。&lt;/p&gt;
 &lt;p&gt;&lt;img src="./image-20200416163610781.png" alt="image-20200416163610781"&gt;&lt;/p&gt;
 &lt;p&gt;按官方题解的思路是这样：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sys
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sys
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;input &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sys&lt;span style="color:#f92672"&gt;.&lt;/span&gt;stdin&lt;span style="color:#f92672"&gt;.&lt;/span&gt;readline
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
@@ -286,7 +307,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ans &lt;span style="color:#f92672"&gt;=&lt;/span&gt; max(ans, m &lt;span style="color:#f92672"&gt;+&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;2&lt;/span&gt; &lt;span style="color:#f92672"&gt;*&lt;/span&gt; j)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; print(ans)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是超时了。翻别人的代码发现创建prev数组还能优化：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sys
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sys
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;input &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sys&lt;span style="color:#f92672"&gt;.&lt;/span&gt;stdin&lt;span style="color:#f92672"&gt;.&lt;/span&gt;readline
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
@@ -320,7 +341,7 @@
 &lt;p&gt;&lt;code&gt;1/0 Accepted&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;给一个数n，要求构造一个字符串，包含n-2个a，2个b，且在这个字符串的按字典序的全排列中排在第k个。&lt;/p&gt;
 &lt;p&gt;找b的位置即可。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; _ &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(t):
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; n, k &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [int(i) &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; input()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;split()]
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; p &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(max(n&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;,k&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;)):
@@ -338,7 +359,7 @@
 &lt;p&gt;&lt;code&gt;1/0 Accepted&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;给一个三进制数x，求两个数a，b，使这两个数的异或为x，且max(a, b)最小。&lt;/p&gt;
 &lt;p&gt;从左往右对每一位考虑最优解，若是0或2，则平均分配，若为1，则分配到0的那方获得接下来所有的数。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; _ &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(t):
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; l &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; x &lt;span style="color:#f92672"&gt;=&lt;/span&gt; input()
@@ -361,7 +382,7 @@
 &lt;p&gt;大概是能做的，只是到了十二点太困了。。就睡觉去了。&lt;/p&gt;
 &lt;p&gt;n个动物围成一圈，相邻的不同动物要有不同的颜色，求最少的颜色和对应的颜色序列。&lt;/p&gt;
 &lt;p&gt;考虑几种情况：所有动物都相同，总数为偶数，总数为奇数但存在相邻的相同动物，总数为奇数且不存在相邻的相同动物。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; _ &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(t):
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; n &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; figure &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [int(i) &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; input()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;split()]
@@ -404,7 +425,7 @@
 &lt;p&gt;看了别人的代码，主要是两点：用栈模拟 dfs 和输入使用&lt;code&gt;input = sys.stdin.readline&lt;/code&gt;。试了一下确实，直接 dfs 会爆栈空间，不优化输入会 TLE。&lt;/p&gt;
 &lt;p&gt;最终结果可以看出，PyPy 和 CPython 差距还是挺大的。&lt;/p&gt;
 &lt;p&gt;&lt;img src="./image-20200406110757605.png" alt="image-20200406110757605"&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sys
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sys
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;input &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sys&lt;span style="color:#f92672"&gt;.&lt;/span&gt;stdin&lt;span style="color:#f92672"&gt;.&lt;/span&gt;readline
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;n, m &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [int(i) &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; input()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;split()]
@@ -464,7 +485,7 @@
 &lt;p&gt;给 n 个数，给一个数 k &amp;lt;= n，要使得至少 k 个数相等。有两种操作：使一个最小的数 +1，使一个最大的数 -1。求最少的操作数。&lt;/p&gt;
 &lt;p&gt;根据&lt;a href="https://www.cnblogs.com/st1vdy/p/12579249.html"&gt;这篇题解&lt;/a&gt;，本题一共三种情况，给最大值 -1，给最小值 +1，同时进行两种操作（此时一定有 $a_1=a_n$ ）。（这个解法感觉比官方的还要好）&lt;/p&gt;
 &lt;p&gt;第一和第二种情况类似，将最左（右）边的 k 个数变为一致即可。第三种情况下，$\sum_{i=1}^{\frac{n}{2}}(a_{n-i}-a_i)$即将所有数变为相同（但是如果 n 为奇数，中间那个数怎么办？待考虑。。但结果是对的），但我们只需要 k 个，所以减去$n-k$。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sys
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;import&lt;/span&gt; sys
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;input &lt;span style="color:#f92672"&gt;=&lt;/span&gt; sys&lt;span style="color:#f92672"&gt;.&lt;/span&gt;stdin&lt;span style="color:#f92672"&gt;.&lt;/span&gt;readline
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;n, k &lt;span style="color:#f92672"&gt;=&lt;/span&gt; [int(i) &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; input()&lt;span style="color:#f92672"&gt;.&lt;/span&gt;split()]
@@ -519,7 +540,7 @@
 &lt;p&gt;N叠盘子，每叠K个，每个盘子有一个beauty值，从中取P个，但对于每叠只能从上到下取，求beauty值最大为多少。&lt;/p&gt;
 &lt;p&gt;先写了一个每次取最大的，WA，发现不对，然后去做第三题了。后又写了个dfs，TLE了。当时心态有点崩，因为TOP 10基本是两分钟AC，想到DP，但没有深入想。&lt;/p&gt;
 &lt;p&gt;官方题解是对于每一叠盘子，先预处理前n个的beauty值和sum，然后对于每一个状态&lt;code&gt;dp[i][j]&lt;/code&gt;，即在前i叠盘子和取j个盘子时能取到的最大值，有状态转移方程&lt;code&gt;dp[i][j] = max(dp[i][j], sum[i][x]+dp[i-1][j-x])&lt;/code&gt;。循环求dp即可。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__&lt;span style="color:#f92672"&gt;==&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, t&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;):
@@ -555,7 +576,7 @@
 &lt;p&gt;把N个字符串分成K组，每组的分数为最长公共前缀的长度，求全局最高分。&lt;/p&gt;
 &lt;p&gt;直接进行分组比较困难，我们可以考虑每组的分数同时也是共同前缀的个数。那么对于每个前缀，若有p个单词拥有这个前缀，则这个前缀会给结果贡献&lt;code&gt;p // K&lt;/code&gt;分。由此求字符串中的每个前缀和拥有这个前缀的字符串数即可。&lt;/p&gt;
 &lt;p&gt;使用前缀树可很容易求得。一开始我的做法是递归这棵树，用了两种写法都RE了，Google了一圈找到测试数据会导致爆栈，故采用了list来模拟栈遍历。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__&lt;span style="color:#f92672"&gt;==&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; __name__&lt;span style="color:#f92672"&gt;==&lt;/span&gt;&lt;span style="color:#e6db74"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; t &lt;span style="color:#f92672"&gt;=&lt;/span&gt; int(input())
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#66d9ef"&gt;for&lt;/span&gt; i &lt;span style="color:#f92672"&gt;in&lt;/span&gt; range(&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;, t&lt;span style="color:#f92672"&gt;+&lt;/span&gt;&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;):
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; out &lt;span style="color:#f92672"&gt;=&lt;/span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;Case #&lt;/span&gt;&lt;span style="color:#e6db74"&gt;{}&lt;/span&gt;&lt;span style="color:#e6db74"&gt;: &amp;#34;&lt;/span&gt;&lt;span style="color:#f92672"&gt;.&lt;/span&gt;format(i)
@@ -755,7 +776,7 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;默认WSL不会读取&lt;code&gt;~/.bashrc&lt;/code&gt;而会读取&lt;code&gt;~/.bash_profile&lt;/code&gt;，所以需要在&lt;code&gt;~/.bash_profile&lt;/code&gt;中写入：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#f92672"&gt;[[&lt;/span&gt; -f ~/.bashrc &lt;span style="color:#f92672"&gt;]]&lt;/span&gt; ; &lt;span style="color:#66d9ef"&gt;then&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;if&lt;/span&gt; &lt;span style="color:#f92672"&gt;[[&lt;/span&gt; -f ~/.bashrc &lt;span style="color:#f92672"&gt;]]&lt;/span&gt; ; &lt;span style="color:#66d9ef"&gt;then&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; . ~/.bashrc
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;fi&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;才能够正常读取bash配置。&lt;/p&gt;
@@ -830,150 +851,4 @@
 &lt;p&gt;&lt;img src="./image-20191208194351006.png" alt="image-20191208194351006"&gt;&lt;/p&gt;
 &lt;p&gt;我错了，我应该看文档的。安装rsync之后问题解决。&lt;/p&gt;
 &lt;h2 id="参考资料"&gt;参考资料&lt;/h2&gt;
-- https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item><item><title>重新安装 Hexo</title><link>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</link><pubDate>Wed, 07 Aug 2019 16:03:29 +0000</pubDate><guid>https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/</guid><description>Coherence's Blog https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/ -&lt;h2 id="缘由"&gt;缘由&lt;/h2&gt;
-&lt;p&gt;直接原因是 Github 的一个假装很贴心的功能：&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1565183420437.png" alt="1565183420437"&gt;&lt;/p&gt;
-&lt;p&gt;由于我的 Hexo 已年代久远，所以有了一堆漏洞，在尝试 Github 的自动修复未果之后，同时也因为当初搞 Hexo 的时候不是很懂，文档也没写好，就决定重新装一遍。&lt;/p&gt;
-&lt;h2 id="过程"&gt;过程&lt;/h2&gt;
-&lt;h3 id="环境"&gt;环境&lt;/h3&gt;
-&lt;p&gt;node.js 6.4.1&lt;/p&gt;
-&lt;p&gt;hexo 3.9.0&lt;/p&gt;
-&lt;p&gt;hexo-cli 2.0.0&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1565186395227.png" alt="1565186395227"&gt;&lt;/p&gt;
-&lt;p&gt;官方文档上写需要 node.js 6.9+，然而我是 6.4，不知道会不会锅。&lt;/p&gt;
-&lt;h3 id="hexo-安装"&gt;Hexo 安装&lt;/h3&gt;
-&lt;p&gt;首先，把仓库 clone 下来后，备份一份源文件。然后找一个空文件夹，按照官方文档的指引，执行：&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;hexo init
-npm install
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;（我发现现在 &lt;code&gt;hexo init&lt;/code&gt; 会同时自动执行 &lt;code&gt;npm install&lt;/code&gt;命令了）&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1565185528852.png" alt="1565185528852"&gt;&lt;/p&gt;
-&lt;p&gt;然而还是有一个漏洞，不管了。&lt;/p&gt;
-&lt;p&gt;然后删除原文件夹中文件（保留.git），把新的文件复制过去。同时把备份文件夹中的&lt;code&gt;source&lt;/code&gt;文件夹覆盖过去。（自动创建 .gitignore 好评）&lt;/p&gt;
-&lt;p&gt;这时候基本的安装就完成了，接下来打开 Github Desktop 开始对比差异。&lt;/p&gt;
-&lt;p&gt;在全局配置&lt;code&gt;_config.yml&lt;/code&gt;中，&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1565184499949.png" alt="1565184499949"&gt;&lt;/p&gt;
-&lt;p&gt;这个配置是为每篇博文创建一个单独的资源文件夹。&lt;/p&gt;
-&lt;p&gt;基本不用变，直接 discard changes 即可。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;.travis.yml&lt;/code&gt; 和 &lt;code&gt;deploy.sh&lt;/code&gt; 也直接还原。&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://cjc7373.github.io/2018/10/13/Hexo%E6%90%AD%E5%BB%BA%E5%B0%8F%E8%AE%B0/#Hexo%E5%9B%BE%E7%89%87%E6%8F%92%E5%85%A5%E6%8C%87%E5%BC%95"&gt;图片的问题&lt;/a&gt;先不管，有问题再说。&lt;/p&gt;
-&lt;h3 id="主题安装"&gt;主题安装&lt;/h3&gt;
-&lt;p&gt;剩下的差异全是主题文件。既然都重新搞了，那就换一个主题吧。在自己的 stars 里找了个主题 &lt;a href="https://github.com/yscoder/hexo-theme-indigo"&gt;hexo-theme-indigo&lt;/a&gt;，看了下也支持 Analysis、Disqus，就决定用它了。&lt;/p&gt;
-&lt;p&gt;接下来就开始按照&lt;a href="https://github.com/yscoder/hexo-theme-indigo/wiki"&gt;主题文档&lt;/a&gt;来安装。首先 clone 仓库，我选择 card 分支，感觉比较好看（其实也没有对比）。&lt;/p&gt;
-&lt;p&gt;在 hexo 根目录执行&lt;code&gt;git clone -b card https://github.com/yscoder/hexo-theme-indigo.git themes/indigo&lt;/code&gt;，下载主题文件。安装插件&lt;code&gt;hexo-renderer-less hexo-generator-feed hexo-generator-json-content hexo-helper-qrcode&lt;/code&gt;。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h2 id="开启标签页"&gt;开启标签页&lt;/h2&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;hexo new page tags
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;修改 &lt;code&gt;hexo/source/tags/index.md&lt;/code&gt; 的元数据&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;layout: tags
-comments: false
----
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="开启分类页"&gt;开启分类页&lt;/h2&gt;
-&lt;p&gt;仅 card theme 支持。&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;hexo new page categories
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;修改 &lt;code&gt;hexo/source/categories/index.md&lt;/code&gt; 的元数据&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;layout: categories
-comments: false
----
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;话说用 Github Desktop commit 的时候因为主题文件夹也是一个 git 仓库，所以报错了，在命令行中 add，提示&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1565227855897.png" alt="1565227855897"&gt;&lt;/p&gt;
-&lt;p&gt;于是我去 Google 了下&lt;a href="%5Bhttps://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97%5D(https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97)"&gt;子模块&lt;/a&gt;，感觉这会让问题变复杂，同时这个主题已经很久没更新过了，干脆把主题的版本库删了吧。删除 &lt;code&gt;.git&lt;/code&gt;文件夹后，提交成功。&lt;/p&gt;
-&lt;h3 id="主题配置"&gt;主题配置&lt;/h3&gt;
-&lt;p&gt;编辑站点配置文件。启用主题&lt;code&gt;theme: indigo&lt;/code&gt;。feed 是用来 rss 的，不管。jsonContent 用来搜索，如下：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h3 id="jsoncontent配置"&gt;jsonContent配置&lt;/h3&gt;
-&lt;p&gt;为了节约资源，可以对 jsonContent 插件生成的数据字段进行配置，减少数据文件大小。参考 &lt;a href="https://github.com/alexbruno/hexo-generator-json-content"&gt;hexo-generator-json-content&lt;/a&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;jsonContent:
-meta: false
-pages: false
-posts:
-title: true
-date: true
-path: true
-text: true
-raw: false
-content: false
-slug: false
-updated: false
-comments: false
-link: false
-permalink: false
-excerpt: false
-categories: false
-tags: true
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;编辑主题配置文件，&lt;code&gt;themes/indigo/_config.yml&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;左侧菜单：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;添加新菜单项时，在 menu 下增加子属性即可。属性说明如下：&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;menu:
-link: # fontawesome图标，省略前缀，本主题前缀为 icon-，必须
-text: About # 菜单显示的文字，如果省略即默认与图标一致，首字母会转大写
-url: /about # 链接，绝对或相对路径，必须
-target: _blank # 是否跳出，省略则在当前页面打开
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;fontawesome 图标已集成到主题中，你可以到 &lt;a href="http://fontawesome.io/icons/"&gt;这个页面&lt;/a&gt; 挑选合适的图标。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我修改为如下：&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;menu:
-home:
-text: 主页
-url: /
-archives:
-url: /archives
-tags:
-url: /tags
-th-list:
-text: Categories
-url: /categories
-github:
-url: https://github.com/cjc7373
-target: _blank
-user:
-text: 关于
-url: /about
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其余改动略。&lt;/p&gt;
-&lt;p&gt;由于这个主题为国人制作，配置文件都带有中文注释，还是很友好的。&lt;/p&gt;
-&lt;h2 id="修锅"&gt;修锅&lt;/h2&gt;
-&lt;p&gt;图片不出意外地崩了。。而且不止首页图片，是所有。。装插件试试。&lt;code&gt;npm install hexo-asset-image --save&lt;/code&gt;。装完又多了两个漏洞，这插件是有多久没更新了。。自动修复试试。&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1565232540544.png" alt="1565232540544"&gt;&lt;/p&gt;
-&lt;p&gt;GG。&lt;/p&gt;
-&lt;p&gt;语言是错的。hexo 配置文件改成 zh-cn 试试。&lt;/p&gt;
-&lt;p&gt;头像好丑。改成猫头鹰了。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;坑爹啊，img不说清楚在哪里。。我在根目录下创建了img，结果找了一下发现是在&lt;code&gt;themes\indigo\source\img&lt;/code&gt;下，图片还是炸。待修。暂时回滚至以前的版本。&lt;/p&gt;
-&lt;h2 id="回滚"&gt;回滚&lt;/h2&gt;
-&lt;p&gt;Updated in 2019/10/7&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1570428603861.png" alt="1570428603861"&gt;&lt;/p&gt;
-&lt;p&gt;时隔两个月,重新拾回了我的博客..&lt;/p&gt;
-&lt;p&gt;这个主题的锅不想修了..&lt;/p&gt;
-&lt;p&gt;又看了几个主题之后,看看似乎原主题也挺好的..&lt;/p&gt;
-&lt;p&gt;所以我又用回了 Next..&lt;/p&gt;
-&lt;p&gt;看了一下 Next 换维护者了..&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1570429427612.png" alt="1570429427612"&gt;&lt;/p&gt;
-&lt;p&gt;仓库地址从&lt;a href="https://github.com/iissnan/hexo-theme-next"&gt;这个&lt;/a&gt;变为&lt;a href="https://github.com/theme-next/hexo-theme-next"&gt;这个&lt;/a&gt;(话说居然不是 fork 过去的)&lt;/p&gt;
-&lt;p&gt;大致过程是&lt;del&gt;重来一遍上述过程&lt;/del&gt;回退到某一个提交即可.&lt;/p&gt;
-&lt;p&gt;不过我把 node.js 的版本更新到了 v12.11.1&lt;/p&gt;
-&lt;p&gt;首先这四个 commit 记录不需要了,我建了个新的分支 theme-indigo 扔着..&lt;/p&gt;
-&lt;p&gt;然后,先fetch一下,因为我在远程仓库上回滚了之前的更改..然后发现记错了,回滚的是 master 分支..&lt;/p&gt;
-&lt;p&gt;然后看一下 log, 回退到 2939aa 这个 commit.&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1570429889982.png" alt="1570429889982"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;git reset --hard 2939aa&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;此时本地分支已经落后于远程分支了,需要强制推送一遍.&lt;code&gt;git push --force&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1570430098775.png" alt="1570430098775"&gt;&lt;/p&gt;
-&lt;p&gt;看了一下这个提交是 [Hexo 安装](#Hexo 安装) 完成之后.&lt;/p&gt;
-&lt;p&gt;接下来安装主题, 先从 Github 下载一个 release. 目前是 v7.4.1&lt;/p&gt;
-&lt;p&gt;看了一眼&lt;a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/UPDATE-FROM-5.1.X.md"&gt;从5.x升级&lt;/a&gt;文档, 全局配置中 language 要从 zh-Hans 变为 zh-CN&lt;/p&gt;
-&lt;p&gt;&lt;del&gt;然后并没有发现其他配置文档&lt;/del&gt; 是有的, 只不过是英文, 在&lt;a href="https://theme-next.org/docs/getting-started/"&gt;这里&lt;/a&gt;, 只能一行一行看 &lt;code&gt;_config.yml&lt;/code&gt; 了.&lt;/p&gt;
-&lt;p&gt;用 sublimerge 对比一下新旧配置文件的差异..&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1570431870938.png" alt="1570431870938"&gt;&lt;/p&gt;
-&lt;p&gt;瞎改了一点.&lt;/p&gt;
-&lt;p&gt;ok. 测试一下, 果然图片又崩了. 原因引用的图片地址多了一级. 把多余的地址删掉是能够正常显示的.&lt;/p&gt;
-&lt;p&gt;&lt;img src="./1570432899620.png" alt="1570432899620"&gt;&lt;/p&gt;
-&lt;p&gt;然而原来那个插件 &lt;code&gt;hexo-asset-image&lt;/code&gt; 没用了. 无奈继续 Google, 找到了一篇&lt;a href="https://liolok.github.io/en/How-to-Add-Image-to-Hexo-Blog-Post/"&gt;英文博文&lt;/a&gt;, 指出了另一个插件&lt;a href="https://github.com/liolok/hexo-asset-link"&gt;hexo-asset-link&lt;/a&gt;, 尝试之, 发现能完美在首页及内容页显示图片.&lt;/p&gt;
-&lt;p&gt;至此, 我的博客算是修好了. (这篇博客写得不成样子,大雾,希望没人看到吧&lt;/p&gt;
-&lt;h2 id="结语"&gt;结语&lt;/h2&gt;
-&lt;p&gt;两次修锅的过程, 让我看到了 Hexo 的插入图片的巨坑. 用图床能够避免这个问题, 然而图床也有缺点, 我还是更喜欢直接插入图片. 感觉上这部分是由 Hexo 来处理的, 与主题无关, 所以还是可以换个主题玩玩的, 目前来说, 还是先专注于内容吧.&lt;/p&gt;
-&lt;p&gt;有时间也可以试试 Typecho, Jekyll, Pelican, Hugo 等其他博客生成器.&lt;/p&gt;
-- https://blog.coherence.codes/posts/2020_and_before/reinstall-hexo/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
+- https://blog.coherence.codes/posts/2020_and_before/wsl%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/ - Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</description></item></channel></rss>
