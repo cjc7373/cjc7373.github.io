@@ -24,6 +24,8 @@ tags:
 
   <img src="./image-20260622152037077.png" alt="image-20260622152037077" style="zoom: 33%;" />
 
+  {{< figure src="image-20260622152037077.png" width="300px">}}
+
 - 维简的[官方说明书](https://www.witrn.com/?p=2105)写得和💩一样，搜到了一个[民间版本](https://github.com/JohnScotttt/WITRN-K2-Quick-Reference-Manual)，比官方的清晰多了
 
 - K2 似乎有个 bug（V5.2 固件），它会显示 RDO 的 Maximum Operating Current 而非 Operating Current。于是在我的一个 30W 充电头上能看到 RDO 为 20V 3.6A (72W)，而实际 Operating Current 请求的是 1.5A。
