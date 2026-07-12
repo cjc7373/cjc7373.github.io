@@ -1,7 +1,7 @@
 ---
 title: IPv6 配置入门
 date: 2023-04-16
-lastmod: 2024-11-07
+lastmod: 2026-07-12
 ---
 
 ## 背景知识
@@ -103,11 +103,27 @@ RFC 4862 定义了一种 IPv6 接口的自动配置机制 (即 SLAAC), 包括生
 
 接下来主机会广播路由器请求 (RS), 以便敦促路由器发送路由器通告 (RA). 主机根据路由器通告中的的前缀信息 (Prefix-Infromation) 选项来构造全局地址.
 
-> Note: 由于 RA 总是会广播给所有主机, 所以 SLAAC 无法做到不给某些主机分配 IP 地址
+> [!NOTE]
+> 
+> 由于 RA 总是会广播给所有主机, 所以 SLAAC 无法做到不给某些主机分配 IP 地址
 
 一个地址的生命周期: 首选地址在首选期限 (preferred lifetime) 过期之后会成为不推荐地址 (deprecated address). 不推荐地址能够继续被用于已经建立的连接中, 但不应该被用于建立新连接. 一个地址在有效期限 (valid lifetime) 过期之后会变为无效地址 (invalid address). 无效地址不能够被用作向外连接的源地址.
 
+这里还有一个问题, 如果路由器重启了, 或者上游更新了通过 PD 下发的前缀, 那么旧的前缀就失效了. 如果 RA 只是下发新的前缀的话, 主机还是可能继续使用旧的地址. 在 [RFC 9096 Improving the Reaction of Customer Edge Routers to IPv6 Renumbering Events](https://datatracker.ietf.org/doc/html/rfc9096#name-signaling-stale-configurati) 中, 定义了如下操作:
+
+> 一个路由器**应该**将学习到的前缀记录在稳定的存储中, 在前缀变更时, RA 报文中**必须**包含之前广播过的前缀, 并将其 "Valid Lifetime" 和 "Preferred Lifetime" 设置为 0.
+
+这一操作即通知主机弃用 stale 的地址.
+
 RFC 4862 中并没有规定 interface identifier 是如何产生的, 只说了很多情况下其由接口的链路层地址 (即 MAC 地址) 产生. 这种生成方式会带来一些隐私上的顾虑, 因而在 SLAAC 隐私扩展 (RFC 4941) 中, 主机会生成一个临时地址 (temporary address) 来负责对外通信. 另一种方式是生成一个不变的, 与 MAC 地址无关的 interface identifier, 这种方式在 RFC 7217 中定义.
+
+RA 中有一个选项 "M", 定义如下:
+
+> 1-bit "Managed address configuration" flag.  Whenset, it indicates that addresses are available via Dynamic Host Configuration Protocol [DHCPv6].
+
+> [!IMPORTANT]
+>
+> [RFC 8504 IPv6 Node Requirements](https://datatracker.ietf.org/doc/html/rfc8504#section-6.3) 指出, 一个主机必须支持 SLAAC. 那么为了简化配置, 我觉得可以在路由器中设置 RA 中不包含 M bit, 以便所有地址分配都走 SLAAC.
 
 ## RFC 8415 (Dynamic Host Configuration Protocol for IPv6)
 
