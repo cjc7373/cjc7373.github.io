@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Coherence's Blog</title><link>https://blog.coherence.codes/posts/</link><description>Recent content in Posts on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Mon, 22 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>维简 K2 与 PD 杂记</title><link>https://blog.coherence.codes/posts/2026/witrn_k2_pd/</link><pubDate>Sat, 20 Jun 2026 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2026/witrn_k2_pd/</guid><description>&lt;p&gt;前段时间斥“巨资” 99 购入了一个 USB 功率计维简 K2，在使用过程中发现了不少奇妙的地方。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Coherence's Blog</title><link>https://blog.coherence.codes/posts/</link><description>Recent content in Posts on Coherence's Blog</description><generator>Hugo</generator><language>zh-cn</language><copyright>Coherence. 本站遵循 CC BY-NC-SA 4.0 协议</copyright><lastBuildDate>Sun, 12 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.coherence.codes/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>维简 K2 与 PD 杂记</title><link>https://blog.coherence.codes/posts/2026/witrn_k2_pd/</link><pubDate>Sat, 20 Jun 2026 00:00:00 +0000</pubDate><guid>https://blog.coherence.codes/posts/2026/witrn_k2_pd/</guid><description>&lt;p&gt;前段时间斥“巨资” 99 购入了一个 USB 功率计维简 K2，在使用过程中发现了不少奇妙的地方。&lt;/p&gt;
 &lt;h2 id="一些发现和吐槽"&gt;一些发现和吐槽&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;我的酷态科 10 号给一加 15t 充电，总是只有二十几瓦的功率，原来是用的线没有 e-marker 芯片，撞到了 3A 的电流上限。换了一条线之后，成功达到了 40w+。&lt;/p&gt;
 &lt;p&gt;&lt;img src="image-20260620191854179.png" alt="image-20260620191854179"&gt;&lt;/p&gt;
-&lt;p&gt;酷态科 10 号输出的功率比 K2 多了 3W，可能是充电头本身的损耗。&lt;/p&gt;
+&lt;p&gt;酷态科 10 号输出的功率比 K2 多了 2.5W，可能是表损+线损。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;15t 附带的充电器（A 口）不支持 PD 协议，随后查到 PD 2.0 往上需要 C 口的 CC 引脚通信。PD 1.0 倒是基于 USB-A 的，只是不知道现在还有多少设备还支持 PD 1.0。&lt;/p&gt;

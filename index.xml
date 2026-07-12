@@ -4,7 +4,7 @@
 &lt;li&gt;
 &lt;p&gt;我的酷态科 10 号给一加 15t 充电，总是只有二十几瓦的功率，原来是用的线没有 e-marker 芯片，撞到了 3A 的电流上限。换了一条线之后，成功达到了 40w+。&lt;/p&gt;
 &lt;p&gt;&lt;img src="image-20260620191854179.png" alt="image-20260620191854179"&gt;&lt;/p&gt;
-&lt;p&gt;酷态科 10 号输出的功率比 K2 多了 3W，可能是充电头本身的损耗。&lt;/p&gt;
+&lt;p&gt;酷态科 10 号输出的功率比 K2 多了 2.5W，可能是表损+线损。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;15t 附带的充电器（A 口）不支持 PD 协议，随后查到 PD 2.0 往上需要 C 口的 CC 引脚通信。PD 1.0 倒是基于 USB-A 的，只是不知道现在还有多少设备还支持 PD 1.0。&lt;/p&gt;
@@ -50,7 +50,7 @@ OSError: open failed
 &lt;p&gt;第二个是 K2 会发送 general 和 pd 两种类型的消息，general 是当前的电压、电流等数据，pd 是 pd 报文，但是只能收到 general 消息。debug 了半天后发现文档中写了需要“菜单开启PD联机开关”&amp;hellip;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;解决了之后顺利抓到了 PD 报文。目前 PD 的规范（r3.2 v1.2）足足有 416 页！只能让 GPT 老师来看了，不过其中基础的部分也不算复杂。下面我们就以以一次充电的 PD 协商为例，来入门一下 PD 协议。&lt;/p&gt;
+&lt;p&gt;解决了之后顺利抓到了 PD 报文。目前 PD 的规范 &lt;a href="https://www.usb.org/document-library/usb-power-delivery"&gt;r3.2 v1.2&lt;/a&gt; 足足有 416 页！（下文中的描述均出自这个版本）只能让 GPT 老师来看了，不过其中基础的部分也不算复杂。下面我们就以以一次充电的 PD 协商为例，来入门一下 PD 协议。&lt;/p&gt;
 &lt;h3 id="历史"&gt;历史&lt;/h3&gt;
 &lt;p&gt;在 PD 之前，USB Battery Charging (BC) 最高支持 5V 1.5A（7.5W）的充电。PD（Power Delivery）1.0 在 2012 年发布，这比 USB-C（2014）要更早，这时候的 PD 已经支持六个 profile，最高 100W 的充电了。受限于 USB-A 接口，这时候的 PD 是用 VBUS 引脚通信的。PD 2.0 添加了 USB-C 的支持。3.0 加入了 Programmable Power Supply (PPS) 的支持，能够以 20 mV 的步进调节电压，50 mA 的步进调节电流。目前 PD 最高支持 48V 5A （240W）的充电。&lt;/p&gt;
 &lt;h3 id="开始协商"&gt;开始协商&lt;/h3&gt;
